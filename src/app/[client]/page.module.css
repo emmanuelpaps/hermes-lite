@@ -245,6 +245,12 @@
   gap: 2rem;
 }
 
+@media (min-width: 993px) {
+  .storyPillarsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 .storyPillarCard {
   padding: 0;
   text-align: left;
