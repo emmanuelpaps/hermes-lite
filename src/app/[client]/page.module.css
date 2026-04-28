@@ -81,9 +81,11 @@
   background: url('/assets/abstract-3d.png') center/contain no-repeat;
   z-index: 0;
   opacity: 0.8;
-  filter: drop-shadow(0 0 30px rgba(138, 43, 226, 0.3));
   mix-blend-mode: screen;
-  transform: translate3d(0, 0, 0); /* Safari hardware acceleration fix */
+  transform: translate3d(0, 0, 0);
+  filter: contrast(1.2) brightness(0.9);
+  -webkit-mask-image: radial-gradient(circle, black 55%, transparent 75%);
+  mask-image: radial-gradient(circle, black 55%, transparent 75%);
 }
 
 .logoContainer {
