@@ -31,25 +31,16 @@
         "name": "Bloque 1: Identidad y Documentos B2B",
         "services": [
           {
-            "name": "Identidad Corporativa y Papelería",
-            "price": 7500,
-            "description": "Estandarización visual de la marca para puntos de contacto físicos y digitales.",
+            "name": "Identidad Corporativa, Papelería y Mailing",
+            "price": 14000,
+            "description": "Estandarización visual de la marca para puntos de contacto físicos, digitales y diseño de plantillas maestras en HTML para correos corporativos.",
             "bullets": [
               "Rediseño de Firmas Corporativas en HTML",
               "Diseño de Hojas Membretadas editables",
-              "Diseño de Tarjetas de Presentación premium"
+              "Diseño de Tarjetas de Presentación premium",
+              "Maquetación de Mailing en HTML responsive (desktop y mobile)"
             ],
             "image": "/assets/pillar-authority.png"
-          },
-          {
-            "name": "Master Templates Mailing",
-            "price": 8000,
-            "description": "Diseño y maquetación de plantillas maestras en HTML para envío de correos corporativos.",
-            "bullets": [
-              "Diseño de arquitectura de correo optimizada para conversión",
-              "Maquetación en HTML responsive (desktop y mobile)"
-            ],
-            "image": "/assets/pillar-acquisition.png"
           },
           {
             "name": "Presentación Ejecutiva B2B",
