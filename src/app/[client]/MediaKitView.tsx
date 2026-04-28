@@ -62,6 +62,10 @@ interface ClientData {
   clientLogo: string;
   industry: string;
   heroText: string;
+  storytelling?: {
+    challenge: string;
+    pillars: { title: string; description: string }[];
+  };
   packages: {
     fn1: Service[];
     apolograma: Service[];
@@ -123,6 +127,41 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           {data.heroText}
         </motion.p>
       </section>
+
+      {/* Storytelling: The Challenge */}
+      {data.storytelling && (
+        <section className={styles.storySection}>
+          <motion.h2 
+            className={`${styles.storyChallenge} text-gradient`}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fadeUp}
+          >
+            &quot;{data.storytelling.challenge}&quot;
+          </motion.h2>
+
+          <motion.div 
+            className={styles.storyPillarsGrid}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
+            }}
+          >
+            {data.storytelling.pillars.map((pillar, idx) => (
+              <TiltCard key={idx} className={styles.storyPillarCard}>
+                <motion.div variants={fadeUp}>
+                  <h3>{pillar.title}</h3>
+                  <p>{pillar.description}</p>
+                </motion.div>
+              </TiltCard>
+            ))}
+          </motion.div>
+        </section>
+      )}
 
       {/* Audiences */}
       <section className={styles.section}>

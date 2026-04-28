@@ -114,6 +114,48 @@
   margin-bottom: 1rem;
 }
 
+/* Storytelling */
+.storySection {
+  padding: 8rem 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.storyChallenge {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 4rem;
+}
+
+.storyPillarsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.storyPillarCard {
+  padding: 2rem;
+  text-align: left;
+  border-left: 4px solid #8a2be2;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 0 16px 16px 0;
+}
+
+.storyPillarCard h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.storyPillarCard p {
+  color: var(--muted-text);
+  line-height: 1.6;
+}
+
 .servicesGrid {
   display: flex;
   flex-direction: column;

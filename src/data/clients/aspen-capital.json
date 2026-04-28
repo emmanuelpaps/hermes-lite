@@ -3,6 +3,23 @@
   "clientLogo": "https://ui-avatars.com/api/?name=Aspen+Capital&background=0D0D0D&color=fff&size=512&rounded=true&font-size=0.3",
   "industry": "Financiero / Factoraje B2B",
   "heroText": "Ayudamos a evolucionar la cultura del financiamiento. A través de este hub estratégico y digital, posicionaremos a Aspen Capital como la red financiera AAA definitiva, conectando con proveedores y escalando su flujo de efectivo en México y Estados Unidos sin fricciones.",
+  "storytelling": {
+    "challenge": "El financiamiento B2B en México sufre de una percepción anticuada y pesada. Nuestro reto es transformar esa narrativa, proyectando a Aspen Capital no solo como un proveedor de factoraje, sino como un aliado tecnológico, transparente y de confianza absoluta para escalar negocios sin fricción.",
+    "pillars": [
+      {
+        "title": "Presencia Web Premium",
+        "description": "Una cara digital que transmita institucionalidad y confianza nivel AAA a primera vista."
+      },
+      {
+        "title": "Autoridad de Marca B2B",
+        "description": "Contenido estratégico en redes y formatos ejecutivos para educar y atraer prospectos calificados."
+      },
+      {
+        "title": "Adquisición Activa",
+        "description": "Embudo comercial optimizado y campañas de mailing para cerrar tratos corporativos más rápido."
+      }
+    ]
+  },
   "packages": {
     "fn1": [],
     "apolograma": [
