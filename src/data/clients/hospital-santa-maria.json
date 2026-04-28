@@ -1,0 +1,28 @@
+{
+  "clientName": "Hospital Santa María",
+  "clientLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Hospital_Santa_Maria_logo.png/640px-Hospital_Santa_Maria_logo.png",
+  "industry": "Médico",
+  "heroText": "Creemos que el sector médico merece visibilidad honesta, accesible y actual. Te abrimos un espacio físico-digital para destacar tu labor, conectar con pacientes y posicionarte como referente en la frontera.",
+  "packages": {
+    "fn1": [
+      {
+        "name": "FN1 Hit (Videoreel)",
+        "price": 13000,
+        "description": "Formato de video corto de alto impacto con dinámica interactiva."
+      },
+      {
+        "name": "FN1 Historia",
+        "price": 2000,
+        "description": "Historia en Instagram/Facebook para mantener presencia."
+      }
+    ],
+    "apolograma": [
+      {
+        "name": "Tier 2 (Core / 1 Cuenta)",
+        "price": 28000,
+        "description": "Iguala mensual: 20 piezas gráficas y 1 sesión de fotos para mantener tu presencia impecable."
+      }
+    ]
+  },
+  "discountPercent": 10
+}

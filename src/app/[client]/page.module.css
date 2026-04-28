@@ -1,0 +1,165 @@
+.main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(30,30,30,1) 0%, rgba(5,5,5,1) 100%);
+  z-index: -1;
+}
+
+.logoContainer {
+  margin-bottom: 2rem;
+}
+
+.logo {
+  max-width: 200px;
+  max-height: 100px;
+  object-fit: contain;
+}
+
+.heroTitle {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  max-width: 800px;
+  margin-bottom: 1.5rem;
+}
+
+.heroSubtitle {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  color: var(--muted-text);
+  max-width: 600px;
+}
+
+.section {
+  padding: 6rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.sectionTitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.sectionSubtitle {
+  color: var(--muted-text);
+  text-align: center;
+  margin-bottom: 4rem;
+  font-size: 1.2rem;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.statCard {
+  padding: 3rem 2rem;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-5px);
+}
+
+.statNumber {
+  font-size: 4rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+}
+
+.servicesGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.serviceItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+}
+
+.serviceInfo h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.serviceInfo p {
+  color: var(--muted-text);
+}
+
+.servicePrice {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.summarySection {
+  background: #111;
+  padding: 6rem 2rem;
+  border-top: 1px solid var(--glass-border);
+}
+
+.summaryCard {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 3rem;
+  text-align: center;
+}
+
+.totalPrice {
+  font-size: 4rem;
+  font-weight: 900;
+  margin: 2rem 0;
+  color: #fff;
+}
+
+.ctaButton {
+  background: #fff;
+  color: #000;
+  border: none;
+  padding: 1rem 3rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.ctaButton:hover {
+  transform: scale(1.05);
+}
+
+.footer {
+  text-align: center;
+  padding: 2rem;
+  color: var(--muted-text);
+  font-size: 0.9rem;
+  border-top: 1px solid var(--glass-border);
+}

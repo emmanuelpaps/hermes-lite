@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Removido output: 'export' y unoptimized: true para aprovechar todo el poder de Vercel
 };
 
 export default nextConfig;
