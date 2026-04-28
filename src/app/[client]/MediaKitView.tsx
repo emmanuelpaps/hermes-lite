@@ -191,38 +191,6 @@ export default function MediaKitView({ data }: { data: ClientData }) {
       <section className={styles.hero}>
         <div className={styles.heroBg} />
         
-        {/* Floating Particles (Frontera Assets) */}
-        <div className={styles.particlesContainer}>
-          <motion.img 
-            src="/assets/stickers/x-purple.png" 
-            alt="X Purple" 
-            className={`${styles.particle} ${styles.particleX}`}
-            animate={{ y: [0, -15, 0], rotate: [0, 10, -10, 0] }}
-            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-          />
-          <motion.img 
-            src="/assets/stickers/star.png" 
-            alt="Star" 
-            className={`${styles.particle} ${styles.particleStar}`}
-            animate={{ y: [0, 20, 0], rotate: [0, -15, 15, 0] }}
-            transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          />
-          <motion.img 
-            src="/assets/stickers/dialog.png" 
-            alt="Dialog" 
-            className={`${styles.particle} ${styles.particleDialog}`}
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          />
-          <motion.img 
-            src="/assets/stickers/notification.png" 
-            alt="Notification" 
-            className={`${styles.particle} ${styles.particleNotif}`}
-            animate={{ y: [0, 15, 0], rotate: [0, -5, 5, 0] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-          />
-        </div>
-
         <motion.div 
           className={styles.floating3D} 
           animate={{ y: [0, -20, 0], rotate: [0, 5, -5, 0] }}
@@ -257,6 +225,21 @@ export default function MediaKitView({ data }: { data: ClientData }) {
         >
           {data.heroText}
         </motion.p>
+
+        <motion.div
+          className={styles.heroStickerContainer}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.8 }}
+        >
+          <motion.img 
+            src="/assets/stickers/x-purple.png" 
+            alt="Frontera Element" 
+            className={styles.singleHeroSticker}
+            animate={{ y: [0, -10, 0], rotate: [0, 5, -5, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </motion.div>
       </section>
 
       {/* Storytelling: The Challenge */}

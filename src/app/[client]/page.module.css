@@ -141,46 +141,22 @@
 /* =========================================
    FLOATING PARTICLES
    ========================================= */
-.particlesContainer {
-  position: absolute;
-  top: 0;
-  left: 0;
+.heroStickerContainer {
+  margin-top: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  position: relative;
   width: 100%;
-  height: 100%;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 0;
 }
 
-.particle {
-  position: absolute;
+.singleHeroSticker {
+  height: 50px;
+  width: auto;
   object-fit: contain;
-  opacity: 0.4;
-  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
-}
-
-.particleX {
-  width: 80px;
-  top: 15%;
-  left: 10%;
-}
-
-.particleStar {
-  width: 60px;
-  bottom: 25%;
-  right: 15%;
-}
-
-.particleDialog {
-  width: 70px;
-  top: 30%;
-  right: 10%;
-}
-
-.particleNotif {
-  width: 50px;
-  bottom: 20%;
-  left: 15%;
+  opacity: 0.9;
+  filter: drop-shadow(0 10px 20px rgba(168, 85, 247, 0.4));
 }
 
 .statsGrid {
@@ -546,9 +522,4 @@
   .totalPrice {
     font-size: 2.5rem;
   }
-  
-  .particleX { width: 50px; left: 5%; top: 12%; opacity: 0.3; }
-  .particleStar { width: 40px; right: 5%; bottom: 35%; opacity: 0.3; }
-  .particleDialog { width: 45px; right: 5%; top: 25%; opacity: 0.3; }
-  .particleNotif { width: 35px; left: 8%; bottom: 45%; opacity: 0.3; }
 }
