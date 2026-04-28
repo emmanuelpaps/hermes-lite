@@ -150,11 +150,12 @@
 }
 
 .brandDivider img {
-  width: 90%;
+  width: 100%;
   max-width: 500px;
   height: auto;
   opacity: 0.8;
   filter: drop-shadow(0 0 60px rgba(168, 85, 247, 0.5));
+  transform: scale(1.3);
 }
 
 .statsGrid {
@@ -469,8 +470,9 @@
   }
 
   .brandDivider img {
-    width: 90%;
-    max-width: 350px;
+    width: 100%;
+    max-width: none;
+    transform: scale(2.5);
   }
 
   .section {
