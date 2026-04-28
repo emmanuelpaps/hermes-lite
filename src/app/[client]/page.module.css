@@ -306,9 +306,16 @@
   overflow: hidden;
   cursor: pointer;
   background: rgba(255, 255, 255, 0.03);
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 12px;
+}
+
+.serviceItem:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(168, 85, 247, 0.4);
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.15), inset 0 0 20px rgba(168, 85, 247, 0.05);
+  transform: translateY(-2px);
 }
 
 .serviceItemActive {
@@ -470,6 +477,29 @@
   color: var(--muted-text);
   font-size: 0.9rem;
   border-top: 1px solid var(--glass-border);
+  padding-bottom: 6rem; /* Extra space for sticky CTA */
+}
+
+.stickyCta {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: linear-gradient(135deg, #a855f7 0%, #8a2be2 100%);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
+  z-index: 100;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stickyCta:hover {
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 15px 40px rgba(168, 85, 247, 0.6);
 }
 
 /* =========================================

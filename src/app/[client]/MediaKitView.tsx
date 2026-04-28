@@ -1,8 +1,28 @@
 "use client";
 
-import { motion, Variants, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
+import { motion, Variants, useMotionValue, useSpring, useTransform, AnimatePresence, animate, useInView } from "framer-motion";
 import styles from "./page.module.css";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
+
+const AnimatedPrice = ({ value }: { value: number }) => {
+  const nodeRef = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(nodeRef, { once: true, margin: "-50px" });
+  
+  useEffect(() => {
+    const node = nodeRef.current;
+    if (!node || !isInView) return;
+    const controls = animate(0, value, {
+      duration: 2,
+      ease: "easeOut",
+      onUpdate(val) {
+        node.textContent = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(val);
+      }
+    });
+    return controls.stop;
+  }, [value, isInView]);
+
+  return <span ref={nodeRef}>{new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(0)}</span>;
+}
 
 interface Service {
   name: string;
@@ -467,18 +487,35 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           )}
 
           <div className={`${styles.totalPrice} text-gradient`}>
-            {formatPrice(total)}
+            <AnimatedPrice value={total} />
           </div>
           
-          <motion.button 
+          <motion.a 
+            href="https://wa.me/526561031571?text=Hola%20Emmanuel%2C%20revis%C3%A9%20la%20propuesta%20de%20Aspen%20Capital%20y%20estoy%20listo%20para%20avanzar."
+            target="_blank"
+            rel="noopener noreferrer"
             className={styles.ctaButton}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            style={{ display: "inline-block", textDecoration: "none" }}
           >
-            Aprobar Propuesta
-          </motion.button>
+            Aprobar Ecosistema
+          </motion.a>
         </motion.div>
       </section>
+
+      {/* Sticky CTA */}
+      <motion.a 
+        href="https://wa.me/526561031571?text=Hola%20Emmanuel%2C%20revis%C3%A9%20la%20propuesta%20de%20Aspen%20Capital%20y%20estoy%20listo%20para%20avanzar."
+        target="_blank"
+        rel="noopener noreferrer"
+        className={styles.stickyCta}
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 2, type: "spring", stiffness: 100 }}
+      >
+        Aprobar Ecosistema
+      </motion.a>
 
       <footer className={styles.footer}>
         <motion.div 
