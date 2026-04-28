@@ -138,6 +138,51 @@
   font-size: 1.2rem;
 }
 
+/* =========================================
+   FLOATING PARTICLES
+   ========================================= */
+.particlesContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  object-fit: contain;
+  opacity: 0.4;
+  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+}
+
+.particleX {
+  width: 80px;
+  top: 15%;
+  left: 10%;
+}
+
+.particleStar {
+  width: 60px;
+  bottom: 25%;
+  right: 15%;
+}
+
+.particleDialog {
+  width: 70px;
+  top: 30%;
+  right: 10%;
+}
+
+.particleNotif {
+  width: 50px;
+  bottom: 20%;
+  left: 15%;
+}
+
 .statsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -501,4 +546,9 @@
   .totalPrice {
     font-size: 2.5rem;
   }
+  
+  .particleX { width: 50px; left: 5%; top: 12%; opacity: 0.3; }
+  .particleStar { width: 40px; right: 5%; bottom: 35%; opacity: 0.3; }
+  .particleDialog { width: 45px; right: 5%; top: 25%; opacity: 0.3; }
+  .particleNotif { width: 35px; left: 8%; bottom: 45%; opacity: 0.3; }
 }
