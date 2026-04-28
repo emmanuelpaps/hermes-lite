@@ -139,24 +139,21 @@
 }
 
 /* =========================================
-   FLOATING PARTICLES
+   BRAND DIVIDER
    ========================================= */
-.heroStickerContainer {
-  margin-top: 4rem;
+.brandDivider {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2;
-  position: relative;
+  padding: 4rem 0 2rem 0;
   width: 100%;
 }
 
-.singleHeroSticker {
-  height: 50px;
-  width: auto;
-  object-fit: contain;
-  opacity: 0.9;
-  filter: drop-shadow(0 10px 20px rgba(168, 85, 247, 0.4));
+.brandDivider img {
+  width: 120px;
+  height: auto;
+  opacity: 0.8;
+  filter: drop-shadow(0 0 40px rgba(168, 85, 247, 0.4));
 }
 
 .statsGrid {
@@ -464,6 +461,14 @@
     opacity: 0.3; /* Menor opacidad para no estorbar lectura */
     pointer-events: none;
     transform: translate3d(0, 0, 0); /* Mantiene aceleración de hardware */
+  }
+
+  .brandDivider {
+    padding: 2rem 0 0 0;
+  }
+
+  .brandDivider img {
+    width: 80px;
   }
 
   .section {

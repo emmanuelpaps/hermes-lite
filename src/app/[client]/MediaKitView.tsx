@@ -225,22 +225,18 @@ export default function MediaKitView({ data }: { data: ClientData }) {
         >
           {data.heroText}
         </motion.p>
-
-        <motion.div
-          className={styles.heroStickerContainer}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.8 }}
-        >
-          <motion.img 
-            src="/assets/stickers/x-purple.png" 
-            alt="Frontera Element" 
-            className={styles.singleHeroSticker}
-            animate={{ y: [0, -10, 0], rotate: [0, 5, -5, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          />
-        </motion.div>
       </section>
+
+      {/* Brand Divider */}
+      <motion.div 
+        className={styles.brandDivider}
+        initial={{ opacity: 0, scale: 0.8 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 0.8 }}
+      >
+        <img src="/assets/stickers/x-purple.png" alt="Frontera X" />
+      </motion.div>
 
       {/* Storytelling: The Challenge */}
       {data.storytelling && (
