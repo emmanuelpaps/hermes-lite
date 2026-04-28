@@ -420,6 +420,10 @@
     font-size: 1.1rem;
   }
 
+  .floating3D {
+    display: none;
+  }
+
   .section {
     padding: 4rem 1rem;
   }
