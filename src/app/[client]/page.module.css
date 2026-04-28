@@ -182,9 +182,12 @@
 
 /* Storytelling */
 .storySection {
-  padding: 8rem 2rem;
-  max-width: 1000px;
+  padding: 4rem 1rem;
+  text-align: center;
+  max-width: 800px;
   margin: 0 auto;
+  position: relative;
+  z-index: 10;
   width: 100%;
 }
 
