@@ -1,0 +1,42 @@
+{
+  "clientName": "Aspen Capital",
+  "clientLogo": "https://ui-avatars.com/api/?name=Aspen+Capital&background=0D0D0D&color=fff&size=512&rounded=true&font-size=0.3",
+  "industry": "Financiero / Factoraje B2B",
+  "heroText": "Ayudamos a evolucionar la cultura del financiamiento. A través de este hub estratégico y digital, posicionaremos a Aspen Capital como la red financiera AAA definitiva, conectando con proveedores y escalando su flujo de efectivo en México y Estados Unidos sin fricciones.",
+  "packages": {
+    "fn1": [],
+    "apolograma": [
+      {
+        "name": "Landing Page Premium + Dashboard",
+        "price": 20000,
+        "description": "Desarrollo de un One-Pager de alto impacto con animaciones avanzadas, y un dashboard administrativo para cambios dinámicos."
+      },
+      {
+        "name": "Manejo de Redes Tier 2 (Mensual)",
+        "price": 28000,
+        "description": "Iguala mensual Core. Incluye 20 piezas gráficas, 1 sesión de fotos y estrategia de comunicación B2B para crear comunidad."
+      },
+      {
+        "name": "Presentación Ejecutiva B2B",
+        "price": 15000,
+        "description": "Diseño corporativo e institucional con integración de Motion Graphics para ventas de alto nivel."
+      },
+      {
+        "name": "Producción de Video B2B (4 Comerciales)",
+        "price": 52000,
+        "description": "Producción completa de 4 comerciales de 20 segundos enfocados a promoción y venta."
+      },
+      {
+        "name": "Master Templates Mailing",
+        "price": 8000,
+        "description": "Diseño y maquetación de plantillas maestras en HTML para envío de correos corporativos."
+      },
+      {
+        "name": "Rediseño Firmas Corporativas",
+        "price": 2500,
+        "description": "Estandarización y diseño premium de las firmas de correo para todo el equipo ejecutivo."
+      }
+    ]
+  },
+  "discountPercent": 0
+}
