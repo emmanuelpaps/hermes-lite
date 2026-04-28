@@ -59,18 +59,25 @@ const TiltCard = ({ children, className }: { children: React.ReactNode, classNam
   );
 };
 
-const AccordionCard = ({ service, formatPrice, variants }: { service: Service, formatPrice: (n:number)=>string, variants: Variants }) => {
-  const [isOpen, setIsOpen] = useState(false);
+interface AccordionProps {
+  service: Service;
+  formatPrice: (n:number)=>string;
+  variants: Variants;
+  isOpen: boolean;
+  onToggle: () => void;
+}
 
+const AccordionCard = ({ service, formatPrice, variants, isOpen, onToggle }: AccordionProps) => {
   return (
     <motion.div 
       layout
-      className={`${styles.serviceItem} glass`}
-      onClick={() => setIsOpen(!isOpen)}
+      className={`${styles.serviceItem} ${isOpen ? styles.serviceItemActive : 'glass'}`}
+      onClick={onToggle}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
       variants={variants}
+      style={{ position: 'relative', zIndex: isOpen ? 45 : 1 }}
     >
       <motion.div layout className={styles.serviceHeader}>
         <div className={styles.serviceInfo}>
@@ -141,6 +148,8 @@ interface ClientData {
 }
 
 export default function MediaKitView({ data }: { data: ClientData }) {
+  const [activeService, setActiveService] = useState<string | null>(null);
+
   const fn1Total = data.packages.fn1.reduce((acc, curr) => acc + curr.price, 0);
   const apoTotal = data.packages.apolograma.reduce((acc, curr) => acc + curr.price, 0);
   const subtotal = fn1Total + apoTotal;
@@ -156,6 +165,18 @@ export default function MediaKitView({ data }: { data: ClientData }) {
 
   return (
     <main className={styles.main}>
+      <AnimatePresence>
+        {activeService && (
+          <motion.div 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }} 
+            className={styles.globalBackdrop} 
+            onClick={() => setActiveService(null)}
+          />
+        )}
+      </AnimatePresence>
+
       {/* Agency Header Navbar */}
       <header className={styles.header}>
         <div className={styles.agencyLogos}>
@@ -301,7 +322,14 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             }}
           >
             {data.packages.fn1.map((service, idx) => (
-              <AccordionCard key={idx} service={service} formatPrice={formatPrice} variants={fadeUp} />
+              <AccordionCard 
+                key={idx} 
+                service={service} 
+                formatPrice={formatPrice} 
+                variants={fadeUp} 
+                isOpen={activeService === service.name}
+                onToggle={() => setActiveService(activeService === service.name ? null : service.name)}
+              />
             ))}
           </motion.div>
         </section>
@@ -328,7 +356,14 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             }}
           >
             {data.packages.apolograma.map((service, idx) => (
-              <AccordionCard key={idx} service={service} formatPrice={formatPrice} variants={fadeUp} />
+              <AccordionCard 
+                key={idx} 
+                service={service} 
+                formatPrice={formatPrice} 
+                variants={fadeUp} 
+                isOpen={activeService === service.name}
+                onToggle={() => setActiveService(activeService === service.name ? null : service.name)}
+              />
             ))}
           </motion.div>
         </section>
