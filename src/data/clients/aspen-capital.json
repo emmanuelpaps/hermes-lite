@@ -8,15 +8,18 @@
     "pillars": [
       {
         "title": "Presencia Web Premium",
-        "description": "Una cara digital que transmita institucionalidad y confianza nivel AAA a primera vista."
+        "description": "Una cara digital que transmita institucionalidad y confianza nivel AAA a primera vista.",
+        "image": "/assets/pillar-web.png"
       },
       {
         "title": "Autoridad de Marca B2B",
-        "description": "Contenido estratégico en redes y formatos ejecutivos para educar y atraer prospectos calificados."
+        "description": "Contenido estratégico en redes y formatos ejecutivos para educar y atraer prospectos calificados.",
+        "image": "/assets/pillar-authority.png"
       },
       {
         "title": "Adquisición Activa",
-        "description": "Embudo comercial optimizado y campañas de mailing para cerrar tratos corporativos más rápido."
+        "description": "Embudo comercial optimizado y campañas de mailing para cerrar tratos corporativos más rápido.",
+        "image": "/assets/pillar-acquisition.png"
       }
     ]
   },
@@ -26,32 +29,38 @@
       {
         "name": "Landing Page Premium + Dashboard",
         "price": 20000,
-        "description": "Desarrollo de un One-Pager de alto impacto con animaciones avanzadas, y un dashboard administrativo para cambios dinámicos."
+        "description": "Desarrollo de un One-Pager de alto impacto con animaciones avanzadas, y un dashboard administrativo para cambios dinámicos.",
+        "image": "/assets/pillar-web.png"
       },
       {
         "name": "Manejo de Redes Tier 2 (Mensual)",
         "price": 28000,
-        "description": "Iguala mensual Core. Incluye 20 piezas gráficas, 1 sesión de fotos y estrategia de comunicación B2B para crear comunidad."
+        "description": "Iguala mensual Core. Incluye 20 piezas gráficas, 1 sesión de fotos y estrategia de comunicación B2B para crear comunidad.",
+        "image": "/assets/pillar-authority.png"
       },
       {
         "name": "Presentación Ejecutiva B2B",
         "price": 15000,
-        "description": "Diseño corporativo e institucional con integración de Motion Graphics para ventas de alto nivel."
+        "description": "Diseño corporativo e institucional con integración de Motion Graphics para ventas de alto nivel.",
+        "image": "/assets/pillar-web.png"
       },
       {
         "name": "Producción de Video B2B (4 Comerciales)",
         "price": 52000,
-        "description": "Producción completa de 4 comerciales de 20 segundos enfocados a promoción y venta."
+        "description": "Producción completa de 4 comerciales de 20 segundos enfocados a promoción y venta.",
+        "image": "/assets/pillar-authority.png"
       },
       {
         "name": "Master Templates Mailing",
         "price": 8000,
-        "description": "Diseño y maquetación de plantillas maestras en HTML para envío de correos corporativos."
+        "description": "Diseño y maquetación de plantillas maestras en HTML para envío de correos corporativos.",
+        "image": "/assets/pillar-acquisition.png"
       },
       {
         "name": "Rediseño Firmas Corporativas",
         "price": 2500,
-        "description": "Estandarización y diseño premium de las firmas de correo para todo el equipo ejecutivo."
+        "description": "Estandarización y diseño premium de las firmas de correo para todo el equipo ejecutivo.",
+        "image": "/assets/pillar-web.png"
       }
     ]
   },

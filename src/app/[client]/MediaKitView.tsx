@@ -1,13 +1,14 @@
 "use client";
 
-import { motion, Variants, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, Variants, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
 import styles from "./page.module.css";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 interface Service {
   name: string;
   price: number;
   description: string;
+  image?: string;
 }
 
 const TiltCard = ({ children, className }: { children: React.ReactNode, className?: string }) => {
@@ -57,6 +58,58 @@ const TiltCard = ({ children, className }: { children: React.ReactNode, classNam
   );
 };
 
+const AccordionCard = ({ service, formatPrice, variants }: { service: Service, formatPrice: (n:number)=>string, variants: Variants }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <motion.div 
+      layout
+      className={`${styles.serviceItem} glass`}
+      onClick={() => setIsOpen(!isOpen)}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      variants={variants}
+    >
+      <motion.div layout className={styles.serviceHeader}>
+        <div className={styles.serviceInfo}>
+          <h3>
+            {service.name}
+            <motion.div 
+              animate={{ rotate: isOpen ? 180 : 0 }}
+              transition={{ duration: 0.3 }}
+              style={{ display: 'inline-block' }}
+            >
+              ▼
+            </motion.div>
+          </h3>
+        </div>
+        <div className={styles.servicePrice}>{formatPrice(service.price)}</div>
+      </motion.div>
+      
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            layout
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className={styles.accordionContent}
+          >
+            {service.image && (
+              <img src={service.image} alt={service.name} className={styles.accordionImage} />
+            )}
+            <div className={styles.accordionText}>
+              {service.description}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+};
+
 interface ClientData {
   clientName: string;
   clientLogo: string;
@@ -64,7 +117,7 @@ interface ClientData {
   heroText: string;
   storytelling?: {
     challenge: string;
-    pillars: { title: string; description: string }[];
+    pillars: { title: string; description: string; image?: string }[];
   };
   packages: {
     fn1: Service[];
@@ -89,6 +142,14 @@ export default function MediaKitView({ data }: { data: ClientData }) {
 
   return (
     <main className={styles.main}>
+      {/* Agency Header Navbar */}
+      <header className={styles.header}>
+        <div className={styles.agencyLogos}>
+          <div className={styles.agencyLogoText}>APOLOGRAMA</div>
+          <div className={styles.agencyLogoText}>FRONTERA NÚMERO UNO</div>
+        </div>
+      </header>
+
       {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroBg} />
@@ -152,12 +213,15 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             }}
           >
             {data.storytelling.pillars.map((pillar, idx) => (
-              <TiltCard key={idx} className={styles.storyPillarCard}>
-                <motion.div variants={fadeUp}>
+              <motion.div key={idx} variants={fadeUp} className={styles.storyPillarCard}>
+                {pillar.image && (
+                  <img src={pillar.image} alt={pillar.title} className={styles.pillarImage} />
+                )}
+                <div className={styles.pillarContent}>
                   <h3>{pillar.title}</h3>
                   <p>{pillar.description}</p>
-                </motion.div>
-              </TiltCard>
+                </div>
+              </motion.div>
             ))}
           </motion.div>
         </section>
@@ -223,18 +287,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             }}
           >
             {data.packages.fn1.map((service, idx) => (
-              <TiltCard key={idx} className={`${styles.serviceItem} glass`}>
-                <motion.div 
-                  variants={fadeUp}
-                  style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}
-                >
-                  <div className={styles.serviceInfo} style={{ textAlign: 'left', flex: 1, paddingRight: '2rem' }}>
-                    <h3>{service.name}</h3>
-                    <p>{service.description}</p>
-                  </div>
-                  <div className={styles.servicePrice}>{formatPrice(service.price)}</div>
-                </motion.div>
-              </TiltCard>
+              <AccordionCard key={idx} service={service} formatPrice={formatPrice} variants={fadeUp} />
             ))}
           </motion.div>
         </section>
@@ -261,18 +314,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             }}
           >
             {data.packages.apolograma.map((service, idx) => (
-              <TiltCard key={idx} className={`${styles.serviceItem} glass`}>
-                <motion.div 
-                  variants={fadeUp}
-                  style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}
-                >
-                  <div className={styles.serviceInfo} style={{ textAlign: 'left', flex: 1, paddingRight: '2rem' }}>
-                    <h3>{service.name}</h3>
-                    <p>{service.description}</p>
-                  </div>
-                  <div className={styles.servicePrice}>{formatPrice(service.price)}</div>
-                </motion.div>
-              </TiltCard>
+              <AccordionCard key={idx} service={service} formatPrice={formatPrice} variants={fadeUp} />
             ))}
           </motion.div>
         </section>
@@ -312,7 +354,13 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             {formatPrice(total)}
           </div>
           
-          <button className={styles.ctaButton}>Aprobar Propuesta</button>
+          <motion.button 
+            className={styles.ctaButton}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Aprobar Propuesta
+          </motion.button>
         </motion.div>
       </section>
 

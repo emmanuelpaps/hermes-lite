@@ -4,6 +4,36 @@
   flex-direction: column;
 }
 
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.agencyLogos {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.agencyLogoText {
+  font-weight: 900;
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: #fff;
+  opacity: 0.8;
+}
+
 .hero {
   height: 100vh;
   display: flex;
@@ -14,6 +44,7 @@
   padding: 2rem;
   position: relative;
   overflow: hidden;
+  padding-top: 5rem;
 }
 
 .heroBg {
@@ -138,11 +169,24 @@
 }
 
 .storyPillarCard {
-  padding: 2rem;
+  padding: 0;
   text-align: left;
-  border-left: 4px solid #8a2be2;
   background: rgba(255, 255, 255, 0.03);
-  border-radius: 0 16px 16px 0;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.pillarImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.pillarContent {
+  padding: 2rem;
+  border-left: 4px solid #8a2be2;
 }
 
 .storyPillarCard h3 {
@@ -163,24 +207,64 @@
 }
 
 .serviceItem {
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.serviceHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 2rem;
 }
 
+.serviceInfo {
+  display: flex;
+  flex-direction: column;
+}
+
 .serviceInfo h3 {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
-}
-
-.serviceInfo p {
-  color: var(--muted-text);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .servicePrice {
   font-size: 1.5rem;
   font-weight: 800;
+}
+
+.accordionContent {
+  padding: 0 2rem 2rem 2rem;
+  color: var(--muted-text);
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.accordionImage {
+  width: 250px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.accordionText {
+  flex: 1;
+  line-height: 1.6;
+}
+
+.chevron {
+  transition: transform 0.3s ease;
+}
+
+.chevron.open {
+  transform: rotate(180deg);
 }
 
 .summarySection {
