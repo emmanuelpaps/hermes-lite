@@ -7,19 +7,19 @@
     "challenge": "Nuestro reto es transformar la percepción del financiamiento B2B, proyectando a Aspen Capital como el aliado tecnológico definitivo para escalar negocios sin fricción.",
     "pillars": [
       {
-        "title": "Presencia Web Premium",
-        "description": "Una cara digital que transmita institucionalidad y confianza nivel AAA a primera vista.",
+        "title": "Fase 1: Identidad Corporativa",
+        "description": "Rediseño de firmas, hojas membretadas, tarjetas digitales y una presentación ejecutiva con motion graphics para alinear a todo el equipo de ventas.",
+        "image": "/assets/pillar-acquisition.png"
+      },
+      {
+        "title": "Fase 2: Plataforma Web Institucional",
+        "description": "Desarrollo de una Landing Page Premium con opción a dashboard de administración de contenidos. La vitrina digital definitiva para Norteamérica.",
         "image": "/assets/pillar-web.png"
       },
       {
-        "title": "Autoridad de Marca B2B",
-        "description": "Contenido estratégico en redes y formatos ejecutivos para educar y atraer prospectos calificados.",
+        "title": "Fase 3: Cinematografía Comercial",
+        "description": "Producción de 2 piezas audiovisuales de grado cinematográfico (comerciales) diseñadas para abrir puertas en presentaciones ejecutivas y pauta digital.",
         "image": "/assets/pillar-authority.png"
-      },
-      {
-        "title": "Adquisición Activa",
-        "description": "Embudo comercial optimizado y campañas de mailing para cerrar tratos corporativos más rápido.",
-        "image": "/assets/pillar-acquisition.png"
       }
     ]
   },
