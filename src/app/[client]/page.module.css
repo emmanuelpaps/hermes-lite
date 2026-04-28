@@ -391,3 +391,79 @@
   font-size: 0.9rem;
   border-top: 1px solid var(--glass-border);
 }
+
+/* =========================================
+   RESPONSIVE (MOBILE OPTIMIZATION)
+   ========================================= */
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .agencyLogos {
+    gap: 1rem;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .agencyLogoText {
+    font-size: 0.8rem;
+  }
+
+  .heroTitle {
+    font-size: 2rem;
+  }
+  
+  .heroSubtitle {
+    font-size: 1.1rem;
+  }
+
+  .section {
+    padding: 4rem 1rem;
+  }
+
+  .serviceHeader {
+    padding: 1.5rem 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .serviceInfo h3 {
+    font-size: 1.2rem;
+  }
+
+  .servicePrice {
+    font-size: 1.2rem;
+  }
+
+  .accordionContent {
+    flex-direction: column;
+    padding: 0 1rem 1.5rem 1rem;
+    gap: 1.5rem;
+  }
+
+  .accordionImage {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+  }
+  
+  .accordionText {
+    font-size: 1rem;
+  }
+  
+  .bulletItem {
+    font-size: 0.9rem;
+  }
+
+  .summaryCard {
+    padding: 1.5rem;
+  }
+
+  .totalPrice {
+    font-size: 2.5rem;
+  }
+}
