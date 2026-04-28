@@ -84,6 +84,9 @@
   max-width: 200px;
   max-height: 100px;
   object-fit: contain;
+  /* CSS Magic to invert a white-bg dark logo into a transparent-bg white logo */
+  filter: invert(1) brightness(2) grayscale(100%);
+  mix-blend-mode: screen;
 }
 
 .heroTitle {
