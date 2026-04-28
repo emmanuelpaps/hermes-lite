@@ -413,8 +413,28 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           viewport={{ once: true }}
           variants={fadeUp}
         >
-          <h2 className={styles.sectionTitle}>Tu ecosistema, consolidado.</h2>
-          <p className={styles.sectionSubtitle} style={{marginBottom: "1rem"}}>Resumen de Inversión Mensual</p>
+          <h2 className={styles.sectionTitle}>
+            {data.packages.blocks && data.packages.blocks.length > 0 ? "Ejecución Modular" : "Tu ecosistema, consolidado."}
+          </h2>
+          <p className={styles.sectionSubtitle} style={{marginBottom: "1rem"}}>
+            {data.packages.blocks && data.packages.blocks.length > 0 ? "Inversión Total del Proyecto" : "Resumen de Inversión Mensual"}
+          </p>
+
+          {data.packages.blocks && data.packages.blocks.length > 0 && (
+            <div style={{
+              background: "rgba(168, 85, 247, 0.1)", 
+              border: "1px solid rgba(168, 85, 247, 0.3)", 
+              borderRadius: "8px", 
+              padding: "1rem", 
+              marginBottom: "2rem",
+              color: "rgba(255, 255, 255, 0.9)",
+              fontSize: "0.95rem",
+              lineHeight: "1.5",
+              textAlign: "left"
+            }}>
+              <strong>Metodología Flexible:</strong> Podemos ejecutar el ecosistema completo de forma simultánea, o bien, realizar un despliegue por bloques individuales <strong>(lapsos de 30 días naturales por bloque)</strong> para escalar la inversión a tu ritmo.
+            </div>
+          )}
           
           <div style={{textAlign: "left", marginBottom: "1rem", color: "var(--muted-text)"}}>
             {subtotal > 0 && <p>Subtotal: {formatPrice(subtotal)}</p>}
