@@ -34,6 +34,13 @@
   opacity: 0.8;
 }
 
+.agencyLogoImage {
+  max-height: 24px;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.9;
+}
+
 .hero {
   height: 100vh;
   display: flex;

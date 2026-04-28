@@ -183,7 +183,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
       <header className={styles.header}>
         <div className={styles.agencyLogos}>
           <div className={styles.agencyLogoText}>APOLOGRAMA</div>
-          <div className={styles.agencyLogoText}>FRONTERA NÚMERO UNO</div>
+          <img src="/assets/fn1-logo-white.png" alt="Frontera Número Uno" className={styles.agencyLogoImage} />
         </div>
       </header>
 
