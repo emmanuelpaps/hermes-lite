@@ -143,6 +143,7 @@ interface ClientData {
   packages: {
     fn1: Service[];
     apolograma: Service[];
+    blocks?: { name: string; services: Service[] }[];
   };
   discountPercent: number;
 }
@@ -152,7 +153,8 @@ export default function MediaKitView({ data }: { data: ClientData }) {
 
   const fn1Total = data.packages.fn1.reduce((acc, curr) => acc + curr.price, 0);
   const apoTotal = data.packages.apolograma.reduce((acc, curr) => acc + curr.price, 0);
-  const subtotal = fn1Total + apoTotal;
+  const blocksTotal = data.packages.blocks ? data.packages.blocks.reduce((acc, block) => acc + block.services.reduce((sum, s) => sum + s.price, 0), 0) : 0;
+  const subtotal = fn1Total + apoTotal + blocksTotal;
   const discountAmount = subtotal * (data.discountPercent / 100);
   const total = subtotal - discountAmount;
 
@@ -337,7 +339,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
         </section>
       )}
 
-      {/* Apolograma Services */}
+      {/* Apolograma Services (Legacy Flat List) */}
       {data.packages.apolograma.length > 0 && (
         <section className={styles.section}>
           <motion.h2 className={styles.sectionTitle} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
@@ -370,6 +372,37 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           </motion.div>
         </section>
       )}
+
+      {/* Blocks Structure */}
+      {data.packages.blocks && data.packages.blocks.map((block, blockIdx) => (
+        <section key={`block-${blockIdx}`} className={styles.section}>
+          <motion.h2 className={styles.sectionTitle} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+            {block.name}
+          </motion.h2>
+          
+          <motion.div 
+            className={styles.servicesGrid}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+            }}
+          >
+            {block.services.map((service, idx) => (
+              <AccordionCard 
+                key={`${blockIdx}-${idx}`} 
+                service={service} 
+                formatPrice={formatPrice} 
+                variants={fadeUp} 
+                isOpen={activeService === service.name}
+                onToggle={() => setActiveService(activeService === service.name ? null : service.name)}
+              />
+            ))}
+          </motion.div>
+        </section>
+      ))}
 
       {/* Summary */}
       <section className={styles.summarySection}>
