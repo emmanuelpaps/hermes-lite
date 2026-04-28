@@ -263,43 +263,45 @@ export default function MediaKitView({ data }: { data: ClientData }) {
       )}
 
       {/* Audiences */}
-      <section className={styles.section}>
-        <motion.h2 
-          className={styles.sectionTitle}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeUp}
-        >
-          Nuestras Audiencias
-        </motion.h2>
-        <motion.p 
-          className={styles.sectionSubtitle}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeUp}
-        >
-          El respaldo que tu marca necesita.
-        </motion.p>
-        
-        <div className={styles.statsGrid}>
-          <TiltCard className={`${styles.statCard} glass`}>
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-              <div className={`${styles.statNumber} text-gradient`}>391K</div>
-              <h3>The Millennials</h3>
-              <p>Facebook · 72% de 25-44 años</p>
-            </motion.div>
-          </TiltCard>
-          <TiltCard className={`${styles.statCard} glass`}>
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.2 }}>
-              <div className={`${styles.statNumber} text-gradient`}>69K</div>
-              <h3>The Centennials</h3>
-              <p>Instagram · 63% de 18-34 años</p>
-            </motion.div>
-          </TiltCard>
-        </div>
-      </section>
+      {data.packages.fn1.length > 0 && (
+        <section className={styles.section}>
+          <motion.h2 
+            className={styles.sectionTitle}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+          >
+            Nuestras Audiencias
+          </motion.h2>
+          <motion.p 
+            className={styles.sectionSubtitle}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+          >
+            El respaldo que tu marca necesita.
+          </motion.p>
+          
+          <div className={styles.statsGrid}>
+            <TiltCard className={`${styles.statCard} glass`}>
+              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+                <div className={`${styles.statNumber} text-gradient`}>391K</div>
+                <h3>The Millennials</h3>
+                <p>Facebook · 72% de 25-44 años</p>
+              </motion.div>
+            </TiltCard>
+            <TiltCard className={`${styles.statCard} glass`}>
+              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.2 }}>
+                <div className={`${styles.statNumber} text-gradient`}>69K</div>
+                <h3>The Centennials</h3>
+                <p>Instagram · 63% de 18-34 años</p>
+              </motion.div>
+            </TiltCard>
+          </div>
+        </section>
+      )}
 
       {/* FN1 Services */}
       {data.packages.fn1.length > 0 && (
