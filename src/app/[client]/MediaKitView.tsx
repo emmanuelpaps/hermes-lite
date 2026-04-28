@@ -1,14 +1,61 @@
 "use client";
 
-import { motion, Variants } from "framer-motion";
+import { motion, Variants, useMotionValue, useSpring, useTransform } from "framer-motion";
 import styles from "./page.module.css";
-import Image from "next/image";
+import React, { useRef } from "react";
 
 interface Service {
   name: string;
   price: number;
   description: string;
 }
+
+const TiltCard = ({ children, className }: { children: React.ReactNode, className?: string }) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x);
+  const mouseYSpring = useSpring(y);
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["7.5deg", "-7.5deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-7.5deg", "7.5deg"]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        rotateY,
+        rotateX,
+        transformStyle: "preserve-3d",
+      }}
+      className={className}
+    >
+      <div style={{ transform: "translateZ(30px)" }}>{children}</div>
+    </motion.div>
+  );
+};
 
 interface ClientData {
   clientName: string;
@@ -41,6 +88,11 @@ export default function MediaKitView({ data }: { data: ClientData }) {
       {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroBg} />
+        <motion.div 
+          className={styles.floating3D} 
+          animate={{ y: [0, -20, 0], rotate: [0, 5, -5, 0] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        />
         <motion.div 
           className={styles.logoContainer}
           initial={{ opacity: 0, scale: 0.8 }}
@@ -94,16 +146,20 @@ export default function MediaKitView({ data }: { data: ClientData }) {
         </motion.p>
         
         <div className={styles.statsGrid}>
-          <motion.div className={`${styles.statCard} glass`} whileHover={{ scale: 1.02 }} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-            <div className={`${styles.statNumber} text-gradient`}>391K</div>
-            <h3>The Millennials</h3>
-            <p>Facebook · 72% de 25-44 años</p>
-          </motion.div>
-          <motion.div className={`${styles.statCard} glass`} whileHover={{ scale: 1.02 }} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.2 }}>
-            <div className={`${styles.statNumber} text-gradient`}>69K</div>
-            <h3>The Centennials</h3>
-            <p>Instagram · 63% de 18-34 años</p>
-          </motion.div>
+          <TiltCard className={`${styles.statCard} glass`}>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+              <div className={`${styles.statNumber} text-gradient`}>391K</div>
+              <h3>The Millennials</h3>
+              <p>Facebook · 72% de 25-44 años</p>
+            </motion.div>
+          </TiltCard>
+          <TiltCard className={`${styles.statCard} glass`}>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.2 }}>
+              <div className={`${styles.statNumber} text-gradient`}>69K</div>
+              <h3>The Centennials</h3>
+              <p>Instagram · 63% de 18-34 años</p>
+            </motion.div>
+          </TiltCard>
         </div>
       </section>
 
@@ -117,24 +173,31 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             Alcance masivo y credibilidad con Frontera Número Uno.
           </motion.p>
           
-          <div className={styles.servicesGrid}>
+          <motion.div 
+            className={styles.servicesGrid}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+            }}
+          >
             {data.packages.fn1.map((service, idx) => (
-              <motion.div 
-                key={idx} 
-                className={`${styles.serviceItem} glass`}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-              >
-                <div className={styles.serviceInfo}>
-                  <h3>{service.name}</h3>
-                  <p>{service.description}</p>
-                </div>
-                <div className={styles.servicePrice}>{formatPrice(service.price)}</div>
-              </motion.div>
+              <TiltCard key={idx} className={`${styles.serviceItem} glass`}>
+                <motion.div 
+                  variants={fadeUp}
+                  style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}
+                >
+                  <div className={styles.serviceInfo} style={{ textAlign: 'left', flex: 1, paddingRight: '2rem' }}>
+                    <h3>{service.name}</h3>
+                    <p>{service.description}</p>
+                  </div>
+                  <div className={styles.servicePrice}>{formatPrice(service.price)}</div>
+                </motion.div>
+              </TiltCard>
             ))}
-          </div>
+          </motion.div>
         </section>
       )}
 
@@ -148,24 +211,31 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             Desarrollo de marca y presencia digital impecable con Apolograma.
           </motion.p>
           
-          <div className={styles.servicesGrid}>
+          <motion.div 
+            className={styles.servicesGrid}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+            }}
+          >
             {data.packages.apolograma.map((service, idx) => (
-              <motion.div 
-                key={idx} 
-                className={`${styles.serviceItem} glass`}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-              >
-                <div className={styles.serviceInfo}>
-                  <h3>{service.name}</h3>
-                  <p>{service.description}</p>
-                </div>
-                <div className={styles.servicePrice}>{formatPrice(service.price)}</div>
-              </motion.div>
+              <TiltCard key={idx} className={`${styles.serviceItem} glass`}>
+                <motion.div 
+                  variants={fadeUp}
+                  style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}
+                >
+                  <div className={styles.serviceInfo} style={{ textAlign: 'left', flex: 1, paddingRight: '2rem' }}>
+                    <h3>{service.name}</h3>
+                    <p>{service.description}</p>
+                  </div>
+                  <div className={styles.servicePrice}>{formatPrice(service.price)}</div>
+                </motion.div>
+              </TiltCard>
             ))}
-          </div>
+          </motion.div>
         </section>
       )}
 
@@ -181,10 +251,23 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           <h2 className={styles.sectionTitle}>Tu ecosistema, consolidado.</h2>
           <p className={styles.sectionSubtitle} style={{marginBottom: "1rem"}}>Resumen de Inversión Mensual</p>
           
-          <div style={{textAlign: "left", marginBottom: "2rem", color: "var(--muted-text)"}}>
+          <div style={{textAlign: "left", marginBottom: "1rem", color: "var(--muted-text)"}}>
             {subtotal > 0 && <p>Subtotal: {formatPrice(subtotal)}</p>}
             {data.discountPercent > 0 && <p style={{color: "#4ade80"}}>Descuento ({data.discountPercent}%): -{formatPrice(discountAmount)}</p>}
           </div>
+
+          {(fn1Total > 0 && apoTotal > 0) && (
+            <>
+              <div className={styles.progressContainer}>
+                <div className={styles.progressAgency} style={{ width: `${(apoTotal / subtotal) * 100}%` }} />
+                <div className={styles.progressMedia} style={{ width: `${(fn1Total / subtotal) * 100}%` }} />
+              </div>
+              <div className={styles.progressLabels}>
+                <span style={{ color: "#a855f7" }}>Agencia ({Math.round((apoTotal/subtotal)*100)}%)</span>
+                <span style={{ color: "#3b82f6" }}>Medios ({Math.round((fn1Total/subtotal)*100)}%)</span>
+              </div>
+            </>
+          )}
 
           <div className={`${styles.totalPrice} text-gradient`}>
             {formatPrice(total)}
