@@ -262,6 +262,29 @@
   font-weight: 300;
 }
 
+.bulletList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.bulletItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  font-size: 1rem;
+  color: var(--muted-text);
+  line-height: 1.5;
+}
+
+.bulletCheck {
+  color: #a855f7;
+  font-weight: 800;
+}
+
 .chevron {
   transition: transform 0.3s ease;
 }

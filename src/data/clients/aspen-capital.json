@@ -30,36 +30,76 @@
         "name": "Landing Page Premium + Dashboard",
         "price": 20000,
         "description": "Desarrollo de un One-Pager de alto impacto con animaciones avanzadas, y un dashboard administrativo para cambios dinámicos.",
+        "bullets": [
+          "Diseño UI/UX Ultra-Premium B2B",
+          "Animaciones avanzadas y físicas de scroll",
+          "Dashboard CMS a la medida para autogestión",
+          "Optimización SEO técnica",
+          "Hosting y dominio incluido por 1 año"
+        ],
         "image": "/assets/pillar-web.png"
       },
       {
         "name": "Manejo de Redes Tier 2 (Mensual)",
         "price": 28000,
         "description": "Iguala mensual Core. Incluye 20 piezas gráficas, 1 sesión de fotos y estrategia de comunicación B2B para crear comunidad.",
+        "bullets": [
+          "Estrategia de posicionamiento en LinkedIn e Instagram",
+          "Diseño de 20 piezas gráficas de alto nivel mensual",
+          "1 sesión de fotografía y video profesional al mes",
+          "Community Management B2B (Respuesta a prospectos)",
+          "Reporte analítico de crecimiento y alcance"
+        ],
         "image": "/assets/pillar-authority.png"
       },
       {
         "name": "Presentación Ejecutiva B2B",
         "price": 15000,
         "description": "Diseño corporativo e institucional con integración de Motion Graphics para ventas de alto nivel.",
+        "bullets": [
+          "Estructuración narrativa de ventas (Pitch Deck)",
+          "Diseño visual estilo McKinsey / Agencia Top",
+          "Integración de micro-animaciones (Motion Graphics)",
+          "Exportación en formatos interactivos y PDF",
+          "Entrega de archivos fuente editables"
+        ],
         "image": "/assets/pillar-web.png"
       },
       {
         "name": "Producción de Video B2B (4 Comerciales)",
         "price": 52000,
         "description": "Producción completa de 4 comerciales de 20 segundos enfocados a promoción y venta.",
+        "bullets": [
+          "Pre-producción: Guionaje técnico y persuasivo",
+          "Producción: Filmación con equipo cinematográfico AAA",
+          "Dirección de arte e iluminación en locación",
+          "Post-producción: Edición dinámica, color grading y sound design",
+          "Formatos optimizados para pauta digital y redes"
+        ],
         "image": "/assets/pillar-authority.png"
       },
       {
         "name": "Master Templates Mailing",
         "price": 8000,
         "description": "Diseño y maquetación de plantillas maestras en HTML para envío de correos corporativos.",
+        "bullets": [
+          "Diseño de arquitectura de correo optimizada para conversión",
+          "Maquetación en HTML responsive (desktop y mobile)",
+          "Pruebas de renderizado anti-spam en Gmail y Outlook",
+          "Ajuste visual a la identidad de marca de Aspen"
+        ],
         "image": "/assets/pillar-acquisition.png"
       },
       {
         "name": "Rediseño Firmas Corporativas",
         "price": 2500,
         "description": "Estandarización y diseño premium de las firmas de correo para todo el equipo ejecutivo.",
+        "bullets": [
+          "Diseño visual minimalista y corporativo",
+          "Integración de links interactivos y CTAs",
+          "Código HTML optimizado para firmas ligeras",
+          "Guía de instalación para el equipo"
+        ],
         "image": "/assets/pillar-web.png"
       }
     ]

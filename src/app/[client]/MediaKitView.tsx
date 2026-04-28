@@ -8,6 +8,7 @@ interface Service {
   name: string;
   price: number;
   description: string;
+  bullets?: string[];
   image?: string;
 }
 
@@ -101,7 +102,20 @@ const AccordionCard = ({ service, formatPrice, variants }: { service: Service, f
               <img src={service.image} alt={service.name} className={styles.accordionImage} />
             )}
             <div className={styles.accordionText}>
-              {service.description}
+              <p style={{ marginBottom: service.bullets ? "1.5rem" : "0" }}>
+                {service.description}
+              </p>
+              
+              {service.bullets && (
+                <ul className={styles.bulletList}>
+                  {service.bullets.map((bullet, idx) => (
+                    <li key={idx} className={styles.bulletItem}>
+                      <span className={styles.bulletCheck}>✓</span>
+                      {bullet}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           </motion.div>
         )}
