@@ -481,7 +481,20 @@ export default function MediaKitView({ data }: { data: ClientData }) {
       </section>
 
       <footer className={styles.footer}>
-        © {new Date().getFullYear()} Tecza Tecnologies S. de R.L. de C.V.
+        <motion.div 
+          className={styles.footerDecoration}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+        >
+          <img src="/assets/puerta-juarez.png" alt="Puerta Juárez" />
+        </motion.div>
+        
+        <div className={styles.footerContent}>
+          <p>© {new Date().getFullYear()} Frontera Número Uno & Apolograma.</p>
+          <p>Strictly Confidential. Do not distribute sin autorización.</p>
+        </div>
       </footer>
     </main>
   );

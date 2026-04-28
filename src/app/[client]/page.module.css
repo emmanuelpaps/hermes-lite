@@ -139,6 +139,41 @@
 }
 
 /* =========================================
+   FOOTER
+   ========================================= */
+.footer {
+  text-align: center;
+  padding: 4rem 1rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  margin-top: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.footerDecoration {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footerDecoration img {
+  width: 150px;
+  height: auto;
+  opacity: 0.15;
+}
+
+.footerContent {
+  color: var(--muted-text);
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+/* =========================================
+   RESPONSIVE OVERRIDES
+   ========================================= */
+
+/* =========================================
    BRAND DIVIDER
    ========================================= */
 .brandDivider {
