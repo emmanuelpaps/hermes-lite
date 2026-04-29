@@ -540,6 +540,10 @@ export default function MediaKitView({ data }: { data: ClientData }) {
         </motion.div>
         
         <div className={styles.footerContent}>
+          <div className={styles.agencyLogos} style={{ marginBottom: '1.5rem', opacity: 0.7 }}>
+            <img src="/assets/apolograma-logo.png" alt="Apolograma" className={styles.apologramaLogoImage} />
+            <img src="/assets/fn1-logo-white.png" alt="Frontera Número Uno" className={styles.agencyLogoImage} />
+          </div>
           <p>© {new Date().getFullYear()} Frontera Número Uno & Apolograma.</p>
           <p>Strictly Confidential. Do not distribute sin autorización.</p>
         </div>
