@@ -26,12 +26,10 @@
 }
 
 .apologramaLogoImage {
-  height: 24px;
+  height: 36px;
   width: auto;
   object-fit: contain;
   opacity: 0.9;
-  filter: invert(1) brightness(2) grayscale(100%);
-  mix-blend-mode: screen;
 }
 
 .agencyLogoImage {
