@@ -472,11 +472,41 @@
 
 .footer {
   text-align: center;
-  padding: 2rem;
+  padding: 4rem 2rem;
   color: var(--muted-text);
   font-size: 0.9rem;
   border-top: 1px solid var(--glass-border);
   padding-bottom: 6rem; /* Extra space for sticky CTA */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.footerContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.footerAgencyLogos {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  opacity: 0.7;
+}
+
+.footerApologramaLogo {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  /* Garantiza transparencia sobre negro incluso si el origen tiene fondo blanco */
+  filter: invert(1) brightness(2) grayscale(100%);
+  mix-blend-mode: screen;
 }
 
 .stickyCta {
