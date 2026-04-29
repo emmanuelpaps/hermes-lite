@@ -284,7 +284,18 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             {data.storytelling.pillars.map((pillar, idx) => (
               <motion.div key={idx} variants={fadeUp} className={styles.storyPillarCard}>
                 {pillar.image && (
-                  <img src={pillar.image} alt={pillar.title} className={styles.pillarImage} />
+                  pillar.image.endsWith('.mp4') || pillar.image.endsWith('.webm') ? (
+                    <video 
+                      src={pillar.image} 
+                      className={styles.pillarImage} 
+                      autoPlay 
+                      loop 
+                      muted 
+                      playsInline 
+                    />
+                  ) : (
+                    <img src={pillar.image} alt={pillar.title} className={styles.pillarImage} />
+                  )
                 )}
                 <div className={styles.pillarContent}>
                   <h3>{pillar.title}</h3>
