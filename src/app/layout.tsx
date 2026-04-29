@@ -5,10 +5,13 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://fronteranumero1.tecza.com.mx'),
   title: "Media Kit | Frontera Número Uno",
   description: "Propuesta de Ecosistema Digital por Frontera Número Uno y Apolograma",
+  icons: {
+    icon: "/icon.png"
+  },
   openGraph: {
     title: "Media Kit | Frontera Número Uno",
     description: "Propuesta de Ecosistema Digital",
-    images: ["/icon.png"],
+    images: ["/assets/fn1-logo-white.png"],
   }
 };
 
