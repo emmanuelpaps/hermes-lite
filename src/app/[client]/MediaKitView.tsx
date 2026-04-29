@@ -202,7 +202,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
       {/* Agency Header Navbar */}
       <header className={styles.header}>
         <div className={styles.agencyLogos}>
-          <div className={styles.agencyLogoText}>APOLOGRAMA</div>
+          <img src="/assets/apolograma-logo.png" alt="Apolograma" className={styles.apologramaLogoImage} />
           <img src="/assets/fn1-logo-white.png" alt="Frontera Número Uno" className={styles.agencyLogoImage} />
         </div>
       </header>

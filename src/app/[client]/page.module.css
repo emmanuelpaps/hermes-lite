@@ -11,7 +11,7 @@
   width: 100%;
   padding: 1.5rem 2rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   z-index: 50;
   background: rgba(0, 0, 0, 0.5);
@@ -25,18 +25,17 @@
   align-items: center;
 }
 
-.agencyLogoText {
-  font-weight: 900;
-  letter-spacing: 2px;
-  font-size: 1.3rem;
-  text-transform: uppercase;
-  color: #fff;
-  opacity: 0.8;
-  line-height: 1;
+.apologramaLogoImage {
+  height: 24px;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.9;
+  filter: invert(1) brightness(2) grayscale(100%);
+  mix-blend-mode: screen;
 }
 
 .agencyLogoImage {
-  height: 26px;
+  height: 24px;
   width: auto;
   object-fit: contain;
   opacity: 0.9;
