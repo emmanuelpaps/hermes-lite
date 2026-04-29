@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Media Kit | Frontera Número Uno",
     description: "Propuesta de Ecosistema Digital",
-    images: ["/assets/fn1-logo-purple.png"],
+    images: ["/assets/fn1-logo-stacked.png"],
   }
 };
 
