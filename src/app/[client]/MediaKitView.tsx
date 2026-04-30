@@ -3,7 +3,7 @@
 import { motion, Variants, useMotionValue, useSpring, useTransform, AnimatePresence, animate, useInView } from "framer-motion";
 import styles from "./page.module.css";
 import React, { useRef, useState, useEffect } from "react";
-import { ViralChart, ApologramaShowcase } from "./EcosystemAnimations";
+import { ViralChart, ApologramaShowcase, PremiumAudienceCard } from "./EcosystemAnimations";
 const AnimatedPrice = ({ value }: { value: number }) => {
   const nodeRef = useRef<HTMLSpanElement>(null);
   const isInView = useInView(nodeRef, { once: true, margin: "-50px" });
@@ -400,26 +400,30 @@ export default function MediaKitView({ data }: { data: ClientData }) {
         </motion.p>
         
         <div className={styles.statsGrid}>
-          <TiltCard className={`${styles.statCard} glass`}>
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-              <div className={`${styles.statNumber} text-gradient`}>391K</div>
-              <h3>The Millennials (Facebook)</h3>
-              <p>
-                <strong>70%</strong> de 25-44 años<br/>
-                <strong>72%</strong> Cd. Juárez / <strong>18%</strong> El Paso, TX
-              </p>
-            </motion.div>
-          </TiltCard>
-          <TiltCard className={`${styles.statCard} glass`}>
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.2 }}>
-              <div className={`${styles.statNumber} text-gradient`}>69K</div>
-              <h3>The Centennials (Instagram)</h3>
-              <p>
-                <strong>65%</strong> de 18-34 años<br/>
-                <strong>63%</strong> Cd. Juárez / <strong>32%</strong> El Paso, TX
-              </p>
-            </motion.div>
-          </TiltCard>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} style={{ height: '100%' }}>
+            <PremiumAudienceCard
+              platform="facebook"
+              title="The Millennials"
+              followers={391}
+              ageRange="25-44 años"
+              agePercent={70}
+              juarezPercent={72}
+              elPasoPercent={18}
+              isLight={isLight}
+            />
+          </motion.div>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.2 }} style={{ height: '100%' }}>
+            <PremiumAudienceCard
+              platform="instagram"
+              title="The Centennials"
+              followers={69}
+              ageRange="18-34 años"
+              agePercent={65}
+              juarezPercent={63}
+              elPasoPercent={32}
+              isLight={isLight}
+            />
+          </motion.div>
         </div>
       </section>
 
