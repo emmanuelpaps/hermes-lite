@@ -392,6 +392,39 @@ export default function MediaKitView({ data }: { data: ClientData }) {
         </div>
       </section>
 
+      {/* Nuestras Audiencias (Restaurado con nuevos demográficos) */}
+      <section className={styles.section}>
+        <motion.h2 className={styles.sectionTitle} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+          Nuestras Audiencias
+        </motion.h2>
+        <motion.p className={styles.sectionSubtitle} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+          Alcance demográfico quirúrgico en la frontera.
+        </motion.p>
+        
+        <div className={styles.statsGrid}>
+          <TiltCard className={`${styles.statCard} glass`}>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+              <div className={`${styles.statNumber} text-gradient`}>391K</div>
+              <h3>The Millennials (Facebook)</h3>
+              <p>
+                <strong>70%</strong> de 25-44 años<br/>
+                <strong>72%</strong> Cd. Juárez / <strong>18%</strong> El Paso, TX
+              </p>
+            </motion.div>
+          </TiltCard>
+          <TiltCard className={`${styles.statCard} glass`}>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.2 }}>
+              <div className={`${styles.statNumber} text-gradient`}>69K</div>
+              <h3>The Centennials (Instagram)</h3>
+              <p>
+                <strong>65%</strong> de 18-34 años<br/>
+                <strong>63%</strong> Cd. Juárez / <strong>32%</strong> El Paso, TX
+              </p>
+            </motion.div>
+          </TiltCard>
+        </div>
+      </section>
+
       {/* FN1 Services */}
       {data.packages.fn1.length > 0 && (
         <section className={styles.section}>

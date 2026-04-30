@@ -95,15 +95,15 @@ export const ViralChart = ({ isLight }: { isLight: boolean }) => {
       >
         <div>
           <div style={{ fontSize: '2.5rem', fontWeight: 900, color: chartColor, lineHeight: 1 }}>
-            <AnimatedCounter from={0} to={52.5} formatter={(v) => v.toFixed(1) + 'M'} />
+            <AnimatedCounter from={0} to={77.1} formatter={(v) => v.toFixed(1) + 'M'} />
           </div>
           <div style={{ fontSize: '0.8rem', opacity: 0.7, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Visualizaciones</div>
         </div>
         <div>
           <div style={{ fontSize: '2.5rem', fontWeight: 900, color: chartColor, lineHeight: 1 }}>
-            <AnimatedCounter from={0} to={548} formatter={(v) => Math.floor(v) + 'K'} />
+            <AnimatedCounter from={0} to={460} formatter={(v) => Math.floor(v) + 'K'} />
           </div>
-          <div style={{ fontSize: '0.8rem', opacity: 0.7, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Interacciones</div>
+          <div style={{ fontSize: '0.8rem', opacity: 0.7, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Seguidores Totales</div>
         </div>
       </motion.div>
     </div>
