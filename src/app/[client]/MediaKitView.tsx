@@ -370,7 +370,6 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                   }} 
                 />
               </div>
-              <h3>Apolograma</h3>
               <p>Agencia de Inteligencia Estratégica. Desarrollamos arquitecturas de marca, plataformas tecnológicas y operaciones digitales para escalar tu negocio.</p>
               <ApologramaShowcase isLight={isLight} />
             </motion.div>
@@ -384,7 +383,6 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                   style={{ width: '180px', height: 'auto', objectFit: 'contain' }} 
                 />
               </div>
-              <h3>Frontera Número Uno</h3>
               <p>El medio digital nativo con mayor retención de la frontera. Transformamos narrativas corporativas en conversación cultural de alto impacto.</p>
               <ViralChart isLight={isLight} />
             </motion.div>
