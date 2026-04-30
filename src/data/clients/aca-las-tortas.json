@@ -5,6 +5,7 @@
   "heroText": "Reconstruimos la conexión honesta con tu comunidad a través de contenido altruista y evolución digital.",
   "hideTotal": true,
   "theme": {
+    "mode": "light",
     "primary": "#E60000",
     "fontHeading": "'Teko', sans-serif",
     "textGradient": "linear-gradient(to right, #ffffff, #ffb3b3)"

@@ -168,6 +168,7 @@ interface ClientData {
   discountPercent: number;
   hideTotal?: boolean;
   theme?: {
+    mode?: 'dark' | 'light';
     primary?: string;
     fontHeading?: string;
     textGradient?: string;
@@ -191,10 +192,19 @@ export default function MediaKitView({ data }: { data: ClientData }) {
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
   };
 
+  const isLight = data.theme?.mode === 'light';
+
   const customTheme = data.theme ? {
     '--font-heading': data.theme.fontHeading || 'Space Grotesk, sans-serif',
-    '--primary-gradient': `linear-gradient(135deg, ${data.theme.primary || '#a855f7'} 0%, #000 100%)`,
+    '--primary-gradient': `linear-gradient(135deg, ${data.theme.primary || '#a855f7'} 0%, ${isLight ? '#990000' : '#000'} 100%)`,
     '--text-gradient': data.theme.textGradient || 'linear-gradient(to right, #fff, #888)',
+    ...(isLight ? {
+      '--bg-color': '#f8f9fa',
+      '--text-color': '#111111',
+      '--muted-text': '#555555',
+      '--card-bg': 'rgba(255, 255, 255, 0.7)',
+      '--glass-border': 'rgba(0, 0, 0, 0.1)',
+    } : {})
   } as React.CSSProperties : {};
 
   return (
@@ -214,20 +224,23 @@ export default function MediaKitView({ data }: { data: ClientData }) {
       {/* Agency Header Navbar */}
       <header className={styles.header}>
         <div className={styles.agencyLogos}>
-          <img src="/assets/apolograma-logo.png" alt="Apolograma" className={styles.apologramaLogoImage} />
-          <img src="/assets/fn1-logo-white.png" alt="Frontera Número Uno" className={styles.agencyLogoImage} />
+          <img src="/assets/apolograma-logo.png" alt="Apolograma" className={isLight ? styles.apologramaLogoImageLight : styles.apologramaLogoImage} />
+          <img src={isLight ? "/assets/fn1-logo-purple.png" : "/assets/fn1-logo-white.png"} alt="Frontera Número Uno" className={styles.agencyLogoImage} />
         </div>
       </header>
 
       {/* Hero Section */}
       <section className={styles.hero}>
-        <div className={styles.heroBg} />
-        
-        <motion.div 
-          className={styles.floating3D} 
-          animate={{ y: [0, -20, 0], rotate: [0, 5, -5, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        />
+        {!isLight && (
+          <>
+            <div className={styles.heroBg} />
+            <motion.div 
+              className={styles.floating3D} 
+              animate={{ y: [0, -20, 0], rotate: [0, 5, -5, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </>
+        )}
         <motion.div 
           className={styles.logoContainer}
           initial={{ opacity: 0, scale: 0.8 }}
@@ -557,8 +570,8 @@ export default function MediaKitView({ data }: { data: ClientData }) {
         
         <div className={styles.footerContent}>
           <div className={styles.footerAgencyLogos}>
-            <img src="/assets/apolograma-logo.png" alt="Apolograma" className={styles.footerApologramaLogo} />
-            <img src="/assets/fn1-logo-white.png" alt="Frontera Número Uno" className={styles.agencyLogoImage} />
+            <img src="/assets/apolograma-logo.png" alt="Apolograma" className={isLight ? styles.footerApologramaLogoLight : styles.footerApologramaLogo} />
+            <img src={isLight ? "/assets/fn1-logo-purple.png" : "/assets/fn1-logo-white.png"} alt="Frontera Número Uno" className={styles.agencyLogoImage} />
           </div>
           <p>© {new Date().getFullYear()} Frontera Número Uno & Apolograma.</p>
           <p>Strictly Confidential. Do not distribute sin autorización.</p>

@@ -30,6 +30,15 @@
   width: auto;
   object-fit: contain;
   opacity: 0.9;
+  filter: invert(1) brightness(2) grayscale(100%);
+  mix-blend-mode: screen;
+}
+
+.apologramaLogoImageLight {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.9;
 }
 
 .agencyLogoImage {
@@ -507,6 +516,12 @@
   /* Garantiza transparencia sobre negro incluso si el origen tiene fondo blanco */
   filter: invert(1) brightness(2) grayscale(100%);
   mix-blend-mode: screen;
+}
+
+.footerApologramaLogoLight {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
 }
 
 .stickyCta {
