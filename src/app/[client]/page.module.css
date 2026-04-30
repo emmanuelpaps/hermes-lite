@@ -379,7 +379,8 @@
   flex: 1;
   line-height: 1.8;
   font-size: 1.15rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-color);
+  opacity: 0.9;
   font-weight: 300;
 }
 
@@ -415,7 +416,7 @@
 }
 
 .summarySection {
-  background: #111;
+  background: var(--bg-color);
   padding: 6rem 2rem;
   border-top: 1px solid var(--glass-border);
 }
@@ -431,7 +432,7 @@
   font-size: 4rem;
   font-weight: 900;
   margin: 1rem 0;
-  color: #fff;
+  color: var(--text-color);
 }
 
 .progressContainer {

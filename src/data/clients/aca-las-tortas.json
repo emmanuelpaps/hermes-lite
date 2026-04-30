@@ -8,7 +8,7 @@
     "mode": "light",
     "primary": "#E60000",
     "fontHeading": "'Teko', sans-serif",
-    "textGradient": "linear-gradient(to right, #ffffff, #ffb3b3)"
+    "textGradient": "linear-gradient(to right, #E60000, #800000)"
   },
   "storytelling": {
     "challenge": "Revertir la percepción pública actual mediante acciones orgánicas y sinceras, donde la marca aporta valor real a la comunidad sin buscar el protagonismo, a la vez que se moderniza para dejar de depender de comisiones abusivas de terceros.",
