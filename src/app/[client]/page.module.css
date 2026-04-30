@@ -572,15 +572,24 @@
    ========================================= */
 @media (max-width: 992px) {
   .header {
-    padding: 1rem;
-    flex-direction: column;
-    gap: 0.5rem;
+    padding: 0.8rem 1rem;
+    flex-direction: row;
   }
   
   .agencyLogos {
-    gap: 1rem;
-    flex-direction: column;
-    text-align: center;
+    gap: 1.5rem;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .apologramaLogoImage,
+  .apologramaLogoImageLight {
+    height: 50px;
+  }
+
+  .agencyLogoImage {
+    height: 18px;
   }
   
   .agencyLogoText {
