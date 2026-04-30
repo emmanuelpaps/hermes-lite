@@ -532,7 +532,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           )}
           
           <motion.a 
-            href="https://wa.me/526561031571?text=Hola%20Emmanuel%2C%20revis%C3%A9%20la%20propuesta%20de%20Aspen%20Capital%20y%20estoy%20listo%20para%20avanzar."
+            href={`https://wa.me/526561031571?text=${encodeURIComponent(`Hola Emmanuel, revisé la propuesta de ${data.clientName} y estoy listo para avanzar.`)}`}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.ctaButton}
@@ -547,7 +547,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
 
       {/* Sticky CTA */}
       <motion.a 
-        href="https://wa.me/526561031571?text=Hola%20Emmanuel%2C%20revis%C3%A9%20la%20propuesta%20de%20Aspen%20Capital%20y%20estoy%20listo%20para%20avanzar."
+        href={`https://wa.me/526561031571?text=${encodeURIComponent(`Hola Emmanuel, revisé la propuesta de ${data.clientName} y estoy listo para avanzar.`)}`}
         target="_blank"
         rel="noopener noreferrer"
         className={styles.stickyCta}

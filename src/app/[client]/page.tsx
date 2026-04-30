@@ -36,10 +36,10 @@ export async function generateMetadata({ params }: { params: Promise<{ client: s
         description: `Ecosistema Digital Exclusivo para ${data.clientName}, desarrollado por Frontera Número Uno y Apolograma.`,
         images: [
           {
-            url: '/assets/fn1-logo-stacked.png',
+            url: data.clientLogo ? `https://fronteranumero1.tecza.com.mx${data.clientLogo}` : `https://fronteranumero1.tecza.com.mx/assets/fn1-logo-stacked.png`,
             width: 1200,
             height: 630,
-            alt: `Logo de Frontera Número Uno`,
+            alt: `Propuesta para ${data.clientName}`,
           },
         ],
       },
