@@ -333,46 +333,57 @@ export default function MediaKitView({ data }: { data: ClientData }) {
         </section>
       )}
 
-      {/* Audiences */}
-      {data.packages.fn1.length > 0 && (
-        <section className={styles.section}>
-          <motion.h2 
-            className={styles.sectionTitle}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-          >
-            Nuestras Audiencias
-          </motion.h2>
-          <motion.p 
-            className={styles.sectionSubtitle}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-          >
-            El respaldo que tu marca necesita.
-          </motion.p>
-          
-          <div className={styles.statsGrid}>
-            <TiltCard className={`${styles.statCard} glass`}>
-              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-                <div className={`${styles.statNumber} text-gradient`}>391K</div>
-                <h3>The Millennials</h3>
-                <p>Facebook · 72% de 25-44 años</p>
-              </motion.div>
-            </TiltCard>
-            <TiltCard className={`${styles.statCard} glass`}>
-              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.2 }}>
-                <div className={`${styles.statNumber} text-gradient`}>69K</div>
-                <h3>The Centennials</h3>
-                <p>Instagram · 63% de 18-34 años</p>
-              </motion.div>
-            </TiltCard>
-          </div>
-        </section>
-      )}
+      {/* El Ecosistema - Presentación Base */}
+      <section className={styles.section}>
+        <motion.h2 
+          className={styles.sectionTitle}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+        >
+          El Ecosistema
+        </motion.h2>
+        <motion.p 
+          className={styles.sectionSubtitle}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+        >
+          La integración perfecta entre inteligencia operativa y alcance mediático masivo.
+        </motion.p>
+        
+        <div className={styles.statsGrid}>
+          <TiltCard className={`${styles.statCard} glass`}>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+              <img 
+                src="/assets/apolograma-logo.png" 
+                alt="Apolograma" 
+                style={{ 
+                  height: '60px', 
+                  marginBottom: '1.5rem', 
+                  filter: isLight ? 'grayscale(100%) brightness(0)' : 'invert(1) brightness(2) grayscale(100%)', 
+                  mixBlendMode: isLight ? 'multiply' : 'screen' 
+                }} 
+              />
+              <h3>Apolograma</h3>
+              <p>Agencia de Inteligencia Estratégica. Desarrollamos arquitecturas de marca, plataformas tecnológicas y operaciones digitales para escalar tu negocio.</p>
+            </motion.div>
+          </TiltCard>
+          <TiltCard className={`${styles.statCard} glass`}>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.2 }}>
+              <img 
+                src={isLight ? "/assets/fn1-logo-purple.png" : "/assets/fn1-logo-white.png"} 
+                alt="Frontera Número Uno" 
+                style={{ height: '30px', marginBottom: '1.5rem' }} 
+              />
+              <h3>Frontera Número Uno</h3>
+              <p>El medio digital nativo con mayor retención de la frontera. Transformamos narrativas corporativas en conversación cultural de alto impacto.</p>
+            </motion.div>
+          </TiltCard>
+        </div>
+      </section>
 
       {/* FN1 Services */}
       {data.packages.fn1.length > 0 && (
