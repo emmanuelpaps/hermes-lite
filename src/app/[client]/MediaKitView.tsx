@@ -359,36 +359,58 @@ export default function MediaKitView({ data }: { data: ClientData }) {
         </motion.p>
         
         <div className={styles.statsGrid}>
-          <TiltCard className={`${styles.statCard} glass`}>
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-              <div style={{ height: '80px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem' }}>
-                <img 
-                  src="/assets/apolograma-logo.png" 
-                  alt="Apolograma" 
-                  style={{ 
-                    width: '160px', 
-                    height: 'auto',
-                    objectFit: 'contain',
-                    filter: isLight ? 'grayscale(100%) brightness(0)' : 'invert(1) brightness(2) grayscale(100%)', 
-                    mixBlendMode: isLight ? 'multiply' : 'screen' 
-                  }} 
-                />
+          <TiltCard className={`${styles.ecosystemCard} glass`}>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+              <div style={{ padding: '2.5rem 2.5rem 0 2.5rem', flex: 1 }}>
+                <div style={{ height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', marginBottom: '1.5rem' }}>
+                  <img 
+                    src="/assets/apolograma-logo.png" 
+                    alt="Apolograma" 
+                    style={{ 
+                      width: '150px', 
+                      height: 'auto',
+                      objectFit: 'contain',
+                      filter: isLight ? 'grayscale(100%) brightness(0)' : 'invert(1) brightness(2) grayscale(100%)', 
+                      mixBlendMode: isLight ? 'multiply' : 'screen' 
+                    }} 
+                  />
+                </div>
+                <p style={{ fontSize: '1.1rem', fontWeight: 600, color: isLight ? '#222' : '#eee', marginBottom: '0.5rem', lineHeight: 1.4 }}>Agencia de Inteligencia Estratégica.</p>
+                <p style={{ fontSize: '0.9rem', color: isLight ? '#666' : '#999', marginBottom: '2rem' }}>Desarrollamos arquitecturas de marca, plataformas tecnológicas y operaciones digitales para escalar tu negocio.</p>
               </div>
-              <p>Agencia de Inteligencia Estratégica. Desarrollamos arquitecturas de marca, plataformas tecnológicas y operaciones digitales para escalar tu negocio.</p>
-              <ApologramaShowcase isLight={isLight} />
+              <div style={{ width: '100%', marginTop: 'auto' }}>
+                <ApologramaShowcase isLight={isLight} />
+              </div>
             </motion.div>
           </TiltCard>
-          <TiltCard className={`${styles.statCard} glass`}>
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.2 }}>
-              <div style={{ height: '80px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem' }}>
-                <img 
-                  src={isLight ? "/assets/fn1-logo-purple.png" : "/assets/fn1-logo-white.png"} 
-                  alt="Frontera Número Uno" 
-                  style={{ width: '180px', height: 'auto', objectFit: 'contain' }} 
-                />
+          <TiltCard className={`${styles.ecosystemCard} glass`}>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.2 }} style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+              <div style={{ padding: '2.5rem 2.5rem 0 2.5rem', flex: 1, position: 'relative', zIndex: 10 }}>
+                <div style={{ height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', marginBottom: '1.5rem' }}>
+                  <img 
+                    src={isLight ? "/assets/fn1-logo-purple.png" : "/assets/fn1-logo-white.png"} 
+                    alt="Frontera Número Uno" 
+                    style={{ width: '170px', height: 'auto', objectFit: 'contain' }} 
+                  />
+                </div>
+                <p style={{ fontSize: '1.1rem', fontWeight: 600, color: isLight ? '#222' : '#eee', marginBottom: '0.5rem', lineHeight: 1.4 }}>El medio digital nativo con mayor retención de la frontera.</p>
+                <p style={{ fontSize: '0.9rem', color: isLight ? '#666' : '#999', marginBottom: '1.5rem' }}>Transformamos narrativas corporativas en conversación cultural de alto impacto.</p>
+                
+                {/* Odometer numbers moved here for Edge-to-Edge bleed */}
+                <div style={{ display: 'flex', gap: '2rem', marginTop: '1rem' }}>
+                  <div>
+                    <div style={{ fontSize: '2.5rem', fontWeight: 900, color: isLight ? '#8a2be2' : '#a855f7', lineHeight: 1 }}>77.1M</div>
+                    <div style={{ fontSize: '0.7rem', fontWeight: 600, textTransform: 'uppercase', opacity: 0.6, marginTop: '0.2rem' }}>Visualizaciones</div>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '2.5rem', fontWeight: 900, color: isLight ? '#8a2be2' : '#a855f7', lineHeight: 1 }}>460K</div>
+                    <div style={{ fontSize: '0.7rem', fontWeight: 600, textTransform: 'uppercase', opacity: 0.6, marginTop: '0.2rem' }}>Seguidores Totales</div>
+                  </div>
+                </div>
               </div>
-              <p>El medio digital nativo con mayor retención de la frontera. Transformamos narrativas corporativas en conversación cultural de alto impacto.</p>
-              <ViralChart isLight={isLight} />
+              <div style={{ width: '100%', marginTop: 'auto' }}>
+                <ViralChart isLight={isLight} />
+              </div>
             </motion.div>
           </TiltCard>
         </div>
