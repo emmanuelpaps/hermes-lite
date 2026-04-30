@@ -11,7 +11,7 @@
     "textGradient": "linear-gradient(to right, #E60000, #800000)"
   },
   "storytelling": {
-    "challenge": "Revertir la percepción pública actual mediante acciones orgánicas y sinceras, donde la marca aporta valor real a la comunidad sin buscar el protagonismo, a la vez que se moderniza para dejar de depender de comisiones abusivas de terceros.",
+    "challenge": "Revertir la percepción pública actual mediante acciones orgánicas y sinceras, donde la marca aporta valor real a la comunidad de manera solidaria, a la vez que se moderniza para obtener independencia tecnológica en sus canales de venta directa.",
     "pillars": [
       {
         "title": "Fase 1: Reconexión Comunitaria",
@@ -20,7 +20,7 @@
       },
       {
         "title": "Fase 2: Tu Propia Plataforma de Pedidos",
-        "description": "Desarrollo de tu propia aplicación y ecosistema de E-Commerce (estilo Uber Eats) para que dejes de pagar el 30% de comisión y recuperes tu margen de ganancia real.",
+        "description": "Desarrollo de tu propia aplicación y ecosistema de E-Commerce para ventas a domicilio, permitiéndote recuperar tu margen de ganancia real y construir tu propia base de datos.",
         "image": "/assets/aca-las-tortas/video-fase2.mp4"
       },
       {
@@ -57,13 +57,13 @@
           {
             "name": "Tu Propia Plataforma de Pedidos",
             "price": 60000,
-            "description": "Ecosistema de pedidos en línea propio para eliminar dependencias de apps de terceros.",
+            "description": "Ecosistema de pedidos en línea propio para eliminar dependencias de intermediarios y retener tu margen.",
             "bullets": [
               "Desarrollo completo de E-Commerce propietario.",
-              "Interfaz estilo Uber Eats (Catálogo, Carrito, Checkout).",
+              "Interfaz premium y fluida de pedidos (Catálogo, Carrito, Checkout).",
               "Integración de pasarelas de pago (Tarjeta, SPEI, OXXO).",
               "Panel de administración para cocina y despachos.",
-              "Cero cobro de comisiones del 30% por venta."
+              "Retención del 100% de la ganancia operativa por venta (Sin comisiones)."
             ]
           }
         ]
