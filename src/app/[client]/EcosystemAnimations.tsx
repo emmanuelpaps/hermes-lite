@@ -117,9 +117,9 @@ export const ApologramaShowcase = ({ isLight }: { isLight: boolean }) => {
   
   // Elegant placeholders that demonstrate capability
   const videos = [
-    { title: "Apps & Plataformas", src: "https://videos.pexels.com/video-files/3129957/3129957-uhd_2560_1440_25fps.mp4" },
-    { title: "Identidad de Marca", src: "https://videos.pexels.com/video-files/853889/853889-hd_1920_1080_25fps.mp4" },
-    { title: "Desarrollo y Código", src: "https://videos.pexels.com/video-files/5495844/5495844-uhd_2160_4096_30fps.mp4" }
+    { title: "Apps & Plataformas", src: "/assets/apolograma/apps.mp4" },
+    { title: "Identidad de Marca", src: "/assets/apolograma/branding.mp4" },
+    { title: "Desarrollo y Código", src: "/assets/apolograma/code.mp4" }
   ];
 
   useEffect(() => {
