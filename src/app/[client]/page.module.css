@@ -28,7 +28,7 @@
 }
 
 .apologramaLogoImage {
-  height: 36px;
+  height: 54px;
   width: auto;
   object-fit: contain;
   opacity: 0.9;
@@ -37,10 +37,12 @@
 }
 
 .apologramaLogoImageLight {
-  height: 36px;
+  height: 54px;
   width: auto;
   object-fit: contain;
   opacity: 0.9;
+  filter: grayscale(100%) brightness(0);
+  mix-blend-mode: multiply;
 }
 
 .agencyLogoImage {
@@ -513,7 +515,7 @@
 }
 
 .footerApologramaLogo {
-  height: 32px;
+  height: 48px;
   width: auto;
   object-fit: contain;
   /* Garantiza transparencia sobre negro incluso si el origen tiene fondo blanco */
@@ -522,9 +524,11 @@
 }
 
 .footerApologramaLogoLight {
-  height: 32px;
+  height: 48px;
   width: auto;
   object-fit: contain;
+  filter: grayscale(100%) brightness(0);
+  mix-blend-mode: multiply;
 }
 
 .stickyCta {
