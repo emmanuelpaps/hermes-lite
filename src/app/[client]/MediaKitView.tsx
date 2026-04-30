@@ -566,7 +566,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           viewport={{ once: true }}
           transition={{ duration: 1 }}
         >
-          <img src="/assets/puerta-juarez.png" alt="Puerta Juárez" />
+          <img src="/assets/puerta-juarez.png" alt="Puerta Juárez" className={isLight ? styles.footerDecorationImageLight : styles.footerDecorationImage} />
         </motion.div>
         
         <div className={styles.footerContent}>
