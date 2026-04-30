@@ -34,6 +34,9 @@ export const AnimatedCounter: React.FC<AnimatedCounterProps> = ({ from = 0, to, 
 
 // --- Viral Chart ---
 export const ViralChart = ({ isLight }: { isLight: boolean }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+
   const pathVariants: Variants = {
     hidden: { pathLength: 0, opacity: 0 },
     visible: { 
@@ -43,10 +46,15 @@ export const ViralChart = ({ isLight }: { isLight: boolean }) => {
     }
   };
 
+  const areaVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 0.15, transition: { duration: 1, delay: 1.5 } }
+  };
+
   const chartColor = isLight ? '#8a2be2' : '#a855f7'; // Purple brand
 
   return (
-    <div style={{ width: '100%', height: '140px', marginTop: '2.5rem', position: 'relative' }}>
+    <div ref={ref} style={{ width: '100%', height: '140px', marginTop: '2.5rem', position: 'relative' }}>
       <svg viewBox="0 0 400 100" style={{ width: '100%', height: '100%', overflow: 'visible' }}>
         {/* Grid lines */}
         <line x1="0" y1="25" x2="400" y2="25" stroke={isLight ? "rgba(0,0,0,0.05)" : "rgba(255,255,255,0.05)"} strokeWidth="1" />
@@ -63,8 +71,7 @@ export const ViralChart = ({ isLight }: { isLight: boolean }) => {
           strokeLinejoin="round"
           variants={pathVariants}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
+          animate={isInView ? "visible" : "hidden"}
           style={{ filter: `drop-shadow(0px 4px 6px ${chartColor}60)` }}
         />
         
@@ -72,10 +79,9 @@ export const ViralChart = ({ isLight }: { isLight: boolean }) => {
         <motion.path
           d="M0 90 L40 90 L60 50 L80 60 L100 45 L120 50 L140 70 L160 55 L200 65 L240 80 L260 0 L280 40 L320 50 L350 45 L400 20 L400 100 L0 100 Z"
           fill={`url(#viralGradient)`}
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.15 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 1, delay: 1.5 }}
+          variants={areaVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
         />
         <defs>
           <linearGradient id="viralGradient" x1="0" x2="0" y1="0" y2="1">
