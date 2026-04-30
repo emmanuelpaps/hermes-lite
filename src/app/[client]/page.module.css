@@ -111,6 +111,13 @@
   mix-blend-mode: screen;
 }
 
+.logoLight {
+  max-width: 200px;
+  max-height: 100px;
+  object-fit: contain;
+  /* El logo ya debe venir con fondo transparente nativo */
+}
+
 .heroTitle {
   font-size: clamp(2rem, 5vw, 4rem);
   font-weight: 800;

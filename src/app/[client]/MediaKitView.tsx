@@ -249,7 +249,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           transition={{ duration: 1 }}
         >
           {data.clientLogo && (
-            <img src={data.clientLogo} alt={data.clientName} className={styles.logo} />
+            <img src={data.clientLogo} alt={data.clientName} className={isLight ? styles.logoLight : styles.logo} />
           )}
         </motion.div>
         
