@@ -3,7 +3,7 @@
 import { motion, Variants, useMotionValue, useSpring, useTransform, AnimatePresence, animate, useInView } from "framer-motion";
 import styles from "./page.module.css";
 import React, { useRef, useState, useEffect } from "react";
-
+import { ViralChart, ApologramaShowcase } from "./EcosystemAnimations";
 const AnimatedPrice = ({ value }: { value: number }) => {
   const nodeRef = useRef<HTMLSpanElement>(null);
   const isInView = useInView(nodeRef, { once: true, margin: "-50px" });
@@ -372,6 +372,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
               </div>
               <h3>Apolograma</h3>
               <p>Agencia de Inteligencia Estratégica. Desarrollamos arquitecturas de marca, plataformas tecnológicas y operaciones digitales para escalar tu negocio.</p>
+              <ApologramaShowcase isLight={isLight} />
             </motion.div>
           </TiltCard>
           <TiltCard className={`${styles.statCard} glass`}>
@@ -385,6 +386,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
               </div>
               <h3>Frontera Número Uno</h3>
               <p>El medio digital nativo con mayor retención de la frontera. Transformamos narrativas corporativas en conversación cultural de alto impacto.</p>
+              <ViralChart isLight={isLight} />
             </motion.div>
           </TiltCard>
         </div>
