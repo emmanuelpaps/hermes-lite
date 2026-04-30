@@ -4,6 +4,11 @@
   "industry": "Gastronomía",
   "heroText": "Reconstruimos la conexión honesta con tu comunidad a través de contenido altruista y evolución digital.",
   "hideTotal": true,
+  "theme": {
+    "primary": "#E60000",
+    "fontHeading": "'Teko', sans-serif",
+    "textGradient": "linear-gradient(to right, #ffffff, #ffb3b3)"
+  },
   "storytelling": {
     "challenge": "Revertir la percepción pública actual mediante acciones orgánicas y sinceras, donde la marca aporta valor real a la comunidad sin buscar el protagonismo, a la vez que se moderniza para dejar de depender de comisiones abusivas de terceros.",
     "pillars": [

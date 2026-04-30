@@ -167,6 +167,11 @@ interface ClientData {
   };
   discountPercent: number;
   hideTotal?: boolean;
+  theme?: {
+    primary?: string;
+    fontHeading?: string;
+    textGradient?: string;
+  };
 }
 
 export default function MediaKitView({ data }: { data: ClientData }) {
@@ -186,8 +191,14 @@ export default function MediaKitView({ data }: { data: ClientData }) {
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
   };
 
+  const customTheme = data.theme ? {
+    '--font-heading': data.theme.fontHeading || 'Space Grotesk, sans-serif',
+    '--primary-gradient': `linear-gradient(135deg, ${data.theme.primary || '#a855f7'} 0%, #000 100%)`,
+    '--text-gradient': data.theme.textGradient || 'linear-gradient(to right, #fff, #888)',
+  } as React.CSSProperties : {};
+
   return (
-    <main className={styles.main}>
+    <main className={styles.main} style={customTheme}>
       <AnimatePresence>
         {activeService && (
           <motion.div 
