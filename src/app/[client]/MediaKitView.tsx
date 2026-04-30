@@ -199,11 +199,12 @@ export default function MediaKitView({ data }: { data: ClientData }) {
     '--primary-gradient': `linear-gradient(135deg, ${data.theme.primary || '#a855f7'} 0%, ${isLight ? '#990000' : '#000'} 100%)`,
     '--text-gradient': data.theme.textGradient || 'linear-gradient(to right, #fff, #888)',
     ...(isLight ? {
-      '--bg-color': '#f8f9fa',
+      '--bg-color': '#ffffff',
       '--text-color': '#111111',
       '--muted-text': '#555555',
-      '--card-bg': 'rgba(255, 255, 255, 0.7)',
-      '--glass-border': 'rgba(0, 0, 0, 0.1)',
+      '--card-bg': 'rgba(0, 0, 0, 0.03)',
+      '--glass-border': 'rgba(0, 0, 0, 0.08)',
+      '--header-bg': 'rgba(255, 255, 255, 0.8)',
     } : {})
   } as React.CSSProperties : {};
 
