@@ -188,14 +188,11 @@ export const ApologramaShowcase = ({ isLight }: { isLight: boolean }) => {
         </div>
       </div>
 
-      {/* Floating Tags */}
+      {/* Static Tags */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', justifyContent: 'flex-start' }}>
         {tags.map((tag, idx) => (
-          <motion.div
+          <div
             key={idx}
-            initial={{ y: 0 }}
-            animate={{ y: [0, -3, 0] }}
-            transition={{ duration: 4, repeat: Infinity, delay: idx * 0.3, ease: "easeInOut" }}
             style={{ 
               fontSize: '0.75rem', 
               padding: '0.4rem 0.8rem', 
@@ -207,7 +204,7 @@ export const ApologramaShowcase = ({ isLight }: { isLight: boolean }) => {
             }}
           >
             {tag}
-          </motion.div>
+          </div>
         ))}
       </div>
     </div>
