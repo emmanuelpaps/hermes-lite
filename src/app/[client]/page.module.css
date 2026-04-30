@@ -331,9 +331,9 @@
 }
 
 .serviceItem:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(168, 85, 247, 0.4);
-  box-shadow: 0 0 30px rgba(168, 85, 247, 0.15), inset 0 0 20px rgba(168, 85, 247, 0.05);
+  background: var(--card-bg);
+  border-color: rgba(168, 85, 247, 0.6);
+  box-shadow: 0 0 40px rgba(168, 85, 247, 0.25);
   transform: translateY(-2px);
 }
 
