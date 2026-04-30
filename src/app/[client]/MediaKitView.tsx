@@ -4,6 +4,8 @@ import { motion, Variants, useMotionValue, useSpring, useTransform, AnimatePrese
 import styles from "./page.module.css";
 import React, { useRef, useState, useEffect } from "react";
 import { ViralChart, ApologramaShowcase, PremiumAudienceCard } from "./EcosystemAnimations";
+import { CursorSpotlight } from "./CursorSpotlight";
+import { Preloader } from "./Preloader";
 const AnimatedPrice = ({ value }: { value: number }) => {
   const nodeRef = useRef<HTMLSpanElement>(null);
   const isInView = useInView(nodeRef, { once: true, margin: "-50px" });
@@ -177,6 +179,14 @@ interface ClientData {
 
 export default function MediaKitView({ data }: { data: ClientData }) {
   const [activeService, setActiveService] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2500); // Duración de la animación cinemática
+    return () => clearTimeout(timer);
+  }, []);
 
   const fn1Total = data.packages.fn1.reduce((acc, curr) => acc + curr.price, 0);
   const apoTotal = data.packages.apolograma.reduce((acc, curr) => acc + curr.price, 0);
@@ -209,7 +219,14 @@ export default function MediaKitView({ data }: { data: ClientData }) {
   } as React.CSSProperties : {};
 
   return (
-    <main className={styles.main} style={customTheme}>
+    <>
+      <AnimatePresence>
+        {loading && <Preloader isLight={isLight} />}
+      </AnimatePresence>
+      <CursorSpotlight isLight={isLight} />
+      
+      {!loading && (
+        <main className={styles.main} style={customTheme}>
       <AnimatePresence>
         {activeService && (
           <motion.div 
@@ -632,5 +649,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
         </div>
       </footer>
     </main>
+      )}
+    </>
   );
 }
