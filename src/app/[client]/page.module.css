@@ -28,7 +28,7 @@
 }
 
 .apologramaLogoImage {
-  height: 54px;
+  height: 80px;
   width: auto;
   object-fit: contain;
   opacity: 0.9;
@@ -37,7 +37,7 @@
 }
 
 .apologramaLogoImageLight {
-  height: 54px;
+  height: 80px;
   width: auto;
   object-fit: contain;
   opacity: 0.9;
@@ -522,7 +522,7 @@
 }
 
 .footerApologramaLogo {
-  height: 48px;
+  height: 70px;
   width: auto;
   object-fit: contain;
   /* Garantiza transparencia sobre negro incluso si el origen tiene fondo blanco */
@@ -531,7 +531,7 @@
 }
 
 .footerApologramaLogoLight {
-  height: 48px;
+  height: 70px;
   width: auto;
   object-fit: contain;
   filter: grayscale(100%) brightness(0);
