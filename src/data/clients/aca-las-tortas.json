@@ -1,0 +1,84 @@
+{
+  "clientName": "Acá Las Tortas",
+  "clientLogo": "/assets/aca-las-tortas/logo.png",
+  "industry": "Gastronomía",
+  "heroText": "Reconstruimos la conexión honesta con tu comunidad a través de contenido altruista y evolución digital.",
+  "hideTotal": true,
+  "storytelling": {
+    "challenge": "Revertir la percepción pública actual mediante acciones orgánicas y sinceras, donde la marca aporta valor real a la comunidad sin buscar el protagonismo, a la vez que se moderniza para dejar de depender de comisiones abusivas de terceros.",
+    "pillars": [
+      {
+        "title": "Fase 1: Reconexión Comunitaria",
+        "description": "Volver a conectar con tus clientes a través de dos grandes producciones en video apoyando causas locales en Juárez. Estos videos tendrán una reacción honesta del público y se distribuirán en Frontera Número Uno.",
+        "image": "/assets/aca-las-tortas/video-fase1.mp4"
+      },
+      {
+        "title": "Fase 2: Tu Propia Plataforma de Pedidos",
+        "description": "Desarrollo de tu propia aplicación y ecosistema de E-Commerce (estilo Uber Eats) para que dejes de pagar el 30% de comisión y recuperes tu margen de ganancia real.",
+        "image": "/assets/aca-las-tortas/video-fase2.mp4"
+      },
+      {
+        "title": "Fase 3: Administración Mensual de Redes",
+        "description": "Manejo integral de tus redes sociales para mantener a tu comunidad activa, más la inyección de una publicación mensual de promoción a través de Frontera Número Uno.",
+        "image": "/assets/aca-las-tortas/video-fase3.mp4"
+      }
+    ]
+  },
+  "packages": {
+    "fn1": [],
+    "apolograma": [],
+    "blocks": [
+      {
+        "name": "Fase 1: Producciones Altruistas (PR Orgánico)",
+        "services": [
+          {
+            "name": "Reconexión Comunitaria",
+            "price": 25000,
+            "description": "2 producciones de video donde Acá Las Tortas participa de forma noble, distribuidas orgánicamente en Frontera Número Uno.",
+            "bullets": [
+              "Desarrollo creativo y guionaje de historias altruistas.",
+              "Producción y rodaje en campo (calle / orfanato).",
+              "1 Video: Reto de las 50 tortas pagadas a indigentes.",
+              "1 Video: Patrocinio sorpresa en orfanato con actividades.",
+              "Distribución orgánica y pauta estratégica en Frontera Número Uno."
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Fase 2: Plataforma de Delivery (D2C)",
+        "services": [
+          {
+            "name": "Tu Propia Plataforma de Pedidos",
+            "price": 60000,
+            "description": "Ecosistema de pedidos en línea propio para eliminar dependencias de apps de terceros.",
+            "bullets": [
+              "Desarrollo completo de E-Commerce propietario.",
+              "Interfaz estilo Uber Eats (Catálogo, Carrito, Checkout).",
+              "Integración de pasarelas de pago (Tarjeta, SPEI, OXXO).",
+              "Panel de administración para cocina y despachos.",
+              "Cero cobro de comisiones del 30% por venta."
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Fase 3: Iguala Operativa (Community & Social)",
+        "services": [
+          {
+            "name": "Administración Mensual de Redes",
+            "price": 15000,
+            "description": "Gestión continua de tu marca para mantener relevancia e impacto comercial.",
+            "bullets": [
+              "Gestión de comunidad en Facebook e Instagram.",
+              "Diseño de parrilla de contenidos (Paquete Medio Apolograma).",
+              "Atención a clientes básica (Respuestas estandarizadas).",
+              "1 Publicación editorial/promocional en Frontera Número Uno cada mes."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "discountPercent": 0
+}

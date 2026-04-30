@@ -166,6 +166,7 @@ interface ClientData {
     blocks?: { name: string; services: Service[] }[];
   };
   discountPercent: number;
+  hideTotal?: boolean;
 }
 
 export default function MediaKitView({ data }: { data: ClientData }) {
@@ -479,27 +480,31 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             </div>
           )}
           
-          <div style={{textAlign: "left", marginBottom: "1rem", color: "var(--muted-text)"}}>
-            {subtotal > 0 && <p>Subtotal: {formatPrice(subtotal)}</p>}
-            {data.discountPercent > 0 && <p style={{color: "#4ade80"}}>Descuento ({data.discountPercent}%): -{formatPrice(discountAmount)}</p>}
-          </div>
-
-          {(fn1Total > 0 && apoTotal > 0) && (
+          {!data.hideTotal && (
             <>
-              <div className={styles.progressContainer}>
-                <div className={styles.progressAgency} style={{ width: `${(apoTotal / subtotal) * 100}%` }} />
-                <div className={styles.progressMedia} style={{ width: `${(fn1Total / subtotal) * 100}%` }} />
+              <div style={{textAlign: "left", marginBottom: "1rem", color: "var(--muted-text)"}}>
+                {subtotal > 0 && <p>Subtotal: {formatPrice(subtotal)}</p>}
+                {data.discountPercent > 0 && <p style={{color: "#4ade80"}}>Descuento ({data.discountPercent}%): -{formatPrice(discountAmount)}</p>}
               </div>
-              <div className={styles.progressLabels}>
-                <span style={{ color: "#a855f7" }}>Agencia ({Math.round((apoTotal/subtotal)*100)}%)</span>
-                <span style={{ color: "#3b82f6" }}>Medios ({Math.round((fn1Total/subtotal)*100)}%)</span>
+
+              {(fn1Total > 0 && apoTotal > 0) && (
+                <>
+                  <div className={styles.progressContainer}>
+                    <div className={styles.progressAgency} style={{ width: `${(apoTotal / subtotal) * 100}%` }} />
+                    <div className={styles.progressMedia} style={{ width: `${(fn1Total / subtotal) * 100}%` }} />
+                  </div>
+                  <div className={styles.progressLabels}>
+                    <span style={{ color: "#a855f7" }}>Agencia ({Math.round((apoTotal/subtotal)*100)}%)</span>
+                    <span style={{ color: "#3b82f6" }}>Medios ({Math.round((fn1Total/subtotal)*100)}%)</span>
+                  </div>
+                </>
+              )}
+
+              <div className={`${styles.totalPrice} text-gradient`}>
+                <AnimatedPrice value={total} />
               </div>
             </>
           )}
-
-          <div className={`${styles.totalPrice} text-gradient`}>
-            <AnimatedPrice value={total} />
-          </div>
           
           <motion.a 
             href="https://wa.me/526561031571?text=Hola%20Emmanuel%2C%20revis%C3%A9%20la%20propuesta%20de%20Aspen%20Capital%20y%20estoy%20listo%20para%20avanzar."
