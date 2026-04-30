@@ -496,7 +496,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
               borderRadius: "8px", 
               padding: "1rem", 
               marginBottom: "2rem",
-              color: "rgba(255, 255, 255, 0.9)",
+              color: "var(--text-color)",
               fontSize: "0.95rem",
               lineHeight: "1.5",
               textAlign: "left"
