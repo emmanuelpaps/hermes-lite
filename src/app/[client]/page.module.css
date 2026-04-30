@@ -103,8 +103,8 @@
 }
 
 .logo {
-  max-width: 200px;
-  max-height: 100px;
+  max-width: 400px;
+  max-height: 200px;
   object-fit: contain;
   /* CSS Magic to invert a white-bg dark logo into a transparent-bg white logo */
   filter: invert(1) brightness(2) grayscale(100%);
@@ -112,8 +112,8 @@
 }
 
 .logoLight {
-  max-width: 200px;
-  max-height: 100px;
+  max-width: 400px;
+  max-height: 200px;
   object-fit: contain;
   /* El logo ya debe venir con fondo transparente nativo */
 }
