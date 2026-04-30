@@ -241,7 +241,7 @@
   font-weight: 800;
   line-height: 1.2;
   text-align: center;
-  color: #fff;
+  color: var(--text-color);
   margin-bottom: 4rem;
   position: relative;
   z-index: 30;
@@ -262,7 +262,7 @@
 .storyPillarCard {
   padding: 0;
   text-align: left;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--card-bg);
   border-radius: 16px;
   overflow: hidden;
   display: flex;
@@ -297,7 +297,7 @@
 .storyPillarCard h3 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  color: #fff;
+  color: var(--text-color);
 }
 
 .storyPillarCard p {
@@ -315,10 +315,10 @@
   padding: 0;
   overflow: hidden;
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--card-bg);
   transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
 }
 
 .serviceItem:hover {
