@@ -1,6 +1,6 @@
 {
   "clientName": "Arq. Bermúdez",
-  "clientLogo": "",
+  "clientLogo": "/assets/arq-bermudez/logo.png",
   "industry": "Construcción e Infraestructura Industrial",
   "heroTitle": "Su legado, institucionalizado.",
   "heroText": "Esta es la estrategia que digitalizará décadas de experiencia corporativa para posicionar a Constructora Hermes y Concretera Río Bravo ante las FIBRAs y desarrolladores industriales de la región.",
@@ -21,22 +21,22 @@
     "fontBody": "'Inter', sans-serif",
     "textColor": "#f8fafc",
     "textGradient": "linear-gradient(to right, #4ade80, #166534)",
-    "clientLogoRaw": false
+    "clientLogoRaw": true
   },
   "storytelling": {
     "narrative": [
       {
         "title": "El Reto",
-        "content": "La industria maquiladora y las FIBRAs en la frontera toman decisiones de asignación de obra basadas en la percepción institucional y el nivel de riesgo. Actualmente, su trayectoria de décadas no tiene un respaldo en el entorno digital, lo que deja espacio para que competidores con menor capacidad ejecuten los proyectos más lucrativos de la región."
+        "content": "La industria maquiladora y las FIBRAs en la frontera toman decisiones de asignación de obra basadas en la <b>percepción institucional</b> y el nivel de riesgo. Actualmente, su trayectoria de décadas no tiene un respaldo en el entorno digital, lo que deja espacio para que competidores con menor capacidad ejecuten los proyectos más lucrativos de la región."
       },
       {
         "title": "La Solución",
-        "content": "Digitalizar su legado mediante una estrategia de <b>crecimiento en fases</b>. En lugar de realizar una inversión de capital agresiva desde el día uno, construiremos su infraestructura digital paso a paso mediante una <b>Iguala de Marketing</b> que permite fondear el crecimiento institucional progresivamente."
+        "content": "Digitalizar su legado mediante una estrategia de <b>crecimiento en fases</b>. En lugar de realizar una inversión de capital agresiva desde el día uno, construiremos su infraestructura digital paso a paso mediante una <b>Iguala de Marketing</b> que permite fondear el crecimiento institucional progresivamente.<br><br>Desde que la primer landing esté en línea, activaremos la difusión editorial en <b>Frontera Número Uno</b> para que cada proyecto completado se convierta en una pieza de RP que fortalezca su posicionamiento ante los tomadores de decisión."
       }
     ],
     "pillars": [
       {
-        "title": "Infraestructura Base",
+        "title": "Infraestructura Digital",
         "description": "Desarrollo de Landing Page institucional para Constructora Hermes y Concretera Río Bravo, estableciendo un ancla de confianza para prospectos corporativos.",
         "image": "/assets/videofase1.mp4"
       },
@@ -46,27 +46,39 @@
         "image": "/assets/videofase2.mp4"
       },
       {
-        "title": "Relaciones Públicas",
-        "description": "Distribución paulatina de la huella de la constructora en Frontera Número Uno para posicionar el nombre de las empresas en los círculos de negocio.",
+        "title": "Relaciones Públicas y Posicionamiento",
+        "description": "Notas editoriales en Frontera Número Uno que posicionen cada obra completada como un caso de éxito público, construyendo credibilidad ante FIBRAs y desarrolladores.",
         "image": "/assets/videofase3.mp4"
       }
     ]
   },
   "packages": {
-    "fn1": [],
+    "fn1": [
+      {
+        "name": "Difusión Editorial y RP",
+        "price": 12000,
+        "description": "Presencia editorial permanente en el medio digital más influyente de Juárez y El Paso. Cada proyecto completado se convierte en una nota de alto impacto.",
+        "bullets": [
+          "2 FN1 Flash (Notas editoriales de proyecto/obra en portal).",
+          "4 FN1 Moments (Cobertura en formato Stories).",
+          "Promoción orgánica en redes de Frontera Número Uno.",
+          "Distribución a audiencia B2B del portal."
+        ]
+      }
+    ],
     "apolograma": [
       {
         "name": "Opción A: Iguala Corporativa Integral",
         "price": 30000,
-        "badge": "Escala Rápida",
-        "description": "Cobertura completa y agresiva para posicionar ambas empresas rápidamente ante desarrolladores.",
+        "badge": "Escala Completa",
+        "description": "Cobertura completa y agresiva para posicionar ambas empresas rápidamente ante desarrolladores y FIBRAs.",
         "bullets": [
-          "Desarrollo de Sitio Web Corporativo (amortizado).",
-          "1 Sesión mensual de fotografía de obra.",
+          "Desarrollo de Sitio Web Corporativo completo (amortizado en iguala).",
+          "1 Sesión mensual de fotografía profesional de obra.",
           "Edición y producción de 4 piezas de video mensuales.",
           "Mantenimiento de identidad digital B2B (LinkedIn/Facebook).",
-          "1 Inserción editorial de RP bimestral en Frontera Número Uno.",
-          "Reporte de posicionamiento digital."
+          "Diseño de presentaciones corporativas.",
+          "Reporte mensual de posicionamiento digital."
         ]
       },
       {
@@ -75,10 +87,10 @@
         "badge": "Crecimiento Seguro",
         "description": "El punto de entrada ideal para establecer la huella digital inicial sin comprometer flujo de capital.",
         "bullets": [
-          "Desarrollo de Landing Page One-Pager.",
+          "Desarrollo de Landing Page One-Pager (amortizado).",
           "Re-edición de material fotográfico/video ya existente.",
-          "Creación de perfiles corporativos.",
-          "2 publicaciones de mantenimiento mensual B2B.",
+          "Creación y mantenimiento de perfiles corporativos.",
+          "2 publicaciones mensuales B2B.",
           "Crecimiento a ritmo conservador."
         ]
       }
