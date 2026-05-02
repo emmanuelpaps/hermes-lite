@@ -2,7 +2,8 @@
   "clientName": "Social Sports",
   "clientLogo": "/assets/social-sports/logo.png",
   "industry": "Entretenimiento & Gastronomía",
-  "heroText": "Posicionamos a Social Sports como el epicentro del entretenimiento deportivo en la frontera, con una estrategia de contenido y difusión masiva diseñada para dominar el Mundial FIFA 2026.",
+  "heroTitle": "Social Sports va a dominar el Mundial.",
+  "heroText": "Esta es la estrategia que convertirá a Social Sports en el destino #1 de la frontera durante el evento deportivo más grande de la historia.",
   "config": {
     "currency": "MXN",
     "locale": "es-MX"
@@ -24,16 +25,16 @@
   "storytelling": {
     "narrative": [
       {
-        "title": "El Momento es Ahora",
-        "content": "La competencia en el ámbito de bares deportivos en Juárez se intensifica cada mes. Pero hay un evento que <b>cambiará las reglas del juego por completo</b>: el Mundial de la FIFA 2026, con sedes en México y Estados Unidos.<br><br>Este no es un torneo más. Es el evento deportivo más grande de la historia, y se jugará <b>en nuestra frontera</b>."
+        "title": "El Reto",
+        "content": "Juárez tiene más de 30 bares deportivos compitiendo por la misma audiencia. Pero en junio de 2026, <b>México será sede del Mundial de la FIFA</b>. El bar que domine la conversación digital <b>antes</b> del primer partido será el que llene mesas durante todo el torneo."
       },
       {
-        "title": "Nuestra Estrategia",
-        "content": "Vamos a posicionar a Social Sports y Fan Burger como <b>los protagonistas indiscutibles</b> del entretenimiento deportivo durante el Mundial y más allá. Lo haremos a través de una campaña masiva de contenido digital de alta producción, administración profesional de redes sociales y difusión estratégica en el medio digital más grande de la frontera: <b>Frontera Número Uno</b>."
+        "title": "La Solución",
+        "content": "Vamos a construir un <b>ecosistema de contenido de alta producción</b> que posicione a Social Sports y Fan Burger como <b>la única opción</b> en la mente del aficionado fronterizo. Lo lograremos combinando diseño de impacto, administración experta de redes sociales y la fuerza mediática de <b>Frontera Número Uno</b> — el medio digital con 77 millones de visualizaciones."
       }
     ],
     "countdownDate": "2026-06-11",
-    "countdownLabel": "Kickoff FIFA 2026 — La oportunidad más grande de la década",
+    "countdownLabel": "Kickoff FIFA 2026 — Cada día sin estrategia es un día que la competencia avanza",
     "pillars": [
       {
         "title": "Contenido de Alta Producción",

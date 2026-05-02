@@ -71,7 +71,7 @@ const CountdownBanner = ({ targetDate, label, isLight, primaryColor }: { targetD
           {label}
         </div>
         <div style={{ fontSize: '0.85rem', color: isLight ? '#666' : '#999', lineHeight: 1.4 }}>
-          La ventana de oportunidad se cierra. Cada día sin estrategia es un día que la competencia avanza.
+          Tus competidores ya están invirtiendo. La pregunta no es si debes actuar, sino cuánto mercado perderás si no lo haces hoy.
         </div>
       </div>
     </motion.div>
@@ -245,6 +245,7 @@ interface ClientData {
   clientName: string;
   clientLogo: string;
   industry: string;
+  heroTitle?: string;
   heroText: string;
   config?: {
     currency?: string;
@@ -379,7 +380,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           animate="visible"
           variants={fadeUp}
         >
-          Transformamos la manera en que {data.clientName} conecta con la comunidad.
+          {data.heroTitle || `Propuesta Estratégica para ${data.clientName}`}
         </motion.h1>
         
         <motion.p 
@@ -496,7 +497,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           viewport={{ once: true }}
           variants={fadeUp}
         >
-          El Ecosistema
+          ¿Quién está detrás de esta propuesta?
         </motion.h2>
         <motion.p 
           className={styles.sectionSubtitle}
@@ -505,7 +506,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           viewport={{ once: true }}
           variants={fadeUp}
         >
-          La integración perfecta entre inteligencia operativa y alcance mediático masivo.
+          Dos empresas. Un solo objetivo: que tu marca sea imposible de ignorar.
         </motion.p>
         
         <div className={styles.statsGrid}>
@@ -525,8 +526,8 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                     }} 
                   />
                 </div>
-                <p style={{ fontSize: '1.1rem', fontWeight: 600, color: isLight ? '#222' : '#eee', marginBottom: '0.5rem', lineHeight: 1.4 }}>Agencia de Inteligencia Estratégica.</p>
-                <p style={{ fontSize: '0.9rem', color: isLight ? '#666' : '#999', marginBottom: '2rem' }}>Desarrollamos arquitecturas de marca, plataformas tecnológicas y operaciones digitales para escalar tu negocio.</p>
+                <p style={{ fontSize: '1.1rem', fontWeight: 600, color: isLight ? '#222' : '#eee', marginBottom: '0.5rem', lineHeight: 1.4 }}>Tu departamento de marketing externo.</p>
+                <p style={{ fontSize: '0.9rem', color: isLight ? '#666' : '#999', marginBottom: '2rem' }}>Diseño gráfico, fotografía, estrategia y administración de redes sociales. Todo lo que necesitas, sin contratar un equipo interno.</p>
               </div>
               <div style={{ width: '100%', marginTop: 'auto' }}>
                 <ApologramaShowcase isLight={isLight} />
@@ -543,8 +544,8 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                     style={{ width: '170px', height: 'auto', objectFit: 'contain' }} 
                   />
                 </div>
-                <p style={{ fontSize: '1.1rem', fontWeight: 600, color: isLight ? '#222' : '#eee', marginBottom: '0.5rem', lineHeight: 1.4 }}>El medio digital nativo con mayor retención de la frontera.</p>
-                <p style={{ fontSize: '0.9rem', color: isLight ? '#666' : '#999', marginBottom: '1.5rem' }}>Transformamos narrativas corporativas en conversación cultural de alto impacto.</p>
+                <p style={{ fontSize: '1.1rem', fontWeight: 600, color: isLight ? '#222' : '#eee', marginBottom: '0.5rem', lineHeight: 1.4 }}>La audiencia más grande de la frontera. Ya es tuya.</p>
+                <p style={{ fontSize: '0.9rem', color: isLight ? '#666' : '#999', marginBottom: '1.5rem' }}>460,000 seguidores y 77 millones de visualizaciones listos para conocer tu marca.</p>
                 
                 {/* Odometer numbers moved here for Edge-to-Edge bleed */}
                 <div style={{ display: 'flex', gap: '2rem', marginTop: '1rem' }}>
@@ -571,10 +572,10 @@ export default function MediaKitView({ data }: { data: ClientData }) {
       {data.features?.showAudiences !== false && (
         <section className={styles.section}>
         <motion.h2 className={styles.sectionTitle} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-          Nuestras Audiencias
+          Tu audiencia potencial
         </motion.h2>
         <motion.p className={styles.sectionSubtitle} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-          Alcance demográfico quirúrgico en la frontera.
+          Estas son las personas que verán tu contenido desde el primer día.
         </motion.p>
         
         <div className={styles.statsGrid}>
@@ -610,10 +611,10 @@ export default function MediaKitView({ data }: { data: ClientData }) {
       {data.features?.showPricing !== false && data.packages.fn1.length > 0 && (
         <section className={styles.section}>
           <motion.h2 className={styles.sectionTitle} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-            Estrategia de Medios
+            Difusión y Alcance Masivo
           </motion.h2>
           <motion.p className={styles.sectionSubtitle} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-            Alcance masivo y credibilidad con Frontera Número Uno.
+            Tu marca en el medio digital más influyente de Juárez y El Paso.
           </motion.p>
           
           <motion.div 
@@ -644,10 +645,10 @@ export default function MediaKitView({ data }: { data: ClientData }) {
       {data.features?.showPricing !== false && data.packages.apolograma.length > 0 && (
         <section className={styles.section}>
           <motion.h2 className={styles.sectionTitle} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-            Estrategia de Agencia
+            Producción de Contenido y Redes Sociales
           </motion.h2>
           <motion.p className={styles.sectionSubtitle} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-            Desarrollo de marca y presencia digital impecable con Apolograma.
+            Contenido profesional diseñado para convertir seguidores en clientes.
           </motion.p>
           
           <motion.div 
@@ -716,10 +717,10 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           variants={fadeUp}
         >
           <h2 className={styles.sectionTitle}>
-            {data.packages.blocks && data.packages.blocks.length > 0 ? "Ejecución Modular" : "Tu ecosistema, consolidado."}
+            {data.packages.blocks && data.packages.blocks.length > 0 ? "Ejecución Modular" : "Tu inversión, desglosada."}
           </h2>
           <p className={styles.sectionSubtitle} style={{marginBottom: "1rem"}}>
-            {data.packages.blocks && data.packages.blocks.length > 0 ? "Inversión Total del Proyecto" : "Resumen de Inversión Mensual"}
+            {data.packages.blocks && data.packages.blocks.length > 0 ? "Inversión Total del Proyecto" : "Esto es exactamente lo que recibirás cada mes:"}
           </p>
 
           {data.packages.blocks && data.packages.blocks.length > 0 && (
@@ -752,8 +753,8 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                     <div className={styles.progressMedia} style={{ width: `${(fn1Total / subtotal) * 100}%` }} />
                   </div>
                   <div className={styles.progressLabels}>
-                    <span style={{ color: "#a855f7" }}>Agencia ({Math.round((apoTotal/subtotal)*100)}%)</span>
-                    <span style={{ color: "#3b82f6" }}>Medios ({Math.round((fn1Total/subtotal)*100)}%)</span>
+                    <span style={{ color: "#a855f7" }}>Contenido y Redes ({Math.round((apoTotal/subtotal)*100)}%)</span>
+                    <span style={{ color: "#3b82f6" }}>Difusión y Alcance ({Math.round((fn1Total/subtotal)*100)}%)</span>
                   </div>
                 </>
               )}
@@ -773,7 +774,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             whileTap={{ scale: 0.95 }}
             style={{ display: "inline-block", textDecoration: "none" }}
           >
-            Aprobar Ecosistema
+            Aprobar Propuesta →
           </motion.a>
         </motion.div>
       </section>
@@ -789,7 +790,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 2, type: "spring", stiffness: 100 }}
       >
-        Aprobar Ecosistema
+        Iniciar Proyecto →
       </motion.a>
 
       <footer className={styles.footer}>
@@ -809,7 +810,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             <img src={isLight ? "/assets/fn1-logo-purple.png" : "/assets/fn1-logo-white.png"} alt="Frontera Número Uno" className={styles.agencyLogoImage} />
           </div>
           <p>© {new Date().getFullYear()} Frontera Número Uno & Apolograma.</p>
-          <p>Strictly Confidential. Do not distribute sin autorización.</p>
+          <p>Propuesta confidencial preparada exclusivamente para {data.clientName}. Vigencia: 30 días naturales.</p>
         </div>
       </footer>
     </main>
