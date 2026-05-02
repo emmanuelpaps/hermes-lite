@@ -32,8 +32,6 @@
   width: auto;
   object-fit: contain;
   opacity: 0.9;
-  filter: invert(1) brightness(100) grayscale(100%);
-  mix-blend-mode: normal;
 }
 
 .apologramaLogoImageLight {
@@ -547,9 +545,6 @@
   height: 70px;
   width: auto;
   object-fit: contain;
-  /* Garantiza transparencia sobre negro incluso si el origen tiene fondo blanco */
-  filter: invert(1) brightness(2) grayscale(100%);
-  mix-blend-mode: screen;
 }
 
 .footerApologramaLogoLight {

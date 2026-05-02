@@ -521,7 +521,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                       width: '150px', 
                       height: 'auto',
                       objectFit: 'contain',
-                      filter: isLight ? 'grayscale(100%) brightness(0)' : 'invert(1) brightness(100) grayscale(100%)', 
+                      filter: isLight ? 'grayscale(100%) brightness(0)' : 'none', 
                       mixBlendMode: isLight ? 'multiply' : 'normal' 
                     }} 
                   />
