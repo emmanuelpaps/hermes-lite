@@ -163,9 +163,10 @@ interface AccordionProps {
   isSelectable?: boolean;
   isSelected?: boolean;
   onSelect?: () => void;
+  priceSuffix?: string;
 }
 
-const AccordionCard = ({ service, formatPrice, variants, isOpen, onToggle, isSelectable, isSelected, onSelect }: AccordionProps) => {
+const AccordionCard = ({ service, formatPrice, variants, isOpen, onToggle, isSelectable, isSelected, onSelect, priceSuffix }: AccordionProps) => {
   return (
     <motion.div 
       layout
@@ -212,7 +213,10 @@ const AccordionCard = ({ service, formatPrice, variants, isOpen, onToggle, isSel
           </h3>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <div className={styles.servicePrice}>{formatPrice(service.price)}</div>
+          <div className={styles.servicePrice} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'center' }}>
+            <span>{formatPrice(service.price)}</span>
+            {priceSuffix && <span style={{ fontSize: '0.65rem', color: 'var(--muted-text)', marginTop: '0.1rem', textTransform: 'uppercase', fontWeight: 600 }}>{priceSuffix}</span>}
+          </div>
           {isSelectable && (
             <div 
               onClick={(e) => { e.stopPropagation(); onSelect && onSelect(); }}
@@ -275,6 +279,7 @@ interface ClientData {
   config?: {
     currency?: string;
     locale?: string;
+    priceSuffix?: string;
   };
   features?: {
     showEcosystem?: boolean;
@@ -712,6 +717,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 isSelectable={isExclusive}
                 isSelected={selectedApoIdx === idx}
                 onSelect={() => setSelectedApoIdx(idx)}
+                priceSuffix={data.config?.priceSuffix}
               />
             ))}
           </motion.div>
@@ -802,8 +808,13 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 </>
               )}
 
-              <div className={`${styles.totalPrice} text-gradient`}>
+              <div className={`${styles.totalPrice} text-gradient`} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <AnimatedPrice value={total} locale={locale} currency={currency} />
+                {data.config?.priceSuffix && (
+                  <span style={{ fontSize: '1rem', color: 'var(--muted-text)', marginTop: '0.5rem', fontWeight: 600, textTransform: 'uppercase' }}>
+                    {data.config.priceSuffix}
+                  </span>
+                )}
               </div>
             </>
           )}

@@ -6,7 +6,8 @@
   "heroText": "Esta es la estrategia que digitalizará décadas de experiencia corporativa para posicionar a Constructora Hermes y Concretera Río Bravo ante las FIBRAs y desarrolladores industriales de la región.",
   "config": {
     "currency": "MXN",
-    "locale": "es-MX"
+    "locale": "es-MX",
+    "priceSuffix": "Mensual (Contrato de 8 meses)"
   },
   "features": {
     "showEcosystem": true,
