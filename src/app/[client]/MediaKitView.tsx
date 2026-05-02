@@ -5,7 +5,7 @@ import styles from "./page.module.css";
 import React, { useRef, useState, useEffect } from "react";
 import { ViralChart, ApologramaShowcase, PremiumAudienceCard } from "./EcosystemAnimations";
 import { CursorSpotlight } from "./CursorSpotlight";
-const AnimatedPrice = ({ value }: { value: number }) => {
+const AnimatedPrice = ({ value, locale = 'es-MX', currency = 'MXN' }: { value: number, locale?: string, currency?: string }) => {
   const nodeRef = useRef<HTMLSpanElement>(null);
   const isInView = useInView(nodeRef, { once: true, margin: "-50px" });
   
@@ -16,13 +16,13 @@ const AnimatedPrice = ({ value }: { value: number }) => {
       duration: 2,
       ease: "easeOut",
       onUpdate(val) {
-        node.textContent = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(val);
+        node.textContent = new Intl.NumberFormat(locale, { style: 'currency', currency }).format(val);
       }
     });
     return controls.stop;
-  }, [value, isInView]);
+  }, [value, isInView, locale, currency]);
 
-  return <span ref={nodeRef}>{new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(0)}</span>;
+  return <span ref={nodeRef}>{new Intl.NumberFormat(locale, { style: 'currency', currency }).format(0)}</span>;
 }
 
 interface Service {
@@ -157,8 +157,18 @@ interface ClientData {
   clientLogo: string;
   industry: string;
   heroText: string;
+  config?: {
+    currency?: string;
+    locale?: string;
+  };
+  features?: {
+    showEcosystem?: boolean;
+    showAudiences?: boolean;
+    showPricing?: boolean;
+  };
   storytelling?: {
-    challenge: string;
+    narrative?: { title: string; content: string }[];
+    challenge?: string;
     pillars: { title: string; description: string; image?: string }[];
   };
   packages: {
@@ -172,6 +182,8 @@ interface ClientData {
     mode?: 'dark' | 'light';
     primary?: string;
     fontHeading?: string;
+    fontBody?: string;
+    textColor?: string;
     textGradient?: string;
   };
 }
@@ -186,7 +198,12 @@ export default function MediaKitView({ data }: { data: ClientData }) {
   const discountAmount = subtotal * (data.discountPercent / 100);
   const total = subtotal - discountAmount;
 
-  const formatPrice = (num: number) => `$${num.toLocaleString("es-MX")} MXN`;
+  const currency = data.config?.currency || "MXN";
+  const locale = data.config?.locale || "es-MX";
+
+  const formatPrice = (num: number) => {
+    return new Intl.NumberFormat(locale, { style: 'currency', currency: currency }).format(num);
+  };
 
   const fadeUp: Variants = {
     hidden: { opacity: 0, y: 30 },
@@ -197,17 +214,20 @@ export default function MediaKitView({ data }: { data: ClientData }) {
 
   const customTheme = data.theme ? {
     '--font-heading': data.theme.fontHeading || 'Space Grotesk, sans-serif',
+    '--font-body': data.theme.fontBody || 'Inter, sans-serif',
     '--primary-gradient': `linear-gradient(135deg, ${data.theme.primary || '#a855f7'} 0%, ${isLight ? '#990000' : '#000'} 100%)`,
     '--text-gradient': data.theme.textGradient || 'linear-gradient(to right, #fff, #888)',
     ...(isLight ? {
       '--bg-color': '#ffffff',
-      '--text-color': '#111111',
+      '--text-color': data.theme.textColor || '#111111',
       '--muted-text': '#555555',
       '--card-bg': 'rgba(0, 0, 0, 0.03)',
       '--glass-border': 'rgba(0, 0, 0, 0.08)',
       '--header-bg': 'rgba(255, 255, 255, 0.8)',
-    } : {})
-  } as React.CSSProperties : {};
+    } : {
+      '--text-color': data.theme.textColor || '#ffffff',
+    })
+  } as unknown as React.CSSProperties : {};
 
   return (
     <>
@@ -288,18 +308,41 @@ export default function MediaKitView({ data }: { data: ClientData }) {
         <img src="/assets/stickers/x-purple.png" alt="Frontera X" />
       </motion.div>
 
-      {/* Storytelling: The Challenge */}
+      {/* Storytelling: The Narrative & Challenge */}
       {data.storytelling && (
         <section className={styles.storySection}>
-          <motion.h2 
-            className={`${styles.storyChallenge} text-gradient`}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeUp}
-          >
-            &quot;{data.storytelling.challenge}&quot;
-          </motion.h2>
+          {data.storytelling.narrative ? (
+            <div style={{ marginBottom: '4rem', textAlign: 'left', maxWidth: '800px', margin: '0 auto 4rem auto' }}>
+              {data.storytelling.narrative.map((block, idx) => (
+                <motion.div 
+                  key={idx} 
+                  initial="hidden" 
+                  whileInView="visible" 
+                  viewport={{ once: true, margin: "-50px" }} 
+                  variants={fadeUp}
+                  style={{ marginBottom: '2.5rem' }}
+                >
+                  <h3 style={{ fontSize: '1.5rem', color: isLight ? '#222' : '#fff', marginBottom: '1rem', fontWeight: 700 }}>
+                    {block.title}
+                  </h3>
+                  <p 
+                    style={{ fontSize: '1.1rem', color: isLight ? '#555' : '#aaa', lineHeight: 1.6 }}
+                    dangerouslySetInnerHTML={{ __html: block.content }}
+                  />
+                </motion.div>
+              ))}
+            </div>
+          ) : data.storytelling.challenge && (
+            <motion.h2 
+              className={`${styles.storyChallenge} text-gradient`}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={fadeUp}
+            >
+              &quot;{data.storytelling.challenge}&quot;
+            </motion.h2>
+          )}
 
           <motion.div 
             className={styles.storyPillarsGrid}
@@ -338,9 +381,10 @@ export default function MediaKitView({ data }: { data: ClientData }) {
       )}
 
       {/* El Ecosistema - Presentación Base */}
-      <section className={styles.section}>
-        <motion.h2 
-          className={styles.sectionTitle}
+      {data.features?.showEcosystem !== false && (
+        <section className={styles.section}>
+          <motion.h2 
+            className={styles.sectionTitle}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -415,9 +459,11 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           </TiltCard>
         </div>
       </section>
+      )}
 
       {/* Nuestras Audiencias (Restaurado con nuevos demográficos) */}
-      <section className={styles.section}>
+      {data.features?.showAudiences !== false && (
+        <section className={styles.section}>
         <motion.h2 className={styles.sectionTitle} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
           Nuestras Audiencias
         </motion.h2>
@@ -452,9 +498,10 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           </motion.div>
         </div>
       </section>
+      )}
 
       {/* FN1 Services */}
-      {data.packages.fn1.length > 0 && (
+      {data.features?.showPricing !== false && data.packages.fn1.length > 0 && (
         <section className={styles.section}>
           <motion.h2 className={styles.sectionTitle} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             Estrategia de Medios
@@ -488,7 +535,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
       )}
 
       {/* Apolograma Services (Legacy Flat List) */}
-      {data.packages.apolograma.length > 0 && (
+      {data.features?.showPricing !== false && data.packages.apolograma.length > 0 && (
         <section className={styles.section}>
           <motion.h2 className={styles.sectionTitle} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             Estrategia de Agencia
@@ -522,7 +569,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
       )}
 
       {/* Blocks Structure */}
-      {data.packages.blocks && data.packages.blocks.map((block, blockIdx) => (
+      {data.features?.showPricing !== false && data.packages.blocks && data.packages.blocks.map((block, blockIdx) => (
         <section key={`block-${blockIdx}`} className={styles.section}>
           <motion.h2 className={styles.sectionTitle} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             {block.name}
@@ -553,6 +600,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
       ))}
 
       {/* Summary */}
+      {data.features?.showPricing !== false && (
       <section className={styles.summarySection}>
         <motion.div 
           className={`${styles.summaryCard} glass`}
@@ -605,7 +653,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
               )}
 
               <div className={`${styles.totalPrice} text-gradient`}>
-                <AnimatedPrice value={total} />
+                <AnimatedPrice value={total} locale={locale} currency={currency} />
               </div>
             </>
           )}
@@ -623,6 +671,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           </motion.a>
         </motion.div>
       </section>
+      )}
 
       {/* Sticky CTA */}
       <motion.a 

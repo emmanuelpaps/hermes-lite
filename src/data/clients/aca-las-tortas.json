@@ -4,13 +4,34 @@
   "industry": "Gastronomía",
   "heroText": "Reconstruimos la conexión honesta con tu comunidad a través de contenido altruista y evolución digital.",
   "hideTotal": true,
+  "config": {
+    "currency": "MXN",
+    "locale": "es-MX"
+  },
+  "features": {
+    "showEcosystem": false,
+    "showAudiences": true,
+    "showPricing": true
+  },
   "theme": {
     "mode": "light",
     "primary": "#E60000",
     "fontHeading": "'Teko', sans-serif",
+    "fontBody": "'Inter', sans-serif",
+    "textColor": "#222222",
     "textGradient": "linear-gradient(to right, #E60000, #800000)"
   },
   "storytelling": {
+    "narrative": [
+      {
+        "title": "La Situación Actual",
+        "content": "Acá Las Tortas se enfrenta a un desafío de percepción pública. Es momento de <b>revertir la narrativa</b> mediante acciones orgánicas y sinceras, donde la marca aporta valor real a la comunidad."
+      },
+      {
+        "title": "Soberanía Digital",
+        "content": "Al mismo tiempo, necesitamos <i>independencia tecnológica</i> en los canales de venta directa para proteger tu margen de ganancia contra aplicaciones de terceros."
+      }
+    ],
     "challenge": "Revertir la percepción pública actual mediante acciones orgánicas y sinceras, donde la marca aporta valor real a la comunidad de manera solidaria, a la vez que se moderniza para obtener independencia tecnológica en sus canales de venta directa.",
     "pillars": [
       {
