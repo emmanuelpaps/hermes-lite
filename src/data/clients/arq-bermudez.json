@@ -53,36 +53,10 @@
     ]
   },
   "packages": {
-    "fn1": [
-      {
-        "name": "Difusión Editorial y RP",
-        "price": 12000,
-        "description": "Presencia editorial permanente en el medio digital más influyente de Juárez y El Paso. Cada proyecto completado se convierte en una nota de alto impacto.",
-        "bullets": [
-          "2 FN1 Flash (Notas editoriales de proyecto/obra en portal).",
-          "4 FN1 Moments (Cobertura en formato Stories).",
-          "Promoción orgánica en redes de Frontera Número Uno.",
-          "Distribución a audiencia B2B del portal."
-        ]
-      }
-    ],
+    "fn1": [],
     "apolograma": [
       {
-        "name": "Opción A: Iguala Corporativa Integral",
-        "price": 30000,
-        "badge": "Escala Completa",
-        "description": "Cobertura completa y agresiva para posicionar ambas empresas rápidamente ante desarrolladores y FIBRAs.",
-        "bullets": [
-          "Desarrollo de Sitio Web Corporativo completo (amortizado en iguala).",
-          "1 Sesión mensual de fotografía profesional de obra.",
-          "Edición y producción de 4 piezas de video mensuales.",
-          "Mantenimiento de identidad digital B2B (LinkedIn/Facebook).",
-          "Diseño de presentaciones corporativas.",
-          "Reporte mensual de posicionamiento digital."
-        ]
-      },
-      {
-        "name": "Opción B: Iguala de Arranque Gradual",
+        "name": "Opción A: Iguala de Arranque Gradual",
         "price": 15000,
         "badge": "Crecimiento Seguro",
         "description": "El punto de entrada ideal para establecer la huella digital inicial sin comprometer flujo de capital.",
@@ -91,7 +65,24 @@
           "Re-edición de material fotográfico/video ya existente.",
           "Creación y mantenimiento de perfiles corporativos.",
           "2 publicaciones mensuales B2B.",
+          "2 FN1 Flash (Notas editoriales en portal de Frontera).",
           "Crecimiento a ritmo conservador."
+        ]
+      },
+      {
+        "name": "Opción B: Iguala Corporativa Integral",
+        "price": 30000,
+        "badge": "Escala Completa",
+        "description": "Cobertura completa y agresiva para posicionar ambas empresas rápidamente ante desarrolladores y FIBRAs.",
+        "bullets": [
+          "Desarrollo de Sitio Web Corporativo completo (amortizado en iguala).",
+          "1 Sesión mensual de fotografía profesional de obra.",
+          "Edición y producción de 4 piezas de video mensuales.",
+          "Mantenimiento de identidad digital B2B (LinkedIn/Facebook).",
+          "4 FN1 Flash (Notas editoriales en portal de Frontera).",
+          "6 FN1 Moments (Cobertura en formato Stories).",
+          "Diseño de presentaciones corporativas.",
+          "Reporte mensual de posicionamiento digital."
         ]
       }
     ]
