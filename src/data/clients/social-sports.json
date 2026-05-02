@@ -14,11 +14,11 @@
   },
   "theme": {
     "mode": "dark",
-    "primary": "#E91E90",
+    "primary": "#E60000",
     "fontHeading": "'Space Grotesk', sans-serif",
     "fontBody": "'Inter', sans-serif",
     "textColor": "#ffffff",
-    "textGradient": "linear-gradient(to right, #E91E90, #9333ea)"
+    "textGradient": "linear-gradient(to right, #FF1744, #E60000)"
   },
   "storytelling": {
     "narrative": [
