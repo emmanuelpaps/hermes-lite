@@ -175,23 +175,16 @@ const AccordionCard = ({ service, formatPrice, variants, isOpen, onToggle, isSel
       whileInView="visible"
       viewport={{ once: true }}
       variants={variants}
-      style={{ position: 'relative', zIndex: isOpen ? 45 : 1 }}
+      style={{ 
+        position: 'relative', zIndex: isOpen ? 45 : 1,
+        ...(isSelectable && isSelected ? { 
+          borderColor: 'var(--primary-color, #4ade80)',
+          boxShadow: '0 0 20px rgba(74, 222, 128, 0.15)'
+        } : {})
+      }}
     >
       <motion.div layout className={styles.serviceHeader}>
-        <div className={styles.serviceInfo} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          {isSelectable && (
-            <div 
-              onClick={(e) => { e.stopPropagation(); onSelect && onSelect(); }}
-              style={{
-                width: '24px', height: '24px', borderRadius: '50%',
-                border: `2px solid ${isSelected ? 'var(--primary-color, #3b82f6)' : '#666'}`,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                cursor: 'pointer', flexShrink: 0
-              }}
-            >
-              {isSelected && <div style={{width: '12px', height: '12px', borderRadius: '50%', background: 'var(--primary-color, #3b82f6)'}} />}
-            </div>
-          )}
+        <div className={styles.serviceInfo}>
           <h3 style={{ margin: 0, display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
             {service.name}
             {service.badge && (
@@ -218,15 +211,21 @@ const AccordionCard = ({ service, formatPrice, variants, isOpen, onToggle, isSel
             </motion.div>
           </h3>
         </div>
-        <div className={styles.servicePrice} style={{ display: 'flex', alignItems: 'center' }}>
-          {formatPrice(service.price)}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div className={styles.servicePrice}>{formatPrice(service.price)}</div>
           {isSelectable && (
-            <span style={{ 
-              fontSize: '0.7rem', color: isSelected ? 'var(--primary-color, #3b82f6)' : '#666', 
-              marginLeft: '0.5rem', fontWeight: 700, textTransform: 'uppercase' 
-            }}>
-              {isSelected ? 'Elegido' : ''}
-            </span>
+            <div 
+              onClick={(e) => { e.stopPropagation(); onSelect && onSelect(); }}
+              style={{
+                width: '22px', height: '22px', borderRadius: '50%',
+                border: `2px solid ${isSelected ? 'var(--primary-color, #4ade80)' : 'rgba(255,255,255,0.3)'}`,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                cursor: 'pointer', flexShrink: 0,
+                transition: 'all 0.2s ease'
+              }}
+            >
+              {isSelected && <div style={{width: '12px', height: '12px', borderRadius: '50%', background: 'var(--primary-color, #4ade80)'}} />}
+            </div>
           )}
         </div>
       </motion.div>
