@@ -160,9 +160,12 @@ interface AccordionProps {
   variants: Variants;
   isOpen: boolean;
   onToggle: () => void;
+  isSelectable?: boolean;
+  isSelected?: boolean;
+  onSelect?: () => void;
 }
 
-const AccordionCard = ({ service, formatPrice, variants, isOpen, onToggle }: AccordionProps) => {
+const AccordionCard = ({ service, formatPrice, variants, isOpen, onToggle, isSelectable, isSelected, onSelect }: AccordionProps) => {
   return (
     <motion.div 
       layout
@@ -175,8 +178,21 @@ const AccordionCard = ({ service, formatPrice, variants, isOpen, onToggle }: Acc
       style={{ position: 'relative', zIndex: isOpen ? 45 : 1 }}
     >
       <motion.div layout className={styles.serviceHeader}>
-        <div className={styles.serviceInfo}>
-          <h3>
+        <div className={styles.serviceInfo} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          {isSelectable && (
+            <div 
+              onClick={(e) => { e.stopPropagation(); onSelect && onSelect(); }}
+              style={{
+                width: '24px', height: '24px', borderRadius: '50%',
+                border: `2px solid ${isSelected ? 'var(--primary-color, #3b82f6)' : '#666'}`,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                cursor: 'pointer', flexShrink: 0
+              }}
+            >
+              {isSelected && <div style={{width: '12px', height: '12px', borderRadius: '50%', background: 'var(--primary-color, #3b82f6)'}} />}
+            </div>
+          )}
+          <h3 style={{ margin: 0, display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
             {service.name}
             {service.badge && (
               <span style={{ 
@@ -196,13 +212,23 @@ const AccordionCard = ({ service, formatPrice, variants, isOpen, onToggle }: Acc
             <motion.div 
               animate={{ rotate: isOpen ? 180 : 0 }}
               transition={{ duration: 0.3 }}
-              style={{ display: 'inline-block' }}
+              style={{ display: 'inline-block', marginLeft: '0.75rem' }}
             >
               ▼
             </motion.div>
           </h3>
         </div>
-        <div className={styles.servicePrice}>{formatPrice(service.price)}</div>
+        <div className={styles.servicePrice} style={{ display: 'flex', alignItems: 'center' }}>
+          {formatPrice(service.price)}
+          {isSelectable && (
+            <span style={{ 
+              fontSize: '0.7rem', color: isSelected ? 'var(--primary-color, #3b82f6)' : '#666', 
+              marginLeft: '0.5rem', fontWeight: 700, textTransform: 'uppercase' 
+            }}>
+              {isSelected ? 'Elegido' : ''}
+            </span>
+          )}
+        </div>
       </motion.div>
       
       <AnimatePresence>
@@ -255,6 +281,7 @@ interface ClientData {
     showEcosystem?: boolean;
     showAudiences?: boolean;
     showPricing?: boolean;
+    exclusivePackages?: boolean;
   };
   storytelling?: {
     narrative?: { title: string; content: string }[];
@@ -283,9 +310,15 @@ interface ClientData {
 
 export default function MediaKitView({ data }: { data: ClientData }) {
   const [activeService, setActiveService] = useState<string | null>(null);
+  
+  const isExclusive = data.features?.exclusivePackages === true;
+  const [selectedApoIdx, setSelectedApoIdx] = useState<number>(0);
 
   const fn1Total = data.packages.fn1.reduce((acc, curr) => acc + curr.price, 0);
-  const apoTotal = data.packages.apolograma.reduce((acc, curr) => acc + curr.price, 0);
+  const apoTotal = isExclusive 
+    ? (data.packages.apolograma.length > 0 ? data.packages.apolograma[selectedApoIdx].price : 0)
+    : data.packages.apolograma.reduce((acc, curr) => acc + curr.price, 0);
+    
   const blocksTotal = data.packages.blocks ? data.packages.blocks.reduce((acc, block) => acc + block.services.reduce((sum, s) => sum + s.price, 0), 0) : 0;
   const subtotal = fn1Total + apoTotal + blocksTotal;
   const discountAmount = subtotal * (data.discountPercent / 100);
@@ -669,6 +702,9 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 variants={fadeUp} 
                 isOpen={activeService === service.name}
                 onToggle={() => setActiveService(activeService === service.name ? null : service.name)}
+                isSelectable={isExclusive}
+                isSelected={selectedApoIdx === idx}
+                onSelect={() => setSelectedApoIdx(idx)}
               />
             ))}
           </motion.div>
@@ -720,7 +756,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             {data.packages.blocks && data.packages.blocks.length > 0 ? "Ejecución Modular" : "Tu inversión, desglosada."}
           </h2>
           <p className={styles.sectionSubtitle} style={{marginBottom: "1rem"}}>
-            {data.packages.blocks && data.packages.blocks.length > 0 ? "Inversión Total del Proyecto" : "Esto es exactamente lo que recibirás cada mes:"}
+            {isExclusive ? "Total basado en la opción seleccionada:" : (data.packages.blocks && data.packages.blocks.length > 0 ? "Inversión Total del Proyecto" : "Esto es exactamente lo que recibirás cada mes:")}
           </p>
 
           {data.packages.blocks && data.packages.blocks.length > 0 && (
