@@ -1,0 +1,101 @@
+{
+  "clientName": "Social Sports",
+  "clientLogo": "/assets/social-sports/logo.png",
+  "industry": "Entretenimiento & Gastronomía",
+  "heroText": "Posicionamos a Social Sports como el epicentro del entretenimiento deportivo en la frontera, con una estrategia de contenido y difusión masiva diseñada para dominar el Mundial FIFA 2026.",
+  "config": {
+    "currency": "MXN",
+    "locale": "es-MX"
+  },
+  "features": {
+    "showEcosystem": true,
+    "showAudiences": true,
+    "showPricing": true
+  },
+  "theme": {
+    "mode": "dark",
+    "primary": "#E91E90",
+    "fontHeading": "'Space Grotesk', sans-serif",
+    "fontBody": "'Inter', sans-serif",
+    "textColor": "#ffffff",
+    "textGradient": "linear-gradient(to right, #E91E90, #9333ea)"
+  },
+  "storytelling": {
+    "narrative": [
+      {
+        "title": "El Momento es Ahora",
+        "content": "La competencia en el ámbito de bares deportivos en Juárez se intensifica cada mes. Pero hay un evento que <b>cambiará las reglas del juego por completo</b>: el Mundial de la FIFA 2026, con sedes en México y Estados Unidos.<br><br>Este no es un torneo más. Es el evento deportivo más grande de la historia, y se jugará <b>en nuestra frontera</b>."
+      },
+      {
+        "title": "Nuestra Estrategia",
+        "content": "Vamos a posicionar a Social Sports y Fan Burger como <b>los protagonistas indiscutibles</b> del entretenimiento deportivo durante el Mundial y más allá. Lo haremos a través de una campaña masiva de contenido digital de alta producción, administración profesional de redes sociales y difusión estratégica en el medio digital más grande de la frontera: <b>Frontera Número Uno</b>."
+      }
+    ],
+    "pillars": [
+      {
+        "title": "Contenido de Alta Producción",
+        "description": "20 publicaciones mensuales diseñadas estratégicamente en formatos Square y Vertical, sesiones fotográficas profesionales y una dirección creativa que eleve la percepción visual de Social Sports y Fan Burger.",
+        "image": "/assets/videofase1.mp4"
+      },
+      {
+        "title": "Difusión Masiva en Frontera Número Uno",
+        "description": "Paquete completo de impacto mediático con Video Reels profesionales, cobertura en formato Stories, notas publicitarias editoriales y transmisiones en vivo desde tu establecimiento.",
+        "image": "/assets/videofase2.mp4"
+      },
+      {
+        "title": "Dominio del Feed y Meta Ads",
+        "description": "Administración integral de redes sociales con estrategia mensual de campaña, copywriting profesional, gestión de Meta Ads y reportes mensuales de ROI para medir cada peso invertido.",
+        "image": "/assets/videofase3.mp4"
+      }
+    ]
+  },
+  "packages": {
+    "fn1": [
+      {
+        "name": "Paquete de Difusión Estratégica",
+        "price": 41000,
+        "description": "Paquete integral de contenido generador de tráfico en los portales y formatos exclusivos de Frontera Número Uno.",
+        "bullets": [
+          "1 FN1 Hits (Video Reel profesional con narrativa).",
+          "6 FN1 Moments (Presentación de formato Stories).",
+          "2 FN1 Flash (Nota publicitaria en nuestro portal).",
+          "1 FN1 On Air (Live de experiencia en nuestro portal).",
+          "Promoción de Social Media Ads incluida en el plan."
+        ]
+      }
+    ],
+    "apolograma": [
+      {
+        "name": "Diseño Gráfico y Producción Visual",
+        "price": 28000,
+        "description": "Creación de contenido visual de alta gama para las 2 cuentas (Social Sports y Fan Burger).",
+        "bullets": [
+          "20 publicaciones estáticas en formato Square y Vertical.",
+          "8 publicaciones en formato diseño.",
+          "12 publicaciones en formato fotografía de producto.",
+          "Adaptación de formatos a Stories.",
+          "1 sesión de fotografía mensual.",
+          "Formatos generales de creación (layouts).",
+          "3 cambios por diseño.",
+          "1 sesión creativa mensual."
+        ]
+      },
+      {
+        "name": "Social Media Management",
+        "price": 28000,
+        "description": "Gestión integral de la presencia digital de Social Sports y Fan Burger en todas las plataformas.",
+        "bullets": [
+          "Administración de redes sociales.",
+          "Meta Business Suite.",
+          "Estrategia mensual de campaña.",
+          "Copywriting y gestión de publicaciones.",
+          "Community Management.",
+          "Calendarización y programación de contenido gráfico.",
+          "Gestión de Meta Ads.",
+          "Reporte mensual de resultados ROI."
+        ]
+      }
+    ]
+  },
+  "discountPercent": 0
+}
