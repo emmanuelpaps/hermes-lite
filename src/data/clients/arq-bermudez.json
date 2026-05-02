@@ -16,11 +16,12 @@
   },
   "theme": {
     "mode": "dark",
-    "primary": "#166534",
+    "primary": "#4ade80",
+    "bgColor": "#14412d",
     "fontHeading": "'Space Grotesk', sans-serif",
     "fontBody": "'Inter', sans-serif",
-    "textColor": "#f8fafc",
-    "textGradient": "linear-gradient(to right, #4ade80, #166534)",
+    "textColor": "#fdf6e3",
+    "textGradient": "linear-gradient(to right, #fdf6e3, #4ade80)",
     "clientLogoRaw": true
   },
   "storytelling": {

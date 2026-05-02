@@ -305,6 +305,7 @@ interface ClientData {
     textColor?: string;
     textGradient?: string;
     clientLogoRaw?: boolean;
+    bgColor?: string;
   };
 }
 
@@ -352,6 +353,13 @@ export default function MediaKitView({ data }: { data: ClientData }) {
       '--header-bg': 'rgba(255, 255, 255, 0.8)',
     } : {
       '--text-color': data.theme.textColor || '#ffffff',
+      ...(data.theme.bgColor ? {
+        '--bg-color': data.theme.bgColor,
+        '--muted-text': '#d4d4d4',
+        '--card-bg': 'rgba(255, 255, 255, 0.05)',
+        '--glass-border': 'rgba(255, 255, 255, 0.1)',
+        '--header-bg': `${data.theme.bgColor}cc`,
+      } : {})
     })
   } as unknown as React.CSSProperties : {};
 
