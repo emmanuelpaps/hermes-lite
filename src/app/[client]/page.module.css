@@ -32,8 +32,8 @@
   width: auto;
   object-fit: contain;
   opacity: 0.9;
-  filter: invert(1) brightness(2) grayscale(100%);
-  mix-blend-mode: screen;
+  filter: invert(1) brightness(100) grayscale(100%);
+  mix-blend-mode: normal;
 }
 
 .apologramaLogoImageLight {
@@ -106,6 +106,7 @@
   max-width: 400px;
   max-height: 200px;
   object-fit: contain;
+  border-radius: 16px;
   /* CSS Magic to invert a white-bg dark logo into a transparent-bg white logo */
   filter: invert(1) brightness(2) grayscale(100%);
   mix-blend-mode: screen;
@@ -115,6 +116,7 @@
   max-width: 400px;
   max-height: 200px;
   object-fit: contain;
+  border-radius: 16px;
   /* El logo ya debe venir con fondo transparente nativo */
 }
 

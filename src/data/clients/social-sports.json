@@ -18,7 +18,8 @@
     "fontHeading": "'Space Grotesk', sans-serif",
     "fontBody": "'Inter', sans-serif",
     "textColor": "#ffffff",
-    "textGradient": "linear-gradient(to right, #FF1744, #E60000)"
+    "textGradient": "linear-gradient(to right, #FF1744, #E60000)",
+    "clientLogoRaw": true
   },
   "storytelling": {
     "narrative": [
@@ -31,6 +32,8 @@
         "content": "Vamos a posicionar a Social Sports y Fan Burger como <b>los protagonistas indiscutibles</b> del entretenimiento deportivo durante el Mundial y más allá. Lo haremos a través de una campaña masiva de contenido digital de alta producción, administración profesional de redes sociales y difusión estratégica en el medio digital más grande de la frontera: <b>Frontera Número Uno</b>."
       }
     ],
+    "countdownDate": "2026-06-11",
+    "countdownLabel": "Kickoff FIFA 2026 — La oportunidad más grande de la década",
     "pillars": [
       {
         "title": "Contenido de Alta Producción",
@@ -68,6 +71,7 @@
       {
         "name": "Diseño Gráfico y Producción Visual",
         "price": 28000,
+        "badge": "2 Cuentas",
         "description": "Creación de contenido visual de alta gama para las 2 cuentas (Social Sports y Fan Burger).",
         "bullets": [
           "20 publicaciones estáticas en formato Square y Vertical.",
@@ -83,6 +87,7 @@
       {
         "name": "Social Media Management",
         "price": 28000,
+        "badge": "2 Cuentas",
         "description": "Gestión integral de la presencia digital de Social Sports y Fan Burger en todas las plataformas.",
         "bullets": [
           "Administración de redes sociales.",

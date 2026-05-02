@@ -5,6 +5,79 @@ import styles from "./page.module.css";
 import React, { useRef, useState, useEffect } from "react";
 import { ViralChart, ApologramaShowcase, PremiumAudienceCard } from "./EcosystemAnimations";
 import { CursorSpotlight } from "./CursorSpotlight";
+
+// --- Countdown Banner ---
+const CountdownBanner = ({ targetDate, label, isLight, primaryColor }: { targetDate: string; label: string; isLight: boolean; primaryColor: string }) => {
+  const [days, setDays] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  
+  useEffect(() => {
+    const target = new Date(targetDate).getTime();
+    const update = () => {
+      const now = Date.now();
+      const diff = Math.max(0, Math.ceil((target - now) / (1000 * 60 * 60 * 24)));
+      setDays(diff);
+    };
+    update();
+    const interval = setInterval(update, 60000);
+    return () => clearInterval(interval);
+  }, [targetDate]);
+
+  return (
+    <motion.div 
+      ref={ref}
+      initial={{ opacity: 0, y: 20, scale: 0.95 }}
+      animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      style={{
+        margin: '3rem auto',
+        padding: '2rem 2.5rem',
+        borderRadius: '16px',
+        background: isLight 
+          ? `linear-gradient(135deg, ${primaryColor}10 0%, ${primaryColor}05 100%)` 
+          : `linear-gradient(135deg, ${primaryColor}20 0%, rgba(0,0,0,0.3) 100%)`,
+        border: `1px solid ${primaryColor}40`,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '2rem',
+        maxWidth: '700px',
+        boxShadow: `0 0 60px ${primaryColor}15`,
+        flexWrap: 'wrap',
+      }}
+    >
+      <div style={{ textAlign: 'center' }}>
+        <motion.div 
+          initial={{ scale: 0 }}
+          animate={isInView ? { scale: 1 } : {}}
+          transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
+          style={{ 
+            fontSize: '3.5rem', 
+            fontWeight: 900, 
+            color: primaryColor, 
+            lineHeight: 1,
+            textShadow: `0 0 30px ${primaryColor}50`
+          }}
+        >
+          {days}
+        </motion.div>
+        <div style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '2px', opacity: 0.7, marginTop: '0.3rem' }}>
+          días
+        </div>
+      </div>
+      <div style={{ textAlign: 'left', flex: 1, minWidth: '200px' }}>
+        <div style={{ fontSize: '1.2rem', fontWeight: 700, color: isLight ? '#222' : '#fff', marginBottom: '0.3rem' }}>
+          {label}
+        </div>
+        <div style={{ fontSize: '0.85rem', color: isLight ? '#666' : '#999', lineHeight: 1.4 }}>
+          La ventana de oportunidad se cierra. Cada día sin estrategia es un día que la competencia avanza.
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
 const AnimatedPrice = ({ value, locale = 'es-MX', currency = 'MXN' }: { value: number, locale?: string, currency?: string }) => {
   const nodeRef = useRef<HTMLSpanElement>(null);
   const isInView = useInView(nodeRef, { once: true, margin: "-50px" });
@@ -31,6 +104,7 @@ interface Service {
   description: string;
   bullets?: string[];
   image?: string;
+  badge?: string;
 }
 
 const TiltCard = ({ children, className }: { children: React.ReactNode, className?: string }) => {
@@ -104,6 +178,21 @@ const AccordionCard = ({ service, formatPrice, variants, isOpen, onToggle }: Acc
         <div className={styles.serviceInfo}>
           <h3>
             {service.name}
+            {service.badge && (
+              <span style={{ 
+                fontSize: '0.6rem', 
+                fontWeight: 700, 
+                textTransform: 'uppercase', 
+                letterSpacing: '0.5px',
+                padding: '0.25rem 0.6rem', 
+                borderRadius: '20px', 
+                background: 'rgba(168, 85, 247, 0.15)', 
+                border: '1px solid rgba(168, 85, 247, 0.3)', 
+                color: '#a855f7', 
+                marginLeft: '0.75rem',
+                verticalAlign: 'middle'
+              }}>{service.badge}</span>
+            )}
             <motion.div 
               animate={{ rotate: isOpen ? 180 : 0 }}
               transition={{ duration: 0.3 }}
@@ -169,6 +258,8 @@ interface ClientData {
   storytelling?: {
     narrative?: { title: string; content: string }[];
     challenge?: string;
+    countdownDate?: string;
+    countdownLabel?: string;
     pillars: { title: string; description: string; image?: string }[];
   };
   packages: {
@@ -185,6 +276,7 @@ interface ClientData {
     fontBody?: string;
     textColor?: string;
     textGradient?: string;
+    clientLogoRaw?: boolean;
   };
 }
 
@@ -273,7 +365,11 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           transition={{ duration: 1 }}
         >
           {data.clientLogo && (
-            <img src={data.clientLogo} alt={data.clientName} className={isLight ? styles.logoLight : styles.logo} />
+            <img 
+              src={data.clientLogo} 
+              alt={data.clientName} 
+              className={data.theme?.clientLogoRaw ? styles.logoLight : (isLight ? styles.logoLight : styles.logo)} 
+            />
           )}
         </motion.div>
         
@@ -342,6 +438,16 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             >
               &quot;{data.storytelling.challenge}&quot;
             </motion.h2>
+          )}
+
+          {/* Countdown Banner */}
+          {data.storytelling.countdownDate && (
+            <CountdownBanner 
+              targetDate={data.storytelling.countdownDate} 
+              label={data.storytelling.countdownLabel || 'Para el evento'}
+              isLight={isLight}
+              primaryColor={data.theme?.primary || '#a855f7'}
+            />
           )}
 
           <motion.div 
@@ -414,8 +520,8 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                       width: '150px', 
                       height: 'auto',
                       objectFit: 'contain',
-                      filter: isLight ? 'grayscale(100%) brightness(0)' : 'invert(1) brightness(2) grayscale(100%)', 
-                      mixBlendMode: isLight ? 'multiply' : 'screen' 
+                      filter: isLight ? 'grayscale(100%) brightness(0)' : 'invert(1) brightness(100) grayscale(100%)', 
+                      mixBlendMode: isLight ? 'multiply' : 'normal' 
                     }} 
                   />
                 </div>
