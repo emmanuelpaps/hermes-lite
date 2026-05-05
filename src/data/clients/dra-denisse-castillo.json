@@ -1,0 +1,127 @@
+{
+  "clientName": "Dra. Denisse Castillo",
+  "theme": {
+    "mode": "light",
+    "primary": "#d4b895",
+    "clientLogoRaw": false
+  },
+  "config": {
+    "priceSuffix": "MENSUAL (CONTRATO 4 MESES)"
+  },
+  "hero": {
+    "headline": "Elevando la percepción de la Medicina Estética",
+    "subheadline": "Propuesta de valor integral para Dra. Denisse Castillo",
+    "backgroundImage": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=2070&auto=format&fit=crop"
+  },
+  "storytelling": {
+    "narrative": [
+      {
+        "title": "Un Consultorio Top requiere una Imagen Top",
+        "content": "Dra. Denisse, sabemos que tu especialidad (armonización sin cirugía, Endolift, Radiesse) atrae a pacientes que no compiten por precio, sino por confianza y estatus. Nuestra misión no es 'manejarte las redes', sino armar a tu equipo actual con contenido gráfico y cinematográfico de clase mundial para que tu consultorio se posicione como la autoridad indiscutible en la frontera."
+      },
+      {
+        "title": "La Diferencia entre Publicar y Posicionar",
+        "content": "Tu equipo interno ya hace un excelente trabajo publicando el día a día. Nosotros seremos tu Estudio Creativo de Fuerzas Especiales. Les entregaremos Renders 3D de tus tratamientos (como Juvederm o Filorga), producciones de video narrativas de alta gama y pautas masivas en Frontera Número Uno para que cada post se sienta como una revista premium."
+      }
+    ],
+    "challenge": "Elevar drásticamente la calidad visual y el posicionamiento digital de tu clínica, proveyendo a tu equipo interno con contenido hiper-realista en 3D, cinematografía y activaciones presenciales para captar pacientes de alto perfil.",
+    "pillars": [
+      {
+        "title": "Módulo 1: Estudio Creativo",
+        "description": "Tu equipo interno recibirá gráficos 3D, diseños vectoriales y videos premium para usar libremente en tus redes.",
+        "image": "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2000&auto=format&fit=crop"
+      },
+      {
+        "title": "Alianzas B2B (Cross-Marketing)",
+        "description": "¿Por qué esperar a que el paciente te busque? A través de nuestra red, organizaremos una activación mensual en los centros Wellness más exclusivos (estudios de Yoga, Pilates y Gimnasios). Llevaremos tu marca a donde tu paciente ideal ya invierte en su cuerpo.",
+        "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2000&auto=format&fit=crop"
+      }
+    ]
+  },
+  "campaignDeepDive": {
+    "title": "Músculo Gráfico: El Poder del Renderizado 3D",
+    "subtitle": "Por qué la Opción Premium cambia las reglas del juego.",
+    "influencerSection": {
+      "image": "https://images.unsplash.com/photo-1629198688000-71f23e745b6e?q=80&w=2000&auto=format&fit=crop",
+      "description": "Una fotografía clínica informa, pero un Render 3D enamora. Al modelar tus productos estrella (jeringas, cremas, texturas) o la tecnología de tu aparatología, elevamos drásticamente el valor percibido del tratamiento ante el paciente, separándote inmediatamente de clínicas genéricas."
+    },
+    "timelines": [
+      {
+        "title": "Impacto de la Calidad 3D en la Toma de Decisión",
+        "steps": [
+          {
+            "step": "Educación Visual Avanzada",
+            "description": "Permite mostrar cómo actúa un bioestimulador o la tecnología Endolift bajo la piel de manera hiperrealista."
+          },
+          {
+            "step": "Estatus de Marca",
+            "description": "Las grandes farmacéuticas (como Allergan o Galderma) usan renders 3D para proyectar ciencia y limpieza. Tu clínica reflejará ese mismo estándar."
+          },
+          {
+            "step": "Retención de Atención",
+            "description": "Un carrusel o video animado en 3D detiene el scroll un 400% más que una fotografía estática tradicional."
+          }
+        ]
+      }
+    ],
+    "budgetTable": [],
+    "impactProjection": "Tu equipo interno recibirá esta 'Artillería Gráfica' semanalmente, permitiéndoles publicar contenido digno de una franquicia internacional sin que tú tengas que involucrarte en la dirección de arte."
+  },
+  "packages": {
+    "fn1": [],
+    "apolograma": [],
+    "blocks": [
+      {
+        "name": "Módulo 1: Iguala de Estudio Creativo & PR",
+        "services": [
+          {
+            "name": "Opción A: Ecosistema Premium 3D",
+            "price": 55000,
+            "description": "La máxima calidad visual. Equipamos a tu clínica con gráficos hiperrealistas, video cinematográfico y alianzas B2B.",
+            "bullets": [
+              "5 a 6 Diseños Semanales Nivel Premium (Incluye modelado y renderizado 3D de productos/aparatos).",
+              "1 Video Clínico Mensual Producido (Grabación y edición cinematográfica para reels/ads).",
+              "1 Publicación Mensual en Frontera Número Uno (Difusión narrativa a una audiencia masiva).",
+              "1 Dinámica de Activación B2B Mensual (Cross-marketing con negocios Fit/Wellness para captar leads).",
+              "Reporte Mensual de Resultados y Calendarización Estratégica con tu equipo interno."
+            ]
+          },
+          {
+            "name": "Opción B: Ecosistema Estándar",
+            "price": 45000,
+            "description": "Alto impacto y difusión, utilizando una línea gráfica estandarizada de excelencia.",
+            "bullets": [
+              "5 a 6 Diseños Semanales Nivel Estándar (Gráficos vectoriales y retoque fotográfico, sin modelado 3D).",
+              "1 Video Clínico Mensual Producido (Grabación y edición cinematográfica para reels/ads).",
+              "1 Publicación Mensual en Frontera Número Uno (Difusión narrativa a una audiencia masiva).",
+              "1 Dinámica de Activación B2B Mensual (Cross-marketing con negocios Fit/Wellness para captar leads).",
+              "Reporte Mensual de Resultados y Calendarización Estratégica con tu equipo interno."
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Módulo 2: Infraestructura Tecnológica (Pago Único)",
+        "services": [
+          {
+            "name": "Sistema de Lealtad y CRM (WebApp)",
+            "price": 65000,
+            "description": "Tu propia plataforma para digitalizar y retener a tus pacientes VIP, logrando recompra automática de tratamientos.",
+            "bullets": [
+              "Desarrollo de WebApp Progresiva (Instalable en teléfonos sin pasar por la AppStore).",
+              "Base de Datos (CRM) para seguimiento de expedientes e historial de tratamientos.",
+              "Sistema de Puntos y Niveles (Ej. Tarjeta Platinum para pacientes frecuentes).",
+              "Notificaciones Push (Alertas automáticas al celular para promociones o recordatorios de retoque de Botox).",
+              "Agenda Digital Privada para pacientes registrados."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "features": {
+    "showEcosystem": false,
+    "showAudiences": false,
+    "showPricing": true
+  }
+}
