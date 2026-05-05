@@ -56,16 +56,16 @@
     "subtitle": "Un despliegue táctico de altruismo y viralidad local.",
     "influencerSection": {
       "image": "/assets/aca-las-tortas/influencers.jpg",
-      "description": "El presupuesto proyectado ($25,000 MXN) ya incluye un fondo base de $2,000 MXN para cubrir los honorarios de colaboración de una de las Creadoras de Contenido de este roster, a selección del cliente."
+      "description": "El presupuesto proyectado de la Fase 1 ($25,000 MXN) ya incluye el pago de honorarios para asegurar la colaboración de una de las Creadoras de Contenido de este roster, a selección del cliente."
     },
     "timeline": [
       {
         "step": "Días 1 al 7: Pre-Producción y Scouting",
-        "description": "Autorización de los 2 guiones narrativos, contacto y cierre con la creadora de contenido seleccionada, y visita técnica a sucursal y asilo/casa hogar."
+        "description": "Autorización de los 2 guiones narrativos, contacto y cierre con la creadora de contenido seleccionada, y visita técnica a sucursal y al asilo 'Desamparados'."
       },
       {
         "step": "Días 8 al 12: Rodaje Físico",
-        "description": "Día 1: Grabación de preparación en sucursal con el equipo. Día 2: Cobertura estilo documental del convivio / entrega en la casa hogar junto a la creadora de contenido."
+        "description": "Día 1: Grabación de preparación en sucursal con el equipo. Día 2: Cobertura estilo documental del convivio y entrega de alimentos en la Casa de Ancianos A.C. 'Desamparados'."
       },
       {
         "step": "Días 13 al 20: Post-Producción y Lanzamiento",
@@ -76,12 +76,12 @@
       {
         "concept": "Producción Agencia",
         "responsibility": "Rodaje, edición, guionaje y pautas en FN1.",
-        "cost": "Incluido ($25,000)"
+        "cost": "Incluido"
       },
       {
         "concept": "Honorarios de Talento",
         "responsibility": "Pago a 1 creadora de contenido local.",
-        "cost": "Incluido ($2,000)"
+        "cost": "Incluido"
       },
       {
         "concept": "Las 50 Tortas",
@@ -89,12 +89,12 @@
         "cost": "Acá Las Tortas"
       },
       {
-        "concept": "Insumos Casa Hogar",
+        "concept": "Insumos Asilo 'Desamparados'",
         "responsibility": "Alimentos, regalos o logística del convivio.",
         "cost": "Acá Las Tortas"
       }
     ],
-    "impactProjection": "Proyección de ROAS (Return On Ad Spend): Al enfocar esta inversión en una campaña altruista de alta visibilidad, no estamos 'gastando' en publicidad tradicional. Estamos comprando un activo de relaciones públicas que limpia la imagen de la marca de raíz. La viralidad orgánica en Frontera Número Uno sumada a la credibilidad de la creadora de contenido, se traducirá en empatía local, lo cual impacta directamente en el retorno presencial de comensales a las sucursales por simple reciprocidad social."
+    "impactProjection": "Proyección de ROAS y Análisis de Viabilidad: ¿Por qué un Asilo en lugar de una Casa Hogar? Grabar niños en situación vulnerable implica un alto riesgo ético y barreras legales de privacidad (difuminar rostros arruina la conexión visual). Al pivotar hacia el Asilo 'Desamparados' (Casa de Ancianos A.C.), logramos interacciones genuinas, rostros visibles llenos de historia y un impacto emocional mucho más profundo y libre de riesgos legales. Esta narrativa altruista, amplificada por Frontera Número Uno y la influencer, limpiará la percepción de la marca y generará un retorno de clientes a las sucursales impulsado por reciprocidad social."
   },
   "packages": {
     "fn1": [],
@@ -111,7 +111,7 @@
               "2 Guiones narrativos aprobados previo al rodaje.",
               "2 Llamados de producción en campo (Hasta 4 horas por llamado con equipo cinematográfico).",
               "1 Video finalizado (60-90 segundos): Reto de 50 tortas donadas a población vulnerable.",
-              "1 Video finalizado (60-90 segundos): Patrocinio y cobertura de convivio en casa hogar.",
+              "1 Video finalizado (60-90 segundos): Patrocinio y cobertura de convivio en Asilo de Ancianos 'Desamparados'.",
               "2 Pautas de distribución garantizada en la red de Frontera Número Uno."
             ]
           }
