@@ -288,7 +288,10 @@ interface ClientData {
       image: string;
       description: string;
     };
-    timeline: { step: string; description: string }[];
+    timelines: { 
+      title: string; 
+      steps: { step: string; description: string }[] 
+    }[];
     budgetTable: {
       concept: string;
       responsibility: string;
@@ -686,20 +689,24 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             </motion.div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
-              {/* Timeline */}
-              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="glass" style={{ padding: '2rem', borderRadius: '16px', background: 'var(--card-bg)', border: '1px solid var(--glass-border)' }}>
-                <h3 style={{ fontSize: '1.4rem', marginBottom: '1.5rem', color: 'var(--text-color)' }}>Cronograma Operativo</h3>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                  {data.campaignDeepDive.timeline.map((item, idx) => (
-                    <div key={idx} style={{ display: 'flex', gap: '1rem' }}>
-                      <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: 'rgba(168, 85, 247, 0.2)', color: '#a855f7', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontWeight: 'bold', fontSize: '0.8rem' }}>{idx + 1}</div>
-                      <div>
-                        <strong style={{ display: 'block', color: 'var(--text-color)', marginBottom: '0.25rem' }}>{item.step}</strong>
-                        <span style={{ fontSize: '0.9rem', color: 'var(--muted-text)', lineHeight: 1.4 }}>{item.description}</span>
-                      </div>
+              {/* Timelines (Multi-Video Support) */}
+              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                {data.campaignDeepDive.timelines.map((tl, tlIdx) => (
+                  <div key={tlIdx} className="glass" style={{ padding: '2rem', borderRadius: '16px', background: 'var(--card-bg)', border: '1px solid var(--glass-border)' }}>
+                    <h3 style={{ fontSize: '1.2rem', marginBottom: '1.5rem', color: 'var(--text-color)' }}>{tl.title}</h3>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                      {tl.steps.map((item, idx) => (
+                        <div key={idx} style={{ display: 'flex', gap: '1rem' }}>
+                          <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: 'rgba(168, 85, 247, 0.2)', color: '#a855f7', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontWeight: 'bold', fontSize: '0.8rem' }}>{idx + 1}</div>
+                          <div>
+                            <strong style={{ display: 'block', color: 'var(--text-color)', marginBottom: '0.25rem' }}>{item.step}</strong>
+                            <span style={{ fontSize: '0.9rem', color: 'var(--muted-text)', lineHeight: 1.4 }}>{item.description}</span>
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </motion.div>
 
               {/* ROI & Budget */}

@@ -58,18 +58,40 @@
       "image": "/assets/aca-las-tortas/influencers.jpg",
       "description": "El presupuesto proyectado de la Fase 1 ($25,000 MXN) ya incluye el pago de honorarios para asegurar la colaboración de una de las Creadoras de Contenido de este roster, a selección del cliente."
     },
-    "timeline": [
+    "timelines": [
       {
-        "step": "Días 1 al 7: Pre-Producción y Scouting",
-        "description": "Autorización de los 2 guiones narrativos, contacto y cierre con la creadora de contenido seleccionada, y visita técnica a sucursal y al asilo 'Desamparados'."
+        "title": "Video 1: Reto 50 Tortas",
+        "steps": [
+          {
+            "step": "Pre-producción",
+            "description": "Autorización del guion narrativo y cierre de fecha con la creadora de contenido."
+          },
+          {
+            "step": "Rodaje en Sucursal",
+            "description": "Grabación de la preparación de las 50 tortas junto a la influencer y el dueño (duración aprox. 3 horas)."
+          },
+          {
+            "step": "Post-producción y Lanzamiento",
+            "description": "Edición y lanzamiento orgánico del reto en Frontera Número Uno y redes de la creadora."
+          }
+        ]
       },
       {
-        "step": "Días 8 al 12: Rodaje Físico",
-        "description": "Día 1: Grabación de preparación en sucursal con el equipo. Día 2: Cobertura estilo documental del convivio y entrega de alimentos en la Casa de Ancianos A.C. 'Desamparados'."
-      },
-      {
-        "step": "Días 13 al 20: Post-Producción y Lanzamiento",
-        "description": "Edición cinematográfica de los videos y publicación orquestada simultánea en los perfiles de la influencer, canales de la marca y la plataforma de Frontera Número Uno."
+        "title": "Video 2: Asilo 'Desamparados'",
+        "steps": [
+          {
+            "step": "Scouting y Permisos",
+            "description": "Visita técnica a las instalaciones del Asilo de Ancianos 'Desamparados' y logística del convivio."
+          },
+          {
+            "step": "Rodaje Documental",
+            "description": "Cobertura emotiva de la entrega de alimentos e interacción con los residentes."
+          },
+          {
+            "step": "Post-producción y Lanzamiento",
+            "description": "Edición cinematográfica para maximizar el impacto emocional y distribución pautada en FN1."
+          }
+        ]
       }
     ],
     "budgetTable": [
