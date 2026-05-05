@@ -281,6 +281,21 @@ interface ClientData {
     locale?: string;
     priceSuffix?: string;
   };
+  campaignDeepDive?: {
+    title: string;
+    subtitle: string;
+    influencerSection: {
+      image: string;
+      description: string;
+    };
+    timeline: { step: string; description: string }[];
+    budgetTable: {
+      concept: string;
+      responsibility: string;
+      cost: string;
+    }[];
+    impactProjection: string;
+  };
   features?: {
     showEcosystem?: boolean;
     showAudiences?: boolean;
@@ -650,6 +665,74 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           </motion.div>
         </div>
       </section>
+      )}
+
+      {/* Campaign Deep Dive (e.g. Phase 1 Expansion) */}
+      {data.campaignDeepDive && (
+        <section className={styles.section} style={{ marginTop: '2rem' }}>
+          <motion.h2 className={styles.sectionTitle} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+            {data.campaignDeepDive.title}
+          </motion.h2>
+          <motion.p className={styles.sectionSubtitle} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+            {data.campaignDeepDive.subtitle}
+          </motion.p>
+          
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2rem', marginTop: '3rem' }}>
+            {/* Influencer Roster */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="glass" style={{ padding: '2rem', borderRadius: '16px', background: 'var(--card-bg)', border: '1px solid var(--glass-border)' }}>
+              <h3 style={{ fontSize: '1.4rem', marginBottom: '1.5rem', color: 'var(--text-color)' }}>Roster de Influencers</h3>
+              <img src={data.campaignDeepDive.influencerSection.image} alt="Influencers" style={{ width: '100%', borderRadius: '8px', marginBottom: '1rem' }} />
+              <p style={{ fontSize: '0.9rem', color: 'var(--muted-text)', lineHeight: 1.6 }}>{data.campaignDeepDive.influencerSection.description}</p>
+            </motion.div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+              {/* Timeline */}
+              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="glass" style={{ padding: '2rem', borderRadius: '16px', background: 'var(--card-bg)', border: '1px solid var(--glass-border)' }}>
+                <h3 style={{ fontSize: '1.4rem', marginBottom: '1.5rem', color: 'var(--text-color)' }}>Cronograma Operativo</h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                  {data.campaignDeepDive.timeline.map((item, idx) => (
+                    <div key={idx} style={{ display: 'flex', gap: '1rem' }}>
+                      <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: 'rgba(168, 85, 247, 0.2)', color: '#a855f7', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontWeight: 'bold', fontSize: '0.8rem' }}>{idx + 1}</div>
+                      <div>
+                        <strong style={{ display: 'block', color: 'var(--text-color)', marginBottom: '0.25rem' }}>{item.step}</strong>
+                        <span style={{ fontSize: '0.9rem', color: 'var(--muted-text)', lineHeight: 1.4 }}>{item.description}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* ROI & Budget */}
+              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                <div className="glass" style={{ padding: '2rem', borderRadius: '16px', background: 'var(--card-bg)', border: '1px solid var(--glass-border)' }}>
+                  <h3 style={{ fontSize: '1.4rem', marginBottom: '1.5rem', color: 'var(--text-color)' }}>Responsabilidad Presupuestal</h3>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                    {data.campaignDeepDive.budgetTable.map((row, idx) => (
+                      <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '1rem', borderBottom: idx === data.campaignDeepDive!.budgetTable.length - 1 ? 'none' : '1px solid rgba(255,255,255,0.05)' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                          <strong style={{ color: 'var(--text-color)', fontSize: '0.95rem' }}>{row.concept}</strong>
+                          <span style={{ color: 'var(--muted-text)', fontSize: '0.8rem' }}>{row.responsibility}</span>
+                        </div>
+                        <div style={{ fontWeight: row.cost.includes('Incluido') ? 700 : 400, color: row.cost.includes('Incluido') ? '#4ade80' : 'var(--muted-text)', fontSize: '0.9rem' }}>
+                          {row.cost}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="glass" style={{ padding: '2rem', borderRadius: '16px', background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%)', border: '1px solid rgba(168, 85, 247, 0.3)' }}>
+                  <h3 style={{ fontSize: '1.4rem', marginBottom: '1rem', color: 'var(--text-color)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <span style={{ fontSize: '1.5rem' }}>📈</span> Proyección de ROAS
+                  </h3>
+                  <p style={{ fontSize: '0.95rem', color: 'var(--text-color)', lineHeight: 1.6, opacity: 0.9 }}>
+                    {data.campaignDeepDive.impactProjection}
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
       )}
 
       {/* FN1 Services */}
