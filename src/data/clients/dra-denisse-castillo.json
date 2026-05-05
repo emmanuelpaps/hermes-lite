@@ -3,7 +3,9 @@
   "theme": {
     "mode": "light",
     "primary": "#d4b895",
-    "clientLogoRaw": false
+    "clientLogoRaw": false,
+    "fontHeading": "'Playfair Display', serif",
+    "fontBody": "'Inter', sans-serif"
   },
   "config": {
     "priceSuffix": "MENSUAL (CONTRATO 4 MESES)"
