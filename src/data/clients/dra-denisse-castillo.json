@@ -70,38 +70,51 @@
     "impactProjection": "Tu equipo interno recibirá esta 'Artillería Gráfica' semanalmente, permitiéndoles publicar contenido digno de una franquicia internacional sin que tú tengas que involucrarte en la dirección de arte."
   },
   "packages": {
-    "fn1": [],
-    "apolograma": [],
-    "blocks": [
+    "fn1": [
       {
-        "name": "Módulo 1: Iguala de Estudio Creativo & PR",
-        "services": [
-          {
-            "name": "Opción A: Ecosistema Premium 3D",
-            "price": 55000,
-            "description": "La máxima calidad visual. Equipamos a tu clínica con gráficos hiperrealistas, video cinematográfico y alianzas B2B.",
-            "bullets": [
-              "5 a 6 Diseños Semanales Nivel Premium (Incluye modelado y renderizado 3D de productos/aparatos).",
-              "1 Video Clínico Mensual Producido (Grabación y edición cinematográfica para reels/ads).",
-              "1 Publicación Mensual en Frontera Número Uno (Difusión narrativa a una audiencia masiva).",
-              "1 Dinámica de Activación B2B Mensual (Cross-marketing con negocios Fit/Wellness para captar leads).",
-              "Reporte Mensual de Resultados y Calendarización Estratégica con tu equipo interno."
-            ]
-          },
-          {
-            "name": "Opción B: Ecosistema Estándar",
-            "price": 45000,
-            "description": "Alto impacto y difusión, utilizando una línea gráfica estandarizada de excelencia.",
-            "bullets": [
-              "5 a 6 Diseños Semanales Nivel Estándar (Gráficos vectoriales y retoque fotográfico, sin modelado 3D).",
-              "1 Video Clínico Mensual Producido (Grabación y edición cinematográfica para reels/ads).",
-              "1 Publicación Mensual en Frontera Número Uno (Difusión narrativa a una audiencia masiva).",
-              "1 Dinámica de Activación B2B Mensual (Cross-marketing con negocios Fit/Wellness para captar leads).",
-              "Reporte Mensual de Resultados y Calendarización Estratégica con tu equipo interno."
-            ]
-          }
+        "name": "Publicación Narrativa en Red",
+        "price": 7500,
+        "description": "Distribución mensual de la marca en la red masiva de Frontera Número Uno.",
+        "bullets": [
+          "Redacción de artículo narrativo y publicitario enfocado en medicina estética.",
+          "Publicación en la fanpage oficial de Frontera Número Uno.",
+          "Alcance segmentado en la frontera (Juárez y El Paso)."
         ]
       },
+      {
+        "name": "Activación B2B (Cross-Marketing)",
+        "price": 10000,
+        "description": "Dinámica presencial en negocios Wellness para captar pacientes de alto perfil.",
+        "bullets": [
+          "Organización de la dinámica mensual en gimnasios o estudios de Pilates/Yoga.",
+          "Captación de prospectos (leads) de alto perfil en frío.",
+          "Mayor difusión e interacción con clientes potenciales en el mercado Fit."
+        ]
+      }
+    ],
+    "apolograma": [
+      {
+        "name": "Opción A: Estudio Creativo Premium (3D + Video)",
+        "price": 37500,
+        "description": "La máxima calidad visual. Equipamos a tu clínica con gráficos hiperrealistas y cinematografía.",
+        "bullets": [
+          "5 a 6 Diseños Semanales Nivel Premium (Incluye modelado y renderizado 3D de productos/aparatos).",
+          "1 Video Clínico Mensual Producido (Grabación y edición cinematográfica para reels/ads).",
+          "Reporte Mensual de Resultados y Calendarización Estratégica con tu equipo interno."
+        ]
+      },
+      {
+        "name": "Opción B: Estudio Creativo Estándar (Video + Vectorial)",
+        "price": 27500,
+        "description": "Alto impacto y difusión utilizando una línea gráfica estandarizada de excelencia sin renders 3D.",
+        "bullets": [
+          "5 a 6 Diseños Semanales Nivel Estándar (Gráficos vectoriales y retoque fotográfico).",
+          "1 Video Clínico Mensual Producido (Grabación y edición cinematográfica para reels/ads).",
+          "Reporte Mensual de Resultados y Calendarización Estratégica con tu equipo interno."
+        ]
+      }
+    ],
+    "blocks": [
       {
         "name": "Módulo 2: Infraestructura Tecnológica (Pago Único)",
         "services": [
@@ -124,6 +137,7 @@
   "features": {
     "showEcosystem": false,
     "showAudiences": false,
-    "showPricing": true
+    "showPricing": true,
+    "exclusivePackages": true
   }
 }
