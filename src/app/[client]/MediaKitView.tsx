@@ -456,14 +456,14 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 position: 'absolute',
                 top: 0, left: 0, width: '100%', height: '100%',
                 objectFit: 'cover',
-                zIndex: -2,
+                zIndex: 0,
               }}
             />
             <div style={{
               position: 'absolute',
               top: 0, left: 0, width: '100%', height: '100%',
               backgroundColor: isLight ? 'rgba(249, 246, 240, 0.40)' : 'rgba(5, 5, 5, 0.70)',
-              zIndex: -1,
+              zIndex: 1,
             }} />
           </>
         ) : data.hero?.backgroundImage ? (
@@ -474,14 +474,14 @@ export default function MediaKitView({ data }: { data: ClientData }) {
               backgroundImage: `url(${data.hero.backgroundImage})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
-              zIndex: -2,
+              zIndex: 0,
             }} />
             <div style={{
               position: 'absolute',
               top: 0, left: 0, width: '100%', height: '100%',
               backgroundColor: isLight ? 'rgba(249, 246, 240, 0.60)' : 'rgba(5, 5, 5, 0.85)',
               backdropFilter: 'blur(2px)',
-              zIndex: -1,
+              zIndex: 1,
             }} />
           </>
         ) : null}
@@ -500,6 +500,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
+          style={{ position: 'relative', zIndex: 2 }}
         >
           {data.clientLogo && (
             <img 
@@ -515,6 +516,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           initial="hidden"
           animate="visible"
           variants={fadeUp}
+          style={{ position: 'relative', zIndex: 2 }}
         >
           {data.hero?.headline || data.heroTitle || `Propuesta Estratégica para ${data.clientName}`}
         </motion.h1>
@@ -525,6 +527,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           animate="visible"
           variants={fadeUp}
           transition={{ delay: 0.2 }}
+          style={{ position: 'relative', zIndex: 2 }}
         >
           {data.hero?.subheadline || data.heroText}
         </motion.p>
