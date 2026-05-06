@@ -13,7 +13,7 @@
   "hero": {
     "headline": "Elevando la percepción de la Medicina Estética",
     "subheadline": "Propuesta de valor integral para Dra. Denisse Castillo",
-    "backgroundImage": "/assets/dra-denisse-castillo/hero.jpg"
+    "backgroundImage": "/assets/dra-denisse-castillo/hero.png"
   },
   "storytelling": {
     "narrative": [
@@ -31,12 +31,12 @@
       {
         "title": "Módulo 1: Estudio Creativo",
         "description": "Tu equipo interno recibirá gráficos 3D, diseños vectoriales y videos premium para usar libremente en tus redes.",
-        "image": "/assets/dra-denisse-castillo/pilar-1.jpg"
+        "image": "/assets/dra-denisse-castillo/pilar-1.png"
       },
       {
         "title": "Alianzas B2B (Cross-Marketing)",
         "description": "¿Por qué esperar a que el paciente te busque? A través de nuestra red, organizaremos una activación mensual en los centros Wellness más exclusivos (estudios de Yoga, Pilates y Gimnasios). Llevaremos tu marca a donde tu paciente ideal ya invierte en su cuerpo.",
-        "image": "/assets/dra-denisse-castillo/pilar-2.jpg"
+        "image": "/assets/dra-denisse-castillo/pilar-2.png"
       }
     ]
   },
@@ -44,7 +44,7 @@
     "title": "Músculo Gráfico: El Poder del Renderizado 3D",
     "subtitle": "Por qué la Opción Premium cambia las reglas del juego.",
     "influencerSection": {
-      "image": "/assets/dra-denisse-castillo/render-3d.jpg",
+      "image": "/assets/dra-denisse-castillo/render-3d.png",
       "description": "Una fotografía clínica informa, pero un Render 3D enamora. Al modelar tus productos estrella (jeringas, cremas, texturas) o la tecnología de tu aparatología, elevamos drásticamente el valor percibido del tratamiento ante el paciente, separándote inmediatamente de clínicas genéricas."
     },
     "timelines": [
