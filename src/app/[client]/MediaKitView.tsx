@@ -399,9 +399,10 @@ export default function MediaKitView({ data }: { data: ClientData }) {
     '--font-heading': data.theme.fontHeading || 'Space Grotesk, sans-serif',
     '--font-body': data.theme.fontBody || 'Inter, sans-serif',
     '--primary-gradient': `linear-gradient(135deg, ${data.theme.primary || '#a855f7'} 0%, ${isLight ? '#990000' : '#000'} 100%)`,
-    '--text-gradient': data.theme.textGradient || 'linear-gradient(to right, #fff, #888)',
+    '--primary-color': data.theme.primary || '#d4b895',
+    '--text-gradient': data.theme.textGradient || (isLight ? 'linear-gradient(to right, #222, #555)' : 'linear-gradient(to right, #fff, #888)'),
     ...(isLight ? {
-      '--bg-color': '#ffffff',
+      '--bg-color': '#fdfcfb',
       '--text-color': data.theme.textColor || '#111111',
       '--muted-text': '#555555',
       '--card-bg': 'rgba(0, 0, 0, 0.03)',
@@ -452,10 +453,12 @@ export default function MediaKitView({ data }: { data: ClientData }) {
               src={data.hero.backgroundVideo} 
               autoPlay loop muted playsInline preload="auto"
               poster={data.hero.backgroundImage || undefined}
+              onCanPlay={(e) => { e.currentTarget.playbackRate = 0.5; }}
               style={{
                 position: 'absolute',
                 top: 0, left: 0, width: '100%', height: '100%',
                 objectFit: 'cover',
+                opacity: 0.75,
                 zIndex: 0,
               }}
             />

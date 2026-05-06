@@ -31,6 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ client: s
     return {
       title: `Propuesta para ${data.clientName} | Frontera Número Uno`,
       description: `Ecosistema Digital Exclusivo para ${data.clientName}, desarrollado por Frontera Número Uno y Apolograma.`,
+      colorScheme: data.theme?.mode === 'light' ? 'light' : 'dark',
       openGraph: {
         title: `Propuesta Ejecutiva: ${data.clientName}`,
         description: `Ecosistema Digital Exclusivo para ${data.clientName}, desarrollado por Frontera Número Uno y Apolograma.`,
