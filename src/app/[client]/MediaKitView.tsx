@@ -164,9 +164,10 @@ interface AccordionProps {
   isSelected?: boolean;
   onSelect?: () => void;
   priceSuffix?: string;
+  selectionType?: 'radio' | 'checkbox';
 }
 
-const AccordionCard = ({ service, formatPrice, variants, isOpen, onToggle, isSelectable, isSelected, onSelect, priceSuffix }: AccordionProps) => {
+const AccordionCard = ({ service, formatPrice, variants, isOpen, onToggle, isSelectable, isSelected, onSelect, priceSuffix, selectionType = 'radio' }: AccordionProps) => {
   return (
     <motion.div 
       layout
@@ -221,14 +222,25 @@ const AccordionCard = ({ service, formatPrice, variants, isOpen, onToggle, isSel
             <div 
               onClick={(e) => { e.stopPropagation(); onSelect && onSelect(); }}
               style={{
-                width: '22px', height: '22px', borderRadius: '50%',
-                border: `2px solid ${isSelected ? 'var(--primary-color, #4ade80)' : 'rgba(255,255,255,0.3)'}`,
+                width: '22px', height: '22px', 
+                borderRadius: selectionType === 'checkbox' ? '6px' : '50%',
+                border: `2px solid ${isSelected ? 'var(--primary-color, #4ade80)' : 'var(--muted-text)'}`,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 cursor: 'pointer', flexShrink: 0,
-                transition: 'all 0.2s ease'
+                transition: 'all 0.2s ease',
+                background: isSelected && selectionType === 'checkbox' ? 'var(--primary-color, #4ade80)' : 'transparent',
+                opacity: isSelected ? 1 : 0.5
               }}
             >
-              {isSelected && <div style={{width: '12px', height: '12px', borderRadius: '50%', background: 'var(--primary-color, #4ade80)'}} />}
+              {isSelected && (
+                selectionType === 'checkbox' ? (
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                ) : (
+                  <div style={{width: '12px', height: '12px', borderRadius: '50%', background: 'var(--primary-color, #4ade80)'}} />
+                )
+              )}
             </div>
           )}
         </div>
@@ -341,15 +353,30 @@ export default function MediaKitView({ data }: { data: ClientData }) {
   
   const isExclusive = data.features?.exclusivePackages === true;
   const [selectedApoIdx, setSelectedApoIdx] = useState<number>(0);
+  
+  const [selectedServices, setSelectedServices] = useState<Record<string, boolean>>(() => {
+    const initialState: Record<string, boolean> = {};
+    if (data.packages.fn1) data.packages.fn1.forEach(s => initialState[s.name] = true);
+    if (data.packages.blocks) data.packages.blocks.forEach(b => b.services.forEach(s => initialState[s.name] = true));
+    if (!isExclusive && data.packages.apolograma) data.packages.apolograma.forEach(s => initialState[s.name] = true);
+    return initialState;
+  });
 
-  const fn1Total = data.packages.fn1.reduce((acc, curr) => acc + curr.price, 0);
+  const toggleServiceSelection = (name: string) => {
+    setSelectedServices(prev => ({ ...prev, [name]: !prev[name] }));
+  };
+
+  const fn1Total = data.packages.fn1 ? data.packages.fn1.reduce((acc, curr) => acc + (selectedServices[curr.name] ? curr.price : 0), 0) : 0;
+  
   const apoTotal = isExclusive 
-    ? (data.packages.apolograma.length > 0 ? data.packages.apolograma[selectedApoIdx].price : 0)
-    : data.packages.apolograma.reduce((acc, curr) => acc + curr.price, 0);
+    ? (data.packages.apolograma && data.packages.apolograma.length > 0 ? data.packages.apolograma[selectedApoIdx].price : 0)
+    : (data.packages.apolograma ? data.packages.apolograma.reduce((acc, curr) => acc + (selectedServices[curr.name] ? curr.price : 0), 0) : 0);
     
-  const blocksTotal = data.packages.blocks ? data.packages.blocks.reduce((acc, block) => acc + block.services.reduce((sum, s) => sum + s.price, 0), 0) : 0;
+  const blocksTotal = data.packages.blocks ? data.packages.blocks.reduce((acc, block) => acc + block.services.reduce((sum, s) => sum + (selectedServices[s.name] ? s.price : 0), 0), 0) : 0;
+  
   const subtotal = fn1Total + apoTotal + blocksTotal;
-  const discountAmount = subtotal * (data.discountPercent / 100);
+  const discountPercent = data.discountPercent || 0;
+  const discountAmount = subtotal * (discountPercent / 100);
   const total = subtotal - discountAmount;
 
   const currency = data.config?.currency || "MXN";
@@ -794,6 +821,11 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 variants={fadeUp} 
                 isOpen={activeService === service.name}
                 onToggle={() => setActiveService(activeService === service.name ? null : service.name)}
+                isSelectable={true}
+                isSelected={selectedServices[service.name]}
+                onSelect={() => toggleServiceSelection(service.name)}
+                selectionType="checkbox"
+                priceSuffix={data.config?.priceSuffix}
               />
             ))}
           </motion.div>
@@ -863,6 +895,11 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 variants={fadeUp} 
                 isOpen={activeService === service.name}
                 onToggle={() => setActiveService(activeService === service.name ? null : service.name)}
+                isSelectable={true}
+                isSelected={selectedServices[service.name]}
+                onSelect={() => toggleServiceSelection(service.name)}
+                selectionType="checkbox"
+                priceSuffix={data.config?.priceSuffix}
               />
             ))}
           </motion.div>
