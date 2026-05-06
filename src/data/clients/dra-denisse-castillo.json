@@ -135,8 +135,8 @@
     ]
   },
   "features": {
-    "showEcosystem": false,
-    "showAudiences": false,
+    "showEcosystem": true,
+    "showAudiences": true,
     "showPricing": true,
     "exclusivePackages": true
   }
