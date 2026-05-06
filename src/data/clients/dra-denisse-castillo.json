@@ -29,14 +29,24 @@
     "challenge": "Elevar drásticamente la calidad visual y el posicionamiento digital de tu clínica, proveyendo a tu equipo interno con contenido hiper-realista en 3D, cinematografía y activaciones presenciales para captar pacientes de alto perfil.",
     "pillars": [
       {
-        "title": "Módulo 1: Estudio Creativo",
-        "description": "Tu equipo interno recibirá gráficos 3D, diseños vectoriales y videos premium para usar libremente en tus redes.",
+        "title": "Estudio Creativo Premium (Apolograma)",
+        "description": "Producción cinematográfica mensual y desarrollo de Renders 3D hiperrealistas de tus tratamientos para proyectar la máxima autoridad clínica.",
         "image": "/assets/dra-denisse-castillo/pilar-1.png"
       },
       {
-        "title": "Alianzas B2B (Cross-Marketing)",
-        "description": "¿Por qué esperar a que el paciente te busque? A través de nuestra red, organizaremos una activación mensual en los centros Wellness más exclusivos (estudios de Yoga, Pilates y Gimnasios). Llevaremos tu marca a donde tu paciente ideal ya invierte en su cuerpo.",
+        "title": "Difusión Masiva (Frontera Número Uno)",
+        "description": "Redacción periodística y distribución de artículos en la red con mayor alcance de la región para atraer tráfico nuevo desde Juárez y El Paso.",
+        "image": "https://images.unsplash.com/photo-1616469829581-73993eb86b02?q=80&w=2000&auto=format&fit=crop"
+      },
+      {
+        "title": "Alianzas B2B (Activaciones Wellness)",
+        "description": "¿Por qué esperar a que el paciente te busque? A través de nuestra red, organizaremos activaciones en los centros Wellness más exclusivos (estudios de Yoga y Pilates) para captar leads VIP.",
         "image": "/assets/dra-denisse-castillo/pilar-2.png"
+      },
+      {
+        "title": "Infraestructura Tecnológica (WebApp CRM)",
+        "description": "Desarrollo de tu propia WebApp de Lealtad para digitalizar pacientes VIP, otorgar puntos y automatizar notificaciones push para recordatorios de retoques.",
+        "image": "https://images.unsplash.com/photo-1555421689-d68471e189f2?q=80&w=2000&auto=format&fit=crop"
       }
     ]
   },
