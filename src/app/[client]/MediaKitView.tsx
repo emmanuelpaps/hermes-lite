@@ -337,6 +337,7 @@ interface ClientData {
   };
   discountPercent: number;
   hideTotal?: boolean;
+  footerVideo?: string;
   theme?: {
     mode?: 'dark' | 'light';
     primary?: string;
@@ -925,6 +926,35 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           </motion.div>
         </section>
       ))}
+
+      {/* Footer Video */}
+      {data.footerVideo && (
+        <section className={styles.section} style={{ paddingBottom: 0 }}>
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '2rem 0' }}
+          >
+            <h2 className={styles.sectionTitle} style={{ fontSize: '1.5rem', marginBottom: '1.5rem' }}>
+              Nuestra Calidad Cinematográfica
+            </h2>
+            <video 
+              src={data.footerVideo} 
+              controls
+              playsInline
+              style={{
+                width: '100%',
+                maxWidth: '350px',
+                borderRadius: '20px',
+                boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
+                border: '1px solid var(--glass-border)'
+              }}
+            />
+          </motion.div>
+        </section>
+      )}
 
       {/* Summary */}
       {data.features?.showPricing !== false && (
