@@ -92,13 +92,13 @@
         ]
       },
       {
-        "name": "Activación B2B (Cross-Marketing)",
+        "name": "Embudos de Captación Offline (Activaciones B2B)",
         "price": 10000,
-        "description": "Dinámica presencial en negocios Wellness para captar pacientes de alto perfil.",
+        "description": "Extracción de pacientes de alto poder adquisitivo directamente desde su entorno natural hacia tu agenda clínica.",
         "bullets": [
-          "Organización de la dinámica mensual en gimnasios o estudios de Pilates/Yoga.",
-          "Captación de prospectos (leads) de alto perfil en frío.",
-          "Mayor difusión e interacción con clientes potenciales en el mercado Fit."
+          "Organización de dinámicas exclusivas en centros Wellness top (Pilates, Yoga, Gimnasios Premium).",
+          "Captación de prospectos (leads VIP) en frío mediante muestras de valor y relaciones públicas.",
+          "Transformación de asistentes en primeras consultas garantizadas."
         ]
       }
     ],
@@ -129,15 +129,15 @@
         "name": "Módulo 2: Infraestructura Tecnológica (Pago Único)",
         "services": [
           {
-            "name": "Sistema de Lealtad y CRM (WebApp)",
+            "name": "Motor de Retención y CRM (WebApp de Lealtad)",
             "price": 65000,
-            "description": "Tu propia plataforma para digitalizar y retener a tus pacientes VIP, logrando recompra automática de tratamientos.",
+            "description": "La medicina estética vive de la recompra. Esta plataforma evita que tus pacientes vayan a otra clínica cuando necesiten su próximo retoque.",
             "bullets": [
-              "Desarrollo de WebApp Progresiva (Instalable en teléfonos sin pasar por la AppStore).",
-              "Base de Datos (CRM) para seguimiento de expedientes e historial de tratamientos.",
-              "Sistema de Puntos y Niveles (Ej. Tarjeta Platinum para pacientes frecuentes).",
-              "Notificaciones Push (Alertas automáticas al celular para promociones o recordatorios de retoque de Botox).",
-              "Agenda Digital Privada para pacientes registrados."
+              "Desarrollo de WebApp Progresiva (Instalable en teléfonos sin la fricción de la AppStore).",
+              "Base de Datos Inteligente (CRM) que rastrea cuándo caducan los tratamientos de cada paciente (ej. Botox a los 6 meses).",
+              "Notificaciones Push Automáticas: El celular del paciente vibrará recordándole agendar su retoque con un incentivo.",
+              "Sistema de Niveles VIP (Ej. Tarjeta Platinum) para gamificar el gasto del paciente y aumentar su Ticket Promedio.",
+              "Agenda Digital Privada sin intermediarios."
             ]
           }
         ]
