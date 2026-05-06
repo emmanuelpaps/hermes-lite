@@ -292,6 +292,7 @@ interface ClientData {
     headline?: string;
     subheadline?: string;
     backgroundImage?: string;
+    backgroundVideo?: string;
   };
   config?: {
     currency?: string;
@@ -444,7 +445,26 @@ export default function MediaKitView({ data }: { data: ClientData }) {
 
       {/* Hero Section */}
       <section className={styles.hero}>
-        {data.hero?.backgroundImage && (
+        {data.hero?.backgroundVideo ? (
+          <>
+            <video 
+              src={data.hero.backgroundVideo} 
+              autoPlay loop muted playsInline
+              style={{
+                position: 'absolute',
+                top: 0, left: 0, width: '100%', height: '100%',
+                objectFit: 'cover',
+                zIndex: -2,
+              }}
+            />
+            <div style={{
+              position: 'absolute',
+              top: 0, left: 0, width: '100%', height: '100%',
+              backgroundColor: isLight ? 'rgba(249, 246, 240, 0.40)' : 'rgba(5, 5, 5, 0.70)',
+              zIndex: -1,
+            }} />
+          </>
+        ) : data.hero?.backgroundImage ? (
           <>
             <div style={{
               position: 'absolute',
@@ -457,13 +477,13 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             <div style={{
               position: 'absolute',
               top: 0, left: 0, width: '100%', height: '100%',
-              backgroundColor: isLight ? 'rgba(249, 246, 240, 0.80)' : 'rgba(5, 5, 5, 0.85)',
-              backdropFilter: 'blur(4px)',
+              backgroundColor: isLight ? 'rgba(249, 246, 240, 0.60)' : 'rgba(5, 5, 5, 0.85)',
+              backdropFilter: 'blur(2px)',
               zIndex: -1,
             }} />
           </>
-        )}
-        {!isLight && !data.hero?.backgroundImage && (
+        ) : null}
+        {!isLight && !data.hero?.backgroundImage && !data.hero?.backgroundVideo && (
           <>
             <div className={styles.heroBg} />
             <motion.div 
