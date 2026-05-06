@@ -450,7 +450,8 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           <>
             <video 
               src={data.hero.backgroundVideo} 
-              autoPlay loop muted playsInline
+              autoPlay loop muted playsInline preload="auto"
+              poster={data.hero.backgroundImage || undefined}
               style={{
                 position: 'absolute',
                 top: 0, left: 0, width: '100%', height: '100%',
