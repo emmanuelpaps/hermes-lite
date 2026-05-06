@@ -276,6 +276,11 @@ interface ClientData {
   industry: string;
   heroTitle?: string;
   heroText: string;
+  hero?: {
+    headline?: string;
+    subheadline?: string;
+    backgroundImage?: string;
+  };
   config?: {
     currency?: string;
     locale?: string;
@@ -412,7 +417,26 @@ export default function MediaKitView({ data }: { data: ClientData }) {
 
       {/* Hero Section */}
       <section className={styles.hero}>
-        {!isLight && (
+        {data.hero?.backgroundImage && (
+          <>
+            <div style={{
+              position: 'absolute',
+              top: 0, left: 0, width: '100%', height: '100%',
+              backgroundImage: `url(${data.hero.backgroundImage})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              zIndex: -2,
+            }} />
+            <div style={{
+              position: 'absolute',
+              top: 0, left: 0, width: '100%', height: '100%',
+              backgroundColor: isLight ? 'rgba(249, 246, 240, 0.80)' : 'rgba(5, 5, 5, 0.85)',
+              backdropFilter: 'blur(4px)',
+              zIndex: -1,
+            }} />
+          </>
+        )}
+        {!isLight && !data.hero?.backgroundImage && (
           <>
             <div className={styles.heroBg} />
             <motion.div 
@@ -443,7 +467,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           animate="visible"
           variants={fadeUp}
         >
-          {data.heroTitle || `Propuesta Estratégica para ${data.clientName}`}
+          {data.hero?.headline || data.heroTitle || `Propuesta Estratégica para ${data.clientName}`}
         </motion.h1>
         
         <motion.p 
@@ -453,7 +477,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           variants={fadeUp}
           transition={{ delay: 0.2 }}
         >
-          {data.heroText}
+          {data.hero?.subheadline || data.heroText}
         </motion.p>
       </section>
 
