@@ -83,24 +83,29 @@
   "packages": {
     "fn1": [
       {
-        "name": "Publicación Narrativa en Red",
+        "name": "Publicación con narrativa ambas redes Fb/Ins",
         "price": 7500,
-        "description": "Distribución mensual de la marca en la red masiva de Frontera Número Uno.",
-        "bullets": [
-          "Redacción de artículo narrativo y publicitario enfocado en medicina estética.",
-          "Publicación en la fanpage oficial de Frontera Número Uno.",
-          "Alcance segmentado en la frontera (Juárez y El Paso)."
-        ]
+        "description": "Distribución mensual de la marca en la red masiva de Frontera Número Uno en ambas plataformas."
       },
       {
-        "name": "Embudos de Captación Offline (Activaciones B2B)",
-        "price": 10000,
-        "description": "Extracción de pacientes de alto poder adquisitivo directamente desde su entorno natural hacia tu agenda clínica.",
-        "bullets": [
-          "Organización de dinámicas exclusivas en centros Wellness top (Pilates, Yoga, Gimnasios Premium).",
-          "Captación de prospectos (leads VIP) en frío mediante muestras de valor y relaciones públicas.",
-          "Transformación de asistentes en primeras consultas garantizadas."
-        ]
+        "name": "Publicación con narrativa solo en Facebook",
+        "price": 4500,
+        "description": "Distribución de un artículo narrativo exclusivamente en la fanpage oficial."
+      },
+      {
+        "name": "Video producido",
+        "price": 12500,
+        "description": "Desarrollo y publicación de un reportaje en video de alto impacto para distribución masiva."
+      },
+      {
+        "name": "Transmisión en vivo",
+        "price": 6000,
+        "description": "Transmisión en directo (Live) desde tu consultorio para interactuar con la audiencia fronteriza en tiempo real."
+      },
+      {
+        "name": "Historia",
+        "price": 2000,
+        "description": "Publicación temporal de 24 horas para mantener presencia y dirigir tráfico rápido."
       }
     ],
     "apolograma": [
@@ -139,6 +144,21 @@
               "Notificaciones Push Automáticas: El celular del paciente vibrará recordándole agendar su retoque con un incentivo.",
               "Sistema de Niveles VIP (Ej. Tarjeta Platinum) para gamificar el gasto del paciente y aumentar su Ticket Promedio.",
               "Agenda Digital Privada sin intermediarios."
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Módulo 3: Activaciones Offline y Relaciones Públicas",
+        "services": [
+          {
+            "name": "Embudos de Captación Offline (Activaciones B2B)",
+            "price": 10000,
+            "description": "Extracción de pacientes de alto poder adquisitivo directamente desde su entorno natural hacia tu agenda clínica.",
+            "bullets": [
+              "Organización de dinámicas exclusivas en centros Wellness top (Pilates, Yoga, Gimnasios Premium).",
+              "Captación de prospectos (leads VIP) en frío mediante muestras de valor y relaciones públicas.",
+              "Transformación de asistentes en primeras consultas garantizadas."
             ]
           }
         ]
