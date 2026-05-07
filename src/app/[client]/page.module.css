@@ -630,13 +630,14 @@
 
   .brandDivider {
     padding: 3rem 0;
+    margin-bottom: -120px; /* Jala el texto hacia arriba para forzar el empalme */
   }
 
   .brandDivider img {
-    width: 80%;
-    max-width: 180px;
-    transform: scale(1);
-    opacity: 0.5;
+    width: 100%;
+    max-width: none;
+    transform: scale(2);
+    opacity: 0.6;
   }
 
   .section {

@@ -559,7 +559,8 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                   whileInView="visible" 
                   viewport={{ once: true, margin: "-50px" }} 
                   variants={fadeUp}
-                  style={{ marginBottom: '2.5rem' }}
+                  className="glass"
+                  style={{ marginBottom: '2.5rem', padding: '2.5rem', position: 'relative', zIndex: 10 }}
                 >
                   <h3 style={{ fontSize: '1.5rem', color: isLight ? '#222' : '#fff', marginBottom: '1rem', fontWeight: 700 }}>
                     {block.title}
