@@ -629,13 +629,14 @@
   }
 
   .brandDivider {
-    padding: 2rem 0 0 0;
+    padding: 3rem 0;
   }
 
   .brandDivider img {
-    width: 100%;
-    max-width: none;
-    transform: scale(2.5);
+    width: 80%;
+    max-width: 180px;
+    transform: scale(1);
+    opacity: 0.5;
   }
 
   .section {
