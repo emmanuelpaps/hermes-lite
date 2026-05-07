@@ -405,8 +405,8 @@ export default function MediaKitView({ data }: { data: ClientData }) {
       '--bg-color': '#fdfcfb',
       '--text-color': data.theme.textColor || '#111111',
       '--muted-text': '#555555',
-      '--card-bg': 'rgba(0, 0, 0, 0.03)',
-      '--glass-border': 'rgba(0, 0, 0, 0.08)',
+      '--card-bg': 'rgba(255, 255, 255, 0.75)',
+      '--glass-border': 'rgba(255, 255, 255, 0.5)',
       '--header-bg': 'rgba(255, 255, 255, 0.8)',
     } : {
       '--text-color': data.theme.textColor || '#ffffff',
