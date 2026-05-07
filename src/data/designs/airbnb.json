@@ -1,0 +1,16 @@
+{
+  "name": "Airbnb",
+  "mode": "light",
+  "fontHeading": "'Circular', 'Inter', sans-serif",
+  "fontBody": "'Circular', 'Inter', sans-serif",
+  "primaryColor": "#ff385c",
+  "bgColor": "#ffffff",
+  "textColor": "#222222",
+  "mutedText": "#717171",
+  "surfaceGlass": "rgba(255, 255, 255, 0.8)",
+  "glassBorder": "rgba(0, 0, 0, 0.04)",
+  "shadowElevation1": "0 3px 12px rgba(0, 0, 0, 0.08)",
+  "shadowElevation2": "0 6px 16px rgba(0, 0, 0, 0.12)",
+  "borderRadius": "24px",
+  "textGradient": "linear-gradient(to right, #222222, #717171)"
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Vercel",
+  "mode": "dark",
+  "fontHeading": "'Geist', 'Inter', sans-serif",
+  "fontBody": "'Geist', 'Inter', sans-serif",
+  "primaryColor": "#ffffff",
+  "bgColor": "#000000",
+  "textColor": "#ededed",
+  "mutedText": "#888888",
+  "surfaceGlass": "rgba(10, 10, 10, 0.6)",
+  "glassBorder": "rgba(255, 255, 255, 0.1)",
+  "shadowElevation1": "0 4px 6px rgba(0, 0, 0, 0.4)",
+  "shadowElevation2": "0 10px 40px rgba(0, 0, 0, 0.5)",
+  "borderRadius": "6px",
+  "textGradient": "linear-gradient(to right, #ffffff, #888888)"
+}

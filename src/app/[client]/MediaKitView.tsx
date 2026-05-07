@@ -341,12 +341,19 @@ interface ClientData {
   theme?: {
     mode?: 'dark' | 'light';
     primary?: string;
+    primaryColor?: string;
     fontHeading?: string;
     fontBody?: string;
     textColor?: string;
+    mutedText?: string;
     textGradient?: string;
     clientLogoRaw?: boolean;
     bgColor?: string;
+    surfaceGlass?: string;
+    glassBorder?: string;
+    shadowElevation1?: string;
+    shadowElevation2?: string;
+    borderRadius?: string;
   };
 }
 
@@ -398,26 +405,18 @@ export default function MediaKitView({ data }: { data: ClientData }) {
   const customTheme = data.theme ? {
     '--font-heading': data.theme.fontHeading || 'Space Grotesk, sans-serif',
     '--font-body': data.theme.fontBody || 'Inter, sans-serif',
-    '--primary-gradient': `linear-gradient(135deg, ${data.theme.primary || '#a855f7'} 0%, ${isLight ? '#990000' : '#000'} 100%)`,
-    '--primary-color': data.theme.primary || '#d4b895',
+    '--primary-gradient': `linear-gradient(135deg, ${data.theme.primaryColor || data.theme.primary || '#a855f7'} 0%, ${isLight ? '#990000' : '#000'} 100%)`,
+    '--primary-color': data.theme.primaryColor || data.theme.primary || '#d4b895',
     '--text-gradient': data.theme.textGradient || (isLight ? 'linear-gradient(to right, #222, #555)' : 'linear-gradient(to right, #fff, #888)'),
-    ...(isLight ? {
-      '--bg-color': '#fdfcfb',
-      '--text-color': data.theme.textColor || '#111111',
-      '--muted-text': '#555555',
-      '--card-bg': 'rgba(255, 255, 255, 0.75)',
-      '--glass-border': 'rgba(255, 255, 255, 0.5)',
-      '--header-bg': 'rgba(255, 255, 255, 0.8)',
-    } : {
-      '--text-color': data.theme.textColor || '#ffffff',
-      ...(data.theme.bgColor ? {
-        '--bg-color': data.theme.bgColor,
-        '--muted-text': '#d4d4d4',
-        '--card-bg': 'rgba(255, 255, 255, 0.05)',
-        '--glass-border': 'rgba(255, 255, 255, 0.1)',
-        '--header-bg': `${data.theme.bgColor}cc`,
-      } : {})
-    })
+    '--bg-color': data.theme.bgColor || (isLight ? '#fdfcfb' : '#050505'),
+    '--text-color': data.theme.textColor || (isLight ? '#111111' : '#ffffff'),
+    '--muted-text': data.theme.mutedText || (isLight ? '#555555' : '#888888'),
+    '--card-bg': data.theme.surfaceGlass || (isLight ? 'rgba(255, 255, 255, 0.75)' : 'rgba(255, 255, 255, 0.05)'),
+    '--glass-border': data.theme.glassBorder || (isLight ? 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 255, 255, 0.1)'),
+    '--header-bg': data.theme.surfaceGlass || (isLight ? 'rgba(255, 255, 255, 0.8)' : 'rgba(0, 0, 0, 0.8)'),
+    '--shadow-elevation-1': data.theme.shadowElevation1 || '0 4px 12px rgba(0,0,0,0.05)',
+    '--shadow-elevation-2': data.theme.shadowElevation2 || '0 8px 32px rgba(0,0,0,0.08)',
+    '--border-radius': data.theme.borderRadius || '16px',
   } as unknown as React.CSSProperties : {};
 
   return (

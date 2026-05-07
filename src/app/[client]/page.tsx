@@ -61,6 +61,18 @@ export default async function ClientPage({ params }: { params: Promise<{ client:
   try {
     const fileContents = await fs.readFile(filePath, 'utf8');
     data = JSON.parse(fileContents);
+    
+    // Theme Engine: Inject Master Design System if template is specified
+    if (data.themeTemplate) {
+      try {
+        const designPath = path.join(process.cwd(), 'src/data/designs', `${data.themeTemplate}.json`);
+        const designContents = await fs.readFile(designPath, 'utf8');
+        const designData = JSON.parse(designContents);
+        data.theme = { ...designData, ...data.theme }; // Client theme overrides master template
+      } catch (e) {
+        console.warn(`Master theme ${data.themeTemplate} not found.`);
+      }
+    }
   } catch (error) {
     return <div>Error: Client data not found.</div>;
   }

@@ -1,0 +1,16 @@
+{
+  "name": "Stripe",
+  "mode": "light",
+  "fontHeading": "'Inter', 'Sofia Pro', sans-serif",
+  "fontBody": "'Inter', sans-serif",
+  "primaryColor": "#635bff",
+  "bgColor": "#f6f9fc",
+  "textColor": "#0a2540",
+  "mutedText": "#425466",
+  "surfaceGlass": "rgba(255, 255, 255, 0.9)",
+  "glassBorder": "rgba(0, 0, 0, 0.05)",
+  "shadowElevation1": "0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08)",
+  "shadowElevation2": "0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07)",
+  "borderRadius": "12px",
+  "textGradient": "linear-gradient(to right, #0a2540, #635bff)"
+}
