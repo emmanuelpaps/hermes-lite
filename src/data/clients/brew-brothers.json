@@ -1,0 +1,96 @@
+{
+  "clientName": "Brew Brothers",
+  "clientLogo": "/assets/brew-brothers/logo.png",
+  "industry": "Hospitality & Coffee",
+  "themeTemplate": "airbnb",
+  "theme": {
+    "primaryColor": "#C25934"
+  },
+  "heroText": "Elevar tu estética. Dominar Pronaf.",
+  "hero": {
+    "headline": "La Cultura del Café, Amplificada.",
+    "subheadline": "Propuesta de Valor Integral para Brew Brothers",
+    "backgroundImage": "/assets/brew-brothers/hero.jpg",
+    "backgroundVideo": ""
+  },
+  "config": {
+    "currency": "MXN",
+    "locale": "es-MX",
+    "priceSuffix": "MENSUAL (CONTRATO 4 MESES)"
+  },
+  "features": {
+    "showEcosystem": true,
+    "showAudiences": true,
+    "showPricing": true,
+    "exclusivePackages": true
+  },
+  "storytelling": {
+    "challenge": "El café ya no es solo una bebida, es una experiencia estética. Para que un negocio nuevo en Zona Pronaf arrase, no basta con tener el mejor grano; hay que verse como la marca más premium de la ciudad.",
+    "pillars": [
+      {
+        "title": "Apetito Visual",
+        "description": "Food Styling cinematográfico que haga que tu menú sea irresistible en pantallas.",
+        "image": "/assets/apolograma/hero-2.jpeg"
+      },
+      {
+        "title": "Tráfico Peatonal",
+        "description": "Campañas de geolocalización agresivas enfocadas en estudiantes y ejecutivos a 2km a la redonda."
+      },
+      {
+        "title": "Tribus de Consumo",
+        "description": "Posicionamiento orgánico a través de Reels de alta factura visual."
+      }
+    ]
+  },
+  "packages": {
+    "fn1": [
+      {
+        "name": "Social Media Management",
+        "price": 10500,
+        "description": "Gestión élite de Instagram y Facebook, enfocada en crecimiento de comunidad y posicionamiento de marca premium.",
+        "bullets": [
+          "12 Publicaciones Premium mensuales (Carruseles y Gráficos)",
+          "Planificación de Parrilla de Contenidos",
+          "Copywriting persuasivo y Community Management"
+        ],
+        "badge": "Recomendado"
+      },
+      {
+        "name": "Meta Ads (Traffic & Conversion)",
+        "price": 7500,
+        "description": "Pauta publicitaria hiper-segmentada para Zona Pronaf, diseñada para atraer tráfico peatonal y pedidos a domicilio.",
+        "bullets": [
+          "Diseño de embudos de venta (Rappi / Visita a sucursal)",
+          "A/B Testing de creatividades",
+          "Optimización diaria de presupuesto"
+        ]
+      }
+    ],
+    "apolograma": [
+      {
+        "name": "Cinematic Food Styling",
+        "price": 12500,
+        "description": "Producción audiovisual de alto nivel. Convertimos cada café y cada postre en una obra de arte cinematográfica.",
+        "bullets": [
+          "1 Sesión Mensual en Locación",
+          "Fotografía Gastronómica Hires",
+          "Dirección de Arte y Styling"
+        ],
+        "image": "/assets/apolograma/service-film.jpg"
+      },
+      {
+        "name": "Reels & TikTok Trends",
+        "price": 8500,
+        "description": "Edición vertical agresiva para capitalizar la atención en formatos cortos y virales.",
+        "bullets": [
+          "4 Reels / TikToks editados al mes",
+          "Color Grading Cinematográfico",
+          "Audio Design y Música en Tendencia"
+        ],
+        "image": "/assets/apolograma/service-content.jpg"
+      }
+    ]
+  },
+  "discountPercent": 0,
+  "footerVideo": "https://fronteranumero1.tecza.com.mx/assets/fn1-reel-vertical.mp4"
+}
