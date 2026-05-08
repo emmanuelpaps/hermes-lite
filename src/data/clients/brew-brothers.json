@@ -17,7 +17,7 @@
   "config": {
     "currency": "MXN",
     "locale": "es-MX",
-    "priceSuffix": "MENSUAL (CONTRATO 4 MESES)"
+    "priceSuffix": "MENSUAL (CONTRATO 6 MESES) + IVA"
   },
   "features": {
     "showEcosystem": true,
@@ -46,49 +46,28 @@
   "packages": {
     "fn1": [
       {
-        "name": "Social Media Management",
-        "price": 10500,
-        "description": "Gestión élite de Instagram y Facebook, enfocada en crecimiento de comunidad y posicionamiento de marca premium.",
+        "name": "Design & Social Media Retainer",
+        "price": 15000,
+        "description": "El núcleo operativo de Brew Brothers. Producción masiva de gráficos y adaptaciones sin perder el rigor estético.",
         "bullets": [
-          "12 Publicaciones Premium mensuales (Carruseles y Gráficos)",
-          "Planificación de Parrilla de Contenidos",
-          "Copywriting persuasivo y Community Management"
+          "18 Diseños mensuales de alta calidad",
+          "Adaptaciones responsivas (Feed, Stories, Portadas)",
+          "Planificación de Parrilla y Community Management"
         ],
-        "badge": "Recomendado"
-      },
-      {
-        "name": "Meta Ads (Traffic & Conversion)",
-        "price": 7500,
-        "description": "Pauta publicitaria hiper-segmentada para Zona Pronaf, diseñada para atraer tráfico peatonal y pedidos a domicilio.",
-        "bullets": [
-          "Diseño de embudos de venta (Rappi / Visita a sucursal)",
-          "A/B Testing de creatividades",
-          "Optimización diaria de presupuesto"
-        ]
+        "badge": "Core"
       }
     ],
     "apolograma": [
       {
-        "name": "Cinematic Food Styling",
-        "price": 12500,
-        "description": "Producción audiovisual de alto nivel. Convertimos cada café y cada postre en una obra de arte cinematográfica.",
+        "name": "Vintage Motion Graphics (Add-on)",
+        "price": 5500,
+        "description": "Bono de animación: Damos vida a las ilustraciones estáticas (Rubber Hose) para dominar el formato vertical de TikTok e IG Reels.",
         "bullets": [
-          "1 Sesión Mensual en Locación",
-          "Fotografía Gastronómica Hires",
-          "Dirección de Arte y Styling"
+          "Animación 2D fluida de personajes",
+          "Efectos de sonido retro y lip-sync básico",
+          "Aumenta retención visual en un 300%"
         ],
         "image": "/assets/apolograma/service-film.jpg"
-      },
-      {
-        "name": "Reels & TikTok Trends",
-        "price": 8500,
-        "description": "Edición vertical agresiva para capitalizar la atención en formatos cortos y virales.",
-        "bullets": [
-          "4 Reels / TikToks editados al mes",
-          "Color Grading Cinematográfico",
-          "Audio Design y Música en Tendencia"
-        ],
-        "image": "/assets/apolograma/service-content.jpg"
       }
     ]
   },
