@@ -30,8 +30,7 @@
     "pillars": [
       {
         "title": "Animación & Motion Graphics",
-        "description": "Darle vida y movimiento a sus personajes retro para TikToks virales y Reels hipnóticos.",
-        "image": "/assets/apolograma/hero-2.jpeg"
+        "description": "Darle vida y movimiento a sus personajes retro para TikToks virales y Reels hipnóticos."
       },
       {
         "title": "Cinematic Beverage Styling",
@@ -66,8 +65,7 @@
           "Animación 2D fluida de personajes",
           "Efectos de sonido retro y lip-sync básico",
           "Aumenta retención visual en un 300%"
-        ],
-        "image": "/assets/apolograma/service-film.jpg"
+        ]
       }
     ]
   },
