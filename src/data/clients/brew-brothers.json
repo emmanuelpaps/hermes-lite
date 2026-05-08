@@ -4,7 +4,8 @@
   "industry": "Hospitality & Coffee",
   "themeTemplate": "airbnb",
   "theme": {
-    "primaryColor": "#C25934"
+    "primaryColor": "#eb4833",
+    "bgColor": "#f6eed8"
   },
   "heroText": "Elevar tu estética. Dominar Pronaf.",
   "hero": {
