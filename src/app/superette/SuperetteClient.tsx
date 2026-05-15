@@ -359,7 +359,7 @@ export default function SuperetteClient() {
                       whileInView={{ scale: 1, opacity: 1 }}
                       viewport={{ once: true }}
                       transition={{ delay: 0.6, type: "spring" }}
-                      style={{ background: theme.textMain, color: "#fff", padding: "1.2rem 2rem", borderRadius: "16px", display: "inline-block", boxShadow: "0 10px 30px rgba(0,0,0,0.15)" }}
+                      style={{ background: theme.textMain, color: "#fff", padding: "1.2rem 2rem", borderRadius: "16px", display: "inline-block", boxShadow: "0 10px 30px rgba(0,0,0,0.15)", whiteSpace: "nowrap" }}
                     >
                       <strong style={{ fontSize: "2rem", letterSpacing: "-1px" }}>$235,400 MXN</strong>
                     </motion.div>
