@@ -294,6 +294,11 @@ interface ClientData {
     backgroundImage?: string;
     backgroundVideo?: string;
   };
+  contact?: {
+    phone?: string;
+    name?: string;
+    message?: string;
+  };
   config?: {
     currency?: string;
     locale?: string;
