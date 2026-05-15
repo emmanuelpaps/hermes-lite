@@ -125,8 +125,8 @@ export default function SuperetteClient() {
           <motion.h1 variants={fadeInUp} style={{ fontSize: "clamp(2.5rem, 8vw, 4.5rem)", fontWeight: 800, margin: "0 0 1.5rem", letterSpacing: "-2px", lineHeight: 1.1, color: theme.superetteGreen }}>
             Ingeniería Gráfica y Comercial
           </motion.h1>
-          <motion.p variants={fadeInUp} style={{ fontSize: "1.4rem", color: theme.textMuted, maxWidth: "700px", margin: "0 auto", lineHeight: 1.6, fontWeight: 400 }}>
-            No somos una agencia creativa tradicional. Somos la infraestructura técnica que absorberá la maquinaria operativa de sus 35 sucursales.
+          <motion.p variants={fadeInUp} style={{ fontSize: "1.4rem", color: theme.textMuted, maxWidth: "750px", margin: "0 auto", lineHeight: 1.6, fontWeight: 400 }}>
+            Sabemos que el volumen masivo es el estándar mínimo que la marca exige hoy en día. No venimos a inventar el hilo negro, sino a instalar una infraestructura técnica externa para heredar y blindar su carga operativa.
           </motion.p>
         </motion.div>
       </div>
@@ -220,7 +220,7 @@ export default function SuperetteClient() {
                 Traffic Management (Embudo)
               </h2>
               <p style={{ fontSize: "1.2rem", color: theme.textMuted, lineHeight: 1.8 }}>
-                No nos limitamos a oprimir el botón de promocionar. Implementamos un embudo industrial diseñado para comprar tráfico directo a piso de venta.
+                Una vez que la línea de producción gráfica está cubierta y la tienda vestida, el siguiente paso es inyectar tráfico físico. Para ello, no nos limitamos a oprimir "promocionar", sino que implementamos un embudo industrial...
               </p>
               
               <div style={{ display: "flex", flexDirection: "column", gap: "1rem", marginTop: "2rem" }}>
@@ -259,7 +259,8 @@ export default function SuperetteClient() {
         </GlassCard>
 
         {/* 3. Transición y Métricas */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(450px, 1fr))", gap: "2.5rem", marginBottom: "5rem" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(450px, 1fr))", gap: "2.5rem", marginBottom: "5rem", position: "relative" }}>
+          <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontSize: "20rem", fontWeight: 900, color: "rgba(10, 130, 68, 0.03)", pointerEvents: "none", zIndex: -1 }}>3</div>
           <GlassCard borderTopColor={theme.superetteGreen}>
             <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.8rem" }}>Plan de Transición Exprés</h3>
             <p style={{ color: theme.textMuted, marginBottom: "2rem", fontSize: "1.1rem" }}>Empalme en 15 días sin detener su ritmo comercial.</p>
@@ -283,7 +284,7 @@ export default function SuperetteClient() {
 
         {/* 4. Tablas Animadas */}
         <GlassCard style={{ marginBottom: "5rem" }}>
-          <div style={{ position: "absolute", top: "-20px", right: "20px", fontSize: "15rem", fontWeight: 900, color: "rgba(10, 130, 68, 0.03)", pointerEvents: "none", lineHeight: 1 }}>3</div>
+          <div style={{ position: "absolute", top: "-20px", right: "20px", fontSize: "15rem", fontWeight: 900, color: "rgba(10, 130, 68, 0.03)", pointerEvents: "none", lineHeight: 1 }}>4</div>
           <h2 style={{ color: theme.superetteGreen, fontSize: "2.5rem", marginTop: 0, marginBottom: "2.5rem" }}>
             Desglose Operativo Mensual
           </h2>
@@ -397,6 +398,27 @@ export default function SuperetteClient() {
               </div>
             ))}
           </div>
+        </motion.div>
+
+        {/* Cierre Comercial Final */}
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp} style={{ textAlign: "center", marginBottom: "5rem", padding: "4rem 2rem", background: "rgba(10, 130, 68, 0.05)", borderRadius: "24px", border: `1px solid rgba(10, 130, 68, 0.2)` }}>
+          <h2 style={{ color: theme.superetteGreen, fontSize: "2.5rem", margin: "0 0 1rem", letterSpacing: "-1px" }}>El equipo está perfilado.</h2>
+          <p style={{ color: theme.textMuted, fontSize: "1.2rem", maxWidth: "600px", margin: "0 auto 2.5rem", lineHeight: 1.6 }}>La infraestructura gráfica y digital está lista para heredar la operación sin interrupciones ni distracciones.</p>
+          <motion.a 
+            href="https://wa.me/526566575959?text=Hola%20Jes%C3%BAs%2C%20revis%C3%A9%20la%20propuesta%20operativa%20de%20Superette.%20%C2%BFIniciamos%20el%20empalme%3F"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            style={{
+              display: "inline-flex", alignItems: "center", gap: "10px",
+              background: theme.superetteGreen, color: "#fff",
+              padding: "1.2rem 3rem", borderRadius: "50px", fontWeight: 800, fontSize: "1.1rem",
+              textDecoration: "none", boxShadow: "0 10px 25px rgba(10,130,68,0.3)"
+            }}
+          >
+            ¿Iniciamos el Empalme de 15 Días?
+          </motion.a>
         </motion.div>
 
       </div>
