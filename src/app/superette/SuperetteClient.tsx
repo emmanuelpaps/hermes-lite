@@ -365,7 +365,7 @@ export default function SuperetteClient() {
           <p style={{ color: theme.textMuted, fontSize: "1.2rem", maxWidth: "700px", margin: "0 auto 3rem", lineHeight: 1.6 }}>Como agencia integral, escalamos su marca cuando estén listos. Cotizados de forma independiente.</p>
           
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "1.5rem", textAlign: "left" }}>
-            {["Renders Arquitectónicos 3D para Sucursales", "Desarrollo de WebApps Corporativas", "Shooting Fotográfico Masivo In-Situ", "Activaciones BTL en Estacionamientos", "Diseño de Campañas Anuales (Madres, Navidad, etc)", "Digital Signage (Red de Pantallas en Sucursal)"].map((item, i) => (
+            {["Renders Arquitectónicos 3D para Sucursales", "Desarrollo de WebApps Corporativas", "Shooting Fotográfico Masivo In-Situ", "Activaciones BTL en Estacionamientos", "Campañas Maestras Anuales (Eje Rector de Marca)", "Digital Signage (Red de Pantallas en Sucursal)"].map((item, i) => (
               <div key={i} style={{ background: "rgba(255,255,255,0.5)", backdropFilter: "blur(10px)", padding: "1.5rem", borderRadius: "16px", border: `1px solid ${theme.border}`, display: "flex", alignItems: "flex-start", gap: "15px", boxShadow: "0 4px 15px rgba(0,0,0,0.02)" }}>
                 <span style={{ color: theme.superetteGreen, fontSize: "1.5rem", fontWeight: 300 }}>✦</span>
                 <span style={{ color: theme.textMain, fontWeight: 500, fontSize: "1.1rem" }}>{item}</span>
