@@ -122,7 +122,7 @@ export default function SuperetteClient() {
             alt="Superette Logo" 
             style={{ height: "90px", marginBottom: "2rem", objectFit: "contain", filter: "drop-shadow(0 10px 20px rgba(0,0,0,0.1)) invert(1)" }}
           />
-          <motion.h1 variants={fadeInUp} style={{ fontSize: "4.5rem", fontWeight: 800, margin: "0 0 1.5rem", letterSpacing: "-2px", lineHeight: 1.1, color: theme.superetteGreen }}>
+          <motion.h1 variants={fadeInUp} style={{ fontSize: "clamp(2.5rem, 8vw, 4.5rem)", fontWeight: 800, margin: "0 0 1.5rem", letterSpacing: "-2px", lineHeight: 1.1, color: theme.superetteGreen }}>
             Ingeniería Gráfica y Comercial
           </motion.h1>
           <motion.p variants={fadeInUp} style={{ fontSize: "1.4rem", color: theme.textMuted, maxWidth: "700px", margin: "0 auto", lineHeight: 1.6, fontWeight: 400 }}>
@@ -137,7 +137,7 @@ export default function SuperetteClient() {
         <GlassCard style={{ marginBottom: "3rem" }}>
           <div style={{ position: "absolute", top: "-20px", right: "20px", fontSize: "15rem", fontWeight: 900, color: "rgba(10, 130, 68, 0.03)", pointerEvents: "none", lineHeight: 1 }}>1</div>
           
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))", gap: "4rem", alignItems: "center" }}>
             <div>
               <h2 style={{ color: theme.superetteGreen, fontSize: "2.5rem", marginTop: 0, marginBottom: "1.5rem", position: "relative" }}>
                 El Desafío Operativo
@@ -214,7 +214,7 @@ export default function SuperetteClient() {
         <GlassCard style={{ marginBottom: "5rem" }}>
           <div style={{ position: "absolute", top: "-20px", right: "20px", fontSize: "15rem", fontWeight: 900, color: "rgba(10, 130, 68, 0.03)", pointerEvents: "none", lineHeight: 1 }}>2</div>
           
-          <div style={{ display: "grid", gridTemplateColumns: "1.2fr 0.8fr", gap: "4rem", alignItems: "center" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))", gap: "4rem", alignItems: "center" }}>
             <div>
               <h2 style={{ color: theme.superetteGreen, fontSize: "2.5rem", marginTop: 0, marginBottom: "1.5rem" }}>
                 Traffic Management (Embudo)
@@ -403,7 +403,7 @@ export default function SuperetteClient() {
 
       <footer style={{ background: theme.textMain, color: "rgba(255,255,255,0.6)", padding: "4rem 2rem", textAlign: "center", position: "relative", zIndex: 10, borderTop: "1px solid rgba(255,255,255,0.1)" }}>
         <div style={{ maxWidth: "1000px", margin: "0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: "2rem" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "1.5rem", opacity: 0.5 }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "1.5rem", opacity: 0.5, flexWrap: "wrap" }}>
             <img src="/assets/fn1-logo-white.png" alt="Frontera Número Uno" style={{ height: "30px", filter: "brightness(0) invert(1)" }} />
             <div style={{ height: "24px", width: "1px", background: "rgba(255,255,255,0.3)", margin: "0 10px" }} />
             <img src="/assets/apolograma-logo.png" alt="Apolograma" style={{ width: "240px", height: "auto", filter: "brightness(0) invert(1)" }} />
