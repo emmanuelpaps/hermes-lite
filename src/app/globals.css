@@ -1,5 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=Teko:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap');
 
+@font-face {
+  font-family: 'PaperTigerScript';
+  src: url('/assets/superette/fonts/PaperTigerScript.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PaperTigerSans';
+  src: url('/assets/superette/fonts/PaperTigerSans.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PaperTigerSerif';
+  src: url('/assets/superette/fonts/PaperTigerSerifBold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
 :root {
   --bg-color: #050505;
   --text-color: #ffffff;

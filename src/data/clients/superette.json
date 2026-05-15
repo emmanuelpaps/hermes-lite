@@ -1,0 +1,109 @@
+{
+  "clientName": "Superette",
+  "clientLogo": "/assets/superette/Superette_Logo_White.png",
+  "industry": "Retail / Supermercado",
+  "heroText": "Con más de 35 sucursales operando en el ritmo más exigente de retail, entendemos que su mercadotecnia no es diseño tradicional; es una maquinaria industrial de comunicación. Nuestra misión es absorber esta carga para garantizar velocidad y mitigar errores en todos sus formatos.",
+  "theme": {
+    "mode": "dark",
+    "bgColor": "#0b140e",
+    "primaryColor": "#da291c",
+    "primary": "#b52217",
+    "fontHeading": "'PaperTigerSerif', sans-serif",
+    "fontBody": "'Inter', sans-serif",
+    "textGradient": "linear-gradient(to right, #ffffff, #a3e635)",
+    "surfaceGlass": "rgba(10, 20, 14, 0.7)",
+    "glassBorder": "rgba(218, 41, 28, 0.3)",
+    "clientLogoRaw": true
+  },
+  "storytelling": {
+    "narrative": [
+      {
+        "title": "El Desafío del Volumen",
+        "content": "Al auditar sus necesidades operativas, identificamos la gestión simultánea de múltiples frentes críticos (Lonas, Prensas, Volantes). Este volumen masivo exige un proceso que evite cuellos de botella y pérdidas por detalles en medios impresos."
+      },
+      {
+        "title": "La Solución: Célula Dedicada",
+        "content": "Frontera Número Uno y Apolograma proponen instalar una Célula de Operación Gráfica (equivalente a 6 especialistas) que funcione como su brazo externo. Asumiremos la carga laboral y la ejecución para darles absoluta paz mental."
+      }
+    ],
+    "pillars": [
+      {
+        "title": "Filtro de Alta Precisión",
+        "description": "Reducción estricta de errores críticos antes de imprenta. Blindamos su producción gráfica masiva.",
+        "image": "/assets/superette/Superette_Green.png"
+      },
+      {
+        "title": "Tráfico Digital a Piso",
+        "description": "Optimización de campañas y volantes geolocalizados que se traducen en visitas reales a las 35 sucursales.",
+        "image": "/assets/superette/Superette_Red.png"
+      },
+      {
+        "title": "Inmersión Presencial (Onboarding)",
+        "description": "Arranque impecable: 2 de nuestros especialistas trabajarán en sus instalaciones por 2 jornadas completas para absorber el ADN y flujo de su empresa.",
+        "image": "/assets/superette/Superette_Yellow.png"
+      }
+    ]
+  },
+  "packages": {
+    "fn1": [],
+    "apolograma": [],
+    "blocks": [
+      {
+        "name": "Fase Operativa Central: Gestión Integral y Célula Dedicada",
+        "services": [
+          {
+            "name": "1. Maquila Gráfica y Pre-Prensa (~118 Artes Mensuales)",
+            "price": 116400,
+            "description": "Ejecución técnica in-house para Retail. SLAs garantizados: Lonas Express (24-36h) y Planas de Prensa (48h). *Tiempos válidos en horario hábil L-V 8am-5pm.",
+            "bullets": [
+              "Gran Formato: Lonas y Banners para sucursales.",
+              "Material POP y Tótems.",
+              "Planas de Periódico de alta complejidad."
+            ],
+            "image": ""
+          },
+          {
+            "name": "2. Ecosistema Digital Masivo (~71 Entregables Mensuales)",
+            "price": 49000,
+            "description": "Maquila de formatos de oferta para distribución electrónica. SLA: 24h hábiles.",
+            "bullets": [
+              "Volantes Digitales (Ofertas Flash).",
+              "Parrilla de Redes (Facebook, Instagram).",
+              "Community Management Básico."
+            ],
+            "image": ""
+          },
+          {
+            "name": "3. Producción Premium y Traffic Management (8 Core)",
+            "price": 70000,
+            "description": "Producción audiovisual y administración técnica de pauta publicitaria. IMPORTANTE: El presupuesto publicitario (Ad Spend) corre a cuenta de Superette.",
+            "bullets": [
+              "4 Notas Corporativas/Informativas.",
+              "2 Videos In-Situ (Reels) de alta retención.",
+              "2 Transmisiones En Vivo.",
+              "Fee de Gestión Estratégica de Pauta."
+            ],
+            "image": ""
+          }
+        ]
+      },
+      {
+        "name": "Servicios Especiales (Fuera de Iguala / Por Proyecto)",
+        "services": [
+          {
+            "name": "Desarrollo y Creación de Campañas Anuales",
+            "price": 0,
+            "description": "Conceptualización de campañas macro (Aniversario, Navidad). Se cotiza de manera independiente según los requerimientos creativos.",
+            "bullets": [
+              "Dirección Creativa y Naming.",
+              "Renders Arquitectónicos 3D para nuevas sucursales.",
+              "Shooting Fotográfico Masivo de perecederos."
+            ],
+            "image": ""
+          }
+        ]
+      }
+    ]
+  },
+  "discountPercent": 0
+}
