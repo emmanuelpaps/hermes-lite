@@ -12,8 +12,8 @@
     "priceSuffix": "MENSUAL (VOLUMEN FIJO)"
   },
   "hero": {
-    "headline": "Transformación Operativa Gráfica",
-    "subheadline": "Absorbiendo la maquinaria industrial de comunicación para 35 sucursales.",
+    "headline": "Ingeniería Gráfica y Operativa",
+    "subheadline": "No somos una agencia creativa tradicional; somos la infraestructura de ingeniería gráfica que absorberá la maquinaria de comunicación de sus 35 sucursales.",
     "backgroundImage": "/assets/superette/Superette_Green_Gradient.png"
   },
   "contact": {
@@ -24,61 +24,61 @@
   "storytelling": {
     "narrative": [
       {
-        "title": "El Desafío del Volumen Operativo",
-        "content": "Al auditar la operación de Superette, identificamos que el volumen de impresos y medios digitales genera cuellos de botella naturales. El verdadero reto es liberar a su equipo interno de esta carga técnica para evitar errores tipográficos y fricciones diarias en la línea de producción gráfica."
+        "title": "El Desafío del Volumen",
+        "content": "Al auditar su operación, identificamos un desafío matemático: procesar más de 190 artes mensuales hace que la creatividad pase a segundo plano frente a la precisión. Sabemos que un error tipográfico en una lona impresa masiva cuesta dinero y genera fricción en piso de venta."
       },
       {
         "title": "La Solución: Célula Dedicada",
-        "content": "No somos una agencia de diseño tradicional; instalaremos una Célula Operativa Dedicada que funcionará como su brazo externo, asumiendo la carga de trabajo equivalente a 6 posiciones de tiempo completo para brindarles total paz mental y precisión matemática."
+        "content": "Proponemos instalar una Célula Operativa Dedicada que funcionará como su brazo externo (equivalente a 6 especialistas de tiempo completo). Nosotros asumimos la carga laboral, los costos de licencias y el estrés operativo, otorgándoles absoluta paz mental."
       }
     ],
     "challenge": "Operar un volumen masivo de más de 197 entregables mensuales sin errores tipográficos ni retrasos en imprenta, garantizando la velocidad que exige el retail de 35 sucursales.",
     "pillars": [
       {
-        "title": "Escuadrón Táctico Dedicado",
-        "description": "Alineamos Dirección de Arte, Traffic Manager y Filtros de Pre-Prensa para asegurar calidad y cero errores en cada lona o anuncio.",
+        "title": "Filtro Técnico Estricto",
+        "description": "Dirección de arte y control de pre-prensa dedicado exclusivamente a asegurar cero errores antes de mandar a imprimir.",
         "image": "/assets/superette/Superette_Green.png"
       },
       {
-        "title": "Plan de Inmersión (Onboarding)",
-        "description": "Arranque impecable: 2 de nuestros especialistas estarán presencialmente en sus instalaciones por 2 jornadas completas para absorber su flujo de trabajo.",
-        "image": "/assets/superette/Superette_Red.png"
+        "title": "Velocidad Garantizada (SLAs)",
+        "description": "Tiempos de respuesta blindados bajo horario hábil. Lonas Express en 24h-36h. Volantes en 24h. Sin retrasos para sus sucursales.",
+        "image": "/assets/superette/Superette_Yellow.png"
       },
       {
-        "title": "Acuerdos de Servicio (SLAs)",
-        "description": "Velocidad garantizada en horario hábil. Lonas Express en 24h-36h. Volantes en 24h. Cero excusas, cero retrasos en piso de venta.",
-        "image": "/assets/superette/Superette_Yellow.png"
+        "title": "Inmersión Presencial",
+        "description": "Nuestro equipo no trabajará a ciegas. Durante el Onboarding, 2 especialistas operarán presencialmente en las oficinas de Superette por 2 jornadas completas.",
+        "image": "/assets/superette/Superette_Red.png"
       }
     ]
   },
   "campaignDeepDive": {
-    "title": "El Ecosistema Comercial",
-    "subtitle": "Ingeniería gráfica diseñada para generar tráfico real.",
+    "title": "Ingeniería Gráfica de Alto Volumen",
+    "subtitle": "Nuestro Flujo de Trabajo Industrial",
     "influencerSection": {
       "image": "/assets/superette/logo.png",
-      "description": "Mientras blindamos la producción industrial de lonas y prensa, dominamos la atención digital. Nuestro ecosistema está diseñado para transformar sus ofertas en un sistema geolocalizado que obliga a la comunidad a visitar la sucursal más cercana."
+      "description": "¿Por qué nuestra célula cambia las reglas del juego? Porque implementamos un embudo industrial. Cada requerimiento entra a un proceso matemático de revisión que evita que una promoción salga al mercado con precios equivocados."
     },
     "timelines": [
       {
-        "title": "Capacidad Instalada de la Célula",
+        "title": "Fases de Transición y Empalme",
         "steps": [
           {
-            "step": "Pre-Prensa y Gran Formato",
-            "description": "Capacidad de hasta 118 artes mensuales. Blindaje total contra errores de impresión en lonas, banners y material POP."
+            "step": "Días 1-5: Auditoría y Absorción",
+            "description": "Auditoría de archivos maestros, levantamiento de requerimientos y absorción del ADN de la marca."
           },
           {
-            "step": "Volantes Digitales",
-            "description": "Hasta 71 entregables digitales enfocados en ofertas flash y promociones tácticas de 24 horas."
+            "step": "Días 6-7: Inmersión Presencial",
+            "description": "2 jornadas completas operando desde el corporativo de Superette para acoplarnos a sus sistemas y comunicación interna."
           },
           {
-            "step": "Producción Premium",
-            "description": "8 Core Assets de relaciones públicas, notas corporativas y Reels de alta calidad."
+            "step": "Día 15: Toma de Control Total",
+            "description": "Liberación oficial de la carga técnica para el equipo interno de Superette y arranque del esquema de 197 entregables."
           }
         ]
       }
     ],
     "budgetTable": [],
-    "impactProjection": "Con nuestra Célula instalada, su equipo interno quedará libre de la carga operativa y técnica, permitiéndoles enfocarse en la toma de decisiones estratégicas para la expansión de la marca."
+    "impactProjection": "Con nuestra Célula instalada, su equipo interno quedará libre de la carga operativa y técnica, permitiéndoles enfocarse en la toma de decisiones estratégicas."
   },
   "packages": {
     "fn1": [],
@@ -120,7 +120,7 @@
           {
             "name": "Producción Premium y Traffic Management",
             "price": 70000,
-            "description": "NOTA: El presupuesto para la pauta publicitaria (Ad Spend) corre a cuenta de Superette.",
+            "description": "NOTA CLARA: El presupuesto para la pauta publicitaria (Ad Spend) corre a cuenta de Superette.",
             "bullets": [
               "Relaciones Públicas: 4 Notas Editoriales.",
               "Producción In-Situ: 2 Reels y 2 Transmisiones En Vivo.",
