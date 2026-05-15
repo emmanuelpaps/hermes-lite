@@ -198,11 +198,11 @@ export default function SuperetteClient() {
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "2rem", marginBottom: "5rem" }}>
           <GlassCard borderTopColor={theme.superetteGreen}>
             <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.4rem" }}>Filtro Técnico Estricto</h3>
-            <p style={{ color: theme.textMuted, lineHeight: 1.6, margin: 0 }}>Dirección de arte y control de pre-prensa dedicado exclusivamente a asegurar cero errores antes de imprimir.</p>
+            <p style={{ color: theme.textMuted, lineHeight: 1.6, margin: 0 }}>Dirección de arte y control de pre-prensa dedicado a ejecutar un riguroso control de calidad antes de mandar a producción.</p>
           </GlassCard>
           <GlassCard borderTopColor={theme.superetteRed}>
-            <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.4rem" }}>Velocidad Garantizada</h3>
-            <p style={{ color: theme.textMuted, lineHeight: 1.6, margin: 0 }}>Tiempos de respuesta blindados (L-V 8a5). Lonas Express en 24h. Volantes en 24h. Cero retrasos.</p>
+            <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.4rem" }}>Velocidad Operativa</h3>
+            <p style={{ color: theme.textMuted, lineHeight: 1.6, margin: 0 }}>Tiempos de respuesta blindados (L-V 8a5). Flujos optimizados para entregas exprés de alto volumen, minimizando tiempos de espera.</p>
           </GlassCard>
           <GlassCard borderTopColor={theme.superetteYellow}>
             <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.4rem" }}>Flujo Anti-Burocracia</h3>
@@ -276,7 +276,7 @@ export default function SuperetteClient() {
             <ul style={{ paddingLeft: "1.2rem", color: theme.textMuted, lineHeight: 1.8, fontSize: "1.1rem" }}>
               <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Alcance (Reach):</strong> Volumen impactado exclusivamente a 3KM de la sucursal.</li>
               <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Costo Por Clic (CPC):</strong> Eficiencia hacia ofertas de fin de semana.</li>
-              <li><strong style={{ color: theme.textMain }}>Engagement Video:</strong> Visualizaciones mayores al 50% en Reels In-Situ.</li>
+              <li><strong style={{ color: theme.textMain }}>Engagement Video:</strong> Optimización constante para maximizar la retención de audiencia en Reels In-Situ.</li>
             </ul>
           </GlassCard>
         </div>
