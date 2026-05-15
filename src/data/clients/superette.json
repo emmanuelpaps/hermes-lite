@@ -2,7 +2,15 @@
   "clientName": "Superette",
   "clientLogo": "/assets/superette/Superette_Logo_White.png",
   "industry": "Retail / Supermercado",
-  "heroText": "Con más de 35 sucursales operando en el ritmo más exigente de retail, entendemos que su mercadotecnia no es diseño tradicional; es una maquinaria industrial de comunicación. Nuestra misión es absorber esta carga para garantizar velocidad y mitigar errores en todos sus formatos.",
+  "heroText": "Transformación Operativa Gráfica. Con más de 35 sucursales operando en el ritmo más exigente de retail, entendemos que su mercadotecnia no es diseño tradicional; es una maquinaria industrial de comunicación. Nuestra misión es instalar una Célula Operativa que absorba esta carga masiva.",
+  "hero": {
+    "backgroundImage": "/assets/superette/Superette_Green_Gradient.png"
+  },
+  "contact": {
+    "phone": "526566575959",
+    "name": "Jesús Zapata",
+    "message": "Hola Jesús, terminé de revisar la propuesta ejecutiva de Superette y estoy listo para avanzar."
+  },
   "theme": {
     "mode": "dark",
     "bgColor": "#0b140e",
@@ -18,28 +26,32 @@
   "storytelling": {
     "narrative": [
       {
-        "title": "El Desafío del Volumen",
-        "content": "Al auditar sus necesidades operativas, identificamos la gestión simultánea de múltiples frentes críticos (Lonas, Prensas, Volantes). Este volumen masivo exige un proceso que evite cuellos de botella y pérdidas por detalles en medios impresos."
+        "title": "1. El Entendimiento (Por Qué)",
+        "content": "Al auditar sus necesidades operativas, identificamos la gestión simultánea de casi 20 frentes de trabajo crítico (Lonas, Prensas, Embudos). Este volumen masivo exige más que creatividad: exige precisión matemática. Cuando la carga supera la capacidad instalada, el riesgo de errores tipográficos en medios impresos aumenta, traduciéndose en pérdidas y fricción."
       },
       {
-        "title": "La Solución: Célula Dedicada",
-        "content": "Frontera Número Uno y Apolograma proponen instalar una Célula de Operación Gráfica (equivalente a 6 especialistas) que funcione como su brazo externo. Asumiremos la carga laboral y la ejecución para darles absoluta paz mental."
+        "title": "2. Nuestra Operación (Cómo)",
+        "content": "No ofrecemos un servicio de diseño tradicional. Instalaremos una Célula de Operación Gráfica (equivalente a 6 especialistas) que funcione como su brazo externo. Alinearemos nuestra capacidad asumiendo la carga laboral, los costos de licencias y la curva de estrés, otorgándoles absoluta paz mental."
+      },
+      {
+        "title": "3. Plan de Empalme (Cuándo)",
+        "content": "Sabemos que la operación no puede detenerse. Ejecutaremos un Plan de Transición Exprés de 15 Días. Para garantizar una inmersión profunda, 2 de nuestros especialistas trabajarán presencialmente en las instalaciones de Superette durante 2 jornadas completas para absorber su ADN y flujos antes de tomar el control."
       }
     ],
     "pillars": [
       {
-        "title": "Filtro de Alta Precisión",
-        "description": "Reducción estricta de errores críticos antes de imprenta. Blindamos su producción gráfica masiva.",
+        "title": "Fuerza de Tarea Dedicada",
+        "description": "Un escuadrón a su disposición: Dirección de Arte, Filtro Técnico de Pre-Prensa, Diseñadores de Adaptación Rápida y Traffic Manager.",
         "image": "/assets/superette/Superette_Green.png"
       },
       {
-        "title": "Tráfico Digital a Piso",
-        "description": "Optimización de campañas y volantes geolocalizados que se traducen en visitas reales a las 35 sucursales.",
+        "title": "Acuerdos de Servicio (SLAs)",
+        "description": "Velocidad garantizada (Horario hábil L-V, 8am-5pm). Lonas Express en 24/36h. Volantes en 24h. Mitigación estricta de errores.",
         "image": "/assets/superette/Superette_Red.png"
       },
       {
-        "title": "Inmersión Presencial (Onboarding)",
-        "description": "Arranque impecable: 2 de nuestros especialistas trabajarán en sus instalaciones por 2 jornadas completas para absorber el ADN y flujo de su empresa.",
+        "title": "Métricas Comerciales",
+        "description": "No medimos por vanidad, medimos por tráfico a piso de venta. Enfocados en bajar el CPC (Costo por Clic) y maximizar el Alcance Local.",
         "image": "/assets/superette/Superette_Yellow.png"
       }
     ]
@@ -54,21 +66,21 @@
           {
             "name": "1. Maquila Gráfica y Pre-Prensa (~118 Artes Mensuales)",
             "price": 116400,
-            "description": "Ejecución técnica in-house para Retail. SLAs garantizados: Lonas Express (24-36h) y Planas de Prensa (48h). *Tiempos válidos en horario hábil L-V 8am-5pm.",
+            "description": "Ejecución técnica in-house para Retail. Blindaje anti-errores impresos.",
             "bullets": [
-              "Gran Formato: Lonas y Banners para sucursales.",
-              "Material POP y Tótems.",
-              "Planas de Periódico de alta complejidad."
+              "Gran Formato: Lonas y Banners para sucursales (54 proy.).",
+              "Material POP: Cenefas y Tótems (36 proy.).",
+              "Prensa Tradicional: Diseño de layouts de alta complejidad."
             ],
             "image": ""
           },
           {
             "name": "2. Ecosistema Digital Masivo (~71 Entregables Mensuales)",
             "price": 49000,
-            "description": "Maquila de formatos de oferta para distribución electrónica. SLA: 24h hábiles.",
+            "description": "Administración y maquila de formatos de oferta para distribución electrónica.",
             "bullets": [
-              "Volantes Digitales (Ofertas Flash).",
-              "Parrilla de Redes (Facebook, Instagram).",
+              "Volantes Digitales y Ofertas Flash (48 proy.).",
+              "Parrilla de Redes Sociales (Facebook, Instagram).",
               "Community Management Básico."
             ],
             "image": ""
@@ -76,9 +88,9 @@
           {
             "name": "3. Producción Premium y Traffic Management (8 Core)",
             "price": 70000,
-            "description": "Producción audiovisual y administración técnica de pauta publicitaria. IMPORTANTE: El presupuesto publicitario (Ad Spend) corre a cuenta de Superette.",
+            "description": "Producción audiovisual in-situ y administración técnica de pauta publicitaria. NOTA: El Ad Spend corre a cuenta de Superette.",
             "bullets": [
-              "4 Notas Corporativas/Informativas.",
+              "4 Notas Corporativas/Informativas PR.",
               "2 Videos In-Situ (Reels) de alta retención.",
               "2 Transmisiones En Vivo.",
               "Fee de Gestión Estratégica de Pauta."
@@ -88,16 +100,16 @@
         ]
       },
       {
-        "name": "Servicios Especiales (Fuera de Iguala / Por Proyecto)",
+        "name": "Menú de Expansión (Fuera de Iguala)",
         "services": [
           {
             "name": "Desarrollo y Creación de Campañas Anuales",
             "price": 0,
-            "description": "Conceptualización de campañas macro (Aniversario, Navidad). Se cotiza de manera independiente según los requerimientos creativos.",
+            "description": "Conceptualización de campañas macro (Aniversario, Navidad). Se cotiza de manera independiente por proyecto.",
             "bullets": [
-              "Dirección Creativa y Naming.",
-              "Renders Arquitectónicos 3D para nuevas sucursales.",
-              "Shooting Fotográfico Masivo de perecederos."
+              "Dirección Creativa y Producción Master.",
+              "Renders Arquitectónicos 3D para tiendas nuevas.",
+              "Shooting Fotográfico Masivo de productos."
             ],
             "image": ""
           }

@@ -1028,7 +1028,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           )}
           
           <motion.a 
-            href={`https://wa.me/526561031571?text=${encodeURIComponent(`Hola Emmanuel, revisé la propuesta de ${data.clientName} y estoy listo para avanzar.`)}`}
+            href={`https://wa.me/${data.contact?.phone || '526561031571'}?text=${encodeURIComponent(data.contact?.message || `Hola, revisé la propuesta de ${data.clientName} y estoy listo para avanzar.`)}`}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.ctaButton}
@@ -1044,7 +1044,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
 
       {/* Sticky CTA */}
       <motion.a 
-        href={`https://wa.me/526561031571?text=${encodeURIComponent(`Hola Emmanuel, revisé la propuesta de ${data.clientName} y estoy listo para avanzar.`)}`}
+        href={`https://wa.me/${data.contact?.phone || '526561031571'}?text=${encodeURIComponent(data.contact?.message || `Hola, revisé la propuesta de ${data.clientName} y estoy listo para avanzar.`)}`}
         target="_blank"
         rel="noopener noreferrer"
         className={styles.stickyCta}
