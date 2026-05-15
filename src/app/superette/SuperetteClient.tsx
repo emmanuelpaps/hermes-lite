@@ -364,11 +364,23 @@ export default function SuperetteClient() {
           <h3 style={{ color: theme.textMain, fontSize: "2rem", marginBottom: "1rem", letterSpacing: "-1px" }}>Proyectos Out of Scope</h3>
           <p style={{ color: theme.textMuted, fontSize: "1.2rem", maxWidth: "700px", margin: "0 auto 3rem", lineHeight: 1.6 }}>Como agencia integral, escalamos su marca cuando estén listos. Cotizados de forma independiente.</p>
           
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "1.5rem", textAlign: "left" }}>
-            {["Renders Arquitectónicos 3D para Sucursales", "Desarrollo de WebApps Corporativas", "Shooting Fotográfico Masivo In-Situ", "Activaciones BTL en Estacionamientos", "Campañas Maestras Anuales (Eje Rector de Marca)", "Digital Signage (Red de Pantallas en Sucursal)"].map((item, i) => (
-              <div key={i} style={{ background: "rgba(255,255,255,0.5)", backdropFilter: "blur(10px)", padding: "1.5rem", borderRadius: "16px", border: `1px solid ${theme.border}`, display: "flex", alignItems: "flex-start", gap: "15px", boxShadow: "0 4px 15px rgba(0,0,0,0.02)" }}>
-                <span style={{ color: theme.superetteGreen, fontSize: "1.5rem", fontWeight: 300 }}>✦</span>
-                <span style={{ color: theme.textMain, fontWeight: 500, fontSize: "1.1rem" }}>{item}</span>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "1.5rem", textAlign: "left" }}>
+            {[
+              { title: "Renders Arquitectónicos 3D", desc: "Visualización fotorrealista para planeación, pre-venta o remodelación de nuevas sucursales." },
+              { title: "Desarrollo de WebApps", desc: "Plataformas a medida para gestión de capital humano, encuestas operativas o intranet corporativa." },
+              { title: "Shooting Fotográfico In-Situ", desc: "Producción industrial fotográfica de alto volumen para perecederos y panadería con dirección de arte." },
+              { title: "Activaciones BTL", desc: "Experiencias físicas en estacionamientos para traccionar volumen masivo durante aperturas o aniversarios." },
+              { title: "Campañas Maestras Anuales", desc: "Diseño del concepto rector 'Paraguas' que dictará el tono publicitario de la marca por los próximos 12 meses." },
+              { title: "Sistemas Digital Signage", desc: "Control y administración remota de la red de pantallas en piso de venta y línea de cajas." }
+            ].map((item, i) => (
+              <div key={i} style={{ background: "rgba(255,255,255,0.5)", backdropFilter: "blur(10px)", padding: "1.8rem", borderRadius: "16px", border: `1px solid ${theme.border}`, display: "flex", flexDirection: "column", gap: "10px", boxShadow: "0 4px 15px rgba(0,0,0,0.02)" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                  <span style={{ color: theme.superetteGreen, fontSize: "1.5rem", fontWeight: 300, lineHeight: 1 }}>✦</span>
+                  <span style={{ color: theme.textMain, fontWeight: 700, fontSize: "1.1rem" }}>{item.title}</span>
+                </div>
+                <p style={{ margin: 0, paddingLeft: "34px", color: theme.textMuted, fontSize: "0.95rem", lineHeight: 1.5 }}>
+                  {item.desc}
+                </p>
               </div>
             ))}
           </div>
