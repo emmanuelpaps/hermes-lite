@@ -371,7 +371,9 @@ export default function SuperetteClient() {
               { title: "Shooting Fotográfico In-Situ", desc: "Producción industrial fotográfica de alto volumen para perecederos y panadería con dirección de arte." },
               { title: "Activaciones BTL", desc: "Experiencias físicas en estacionamientos para traccionar volumen masivo durante aperturas o aniversarios." },
               { title: "Campañas Maestras Anuales", desc: "Diseño del concepto rector 'Paraguas' que dictará el tono publicitario de la marca por los próximos 12 meses." },
-              { title: "Sistemas Digital Signage", desc: "Control y administración remota de la red de pantallas en piso de venta y línea de cajas." }
+              { title: "Sistemas Digital Signage", desc: "Control y administración remota de la red de pantallas en piso de venta y línea de cajas." },
+              { title: "Recorridos Virtuales 3D", desc: "Experiencias interactivas e inmersivas para recorrer digitalmente las sucursales en fase de planeación." },
+              { title: "Integración de Agentes IA", desc: "Automatización de flujos operativos internos y bases de datos usando inteligencia artificial a medida." }
             ].map((item, i) => (
               <div key={i} style={{ background: "rgba(255,255,255,0.5)", backdropFilter: "blur(10px)", padding: "1.8rem", borderRadius: "16px", border: `1px solid ${theme.border}`, display: "flex", flexDirection: "column", gap: "10px", boxShadow: "0 4px 15px rgba(0,0,0,0.02)" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
