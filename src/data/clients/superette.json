@@ -1,8 +1,11 @@
 {
   "clientName": "Superette",
-  "clientLogo": "/assets/superette/logo.png",
+  "clientLogo": "/assets/superette/Superette_Logo_White.png",
   "industry": "Retail / Supermercado",
-  "heroText": "En el retail, la lentitud cuesta ventas. Actuamos como la extensión táctica de Superette: absorbemos la complejidad operativa de la marca para garantizar que cada promoción, lona y oferta llegue a tiempo, sin errores, y genere tráfico real en las 35 sucursales.",
+  "heroText": "Transformación Operativa Gráfica: Nuestra misión es absorber la maquinaria industrial de comunicación de sus 35 sucursales, garantizando velocidad y cero errores.",
+  "hero": {
+    "backgroundImage": "/assets/superette/Superette_Green_Gradient.png"
+  },
   "contact": {
     "phone": "526566575959",
     "name": "Jesús Zapata",
@@ -10,42 +13,42 @@
   },
   "theme": {
     "mode": "dark",
-    "bgColor": "#0f0f0f",
-    "primaryColor": "#e63900",
-    "primary": "#cc2900",
+    "bgColor": "#0b140e",
+    "primaryColor": "#da291c",
+    "primary": "#b52217",
     "fontHeading": "'PaperTigerSerif', sans-serif",
-    "fontBody": "'PaperTigerSans', sans-serif",
-    "textGradient": "linear-gradient(to right, #ffffff, #ff6600)",
-    "surfaceGlass": "rgba(20, 20, 20, 0.6)",
-    "glassBorder": "rgba(230, 57, 0, 0.25)",
+    "fontBody": "'Inter', sans-serif",
+    "textGradient": "linear-gradient(to right, #ffffff, #a3e635)",
+    "surfaceGlass": "rgba(10, 20, 14, 0.7)",
+    "glassBorder": "rgba(218, 41, 28, 0.3)",
     "clientLogoRaw": true
   },
   "storytelling": {
     "narrative": [
       {
-        "title": "El Cuello de Botella Operativo",
-        "content": "Superette es un gigante histórico, pero operar un volumen de 150+ artes impresos al mes es brutal. El verdadero reto es liberar a su equipo interno de esta carga técnica (Prensa, POP, Gran Formato) para evitar costosos retrasos en imprenta."
+        "title": "El Desafío Operativo",
+        "content": "Al auditar la operación masiva de Superette, identificamos que el volumen de impresos y medios digitales genera cuellos de botella naturales. El reto es liberar a su equipo de esta carga para evitar errores y fricciones diarias."
       },
       {
-        "title": "La Batalla por el Tráfico",
-        "content": "Mientras blindamos la producción industrial, debemos dominar la atención digital. El objetivo es claro: atraer a nuevas generaciones y convertir las ofertas en tráfico real hacia las 35 sucursales, sin sacrificar el margen de ganancia."
+        "title": "La Solución: Célula Dedicada",
+        "content": "Instalaremos una Célula Operativa Dedicada que funcionará como su brazo externo, asumiendo la carga de trabajo equivalente a 6 posiciones de tiempo completo para brindarles total paz mental."
       }
     ],
     "pillars": [
       {
-        "title": "Ejecución a Escala Industrial",
-        "description": "Blindamos su operación. Un escuadrón de pre-prensa y diseño dedicado a procesar el 100% de la 'Biblia Mensual'. Cero retrasos en imprenta, cero cuellos de botella.",
-        "image": "/assets/superette/drive-download-20260514T165535Z-3-001/Rey Asador logos master-02.png"
+        "title": "Escuadrón Táctico",
+        "description": "Alineamos Dirección de Arte, Traffic Manager y Filtros de Pre-Prensa para asegurar calidad y cero errores.",
+        "image": "/assets/superette/Superette_Green.png"
       },
       {
-        "title": "Máquina de Tráfico Digital",
-        "description": "No hacemos 'posteos', generamos visitas. Transformamos sus ofertas en un ecosistema de volantes digitales geolocalizados que obligan a la comunidad a ir al piso de venta.",
-        "image": "/assets/superette/drive-download-20260514T165535Z-3-001/Rey Asador logos master-03.png"
+        "title": "Onboarding de Inmersión",
+        "description": "Arranque impecable: 2 de nuestros especialistas estarán presencialmente en sus instalaciones por 2 jornadas completas para integrarse al flujo de trabajo.",
+        "image": "/assets/superette/Superette_Red.png"
       },
       {
-        "title": "Autoridad de Marca y Rentabilidad",
-        "description": "Cubrimos el piso de venta con producciones premium (Reels/Lives) y aplicamos ingeniería de medios a su pauta publicitaria para exprimir el ROI de cada peso invertido.",
-        "image": "/assets/superette/drive-download-20260514T165535Z-3-001/Rey Asador logos master-04.png"
+        "title": "Tráfico y Retención",
+        "description": "Un ecosistema digital diseñado estratégicamente para llevar tráfico físico comprobable directo a piso de venta.",
+        "image": "/assets/superette/Superette_Yellow.png"
       }
     ]
   },
@@ -54,53 +57,66 @@
     "apolograma": [],
     "blocks": [
       {
-        "name": "Nivel de Integración 1: Gestión Integral de Diseño Operativo",
+        "name": "Nivel de Integración: Gestión Integral de Diseño Operativo",
         "services": [
           {
-            "name": "Producción y Adaptación Gráfica (Impresos y BTL)",
+            "name": "1. Maquila Gráfica y Pre-Prensa (~118 Artes)",
             "price": 116400,
-            "description": "Ejecución técnica y producción mensual basada en la entrega programada de los requerimientos de diseño tradicional de la marca.",
+            "description": "Acuerdo de Servicio (SLA): Lonas Express en 24h-36h. Entregas garantizadas de Lunes a Viernes de 8:00 AM a 5:00 PM.",
             "bullets": [
-              "Gran Formato: Banners para sucursales, carteleras y tótems.",
-              "Material POP: Cenefas, stoppers, refricalcas y displays.",
-              "Prensa Tradicional: Diseño de layouts de alta complejidad para medios impresos locales.",
-              "Pantallas Digitales: Adaptaciones para tótems en plazas comerciales."
+              "Gran Formato: Lonas, Banners, Carteleras.",
+              "Material POP: Cenefas, Stoppers, Tótems.",
+              "Prensa: Filtro estricto para layouts impresos."
             ],
             "image": "/assets/superette/drive-download-20260514T165535Z-3-001/Rey Asador logos master-05.png"
           }
         ]
       },
       {
-        "name": "Nivel de Integración 2: Gestión Operativa y Ecosistema Digital",
+        "name": "Nivel de Integración: Ecosistema Digital Masivo",
         "services": [
           {
-            "name": "Administración de Redes Sociales y Contenido Digital",
+            "name": "2. Ofertas Flash y Redes Sociales (~71 Entregables)",
             "price": 49000,
-            "description": "Infraestructura digital para la gestión de comunidades y el despliegue de ofertas en formatos modernos.",
+            "description": "Acuerdo de Servicio (SLA): Volantes Digitales y Banners listos en 24h hábiles.",
             "bullets": [
-              "Volantes Digitales: Adaptaciones de formatos de oferta para distribución electrónica.",
-              "Parrilla de Redes Sociales: Producción de contenido para Facebook, Instagram y TikTok.",
-              "Community Management: Gestión y moderación activa de la comunidad digital.",
-              "Banners Web: Adaptaciones de campañas para medios de comunicación locales."
+              "Volantes Digitales geolocalizados.",
+              "Parrilla de Contenido para Redes Sociales.",
+              "Moderación de comunidad básica."
             ],
             "image": "/assets/superette/drive-download-20260514T165535Z-3-001/Rey Asador logos master-06.png"
           }
         ]
       },
       {
-        "name": "Nivel de Integración 3: Dirección Estratégica Multicanal (Full Service)",
+        "name": "Nivel de Integración: Dirección Estratégica Multicanal",
         "services": [
           {
-            "name": "Relaciones Públicas, Producción Audiovisual y Gestión de Medios",
+            "name": "3. Producción Premium y Gestión (8 Entregables Core)",
             "price": 70000,
-            "description": "Servicio integral de cobertura de marca y administración técnica de la pauta publicitaria.",
+            "description": "NOTA IMPORTANTE: El presupuesto para la pauta publicitaria (Ad Spend) corre a cuenta de Superette.",
             "bullets": [
-              "Redacción Editorial: Publicación de 4 notas corporativas/informativas al mes.",
-              "Producción Audiovisual: Realización de 2 videos formato Reel de alta calidad en sucursales.",
-              "Transmisiones En Vivo: Producción de 2 eventos de transmisión directa para dinámicas de marca.",
-              "Traffic Management: Planeación, administración y optimización técnica de campañas en plataformas digitales."
+              "Relaciones Públicas: 4 Notas Editoriales.",
+              "Producción In-Situ: 2 Reels y 2 Transmisiones En Vivo.",
+              "Administración Estratégica de Campañas."
             ],
             "image": "/assets/superette/drive-download-20260514T165535Z-3-001/Rey Asador logos master-07.png"
+          }
+        ]
+      },
+      {
+        "name": "Servicios Especiales (Bajo Cotización)",
+        "services": [
+          {
+            "name": "Desarrollo y Creación de Campañas Anuales",
+            "price": 0,
+            "description": "Conceptos macro para temporalidades fuertes (Navidad, Aniversarios). Se cotiza de forma independiente.",
+            "bullets": [
+              "Dirección Creativa y Naming.",
+              "Renders Arquitectónicos 3D.",
+              "Shooting Fotográfico Masivo."
+            ],
+            "image": "/assets/superette/drive-download-20260514T165535Z-3-001/Rey Asador logos master-08.png"
           }
         ]
       }
