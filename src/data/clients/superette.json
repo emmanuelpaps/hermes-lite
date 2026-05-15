@@ -1,126 +1,155 @@
 {
   "clientName": "Superette",
-  "clientLogo": "/assets/superette/Superette_Logo_White.png",
-  "industry": "Retail / Supermercado",
-  "heroText": "Transformación Operativa Gráfica: Nuestra misión es absorber la maquinaria industrial de comunicación de sus 35 sucursales, garantizando velocidad y cero errores.",
+  "themeTemplate": "apple",
+  "theme": {
+    "mode": "light",
+    "primary": "#da291c",
+    "clientLogoRaw": true,
+    "fontHeading": "'PaperTigerSerif', sans-serif",
+    "fontBody": "'Inter', sans-serif"
+  },
+  "config": {
+    "priceSuffix": "MENSUAL (VOLUMEN FIJO)"
+  },
   "hero": {
+    "headline": "Transformación Operativa Gráfica",
+    "subheadline": "Absorbiendo la maquinaria industrial de comunicación para 35 sucursales.",
     "backgroundImage": "/assets/superette/Superette_Green_Gradient.png"
   },
   "contact": {
     "phone": "526566575959",
     "name": "Jesús Zapata",
-    "message": "Hola Jesús, revisé la propuesta de Superette y estoy listo para avanzar."
-  },
-  "theme": {
-    "mode": "dark",
-    "bgColor": "#0b140e",
-    "primaryColor": "#da291c",
-    "primary": "#b52217",
-    "fontHeading": "'PaperTigerSerif', sans-serif",
-    "fontBody": "'Inter', sans-serif",
-    "textGradient": "linear-gradient(to right, #ffffff, #a3e635)",
-    "surfaceGlass": "rgba(10, 20, 14, 0.7)",
-    "glassBorder": "rgba(218, 41, 28, 0.3)",
-    "clientLogoRaw": true
+    "message": "Hola Jesús, revisé la propuesta operativa de Superette y estoy listo para avanzar."
   },
   "storytelling": {
     "narrative": [
       {
-        "title": "El Desafío Operativo",
-        "content": "Al auditar la operación masiva de Superette, identificamos que el volumen de impresos y medios digitales genera cuellos de botella naturales. El reto es liberar a su equipo de esta carga para evitar errores y fricciones diarias."
+        "title": "El Desafío del Volumen Operativo",
+        "content": "Al auditar la operación de Superette, identificamos que el volumen de impresos y medios digitales genera cuellos de botella naturales. El verdadero reto es liberar a su equipo interno de esta carga técnica para evitar errores tipográficos y fricciones diarias en la línea de producción gráfica."
       },
       {
         "title": "La Solución: Célula Dedicada",
-        "content": "Instalaremos una Célula Operativa Dedicada que funcionará como su brazo externo, asumiendo la carga de trabajo equivalente a 6 posiciones de tiempo completo para brindarles total paz mental."
+        "content": "No somos una agencia de diseño tradicional; instalaremos una Célula Operativa Dedicada que funcionará como su brazo externo, asumiendo la carga de trabajo equivalente a 6 posiciones de tiempo completo para brindarles total paz mental y precisión matemática."
       }
     ],
+    "challenge": "Operar un volumen masivo de más de 197 entregables mensuales sin errores tipográficos ni retrasos en imprenta, garantizando la velocidad que exige el retail de 35 sucursales.",
     "pillars": [
       {
-        "title": "Escuadrón Táctico",
-        "description": "Alineamos Dirección de Arte, Traffic Manager y Filtros de Pre-Prensa para asegurar calidad y cero errores.",
+        "title": "Escuadrón Táctico Dedicado",
+        "description": "Alineamos Dirección de Arte, Traffic Manager y Filtros de Pre-Prensa para asegurar calidad y cero errores en cada lona o anuncio.",
         "image": "/assets/superette/Superette_Green.png"
       },
       {
-        "title": "Onboarding de Inmersión",
-        "description": "Arranque impecable: 2 de nuestros especialistas estarán presencialmente en sus instalaciones por 2 jornadas completas para integrarse al flujo de trabajo.",
+        "title": "Plan de Inmersión (Onboarding)",
+        "description": "Arranque impecable: 2 de nuestros especialistas estarán presencialmente en sus instalaciones por 2 jornadas completas para absorber su flujo de trabajo.",
         "image": "/assets/superette/Superette_Red.png"
       },
       {
-        "title": "Tráfico y Retención",
-        "description": "Un ecosistema digital diseñado estratégicamente para llevar tráfico físico comprobable directo a piso de venta.",
+        "title": "Acuerdos de Servicio (SLAs)",
+        "description": "Velocidad garantizada en horario hábil. Lonas Express en 24h-36h. Volantes en 24h. Cero excusas, cero retrasos en piso de venta.",
         "image": "/assets/superette/Superette_Yellow.png"
       }
     ]
+  },
+  "campaignDeepDive": {
+    "title": "El Ecosistema Comercial",
+    "subtitle": "Ingeniería gráfica diseñada para generar tráfico real.",
+    "influencerSection": {
+      "image": "/assets/superette/logo.png",
+      "description": "Mientras blindamos la producción industrial de lonas y prensa, dominamos la atención digital. Nuestro ecosistema está diseñado para transformar sus ofertas en un sistema geolocalizado que obliga a la comunidad a visitar la sucursal más cercana."
+    },
+    "timelines": [
+      {
+        "title": "Capacidad Instalada de la Célula",
+        "steps": [
+          {
+            "step": "Pre-Prensa y Gran Formato",
+            "description": "Capacidad de hasta 118 artes mensuales. Blindaje total contra errores de impresión en lonas, banners y material POP."
+          },
+          {
+            "step": "Volantes Digitales",
+            "description": "Hasta 71 entregables digitales enfocados en ofertas flash y promociones tácticas de 24 horas."
+          },
+          {
+            "step": "Producción Premium",
+            "description": "8 Core Assets de relaciones públicas, notas corporativas y Reels de alta calidad."
+          }
+        ]
+      }
+    ],
+    "budgetTable": [],
+    "impactProjection": "Con nuestra Célula instalada, su equipo interno quedará libre de la carga operativa y técnica, permitiéndoles enfocarse en la toma de decisiones estratégicas para la expansión de la marca."
   },
   "packages": {
     "fn1": [],
     "apolograma": [],
     "blocks": [
       {
-        "name": "Nivel de Integración: Gestión Integral de Diseño Operativo",
+        "name": "Fase 1: Maquila Gráfica y Pre-Prensa",
         "services": [
           {
-            "name": "1. Maquila Gráfica y Pre-Prensa (~118 Artes)",
+            "name": "Diseño Tradicional (Aprox. 118 Artes)",
             "price": 116400,
-            "description": "Acuerdo de Servicio (SLA): Lonas Express en 24h-36h. Entregas garantizadas de Lunes a Viernes de 8:00 AM a 5:00 PM.",
+            "description": "Lonas Express (24-36h). Planas de Periódico. Carteleras y Tótems. Horario de recepción: L-V 8:00 AM a 5:00 PM.",
             "bullets": [
-              "Gran Formato: Lonas, Banners, Carteleras.",
-              "Material POP: Cenefas, Stoppers, Tótems.",
-              "Prensa: Filtro estricto para layouts impresos."
-            ],
-            "image": "/assets/superette/drive-download-20260514T165535Z-3-001/Rey Asador logos master-05.png"
+              "Gran Formato: Lonas, Banners para sucursales (54 proy.).",
+              "Material POP: Cenefas, Stoppers, Refricalcas (36 proy.).",
+              "Prensa Tradicional: Diseño de layouts de alta complejidad."
+            ]
           }
         ]
       },
       {
-        "name": "Nivel de Integración: Ecosistema Digital Masivo",
+        "name": "Fase 2: Ecosistema Digital Masivo",
         "services": [
           {
-            "name": "2. Ofertas Flash y Redes Sociales (~71 Entregables)",
+            "name": "Ofertas Flash y Redes Sociales (Aprox. 71 Entregables)",
             "price": 49000,
-            "description": "Acuerdo de Servicio (SLA): Volantes Digitales y Banners listos en 24h hábiles.",
+            "description": "Volantes y banners listos en 24h hábiles. Distribución electrónica táctica.",
             "bullets": [
-              "Volantes Digitales geolocalizados.",
-              "Parrilla de Contenido para Redes Sociales.",
-              "Moderación de comunidad básica."
-            ],
-            "image": "/assets/superette/drive-download-20260514T165535Z-3-001/Rey Asador logos master-06.png"
+              "Volantes Digitales geolocalizados (48 proy.).",
+              "Parrilla de Redes Sociales (Facebook, Instagram).",
+              "Community Management Básico."
+            ]
           }
         ]
       },
       {
-        "name": "Nivel de Integración: Dirección Estratégica Multicanal",
+        "name": "Fase 3: Dirección Estratégica Multicanal",
         "services": [
           {
-            "name": "3. Producción Premium y Gestión (8 Entregables Core)",
+            "name": "Producción Premium y Traffic Management",
             "price": 70000,
-            "description": "NOTA IMPORTANTE: El presupuesto para la pauta publicitaria (Ad Spend) corre a cuenta de Superette.",
+            "description": "NOTA: El presupuesto para la pauta publicitaria (Ad Spend) corre a cuenta de Superette.",
             "bullets": [
               "Relaciones Públicas: 4 Notas Editoriales.",
               "Producción In-Situ: 2 Reels y 2 Transmisiones En Vivo.",
-              "Administración Estratégica de Campañas."
-            ],
-            "image": "/assets/superette/drive-download-20260514T165535Z-3-001/Rey Asador logos master-07.png"
+              "Administración Estratégica de Campañas (Traffic Management)."
+            ]
           }
         ]
       },
       {
-        "name": "Servicios Especiales (Bajo Cotización)",
+        "name": "Servicios Especiales (Fuera de Iguala)",
         "services": [
           {
             "name": "Desarrollo y Creación de Campañas Anuales",
             "price": 0,
-            "description": "Conceptos macro para temporalidades fuertes (Navidad, Aniversarios). Se cotiza de forma independiente.",
+            "description": "Bajo cotización independiente.",
             "bullets": [
-              "Dirección Creativa y Naming.",
-              "Renders Arquitectónicos 3D.",
-              "Shooting Fotográfico Masivo."
-            ],
-            "image": "/assets/superette/drive-download-20260514T165535Z-3-001/Rey Asador logos master-08.png"
+              "Dirección Creativa y Producción Master para Aniversario/Navidad.",
+              "Renders Arquitectónicos 3D para nuevas sucursales.",
+              "Shooting Fotográfico Masivo de productos perecederos."
+            ]
           }
         ]
       }
     ]
   },
-  "discountPercent": 0
+  "features": {
+    "showEcosystem": true,
+    "showAudiences": true,
+    "showPricing": true,
+    "exclusivePackages": true
+  }
 }
