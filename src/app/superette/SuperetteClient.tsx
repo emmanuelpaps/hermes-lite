@@ -272,12 +272,12 @@ export default function SuperetteClient() {
           </GlassCard>
 
           <GlassCard borderTopColor={theme.superetteRed}>
-            <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.8rem" }}>Protección Anti-Vanidad</h3>
-            <p style={{ color: theme.textMuted, marginBottom: "2rem", fontSize: "1.1rem" }}>Métricas duros (KPIs) para evaluar la pauta:</p>
+            <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.8rem" }}>Filosofía de Medición</h3>
+            <p style={{ color: theme.textMuted, marginBottom: "2rem", fontSize: "1.1rem" }}>Monitoreo de indicadores clave (Métricas Guía) para la toma de decisiones:</p>
             <ul style={{ paddingLeft: "1.2rem", color: theme.textMuted, lineHeight: 1.8, fontSize: "1.1rem" }}>
-              <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Alcance (Reach):</strong> Volumen impactado exclusivamente a 3KM de la sucursal.</li>
-              <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Costo Por Clic (CPC):</strong> Eficiencia hacia ofertas de fin de semana.</li>
-              <li><strong style={{ color: theme.textMain }}>Engagement Video:</strong> Optimización constante para maximizar la retención de audiencia en Reels In-Situ.</li>
+              <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Alcance (Reach):</strong> Priorización de pauta geolocalizada en los radios más relevantes para cada sucursal.</li>
+              <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Costo Por Clic (CPC):</strong> Monitoreo continuo del costo de tráfico para iterar y mejorar las ofertas de fin de semana.</li>
+              <li><strong style={{ color: theme.textMain }}>Engagement Video:</strong> Análisis de retención en Reels para entender qué contenido conecta mejor con la audiencia local.</li>
             </ul>
           </GlassCard>
         </div>
