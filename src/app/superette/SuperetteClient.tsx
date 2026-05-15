@@ -152,31 +152,42 @@ export default function SuperetteClient() {
             </div>
 
             {/* GRÁFICA DE BARRAS ANIMADA */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} style={{ height: "300px", display: "flex", alignItems: "flex-end", gap: "1rem", borderBottom: `2px solid ${theme.textMuted}`, paddingBottom: "1rem", position: "relative" }}>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} style={{ display: "flex", flexDirection: "column", gap: "0.5rem", position: "relative" }}>
               
-              <div style={{ position: "absolute", top: 0, left: 0, color: theme.textMuted, fontSize: "0.9rem", fontWeight: 600 }}>Volumen de Producción (Artes / Mes)</div>
+              <div style={{ color: theme.textMuted, fontSize: "0.9rem", fontWeight: 600, marginBottom: "1rem" }}>Volumen de Producción (Artes / Mes)</div>
               
-              {/* Barra 1 */}
-              <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
-                <motion.div variants={{ hidden: { height: 0 }, visible: { height: "30px", transition: { duration: 1, ease: "easeOut" } } }} style={{ width: "100%", background: "rgba(10, 130, 68, 0.2)", borderRadius: "8px 8px 0 0" }} />
-                <span style={{ fontSize: "0.85rem", color: theme.textMuted, textAlign: "center", fontWeight: 600 }}>Marca<br/>Promedio</span>
-                <span style={{ fontWeight: 800 }}>15</span>
+              {/* Contenedor de Barras */}
+              <div style={{ height: "250px", display: "flex", alignItems: "flex-end", gap: "1rem", borderBottom: `2px solid ${theme.textMuted}` }}>
+                {/* Barra 1 */}
+                <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
+                  <motion.div variants={{ hidden: { height: 0 }, visible: { height: "30px", transition: { duration: 1, ease: "easeOut" } } }} style={{ width: "100%", background: "rgba(10, 130, 68, 0.2)", borderRadius: "8px 8px 0 0" }} />
+                </div>
+                {/* Barra 2 */}
+                <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
+                  <motion.div variants={{ hidden: { height: 0 }, visible: { height: "90px", transition: { duration: 1, delay: 0.2, ease: "easeOut" } } }} style={{ width: "100%", background: "rgba(250, 204, 21, 0.4)", borderRadius: "8px 8px 0 0" }} />
+                </div>
+                {/* Barra 3 (Superette) */}
+                <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
+                  <motion.div variants={{ hidden: { height: 0 }, visible: { height: "250px", transition: { duration: 1.2, delay: 0.4, type: "spring" } } }} style={{ width: "100%", background: theme.superetteGreen, borderRadius: "8px 8px 0 0", position: "relative", boxShadow: "0 0 20px rgba(10,130,68,0.4)" }}>
+                    <motion.div animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 2, repeat: Infinity }} style={{ position: "absolute", top: 0, left: 0, right: 0, height: "100%", background: "linear-gradient(to bottom, rgba(255,255,255,0.2), transparent)", borderRadius: "8px 8px 0 0" }} />
+                  </motion.div>
+                </div>
               </div>
 
-              {/* Barra 2 */}
-              <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
-                <motion.div variants={{ hidden: { height: 0 }, visible: { height: "90px", transition: { duration: 1, delay: 0.2, ease: "easeOut" } } }} style={{ width: "100%", background: "rgba(250, 204, 21, 0.4)", borderRadius: "8px 8px 0 0" }} />
-                <span style={{ fontSize: "0.85rem", color: theme.textMuted, textAlign: "center", fontWeight: 600 }}>Campaña<br/>Normal</span>
-                <span style={{ fontWeight: 800 }}>45</span>
-              </div>
-
-              {/* Barra 3 (Superette) */}
-              <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
-                <motion.div variants={{ hidden: { height: 0 }, visible: { height: "250px", transition: { duration: 1.2, delay: 0.4, type: "spring" } } }} style={{ width: "100%", background: theme.superetteGreen, borderRadius: "8px 8px 0 0", position: "relative", boxShadow: "0 0 20px rgba(10,130,68,0.4)" }}>
-                  <motion.div animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 2, repeat: Infinity }} style={{ position: "absolute", top: 0, left: 0, right: 0, height: "100%", background: "linear-gradient(to bottom, rgba(255,255,255,0.2), transparent)", borderRadius: "8px 8px 0 0" }} />
-                </motion.div>
-                <span style={{ fontSize: "0.85rem", color: theme.superetteGreen, textAlign: "center", fontWeight: 800 }}>Ritmo<br/>Superette</span>
-                <span style={{ fontWeight: 900, color: theme.superetteGreen, fontSize: "1.2rem" }}>197+</span>
+              {/* Contenedor de Etiquetas Perfectamente Alineadas */}
+              <div style={{ display: "flex", gap: "1rem", marginTop: "0.5rem" }}>
+                <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: "5px" }}>
+                  <span style={{ fontSize: "0.85rem", color: theme.textMuted, textAlign: "center", fontWeight: 600 }}>Marca<br/>Promedio</span>
+                  <span style={{ fontWeight: 800, color: theme.textMain }}>15</span>
+                </div>
+                <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: "5px" }}>
+                  <span style={{ fontSize: "0.85rem", color: theme.textMuted, textAlign: "center", fontWeight: 600 }}>Campaña<br/>Normal</span>
+                  <span style={{ fontWeight: 800, color: theme.textMain }}>45</span>
+                </div>
+                <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: "5px" }}>
+                  <span style={{ fontSize: "0.85rem", color: theme.superetteGreen, textAlign: "center", fontWeight: 800 }}>Ritmo<br/>Superette</span>
+                  <span style={{ fontWeight: 900, color: theme.superetteGreen, fontSize: "1.2rem" }}>197+</span>
+                </div>
               </div>
 
             </motion.div>
@@ -230,17 +241,17 @@ export default function SuperetteClient() {
 
             {/* GRÁFICA DE EMBUDO ANIMADA */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "5px" }}>
-              <motion.div variants={{ hidden: { opacity: 0, width: "0%" }, visible: { opacity: 1, width: "100%", transition: { duration: 0.8 } } }} style={{ height: "100px", background: theme.superetteGreen, borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 800, fontSize: "1.2rem", boxShadow: "0 10px 20px rgba(10,130,68,0.2)" }}>
+              <motion.div variants={{ hidden: { opacity: 0, width: "0%" }, visible: { opacity: 1, width: "100%", transition: { duration: 0.8 } } }} style={{ height: "100px", background: theme.superetteGreen, borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", color: "#fff", fontWeight: 800, fontSize: "1.2rem", boxShadow: "0 10px 20px rgba(10,130,68,0.2)", padding: "0 1rem" }}>
                 TODO JUÁREZ
               </motion.div>
               <div style={{ width: 0, height: 0, borderLeft: "20px solid transparent", borderRight: "20px solid transparent", borderTop: "20px solid " + theme.superetteGreen }} />
               
-              <motion.div variants={{ hidden: { opacity: 0, width: "0%" }, visible: { opacity: 1, width: "75%", transition: { duration: 0.8, delay: 0.3 } } }} style={{ height: "90px", background: theme.superetteYellow, borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", color: "#b45309", fontWeight: 800, fontSize: "1.1rem", boxShadow: "0 10px 20px rgba(250,204,21,0.2)" }}>
+              <motion.div variants={{ hidden: { opacity: 0, width: "0%" }, visible: { opacity: 1, width: "75%", transition: { duration: 0.8, delay: 0.3 } } }} style={{ height: "90px", background: theme.superetteYellow, borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", color: "#b45309", fontWeight: 800, fontSize: "1.1rem", boxShadow: "0 10px 20px rgba(250,204,21,0.2)", padding: "0 1rem" }}>
                 RETARGETING
               </motion.div>
               <div style={{ width: 0, height: 0, borderLeft: "20px solid transparent", borderRight: "20px solid transparent", borderTop: "20px solid " + theme.superetteYellow }} />
 
-              <motion.div variants={{ hidden: { opacity: 0, width: "0%" }, visible: { opacity: 1, width: "50%", transition: { duration: 0.8, delay: 0.6 } } }} style={{ height: "80px", background: theme.superetteRed, borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 800, fontSize: "1.1rem", boxShadow: "0 10px 20px rgba(218,41,28,0.2)" }}>
+              <motion.div variants={{ hidden: { opacity: 0, width: "0%" }, visible: { opacity: 1, width: "50%", transition: { duration: 0.8, delay: 0.6 } } }} style={{ height: "80px", background: theme.superetteRed, borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", color: "#fff", fontWeight: 800, fontSize: "1.1rem", boxShadow: "0 10px 20px rgba(218,41,28,0.2)", padding: "0 1rem", lineHeight: 1.2 }}>
                 VISITA A SUCURSAL
               </motion.div>
             </motion.div>
