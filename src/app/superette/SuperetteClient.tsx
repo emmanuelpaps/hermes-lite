@@ -84,9 +84,9 @@ export default function SuperetteClient() {
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
           {/* Usamos el logo default de FN1 asumiendo que existe en public/assets/ */}
-          <img src="/assets/fn1-logo.png" alt="Frontera Número Uno" style={{ height: isScrolled ? "25px" : "30px", transition: "height 0.3s ease", filter: "brightness(0)" }} />
+          <img src="/assets/fn1-logo-white.png" alt="Frontera Número Uno" style={{ height: isScrolled ? "25px" : "30px", transition: "height 0.3s ease", filter: "brightness(0)" }} />
           <div style={{ height: "20px", width: "1px", background: "rgba(0,0,0,0.2)" }} />
-          <img src="/assets/apolograma.png" alt="Apolograma" style={{ height: isScrolled ? "18px" : "22px", transition: "height 0.3s ease", filter: "brightness(0)" }} />
+          <img src="/assets/apolograma-logo.png" alt="Apolograma" style={{ height: isScrolled ? "18px" : "22px", transition: "height 0.3s ease", filter: "brightness(0)" }} />
         </div>
         <div style={{ fontSize: "0.85rem", fontWeight: 600, letterSpacing: "1px", textTransform: "uppercase", color: theme.textMuted }}>
           Propuesta Confidencial
@@ -345,9 +345,9 @@ export default function SuperetteClient() {
       <footer style={{ background: theme.textMain, color: "rgba(255,255,255,0.6)", padding: "4rem 2rem", textAlign: "center", position: "relative", zIndex: 10, borderTop: "1px solid rgba(255,255,255,0.1)" }}>
         <div style={{ maxWidth: "1000px", margin: "0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: "2rem" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "1.5rem", opacity: 0.5 }}>
-            <img src="/assets/fn1-logo.png" alt="Frontera Número Uno" style={{ height: "30px", filter: "brightness(0) invert(1)" }} />
+            <img src="/assets/fn1-logo-white.png" alt="Frontera Número Uno" style={{ height: "30px", filter: "brightness(0) invert(1)" }} />
             <div style={{ height: "24px", width: "1px", background: "rgba(255,255,255,0.3)" }} />
-            <img src="/assets/apolograma.png" alt="Apolograma" style={{ height: "22px", filter: "brightness(0) invert(1)" }} />
+            <img src="/assets/apolograma-logo.png" alt="Apolograma" style={{ height: "22px", filter: "brightness(0) invert(1)" }} />
           </div>
           <p style={{ margin: 0, fontSize: "0.95rem", maxWidth: "500px", lineHeight: 1.6 }}>
             Este documento contiene información confidencial y propietaria. Prohibida su reproducción o distribución sin autorización expresa.
