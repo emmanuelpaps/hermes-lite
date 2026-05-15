@@ -146,8 +146,8 @@ export default function SuperetteClient() {
                 Al auditar su operación, identificamos un desafío matemático: procesar más de <strong>190 artes mensuales</strong> hace que la creatividad pase a segundo plano frente a la precisión. Sabemos que un error tipográfico en una lona masiva cuesta dinero y genera fricción en piso de venta.
               </p>
               <div style={{ background: "rgba(255,255,255,0.5)", borderLeft: `5px solid ${theme.superetteGreen}`, padding: "1.5rem", borderRadius: "16px", marginTop: "2rem", boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.8)" }}>
-                <h4 style={{ color: theme.superetteGreen, margin: "0 0 0.5rem", fontSize: "1.2rem" }}>La Solución: Célula Dedicada</h4>
-                <p style={{ margin: 0, color: theme.textMain, fontSize: "1.05rem", lineHeight: 1.6 }}>Proponemos instalar una célula que funcionará como su brazo externo (6 especialistas de tiempo completo). Nosotros asumimos la carga laboral y los costos de licencias, otorgándoles absoluta paz mental.</p>
+                <h4 style={{ color: theme.superetteGreen, margin: "0 0 0.5rem", fontSize: "1.2rem" }}>La Solución: Célula Operativa</h4>
+                <p style={{ margin: 0, color: theme.textMain, fontSize: "1.05rem", lineHeight: 1.6 }}>Proponemos instalar una célula de soporte que funcionará como su brazo externo. Nosotros asumimos la carga de trabajo y los costos de licencias, otorgándoles absoluta paz mental.</p>
               </div>
             </div>
 
@@ -198,7 +198,7 @@ export default function SuperetteClient() {
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "2rem", marginBottom: "5rem" }}>
           <GlassCard borderTopColor={theme.superetteGreen}>
             <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.4rem" }}>Filtro Técnico Estricto</h3>
-            <p style={{ color: theme.textMuted, lineHeight: 1.6, margin: 0 }}>Dirección de arte y control de pre-prensa dedicado a ejecutar un riguroso control de calidad antes de mandar a producción.</p>
+            <p style={{ color: theme.textMuted, lineHeight: 1.6, margin: 0 }}>Dirección de arte y control de pre-prensa enfocados en ejecutar un riguroso control de calidad antes de mandar a producción.</p>
           </GlassCard>
           <GlassCard borderTopColor={theme.superetteRed}>
             <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.4rem" }}>Velocidad Operativa</h3>
@@ -263,11 +263,11 @@ export default function SuperetteClient() {
           <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontSize: "20rem", fontWeight: 900, color: "rgba(10, 130, 68, 0.03)", pointerEvents: "none", zIndex: -1 }}>3</div>
           <GlassCard borderTopColor={theme.superetteGreen}>
             <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.8rem" }}>Plan de Transición Exprés</h3>
-            <p style={{ color: theme.textMuted, marginBottom: "2rem", fontSize: "1.1rem" }}>Empalme en 15 días sin detener su ritmo comercial.</p>
+            <p style={{ color: theme.textMuted, marginBottom: "2rem", fontSize: "1.1rem" }}>Empalme en 10 días sin detener su ritmo comercial.</p>
             <ul style={{ paddingLeft: "1.2rem", color: theme.textMuted, lineHeight: 1.8, fontSize: "1.1rem" }}>
               <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Fase 1 (Días 1-5):</strong> Auditoría, extracción de credenciales, y descarga de plantillas.</li>
-              <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Fase 2 (Días 6-14):</strong> Inmersión presencial (2 jornadas) y <em>Shadowing</em> en paralelo.</li>
-              <li><strong style={{ color: theme.textMain }}>Día 15:</strong> Toma de control total.</li>
+              <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Fase 2 (Días 6-9):</strong> Inmersión presencial (2 jornadas) y <em>Shadowing</em> en paralelo.</li>
+              <li><strong style={{ color: theme.textMain }}>Día 10:</strong> Toma de control total.</li>
             </ul>
           </GlassCard>
 
@@ -417,7 +417,7 @@ export default function SuperetteClient() {
               textDecoration: "none", boxShadow: "0 10px 25px rgba(10,130,68,0.3)"
             }}
           >
-            ¿Iniciamos el Empalme de 15 Días?
+            ¿Iniciamos el Empalme de 10 Días?
           </motion.a>
         </motion.div>
 
