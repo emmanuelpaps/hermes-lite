@@ -43,7 +43,7 @@ const GlassCard = ({ children, style = {}, borderTopColor = theme.superetteGreen
     backdropFilter: "blur(20px)",
     WebkitBackdropFilter: "blur(20px)",
     borderRadius: "24px",
-    padding: "3rem",
+    padding: "clamp(1.5rem, 5vw, 3rem)",
     boxShadow: "0 10px 40px rgba(0, 0, 0, 0.05), inset 0 0 0 1px rgba(255, 255, 255, 0.5)",
     borderTop: `4px solid ${borderTopColor}`,
     position: "relative",
@@ -137,7 +137,7 @@ export default function SuperetteClient() {
         <GlassCard style={{ marginBottom: "3rem" }}>
           <div style={{ position: "absolute", top: "-20px", right: "20px", fontSize: "15rem", fontWeight: 900, color: "rgba(10, 130, 68, 0.03)", pointerEvents: "none", lineHeight: 1 }}>1</div>
           
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))", gap: "4rem", alignItems: "center" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))", gap: "clamp(2rem, 5vw, 4rem)", alignItems: "center" }}>
             <div>
               <h2 style={{ color: theme.superetteGreen, fontSize: "2.5rem", marginTop: 0, marginBottom: "1.5rem", position: "relative" }}>
                 El Desafío Operativo
@@ -195,7 +195,7 @@ export default function SuperetteClient() {
         </GlassCard>
 
         {/* Las Garantías */}
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "2rem", marginBottom: "5rem" }}>
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))", gap: "clamp(1.5rem, 4vw, 2rem)", marginBottom: "5rem" }}>
           <GlassCard borderTopColor={theme.superetteGreen}>
             <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.4rem" }}>Filtro Técnico Estricto</h3>
             <p style={{ color: theme.textMuted, lineHeight: 1.6, margin: 0 }}>Dirección de arte y control de pre-prensa enfocados en ejecutar un riguroso control de calidad antes de mandar a producción.</p>
@@ -214,7 +214,7 @@ export default function SuperetteClient() {
         <GlassCard style={{ marginBottom: "5rem" }}>
           <div style={{ position: "absolute", top: "-20px", right: "20px", fontSize: "15rem", fontWeight: 900, color: "rgba(10, 130, 68, 0.03)", pointerEvents: "none", lineHeight: 1 }}>2</div>
           
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))", gap: "4rem", alignItems: "center" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))", gap: "clamp(2rem, 5vw, 4rem)", alignItems: "center" }}>
             <div>
               <h2 style={{ color: theme.superetteGreen, fontSize: "2.5rem", marginTop: 0, marginBottom: "1.5rem" }}>
                 Traffic Management (Embudo)
@@ -259,7 +259,7 @@ export default function SuperetteClient() {
         </GlassCard>
 
         {/* 3. Transición y Métricas */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(450px, 1fr))", gap: "2.5rem", marginBottom: "5rem", position: "relative" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 450px), 1fr))", gap: "clamp(1.5rem, 4vw, 2.5rem)", marginBottom: "5rem", position: "relative" }}>
           <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontSize: "20rem", fontWeight: 900, color: "rgba(10, 130, 68, 0.03)", pointerEvents: "none", zIndex: -1 }}>3</div>
           <GlassCard borderTopColor={theme.superetteGreen}>
             <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.8rem" }}>Plan de Transición Exprés</h3>
@@ -299,10 +299,10 @@ export default function SuperetteClient() {
               </thead>
               <motion.tbody variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
                 <motion.tr variants={tableRowAnim} style={{ borderRadius: "16px" }}>
-                  <td style={{ padding: "2rem", borderTopLeftRadius: "16px", borderBottomLeftRadius: "16px", background: "rgba(255,255,255,0.6)", verticalAlign: "top" }}>
+                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", borderTopLeftRadius: "16px", borderBottomLeftRadius: "16px", background: "rgba(255,255,255,0.6)", verticalAlign: "top" }}>
                     <strong style={{ color: theme.textMain, fontSize: "1.2rem" }}>1. Maquila Gráfica In-House</strong>
                   </td>
-                  <td style={{ padding: "2rem", background: "rgba(255,255,255,0.6)", verticalAlign: "top" }}>
+                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", background: "rgba(255,255,255,0.6)", verticalAlign: "top" }}>
                     <strong style={{ color: theme.superetteGreen }}>~118 Artes Impresos:</strong>
                     <ul style={{ paddingLeft: "1.2rem", marginTop: "0.8rem", color: theme.textMuted, lineHeight: 1.6 }}>
                       <li>Lonas, Banners y Carteleras (54)</li>
@@ -311,15 +311,15 @@ export default function SuperetteClient() {
                       <li>Adaptaciones de formato (12)</li>
                     </ul>
                   </td>
-                  <td style={{ padding: "2rem", textAlign: "right", borderTopRightRadius: "16px", borderBottomRightRadius: "16px", background: "rgba(255,255,255,0.6)", verticalAlign: "top" }}>
+                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", textAlign: "right", borderTopRightRadius: "16px", borderBottomRightRadius: "16px", background: "rgba(255,255,255,0.6)", verticalAlign: "top" }}>
                     <strong style={{ fontSize: "1.3rem", color: theme.textMain }}>$116,400 MXN</strong>
                   </td>
                 </motion.tr>
                 <motion.tr variants={tableRowAnim} style={{ borderRadius: "16px" }}>
-                  <td style={{ padding: "2rem", borderTopLeftRadius: "16px", borderBottomLeftRadius: "16px", background: "rgba(255,255,255,0.6)", verticalAlign: "top" }}>
+                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", borderTopLeftRadius: "16px", borderBottomLeftRadius: "16px", background: "rgba(255,255,255,0.6)", verticalAlign: "top" }}>
                     <strong style={{ color: theme.textMain, fontSize: "1.2rem" }}>2. Ecosistema Digital</strong>
                   </td>
-                  <td style={{ padding: "2rem", background: "rgba(255,255,255,0.6)", verticalAlign: "top" }}>
+                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", background: "rgba(255,255,255,0.6)", verticalAlign: "top" }}>
                     <strong style={{ color: theme.superetteGreen }}>~71 Entregables Digitales:</strong>
                     <ul style={{ paddingLeft: "1.2rem", marginTop: "0.8rem", color: theme.textMuted, lineHeight: 1.6 }}>
                       <li>Volantes Digitales y Ofertas Flash (48)</li>
@@ -327,15 +327,15 @@ export default function SuperetteClient() {
                       <li>Banners Web y Medios Locales (8)</li>
                     </ul>
                   </td>
-                  <td style={{ padding: "2rem", textAlign: "right", borderTopRightRadius: "16px", borderBottomRightRadius: "16px", background: "rgba(255,255,255,0.6)", verticalAlign: "top" }}>
+                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", textAlign: "right", borderTopRightRadius: "16px", borderBottomRightRadius: "16px", background: "rgba(255,255,255,0.6)", verticalAlign: "top" }}>
                     <strong style={{ fontSize: "1.3rem", color: theme.textMain }}>$49,000 MXN</strong>
                   </td>
                 </motion.tr>
                 <motion.tr variants={tableRowAnim} style={{ borderRadius: "16px" }}>
-                  <td style={{ padding: "2rem", borderTopLeftRadius: "16px", borderBottomLeftRadius: "16px", background: "rgba(255,255,255,0.6)", verticalAlign: "top" }}>
+                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", borderTopLeftRadius: "16px", borderBottomLeftRadius: "16px", background: "rgba(255,255,255,0.6)", verticalAlign: "top" }}>
                     <strong style={{ color: theme.textMain, fontSize: "1.2rem" }}>3. Dirección Estratégica</strong>
                   </td>
-                  <td style={{ padding: "2rem", background: "rgba(255,255,255,0.6)", verticalAlign: "top" }}>
+                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", background: "rgba(255,255,255,0.6)", verticalAlign: "top" }}>
                     <strong style={{ color: theme.superetteGreen }}>8 Entregables Core + Pauta:</strong>
                     <ul style={{ paddingLeft: "1.2rem", marginTop: "0.8rem", color: theme.textMuted, lineHeight: 1.6 }}>
                       <li>Redacción de Notas Corporativas PR (4)</li>
@@ -346,15 +346,15 @@ export default function SuperetteClient() {
                       El Ad Spend corre por cuenta de Superette.
                     </span>
                   </td>
-                  <td style={{ padding: "2rem", textAlign: "right", borderTopRightRadius: "16px", borderBottomRightRadius: "16px", background: "rgba(255,255,255,0.6)", verticalAlign: "top" }}>
+                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", textAlign: "right", borderTopRightRadius: "16px", borderBottomRightRadius: "16px", background: "rgba(255,255,255,0.6)", verticalAlign: "top" }}>
                     <strong style={{ fontSize: "1.3rem", color: theme.textMain }}>$70,000 MXN</strong>
                   </td>
                 </motion.tr>
                 <motion.tr variants={tableRowAnim}>
-                  <td colSpan={2} style={{ padding: "3rem 2rem", textAlign: "right", verticalAlign: "middle" }}>
+                  <td colSpan={2} style={{ padding: "clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem)", textAlign: "right", verticalAlign: "middle" }}>
                     <strong style={{ color: theme.textMuted, fontSize: "1.2rem", textTransform: "uppercase", letterSpacing: "2px" }}>Inversión Mensual Total</strong>
                   </td>
-                  <td style={{ padding: "3rem 2rem", textAlign: "right", verticalAlign: "middle" }}>
+                  <td style={{ padding: "clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem)", textAlign: "right", verticalAlign: "middle" }}>
                     <motion.div 
                       initial={{ scale: 0.9, opacity: 0 }}
                       whileInView={{ scale: 1, opacity: 1 }}
