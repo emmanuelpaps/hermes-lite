@@ -65,15 +65,29 @@ export default function MysiClient() {
       <div style={{ position: "fixed", top: "10%", left: "-10%", width: "40vw", height: "40vw", background: theme.mysiBlue, filter: "blur(150px)", opacity: 0.15, borderRadius: "50%", pointerEvents: "none" }} />
       <div style={{ position: "fixed", bottom: "10%", right: "-10%", width: "40vw", height: "40vw", background: theme.mysiAccent, filter: "blur(150px)", opacity: 0.15, borderRadius: "50%", pointerEvents: "none" }} />
 
-      {/* HEADER */}
-      <header style={{ padding: "clamp(1.5rem, 4vw, 2.5rem) clamp(1rem, 5vw, 4rem)", display: "flex", justifyContent: "space-between", alignItems: "center", position: "relative", zIndex: 10 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
-          <img src="/assets/fn1-logo-white.png" alt="FN1" style={{ height: "40px", opacity: 0.9, mixBlendMode: "screen" }} />
-          <div style={{ width: "1px", height: "30px", background: "rgba(255,255,255,0.2)" }} />
-          <img src="/assets/apolograma-logo.png" alt="Apolograma" style={{ height: "18px", opacity: 0.8, filter: "brightness(0) invert(1)" }} />
+      {/* HEADER IOS GLASSMORPHISM */}
+      <header style={{ 
+        position: "fixed", 
+        top: 0, left: 0, right: 0, 
+        padding: "clamp(1rem, 2vw, 1.5rem) clamp(1rem, 5vw, 4rem)", 
+        display: "flex", 
+        justifyContent: "space-between", 
+        alignItems: "center", 
+        zIndex: 100,
+        background: "rgba(15, 23, 42, 0.65)",
+        backdropFilter: "blur(24px) saturate(180%)",
+        WebkitBackdropFilter: "blur(24px) saturate(180%)",
+        borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+        boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)"
+      }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
+          <img src="/assets/fn1-logo-white.png" alt="FN1" style={{ height: "28px", opacity: 0.95 }} />
+          <div style={{ width: "1px", height: "24px", background: "rgba(255,255,255,0.15)" }} />
+          <img src="/assets/apolograma-logo.png" alt="Apolograma" style={{ height: "14px", opacity: 0.9, filter: "brightness(0) invert(1)" }} />
         </div>
-        <div style={{ fontWeight: 600, color: theme.textMuted, fontSize: "0.9rem", letterSpacing: "2px", textTransform: "uppercase" }}>
-          CONFIDENCIAL
+        <div style={{ display: "flex", alignItems: "center", gap: "8px", fontWeight: 600, color: "rgba(255,255,255,0.6)", fontSize: "0.8rem", letterSpacing: "2px", textTransform: "uppercase" }}>
+          <span style={{ display: "inline-block", width: "8px", height: "8px", borderRadius: "50%", background: theme.mysiAccent, boxShadow: `0 0 10px ${theme.mysiAccent}` }}></span>
+          <span style={{ display: "none", '@media (min-width: 600px)': { display: "inline" } } as any}>CONFIDENCIAL</span>
         </div>
       </header>
 
@@ -81,7 +95,7 @@ export default function MysiClient() {
       <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 clamp(1rem, 5vw, 2rem)", position: "relative", zIndex: 10 }}>
         
         {/* HERO SECTION */}
-        <motion.section initial="hidden" animate="visible" variants={staggerContainer} style={{ paddingTop: "6rem", paddingBottom: "8rem" }}>
+        <motion.section initial="hidden" animate="visible" variants={staggerContainer} style={{ paddingTop: "8rem", paddingBottom: "8rem" }}>
           <motion.div variants={glassCardAnim} style={{ display: "inline-flex", alignItems: "center", gap: "10px", background: "rgba(56, 189, 248, 0.1)", padding: "8px 16px", borderRadius: "100px", color: theme.mysiAccent, fontWeight: 600, fontSize: "0.9rem", marginBottom: "2rem", border: "1px solid rgba(56, 189, 248, 0.2)" }}>
             <Video size={16} /> Gemelo Digital para Meta Quest
           </motion.div>
@@ -272,12 +286,29 @@ export default function MysiClient() {
           </div>
         </div>
 
-        {/* CTA */}
-        <div style={{ textAlign: "center", paddingBottom: "6rem" }}>
-          <p style={{ color: theme.textMuted, fontSize: "1.1rem", marginBottom: "2rem" }}>
-            Construyendo el futuro de la manufactura inteligente.
+        {/* FOOTER IOS */}
+        <footer style={{ 
+          marginTop: "4rem",
+          padding: "3rem 0", 
+          textAlign: "center",
+          borderTop: "1px solid rgba(255, 255, 255, 0.08)",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "2rem"
+        }}>
+          <p style={{ color: theme.textMuted, fontSize: "1.1rem", margin: 0 }}>
+            Construyendo el futuro de la manufactura inteligente en Realidad Virtual.
           </p>
-        </div>
+          <div style={{ display: "flex", alignItems: "center", gap: "1.5rem", justifyContent: "center" }}>
+            <img src="/assets/fn1-logo-white.png" alt="FN1" style={{ height: "24px", opacity: 0.5 }} />
+            <div style={{ width: "1px", height: "20px", background: "rgba(255,255,255,0.1)" }} />
+            <img src="/assets/apolograma-logo.png" alt="Apolograma" style={{ height: "12px", opacity: 0.5, filter: "brightness(0) invert(1)" }} />
+          </div>
+          <p style={{ color: "rgba(255,255,255,0.2)", fontSize: "0.8rem", margin: 0, letterSpacing: "1px" }}>
+            © {new Date().getFullYear()} Frontera Número Uno & Apolograma. Todos los derechos reservados.
+          </p>
+        </footer>
 
       </div>
 
