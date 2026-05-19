@@ -90,7 +90,7 @@ export default function MysiClient() {
             <span style={{ color: theme.mysiAccent }}>MYSI Costa Rica</span>
           </motion.h1>
           <motion.p variants={glassCardAnim} style={{ fontSize: "clamp(1.2rem, 3vw, 1.5rem)", color: theme.textMuted, maxWidth: "700px", lineHeight: 1.5, margin: 0 }}>
-            Una simulación interactiva de 10 minutos diseñada para deslumbrar a prospectos en Costa Rica exhibiendo la capacidad industrial y precisión tecnológica de Juárez.
+            Lleva toda tu planta industrial a Costa Rica dentro de un visor. Una experiencia interactiva de 10 minutos diseñada para que cualquier prospecto entienda exactamente por qué MYSI es líder en precisión y manufactura.
           </motion.p>
         </motion.section>
 
@@ -105,23 +105,22 @@ export default function MysiClient() {
                   Arquitectura del Entorno VR
                 </h2>
                 <p style={{ color: theme.textMuted, fontSize: "1.2rem", lineHeight: 1.7 }}>
-                  Desarrollado en <strong>Unity 3D</strong> y compilado nativamente para Meta Quest. 
-                  El recorrido tiene una duración máxima de 10 minutos para optimizar el flujo de usuarios en el piso de exhibición.
+                  Desarrollado con la misma tecnología usada en videojuegos de última generación (Unity 3D). Diseñamos el recorrido para que dure <strong>máximo 10 minutos</strong>, asegurando que cientos de personas en la expo puedan probarlo sin causar cuellos de botella.
                 </p>
               </div>
               <div style={{ display: "grid", gap: "1.5rem" }}>
                 <div style={{ display: "flex", gap: "1.5rem", alignItems: "flex-start", background: "rgba(0,0,0,0.2)", padding: "1.5rem", borderRadius: "16px" }}>
                   <div style={{ background: "rgba(56, 189, 248, 0.1)", padding: "12px", borderRadius: "12px", color: theme.mysiAccent }}><Target size={24} /></div>
                   <div>
-                    <strong style={{ display: "block", fontSize: "1.2rem", marginBottom: "0.5rem" }}>4 Estaciones Observacionales</strong>
-                    <span style={{ color: theme.textMuted, lineHeight: 1.5 }}>Modelos 3D precisos de las máquinas con voiceovers explicativos y paneles flotantes de fotografías reales.</span>
+                    <strong style={{ display: "block", fontSize: "1.2rem", marginBottom: "0.5rem" }}>4 Estaciones de Exhibición (Visita Guiada)</strong>
+                    <span style={{ color: theme.textMuted, lineHeight: 1.5 }}>Recreamos tus máquinas reales en 3D (CMM, Electroerosión, etc.). Mientras el usuario las observa, una voz profesional (Voiceover) y paneles flotantes con fotos reales le explican las ventajas competitivas de cada máquina.</span>
                   </div>
                 </div>
                 <div style={{ display: "flex", gap: "1.5rem", alignItems: "flex-start", background: "rgba(0,0,0,0.2)", padding: "1.5rem", borderRadius: "16px" }}>
                   <div style={{ background: "rgba(37, 99, 235, 0.2)", padding: "12px", borderRadius: "12px", color: theme.mysiBlue }}><Bot size={24} /></div>
                   <div>
-                    <strong style={{ display: "block", fontSize: "1.2rem", marginBottom: "0.5rem" }}>Minijuego CNC HAAS</strong>
-                    <span style={{ color: theme.textMuted, lineHeight: 1.5 }}>1 estación totalmente interactiva. El prospecto usa sus manos para operar una simulación básica de maquinado.</span>
+                    <strong style={{ display: "block", fontSize: "1.2rem", marginBottom: "0.5rem" }}>1 Simulador Interactivo (Minijuego CNC)</strong>
+                    <span style={{ color: theme.textMuted, lineHeight: 1.5 }}>La joya de la corona. El prospecto usa sus propias manos virtuales para operar los botones de una máquina HAAS CNC, experimentando la precisión de MYSI de forma divertida y memorable.</span>
                   </div>
                 </div>
               </div>
@@ -136,16 +135,16 @@ export default function MysiClient() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))", gap: "clamp(2rem, 5vw, 4rem)", alignItems: "center" }}>
             <div>
               <h2 style={{ color: theme.mysiAccent, fontSize: "2.5rem", marginTop: 0, marginBottom: "1.5rem" }}>
-                Embudo Digital B2B
+                Embudo Automático de Ventas
               </h2>
               <p style={{ color: theme.textMuted, fontSize: "1.2rem", lineHeight: 1.7, marginBottom: "2rem" }}>
-                La experiencia VR es el "gancho". Para capitalizar esa atención, conectamos el mundo físico con tu base de datos mediante una Landing Page de captura.
+                La Realidad Virtual es el "gancho" para atraerlos a tu stand. Una vez ahí, usamos la tecnología para asegurar que no se vayan sin dejarte sus datos de contacto (Leads).
               </p>
               <ul style={{ paddingLeft: "1.2rem", color: theme.textMuted, lineHeight: 1.8, fontSize: "1.1rem", margin: 0 }}>
-                <li><strong style={{ color: theme.textMain }}>Paso 1:</strong> El usuario termina el recorrido VR.</li>
-                <li><strong style={{ color: theme.textMain }}>Paso 2:</strong> Escanea un QR o usa un iPad (Landing Page).</li>
-                <li><strong style={{ color: theme.textMain }}>Paso 3:</strong> La base de datos guarda el contacto en la nube.</li>
-                <li><strong style={{ color: theme.textMain }}>Paso 4:</strong> WhatsApp detona un mensaje automático entregando el Brochure digital al prospecto en tiempo real.</li>
+                <li><strong style={{ color: theme.textMain }}>Paso 1:</strong> El prospecto termina de jugar y se quita los lentes VR.</li>
+                <li><strong style={{ color: theme.textMain }}>Paso 2:</strong> Le pedimos que escanee un código QR en el stand o le pasamos un iPad.</li>
+                <li><strong style={{ color: theme.textMain }}>Paso 3:</strong> Ingresa su nombre y teléfono. Esos datos se guardan en tu base de datos de inmediato.</li>
+                <li><strong style={{ color: theme.textMain }}>Paso 4:</strong> En ese mismo segundo, el sistema le envía un mensaje automático de WhatsApp a su celular con el catálogo oficial de MYSI.</li>
               </ul>
             </div>
             <div style={{ position: "relative", height: "300px", borderRadius: "16px", overflow: "hidden", background: "rgba(0,0,0,0.3)", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -210,9 +209,9 @@ export default function MysiClient() {
                   <td style={{ padding: "clamp(1rem, 3vw, 2rem)", background: "rgba(0,0,0,0.3)", verticalAlign: "top" }}>
                     <strong style={{ color: theme.mysiAccent }}>Modelado Físico y Estructura:</strong>
                     <ul style={{ paddingLeft: "1.2rem", marginTop: "0.8rem", color: theme.textMuted, lineHeight: 1.6 }}>
-                      <li>Modelado de 4 Máquinas Observacionales</li>
-                      <li>Modelado de Máquina Interactiva (Joyita de la Corona)</li>
-                      <li>Diseño de Estructura e implementación en Unity</li>
+                      <li>Modelado en 3D de las 4 máquinas estáticas (Exhibición).</li>
+                      <li>Modelado ultra-detallado de la Máquina Interactiva.</li>
+                      <li>Diseño del entorno virtual de la planta (Piso, paredes, iluminación).</li>
                     </ul>
                   </td>
                   <td style={{ padding: "clamp(1rem, 3vw, 2rem)", textAlign: "right", borderTopRightRadius: "16px", borderBottomRightRadius: "16px", background: "rgba(0,0,0,0.3)", verticalAlign: "top" }}>
@@ -227,9 +226,9 @@ export default function MysiClient() {
                   <td style={{ padding: "clamp(1rem, 3vw, 2rem)", background: "rgba(0,0,0,0.3)", verticalAlign: "top" }}>
                     <strong style={{ color: theme.mysiAccent }}>Interactividad y Sincronización:</strong>
                     <ul style={{ paddingLeft: "1.2rem", marginTop: "0.8rem", color: theme.textMuted, lineHeight: 1.6 }}>
-                      <li>Guionización y Sincronización de Diálogos (Intro/Outro/Maquinas)</li>
-                      <li>Programación de "Minijuego CNC" (Uso básico)</li>
-                      <li>Setup General VR y Movimiento entre estaciones</li>
+                      <li>Programación de locuciones y diálogos de bienvenida/despedida.</li>
+                      <li>Programación del "Minijuego CNC" para que reconozca las manos del usuario.</li>
+                      <li>Configuración para que el usuario pueda "caminar" o teletransportarse por la planta virtual.</li>
                     </ul>
                   </td>
                   <td style={{ padding: "clamp(1rem, 3vw, 2rem)", textAlign: "right", borderTopRightRadius: "16px", borderBottomRightRadius: "16px", background: "rgba(0,0,0,0.3)", verticalAlign: "top" }}>
@@ -244,9 +243,9 @@ export default function MysiClient() {
                   <td style={{ padding: "clamp(1rem, 3vw, 2rem)", background: "rgba(0,0,0,0.3)", verticalAlign: "top" }}>
                     <strong style={{ color: theme.mysiAccent }}>Base de Datos y WhatsApp:</strong>
                     <ul style={{ paddingLeft: "1.2rem", marginTop: "0.8rem", color: theme.textMuted, lineHeight: 1.6 }}>
-                      <li>UI/UX Landing Page de Alta Conversión</li>
-                      <li>Setup de Base de Datos</li>
-                      <li>Integración API de WhatsApp para envío de Brochure</li>
+                      <li>Diseño de página web (Landing Page) atractiva para registro en iPads/Celulares.</li>
+                      <li>Creación de Base de Datos en la Nube (CRM) para almacenar prospectos seguros.</li>
+                      <li>Automatización robotizada para que WhatsApp envíe mensajes y brochures al instante 24/7.</li>
                     </ul>
                   </td>
                   <td style={{ padding: "clamp(1rem, 3vw, 2rem)", textAlign: "right", borderTopRightRadius: "16px", borderBottomRightRadius: "16px", background: "rgba(0,0,0,0.3)", verticalAlign: "top" }}>
