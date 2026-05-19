@@ -1,0 +1,287 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { ChevronRight, Video, Target, Globe, ArrowRight, Download, Bot } from "lucide-react";
+import React from "react";
+
+// Paleta industrial para MYSI
+const theme = {
+  mysiNavy: "#0F172A",
+  mysiSteel: "#64748B",
+  mysiSilver: "#E2E8F0",
+  mysiBlue: "#2563EB",
+  mysiAccent: "#38BDF8",
+  bgGradient: "linear-gradient(135deg, #0F172A 0%, #1E293B 100%)",
+  textMain: "#F8FAFC",
+  textMuted: "#94A3B8"
+};
+
+const glassCardAnim = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+};
+
+const tableRowAnim = {
+  hidden: { opacity: 0, x: -20 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.4 } }
+};
+
+const GlassCard = ({ children, style = {}, borderTopColor = theme.mysiAccent }: any) => (
+  <motion.div variants={glassCardAnim} style={{
+    background: "rgba(30, 41, 59, 0.4)",
+    backdropFilter: "blur(20px)",
+    WebkitBackdropFilter: "blur(20px)",
+    borderRadius: "24px",
+    padding: "clamp(1.5rem, 5vw, 3rem)",
+    boxShadow: "0 10px 40px rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(255, 255, 255, 0.1)",
+    borderTop: `4px solid ${borderTopColor}`,
+    position: "relative",
+    overflow: "hidden",
+    ...style
+  }}>
+    <div style={{
+      position: "absolute",
+      top: "-50%",
+      left: "-50%",
+      width: "200%",
+      height: "200%",
+      background: "radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 50%)",
+      pointerEvents: "none"
+    }} />
+    <div style={{ position: "relative", zIndex: 1 }}>{children}</div>
+  </motion.div>
+);
+
+export default function MysiClient() {
+  return (
+    <div style={{ background: theme.bgGradient, minHeight: "100vh", fontFamily: "system-ui, -apple-system, sans-serif", color: theme.textMain, overflowX: "hidden" }}>
+      
+      {/* Decorative Blur Orbs */}
+      <div style={{ position: "fixed", top: "10%", left: "-10%", width: "40vw", height: "40vw", background: theme.mysiBlue, filter: "blur(150px)", opacity: 0.15, borderRadius: "50%", pointerEvents: "none" }} />
+      <div style={{ position: "fixed", bottom: "10%", right: "-10%", width: "40vw", height: "40vw", background: theme.mysiAccent, filter: "blur(150px)", opacity: 0.15, borderRadius: "50%", pointerEvents: "none" }} />
+
+      {/* HEADER */}
+      <header style={{ padding: "clamp(1.5rem, 4vw, 2.5rem) clamp(1rem, 5vw, 4rem)", display: "flex", justifyContent: "space-between", alignItems: "center", position: "relative", zIndex: 10 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
+          <img src="/assets/fn1-logo-white.png" alt="FN1" style={{ height: "40px", opacity: 0.9, mixBlendMode: "screen" }} />
+          <div style={{ width: "1px", height: "30px", background: "rgba(255,255,255,0.2)" }} />
+          <img src="/assets/apolograma-logo.png" alt="Apolograma" style={{ height: "18px", opacity: 0.8, filter: "brightness(0) invert(1)" }} />
+        </div>
+        <div style={{ fontWeight: 600, color: theme.textMuted, fontSize: "0.9rem", letterSpacing: "2px", textTransform: "uppercase" }}>
+          CONFIDENCIAL
+        </div>
+      </header>
+
+      {/* MAIN CONTAINER */}
+      <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 clamp(1rem, 5vw, 2rem)", position: "relative", zIndex: 10 }}>
+        
+        {/* HERO SECTION */}
+        <motion.section initial="hidden" animate="visible" variants={staggerContainer} style={{ paddingTop: "6rem", paddingBottom: "8rem" }}>
+          <motion.div variants={glassCardAnim} style={{ display: "inline-flex", alignItems: "center", gap: "10px", background: "rgba(56, 189, 248, 0.1)", padding: "8px 16px", borderRadius: "100px", color: theme.mysiAccent, fontWeight: 600, fontSize: "0.9rem", marginBottom: "2rem", border: "1px solid rgba(56, 189, 248, 0.2)" }}>
+            <Video size={16} /> Gemelo Digital para Meta Quest
+          </motion.div>
+          <motion.h1 variants={glassCardAnim} style={{ fontSize: "clamp(3rem, 6vw, 4.5rem)", lineHeight: 1.1, margin: "0 0 1.5rem", letterSpacing: "-1.5px", color: "#FFF" }}>
+            Experiencia Inmersiva VR:<br />
+            <span style={{ color: theme.mysiAccent }}>MYSI Costa Rica</span>
+          </motion.h1>
+          <motion.p variants={glassCardAnim} style={{ fontSize: "clamp(1.2rem, 3vw, 1.5rem)", color: theme.textMuted, maxWidth: "700px", lineHeight: 1.5, margin: 0 }}>
+            Una simulación interactiva de 10 minutos diseñada para deslumbrar a prospectos en Costa Rica exhibiendo la capacidad industrial y precisión tecnológica de Juárez.
+          </motion.p>
+        </motion.section>
+
+        {/* 1. ESPECIFICACIONES TÉCNICAS */}
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} style={{ marginBottom: "5rem" }}>
+          <GlassCard style={{ marginBottom: "3rem" }}>
+            <div style={{ position: "absolute", top: "-20px", right: "20px", fontSize: "15rem", fontWeight: 900, color: "rgba(255, 255, 255, 0.02)", pointerEvents: "none", lineHeight: 1 }}>1</div>
+            
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))", gap: "clamp(2rem, 5vw, 4rem)", alignItems: "center" }}>
+              <div>
+                <h2 style={{ color: theme.mysiAccent, fontSize: "2.5rem", marginTop: 0, marginBottom: "1.5rem", position: "relative" }}>
+                  Arquitectura del Entorno VR
+                </h2>
+                <p style={{ color: theme.textMuted, fontSize: "1.2rem", lineHeight: 1.7 }}>
+                  Desarrollado en <strong>Unity 3D</strong> y compilado nativamente para Meta Quest. 
+                  El recorrido tiene una duración máxima de 10 minutos para optimizar el flujo de usuarios en el piso de exhibición.
+                </p>
+              </div>
+              <div style={{ display: "grid", gap: "1.5rem" }}>
+                <div style={{ display: "flex", gap: "1.5rem", alignItems: "flex-start", background: "rgba(0,0,0,0.2)", padding: "1.5rem", borderRadius: "16px" }}>
+                  <div style={{ background: "rgba(56, 189, 248, 0.1)", padding: "12px", borderRadius: "12px", color: theme.mysiAccent }}><Target size={24} /></div>
+                  <div>
+                    <strong style={{ display: "block", fontSize: "1.2rem", marginBottom: "0.5rem" }}>4 Estaciones Observacionales</strong>
+                    <span style={{ color: theme.textMuted, lineHeight: 1.5 }}>Modelos 3D precisos de las máquinas con voiceovers explicativos y paneles flotantes de fotografías reales.</span>
+                  </div>
+                </div>
+                <div style={{ display: "flex", gap: "1.5rem", alignItems: "flex-start", background: "rgba(0,0,0,0.2)", padding: "1.5rem", borderRadius: "16px" }}>
+                  <div style={{ background: "rgba(37, 99, 235, 0.2)", padding: "12px", borderRadius: "12px", color: theme.mysiBlue }}><Bot size={24} /></div>
+                  <div>
+                    <strong style={{ display: "block", fontSize: "1.2rem", marginBottom: "0.5rem" }}>Minijuego CNC HAAS</strong>
+                    <span style={{ color: theme.textMuted, lineHeight: 1.5 }}>1 estación totalmente interactiva. El prospecto usa sus manos para operar una simulación básica de maquinado.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </GlassCard>
+        </motion.div>
+
+        {/* 2. EMBUDO DE FERIA (LANDING PAGE) */}
+        <GlassCard style={{ marginBottom: "5rem" }}>
+          <div style={{ position: "absolute", top: "-20px", right: "20px", fontSize: "15rem", fontWeight: 900, color: "rgba(255, 255, 255, 0.02)", pointerEvents: "none", lineHeight: 1 }}>2</div>
+          
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))", gap: "clamp(2rem, 5vw, 4rem)", alignItems: "center" }}>
+            <div>
+              <h2 style={{ color: theme.mysiAccent, fontSize: "2.5rem", marginTop: 0, marginBottom: "1.5rem" }}>
+                Embudo Digital B2B
+              </h2>
+              <p style={{ color: theme.textMuted, fontSize: "1.2rem", lineHeight: 1.7, marginBottom: "2rem" }}>
+                La experiencia VR es el "gancho". Para capitalizar esa atención, conectamos el mundo físico con tu base de datos mediante una Landing Page de captura.
+              </p>
+              <ul style={{ paddingLeft: "1.2rem", color: theme.textMuted, lineHeight: 1.8, fontSize: "1.1rem", margin: 0 }}>
+                <li><strong style={{ color: theme.textMain }}>Paso 1:</strong> El usuario termina el recorrido VR.</li>
+                <li><strong style={{ color: theme.textMain }}>Paso 2:</strong> Escanea un QR o usa un iPad (Landing Page).</li>
+                <li><strong style={{ color: theme.textMain }}>Paso 3:</strong> La base de datos guarda el contacto en la nube.</li>
+                <li><strong style={{ color: theme.textMain }}>Paso 4:</strong> WhatsApp detona un mensaje automático entregando el Brochure digital al prospecto en tiempo real.</li>
+              </ul>
+            </div>
+            <div style={{ position: "relative", height: "300px", borderRadius: "16px", overflow: "hidden", background: "rgba(0,0,0,0.3)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <div style={{ position: "absolute", inset: 0, background: "url('/assets/abstract-3d.png') center/cover", opacity: 0.4 }} />
+              <div style={{ textAlign: "center", zIndex: 1 }}>
+                <Globe size={48} color={theme.mysiAccent} style={{ marginBottom: "1rem" }} />
+                <h3 style={{ margin: 0, fontSize: "1.5rem", fontWeight: 600 }}>Captura Segura de Leads</h3>
+              </div>
+            </div>
+          </div>
+        </GlassCard>
+
+        {/* 3. CRONOGRAMA */}
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} style={{ marginBottom: "5rem" }}>
+          <h2 style={{ color: "#FFF", fontSize: "2.5rem", textAlign: "center", marginBottom: "3rem" }}>Cronograma (Hacia Atrás)</h2>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "2rem" }}>
+            <GlassCard borderTopColor={theme.mysiSteel} style={{ textAlign: "center", padding: "2rem" }}>
+              <h3 style={{ fontSize: "2rem", color: theme.mysiAccent, margin: "0 0 1rem" }}>Todo Mayo</h3>
+              <p style={{ color: theme.textMuted, margin: 0 }}>Desarrollo intensivo de la Arquitectura 3D y Programación Lógica de VR.</p>
+            </GlassCard>
+            <GlassCard borderTopColor={theme.mysiBlue} style={{ textAlign: "center", padding: "2rem" }}>
+              <h3 style={{ fontSize: "2rem", color: theme.mysiAccent, margin: "0 0 1rem" }}>8 de Junio</h3>
+              <p style={{ color: theme.textMuted, margin: 0 }}>Demo Beta V.1 (Pruebas de recorrido en las oficinas del cliente).</p>
+            </GlassCard>
+            <GlassCard borderTopColor={theme.textMain} style={{ textAlign: "center", padding: "2rem" }}>
+              <h3 style={{ fontSize: "2rem", color: theme.textMain, margin: "0 0 1rem" }}>15 de Junio</h3>
+              <p style={{ color: theme.textMuted, margin: 0 }}>Freeze de código, entrega final de Oculus y capacitación al equipo de ventas.</p>
+            </GlassCard>
+          </div>
+        </motion.div>
+
+        {/* 4. REQUISITOS (NECESITAMOS) */}
+        <GlassCard borderTopColor={theme.mysiBlue} style={{ marginBottom: "5rem" }}>
+          <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.8rem" }}>Requerimientos Técnicos (A proveer por MYSI)</h3>
+          <ul style={{ paddingLeft: "1.2rem", color: theme.textMuted, lineHeight: 1.8, fontSize: "1.1rem", margin: "1.5rem 0 0" }}>
+            <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Referencias Visuales 3D:</strong> Fotos y videos de las 4 máquinas (todos los ángulos posibles) para el modelado fotorealista.</li>
+            <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Máquina Interactiva:</strong> Fotos, videos y detalles exactos de qué hace cada botón en la máquina interactiva.</li>
+            <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Arquitectura:</strong> Fotos y dimensiones aproximadas del plano de la planta en Costa Rica.</li>
+            <li><strong style={{ color: theme.textMain }}>Voiceover Técnico:</strong> Apoyo técnico para validar el guion (ventajas técnicas de las máquinas) antes de grabar el audio.</li>
+          </ul>
+        </GlassCard>
+
+        {/* 5. TABLA DE INVERSIÓN */}
+        <div style={{ marginBottom: "5rem" }}>
+          <h2 style={{ color: "#FFF", fontSize: "2.5rem", marginBottom: "3rem", textAlign: "center" }}>Desglose de Ingeniería</h2>
+          
+          <div style={{ overflowX: "auto", position: "relative", zIndex: 2 }}>
+            <table style={{ width: "100%", borderCollapse: "separate", borderSpacing: "0 12px", minWidth: "600px" }}>
+              <thead>
+                <tr>
+                  <th style={{ textAlign: "left", color: theme.textMuted, fontSize: "0.9rem", fontWeight: 600, paddingBottom: "1rem", letterSpacing: "1px" }}>FASE OPERATIVA</th>
+                  <th style={{ textAlign: "left", color: theme.textMuted, fontSize: "0.9rem", fontWeight: 600, paddingBottom: "1rem", letterSpacing: "1px" }}>VOLUMEN Y ENTREGABLES</th>
+                  <th style={{ textAlign: "right", color: theme.textMuted, fontSize: "0.9rem", fontWeight: 600, paddingBottom: "1rem", letterSpacing: "1px" }}>HORAS</th>
+                </tr>
+              </thead>
+              <motion.tbody variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+                
+                <motion.tr variants={tableRowAnim} style={{ borderRadius: "16px" }}>
+                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", borderTopLeftRadius: "16px", borderBottomLeftRadius: "16px", background: "rgba(0,0,0,0.3)", verticalAlign: "top" }}>
+                    <strong style={{ color: theme.textMain, fontSize: "1.2rem" }}>1. Arquitectura 3D</strong>
+                  </td>
+                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", background: "rgba(0,0,0,0.3)", verticalAlign: "top" }}>
+                    <strong style={{ color: theme.mysiAccent }}>Modelado Físico y Estructura:</strong>
+                    <ul style={{ paddingLeft: "1.2rem", marginTop: "0.8rem", color: theme.textMuted, lineHeight: 1.6 }}>
+                      <li>Modelado de 4 Máquinas Observacionales</li>
+                      <li>Modelado de Máquina Interactiva (Joyita de la Corona)</li>
+                      <li>Diseño de Estructura e implementación en Unity</li>
+                    </ul>
+                  </td>
+                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", textAlign: "right", borderTopRightRadius: "16px", borderBottomRightRadius: "16px", background: "rgba(0,0,0,0.3)", verticalAlign: "top" }}>
+                    <strong style={{ fontSize: "1.3rem", color: theme.textMain }}>80 hrs</strong>
+                  </td>
+                </motion.tr>
+
+                <motion.tr variants={tableRowAnim} style={{ borderRadius: "16px" }}>
+                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", borderTopLeftRadius: "16px", borderBottomLeftRadius: "16px", background: "rgba(0,0,0,0.3)", verticalAlign: "top" }}>
+                    <strong style={{ color: theme.textMain, fontSize: "1.2rem" }}>2. Lógica VR</strong>
+                  </td>
+                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", background: "rgba(0,0,0,0.3)", verticalAlign: "top" }}>
+                    <strong style={{ color: theme.mysiAccent }}>Interactividad y Sincronización:</strong>
+                    <ul style={{ paddingLeft: "1.2rem", marginTop: "0.8rem", color: theme.textMuted, lineHeight: 1.6 }}>
+                      <li>Guionización y Sincronización de Diálogos (Intro/Outro/Maquinas)</li>
+                      <li>Programación de "Minijuego CNC" (Uso básico)</li>
+                      <li>Setup General VR y Movimiento entre estaciones</li>
+                    </ul>
+                  </td>
+                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", textAlign: "right", borderTopRightRadius: "16px", borderBottomRightRadius: "16px", background: "rgba(0,0,0,0.3)", verticalAlign: "top" }}>
+                    <strong style={{ fontSize: "1.3rem", color: theme.textMain }}>50 hrs</strong>
+                  </td>
+                </motion.tr>
+
+                <motion.tr variants={tableRowAnim} style={{ borderRadius: "16px" }}>
+                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", borderTopLeftRadius: "16px", borderBottomLeftRadius: "16px", background: "rgba(0,0,0,0.3)", verticalAlign: "top" }}>
+                    <strong style={{ color: theme.textMain, fontSize: "1.2rem" }}>3. Ecosistema de Leads</strong>
+                  </td>
+                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", background: "rgba(0,0,0,0.3)", verticalAlign: "top" }}>
+                    <strong style={{ color: theme.mysiAccent }}>Base de Datos y WhatsApp:</strong>
+                    <ul style={{ paddingLeft: "1.2rem", marginTop: "0.8rem", color: theme.textMuted, lineHeight: 1.6 }}>
+                      <li>UI/UX Landing Page de Alta Conversión</li>
+                      <li>Setup de Base de Datos</li>
+                      <li>Integración API de WhatsApp para envío de Brochure</li>
+                    </ul>
+                  </td>
+                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", textAlign: "right", borderTopRightRadius: "16px", borderBottomRightRadius: "16px", background: "rgba(0,0,0,0.3)", verticalAlign: "top" }}>
+                    <strong style={{ fontSize: "1.3rem", color: theme.textMain }}>35 hrs</strong>
+                  </td>
+                </motion.tr>
+
+                <motion.tr variants={tableRowAnim}>
+                  <td colSpan={2} style={{ padding: "clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem)", textAlign: "right", verticalAlign: "middle" }}>
+                    <strong style={{ color: theme.textMuted, fontSize: "1.2rem", textTransform: "uppercase", letterSpacing: "2px" }}>Inversión Total (165 Horas)</strong>
+                  </td>
+                  <td style={{ padding: "clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem)", textAlign: "right", verticalAlign: "middle", whiteSpace: "nowrap" }}>
+                    <motion.div 
+                      initial={{ scale: 0.9, opacity: 0 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      transition={{ delay: 0.3, type: "spring" }}
+                    >
+                      <strong style={{ fontSize: "2rem", letterSpacing: "-1px", color: theme.mysiAccent }}>$107,250 MXN</strong>
+                    </motion.div>
+                  </td>
+                </motion.tr>
+              </motion.tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* CTA */}
+        <div style={{ textAlign: "center", paddingBottom: "6rem" }}>
+          <p style={{ color: theme.textMuted, fontSize: "1.1rem", marginBottom: "2rem" }}>
+            Construyendo el futuro de la manufactura inteligente.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  );
+}
