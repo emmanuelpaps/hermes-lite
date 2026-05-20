@@ -59,8 +59,17 @@ const GlassCard = ({ children, style = {}, borderTopColor = theme.mysiAccent }: 
 
 export default function MysiClient() {
   return (
-    <div style={{ background: theme.bgGradient, minHeight: "100vh", fontFamily: "system-ui, -apple-system, sans-serif", color: theme.textMain, overflowX: "hidden" }}>
+    <div style={{ background: theme.mysiNavy, minHeight: "100vh", fontFamily: "system-ui, -apple-system, sans-serif", color: theme.textMain, overflowX: "hidden" }}>
       
+      {/* BACKGROUND VIDEO */}
+      <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100vh", zIndex: 0, overflow: "hidden" }}>
+        <video autoPlay loop muted playsInline style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.4 }}>
+          <source src="/assets/mysi-bg.mp4" type="video/mp4" />
+        </video>
+        {/* Gradient overlay para fundir el video con el color de fondo y permitir legibilidad */}
+        <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", background: "linear-gradient(180deg, rgba(15,23,42,0.6) 0%, rgba(15,23,42,0.95) 100%)" }} />
+      </div>
+
       {/* Decorative Blur Orbs */}
       <div style={{ position: "fixed", top: "10%", left: "-10%", width: "40vw", height: "40vw", background: theme.mysiBlue, filter: "blur(150px)", opacity: 0.15, borderRadius: "50%", pointerEvents: "none" }} />
       <div style={{ position: "fixed", bottom: "10%", right: "-10%", width: "40vw", height: "40vw", background: theme.mysiAccent, filter: "blur(150px)", opacity: 0.15, borderRadius: "50%", pointerEvents: "none" }} />
