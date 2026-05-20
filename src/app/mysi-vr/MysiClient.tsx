@@ -75,27 +75,6 @@ export default function MysiClient() {
       <div style={{ position: "fixed", bottom: "10%", right: "-10%", width: "40vw", height: "40vw", background: theme.mysiAccent, filter: "blur(150px)", opacity: 0.15, borderRadius: "50%", pointerEvents: "none" }} />
 
       {/* HEADER IOS GLASSMORPHISM */}
-      <style>{`
-        @media (max-width: 600px) {
-          .mobile-header-stack {
-            flex-direction: column !important;
-            justify-content: center !important;
-            align-items: center !important;
-            gap: 1rem !important;
-            padding-top: 1.5rem !important;
-            padding-bottom: 1.5rem !important;
-          }
-          .mobile-logos-stack {
-            flex-direction: column !important;
-            justify-content: center !important;
-            align-items: center !important;
-            gap: 0.8rem !important;
-          }
-          .mobile-divider-hide {
-            display: none !important;
-          }
-        }
-      `}</style>
       <header className="mobile-header-stack" style={{ 
         position: "fixed", 
         top: 0, left: 0, right: 0, 
