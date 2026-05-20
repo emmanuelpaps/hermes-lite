@@ -82,6 +82,8 @@ export default function MysiClient() {
         display: "flex", 
         justifyContent: "space-between", 
         alignItems: "center", 
+        flexWrap: "wrap",
+        gap: "1rem",
         zIndex: 100,
         background: "rgba(15, 23, 42, 0.65)",
         backdropFilter: "blur(24px) saturate(180%)",
@@ -89,7 +91,7 @@ export default function MysiClient() {
         borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
         boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)"
       }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "clamp(0.5rem, 2vw, 1.5rem)", flexWrap: "wrap" }}>
           <img src="/assets/fn1-logo-white.png" alt="FN1" style={{ height: "24px", opacity: 0.95 }} />
           <div style={{ width: "1px", height: "24px", background: "rgba(255,255,255,0.15)" }} />
           <img src="/assets/apolograma-logo-v2.png" alt="Apolograma" style={{ height: "16px", opacity: 0.9, filter: "brightness(0) invert(1)" }} />
@@ -323,7 +325,7 @@ export default function MysiClient() {
           <p style={{ color: theme.textMuted, fontSize: "1.1rem", margin: 0 }}>
             Construyendo el futuro de la manufactura inteligente en Realidad Virtual.
           </p>
-          <div style={{ display: "flex", alignItems: "center", gap: "1.5rem", justifyContent: "center" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "clamp(0.5rem, 2vw, 1.5rem)", justifyContent: "center" }}>
             <img src="/assets/fn1-logo-white.png" alt="FN1" style={{ height: "20px", opacity: 0.5 }} />
             <div style={{ width: "1px", height: "20px", background: "rgba(255,255,255,0.1)" }} />
             <img src="/assets/apolograma-logo-v2.png" alt="Apolograma" style={{ height: "14px", opacity: 0.5, filter: "brightness(0) invert(1)" }} />
