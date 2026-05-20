@@ -85,7 +85,7 @@ export default function SuperetteClient() {
         <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
           <img src="/assets/fn1-logo-white.png" alt="Frontera Número Uno" style={{ height: isScrolled ? "25px" : "30px", transition: "height 0.3s ease", filter: "brightness(0)" }} />
           <div style={{ height: "20px", width: "1px", background: "rgba(0,0,0,0.2)", margin: "0 10px" }} />
-          <img src="/assets/apolograma-logo.png" alt="Apolograma" style={{ width: isScrolled ? "180px" : "220px", height: "auto", transition: "width 0.3s ease", filter: "brightness(0)" }} />
+          <img src="/assets/apolograma-logo.png" alt="Apolograma" style={{ height: isScrolled ? "14px" : "18px", transition: "height 0.3s ease", filter: "brightness(0)" }} />
         </div>
         <div style={{ fontSize: "0.85rem", fontWeight: 600, letterSpacing: "1px", textTransform: "uppercase", color: theme.textMuted }}>
           Propuesta Confidencial
@@ -428,7 +428,7 @@ export default function SuperetteClient() {
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "1.5rem", opacity: 0.5, flexWrap: "wrap" }}>
             <img src="/assets/fn1-logo-white.png" alt="Frontera Número Uno" style={{ height: "30px", filter: "brightness(0) invert(1)" }} />
             <div style={{ height: "24px", width: "1px", background: "rgba(255,255,255,0.3)", margin: "0 10px" }} />
-            <img src="/assets/apolograma-logo.png" alt="Apolograma" style={{ width: "240px", height: "auto", filter: "brightness(0) invert(1)" }} />
+            <img src="/assets/apolograma-logo.png" alt="Apolograma" style={{ height: "20px", filter: "brightness(0) invert(1)" }} />
           </div>
           <p style={{ margin: 0, fontSize: "0.95rem", maxWidth: "500px", lineHeight: 1.6 }}>
             Este documento contiene información confidencial y propietaria. Prohibida su reproducción o distribución sin autorización expresa.
