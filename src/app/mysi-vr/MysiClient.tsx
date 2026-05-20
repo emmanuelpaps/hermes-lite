@@ -183,7 +183,7 @@ export default function MysiClient() {
                 <li><strong style={{ color: theme.mysiAccent }}>Reporte Post-Expo:</strong> Te entregamos un análisis de conversión y material gráfico (plantillas) para dar un seguimiento altamente profesional a los leads capturados.</li>
               </ul>
             </div>
-            <div style={{ position: "relative", aspectRatio: "16/9", width: "100%", borderRadius: "16px", overflow: "hidden", background: "rgba(0,0,0,0.3)", display: "flex", alignItems: "center", justifyContent: "center", border: `1px solid rgba(255,255,255,0.2)`, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}>
+            <div style={{ position: "relative", aspectRatio: "4/5", width: "100%", borderRadius: "16px", overflow: "hidden", background: "rgba(0,0,0,0.3)", display: "flex", alignItems: "center", justifyContent: "center", border: `1px solid rgba(255,255,255,0.2)`, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}>
               <video autoPlay loop muted playsInline style={{ position: "absolute", width: "100%", height: "100%", objectFit: "cover", opacity: 0.95 }}>
                 <source src="/assets/tablet-leads-video.mp4" type="video/mp4" />
               </video>
