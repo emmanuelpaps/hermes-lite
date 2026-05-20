@@ -302,11 +302,11 @@ export default function MysiClient() {
               <p style={{ color: theme.textMuted, margin: 0 }}>Desarrollo intensivo de la Arquitectura 3D y Programación Lógica de VR.</p>
             </GlassCard>
             <GlassCard borderTopColor={theme.mysiBlue} style={{ textAlign: "center", padding: "2rem" }}>
-              <h3 style={{ fontSize: "2rem", color: theme.mysiAccent, margin: "0 0 1rem" }}>8 de Junio</h3>
+              <h3 style={{ fontSize: "2rem", color: theme.mysiAccent, margin: "0 0 1rem" }}>12 de Junio</h3>
               <p style={{ color: theme.textMuted, margin: 0 }}>Demo Beta V.1 (Pruebas de recorrido en las oficinas del cliente).</p>
             </GlassCard>
             <GlassCard borderTopColor={theme.textMain} style={{ textAlign: "center", padding: "2rem" }}>
-              <h3 style={{ fontSize: "2rem", color: theme.textMain, margin: "0 0 1rem" }}>15 de Junio</h3>
+              <h3 style={{ fontSize: "2rem", color: theme.textMain, margin: "0 0 1rem" }}>17 de Junio</h3>
               <p style={{ color: theme.textMuted, margin: 0 }}>Freeze de código, entrega final de Oculus y capacitación al equipo de ventas.</p>
             </GlassCard>
           </div>
