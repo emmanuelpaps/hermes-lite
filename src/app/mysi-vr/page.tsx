@@ -11,7 +11,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "MYSI Costa Rica | Apolograma Interactive Studio",
     description: "Desarrollo de entorno inmersivo y simulador VR.",
-    images: ["/assets/og-apolograma.png"],
+    images: [
+      {
+        url: "https://fronteranumero1.tecza.com.mx/assets/og-apolograma.png",
+        width: 615,
+        height: 445,
+        alt: "Apolograma Interactive Studio",
+      }
+    ],
   }
 };
 
