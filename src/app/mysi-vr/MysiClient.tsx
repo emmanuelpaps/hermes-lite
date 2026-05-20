@@ -159,6 +159,7 @@ export default function MysiClient() {
                 <li><strong style={{ color: theme.textMain }}>Paso 2:</strong> Le pedimos que escanee un código QR en el stand o le pasamos un iPad.</li>
                 <li><strong style={{ color: theme.textMain }}>Paso 3:</strong> Ingresa su nombre y teléfono. Esos datos se guardan en tu base de datos de inmediato.</li>
                 <li><strong style={{ color: theme.textMain }}>Paso 4:</strong> En ese mismo segundo, el sistema le envía un mensaje automático de WhatsApp a su celular con el catálogo oficial de MYSI.</li>
+                <li><strong style={{ color: theme.mysiAccent }}>Reporte Post-Expo:</strong> Te entregamos un análisis de conversión y material gráfico (plantillas) para dar un seguimiento altamente profesional a los leads capturados.</li>
               </ul>
             </div>
             <div style={{ position: "relative", height: "300px", borderRadius: "16px", overflow: "hidden", background: "rgba(0,0,0,0.3)", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -197,7 +198,8 @@ export default function MysiClient() {
             <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Referencias Visuales 3D:</strong> Fotos y videos de las 4 máquinas estáticas (VF-3 SXT, ST-15Y, Mini Mill, VF-2 SXT).</li>
             <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Máquina Interactiva:</strong> Referencias del panel de control de la HAAS VF-2SSYT y del Bar Feeder.</li>
             <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Arquitectura:</strong> Fotos y metros cuadrados exactos de la superficie de la planta en Costa Rica.</li>
-            <li><strong style={{ color: theme.textMain }}>Voiceover:</strong> Aprobación final del guion comercial de 8 diálogos antes de enviar a grabar la locución profesional.</li>
+            <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Voiceover:</strong> Aprobación final del guion comercial de 8 diálogos antes de enviar a grabar la locución profesional.</li>
+            <li><strong style={{ color: theme.textMain }}>Hardware VR:</strong> El cliente cuenta con y proveerá los visores Meta Quest para la instalación del software.</li>
           </ul>
         </GlassCard>
 
