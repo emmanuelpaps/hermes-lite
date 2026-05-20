@@ -91,10 +91,10 @@ export default function MysiClient() {
         borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
         boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)"
       }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "clamp(0.5rem, 2vw, 1.5rem)", flexWrap: "wrap" }}>
-          <img src="/assets/fn1-logo-white.png" alt="FN1" style={{ height: "24px", opacity: 0.95 }} />
-          <div style={{ width: "1px", height: "24px", background: "rgba(255,255,255,0.15)" }} />
-          <img src="/assets/apolograma-logo-v2.png" alt="Apolograma" style={{ height: "16px", opacity: 0.9, filter: "brightness(0) invert(1)" }} />
+        <div style={{ display: "flex", alignItems: "center", gap: "clamp(0.5rem, 2vw, 1.5rem)", flexWrap: "nowrap" }}>
+          <img src="/assets/fn1-logo-white.png" alt="FN1" style={{ height: "clamp(16px, 4vw, 24px)", opacity: 0.95 }} />
+          <div style={{ width: "1px", height: "clamp(16px, 4vw, 24px)", background: "rgba(255,255,255,0.15)" }} />
+          <img src="/assets/apolograma-logo-v2.png" alt="Apolograma" style={{ height: "clamp(10px, 2.5vw, 16px)", opacity: 0.9, filter: "brightness(0) invert(1)" }} />
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "8px", fontWeight: 600, color: "rgba(255,255,255,0.6)", fontSize: "0.8rem", letterSpacing: "2px", textTransform: "uppercase" }}>
           <span style={{ display: "inline-block", width: "8px", height: "8px", borderRadius: "50%", background: theme.mysiAccent, boxShadow: `0 0 10px ${theme.mysiAccent}` }}></span>
@@ -325,10 +325,10 @@ export default function MysiClient() {
           <p style={{ color: theme.textMuted, fontSize: "1.1rem", margin: 0 }}>
             Construyendo el futuro de la manufactura inteligente en Realidad Virtual.
           </p>
-          <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "clamp(0.5rem, 2vw, 1.5rem)", justifyContent: "center" }}>
-            <img src="/assets/fn1-logo-white.png" alt="FN1" style={{ height: "20px", opacity: 0.5 }} />
-            <div style={{ width: "1px", height: "20px", background: "rgba(255,255,255,0.1)" }} />
-            <img src="/assets/apolograma-logo-v2.png" alt="Apolograma" style={{ height: "14px", opacity: 0.5, filter: "brightness(0) invert(1)" }} />
+          <div style={{ display: "flex", flexWrap: "nowrap", alignItems: "center", gap: "clamp(0.5rem, 2vw, 1.5rem)", justifyContent: "center" }}>
+            <img src="/assets/fn1-logo-white.png" alt="FN1" style={{ height: "clamp(14px, 3.5vw, 20px)", opacity: 0.5 }} />
+            <div style={{ width: "1px", height: "clamp(14px, 3.5vw, 20px)", background: "rgba(255,255,255,0.1)" }} />
+            <img src="/assets/apolograma-logo-v2.png" alt="Apolograma" style={{ height: "clamp(9px, 2vw, 14px)", opacity: 0.5, filter: "brightness(0) invert(1)" }} />
           </div>
           <p style={{ color: "rgba(255,255,255,0.2)", fontSize: "0.8rem", margin: 0, letterSpacing: "1px" }}>
             © {new Date().getFullYear()} Frontera Número Uno & Apolograma. Todos los derechos reservados.
