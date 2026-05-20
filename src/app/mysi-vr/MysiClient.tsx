@@ -1,8 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight, Video, Target, Globe, ArrowRight, Download, Bot } from "lucide-react";
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 // Paleta industrial para MYSI
 const theme = {
@@ -58,8 +58,105 @@ const GlassCard = ({ children, style = {}, borderTopColor = theme.mysiAccent }: 
 );
 
 export default function MysiClient() {
+  const [loadingProgress, setLoadingProgress] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Simulación de carga realista
+  useEffect(() => {
+    const duration = 2800; // 2.8 segundos
+    const intervalTime = 30;
+    const steps = duration / intervalTime;
+
+    const timer = setInterval(() => {
+      setLoadingProgress((prev) => {
+        const baseAdvance = 100 / steps;
+        // Pausas aleatorias para que no se vea tan lineal, simulando descarga de videos
+        const randomSlowdown = Math.random() > 0.6 ? 0 : baseAdvance * 1.8;
+        const next = Math.min(100, prev + randomSlowdown);
+        
+        if (next >= 100) {
+          clearInterval(timer);
+          setTimeout(() => setIsLoading(false), 600); // Pausa en 100% para leer
+          return 100;
+        }
+        return next;
+      });
+    }, intervalTime);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  // Bloquear scroll mientras carga
+  useEffect(() => {
+    if (isLoading) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [isLoading]);
+
   return (
-    <div style={{ background: theme.mysiNavy, minHeight: "100vh", fontFamily: "system-ui, -apple-system, sans-serif", color: theme.textMain, overflowX: "hidden" }}>
+    <>
+      {/* LOADING SCREEN OVELAY */}
+      <AnimatePresence>
+        {isLoading && (
+          <motion.div 
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0, filter: "blur(10px)" }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            style={{
+              position: "fixed",
+              top: 0, left: 0, right: 0, bottom: 0,
+              background: theme.bgGradient,
+              zIndex: 99999,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "#FFF"
+            }}
+          >
+            <motion.div 
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              style={{ marginBottom: "2rem", display: "flex", alignItems: "center", gap: "1.5rem" }}
+            >
+              <img src="/assets/fn1-logo-white.png" alt="FN1" style={{ height: "45px", opacity: 0.9 }} />
+              <div style={{ width: "1px", height: "35px", background: "rgba(255,255,255,0.2)" }} />
+              <img src="/assets/apolograma-logo-v2.png" alt="Apolograma" style={{ height: "22px", opacity: 0.9, filter: "brightness(0) invert(1)" }} />
+            </motion.div>
+            
+            <div style={{ fontSize: "5rem", fontWeight: 700, fontFamily: "system-ui", color: theme.mysiAccent, letterSpacing: "-2px" }}>
+              {Math.floor(loadingProgress)}%
+            </div>
+            
+            <div style={{ width: "260px", height: "4px", background: "rgba(255,255,255,0.1)", marginTop: "1.5rem", borderRadius: "4px", overflow: "hidden", position: "relative" }}>
+              <motion.div 
+                style={{ 
+                  position: "absolute", top: 0, left: 0, bottom: 0,
+                  background: `linear-gradient(90deg, ${theme.mysiBlue}, ${theme.mysiAccent})`,
+                  boxShadow: `0 0 12px ${theme.mysiAccent}`
+                }}
+                initial={{ width: "0%" }}
+                animate={{ width: `${loadingProgress}%` }}
+                transition={{ ease: "easeOut", duration: 0.1 }}
+              />
+            </div>
+            
+            <motion.div 
+              animate={{ opacity: [0.4, 1, 0.4] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              style={{ marginTop: "2rem", color: theme.textMuted, fontSize: "0.85rem", letterSpacing: "3px", textTransform: "uppercase" }}
+            >
+              Cargando Entorno VR...
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div style={{ background: theme.mysiNavy, minHeight: "100vh", fontFamily: "system-ui, -apple-system, sans-serif", color: theme.textMain, overflowX: "hidden" }}>
       
       {/* BACKGROUND VIDEO */}
       <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100vh", zIndex: 0, overflow: "hidden" }}>
@@ -334,5 +431,6 @@ export default function MysiClient() {
       </div>
 
     </div>
+    </>
   );
 }
