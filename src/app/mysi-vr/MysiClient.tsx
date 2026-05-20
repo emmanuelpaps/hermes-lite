@@ -132,12 +132,12 @@ export default function MysiClient() {
                 <p style={{ color: theme.textMuted, fontSize: "1.2rem", lineHeight: 1.7 }}>
                   Desarrollado con la misma tecnología usada en videojuegos de última generación (Unity 3D). Diseñamos el recorrido para que dure <strong>máximo 10 minutos</strong>, asegurando que cientos de personas en la expo puedan probarlo sin causar cuellos de botella.
                 </p>
-                <div style={{ marginTop: "2rem", borderRadius: "16px", overflow: "hidden", position: "relative", height: "220px", border: `1px solid rgba(255,255,255,0.1)` }}>
+                <div style={{ marginTop: "2rem", borderRadius: "16px", overflow: "hidden", position: "relative", aspectRatio: "16/9", width: "100%", border: `1px solid rgba(255,255,255,0.2)`, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}>
                   <video autoPlay loop muted playsInline style={{ width: "100%", height: "100%", objectFit: "cover" }}>
                     <source src="/assets/leads-video.mp4" type="video/mp4" />
                   </video>
-                  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(0deg, rgba(15,23,42,0.8) 0%, transparent 60%)" }} />
-                  <div style={{ position: "absolute", bottom: "1rem", left: "1.5rem", color: "#FFF", fontWeight: 600, fontSize: "1.1rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(0deg, rgba(15,23,42,0.6) 0%, transparent 40%)" }} />
+                  <div style={{ position: "absolute", bottom: "1.5rem", left: "1.5rem", color: "#FFF", fontWeight: 600, fontSize: "1.1rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
                     <span style={{ display: "inline-block", width: "8px", height: "8px", borderRadius: "50%", background: theme.mysiAccent, boxShadow: `0 0 10px ${theme.mysiAccent}` }}></span>
                     Simulación Activa
                   </div>
@@ -183,11 +183,11 @@ export default function MysiClient() {
                 <li><strong style={{ color: theme.mysiAccent }}>Reporte Post-Expo:</strong> Te entregamos un análisis de conversión y material gráfico (plantillas) para dar un seguimiento altamente profesional a los leads capturados.</li>
               </ul>
             </div>
-            <div style={{ position: "relative", height: "300px", borderRadius: "16px", overflow: "hidden", background: "rgba(0,0,0,0.3)", display: "flex", alignItems: "center", justifyContent: "center", border: `1px solid rgba(255,255,255,0.1)` }}>
-              <video autoPlay loop muted playsInline style={{ position: "absolute", width: "100%", height: "100%", objectFit: "cover", opacity: 0.8 }}>
+            <div style={{ position: "relative", aspectRatio: "16/9", width: "100%", borderRadius: "16px", overflow: "hidden", background: "rgba(0,0,0,0.3)", display: "flex", alignItems: "center", justifyContent: "center", border: `1px solid rgba(255,255,255,0.2)`, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}>
+              <video autoPlay loop muted playsInline style={{ position: "absolute", width: "100%", height: "100%", objectFit: "cover", opacity: 0.95 }}>
                 <source src="/assets/tablet-leads-video.mp4" type="video/mp4" />
               </video>
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(0deg, rgba(15,23,42,0.9) 0%, rgba(15,23,42,0.3) 100%)" }} />
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(0deg, rgba(15,23,42,0.6) 0%, transparent 40%)" }} />
               <div style={{ textAlign: "center", zIndex: 1, position: "absolute", bottom: "1.5rem" }}>
                 <h3 style={{ margin: 0, fontSize: "1.5rem", fontWeight: 600, color: "#FFF" }}>Captura Segura de Leads</h3>
               </div>
