@@ -126,15 +126,15 @@ export default function MysiClient() {
                 <div style={{ display: "flex", gap: "1.5rem", alignItems: "flex-start", background: "rgba(0,0,0,0.2)", padding: "1.5rem", borderRadius: "16px" }}>
                   <div style={{ background: "rgba(56, 189, 248, 0.1)", padding: "12px", borderRadius: "12px", color: theme.mysiAccent }}><Target size={24} /></div>
                   <div>
-                    <strong style={{ display: "block", fontSize: "1.2rem", marginBottom: "0.5rem" }}>4 Estaciones de Exhibición (Visita Guiada)</strong>
-                    <span style={{ color: theme.textMuted, lineHeight: 1.5 }}>Recreamos tus máquinas reales en 3D (CMM, Electroerosión, etc.). Mientras el usuario las observa, una voz profesional (Voiceover) y paneles flotantes con fotos reales le explican las ventajas competitivas de cada máquina.</span>
+                    <strong style={{ display: "block", fontSize: "1.2rem", marginBottom: "0.5rem" }}>4 Estaciones de Exhibición (Serie HAAS)</strong>
+                    <span style={{ color: theme.textMuted, lineHeight: 1.5 }}>Recreamos tu piso de producción en 3D. El recorrido incluye el <strong>HAAS VF-3 SXT</strong> (Maquinado pesado), <strong>HAAS ST-15Y</strong> (Torneado), <strong>Haas Mini Mill</strong> y <strong>VF-2 SXT</strong>. Una voz narrará el valor y las ventajas operativas de cada equipo.</span>
                   </div>
                 </div>
                 <div style={{ display: "flex", gap: "1.5rem", alignItems: "flex-start", background: "rgba(0,0,0,0.2)", padding: "1.5rem", borderRadius: "16px" }}>
                   <div style={{ background: "rgba(37, 99, 235, 0.2)", padding: "12px", borderRadius: "12px", color: theme.mysiBlue }}><Bot size={24} /></div>
                   <div>
-                    <strong style={{ display: "block", fontSize: "1.2rem", marginBottom: "0.5rem" }}>1 Simulador Interactivo (Minijuego CNC)</strong>
-                    <span style={{ color: theme.textMuted, lineHeight: 1.5 }}>La joya de la corona. El prospecto usa sus propias manos virtuales para operar los botones de una máquina HAAS CNC, experimentando la precisión de MYSI de forma divertida y memorable.</span>
+                    <strong style={{ display: "block", fontSize: "1.2rem", marginBottom: "0.5rem" }}>Simulador Interactivo: HAAS VF-2SSYT</strong>
+                    <span style={{ color: theme.textMuted, lineHeight: 1.5 }}>La joya de la corona. El prospecto usa sus manos virtuales para presionar el botón de inicio de esta máquina de supervelocidad, detonando una animación realista del maquinado de alta precisión.</span>
                   </div>
                 </div>
               </div>
@@ -194,10 +194,10 @@ export default function MysiClient() {
         <GlassCard borderTopColor={theme.mysiBlue} style={{ marginBottom: "5rem" }}>
           <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.8rem" }}>Requerimientos Técnicos (A proveer por MYSI)</h3>
           <ul style={{ paddingLeft: "1.2rem", color: theme.textMuted, lineHeight: 1.8, fontSize: "1.1rem", margin: "1.5rem 0 0" }}>
-            <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Referencias Visuales 3D:</strong> Fotos y videos de las 4 máquinas (todos los ángulos posibles) para el modelado fotorealista.</li>
-            <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Máquina Interactiva:</strong> Fotos, videos y detalles exactos de qué hace cada botón en la máquina interactiva.</li>
-            <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Arquitectura:</strong> Fotos y dimensiones aproximadas del plano de la planta en Costa Rica.</li>
-            <li><strong style={{ color: theme.textMain }}>Voiceover Técnico:</strong> Apoyo técnico para validar el guion (ventajas técnicas de las máquinas) antes de grabar el audio.</li>
+            <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Referencias Visuales 3D:</strong> Fotos y videos de las 4 máquinas estáticas (VF-3 SXT, ST-15Y, Mini Mill, VF-2 SXT).</li>
+            <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Máquina Interactiva:</strong> Referencias del panel de control de la HAAS VF-2SSYT y del Bar Feeder.</li>
+            <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Arquitectura:</strong> Fotos y metros cuadrados exactos de la superficie de la planta en Costa Rica.</li>
+            <li><strong style={{ color: theme.textMain }}>Voiceover:</strong> Aprobación final del guion comercial de 8 diálogos antes de enviar a grabar la locución profesional.</li>
           </ul>
         </GlassCard>
 
@@ -223,9 +223,9 @@ export default function MysiClient() {
                   <td style={{ padding: "clamp(1rem, 3vw, 2rem)", background: "rgba(0,0,0,0.3)", verticalAlign: "top" }}>
                     <strong style={{ color: theme.mysiAccent }}>Modelado Físico y Estructura:</strong>
                     <ul style={{ paddingLeft: "1.2rem", marginTop: "0.8rem", color: theme.textMuted, lineHeight: 1.6 }}>
-                      <li>Modelado en 3D de las 4 máquinas estáticas (Exhibición).</li>
-                      <li>Modelado ultra-detallado de la Máquina Interactiva.</li>
-                      <li>Diseño del entorno virtual de la planta (Piso, paredes, iluminación).</li>
+                      <li>Modelado en 3D de 4 máquinas estáticas (VF-3 SXT, ST-15Y, Mini Mill, VF-2 SXT).</li>
+                      <li>Modelado ultra-detallado de la Máquina Interactiva (VF-2SSYT y Bar Feeder).</li>
+                      <li>Diseño del entorno virtual de la planta de Costa Rica a escala.</li>
                     </ul>
                   </td>
                   <td style={{ padding: "clamp(1rem, 3vw, 2rem)", textAlign: "right", borderTopRightRadius: "16px", borderBottomRightRadius: "16px", background: "rgba(0,0,0,0.3)", verticalAlign: "top" }}>
@@ -240,9 +240,9 @@ export default function MysiClient() {
                   <td style={{ padding: "clamp(1rem, 3vw, 2rem)", background: "rgba(0,0,0,0.3)", verticalAlign: "top" }}>
                     <strong style={{ color: theme.mysiAccent }}>Interactividad y Sincronización:</strong>
                     <ul style={{ paddingLeft: "1.2rem", marginTop: "0.8rem", color: theme.textMuted, lineHeight: 1.6 }}>
-                      <li>Programación de locuciones y diálogos de bienvenida/despedida.</li>
-                      <li>Programación del "Minijuego CNC" para que reconozca las manos del usuario.</li>
-                      <li>Configuración para que el usuario pueda "caminar" o teletransportarse por la planta virtual.</li>
+                      <li>Programación de las 8 locuciones del guion y sincronización de eventos.</li>
+                      <li>Programación de la animación interactiva de la HAAS VF-2SSYT.</li>
+                      <li>Configuración del Teleport para avanzar fluidamente entre las 5 estaciones.</li>
                     </ul>
                   </td>
                   <td style={{ padding: "clamp(1rem, 3vw, 2rem)", textAlign: "right", borderTopRightRadius: "16px", borderBottomRightRadius: "16px", background: "rgba(0,0,0,0.3)", verticalAlign: "top" }}>
