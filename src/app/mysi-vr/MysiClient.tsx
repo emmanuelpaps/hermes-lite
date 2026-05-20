@@ -230,84 +230,80 @@ export default function MysiClient() {
         <div style={{ marginBottom: "5rem" }}>
           <h2 style={{ color: "#FFF", fontSize: "2.5rem", marginBottom: "3rem", textAlign: "center" }}>Desglose de Ingeniería</h2>
           
-          <div style={{ overflowX: "auto", position: "relative", zIndex: 2 }}>
-            <table style={{ width: "100%", borderCollapse: "separate", borderSpacing: "0 12px", minWidth: "600px" }}>
-              <thead>
-                <tr>
-                  <th style={{ textAlign: "left", color: theme.textMuted, fontSize: "0.9rem", fontWeight: 600, paddingBottom: "1rem", letterSpacing: "1px" }}>FASE OPERATIVA</th>
-                  <th style={{ textAlign: "left", color: theme.textMuted, fontSize: "0.9rem", fontWeight: 600, paddingBottom: "1rem", letterSpacing: "1px" }}>VOLUMEN Y ENTREGABLES</th>
-                  <th style={{ textAlign: "right", color: theme.textMuted, fontSize: "0.9rem", fontWeight: 600, paddingBottom: "1rem", letterSpacing: "1px" }}>HORAS</th>
-                </tr>
-              </thead>
-              <motion.tbody variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                
-                <motion.tr variants={tableRowAnim} style={{ borderRadius: "16px" }}>
-                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", borderTopLeftRadius: "16px", borderBottomLeftRadius: "16px", background: "rgba(0,0,0,0.3)", verticalAlign: "top" }}>
-                    <strong style={{ color: theme.textMain, fontSize: "1.2rem" }}>1. Arquitectura 3D</strong>
-                  </td>
-                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", background: "rgba(0,0,0,0.3)", verticalAlign: "top" }}>
-                    <strong style={{ color: theme.mysiAccent }}>Modelado Físico y Estructura:</strong>
-                    <ul style={{ paddingLeft: "1.2rem", marginTop: "0.8rem", color: theme.textMuted, lineHeight: 1.6 }}>
-                      <li>Modelado en 3D de 4 máquinas estáticas (VF-3 SXT, ST-15Y, Mini Mill, VF-2 SXT).</li>
-                      <li>Modelado ultra-detallado de la Máquina Interactiva (VF-2SSYT y Bar Feeder).</li>
-                      <li>Diseño del entorno virtual de la planta de Costa Rica a escala.</li>
-                    </ul>
-                  </td>
-                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", textAlign: "right", borderTopRightRadius: "16px", borderBottomRightRadius: "16px", background: "rgba(0,0,0,0.3)", verticalAlign: "top" }}>
-                    <strong style={{ fontSize: "1.3rem", color: theme.textMain }}>80 hrs</strong>
-                  </td>
-                </motion.tr>
+          <div style={{ position: "relative", zIndex: 2, display: "flex", flexDirection: "column", gap: "1rem" }}>
+            
+            <div className="grid-header">
+              <div style={{ color: theme.textMuted, fontSize: "0.9rem", fontWeight: 600, letterSpacing: "1px" }}>FASE OPERATIVA</div>
+              <div style={{ color: theme.textMuted, fontSize: "0.9rem", fontWeight: 600, letterSpacing: "1px" }}>VOLUMEN Y ENTREGABLES</div>
+              <div style={{ textAlign: "right", color: theme.textMuted, fontSize: "0.9rem", fontWeight: 600, letterSpacing: "1px" }}>HORAS</div>
+            </div>
 
-                <motion.tr variants={tableRowAnim} style={{ borderRadius: "16px" }}>
-                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", borderTopLeftRadius: "16px", borderBottomLeftRadius: "16px", background: "rgba(0,0,0,0.3)", verticalAlign: "top" }}>
-                    <strong style={{ color: theme.textMain, fontSize: "1.2rem" }}>2. Lógica VR</strong>
-                  </td>
-                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", background: "rgba(0,0,0,0.3)", verticalAlign: "top" }}>
-                    <strong style={{ color: theme.mysiAccent }}>Interactividad y Sincronización:</strong>
-                    <ul style={{ paddingLeft: "1.2rem", marginTop: "0.8rem", color: theme.textMuted, lineHeight: 1.6 }}>
-                      <li>Programación de las 8 locuciones del guion y sincronización de eventos.</li>
-                      <li>Programación de la animación interactiva de la HAAS VF-2SSYT.</li>
-                      <li>Configuración del Teleport para avanzar fluidamente entre las 5 estaciones.</li>
-                    </ul>
-                  </td>
-                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", textAlign: "right", borderTopRightRadius: "16px", borderBottomRightRadius: "16px", background: "rgba(0,0,0,0.3)", verticalAlign: "top" }}>
-                    <strong style={{ fontSize: "1.3rem", color: theme.textMain }}>50 hrs</strong>
-                  </td>
-                </motion.tr>
+            <motion.div variants={tableRowAnim} className="responsive-grid-table">
+              <div>
+                <strong style={{ color: theme.textMain, fontSize: "1.2rem" }}>1. Arquitectura 3D</strong>
+              </div>
+              <div>
+                <strong style={{ color: theme.mysiAccent }}>Modelado Físico y Estructura:</strong>
+                <ul style={{ paddingLeft: "1.2rem", marginTop: "0.8rem", color: theme.textMuted, lineHeight: 1.6 }}>
+                  <li>Modelado en 3D de 4 máquinas estáticas (VF-3 SXT, ST-15Y, Mini Mill, VF-2 SXT).</li>
+                  <li>Modelado ultra-detallado de la Máquina Interactiva (VF-2SSYT y Bar Feeder).</li>
+                  <li>Diseño del entorno virtual de la planta de Costa Rica a escala.</li>
+                </ul>
+              </div>
+              <div className="mobile-left" style={{ textAlign: "right" }}>
+                <strong style={{ fontSize: "1.3rem", color: theme.textMain }}>80 hrs</strong>
+              </div>
+            </motion.div>
 
-                <motion.tr variants={tableRowAnim} style={{ borderRadius: "16px" }}>
-                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", borderTopLeftRadius: "16px", borderBottomLeftRadius: "16px", background: "rgba(0,0,0,0.3)", verticalAlign: "top" }}>
-                    <strong style={{ color: theme.textMain, fontSize: "1.2rem" }}>3. Ecosistema de Leads</strong>
-                  </td>
-                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", background: "rgba(0,0,0,0.3)", verticalAlign: "top" }}>
-                    <strong style={{ color: theme.mysiAccent }}>Base de Datos y WhatsApp:</strong>
-                    <ul style={{ paddingLeft: "1.2rem", marginTop: "0.8rem", color: theme.textMuted, lineHeight: 1.6 }}>
-                      <li>Diseño de página web (Landing Page) atractiva para registro en iPads/Celulares.</li>
-                      <li>Creación de Base de Datos en la Nube (CRM) para almacenar prospectos seguros.</li>
-                      <li>Automatización robotizada para que WhatsApp envíe mensajes y brochures al instante 24/7.</li>
-                    </ul>
-                  </td>
-                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", textAlign: "right", borderTopRightRadius: "16px", borderBottomRightRadius: "16px", background: "rgba(0,0,0,0.3)", verticalAlign: "top" }}>
-                    <strong style={{ fontSize: "1.3rem", color: theme.textMain }}>35 hrs</strong>
-                  </td>
-                </motion.tr>
+            <motion.div variants={tableRowAnim} className="responsive-grid-table">
+              <div>
+                <strong style={{ color: theme.textMain, fontSize: "1.2rem" }}>2. Lógica VR</strong>
+              </div>
+              <div>
+                <strong style={{ color: theme.mysiAccent }}>Interactividad y Sincronización:</strong>
+                <ul style={{ paddingLeft: "1.2rem", marginTop: "0.8rem", color: theme.textMuted, lineHeight: 1.6 }}>
+                  <li>Programación de las 8 locuciones del guion y sincronización de eventos.</li>
+                  <li>Programación de la animación interactiva de la HAAS VF-2SSYT.</li>
+                  <li>Configuración del Teleport para avanzar fluidamente entre las 5 estaciones.</li>
+                </ul>
+              </div>
+              <div className="mobile-left" style={{ textAlign: "right" }}>
+                <strong style={{ fontSize: "1.3rem", color: theme.textMain }}>50 hrs</strong>
+              </div>
+            </motion.div>
 
-                <motion.tr variants={tableRowAnim}>
-                  <td colSpan={2} style={{ padding: "clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem)", textAlign: "right", verticalAlign: "middle" }}>
-                    <strong style={{ color: theme.textMuted, fontSize: "1.2rem", textTransform: "uppercase", letterSpacing: "2px" }}>Inversión Total (165 Horas)</strong>
-                  </td>
-                  <td style={{ padding: "clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem)", textAlign: "right", verticalAlign: "middle", whiteSpace: "nowrap" }}>
-                    <motion.div 
-                      initial={{ scale: 0.9, opacity: 0 }}
-                      whileInView={{ scale: 1, opacity: 1 }}
-                      transition={{ delay: 0.3, type: "spring" }}
-                    >
-                      <strong style={{ fontSize: "2rem", letterSpacing: "-1px", color: theme.mysiAccent }}>$107,250 MXN</strong>
-                    </motion.div>
-                  </td>
-                </motion.tr>
-              </motion.tbody>
-            </table>
+            <motion.div variants={tableRowAnim} className="responsive-grid-table">
+              <div>
+                <strong style={{ color: theme.textMain, fontSize: "1.2rem" }}>3. Ecosistema de Leads</strong>
+              </div>
+              <div>
+                <strong style={{ color: theme.mysiAccent }}>Base de Datos y WhatsApp:</strong>
+                <ul style={{ paddingLeft: "1.2rem", marginTop: "0.8rem", color: theme.textMuted, lineHeight: 1.6 }}>
+                  <li>Diseño de página web (Landing Page) atractiva para registro en iPads/Celulares.</li>
+                  <li>Creación de Base de Datos en la Nube (CRM) para almacenar prospectos seguros.</li>
+                  <li>Automatización robotizada para que WhatsApp envíe mensajes y brochures al instante 24/7.</li>
+                </ul>
+              </div>
+              <div className="mobile-left" style={{ textAlign: "right" }}>
+                <strong style={{ fontSize: "1.3rem", color: theme.textMain }}>35 hrs</strong>
+              </div>
+            </motion.div>
+
+            <motion.div variants={tableRowAnim} className="totals-row" style={{ background: "rgba(56, 189, 248, 0.05)", border: `1px solid ${theme.mysiAccent}`, borderRadius: "16px", marginTop: "1rem" }}>
+              <div style={{ textAlign: "right" }} className="mobile-left">
+                <strong style={{ color: theme.textMuted, fontSize: "1.2rem", textTransform: "uppercase", letterSpacing: "2px" }}>Inversión Total (165 Horas)</strong>
+              </div>
+              <div style={{ textAlign: "right" }} className="mobile-left">
+                <motion.div 
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: 0.3, type: "spring" }}
+                  style={{ display: "inline-block" }}
+                >
+                  <strong style={{ fontSize: "2rem", letterSpacing: "-1px", color: theme.mysiAccent }}>$107,250 MXN</strong>
+                </motion.div>
+              </div>
+            </motion.div>
           </div>
         </div>
 
