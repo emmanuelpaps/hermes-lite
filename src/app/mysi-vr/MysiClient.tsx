@@ -87,7 +87,7 @@ export default function MysiClient() {
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "8px", fontWeight: 600, color: "rgba(255,255,255,0.6)", fontSize: "0.8rem", letterSpacing: "2px", textTransform: "uppercase" }}>
           <span style={{ display: "inline-block", width: "8px", height: "8px", borderRadius: "50%", background: theme.mysiAccent, boxShadow: `0 0 10px ${theme.mysiAccent}` }}></span>
-          <span style={{ display: "none", '@media (min-width: 600px)': { display: "inline" } } as any}>CONFIDENCIAL</span>
+          <span>CONFIDENCIAL</span>
         </div>
       </header>
 
