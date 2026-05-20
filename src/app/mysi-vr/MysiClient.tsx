@@ -121,11 +121,12 @@ export default function MysiClient() {
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}
+              className="mobile-logos-stack"
               style={{ marginBottom: "2rem", display: "flex", alignItems: "center", gap: "1.5rem" }}
             >
-              <img src="/assets/fn1-logo-white.png" alt="FN1" style={{ height: "45px", opacity: 0.9 }} />
-              <div style={{ width: "1px", height: "35px", background: "rgba(255,255,255,0.2)" }} />
-              <img src="/assets/apolograma-logo-v2.png" alt="Apolograma" style={{ height: "22px", opacity: 0.9, filter: "brightness(0) invert(1)" }} />
+              <img src="/assets/fn1-logo-white.png" alt="FN1" style={{ height: "clamp(24px, 6vw, 45px)", opacity: 0.9 }} />
+              <div className="mobile-divider-hide" style={{ width: "1px", height: "35px", background: "rgba(255,255,255,0.2)" }} />
+              <img src="/assets/apolograma-logo-v2.png" alt="Apolograma" style={{ height: "clamp(12px, 3vw, 22px)", opacity: 0.9, filter: "brightness(0) invert(1)" }} />
             </motion.div>
             
             <div style={{ fontSize: "5rem", fontWeight: 700, fontFamily: "system-ui", color: theme.mysiAccent, letterSpacing: "-2px" }}>
