@@ -279,3 +279,32 @@ export const PremiumAudienceCard = ({
     </div>
   );
 };
+
+// --- Insight Cards (Views & Interactions) ---
+export const InsightCard = ({ title, value, increase, isLight }: { title: string, value: string, increase: string, isLight: boolean }) => {
+  return (
+    <div style={{
+      background: isLight ? 'rgba(255,255,255,0.7)' : 'rgba(20,20,20,0.4)',
+      backdropFilter: 'blur(10px)',
+      borderRadius: '24px',
+      padding: '2rem',
+      border: `1px solid ${isLight ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.05)'}`,
+      boxShadow: `inset 0 0 20px ${isLight ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.5)'}, 0 10px 30px rgba(0,0,0,0.05)`,
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      height: '100%'
+    }}>
+      <div style={{ fontSize: '1.1rem', fontWeight: 600, color: isLight ? '#333' : '#ccc' }}>{title}</div>
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.75rem', marginTop: '2rem' }}>
+        <div style={{ fontSize: '2.5rem', fontWeight: 800, color: isLight ? '#111' : '#fff', lineHeight: 1 }}>{value}</div>
+        <div style={{ color: '#10b981', fontSize: '1rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+          </svg>
+          {increase}
+        </div>
+      </div>
+    </div>
+  );
+};

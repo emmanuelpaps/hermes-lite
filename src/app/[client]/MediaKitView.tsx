@@ -3,7 +3,7 @@
 import { motion, Variants, useMotionValue, useSpring, useTransform, AnimatePresence, animate, useInView } from "framer-motion";
 import styles from "./page.module.css";
 import React, { useRef, useState, useEffect } from "react";
-import { ViralChart, ApologramaShowcase, PremiumAudienceCard } from "./EcosystemAnimations";
+import { ViralChart, ApologramaShowcase, PremiumAudienceCard, InsightCard } from "./EcosystemAnimations";
 import { CursorSpotlight } from "./CursorSpotlight";
 import Image from "next/image";
 
@@ -745,6 +745,25 @@ export default function MediaKitView({ data }: { data: ClientData }) {
               juarezPercent={63}
               elPasoPercent={32}
               isLight={isLight}
+            />
+          </motion.div>
+        </div>
+        
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', marginTop: '1.5rem' }}>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.4 }} style={{ height: '100%' }}>
+            <InsightCard 
+              title="Visualizaciones" 
+              value="70.0M" 
+              increase="50.1%" 
+              isLight={isLight} 
+            />
+          </motion.div>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.5 }} style={{ height: '100%' }}>
+            <InsightCard 
+              title="Interacciones" 
+              value="650.5K" 
+              increase="41%" 
+              isLight={isLight} 
             />
           </motion.div>
         </div>
