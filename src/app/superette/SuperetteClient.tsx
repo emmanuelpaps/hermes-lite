@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ShieldCheck, Zap, Layers, Eye, Magnet, ShoppingCart, ArrowDown } from "lucide-react";
+import { ShieldCheck, Zap, Layers, Eye, Magnet, ShoppingCart, ArrowDown, Radar, TrendingDown, Play } from "lucide-react";
 import { Outfit } from "next/font/google";
 
 const titleFont = Outfit({ subsets: ["latin"], weight: ["700", "800", "900"] });
@@ -316,21 +316,64 @@ export default function SuperetteClient() {
           <GlassCard borderTopColor={theme.superetteGreen}>
             <h3 className={titleFont.className} style={{ color: theme.textMain, marginTop: 0, fontSize: "1.8rem", fontWeight: 700 }}>Plan de Transición Exprés</h3>
             <p style={{ color: theme.textMuted, marginBottom: "2rem", fontSize: "1.1rem" }}>Empalme en 10 días sin detener su ritmo comercial.</p>
-            <ul style={{ paddingLeft: "1.2rem", color: theme.textMuted, lineHeight: 1.8, fontSize: "1.1rem" }}>
-              <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Fase 1 (Días 1-5):</strong> Auditoría, extracción de credenciales, y descarga de plantillas.</li>
-              <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Fase 2 (Días 6-9):</strong> Inmersión presencial (2 jornadas) y <em>Shadowing</em> en paralelo.</li>
-              <li><strong style={{ color: theme.textMain }}>Día 10:</strong> Toma de control total.</li>
-            </ul>
+            <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", position: "relative", paddingLeft: "10px" }}>
+              {/* Línea vertical conectora */}
+              <div style={{ position: "absolute", left: "26px", top: "20px", bottom: "20px", width: "2px", background: theme.borderSolid, zIndex: 0 }} />
+              
+              <div style={{ display: "flex", gap: "1rem", position: "relative", zIndex: 1 }}>
+                <div style={{ width: "34px", height: "34px", borderRadius: "50%", background: theme.superetteGreen, color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", fontSize: "1rem", flexShrink: 0 }}>1</div>
+                <div>
+                  <h4 style={{ margin: "0 0 0.2rem", color: theme.textMain, fontSize: "1.1rem" }}>Fase 1 (Días 1-5)</h4>
+                  <p style={{ margin: 0, color: theme.textMuted, fontSize: "1rem", lineHeight: 1.5 }}>Auditoría, extracción de credenciales, y descarga de plantillas.</p>
+                </div>
+              </div>
+
+              <div style={{ display: "flex", gap: "1rem", position: "relative", zIndex: 1 }}>
+                <div style={{ width: "34px", height: "34px", borderRadius: "50%", background: theme.superetteYellow, color: "#b45309", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", fontSize: "1rem", flexShrink: 0 }}>2</div>
+                <div>
+                  <h4 style={{ margin: "0 0 0.2rem", color: theme.textMain, fontSize: "1.1rem" }}>Fase 2 (Días 6-9)</h4>
+                  <p style={{ margin: 0, color: theme.textMuted, fontSize: "1rem", lineHeight: 1.5 }}>Inmersión presencial (2 jornadas) y <em>Shadowing</em> en paralelo.</p>
+                </div>
+              </div>
+
+              <div style={{ display: "flex", gap: "1rem", position: "relative", zIndex: 1 }}>
+                <div style={{ width: "34px", height: "34px", borderRadius: "50%", background: theme.textMain, color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", fontSize: "1rem", flexShrink: 0 }}>3</div>
+                <div>
+                  <h4 style={{ margin: "0 0 0.2rem", color: theme.textMain, fontSize: "1.1rem" }}>Día 10 (Takeover)</h4>
+                  <p style={{ margin: 0, color: theme.textMuted, fontSize: "1rem", lineHeight: 1.5 }}>Toma de control total de la producción.</p>
+                </div>
+              </div>
+            </div>
           </GlassCard>
 
           <GlassCard borderTopColor={theme.superetteRed}>
             <h3 className={titleFont.className} style={{ color: theme.textMain, marginTop: 0, fontSize: "1.8rem", fontWeight: 700 }}>Filosofía de Medición</h3>
             <p style={{ color: theme.textMuted, marginBottom: "2rem", fontSize: "1.1rem" }}>Monitoreo de indicadores clave (Métricas Guía) para la toma de decisiones:</p>
-            <ul style={{ paddingLeft: "1.2rem", color: theme.textMuted, lineHeight: 1.8, fontSize: "1.1rem" }}>
-              <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Alcance (Reach):</strong> Priorización de pauta geolocalizada en los radios más relevantes para cada sucursal.</li>
-              <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Costo Por Clic (CPC):</strong> Monitoreo continuo del costo de tráfico para iterar y mejorar las ofertas de fin de semana.</li>
-              <li><strong style={{ color: theme.textMain }}>Engagement Video:</strong> Análisis de retención en Reels para entender qué contenido conecta mejor con la audiencia local.</li>
-            </ul>
+            <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+              <div style={{ background: "#f8fafc", border: `1px solid ${theme.borderSolid}`, borderRadius: "12px", padding: "1.2rem", display: "flex", gap: "1rem", alignItems: "flex-start" }}>
+                <div style={{ background: "rgba(10,130,68,0.1)", color: theme.superetteGreen, padding: "10px", borderRadius: "8px" }}><Radar size={22} /></div>
+                <div>
+                  <h4 style={{ margin: "0 0 0.2rem", color: theme.textMain, fontSize: "1.1rem" }}>Alcance (Reach)</h4>
+                  <p style={{ margin: 0, color: theme.textMuted, fontSize: "0.95rem", lineHeight: 1.5 }}>Priorización de pauta masiva para maximizar cobertura y frecuencia en toda la ciudad.</p>
+                </div>
+              </div>
+
+              <div style={{ background: "#f8fafc", border: `1px solid ${theme.borderSolid}`, borderRadius: "12px", padding: "1.2rem", display: "flex", gap: "1rem", alignItems: "flex-start" }}>
+                <div style={{ background: "rgba(218,41,28,0.1)", color: theme.superetteRed, padding: "10px", borderRadius: "8px" }}><TrendingDown size={22} /></div>
+                <div>
+                  <h4 style={{ margin: "0 0 0.2rem", color: theme.textMain, fontSize: "1.1rem" }}>Costo Por Clic (CPC)</h4>
+                  <p style={{ margin: 0, color: theme.textMuted, fontSize: "0.95rem", lineHeight: 1.5 }}>Monitoreo continuo del costo de tráfico para iterar y mejorar las ofertas de fin de semana.</p>
+                </div>
+              </div>
+
+              <div style={{ background: "#f8fafc", border: `1px solid ${theme.borderSolid}`, borderRadius: "12px", padding: "1.2rem", display: "flex", gap: "1rem", alignItems: "flex-start" }}>
+                <div style={{ background: "rgba(250,204,21,0.15)", color: "#b45309", padding: "10px", borderRadius: "8px" }}><Play size={22} /></div>
+                <div>
+                  <h4 style={{ margin: "0 0 0.2rem", color: theme.textMain, fontSize: "1.1rem" }}>Engagement Video</h4>
+                  <p style={{ margin: 0, color: theme.textMuted, fontSize: "0.95rem", lineHeight: 1.5 }}>Análisis de retención en Reels para entender qué contenido conecta mejor con la audiencia local.</p>
+                </div>
+              </div>
+            </div>
           </GlassCard>
         </div>
 
