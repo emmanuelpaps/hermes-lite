@@ -20,66 +20,33 @@
   "storytelling": {
     "narrative": [
       {
-        "title": "Un Consultorio Top requiere una Imagen Top",
-        "content": "Dra. Denisse, sabemos que tu especialidad (armonización sin cirugía, Endolift, Radiesse) atrae a pacientes que no compiten por precio, sino por confianza y estatus. Nuestra misión no es 'manejarte las redes', sino armar a tu equipo actual con contenido gráfico y cinematográfico de clase mundial para que tu consultorio se posicione como la autoridad indiscutible en la frontera."
+        "title": "Un Consultorio Top requiere una Distribución Top",
+        "content": "Dra. Denisse, sabemos que tu especialidad atrae a pacientes que no compiten por precio, sino por confianza y estatus. Nuestra misión es potenciar tu marca, posicionándola frente a la audiencia más grande y activa de la región a través de reportajes audiovisuales y cobertura constante."
       },
       {
         "title": "La Diferencia entre Publicar y Posicionar",
-        "content": "Tu equipo interno ya hace un excelente trabajo publicando el día a día. Nosotros seremos tu Estudio Creativo de Fuerzas Especiales. Les entregaremos Renders 3D de tus tratamientos (como Juvederm o Filorga), producciones de video narrativas de alta gama y pautas masivas en Frontera Número Uno para que cada post se sienta como una revista premium."
+        "content": "Tu equipo ya hace un excelente trabajo. Nosotros seremos tu canal de difusión masiva. Distribuiremos tu mensaje de autoridad en Frontera Número Uno, asegurando que miles de clientes potenciales en Juárez y El Paso te reconozcan como la referencia número uno en medicina estética."
       }
     ],
-    "challenge": "Elevar drásticamente la calidad visual y el posicionamiento digital de tu clínica, proveyendo a tu equipo interno con contenido hiper-realista en 3D, cinematografía y activaciones presenciales para captar pacientes de alto perfil.",
+    "challenge": "Elevar drásticamente tu alcance digital y el posicionamiento de tu clínica, utilizando periodismo audiovisual y distribución masiva para captar pacientes de alto perfil.",
     "pillars": [
       {
-        "title": "Estudio Creativo Premium (Apolograma)",
-        "description": "Producción cinematográfica mensual y desarrollo de Renders 3D hiperrealistas de tus tratamientos para proyectar la máxima autoridad clínica.",
-        "image": "/assets/dra-denisse-castillo/pilar-1-v2.png"
-      },
-      {
-        "title": "Difusión Masiva (Frontera Número Uno)",
-        "description": "Redacción periodística y distribución de artículos en la red con mayor alcance de la región para atraer tráfico nuevo desde Juárez y El Paso.",
+        "title": "Cobertura Editorial (Frontera Número Uno)",
+        "description": "Redacción y distribución de publicaciones en la red con mayor alcance de la región para atraer tráfico nuevo desde Juárez y El Paso.",
         "image": "/assets/dra-denisse-castillo/pilar-3.png"
       },
       {
-        "title": "Alianzas B2B (Activaciones Wellness)",
-        "description": "¿Por qué esperar a que el paciente te busque? A través de nuestra red, organizaremos activaciones en los centros Wellness más exclusivos (estudios de Yoga y Pilates) para captar leads VIP.",
-        "image": "/assets/dra-denisse-castillo/pilar-2.png"
-      },
-      {
-        "title": "Infraestructura Tecnológica (WebApp CRM)",
-        "description": "Desarrollo de tu propia WebApp de Lealtad para digitalizar pacientes VIP, otorgar puntos y automatizar notificaciones push para recordatorios de retoques.",
-        "image": "/assets/dra-denisse-castillo/pilar-4.png"
+        "title": "Producción de Alto Impacto",
+        "description": "Desarrollo de video-reportajes producidos con formato documental o entrevista, diseñados para volverse virales en redes sociales y generar confianza en nuevos pacientes.",
+        "image": "/assets/dra-denisse-castillo/pilar-1-v2.png"
       }
     ]
   },
-  "campaignDeepDive": {
-    "title": "Músculo Gráfico: El Poder del Renderizado 3D",
-    "subtitle": "Por qué la Opción Premium cambia las reglas del juego.",
-    "influencerSection": {
-      "image": "/assets/dra-denisse-castillo/render-3d.png",
-      "description": "Una fotografía clínica informa, pero un Render 3D enamora. Al modelar tus productos estrella (jeringas, cremas, texturas) o la tecnología de tu aparatología, elevamos drásticamente el valor percibido del tratamiento ante el paciente, separándote inmediatamente de clínicas genéricas."
-    },
-    "timelines": [
-      {
-        "title": "Impacto de la Calidad 3D en la Toma de Decisión",
-        "steps": [
-          {
-            "step": "Educación Visual Avanzada",
-            "description": "Permite mostrar cómo actúa un bioestimulador o la tecnología Endolift bajo la piel de manera hiperrealista."
-          },
-          {
-            "step": "Estatus de Marca",
-            "description": "Las grandes farmacéuticas (como Allergan o Galderma) usan renders 3D para proyectar ciencia y limpieza. Tu clínica reflejará ese mismo estándar."
-          },
-          {
-            "step": "Retención de Atención",
-            "description": "Un carrusel o video animado en 3D detiene el scroll un 400% más que una fotografía estática tradicional."
-          }
-        ]
-      }
-    ],
-    "budgetTable": [],
-    "impactProjection": "Tu equipo interno recibirá esta 'Artillería Gráfica' semanalmente, permitiéndoles publicar contenido digno de una franquicia internacional sin que tú tengas que involucrarte en la dirección de arte."
+  "features": {
+    "showEcosystem": false,
+    "showAudiences": true,
+    "showPricing": true,
+    "exclusivePackages": true
   },
   "packages": {
     "fn1": [
@@ -97,11 +64,6 @@
     "apolograma": [],
     "blocks": []
   },
-  "features": {
-    "showEcosystem": true,
-    "showAudiences": true,
-    "showPricing": true,
-    "exclusivePackages": true
-  },
+
   "footerVideo": "/assets/dra-denisse-castillo/dra-reel-h264.mp4"
 }
