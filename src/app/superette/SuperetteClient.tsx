@@ -97,9 +97,8 @@ export default function SuperetteClient() {
         background: isScrolled ? "rgba(255, 255, 255, 0.85)" : "transparent",
         backdropFilter: isScrolled ? "blur(12px)" : "none",
         WebkitBackdropFilter: isScrolled ? "blur(12px)" : "none",
-        borderBottom: isScrolled ? "1px solid rgba(0,0,0,0.05)" : "none",
         transition: "all 0.3s ease",
-        padding: isScrolled ? "1rem 2rem" : "1.5rem 2rem",
+        padding: isScrolled ? "1rem clamp(1rem, 4vw, 2rem)" : "1.5rem clamp(1rem, 4vw, 2rem)",
         display: "flex", justifyContent: "space-between", alignItems: "center"
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
@@ -107,7 +106,7 @@ export default function SuperetteClient() {
           <div style={{ height: "20px", width: "1px", background: "rgba(0,0,0,0.2)", margin: "0 10px" }} />
           <img src="/assets/apolograma-logo-v2.png" alt="Apolograma" style={{ height: isScrolled ? "14px" : "18px", transition: "height 0.3s ease", filter: "brightness(0)" }} />
         </div>
-        <div style={{ fontSize: "0.85rem", fontWeight: 600, letterSpacing: "1px", textTransform: "uppercase", color: theme.textMuted }}>
+        <div style={{ fontSize: "clamp(0.6rem, 2.5vw, 0.85rem)", fontWeight: 600, letterSpacing: "1px", textTransform: "uppercase", color: theme.textMuted }}>
           Propuesta Confidencial
         </div>
       </header>
@@ -122,9 +121,9 @@ export default function SuperetteClient() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         style={{
-          position: "fixed", bottom: "30px", right: "30px", zIndex: 100,
+          position: "fixed", bottom: "clamp(15px, 4vw, 30px)", right: "clamp(15px, 4vw, 30px)", zIndex: 100,
           background: theme.textMain, color: "#fff",
-          padding: "1rem 2rem", borderRadius: "50px", fontWeight: "bold",
+          padding: "clamp(0.8rem, 3vw, 1rem) clamp(1.2rem, 5vw, 2rem)", borderRadius: "50px", fontWeight: "bold",
           textDecoration: "none", boxShadow: "0 15px 35px rgba(0,0,0,0.2)",
           display: "flex", alignItems: "center", gap: "10px",
           border: "1px solid rgba(255,255,255,0.1)"
@@ -134,7 +133,7 @@ export default function SuperetteClient() {
       </motion.a>
 
       {/* Hero Section */}
-      <div style={{ position: "relative", padding: "12rem 2rem 8rem", textAlign: "center", zIndex: 1, overflow: "hidden", minHeight: "80vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div style={{ position: "relative", padding: "clamp(8rem, 20vh, 12rem) clamp(1rem, 5vw, 2rem) clamp(4rem, 10vh, 8rem)", textAlign: "center", zIndex: 1, overflow: "hidden", minHeight: "80vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
         
         {/* Background Video */}
         <video 
@@ -216,15 +215,15 @@ export default function SuperetteClient() {
               </div>
 
               {/* Contenedor de Etiquetas Perfectamente Alineadas */}
-              <div style={{ display: "flex", gap: "1rem", marginTop: "0.5rem" }}>
+              <div style={{ display: "flex", gap: "clamp(0.2rem, 2vw, 1rem)", marginTop: "0.5rem" }}>
                 <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: "5px" }}>
-                  <span style={{ fontSize: "0.85rem", color: theme.textMuted, textAlign: "center", fontWeight: 600 }}>Marca<br/>Promedio</span>
+                  <span style={{ fontSize: "clamp(0.65rem, 2.5vw, 0.85rem)", color: theme.textMuted, textAlign: "center", fontWeight: 600 }}>Marca<br/>Promedio</span>
                 </div>
                 <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: "5px" }}>
-                  <span style={{ fontSize: "0.85rem", color: theme.textMuted, textAlign: "center", fontWeight: 600 }}>Campaña<br/>Normal</span>
+                  <span style={{ fontSize: "clamp(0.65rem, 2.5vw, 0.85rem)", color: theme.textMuted, textAlign: "center", fontWeight: 600 }}>Campaña<br/>Normal</span>
                 </div>
                 <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: "5px" }}>
-                  <span style={{ fontSize: "0.85rem", color: theme.superetteGreen, textAlign: "center", fontWeight: 800 }}>Ritmo<br/>Superette</span>
+                  <span style={{ fontSize: "clamp(0.65rem, 2.5vw, 0.85rem)", color: theme.superetteGreen, textAlign: "center", fontWeight: 800 }}>Ritmo<br/>Superette</span>
                 </div>
               </div>
 
@@ -630,7 +629,7 @@ export default function SuperetteClient() {
           <h3 className={titleFont.className} style={{ color: theme.textMain, fontSize: "2rem", marginBottom: "1rem", letterSpacing: "-1px", fontWeight: 700 }}>Proyectos Out of Scope</h3>
           <p style={{ color: theme.textMuted, fontSize: "1.2rem", maxWidth: "700px", margin: "0 auto 3rem", lineHeight: 1.6 }}>Como agencia integral, escalamos su marca cuando estén listos. Cotizados de forma independiente.</p>
           
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "1.5rem", textAlign: "left" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))", gap: "1.5rem", textAlign: "left" }}>
             {[
               { icon: <Cuboid size={20} />, title: "Renders Arquitectónicos 3D", desc: "Visualización fotorrealista para planeación, pre-venta o remodelación de nuevas sucursales." },
               { icon: <MonitorSmartphone size={20} />, title: "Desarrollo de WebApps", desc: "Plataformas a medida para gestión de capital humano, encuestas operativas o intranet corporativa." },
