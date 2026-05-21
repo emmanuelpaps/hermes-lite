@@ -46,7 +46,8 @@
     "showEcosystem": false,
     "showAudiences": true,
     "showPricing": true,
-    "exclusivePackages": true
+    "exclusivePackages": true,
+    "disableSelection": true
   },
   "packages": {
     "fn1": [

@@ -331,6 +331,7 @@ interface ClientData {
     showAudiences?: boolean;
     showPricing?: boolean;
     exclusivePackages?: boolean;
+    disableSelection?: boolean;
   };
   storytelling?: {
     narrative?: { title: string; content: string }[];
@@ -849,7 +850,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 formatPrice={formatPrice} 
                 variants={fadeUp} 
                 isOpen={true}
-                isSelectable={true}
+                isSelectable={!data.features?.disableSelection}
                 isSelected={selectedServices[service.name]}
                 onSelect={() => toggleServiceSelection(service.name)}
                 selectionType="checkbox"
@@ -949,6 +950,9 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             </h2>
             <video 
               src={data.footerVideo} 
+              autoPlay
+              muted
+              loop
               controls
               playsInline
               style={{
