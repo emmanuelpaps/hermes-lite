@@ -1102,6 +1102,22 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             <Image src="/assets/apolograma-logo-v2.png" alt="Apolograma" width={300} height={50} sizes="(max-width: 768px) 150px, 300px" className={isLight ? styles.footerApologramaLogoLight : styles.footerApologramaLogo} />
             <Image src={isLight ? "/assets/fn1-logo-purple.png" : "/assets/fn1-logo-white.png"} alt="Frontera Número Uno" width={415} height={43} sizes="(max-width: 768px) 200px, 415px" className={styles.agencyLogoImage} />
           </div>
+          
+          <div style={{ display: 'flex', gap: '1.5rem', marginTop: '1.5rem', marginBottom: '1rem', justifyContent: 'center' }}>
+            <a href="https://www.facebook.com/fronteranumberone" target="_blank" rel="noopener noreferrer" style={{ color: isLight ? '#444' : '#fff', opacity: 0.8, transition: 'opacity 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center' }} onMouseEnter={(e) => e.currentTarget.style.opacity = '1'} onMouseLeave={(e) => e.currentTarget.style.opacity = '0.8'}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+              </svg>
+            </a>
+            <a href="https://www.instagram.com/fronteranumero1/" target="_blank" rel="noopener noreferrer" style={{ color: isLight ? '#444' : '#fff', opacity: 0.8, transition: 'opacity 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center' }} onMouseEnter={(e) => e.currentTarget.style.opacity = '1'} onMouseLeave={(e) => e.currentTarget.style.opacity = '0.8'}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+          </div>
+
           <p style={{ color: isLight ? '#444' : '#ccc', fontSize: '0.85rem' }}>© {new Date().getFullYear()} Frontera Número Uno & Apolograma.</p>
           <p style={{ color: isLight ? '#444' : '#ccc', fontSize: '0.85rem' }}>Propuesta confidencial preparada exclusivamente para {data.clientName}. Vigencia: 30 días naturales.</p>
         </div>
