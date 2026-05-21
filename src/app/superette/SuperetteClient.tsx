@@ -358,7 +358,7 @@ export default function SuperetteClient() {
                 <span style={{ fontSize: "0.85rem", color: "#fff", fontWeight: 700, background: "rgba(255,255,255,0.2)", padding: "6px 14px", borderRadius: "20px" }}>Últimos 28 días</span>
               </div>
               
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "1.5rem" }}>
                 {/* Tarjeta 1: Views */}
                 <div style={{ background: "rgba(0, 0, 0, 0.4)", backdropFilter: "blur(20px)", padding: "1.5rem", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.1)", position: "relative", overflow: "hidden" }}>
                   <h4 style={{ margin: "0 0 1rem", color: "rgba(255,255,255,0.8)", fontSize: "1.1rem", fontWeight: 600 }}>Visualizaciones</h4>
@@ -395,8 +395,8 @@ export default function SuperetteClient() {
                   </div>
                   
                   <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem", position: "relative", zIndex: 2 }}>
-                    <span style={{ fontSize: "3.5rem", fontWeight: 900, color: "#fff", letterSpacing: "-2px", lineHeight: 1 }}>70.0M</span>
-                    <span style={{ fontSize: "1.2rem", fontWeight: 700, color: "#4ade80" }}>↑ 50.1%</span>
+                    <span style={{ fontSize: "clamp(2.5rem, 8vw, 3.5rem)", fontWeight: 900, color: "#fff", letterSpacing: "-2px", lineHeight: 1 }}>70.0M</span>
+                    <span style={{ fontSize: "clamp(1rem, 3vw, 1.2rem)", fontWeight: 700, color: "#4ade80" }}>↑ 50.1%</span>
                   </div>
                 </div>
 
@@ -436,8 +436,8 @@ export default function SuperetteClient() {
                   </div>
                   
                   <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem", position: "relative", zIndex: 2 }}>
-                    <span style={{ fontSize: "3.5rem", fontWeight: 900, color: "#fff", letterSpacing: "-2px", lineHeight: 1 }}>650.4K</span>
-                    <span style={{ fontSize: "1.2rem", fontWeight: 700, color: "#4ade80" }}>↑ 41%</span>
+                    <span style={{ fontSize: "clamp(2.5rem, 8vw, 3.5rem)", fontWeight: 900, color: "#fff", letterSpacing: "-2px", lineHeight: 1 }}>650.4K</span>
+                    <span style={{ fontSize: "clamp(1rem, 3vw, 1.2rem)", fontWeight: 700, color: "#4ade80" }}>↑ 41%</span>
                   </div>
                 </div>
               </div>
