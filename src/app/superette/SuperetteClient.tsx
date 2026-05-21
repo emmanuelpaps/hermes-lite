@@ -682,9 +682,9 @@ export default function SuperetteClient() {
       <footer style={{ background: theme.textMain, color: "rgba(255,255,255,0.6)", padding: "4rem 2rem", textAlign: "center", position: "relative", zIndex: 10, borderTop: "1px solid rgba(255,255,255,0.1)" }}>
         <div style={{ maxWidth: "1000px", margin: "0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: "2rem" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "1.5rem", opacity: 0.5, flexWrap: "wrap" }}>
-            <img src="/assets/fn1-logo-white.png" alt="Frontera Número Uno" style={{ height: "30px", filter: "brightness(0) invert(1)" }} />
+            <img src="/assets/fn1-logo-white.png" alt="Frontera Número Uno" style={{ height: "30px", maxWidth: "45vw", objectFit: "contain", filter: "brightness(0) invert(1)" }} />
             <div style={{ height: "24px", width: "1px", background: "rgba(255,255,255,0.3)", margin: "0 10px" }} />
-            <img src="/assets/apolograma-logo-v2.png" alt="Apolograma" style={{ height: "14px", filter: "brightness(0) invert(1)" }} />
+            <img src="/assets/apolograma-logo-v2.png" alt="Apolograma" style={{ height: "14px", maxWidth: "35vw", objectFit: "contain", filter: "brightness(0) invert(1)" }} />
           </div>
           <p style={{ margin: 0, fontSize: "0.95rem", maxWidth: "500px", lineHeight: 1.6 }}>
             Este documento contiene información confidencial y propietaria. Prohibida su reproducción o distribución sin autorización expresa.
