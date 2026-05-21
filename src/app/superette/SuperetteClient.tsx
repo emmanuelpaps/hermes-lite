@@ -3,6 +3,9 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ShieldCheck, Zap, Layers } from "lucide-react";
+import { Space_Grotesk } from "next/font/google";
+
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 
 const theme = {
   superetteGreen: "#0a8244",
@@ -138,7 +141,7 @@ export default function SuperetteClient() {
             alt="Superette Logo" 
             style={{ height: "90px", marginBottom: "2rem", objectFit: "contain", filter: "drop-shadow(0 10px 20px rgba(0,0,0,0.1)) invert(1)" }}
           />
-          <motion.h1 variants={fadeInUp} style={{ fontSize: "clamp(2.5rem, 8vw, 4.5rem)", fontWeight: 800, margin: "0 0 1.5rem", letterSpacing: "-2px", lineHeight: 1.1, color: theme.superetteGreen }}>
+          <motion.h1 variants={fadeInUp} className={spaceGrotesk.className} style={{ fontSize: "clamp(2.5rem, 8vw, 4.5rem)", fontWeight: 800, margin: "0 0 1.5rem", letterSpacing: "-2px", lineHeight: 1.1, color: theme.superetteGreen }}>
             Ingeniería Gráfica y Comercial
           </motion.h1>
           <motion.p variants={fadeInUp} style={{ fontSize: "1.4rem", color: theme.textMuted, maxWidth: "750px", margin: "0 auto", lineHeight: 1.6, fontWeight: 400 }}>
@@ -153,7 +156,7 @@ export default function SuperetteClient() {
         <GlassCard style={{ marginBottom: "3rem" }}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))", gap: "clamp(2rem, 5vw, 4rem)", alignItems: "center" }}>
             <div>
-              <h2 style={{ color: theme.superetteGreen, fontSize: "2.5rem", marginTop: 0, marginBottom: "1.5rem", position: "relative" }}>
+              <h2 className={spaceGrotesk.className} style={{ color: theme.superetteGreen, fontSize: "2.5rem", marginTop: 0, marginBottom: "1.5rem", position: "relative" }}>
                 El Desafío Operativo
               </h2>
               <p style={{ fontSize: "1.2rem", color: theme.textMuted, lineHeight: 1.8 }}>
@@ -248,7 +251,7 @@ export default function SuperetteClient() {
           
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))", gap: "clamp(2rem, 5vw, 4rem)", alignItems: "center" }}>
             <div>
-              <h2 style={{ color: theme.superetteGreen, fontSize: "2.5rem", marginTop: 0, marginBottom: "1.5rem" }}>
+              <h2 className={spaceGrotesk.className} style={{ color: theme.superetteGreen, fontSize: "2.5rem", marginTop: 0, marginBottom: "1.5rem" }}>
                 Traffic Management (Embudo)
               </h2>
               <p style={{ fontSize: "1.2rem", color: theme.textMuted, lineHeight: 1.8 }}>
@@ -294,7 +297,7 @@ export default function SuperetteClient() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 450px), 1fr))", gap: "clamp(1.5rem, 4vw, 2.5rem)", marginBottom: "5rem", position: "relative" }}>
           <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontSize: "20rem", fontWeight: 900, color: "rgba(10, 130, 68, 0.03)", pointerEvents: "none", zIndex: -1 }}>3</div>
           <GlassCard borderTopColor={theme.superetteGreen}>
-            <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.8rem" }}>Plan de Transición Exprés</h3>
+            <h3 className={spaceGrotesk.className} style={{ color: theme.textMain, marginTop: 0, fontSize: "1.8rem" }}>Plan de Transición Exprés</h3>
             <p style={{ color: theme.textMuted, marginBottom: "2rem", fontSize: "1.1rem" }}>Empalme en 10 días sin detener su ritmo comercial.</p>
             <ul style={{ paddingLeft: "1.2rem", color: theme.textMuted, lineHeight: 1.8, fontSize: "1.1rem" }}>
               <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Fase 1 (Días 1-5):</strong> Auditoría, extracción de credenciales, y descarga de plantillas.</li>
@@ -304,7 +307,7 @@ export default function SuperetteClient() {
           </GlassCard>
 
           <GlassCard borderTopColor={theme.superetteRed}>
-            <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.8rem" }}>Filosofía de Medición</h3>
+            <h3 className={spaceGrotesk.className} style={{ color: theme.textMain, marginTop: 0, fontSize: "1.8rem" }}>Filosofía de Medición</h3>
             <p style={{ color: theme.textMuted, marginBottom: "2rem", fontSize: "1.1rem" }}>Monitoreo de indicadores clave (Métricas Guía) para la toma de decisiones:</p>
             <ul style={{ paddingLeft: "1.2rem", color: theme.textMuted, lineHeight: 1.8, fontSize: "1.1rem" }}>
               <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Alcance (Reach):</strong> Priorización de pauta geolocalizada en los radios más relevantes para cada sucursal.</li>
@@ -317,7 +320,7 @@ export default function SuperetteClient() {
         {/* 4. Tablas Animadas */}
         <GlassCard style={{ marginBottom: "5rem" }}>
           <div style={{ position: "absolute", top: "-20px", right: "20px", fontSize: "15rem", fontWeight: 900, color: "rgba(10, 130, 68, 0.03)", pointerEvents: "none", lineHeight: 1 }}>4</div>
-          <h2 style={{ color: theme.superetteGreen, fontSize: "2.5rem", marginTop: 0, marginBottom: "2.5rem" }}>
+          <h2 className={spaceGrotesk.className} style={{ color: theme.superetteGreen, fontSize: "2.5rem", marginTop: 0, marginBottom: "2.5rem" }}>
             Desglose Operativo Mensual
           </h2>
           <div style={{ overflowX: "auto", position: "relative", zIndex: 2 }}>
@@ -405,7 +408,7 @@ export default function SuperetteClient() {
 
         {/* 5. Menú de Expansión */}
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp} style={{ textAlign: "center", marginBottom: "5rem" }}>
-          <h3 style={{ color: theme.textMain, fontSize: "2rem", marginBottom: "1rem", letterSpacing: "-1px" }}>Proyectos Out of Scope</h3>
+          <h3 className={spaceGrotesk.className} style={{ color: theme.textMain, fontSize: "2rem", marginBottom: "1rem", letterSpacing: "-1px" }}>Proyectos Out of Scope</h3>
           <p style={{ color: theme.textMuted, fontSize: "1.2rem", maxWidth: "700px", margin: "0 auto 3rem", lineHeight: 1.6 }}>Como agencia integral, escalamos su marca cuando estén listos. Cotizados de forma independiente.</p>
           
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "1.5rem", textAlign: "left" }}>
@@ -434,7 +437,7 @@ export default function SuperetteClient() {
 
         {/* Cierre Comercial Final */}
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp} style={{ textAlign: "center", marginBottom: "5rem", padding: "4rem 2rem", background: "rgba(10, 130, 68, 0.05)", borderRadius: "24px", border: `1px solid rgba(10, 130, 68, 0.2)` }}>
-          <h2 style={{ color: theme.superetteGreen, fontSize: "2.5rem", margin: "0 0 1rem", letterSpacing: "-1px" }}>El equipo está perfilado.</h2>
+          <h2 className={spaceGrotesk.className} style={{ color: theme.superetteGreen, fontSize: "2.5rem", margin: "0 0 1rem", letterSpacing: "-1px" }}>El equipo está perfilado.</h2>
           <p style={{ color: theme.textMuted, fontSize: "1.2rem", maxWidth: "600px", margin: "0 auto 2.5rem", lineHeight: 1.6 }}>La infraestructura gráfica y digital está lista para heredar la operación sin interrupciones ni distracciones.</p>
           <motion.a 
             href="https://wa.me/526566575959?text=Hola%20Jes%C3%BAs%2C%20revis%C3%A9%20la%20propuesta%20operativa%20de%20Superette.%20%C2%BFIniciamos%20el%20empalme%3F"
