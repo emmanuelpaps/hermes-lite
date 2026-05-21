@@ -338,14 +338,67 @@ export default function SuperetteClient() {
               </div>
             </div>
 
-            {/* Animación de Radar/Broadcast FN1 */}
-            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", position: "relative", minHeight: "350px" }}>
-              <motion.div animate={{ scale: [1, 1.5, 1], opacity: [0.1, 0, 0.1] }} transition={{ duration: 3, repeat: Infinity, ease: "easeOut" }} style={{ position: "absolute", width: "250px", height: "250px", borderRadius: "50%", border: `4px solid ${theme.superetteGreen}` }} />
-              <motion.div animate={{ scale: [1, 1.8, 1], opacity: [0.3, 0, 0.3] }} transition={{ duration: 3, delay: 1, repeat: Infinity, ease: "easeOut" }} style={{ position: "absolute", width: "200px", height: "200px", borderRadius: "50%", border: `4px solid ${theme.superetteGreen}` }} />
-              <motion.div animate={{ scale: [1, 2.2, 1], opacity: [0.5, 0, 0.5] }} transition={{ duration: 3, delay: 2, repeat: Infinity, ease: "easeOut" }} style={{ position: "absolute", width: "150px", height: "150px", borderRadius: "50%", border: `4px solid ${theme.superetteGreen}` }} />
+            {/* Dashboard de Stats Reales */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+              <div style={{ background: "#fff", padding: "1.5rem", borderRadius: "16px", boxShadow: "0 10px 30px rgba(0,0,0,0.05)", border: `1px solid ${theme.borderSolid}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <img src="/assets/fn1-logo-purple.png" alt="Frontera Numero Uno" style={{ width: "150px", height: "auto" }} />
+                <span style={{ fontSize: "0.85rem", color: theme.superetteGreen, fontWeight: 700, background: "rgba(10,130,68,0.1)", padding: "4px 12px", borderRadius: "20px" }}>Últimos 28 días</span>
+              </div>
               
-              <div style={{ background: "#fff", padding: "2.5rem", borderRadius: "24px", boxShadow: "0 20px 50px rgba(0,0,0,0.15)", zIndex: 10, position: "relative", border: `1px solid ${theme.borderSolid}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <img src="/assets/fn1-logo-purple.png" alt="Frontera Numero Uno" style={{ width: "220px", height: "auto" }} />
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+                {/* Tarjeta 1: Views */}
+                <div style={{ background: "#fff", padding: "1.5rem", borderRadius: "16px", boxShadow: "0 10px 30px rgba(0,0,0,0.05)", border: `1px solid ${theme.borderSolid}` }}>
+                  <h4 style={{ margin: "0 0 1rem", color: theme.textMain, fontSize: "1.1rem", fontWeight: 600 }}>Vistas de Video</h4>
+                  
+                  <div style={{ width: "100%", height: "50px", marginBottom: "1rem" }}>
+                    <svg viewBox="0 0 200 50" style={{ width: "100%", height: "100%", overflow: "visible" }}>
+                      <motion.polyline 
+                        initial={{ pathLength: 0, opacity: 0 }}
+                        whileInView={{ pathLength: 1, opacity: 1 }}
+                        transition={{ duration: 2, ease: "easeOut", delay: 0.2 }}
+                        viewport={{ once: true }}
+                        fill="none" 
+                        stroke="#0064e0" 
+                        strokeWidth="3" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round"
+                        points="0,30 20,40 40,25 60,35 80,20 100,25 120,35 140,20 160,30 180,40 200,10"
+                      />
+                    </svg>
+                  </div>
+                  
+                  <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem" }}>
+                    <span style={{ fontSize: "2rem", fontWeight: 900, color: theme.textMain, letterSpacing: "-1px" }}>70.0M</span>
+                    <span style={{ fontSize: "1rem", fontWeight: 700, color: theme.superetteGreen }}>↑ 50.1%</span>
+                  </div>
+                </div>
+
+                {/* Tarjeta 2: Interacciones */}
+                <div style={{ background: "#fff", padding: "1.5rem", borderRadius: "16px", boxShadow: "0 10px 30px rgba(0,0,0,0.05)", border: `1px solid ${theme.borderSolid}` }}>
+                  <h4 style={{ margin: "0 0 1rem", color: theme.textMain, fontSize: "1.1rem", fontWeight: 600 }}>Interacciones</h4>
+                  
+                  <div style={{ width: "100%", height: "50px", marginBottom: "1rem" }}>
+                    <svg viewBox="0 0 200 50" style={{ width: "100%", height: "100%", overflow: "visible" }}>
+                      <motion.polyline 
+                        initial={{ pathLength: 0, opacity: 0 }}
+                        whileInView={{ pathLength: 1, opacity: 1 }}
+                        transition={{ duration: 2, ease: "easeOut", delay: 0.4 }}
+                        viewport={{ once: true }}
+                        fill="none" 
+                        stroke="#0064e0" 
+                        strokeWidth="3" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round"
+                        points="0,20 20,35 40,30 60,40 80,25 100,30 120,45 140,35 160,20 180,25 200,15"
+                      />
+                    </svg>
+                  </div>
+                  
+                  <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem" }}>
+                    <span style={{ fontSize: "2rem", fontWeight: 900, color: theme.textMain, letterSpacing: "-1px" }}>650.4K</span>
+                    <span style={{ fontSize: "1rem", fontWeight: 700, color: theme.superetteGreen }}>↑ 41%</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
