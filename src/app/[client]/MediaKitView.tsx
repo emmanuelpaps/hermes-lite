@@ -261,7 +261,7 @@ const AccordionCard = ({ service, formatPrice, variants, isOpen, onToggle, isSel
             className={styles.accordionContent}
           >
             {service.image && (
-              <img src={service.image} alt={service.name} className={styles.accordionImage} />
+              <Image src={service.image} alt={service.name} className={styles.accordionImage} width={200} height={200} />
             )}
             <div className={styles.accordionText}>
               <p style={{ marginBottom: service.bullets ? "1.5rem" : "0" }}>
@@ -461,7 +461,6 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             <video 
               src={data.hero.backgroundVideo} 
               autoPlay loop muted playsInline preload="auto"
-              poster={data.hero.backgroundImage || undefined}
               onCanPlay={(e) => { e.currentTarget.playbackRate = 0.5; }}
               style={{
                 position: 'absolute',
@@ -543,7 +542,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.8 }}
       >
-        <img src="/assets/stickers/x-purple.png" alt="Frontera X" />
+        <Image src="/assets/stickers/x-purple.png" alt="Frontera X" width={412} height={394} />
       </motion.div>
 
       {/* Storytelling: The Narrative & Challenge */}
@@ -616,7 +615,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                       playsInline 
                     />
                   ) : (
-                    <img src={pillar.image} alt={pillar.title} className={styles.pillarImage} />
+                    <Image src={pillar.image} alt={pillar.title} className={styles.pillarImage} width={509} height={380} />
                   )
                 )}
                 <div className={styles.pillarContent}>
@@ -656,9 +655,11 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
               <div style={{ padding: '2.5rem 2.5rem 0 2.5rem', flex: 1 }}>
                 <div style={{ height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', marginBottom: '1.5rem' }}>
-                  <img 
+                  <Image 
                     src="/assets/apolograma-logo-v2.png" 
                     alt="Apolograma" 
+                    width={200}
+                    height={24}
                     style={{ 
                       height: '24px', 
                       width: 'auto',
@@ -784,7 +785,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             {/* Influencer Roster */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="glass" style={{ padding: '2rem', borderRadius: '16px', background: 'var(--card-bg)', border: '1px solid var(--glass-border)' }}>
               <h3 style={{ fontSize: '1.4rem', marginBottom: '1.5rem', color: 'var(--text-color)' }}>Roster de Influencers</h3>
-              <img src={data.campaignDeepDive.influencerSection.image} alt="Influencers" style={{ width: '100%', borderRadius: '8px', marginBottom: '1rem' }} />
+              <Image src={data.campaignDeepDive.influencerSection.image} alt="Influencers" width={800} height={600} style={{ width: '100%', height: 'auto', borderRadius: '8px', marginBottom: '1rem' }} />
               <p style={{ fontSize: '0.9rem', color: 'var(--muted-text)', lineHeight: 1.6 }}>{data.campaignDeepDive.influencerSection.description}</p>
             </motion.div>
 
@@ -1086,7 +1087,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           viewport={{ once: true }}
           transition={{ duration: 1 }}
         >
-          <img src="/assets/puerta-juarez.png" alt="Puerta Juárez" className={isLight ? styles.footerDecorationImageLight : styles.footerDecorationImage} />
+          <Image src="/assets/puerta-juarez.png" alt="Puerta Juárez" className={isLight ? styles.footerDecorationImageLight : styles.footerDecorationImage} width={150} height={183} />
         </motion.div>
         
         <div className={styles.footerContent}>
