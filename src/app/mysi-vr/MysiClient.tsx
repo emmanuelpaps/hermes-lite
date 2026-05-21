@@ -17,13 +17,18 @@ const theme = {
 };
 
 const glassCardAnim = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, staggerChildren: 0.15 } }
+};
+
+const itemAnim = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
 };
 
 const staggerContainer = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+  visible: { opacity: 1, transition: { staggerChildren: 0.2, delayChildren: 0.1 } }
 };
 
 const tableRowAnim = {
@@ -239,7 +244,7 @@ export default function MysiClient() {
             <div style={{ position: "absolute", top: "-20px", right: "20px", fontSize: "15rem", fontWeight: 900, color: "rgba(255, 255, 255, 0.02)", pointerEvents: "none", lineHeight: 1 }}>1</div>
             
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))", gap: "clamp(2rem, 5vw, 4rem)", alignItems: "center" }}>
-              <div>
+              <motion.div variants={itemAnim}>
                 <h2 style={{ color: theme.mysiAccent, fontSize: "2.5rem", marginTop: 0, marginBottom: "1.5rem", position: "relative" }}>
                   Arquitectura del Entorno VR
                 </h2>
@@ -254,8 +259,8 @@ export default function MysiClient() {
                     Simulación Activa
                   </div>
                 </div>
-              </div>
-              <div style={{ display: "grid", gap: "1.5rem" }}>
+              </motion.div>
+              <motion.div variants={itemAnim} style={{ display: "grid", gap: "1.5rem" }}>
                 <div style={{ display: "flex", gap: "1.5rem", alignItems: "flex-start", background: "rgba(0,0,0,0.2)", padding: "1.5rem", borderRadius: "16px" }}>
                   <div style={{ background: "rgba(56, 189, 248, 0.1)", padding: "12px", borderRadius: "12px", color: theme.mysiAccent }}><Target size={24} /></div>
                   <div>
@@ -270,17 +275,18 @@ export default function MysiClient() {
                     <span style={{ color: theme.textMuted, lineHeight: 1.5 }}>La joya de la corona. El prospecto usa sus manos virtuales para presionar el botón de inicio de esta máquina de supervelocidad, detonando una animación realista del maquinado de alta precisión.</span>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </GlassCard>
         </motion.div>
 
         {/* 2. EMBUDO DE FERIA (LANDING PAGE) */}
-        <GlassCard style={{ marginBottom: "5rem" }}>
-          <div style={{ position: "absolute", top: "-20px", right: "20px", fontSize: "15rem", fontWeight: 900, color: "rgba(255, 255, 255, 0.02)", pointerEvents: "none", lineHeight: 1 }}>2</div>
-          
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))", gap: "clamp(2rem, 5vw, 4rem)", alignItems: "center" }}>
-            <div>
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} style={{ marginBottom: "5rem" }}>
+          <GlassCard>
+            <div style={{ position: "absolute", top: "-20px", right: "20px", fontSize: "15rem", fontWeight: 900, color: "rgba(255, 255, 255, 0.02)", pointerEvents: "none", lineHeight: 1 }}>2</div>
+            
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))", gap: "clamp(2rem, 5vw, 4rem)", alignItems: "center" }}>
+              <motion.div variants={itemAnim}>
               <h2 style={{ color: theme.mysiAccent, fontSize: "2.5rem", marginTop: 0, marginBottom: "1.5rem" }}>
                 Embudo Automático de Ventas
               </h2>
@@ -294,16 +300,17 @@ export default function MysiClient() {
                 <li><strong style={{ color: theme.textMain }}>Paso 4:</strong> En ese mismo segundo, el sistema le envía un mensaje automático de WhatsApp a su celular con el catálogo oficial de MYSI.</li>
                 <li><strong style={{ color: theme.mysiAccent }}>Reporte Post-Expo:</strong> Te entregamos un análisis de conversión y material gráfico (plantillas) para dar un seguimiento altamente profesional a los leads capturados.</li>
               </ul>
-            </div>
-            <div style={{ position: "relative", aspectRatio: "4/5", width: "100%", borderRadius: "16px", overflow: "hidden", background: "rgba(0,0,0,0.3)", display: "flex", alignItems: "center", justifyContent: "center", border: `1px solid rgba(255,255,255,0.2)`, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}>
-              <LazyVideo src="/assets/tablet-leads-video.mp4" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.95 }} />
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(0deg, rgba(15,23,42,0.6) 0%, transparent 40%)" }} />
-              <div style={{ textAlign: "center", zIndex: 1, position: "absolute", bottom: "1.5rem" }}>
-                <h3 style={{ margin: 0, fontSize: "1.5rem", fontWeight: 600, color: "#FFF" }}>Captura Segura de Leads</h3>
-              </div>
-            </div>
+              </motion.div>
+              <motion.div variants={itemAnim} style={{ position: "relative", aspectRatio: "4/5", width: "100%", borderRadius: "16px", overflow: "hidden", background: "rgba(0,0,0,0.3)", display: "flex", alignItems: "center", justifyContent: "center", border: `1px solid rgba(255,255,255,0.2)`, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}>
+                <LazyVideo src="/assets/tablet-leads-video.mp4" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.95 }} />
+                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(0deg, rgba(15,23,42,0.6) 0%, transparent 40%)" }} />
+                <div style={{ textAlign: "center", zIndex: 1, position: "absolute", bottom: "1.5rem" }}>
+                  <h3 style={{ margin: 0, fontSize: "1.5rem", fontWeight: 600, color: "#FFF" }}>Captura Segura de Leads</h3>
+                </div>
+              </motion.div>
           </div>
         </GlassCard>
+        </motion.div>
 
         {/* 3. CRONOGRAMA */}
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} style={{ marginBottom: "5rem" }}>
@@ -325,20 +332,22 @@ export default function MysiClient() {
         </motion.div>
 
         {/* 4. REQUISITOS (NECESITAMOS) */}
-        <GlassCard borderTopColor={theme.mysiBlue} style={{ marginBottom: "5rem" }}>
-          <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.8rem" }}>Requerimientos Técnicos (A proveer por MYSI)</h3>
-          <ul style={{ paddingLeft: "1.2rem", color: theme.textMuted, lineHeight: 1.8, fontSize: "1.1rem", margin: "1.5rem 0 0" }}>
-            <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Referencias Visuales 3D:</strong> Fotos y videos de las 4 máquinas estáticas (VF-3 SXT, ST-15Y, Mini Mill, VF-2 SXT).</li>
-            <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Máquina Interactiva:</strong> Referencias del panel de control de la HAAS VF-2SSYT y del Bar Feeder.</li>
-            <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Arquitectura:</strong> Fotos y metros cuadrados exactos de la superficie de la planta en Costa Rica.</li>
-            <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Voiceover:</strong> Aprobación final del guion comercial de 8 diálogos antes de enviar a grabar la locución profesional.</li>
-            <li><strong style={{ color: theme.textMain }}>Hardware VR:</strong> El cliente cuenta con y proveerá los visores Meta Quest para la instalación del software.</li>
-          </ul>
-        </GlassCard>
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} style={{ marginBottom: "5rem" }}>
+          <GlassCard borderTopColor={theme.mysiBlue}>
+            <motion.h3 variants={itemAnim} style={{ color: theme.textMain, marginTop: 0, fontSize: "1.8rem" }}>Requerimientos Técnicos (A proveer por MYSI)</motion.h3>
+            <motion.ul variants={itemAnim} style={{ paddingLeft: "1.2rem", color: theme.textMuted, lineHeight: 1.8, fontSize: "1.1rem", margin: "1.5rem 0 0" }}>
+              <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Referencias Visuales 3D:</strong> Fotos y videos de las 4 máquinas estáticas (VF-3 SXT, ST-15Y, Mini Mill, VF-2 SXT).</li>
+              <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Máquina Interactiva:</strong> Referencias del panel de control de la HAAS VF-2SSYT y del Bar Feeder.</li>
+              <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Arquitectura:</strong> Fotos y metros cuadrados exactos de la superficie de la planta en Costa Rica.</li>
+              <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Voiceover:</strong> Aprobación final del guion comercial de 8 diálogos antes de enviar a grabar la locución profesional.</li>
+              <li><strong style={{ color: theme.textMain }}>Hardware VR:</strong> El cliente cuenta con y proveerá los visores Meta Quest para la instalación del software.</li>
+            </motion.ul>
+          </GlassCard>
+        </motion.div>
 
         {/* 5. TABLA DE INVERSIÓN */}
-        <div style={{ marginBottom: "5rem" }}>
-          <h2 style={{ color: "#FFF", fontSize: "2.5rem", marginBottom: "3rem", textAlign: "center" }}>Desglose de Ingeniería</h2>
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} style={{ marginBottom: "5rem" }}>
+          <motion.h2 variants={itemAnim} style={{ color: "#FFF", fontSize: "2.5rem", marginBottom: "3rem", textAlign: "center" }}>Desglose de Ingeniería</motion.h2>
           
           <div style={{ position: "relative", zIndex: 2, display: "flex", flexDirection: "column", gap: "1rem" }}>
             
@@ -415,7 +424,7 @@ export default function MysiClient() {
               </div>
             </motion.div>
           </div>
-        </div>
+        </motion.div>
 
         {/* FOOTER IOS */}
         <footer style={{ 
