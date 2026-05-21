@@ -579,7 +579,7 @@ export default function SuperetteClient() {
                   <li>Redacción de Notas Corporativas PR (4)</li>
                   <li>Producción de Reels In-Situ (2)</li>
                   <li>Transmisiones En Vivo (2)</li>
-                  <li>Gestión de Pauta (Meta Ads y Google Ads)</li>
+                  <li>Gestión de Pauta (Meta, Google, TikTok y OpenAI [Fase Beta])</li>
                 </ul>
                 <div style={{ display: "inline-block", background: "rgba(218, 41, 28, 0.1)", color: theme.superetteRed, padding: "6px 12px", borderRadius: "6px", fontSize: "0.85rem", marginTop: "1rem", fontWeight: "bold" }}>
                   El Ad Spend corre por cuenta de Superette.
