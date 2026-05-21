@@ -84,87 +84,18 @@
   "packages": {
     "fn1": [
       {
-        "name": "Publicación con narrativa ambas redes Fb/Ins",
+        "name": "Publicación (Facebook, Instagram e Historias)",
         "price": 7500,
-        "description": "Distribución mensual de la marca en la red masiva de Frontera Número Uno en ambas plataformas."
-      },
-      {
-        "name": "Publicación con narrativa solo en Facebook",
-        "price": 4500,
-        "description": "Distribución de un artículo narrativo exclusivamente en la fanpage oficial."
+        "description": "Distribución mensual de la marca en la red masiva de Frontera Número Uno en ambas plataformas, incluyendo el formato de historias."
       },
       {
         "name": "Video producido",
         "price": 12500,
         "description": "Desarrollo y publicación de un reportaje en video de alto impacto para distribución masiva."
-      },
-      {
-        "name": "Transmisión en vivo",
-        "price": 6000,
-        "description": "Transmisión en directo (Live) desde tu consultorio para interactuar con la audiencia fronteriza en tiempo real."
-      },
-      {
-        "name": "Historia",
-        "price": 2000,
-        "description": "Publicación temporal de 24 horas para mantener presencia y dirigir tráfico rápido."
       }
     ],
-    "apolograma": [
-      {
-        "name": "Opción A: Estudio Creativo Premium (3D + Video)",
-        "price": 37500,
-        "description": "La máxima calidad visual. Equipamos a tu clínica con gráficos hiperrealistas y cinematografía.",
-        "bullets": [
-          "5 a 6 Diseños Semanales Nivel Premium (Incluye modelado y renderizado 3D de productos/aparatos).",
-          "1 Video Clínico Mensual Producido (Grabación y edición cinematográfica para reels/ads).",
-          "Reporte Mensual de Resultados y Calendarización Estratégica con tu equipo interno."
-        ]
-      },
-      {
-        "name": "Opción B: Estudio Creativo Estándar (Video + Vectorial)",
-        "price": 27500,
-        "description": "Alto impacto y difusión utilizando una línea gráfica estandarizada de excelencia sin renders 3D.",
-        "bullets": [
-          "5 a 6 Diseños Semanales Nivel Estándar (Gráficos vectoriales y retoque fotográfico).",
-          "1 Video Clínico Mensual Producido (Grabación y edición cinematográfica para reels/ads).",
-          "Reporte Mensual de Resultados y Calendarización Estratégica con tu equipo interno."
-        ]
-      }
-    ],
-    "blocks": [
-      {
-        "name": "Módulo 2: Infraestructura Tecnológica (Pago Único)",
-        "services": [
-          {
-            "name": "Motor de Retención y CRM (WebApp de Lealtad)",
-            "price": 65000,
-            "description": "La medicina estética vive de la recompra. Esta plataforma evita que tus pacientes vayan a otra clínica cuando necesiten su próximo retoque.",
-            "bullets": [
-              "Desarrollo de WebApp Progresiva (Instalable en teléfonos sin la fricción de la AppStore).",
-              "Base de Datos Inteligente (CRM) que rastrea cuándo caducan los tratamientos de cada paciente (ej. Botox a los 6 meses).",
-              "Notificaciones Push Automáticas: El celular del paciente vibrará recordándole agendar su retoque con un incentivo.",
-              "Sistema de Niveles VIP (Ej. Tarjeta Platinum) para gamificar el gasto del paciente y aumentar su Ticket Promedio.",
-              "Agenda Digital Privada sin intermediarios."
-            ]
-          }
-        ]
-      },
-      {
-        "name": "Módulo 3: Activaciones Offline y Relaciones Públicas",
-        "services": [
-          {
-            "name": "Embudos de Captación Offline (Activaciones B2B)",
-            "price": 10000,
-            "description": "Extracción de pacientes de alto poder adquisitivo directamente desde su entorno natural hacia tu agenda clínica.",
-            "bullets": [
-              "Organización de dinámicas exclusivas en centros Wellness top (Pilates, Yoga, Gimnasios Premium).",
-              "Captación de prospectos (leads VIP) en frío mediante muestras de valor y relaciones públicas.",
-              "Transformación de asistentes en primeras consultas garantizadas."
-            ]
-          }
-        ]
-      }
-    ]
+    "apolograma": [],
+    "blocks": []
   },
   "features": {
     "showEcosystem": true,
