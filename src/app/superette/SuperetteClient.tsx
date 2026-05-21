@@ -84,7 +84,7 @@ export default function SuperetteClient() {
   }, []);
 
   return (
-    <div style={{ backgroundColor: theme.bg, color: theme.textMain, fontFamily: "'Inter', sans-serif", minHeight: "100vh", position: "relative", overflow: "hidden" }}>
+    <div style={{ backgroundColor: theme.bg, color: theme.textMain, fontFamily: "'Inter', sans-serif", minHeight: "100vh", position: "relative", overflow: "hidden", width: "100%", maxWidth: "100vw" }}>
       
       {/* Volumetric Lights */}
       <div style={{ position: "fixed", top: "10%", left: "-10%", width: "600px", height: "600px", background: "radial-gradient(circle, rgba(10, 130, 68, 0.15) 0%, rgba(255,255,255,0) 70%)", filter: "blur(60px)", zIndex: 0, pointerEvents: "none" }} />
@@ -101,10 +101,10 @@ export default function SuperetteClient() {
         padding: isScrolled ? "1rem clamp(1rem, 4vw, 2rem)" : "1.5rem clamp(1rem, 4vw, 2rem)",
         display: "flex", justifyContent: "space-between", alignItems: "center"
       }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <img src="/assets/fn1-logo-white.png" alt="Frontera Número Uno" style={{ height: isScrolled ? "25px" : "30px", transition: "height 0.3s ease", filter: "brightness(0)" }} />
-          <div style={{ height: "20px", width: "1px", background: "rgba(0,0,0,0.2)", margin: "0 10px" }} />
-          <img src="/assets/apolograma-logo-v2.png" alt="Apolograma" style={{ height: isScrolled ? "14px" : "18px", transition: "height 0.3s ease", filter: "brightness(0)" }} />
+        <div style={{ display: "flex", alignItems: "center", gap: "clamp(0.5rem, 2vw, 1rem)" }}>
+          <img src="/assets/fn1-logo-white.png" alt="Frontera Número Uno" style={{ height: isScrolled ? "25px" : "30px", maxWidth: "35vw", objectFit: "contain", transition: "height 0.3s ease", filter: "brightness(0)" }} />
+          <div style={{ height: "20px", width: "1px", background: "rgba(0,0,0,0.2)", margin: "0 clamp(2px, 1vw, 10px)" }} />
+          <img src="/assets/apolograma-logo-v2.png" alt="Apolograma" style={{ height: isScrolled ? "14px" : "18px", maxWidth: "25vw", objectFit: "contain", transition: "height 0.3s ease", filter: "brightness(0)" }} />
         </div>
         <div style={{ fontSize: "clamp(0.6rem, 2.5vw, 0.85rem)", fontWeight: 600, letterSpacing: "1px", textTransform: "uppercase", color: theme.textMuted }}>
           Propuesta Confidencial
@@ -141,6 +141,7 @@ export default function SuperetteClient() {
           loop 
           muted 
           playsInline 
+          poster="/assets/superette/hero.png"
           style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: -2, opacity: 0.8 }}
         >
           <source src="/assets/superette-hero.mp4" type="video/mp4" />
@@ -173,7 +174,7 @@ export default function SuperetteClient() {
           
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))", gap: "clamp(2rem, 5vw, 4rem)", alignItems: "center" }}>
             <div>
-              <h2 className={titleFont.className} style={{ color: theme.superetteGreen, fontSize: "2.5rem", marginTop: 0, marginBottom: "1.5rem", position: "relative" }}>
+              <h2 className={titleFont.className} style={{ color: theme.superetteGreen, fontSize: "clamp(1.8rem, 6vw, 2.5rem)", marginTop: 0, marginBottom: "1.5rem", position: "relative" }}>
                 El Desafío Operativo
               </h2>
               <p style={{ fontSize: "1.2rem", color: theme.textMuted, lineHeight: 1.8 }}>
@@ -268,7 +269,7 @@ export default function SuperetteClient() {
           
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))", gap: "clamp(2rem, 5vw, 4rem)", alignItems: "center" }}>
             <div>
-              <h2 className={titleFont.className} style={{ color: theme.superetteGreen, fontSize: "2.5rem", marginTop: 0, marginBottom: "1.5rem" }}>
+              <h2 className={titleFont.className} style={{ color: theme.superetteGreen, fontSize: "clamp(1.8rem, 6vw, 2.5rem)", marginTop: 0, marginBottom: "1.5rem" }}>
                 Traffic Management (Embudo)
               </h2>
               <p style={{ fontSize: "1.2rem", color: theme.textMuted, lineHeight: 1.8 }}>
@@ -331,7 +332,7 @@ export default function SuperetteClient() {
           
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))", gap: "clamp(2rem, 5vw, 4rem)", alignItems: "center" }}>
             <div>
-              <h2 className={titleFont.className} style={{ color: theme.superetteGreen, fontSize: "2.5rem", marginTop: 0, marginBottom: "1.5rem" }}>
+              <h2 className={titleFont.className} style={{ color: theme.superetteGreen, fontSize: "clamp(1.8rem, 6vw, 2.5rem)", marginTop: 0, marginBottom: "1.5rem" }}>
                 Frontera Número Uno:<br/>Tu Ecosistema de Tráfico
               </h2>
               <p style={{ fontSize: "1.2rem", color: theme.textMuted, lineHeight: 1.8 }}>
@@ -548,7 +549,7 @@ export default function SuperetteClient() {
         {/* 4. Desglose Operativo */}
         <GlassCard style={{ marginBottom: "5rem" }}>
           <div style={{ position: "absolute", top: "-20px", right: "20px", fontSize: "15rem", fontWeight: 900, color: "rgba(10, 130, 68, 0.03)", pointerEvents: "none", lineHeight: 1 }}>4</div>
-          <h2 className={titleFont.className} style={{ color: theme.superetteGreen, fontSize: "2.5rem", marginTop: 0, marginBottom: "2.5rem", fontWeight: 800 }}>
+          <h2 className={titleFont.className} style={{ color: theme.superetteGreen, fontSize: "clamp(1.8rem, 6vw, 2.5rem)", marginTop: 0, marginBottom: "2.5rem", fontWeight: 800 }}>
             Desglose Operativo Mensual
           </h2>
           
@@ -617,7 +618,7 @@ export default function SuperetteClient() {
             <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ display: "flex", justifyContent: "flex-end", marginTop: "1rem" }}>
               <div style={{ background: "linear-gradient(135deg, #0f172a, #1e293b)", color: "#fff", padding: "1.5rem 2.5rem", borderRadius: "100px", display: "flex", alignItems: "center", gap: "2rem", boxShadow: "0 20px 40px rgba(15, 23, 42, 0.25)", flexWrap: "wrap", justifyContent: "center" }}>
                 <span style={{ fontSize: "1.1rem", textTransform: "uppercase", letterSpacing: "1px", opacity: 0.8, fontWeight: 600 }}>Inversión Mensual Total</span>
-                <span style={{ fontSize: "2.5rem", fontWeight: 900, letterSpacing: "-1px" }}>$235,400 MXN</span>
+                <span style={{ fontSize: "clamp(1.8rem, 6vw, 2.5rem)", fontWeight: 900, letterSpacing: "-1px" }}>$235,400 MXN</span>
               </div>
             </motion.div>
 
@@ -661,7 +662,7 @@ export default function SuperetteClient() {
 
         {/* Cierre Comercial Final */}
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp} style={{ textAlign: "center", marginBottom: "5rem", padding: "4rem 2rem", background: "rgba(10, 130, 68, 0.05)", borderRadius: "24px", border: `1px solid rgba(10, 130, 68, 0.2)` }}>
-          <h2 className={titleFont.className} style={{ color: theme.superetteGreen, fontSize: "2.5rem", margin: "0 0 1rem", letterSpacing: "-1px", fontWeight: 800 }}>El equipo está perfilado.</h2>
+          <h2 className={titleFont.className} style={{ color: theme.superetteGreen, fontSize: "clamp(1.8rem, 6vw, 2.5rem)", margin: "0 0 1rem", letterSpacing: "-1px", fontWeight: 800 }}>El equipo está perfilado.</h2>
           <p style={{ color: theme.textMuted, fontSize: "1.2rem", maxWidth: "600px", margin: "0 auto 2.5rem", lineHeight: 1.6 }}>La infraestructura gráfica y digital está lista para heredar la operación sin interrupciones ni distracciones.</p>
           <motion.a 
             href="https://wa.me/526566575959?text=Hola%20Jes%C3%BAs%2C%20revis%C3%A9%20la%20propuesta%20operativa%20de%20Superette.%20%C2%BFIniciamos%20el%20empalme%3F"
