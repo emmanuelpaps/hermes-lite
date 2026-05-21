@@ -136,39 +136,43 @@ export default function SuperetteClient() {
         
         {/* 1. El Desafío + Gráfica Animada */}
         <GlassCard style={{ marginBottom: "3rem" }}>
-          <div style={{ position: "absolute", top: "-20px", right: "20px", fontSize: "15rem", fontWeight: 900, color: "rgba(10, 130, 68, 0.03)", pointerEvents: "none", lineHeight: 1 }}>1</div>
-          
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))", gap: "clamp(2rem, 5vw, 4rem)", alignItems: "center" }}>
             <div>
               <h2 style={{ color: theme.superetteGreen, fontSize: "2.5rem", marginTop: 0, marginBottom: "1.5rem", position: "relative" }}>
                 El Desafío Operativo
               </h2>
               <p style={{ fontSize: "1.2rem", color: theme.textMuted, lineHeight: 1.8 }}>
-                Al auditar su operación, identificamos un desafío matemático: procesar más de <strong>190 artes mensuales</strong> hace que la creatividad pase a segundo plano frente a la precisión. Sabemos que un error tipográfico en una lona masiva cuesta dinero y genera fricción en piso de venta.
+                Al auditar su operación, identificamos un desafío matemático: procesar más de <strong>190 artes mensuales</strong> hace que la creatividad pase a segundo plano frente a la precisión. Sabemos que un <strong>error tipográfico</strong> en una lona masiva <strong>cuesta dinero</strong> y genera <strong>fricción en piso de venta</strong>.
               </p>
-              <div style={{ background: "rgba(255,255,255,0.5)", borderLeft: `5px solid ${theme.superetteGreen}`, padding: "1.5rem", borderRadius: "16px", marginTop: "2rem", boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.8)" }}>
-                <h4 style={{ color: theme.superetteGreen, margin: "0 0 0.5rem", fontSize: "1.2rem" }}>La Solución: Célula Operativa</h4>
-                <p style={{ margin: 0, color: theme.textMain, fontSize: "1.05rem", lineHeight: 1.6 }}>Proponemos instalar una célula de soporte que funcionará como su brazo externo. Nosotros asumimos la carga de trabajo y los costos de licencias, otorgándoles absoluta paz mental.</p>
+              <div style={{ background: "#ffffff", borderLeft: `5px solid ${theme.superetteGreen}`, padding: "1.5rem", borderRadius: "16px", marginTop: "2rem", boxShadow: "0 10px 30px rgba(0,0,0,0.08)" }}>
+                <h4 style={{ color: theme.superetteGreen, margin: "0 0 0.5rem", fontSize: "1.2rem", display: "flex", alignItems: "center", gap: "8px" }}>
+                  <ShieldCheck size={20} />
+                  La Solución: Célula Operativa
+                </h4>
+                <p style={{ margin: 0, color: theme.textMuted, fontSize: "1.05rem", lineHeight: 1.6 }}>Proponemos instalar una célula de soporte que funcionará como su brazo externo. Nosotros asumimos la carga de trabajo y los costos de licencias, otorgándoles absoluta paz mental.</p>
               </div>
             </div>
 
             {/* GRÁFICA DE BARRAS ANIMADA */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} style={{ display: "flex", flexDirection: "column", gap: "0.5rem", position: "relative" }}>
               
-              <div style={{ color: theme.textMuted, fontSize: "0.9rem", fontWeight: 600, marginBottom: "1rem" }}>Volumen de Producción (Artes / Mes)</div>
+              <div style={{ color: theme.textMuted, fontSize: "0.9rem", fontWeight: 600, marginBottom: "1rem", textAlign: "center" }}>Volumen de Producción (Artes / Mes)</div>
               
               {/* Contenedor de Barras */}
-              <div style={{ height: "250px", display: "flex", alignItems: "flex-end", gap: "1rem", borderBottom: `2px solid ${theme.textMuted}` }}>
+              <div style={{ height: "280px", display: "flex", alignItems: "flex-end", gap: "1rem", borderBottom: `2px solid ${theme.textMuted}` }}>
                 {/* Barra 1 */}
-                <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
+                <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end", alignItems: "center", gap: "8px" }}>
+                  <motion.div variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { delay: 1 } } }} style={{ fontWeight: 800, color: theme.textMain, fontSize: "1.1rem" }}>15</motion.div>
                   <motion.div variants={{ hidden: { height: 0 }, visible: { height: "30px", transition: { duration: 1, ease: "easeOut" } } }} style={{ width: "100%", background: "rgba(10, 130, 68, 0.2)", borderRadius: "8px 8px 0 0" }} />
                 </div>
                 {/* Barra 2 */}
-                <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
+                <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end", alignItems: "center", gap: "8px" }}>
+                  <motion.div variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { delay: 1 } } }} style={{ fontWeight: 800, color: theme.textMain, fontSize: "1.1rem" }}>45</motion.div>
                   <motion.div variants={{ hidden: { height: 0 }, visible: { height: "90px", transition: { duration: 1, delay: 0.2, ease: "easeOut" } } }} style={{ width: "100%", background: "rgba(250, 204, 21, 0.4)", borderRadius: "8px 8px 0 0" }} />
                 </div>
                 {/* Barra 3 (Superette) */}
-                <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
+                <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end", alignItems: "center", gap: "8px" }}>
+                  <motion.div variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0, transition: { delay: 1.2, type: "spring" } } }} style={{ background: theme.superetteGreen, color: "#fff", padding: "4px 12px", borderRadius: "20px", fontWeight: 900, fontSize: "1.2rem", boxShadow: "0 4px 12px rgba(10,130,68,0.3)", position: "relative", zIndex: 10 }}>197+</motion.div>
                   <motion.div variants={{ hidden: { height: 0 }, visible: { height: "250px", transition: { duration: 1.2, delay: 0.4, type: "spring" } } }} style={{ width: "100%", background: theme.superetteGreen, borderRadius: "8px 8px 0 0", position: "relative", boxShadow: "0 0 20px rgba(10,130,68,0.4)" }}>
                     <motion.div animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 2, repeat: Infinity }} style={{ position: "absolute", top: 0, left: 0, right: 0, height: "100%", background: "linear-gradient(to bottom, rgba(255,255,255,0.2), transparent)", borderRadius: "8px 8px 0 0" }} />
                   </motion.div>
@@ -179,15 +183,12 @@ export default function SuperetteClient() {
               <div style={{ display: "flex", gap: "1rem", marginTop: "0.5rem" }}>
                 <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: "5px" }}>
                   <span style={{ fontSize: "0.85rem", color: theme.textMuted, textAlign: "center", fontWeight: 600 }}>Marca<br/>Promedio</span>
-                  <span style={{ fontWeight: 800, color: theme.textMain }}>15</span>
                 </div>
                 <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: "5px" }}>
                   <span style={{ fontSize: "0.85rem", color: theme.textMuted, textAlign: "center", fontWeight: 600 }}>Campaña<br/>Normal</span>
-                  <span style={{ fontWeight: 800, color: theme.textMain }}>45</span>
                 </div>
                 <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: "5px" }}>
                   <span style={{ fontSize: "0.85rem", color: theme.superetteGreen, textAlign: "center", fontWeight: 800 }}>Ritmo<br/>Superette</span>
-                  <span style={{ fontWeight: 900, color: theme.superetteGreen, fontSize: "1.2rem" }}>197+</span>
                 </div>
               </div>
 
