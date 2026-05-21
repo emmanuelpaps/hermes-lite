@@ -60,7 +60,7 @@ const GlassCard = ({ children, style = {}, borderTopColor = theme.mysiAccent }: 
 // Componente para cargar videos solo cuando entran en pantalla
 const LazyVideo = ({ src, style, ...props }: any) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "200px" });
+  const isInView = useInView(ref, { once: true, margin: "1200px" });
 
   return (
     <div ref={ref} style={{ width: "100%", height: "100%", position: "absolute", inset: 0 }}>
@@ -246,7 +246,7 @@ export default function MysiClient() {
                 <p style={{ color: theme.textMuted, fontSize: "1.2rem", lineHeight: 1.7 }}>
                   Desarrollado con la misma tecnología usada en videojuegos de última generación (Unity 3D). Diseñamos el recorrido para que dure <strong>máximo 10 minutos</strong>, asegurando que cientos de personas en la expo puedan probarlo sin causar cuellos de botella.
                 </p>
-                <div style={{ marginTop: "2rem", borderRadius: "16px", overflow: "hidden", position: "relative", aspectRatio: "16/9", width: "100%", border: `1px solid rgba(255,255,255,0.2)`, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}>
+                <div style={{ marginTop: "2rem", borderRadius: "16px", overflow: "hidden", position: "relative", aspectRatio: "5/4", width: "100%", border: `1px solid rgba(255,255,255,0.2)`, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}>
                   <LazyVideo src="/assets/leads-video.mp4" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                   <div style={{ position: "absolute", inset: 0, background: "linear-gradient(0deg, rgba(15,23,42,0.6) 0%, transparent 40%)" }} />
                   <div style={{ position: "absolute", bottom: "1.5rem", left: "1.5rem", color: "#FFF", fontWeight: 600, fontSize: "1.1rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
