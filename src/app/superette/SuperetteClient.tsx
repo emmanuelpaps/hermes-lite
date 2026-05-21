@@ -338,69 +338,110 @@ export default function SuperetteClient() {
               </div>
             </div>
 
-            {/* Dashboard de Stats Reales */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-              <div style={{ background: "#fff", padding: "1.5rem", borderRadius: "16px", boxShadow: "0 10px 30px rgba(0,0,0,0.05)", border: `1px solid ${theme.borderSolid}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                <img src="/assets/fn1-logo-purple.png" alt="Frontera Numero Uno" style={{ width: "150px", height: "auto" }} />
-                <span style={{ fontSize: "0.85rem", color: theme.superetteGreen, fontWeight: 700, background: "rgba(10,130,68,0.1)", padding: "4px 12px", borderRadius: "20px" }}>Últimos 28 días</span>
+            {/* Dashboard de Stats Reales (PREMIUM DARK MODE) */}
+            <motion.div 
+              animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }} 
+              transition={{ duration: 15, ease: "linear", repeat: Infinity }}
+              style={{ 
+                display: "flex", 
+                flexDirection: "column", 
+                gap: "1.5rem", 
+                background: "linear-gradient(-45deg, #0a8244, #1a202c, #0064e0, #0a8244)", 
+                backgroundSize: "400% 400%", 
+                padding: "2rem", 
+                borderRadius: "24px", 
+                boxShadow: "0 20px 50px rgba(0,0,0,0.3)" 
+              }}>
+              
+              <div style={{ background: "rgba(255, 255, 255, 0.05)", backdropFilter: "blur(20px)", padding: "1.5rem", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <img src="/assets/fn1-logo-purple.png" alt="Frontera Numero Uno" style={{ width: "150px", height: "auto", filter: "brightness(0) invert(1)" }} />
+                <span style={{ fontSize: "0.85rem", color: "#fff", fontWeight: 700, background: "rgba(255,255,255,0.2)", padding: "6px 14px", borderRadius: "20px" }}>Últimos 28 días</span>
               </div>
               
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
                 {/* Tarjeta 1: Views */}
-                <div style={{ background: "#fff", padding: "1.5rem", borderRadius: "16px", boxShadow: "0 10px 30px rgba(0,0,0,0.05)", border: `1px solid ${theme.borderSolid}` }}>
-                  <h4 style={{ margin: "0 0 1rem", color: theme.textMain, fontSize: "1.1rem", fontWeight: 600 }}>Visualizaciones</h4>
+                <div style={{ background: "rgba(0, 0, 0, 0.3)", backdropFilter: "blur(20px)", padding: "1.5rem", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.05)", position: "relative", overflow: "hidden" }}>
+                  <h4 style={{ margin: "0 0 1rem", color: "rgba(255,255,255,0.7)", fontSize: "1.1rem", fontWeight: 600 }}>Visualizaciones</h4>
                   
-                  <div style={{ width: "100%", height: "50px", marginBottom: "1rem" }}>
-                    <svg viewBox="0 0 200 50" style={{ width: "100%", height: "100%", overflow: "visible" }}>
+                  <div style={{ width: "100%", height: "60px", marginBottom: "1rem", position: "relative" }}>
+                    <svg viewBox="0 0 200 60" style={{ width: "100%", height: "100%", overflow: "visible", filter: "drop-shadow(0 0 8px rgba(74, 222, 128, 0.6))" }}>
+                      <defs>
+                        <linearGradient id="gradViews" x1="0%" y1="0%" x2="0%" y2="100%">
+                          <stop offset="0%" stopColor="#4ade80" stopOpacity="0.4" />
+                          <stop offset="100%" stopColor="#4ade80" stopOpacity="0" />
+                        </linearGradient>
+                      </defs>
+                      <motion.path 
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ duration: 1, delay: 1 }}
+                        viewport={{ once: true, margin: "-50px" }}
+                        fill="url(#gradViews)"
+                        d="M0 40 L20 50 L40 35 L60 45 L80 30 L100 35 L120 45 L140 30 L160 40 L180 50 L200 20 L200 60 L0 60 Z"
+                      />
                       <motion.path 
                         initial={{ pathLength: 0, opacity: 0 }}
                         whileInView={{ pathLength: 1, opacity: 1 }}
                         transition={{ duration: 2.5, ease: "easeInOut", delay: 0.2 }}
                         viewport={{ once: true, margin: "-50px" }}
                         fill="none" 
-                        stroke="#0064e0" 
+                        stroke="#4ade80" 
                         strokeWidth="3" 
                         strokeLinecap="round" 
                         strokeLinejoin="round"
-                        d="M0 30 L20 40 L40 25 L60 35 L80 20 L100 25 L120 35 L140 20 L160 30 L180 40 L200 10"
+                        d="M0 40 L20 50 L40 35 L60 45 L80 30 L100 35 L120 45 L140 30 L160 40 L180 50 L200 20"
                       />
                     </svg>
                   </div>
                   
-                  <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem" }}>
-                    <span style={{ fontSize: "2rem", fontWeight: 900, color: theme.textMain, letterSpacing: "-1px" }}>70.0M</span>
-                    <span style={{ fontSize: "1rem", fontWeight: 700, color: theme.superetteGreen }}>↑ 50.1%</span>
+                  <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem", position: "relative", zIndex: 2 }}>
+                    <span style={{ fontSize: "2.2rem", fontWeight: 900, color: "#fff", letterSpacing: "-1px" }}>70.0M</span>
+                    <span style={{ fontSize: "1rem", fontWeight: 700, color: "#4ade80" }}>↑ 50.1%</span>
                   </div>
                 </div>
 
                 {/* Tarjeta 2: Interacciones */}
-                <div style={{ background: "#fff", padding: "1.5rem", borderRadius: "16px", boxShadow: "0 10px 30px rgba(0,0,0,0.05)", border: `1px solid ${theme.borderSolid}` }}>
-                  <h4 style={{ margin: "0 0 1rem", color: theme.textMain, fontSize: "1.1rem", fontWeight: 600 }}>Interacciones</h4>
+                <div style={{ background: "rgba(0, 0, 0, 0.3)", backdropFilter: "blur(20px)", padding: "1.5rem", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.05)", position: "relative", overflow: "hidden" }}>
+                  <h4 style={{ margin: "0 0 1rem", color: "rgba(255,255,255,0.7)", fontSize: "1.1rem", fontWeight: 600 }}>Interacciones</h4>
                   
-                  <div style={{ width: "100%", height: "50px", marginBottom: "1rem" }}>
-                    <svg viewBox="0 0 200 50" style={{ width: "100%", height: "100%", overflow: "visible" }}>
+                  <div style={{ width: "100%", height: "60px", marginBottom: "1rem", position: "relative" }}>
+                    <svg viewBox="0 0 200 60" style={{ width: "100%", height: "100%", overflow: "visible", filter: "drop-shadow(0 0 8px rgba(96, 165, 250, 0.6))" }}>
+                      <defs>
+                        <linearGradient id="gradInt" x1="0%" y1="0%" x2="0%" y2="100%">
+                          <stop offset="0%" stopColor="#60a5fa" stopOpacity="0.4" />
+                          <stop offset="100%" stopColor="#60a5fa" stopOpacity="0" />
+                        </linearGradient>
+                      </defs>
+                      <motion.path 
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ duration: 1, delay: 1 }}
+                        viewport={{ once: true, margin: "-50px" }}
+                        fill="url(#gradInt)"
+                        d="M0 30 L20 45 L40 40 L60 50 L80 35 L100 40 L120 55 L140 45 L160 30 L180 35 L200 25 L200 60 L0 60 Z"
+                      />
                       <motion.path 
                         initial={{ pathLength: 0, opacity: 0 }}
                         whileInView={{ pathLength: 1, opacity: 1 }}
                         transition={{ duration: 2.5, ease: "easeInOut", delay: 0.5 }}
                         viewport={{ once: true, margin: "-50px" }}
                         fill="none" 
-                        stroke="#0064e0" 
+                        stroke="#60a5fa" 
                         strokeWidth="3" 
                         strokeLinecap="round" 
                         strokeLinejoin="round"
-                        d="M0 20 L20 35 L40 30 L60 40 L80 25 L100 30 L120 45 L140 35 L160 20 L180 25 L200 15"
+                        d="M0 30 L20 45 L40 40 L60 50 L80 35 L100 40 L120 55 L140 45 L160 30 L180 35 L200 25"
                       />
                     </svg>
                   </div>
                   
-                  <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem" }}>
-                    <span style={{ fontSize: "2rem", fontWeight: 900, color: theme.textMain, letterSpacing: "-1px" }}>650.4K</span>
-                    <span style={{ fontSize: "1rem", fontWeight: 700, color: theme.superetteGreen }}>↑ 41%</span>
+                  <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem", position: "relative", zIndex: 2 }}>
+                    <span style={{ fontSize: "2.2rem", fontWeight: 900, color: "#fff", letterSpacing: "-1px" }}>650.4K</span>
+                    <span style={{ fontSize: "1rem", fontWeight: 700, color: "#60a5fa" }}>↑ 41%</span>
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </GlassCard>
 
