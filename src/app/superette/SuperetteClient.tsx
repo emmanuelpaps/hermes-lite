@@ -212,7 +212,7 @@ export default function SuperetteClient() {
                 <Zap size={32} />
               </div>
               <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.4rem", marginBottom: "1rem" }}>Velocidad Operativa</h3>
-              <p style={{ color: theme.textMuted, lineHeight: 1.6, margin: 0 }}>Tiempos de respuesta blindados (L-V 8a5). Flujos optimizados para entregas exprés de alto volumen, minimizando tiempos de espera.</p>
+              <p style={{ color: theme.textMuted, lineHeight: 1.6, margin: 0 }}>Optimizamos la línea de producción para ir a la velocidad del retail. Garantizamos entregas ágiles de alto volumen para que tus ofertas nunca lleguen tarde a tienda.</p>
             </div>
           </GlassCard>
           <GlassCard borderTopColor={theme.superetteYellow}>
