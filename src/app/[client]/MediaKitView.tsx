@@ -567,9 +567,9 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                   className="glass"
                   style={{ marginBottom: '2.5rem', padding: '2.5rem', position: 'relative', zIndex: 10 }}
                 >
-                  <h3 style={{ fontSize: '1.5rem', color: isLight ? '#222' : '#fff', marginBottom: '1rem', fontWeight: 700 }}>
+                  <h2 style={{ fontSize: '1.5rem', color: isLight ? '#222' : '#fff', marginBottom: '1rem', fontWeight: 700 }}>
                     {block.title}
-                  </h3>
+                  </h2>
                   <p 
                     style={{ fontSize: '1.1rem', color: isLight ? '#555' : '#aaa', lineHeight: 1.6 }}
                     dangerouslySetInnerHTML={{ __html: block.content }}
@@ -1102,8 +1102,8 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             <Image src="/assets/apolograma-logo-v2.png" alt="Apolograma" width={300} height={50} sizes="(max-width: 768px) 150px, 300px" className={isLight ? styles.footerApologramaLogoLight : styles.footerApologramaLogo} />
             <Image src={isLight ? "/assets/fn1-logo-purple.png" : "/assets/fn1-logo-white.png"} alt="Frontera Número Uno" width={415} height={43} sizes="(max-width: 768px) 200px, 415px" className={styles.agencyLogoImage} />
           </div>
-          <p>© {new Date().getFullYear()} Frontera Número Uno & Apolograma.</p>
-          <p>Propuesta confidencial preparada exclusivamente para {data.clientName}. Vigencia: 30 días naturales.</p>
+          <p style={{ color: isLight ? '#444' : '#ccc', fontSize: '0.85rem' }}>© {new Date().getFullYear()} Frontera Número Uno & Apolograma.</p>
+          <p style={{ color: isLight ? '#444' : '#ccc', fontSize: '0.85rem' }}>Propuesta confidencial preparada exclusivamente para {data.clientName}. Vigencia: 30 días naturales.</p>
         </div>
       </footer>
     </main>
