@@ -249,8 +249,18 @@ export default function MysiClient() {
                   Arquitectura del Entorno VR
                 </h2>
                 <p style={{ color: theme.textMuted, fontSize: "1.2rem", lineHeight: 1.7 }}>
-                  Desarrollado con la misma tecnología usada en videojuegos de última generación (Unity 3D). Diseñamos el recorrido para que dure <strong>máximo 10 minutos</strong>, asegurando que cientos de personas en la expo puedan probarlo sin causar cuellos de botella.
+                  Desarrollado con la misma tecnología usada en videojuegos de última generación (Unity 3D). Contará con dos modalidades de visualización para adaptarse al flujo de gente en el stand:
                 </p>
+                <div style={{ display: "flex", flexDirection: "column", gap: "1rem", marginTop: "1.5rem" }}>
+                  <div style={{ background: "rgba(255,255,255,0.05)", padding: "1rem", borderRadius: "12px", borderLeft: `4px solid ${theme.mysiAccent}` }}>
+                    <strong style={{ color: "#FFF", display: "block", marginBottom: "0.5rem" }}>Modo Full-Interact (10 minutos)</strong>
+                    <span style={{ color: theme.textMuted, fontSize: "1rem", lineHeight: 1.5 }}>Recorrido completo con interacciones y mecánicas de simuladores de la maquinaria.</span>
+                  </div>
+                  <div style={{ background: "rgba(255,255,255,0.05)", padding: "1rem", borderRadius: "12px", borderLeft: `4px solid ${theme.mysiBlue}` }}>
+                    <strong style={{ color: "#FFF", display: "block", marginBottom: "0.5rem" }}>Modo Express Tour (2 minutos)</strong>
+                    <span style={{ color: theme.textMuted, fontSize: "1rem", lineHeight: 1.5 }}>Recorrido visual guiado y rápido por las instalaciones sin interacciones, ideal para momentos de alto tráfico.</span>
+                  </div>
+                </div>
                 <div style={{ marginTop: "2rem", borderRadius: "16px", overflow: "hidden", position: "relative", aspectRatio: "4/5", width: "100%", border: `1px solid rgba(255,255,255,0.2)`, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}>
                   <LazyVideo src="/assets/leads-video.mp4" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                   <div style={{ position: "absolute", inset: 0, background: "linear-gradient(0deg, rgba(15,23,42,0.6) 0%, transparent 40%)" }} />
@@ -340,7 +350,8 @@ export default function MysiClient() {
               <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Máquina Interactiva:</strong> Referencias del panel de control de la HAAS VF-2SSYT y del Bar Feeder.</li>
               <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Arquitectura:</strong> Fotos y metros cuadrados exactos de la superficie de la planta en Costa Rica.</li>
               <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Voiceover:</strong> Aprobación final del guion comercial de 8 diálogos antes de enviar a grabar la locución profesional.</li>
-              <li><strong style={{ color: theme.textMain }}>Hardware VR:</strong> El cliente cuenta con y proveerá los visores Meta Quest para la instalación del software.</li>
+              <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Hardware VR:</strong> El cliente cuenta con y proveerá los visores Meta Quest para la instalación del software.</li>
+              <li><strong style={{ color: theme.textMain }}>Hardware de Exhibición (A definir):</strong> El cliente proveerá laptop, pantalla de proyección y router local (Te compartiremos especificaciones recomendadas en breve).</li>
             </motion.ul>
           </GlassCard>
         </motion.div>
@@ -424,6 +435,31 @@ export default function MysiClient() {
               </div>
             </motion.div>
           </div>
+        </motion.div>
+
+        {/* 6. CONDICIONES Y DATOS BANCARIOS */}
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} style={{ marginBottom: "5rem" }}>
+          <GlassCard borderTopColor={theme.mysiSteel}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))", gap: "3rem" }}>
+              <motion.div variants={itemAnim}>
+                <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.8rem", marginBottom: "1.5rem" }}>Condiciones de Pago</h3>
+                <ul style={{ paddingLeft: "1.2rem", color: theme.textMuted, lineHeight: 1.8, fontSize: "1.1rem", margin: 0 }}>
+                  <li style={{ marginBottom: "0.5rem" }}><strong style={{ color: theme.textMain }}>50%</strong> Anticipo para arrancar el proyecto.</li>
+                  <li style={{ marginBottom: "0.5rem" }}><strong style={{ color: theme.textMain }}>25%</strong> A la presentación de avances.</li>
+                  <li><strong style={{ color: theme.textMain }}>25%</strong> Contra entrega final del software VR.</li>
+                </ul>
+              </motion.div>
+              <motion.div variants={itemAnim}>
+                <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.8rem", marginBottom: "1.5rem" }}>Datos Bancarios</h3>
+                <div style={{ background: "rgba(0,0,0,0.2)", padding: "1.5rem", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.1)" }}>
+                  <div style={{ marginBottom: "0.8rem" }}><strong style={{ color: theme.mysiAccent }}>Razón Social:</strong> <span style={{ color: theme.textMuted }}>Tecza S.A. de C.V. (Pendiente)</span></div>
+                  <div style={{ marginBottom: "0.8rem" }}><strong style={{ color: theme.mysiAccent }}>Banco:</strong> <span style={{ color: theme.textMuted }}>[Pendiente]</span></div>
+                  <div style={{ marginBottom: "0.8rem" }}><strong style={{ color: theme.mysiAccent }}>Cuenta:</strong> <span style={{ color: theme.textMuted }}>[Pendiente]</span></div>
+                  <div><strong style={{ color: theme.mysiAccent }}>CLABE:</strong> <span style={{ color: theme.textMuted }}>[Pendiente]</span></div>
+                </div>
+              </motion.div>
+            </div>
+          </GlassCard>
         </motion.div>
 
         {/* FOOTER IOS */}
