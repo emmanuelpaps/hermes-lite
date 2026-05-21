@@ -11,6 +11,11 @@
   "config": {
     "priceSuffix": "MENSUAL"
   },
+  "meta": {
+    "title": "Acelerando el Movimiento de Inventario | Chevrolet Saracho",
+    "description": "Alcance masivo en Facebook y cobertura en vivo desde tu agencia. Descubre la propuesta comercial confidencial de Frontera Número Uno.",
+    "ogImage": "/assets/saracho/og-image.png"
+  },
   "hero": {
     "headline": "Acelerando el Movimiento de Inventario",
     "subheadline": "Propuesta Comercial Confidencial para Chevrolet Saracho",

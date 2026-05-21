@@ -29,15 +29,15 @@ export async function generateMetadata({ params }: { params: Promise<{ client: s
     const data = JSON.parse(fileContents);
     
     return {
-      title: `Propuesta para ${data.clientName} | Frontera Número Uno`,
-      description: `Ecosistema Digital Exclusivo para ${data.clientName}, desarrollado por Frontera Número Uno y Apolograma.`,
+      title: data.meta?.title || `Propuesta para ${data.clientName} | Frontera Número Uno`,
+      description: data.meta?.description || `Ecosistema Digital Exclusivo para ${data.clientName}, desarrollado por Frontera Número Uno y Apolograma.`,
       colorScheme: data.theme?.mode === 'light' ? 'light' : 'dark',
       openGraph: {
-        title: `Propuesta Ejecutiva: ${data.clientName}`,
-        description: `Ecosistema Digital Exclusivo para ${data.clientName}, desarrollado por Frontera Número Uno y Apolograma.`,
+        title: data.meta?.title || `Propuesta Ejecutiva: ${data.clientName}`,
+        description: data.meta?.description || `Ecosistema Digital Exclusivo para ${data.clientName}, desarrollado por Frontera Número Uno y Apolograma.`,
         images: [
           {
-            url: data.clientLogo ? `https://fronteranumero1.tecza.com.mx${data.clientLogo}` : `https://fronteranumero1.tecza.com.mx/assets/fn1-logo-stacked.png`,
+            url: data.meta?.ogImage ? `https://fronteranumero1.tecza.com.mx${data.meta.ogImage}` : (data.clientLogo ? `https://fronteranumero1.tecza.com.mx${data.clientLogo}` : `https://fronteranumero1.tecza.com.mx/assets/fn1-logo-stacked.png`),
             width: 1200,
             height: 630,
             alt: `Propuesta para ${data.clientName}`,
