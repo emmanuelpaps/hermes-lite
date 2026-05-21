@@ -495,8 +495,8 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             <div style={{
               position: 'absolute',
               top: 0, left: 0, width: '100%', height: '100%',
-              backgroundColor: isLight ? 'rgba(249, 246, 240, 0.60)' : 'rgba(5, 5, 5, 0.85)',
-              backdropFilter: 'blur(2px)',
+              background: isLight ? 'rgba(249, 246, 240, 0.60)' : 'linear-gradient(to bottom, rgba(5, 5, 5, 0.3), rgba(5, 5, 5, 0.9))',
+              backdropFilter: 'blur(1px)',
               zIndex: 1,
             }} />
           </>
