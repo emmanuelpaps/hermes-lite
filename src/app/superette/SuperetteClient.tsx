@@ -115,7 +115,22 @@ export default function SuperetteClient() {
       </motion.a>
 
       {/* Hero Section */}
-      <div style={{ padding: "12rem 2rem 8rem", textAlign: "center", position: "relative", zIndex: 1 }}>
+      <div style={{ position: "relative", padding: "12rem 2rem 8rem", textAlign: "center", zIndex: 1, overflow: "hidden", minHeight: "80vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        
+        {/* Background Video */}
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: -2, opacity: 0.8 }}
+        >
+          <source src="/assets/superette-hero.mp4" type="video/mp4" />
+        </video>
+
+        {/* Overlay Overlay para fusionar el video con la página */}
+        <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", background: "linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(240,253,244,1) 100%)", zIndex: -1 }} />
+
         <motion.div initial="hidden" animate="visible" variants={staggerContainer} style={{ maxWidth: "900px", margin: "0 auto", position: "relative" }}>
           <motion.img 
             variants={fadeInUp}
