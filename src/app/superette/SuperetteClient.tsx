@@ -317,28 +317,28 @@ export default function SuperetteClient() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))", gap: "clamp(2rem, 5vw, 4rem)", alignItems: "center" }}>
             <div>
               <h2 className={titleFont.className} style={{ color: theme.superetteGreen, fontSize: "2.5rem", marginTop: 0, marginBottom: "1.5rem" }}>
-                Difusión Masiva:<br/>Frontera Número Uno
+                Frontera Número Uno:<br/>Tu Ecosistema de Tráfico
               </h2>
               <p style={{ fontSize: "1.2rem", color: theme.textMuted, lineHeight: 1.8 }}>
-                A diferencia de una agencia tradicional que depende 100% de comprar anuncios a Facebook o Google, <strong>nosotros somos dueños de nuestra propia audiencia</strong>.
+                Las agencias tradicionales te rentan tráfico pagando a Facebook o Google. Nosotros <strong>somos dueños de la plataforma de noticias digitales más leída en Juárez</strong>.
               </p>
               <p style={{ fontSize: "1.2rem", color: theme.textMuted, lineHeight: 1.8, marginTop: "1rem" }}>
-                Al trabajar con la Célula Operativa, tu catálogo de ofertas se distribuye automáticamente en <strong>Frontera Número Uno</strong>, la plataforma de noticias digitales de mayor alcance en Ciudad Juárez. Esto significa impactos locales garantizados y tráfico orgánico masivo que ninguna otra agencia puede ofrecerte.
+                Al integrarte con la Célula Operativa, tu catálogo de ofertas se inyecta directamente en el flujo de noticias de <strong>Frontera Número Uno</strong>. No dependemos de algoritmos externos; tenemos línea directa con millones de juarenses cautivos. El resultado es un alcance orgánico masivo y un costo de adquisición que nadie más puede igualar.
               </p>
               
               <div style={{ display: "flex", gap: "1rem", marginTop: "2rem" }}>
                 <div style={{ background: "rgba(10,130,68,0.1)", padding: "1rem 1.5rem", borderRadius: "12px", border: `1px solid ${theme.superetteGreen}`, flex: 1 }}>
-                  <h4 style={{ margin: 0, color: theme.superetteGreen, fontSize: "1.3rem" }}>Audiencia Cautiva</h4>
-                  <p style={{ margin: 0, color: theme.textMain, fontSize: "0.95rem" }}>Lectores 100% locales en Juárez</p>
+                  <h4 style={{ margin: 0, color: theme.superetteGreen, fontSize: "1.3rem" }}>Tráfico Orgánico Masivo</h4>
+                  <p style={{ margin: 0, color: theme.textMain, fontSize: "0.95rem" }}>Tus ofertas frente a millones de juarenses</p>
                 </div>
                 <div style={{ background: "rgba(10,130,68,0.1)", padding: "1rem 1.5rem", borderRadius: "12px", border: `1px solid ${theme.superetteGreen}`, flex: 1 }}>
-                  <h4 style={{ margin: 0, color: theme.superetteGreen, fontSize: "1.3rem" }}>Alcance Directo</h4>
-                  <p style={{ margin: 0, color: theme.textMain, fontSize: "0.95rem" }}>Tus ofertas en el ciclo de noticias</p>
+                  <h4 style={{ margin: 0, color: theme.superetteGreen, fontSize: "1.3rem" }}>Autoridad de Marca</h4>
+                  <p style={{ margin: 0, color: theme.textMain, fontSize: "0.95rem" }}>Respaldo de la fuente de noticias líder</p>
                 </div>
               </div>
             </div>
 
-            {/* Dashboard de Stats Reales (PREMIUM DARK MODE) */}
+            {/* Dashboard de Stats Reales (PREMIUM DARK MODE - PURPLE THEME) */}
             <motion.div 
               animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }} 
               transition={{ duration: 15, ease: "linear", repeat: Infinity }}
@@ -346,29 +346,29 @@ export default function SuperetteClient() {
                 display: "flex", 
                 flexDirection: "column", 
                 gap: "1.5rem", 
-                background: "linear-gradient(-45deg, #0a8244, #1a202c, #0064e0, #0a8244)", 
+                background: "linear-gradient(-45deg, #4c1d95, #2e1065, #7e22ce, #3b0764)", 
                 backgroundSize: "400% 400%", 
                 padding: "2rem", 
                 borderRadius: "24px", 
-                boxShadow: "0 20px 50px rgba(0,0,0,0.3)" 
+                boxShadow: "0 20px 50px rgba(76, 29, 149, 0.4)" 
               }}>
               
-              <div style={{ background: "rgba(255, 255, 255, 0.05)", backdropFilter: "blur(20px)", padding: "1.5rem", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <div style={{ background: "rgba(255, 255, 255, 0.1)", backdropFilter: "blur(20px)", padding: "1.5rem", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.2)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                 <img src="/assets/fn1-logo-purple.png" alt="Frontera Numero Uno" style={{ width: "150px", height: "auto", filter: "brightness(0) invert(1)" }} />
                 <span style={{ fontSize: "0.85rem", color: "#fff", fontWeight: 700, background: "rgba(255,255,255,0.2)", padding: "6px 14px", borderRadius: "20px" }}>Últimos 28 días</span>
               </div>
               
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
                 {/* Tarjeta 1: Views */}
-                <div style={{ background: "rgba(0, 0, 0, 0.3)", backdropFilter: "blur(20px)", padding: "1.5rem", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.05)", position: "relative", overflow: "hidden" }}>
-                  <h4 style={{ margin: "0 0 1rem", color: "rgba(255,255,255,0.7)", fontSize: "1.1rem", fontWeight: 600 }}>Visualizaciones</h4>
+                <div style={{ background: "rgba(0, 0, 0, 0.4)", backdropFilter: "blur(20px)", padding: "1.5rem", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.1)", position: "relative", overflow: "hidden" }}>
+                  <h4 style={{ margin: "0 0 1rem", color: "rgba(255,255,255,0.8)", fontSize: "1.1rem", fontWeight: 600 }}>Visualizaciones</h4>
                   
                   <div style={{ width: "100%", height: "60px", marginBottom: "1rem", position: "relative" }}>
-                    <svg viewBox="0 0 200 60" style={{ width: "100%", height: "100%", overflow: "visible", filter: "drop-shadow(0 0 8px rgba(74, 222, 128, 0.6))" }}>
+                    <svg viewBox="0 0 200 60" style={{ width: "100%", height: "100%", overflow: "visible", filter: "drop-shadow(0 0 8px rgba(192, 132, 252, 0.6))" }}>
                       <defs>
                         <linearGradient id="gradViews" x1="0%" y1="0%" x2="0%" y2="100%">
-                          <stop offset="0%" stopColor="#4ade80" stopOpacity="0.4" />
-                          <stop offset="100%" stopColor="#4ade80" stopOpacity="0" />
+                          <stop offset="0%" stopColor="#c084fc" stopOpacity="0.5" />
+                          <stop offset="100%" stopColor="#c084fc" stopOpacity="0" />
                         </linearGradient>
                       </defs>
                       <motion.path 
@@ -385,7 +385,7 @@ export default function SuperetteClient() {
                         transition={{ duration: 2.5, ease: "easeInOut", delay: 0.2 }}
                         viewport={{ once: true, margin: "-50px" }}
                         fill="none" 
-                        stroke="#4ade80" 
+                        stroke="#c084fc" 
                         strokeWidth="3" 
                         strokeLinecap="round" 
                         strokeLinejoin="round"
@@ -396,20 +396,20 @@ export default function SuperetteClient() {
                   
                   <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem", position: "relative", zIndex: 2 }}>
                     <span style={{ fontSize: "2.2rem", fontWeight: 900, color: "#fff", letterSpacing: "-1px" }}>70.0M</span>
-                    <span style={{ fontSize: "1rem", fontWeight: 700, color: "#4ade80" }}>↑ 50.1%</span>
+                    <span style={{ fontSize: "1rem", fontWeight: 700, color: "#c084fc" }}>↑ 50.1%</span>
                   </div>
                 </div>
 
                 {/* Tarjeta 2: Interacciones */}
-                <div style={{ background: "rgba(0, 0, 0, 0.3)", backdropFilter: "blur(20px)", padding: "1.5rem", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.05)", position: "relative", overflow: "hidden" }}>
-                  <h4 style={{ margin: "0 0 1rem", color: "rgba(255,255,255,0.7)", fontSize: "1.1rem", fontWeight: 600 }}>Interacciones</h4>
+                <div style={{ background: "rgba(0, 0, 0, 0.4)", backdropFilter: "blur(20px)", padding: "1.5rem", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.1)", position: "relative", overflow: "hidden" }}>
+                  <h4 style={{ margin: "0 0 1rem", color: "rgba(255,255,255,0.8)", fontSize: "1.1rem", fontWeight: 600 }}>Interacciones</h4>
                   
                   <div style={{ width: "100%", height: "60px", marginBottom: "1rem", position: "relative" }}>
-                    <svg viewBox="0 0 200 60" style={{ width: "100%", height: "100%", overflow: "visible", filter: "drop-shadow(0 0 8px rgba(96, 165, 250, 0.6))" }}>
+                    <svg viewBox="0 0 200 60" style={{ width: "100%", height: "100%", overflow: "visible", filter: "drop-shadow(0 0 8px rgba(244, 114, 182, 0.6))" }}>
                       <defs>
                         <linearGradient id="gradInt" x1="0%" y1="0%" x2="0%" y2="100%">
-                          <stop offset="0%" stopColor="#60a5fa" stopOpacity="0.4" />
-                          <stop offset="100%" stopColor="#60a5fa" stopOpacity="0" />
+                          <stop offset="0%" stopColor="#f472b6" stopOpacity="0.5" />
+                          <stop offset="100%" stopColor="#f472b6" stopOpacity="0" />
                         </linearGradient>
                       </defs>
                       <motion.path 
@@ -426,7 +426,7 @@ export default function SuperetteClient() {
                         transition={{ duration: 2.5, ease: "easeInOut", delay: 0.5 }}
                         viewport={{ once: true, margin: "-50px" }}
                         fill="none" 
-                        stroke="#60a5fa" 
+                        stroke="#f472b6" 
                         strokeWidth="3" 
                         strokeLinecap="round" 
                         strokeLinejoin="round"
@@ -437,7 +437,7 @@ export default function SuperetteClient() {
                   
                   <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem", position: "relative", zIndex: 2 }}>
                     <span style={{ fontSize: "2.2rem", fontWeight: 900, color: "#fff", letterSpacing: "-1px" }}>650.4K</span>
-                    <span style={{ fontSize: "1rem", fontWeight: 700, color: "#60a5fa" }}>↑ 41%</span>
+                    <span style={{ fontSize: "1rem", fontWeight: 700, color: "#f472b6" }}>↑ 41%</span>
                   </div>
                 </div>
               </div>
