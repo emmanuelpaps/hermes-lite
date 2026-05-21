@@ -452,10 +452,25 @@ export default function MysiClient() {
               <motion.div variants={itemAnim}>
                 <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.8rem", marginBottom: "1.5rem" }}>Datos Bancarios</h3>
                 <div style={{ background: "rgba(0,0,0,0.2)", padding: "1.5rem", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.1)" }}>
-                  <div style={{ marginBottom: "0.8rem" }}><strong style={{ color: theme.mysiAccent }}>Razón Social:</strong> <span style={{ color: theme.textMuted }}>Tecza S.A. de C.V. (Pendiente)</span></div>
-                  <div style={{ marginBottom: "0.8rem" }}><strong style={{ color: theme.mysiAccent }}>Banco:</strong> <span style={{ color: theme.textMuted }}>[Pendiente]</span></div>
-                  <div style={{ marginBottom: "0.8rem" }}><strong style={{ color: theme.mysiAccent }}>Cuenta:</strong> <span style={{ color: theme.textMuted }}>[Pendiente]</span></div>
-                  <div><strong style={{ color: theme.mysiAccent }}>CLABE:</strong> <span style={{ color: theme.textMuted }}>[Pendiente]</span></div>
+                  <div style={{ marginBottom: "0.8rem" }}><strong style={{ color: theme.mysiAccent }}>Razón Social:</strong> <span style={{ color: theme.textMuted }}>TECNOLOGIES TECZA, S. DE R.L. DE C.V.</span></div>
+                  <div style={{ marginBottom: "0.8rem" }}><strong style={{ color: theme.mysiAccent }}>Banco:</strong> <span style={{ color: theme.textMuted }}>Banregio</span></div>
+                  <div style={{ marginBottom: "0.8rem" }}><strong style={{ color: theme.mysiAccent }}>Cuenta:</strong> <span style={{ color: theme.textMuted }}>065-74924-002-9</span></div>
+                  <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                    <strong style={{ color: theme.mysiAccent }}>CLABE:</strong> 
+                    <div 
+                      onClick={() => {
+                        navigator.clipboard.writeText("058164657492400290");
+                        alert("¡CLABE copiada al portapapeles!");
+                      }}
+                      style={{ color: theme.textMain, cursor: "pointer", background: "rgba(56, 189, 248, 0.1)", padding: "4px 10px", borderRadius: "6px", border: `1px solid ${theme.mysiAccent}`, fontWeight: "bold", display: "inline-flex", alignItems: "center", gap: "6px", transition: "all 0.2s ease" }}
+                      onMouseOver={(e) => e.currentTarget.style.background = "rgba(56, 189, 248, 0.25)"}
+                      onMouseOut={(e) => e.currentTarget.style.background = "rgba(56, 189, 248, 0.1)"}
+                      title="Copiar CLABE"
+                    >
+                      058164657492400290 
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             </div>
