@@ -101,13 +101,10 @@ export default function SuperetteClient() {
         padding: isScrolled ? "1rem clamp(1rem, 4vw, 2rem)" : "1.5rem clamp(1rem, 4vw, 2rem)",
         display: "flex", justifyContent: "space-between", alignItems: "center"
       }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "clamp(0.5rem, 2vw, 1rem)" }}>
-          <img src="/assets/fn1-logo-white.png" alt="Frontera Número Uno" style={{ height: isScrolled ? "25px" : "30px", maxWidth: "35vw", objectFit: "contain", transition: "height 0.3s ease", filter: "brightness(0)" }} />
-          <div style={{ height: "20px", width: "1px", background: "rgba(0,0,0,0.2)", margin: "0 clamp(2px, 1vw, 10px)" }} />
-          <img src="/assets/apolograma-logo-v2.png" alt="Apolograma" style={{ height: isScrolled ? "14px" : "18px", maxWidth: "25vw", objectFit: "contain", transition: "height 0.3s ease", filter: "brightness(0)" }} />
-        </div>
-        <div style={{ fontSize: "clamp(0.6rem, 2.5vw, 0.85rem)", fontWeight: 600, letterSpacing: "1px", textTransform: "uppercase", color: theme.textMuted }}>
-          Propuesta Confidencial
+        <div style={{ display: "flex", alignItems: "center", gap: "clamp(0.5rem, 2vw, 1rem)", flexWrap: "wrap" }}>
+          <img src="/assets/fn1-logo-white.png" alt="Frontera Número Uno" style={{ height: isScrolled ? "25px" : "30px", maxWidth: "45vw", objectFit: "contain", transition: "height 0.3s ease", filter: "brightness(0)" }} />
+          <div style={{ height: "20px", width: "1px", background: "rgba(0,0,0,0.2)", margin: "0 clamp(2px, 1vw, 5px)" }} />
+          <img src="/assets/apolograma-logo-v2.png" alt="Apolograma" style={{ height: isScrolled ? "14px" : "18px", maxWidth: "35vw", objectFit: "contain", transition: "height 0.3s ease", filter: "brightness(0)" }} />
         </div>
       </header>
 
