@@ -602,19 +602,37 @@ export default function SuperetteClient() {
                 <h3 style={{ margin: 0, color: theme.textMain, fontSize: "1.3rem", fontWeight: 700 }}>3. Dirección Estratégica</h3>
               </div>
               <div style={{ flex: "2 1 300px", background: "rgba(10, 130, 68, 0.04)", padding: "1.2rem 1.5rem", borderRadius: "12px" }}>
-                <strong style={{ color: theme.superetteGreen, fontSize: "1rem" }}>8 Entregables Core + Pauta:</strong>
+                <strong style={{ color: theme.superetteGreen, fontSize: "1rem" }}>8 Entregables Core:</strong>
                 <ul style={{ paddingLeft: "1.2rem", marginTop: "0.5rem", marginBottom: 0, color: theme.textMuted, lineHeight: 1.6 }}>
                   <li>Redacción de Notas Corporativas PR (4)</li>
                   <li>Producción de Reels In-Situ (2)</li>
                   <li>Transmisiones En Vivo (2)</li>
-                  <li>Gestión de Pauta (Meta, Google, TikTok y OpenAI [Fase Beta])</li>
+                </ul>
+              </div>
+              <div style={{ flex: "1 1 150px", textAlign: "right" }}>
+                <strong style={{ fontSize: "1.6rem", color: theme.textMain, fontWeight: 900 }}>$50,000 <span style={{fontSize: "1rem", color: theme.textMuted, fontWeight: 500}}>MXN</span></strong>
+              </div>
+            </motion.div>
+
+            {/* Phase 4 */}
+            <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ background: "rgba(255, 255, 255, 0.8)", border: `1px solid ${theme.borderSolid}`, borderRadius: "20px", padding: "1.5rem", display: "flex", gap: "1.5rem", alignItems: "center", flexWrap: "wrap", boxShadow: "0 4px 20px rgba(0,0,0,0.02)" }}>
+              <div style={{ flex: "1 1 200px" }}>
+                <h3 style={{ margin: 0, color: theme.textMain, fontSize: "1.3rem", fontWeight: 700 }}>4. Gestión de Pauta</h3>
+              </div>
+              <div style={{ flex: "2 1 300px", background: "rgba(10, 130, 68, 0.04)", padding: "1.2rem 1.5rem", borderRadius: "12px" }}>
+                <strong style={{ color: theme.superetteGreen, fontSize: "1rem" }}>Campañas Digitales:</strong>
+                <ul style={{ paddingLeft: "1.2rem", marginTop: "0.5rem", marginBottom: 0, color: theme.textMuted, lineHeight: 1.6 }}>
+                  <li>Meta (Facebook e Instagram)</li>
+                  <li>Google Ads</li>
+                  <li>TikTok Ads</li>
+                  <li>OpenAI [Fase Beta]</li>
                 </ul>
                 <div style={{ display: "inline-block", background: "rgba(218, 41, 28, 0.1)", color: theme.superetteRed, padding: "6px 12px", borderRadius: "6px", fontSize: "0.85rem", marginTop: "1rem", fontWeight: "bold" }}>
                   El Ad Spend corre por cuenta de Superette.
                 </div>
               </div>
               <div style={{ flex: "1 1 150px", textAlign: "right" }}>
-                <strong style={{ fontSize: "1.6rem", color: theme.textMain, fontWeight: 900 }}>$70,000 <span style={{fontSize: "1rem", color: theme.textMuted, fontWeight: 500}}>MXN</span></strong>
+                <strong style={{ fontSize: "1.6rem", color: theme.textMain, fontWeight: 900 }}>$20,000 <span style={{fontSize: "1rem", color: theme.textMuted, fontWeight: 500}}>MXN</span></strong>
               </div>
             </motion.div>
 
