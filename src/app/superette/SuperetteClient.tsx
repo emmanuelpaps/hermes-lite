@@ -449,11 +449,12 @@ export default function SuperetteClient() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 450px), 1fr))", gap: "clamp(1.5rem, 4vw, 2.5rem)", marginBottom: "5rem", position: "relative" }}>
           <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontSize: "20rem", fontWeight: 900, color: "rgba(10, 130, 68, 0.03)", pointerEvents: "none", zIndex: -1 }}>4</div>
           <GlassCard borderTopColor={theme.superetteGreen}>
-            <video autoPlay loop muted playsInline style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.05, zIndex: 0 }} src="/assets/superette/transicion.mp4" />
-            <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", background: "linear-gradient(to bottom, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 40%)", zIndex: 0, pointerEvents: "none", borderRadius: "24px" }} />
+            <video autoPlay loop muted playsInline style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.4, zIndex: 0 }} src="/assets/superette/transicion.mp4" />
             <div style={{ position: "relative", zIndex: 1 }}>
-              <h3 className={titleFont.className} style={{ color: theme.textMain, marginTop: 0, fontSize: "1.8rem", fontWeight: 700 }}>Plan de Transición Exprés</h3>
-              <p style={{ color: theme.textMuted, marginBottom: "2rem", fontSize: "1.1rem" }}>Empalme en 10 días sin detener su ritmo comercial.</p>
+              <div style={{ background: "rgba(255, 255, 255, 0.75)", backdropFilter: "blur(12px)", padding: "1.5rem", borderRadius: "16px", marginBottom: "2rem", border: "1px solid rgba(255,255,255,0.6)", display: "inline-block" }}>
+                <h3 className={titleFont.className} style={{ color: theme.textMain, marginTop: 0, fontSize: "1.8rem", fontWeight: 700 }}>Plan de Transición Exprés</h3>
+                <p style={{ color: theme.textMuted, margin: 0, fontSize: "1.1rem" }}>Empalme en 10 días sin detener su ritmo comercial.</p>
+              </div>
               <div style={{ display: "flex", flexDirection: "column", gap: "1rem", position: "relative" }}>
                 {/* Línea vertical conectora */}
                 <div style={{ position: "absolute", left: "32px", top: "20px", bottom: "20px", width: "2px", background: theme.borderSolid, zIndex: 0 }} />
@@ -486,11 +487,12 @@ export default function SuperetteClient() {
           </GlassCard>
 
           <GlassCard borderTopColor={theme.superetteRed}>
-            <video autoPlay loop muted playsInline style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.05, zIndex: 0 }} src="/assets/superette/medicion.mp4" />
-            <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", background: "linear-gradient(to bottom, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 40%)", zIndex: 0, pointerEvents: "none", borderRadius: "24px" }} />
+            <video autoPlay loop muted playsInline style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.4, zIndex: 0 }} src="/assets/superette/medicion.mp4" />
             <div style={{ position: "relative", zIndex: 1 }}>
-              <h3 className={titleFont.className} style={{ color: theme.textMain, marginTop: 0, fontSize: "1.8rem", fontWeight: 700 }}>Filosofía de Medición</h3>
-              <p style={{ color: theme.textMuted, marginBottom: "2rem", fontSize: "1.1rem" }}>Monitoreo de indicadores clave (Métricas Guía) para la toma de decisiones:</p>
+              <div style={{ background: "rgba(255, 255, 255, 0.75)", backdropFilter: "blur(12px)", padding: "1.5rem", borderRadius: "16px", marginBottom: "2rem", border: "1px solid rgba(255,255,255,0.6)", display: "inline-block" }}>
+                <h3 className={titleFont.className} style={{ color: theme.textMain, marginTop: 0, fontSize: "1.8rem", fontWeight: 700 }}>Filosofía de Medición</h3>
+                <p style={{ color: theme.textMuted, margin: 0, fontSize: "1.1rem" }}>Monitoreo de indicadores clave (Métricas Guía) para la toma de decisiones:</p>
+              </div>
               <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
                 <div style={{ background: "rgba(248, 250, 252, 0.85)", border: `1px solid ${theme.borderSolid}`, borderRadius: "12px", padding: "1.2rem", display: "flex", gap: "1rem", alignItems: "flex-start", backdropFilter: "blur(8px)" }}>
                   <div style={{ background: "rgba(10,130,68,0.1)", color: theme.superetteGreen, padding: "10px", borderRadius: "8px" }}><Radar size={22} /></div>
