@@ -348,21 +348,21 @@ export default function SuperetteClient() {
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
                 {/* Tarjeta 1: Views */}
                 <div style={{ background: "#fff", padding: "1.5rem", borderRadius: "16px", boxShadow: "0 10px 30px rgba(0,0,0,0.05)", border: `1px solid ${theme.borderSolid}` }}>
-                  <h4 style={{ margin: "0 0 1rem", color: theme.textMain, fontSize: "1.1rem", fontWeight: 600 }}>Vistas de Video</h4>
+                  <h4 style={{ margin: "0 0 1rem", color: theme.textMain, fontSize: "1.1rem", fontWeight: 600 }}>Visualizaciones</h4>
                   
                   <div style={{ width: "100%", height: "50px", marginBottom: "1rem" }}>
                     <svg viewBox="0 0 200 50" style={{ width: "100%", height: "100%", overflow: "visible" }}>
-                      <motion.polyline 
+                      <motion.path 
                         initial={{ pathLength: 0, opacity: 0 }}
                         whileInView={{ pathLength: 1, opacity: 1 }}
-                        transition={{ duration: 2, ease: "easeOut", delay: 0.2 }}
-                        viewport={{ once: true }}
+                        transition={{ duration: 2.5, ease: "easeInOut", delay: 0.2 }}
+                        viewport={{ once: true, margin: "-50px" }}
                         fill="none" 
                         stroke="#0064e0" 
                         strokeWidth="3" 
                         strokeLinecap="round" 
                         strokeLinejoin="round"
-                        points="0,30 20,40 40,25 60,35 80,20 100,25 120,35 140,20 160,30 180,40 200,10"
+                        d="M0 30 L20 40 L40 25 L60 35 L80 20 L100 25 L120 35 L140 20 L160 30 L180 40 L200 10"
                       />
                     </svg>
                   </div>
@@ -379,17 +379,17 @@ export default function SuperetteClient() {
                   
                   <div style={{ width: "100%", height: "50px", marginBottom: "1rem" }}>
                     <svg viewBox="0 0 200 50" style={{ width: "100%", height: "100%", overflow: "visible" }}>
-                      <motion.polyline 
+                      <motion.path 
                         initial={{ pathLength: 0, opacity: 0 }}
                         whileInView={{ pathLength: 1, opacity: 1 }}
-                        transition={{ duration: 2, ease: "easeOut", delay: 0.4 }}
-                        viewport={{ once: true }}
+                        transition={{ duration: 2.5, ease: "easeInOut", delay: 0.5 }}
+                        viewport={{ once: true, margin: "-50px" }}
                         fill="none" 
                         stroke="#0064e0" 
                         strokeWidth="3" 
                         strokeLinecap="round" 
                         strokeLinejoin="round"
-                        points="0,20 20,35 40,30 60,40 80,25 100,30 120,45 140,35 160,20 180,25 200,15"
+                        d="M0 20 L20 35 L40 30 L60 40 L80 25 L100 30 L120 45 L140 35 L160 20 L180 25 L200 15"
                       />
                     </svg>
                   </div>
