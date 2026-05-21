@@ -38,8 +38,6 @@ export async function generateMetadata({ params }: { params: Promise<{ client: s
         images: [
           {
             url: data.meta?.ogImage ? `https://fronteranumero1.tecza.com.mx${data.meta.ogImage}` : (data.clientLogo ? `https://fronteranumero1.tecza.com.mx${data.clientLogo}` : `https://fronteranumero1.tecza.com.mx/assets/fn1-logo-stacked.png`),
-            width: 1200,
-            height: 630,
             alt: `Propuesta para ${data.clientName}`,
           },
         ],
