@@ -158,7 +158,7 @@ export default function SuperetteClient() {
             Ingeniería Gráfica y Comercial
           </motion.h1>
           <motion.p variants={fadeInUp} style={{ fontSize: "1.4rem", color: theme.textMuted, maxWidth: "750px", margin: "0 auto", lineHeight: 1.6, fontWeight: 400 }}>
-            Sabemos que el volumen masivo es el estándar mínimo que la marca exige hoy en día. No venimos a inventar el hilo negro, sino a instalar una infraestructura técnica externa para heredar y blindar su carga operativa.
+            Su exigencia comercial requiere un ecosistema que soporte la escala sin fallar. Heredamos, optimizamos y blindamos toda su operación gráfica.
           </motion.p>
         </motion.div>
       </div>
