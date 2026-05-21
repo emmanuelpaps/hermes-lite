@@ -1,0 +1,63 @@
+{
+  "clientName": "Chevrolet Saracho",
+  "themeTemplate": "apple",
+  "theme": {
+    "mode": "dark",
+    "primary": "#00539F",
+    "clientLogoRaw": false,
+    "fontHeading": "'Playfair Display', serif",
+    "fontBody": "'Inter', sans-serif"
+  },
+  "config": {
+    "priceSuffix": "MENSUAL"
+  },
+  "hero": {
+    "headline": "Acelerando el Movimiento de Inventario",
+    "subheadline": "Propuesta Comercial Confidencial para Chevrolet Saracho",
+    "backgroundImage": "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=2940&auto=format&fit=crop"
+  },
+  "storytelling": {
+    "narrative": [
+      {
+        "title": "Una Agencia Top requiere Tracción Masiva",
+        "content": "Chevrolet Saracho es una institución en la frontera. Pero hoy en día, la decisión de compra de un vehículo comienza en el celular. Nuestra misión es poner tu inventario frente a la audiencia más grande y activa de Juárez y El Paso."
+      },
+      {
+        "title": "Convertir Vistas en Pruebas de Manejo",
+        "content": "No hacemos publicaciones comunes. Distribuiremos contenido de alto impacto sobre tus unidades, promociones y lanzamientos directamente en Frontera Número Uno, canalizando miles de ojos hacia tu piso de ventas."
+      }
+    ],
+    "challenge": "Dominar la atención digital en la región fronteriza para generar prospectos calificados, aumentar visitas a la agencia y acelerar el desplazamiento de inventario automotriz.",
+    "pillars": [
+      {
+        "title": "Alcance Masivo en Facebook",
+        "description": "Publicación estratégica en la red con mayor penetración local para atraer tráfico constante de compradores potenciales.",
+        "image": "https://images.unsplash.com/photo-1549317661-bd32c8ce0be2?q=80&w=2940&auto=format&fit=crop"
+      },
+      {
+        "title": "Cobertura en Vivo",
+        "description": "Transmisiones en vivo desde la agencia mostrando el inventario, destacando promociones especiales y generando sentido de urgencia en la audiencia.",
+        "image": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2940&auto=format&fit=crop"
+      }
+    ]
+  },
+  "features": {
+    "showEcosystem": false,
+    "showAudiences": true,
+    "showPricing": true,
+    "exclusivePackages": true,
+    "disableSelection": true
+  },
+  "packages": {
+    "fn1": [
+      {
+        "name": "Paquete Tracción Saracho",
+        "price": 11000,
+        "description": "Incluye una transmisión en vivo mensual desde la agencia y una publicación dedicada en nuestras redes de Facebook para amplificar tus promociones."
+      }
+    ],
+    "apolograma": [],
+    "blocks": []
+  },
+  "clientLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Chevrolet-logo.png/800px-Chevrolet-logo.png"
+}
