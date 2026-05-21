@@ -20,8 +20,9 @@ function AnimatedCounter({ from, to, format, delay = 0 }: { from: number, to: nu
 }
 import { ShieldCheck, Zap, Layers, Eye, Magnet, ShoppingCart, ArrowDown, Radar, TrendingDown, Play, Cuboid, MonitorSmartphone, Camera, Megaphone, Target, Tv, Glasses, Bot, TrendingUp, Cpu } from "lucide-react";
 import { Outfit } from "next/font/google";
+import Image from "next/image";
 
-const titleFont = Outfit({ subsets: ["latin"], weight: ["700", "800", "900"] });
+const titleFont = Outfit({ subsets: ["latin"], weight: ["700", "800", "900"], display: "swap" });
 
 const theme = {
   superetteGreen: "#0a8244",
@@ -110,9 +111,9 @@ export default function SuperetteClient() {
         display: "flex", alignItems: "center"
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: "clamp(0.5rem, 2vw, 1rem)", flexWrap: "nowrap" }}>
-          <img src="/assets/fn1-logo-white.png" alt="Frontera Número Uno" style={{ height: isScrolled ? "clamp(12px, 2.5vw, 25px)" : "clamp(15px, 3.5vw, 30px)", width: "auto", transition: "height 0.3s ease", filter: "brightness(0)" }} />
+          <Image src="/assets/fn1-logo-white.png" alt="Frontera Número Uno" width={960} height={100} priority style={{ height: isScrolled ? "clamp(12px, 2.5vw, 25px)" : "clamp(15px, 3.5vw, 30px)", width: "auto", transition: "height 0.3s ease", filter: "brightness(0)" }} />
           <div style={{ height: isScrolled ? "16px" : "20px", width: "1px", background: "rgba(0,0,0,0.2)", margin: "0 clamp(2px, 1vw, 5px)", transition: "height 0.3s ease", flexShrink: 0 }} />
-          <img src="/assets/apolograma-logo-v2.png" alt="Apolograma" style={{ height: isScrolled ? "clamp(7px, 1.5vw, 14px)" : "clamp(9px, 2vw, 18px)", width: "auto", transition: "height 0.3s ease", filter: "brightness(0)" }} />
+          <Image src="/assets/apolograma-logo-v2.png" alt="Apolograma" width={605} height={50} priority style={{ height: isScrolled ? "clamp(7px, 1.5vw, 14px)" : "clamp(9px, 2vw, 18px)", width: "auto", transition: "height 0.3s ease", filter: "brightness(0)" }} />
         </div>
       </header>
 
@@ -146,6 +147,7 @@ export default function SuperetteClient() {
           loop 
           muted 
           playsInline 
+          poster="/assets/superette-hero-poster.jpg"
           style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: -2, opacity: 0.8 }}
         >
           <source src="/assets/superette-hero.mp4" type="video/mp4" />
@@ -374,7 +376,7 @@ export default function SuperetteClient() {
               }}>
               
               <div style={{ background: "rgba(255, 255, 255, 0.1)", backdropFilter: "blur(20px)", padding: "1.5rem", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.2)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" }}>
-                <img src="/assets/fn1-logo-purple.png" alt="Frontera Numero Uno" style={{ width: "150px", height: "auto", filter: "brightness(0) invert(1)" }} />
+                <Image src="/assets/fn1-logo-purple.png" alt="Frontera Numero Uno" width={960} height={100} style={{ width: "150px", height: "auto", filter: "brightness(0) invert(1)" }} />
                 <span style={{ fontSize: "0.85rem", color: "#fff", fontWeight: 700, background: "rgba(255,255,255,0.2)", padding: "6px 14px", borderRadius: "20px", whiteSpace: "nowrap" }}>Últimos 28 días</span>
               </div>
               
@@ -751,9 +753,9 @@ export default function SuperetteClient() {
       <footer style={{ background: theme.textMain, color: "rgba(255,255,255,0.6)", padding: "4rem 2rem", textAlign: "center", position: "relative", zIndex: 10, borderTop: "1px solid rgba(255,255,255,0.1)" }}>
         <div style={{ maxWidth: "1000px", margin: "0 auto", display: "flex", flexDirection: "column", alignItems: "center", gap: "2rem" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "clamp(0.5rem, 2vw, 1.5rem)", opacity: 0.5, flexWrap: "nowrap" }}>
-            <img src="/assets/fn1-logo-white.png" alt="Frontera Número Uno" style={{ height: "clamp(15px, 3.5vw, 30px)", width: "auto", filter: "brightness(0) invert(1)" }} />
+            <Image src="/assets/fn1-logo-white.png" alt="Frontera Número Uno" width={960} height={100} style={{ height: "clamp(15px, 3.5vw, 30px)", width: "auto", filter: "brightness(0) invert(1)" }} />
             <div style={{ height: "20px", width: "1px", background: "rgba(255,255,255,0.3)", margin: "0 5px", flexShrink: 0 }} />
-            <img src="/assets/apolograma-logo-v2.png" alt="Apolograma" style={{ height: "clamp(8px, 2vw, 15px)", width: "auto", filter: "brightness(0) invert(1)" }} />
+            <Image src="/assets/apolograma-logo-v2.png" alt="Apolograma" width={605} height={50} style={{ height: "clamp(8px, 2vw, 15px)", width: "auto", filter: "brightness(0) invert(1)" }} />
           </div>
           <p style={{ margin: 0, fontSize: "0.95rem", maxWidth: "500px", lineHeight: 1.6 }}>
             Este documento contiene información confidencial y propietaria. Prohibida su reproducción o distribución sin autorización expresa.
