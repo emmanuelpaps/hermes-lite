@@ -41,6 +41,11 @@ const fadeInUp: any = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
 };
 
+const scaleUp: any = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: "easeOut" } }
+};
+
 const staggerContainer: any = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
@@ -51,13 +56,10 @@ const glassCardAnim: any = {
   visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
 };
 
-const tableRowAnim: any = {
-  hidden: { opacity: 0, x: -20, backgroundColor: "rgba(255,255,255,0)" },
-  visible: { opacity: 1, x: 0, backgroundColor: "rgba(255,255,255,0.7)", transition: { duration: 0.5 } }
-};
+
 
 // Premium Glass Card Component
-const GlassCard = ({ children, style = {}, borderTopColor = theme.superetteGreen }: any) => (
+const GlassCard = ({ children, style = {}, borderTopColor = theme.superetteGreen }: { children: React.ReactNode, style?: React.CSSProperties, borderTopColor?: string }) => (
   <motion.div variants={glassCardAnim} style={{
     background: theme.surface,
     backdropFilter: "blur(20px)",
@@ -269,7 +271,7 @@ export default function SuperetteClient() {
                 Traffic Management (Embudo)
               </h2>
               <p style={{ fontSize: "1.2rem", color: theme.textMuted, lineHeight: 1.8 }}>
-                Una vez que la línea de producción gráfica está cubierta y la tienda vestida, el siguiente paso es inyectar tráfico físico. Para ello, no nos limitamos a oprimir "promocionar", sino que implementamos un embudo industrial...
+                Una vez que la línea de producción gráfica está cubierta y la tienda vestida, el siguiente paso es inyectar tráfico físico. Para ello, no nos limitamos a oprimir &quot;promocionar&quot;, sino que implementamos un embudo industrial...
               </p>
               
               <div style={{ display: "flex", flexDirection: "column", gap: "1rem", marginTop: "2rem" }}>
