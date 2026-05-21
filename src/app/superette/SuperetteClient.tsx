@@ -522,92 +522,81 @@ export default function SuperetteClient() {
           </GlassCard>
         </div>
 
-        {/* 5. Tablas Animadas */}
+        {/* 4. Desglose Operativo */}
         <GlassCard style={{ marginBottom: "5rem" }}>
-          <div style={{ position: "absolute", top: "-20px", right: "20px", fontSize: "15rem", fontWeight: 900, color: "rgba(10, 130, 68, 0.03)", pointerEvents: "none", lineHeight: 1 }}>5</div>
+          <div style={{ position: "absolute", top: "-20px", right: "20px", fontSize: "15rem", fontWeight: 900, color: "rgba(10, 130, 68, 0.03)", pointerEvents: "none", lineHeight: 1 }}>4</div>
           <h2 className={titleFont.className} style={{ color: theme.superetteGreen, fontSize: "2.5rem", marginTop: 0, marginBottom: "2.5rem", fontWeight: 800 }}>
             Desglose Operativo Mensual
           </h2>
-          <div style={{ overflowX: "auto", position: "relative", zIndex: 2 }}>
-            <table style={{ width: "100%", borderCollapse: "separate", borderSpacing: "0 12px" }}>
-              <thead>
-                <tr>
-                  <th style={{ padding: "1rem 1.5rem", textAlign: "left", color: theme.textMuted, fontWeight: 600, borderBottom: `2px solid ${theme.borderSolid}`, fontSize: "0.9rem", textTransform: "uppercase" }}>Fase Operativa</th>
-                  <th style={{ padding: "1rem 1.5rem", textAlign: "left", color: theme.textMuted, fontWeight: 600, borderBottom: `2px solid ${theme.borderSolid}`, fontSize: "0.9rem", textTransform: "uppercase" }}>Volumen y Entregables (197)</th>
-                  <th style={{ padding: "1rem 1.5rem", textAlign: "right", color: theme.textMuted, fontWeight: 600, borderBottom: `2px solid ${theme.borderSolid}`, fontSize: "0.9rem", textTransform: "uppercase" }}>Inversión Mensual</th>
-                </tr>
-              </thead>
-              <motion.tbody variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                <motion.tr variants={tableRowAnim} style={{ borderRadius: "16px" }}>
-                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", borderTopLeftRadius: "16px", borderBottomLeftRadius: "16px", background: "rgba(255,255,255,0.6)", verticalAlign: "top" }}>
-                    <strong style={{ color: theme.textMain, fontSize: "1.2rem" }}>1. Maquila Gráfica In-House</strong>
-                  </td>
-                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", background: "rgba(255,255,255,0.6)", verticalAlign: "top" }}>
-                    <strong style={{ color: theme.superetteGreen }}>~118 Artes Impresos:</strong>
-                    <ul style={{ paddingLeft: "1.2rem", marginTop: "0.8rem", color: theme.textMuted, lineHeight: 1.6 }}>
-                      <li>Lonas, Banners y Carteleras (54)</li>
-                      <li>Material POP y Cenefas (36)</li>
-                      <li>Planas de Periódico (16)</li>
-                      <li>Adaptaciones de formato (12)</li>
-                    </ul>
-                  </td>
-                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", textAlign: "right", borderTopRightRadius: "16px", borderBottomRightRadius: "16px", background: "rgba(255,255,255,0.6)", verticalAlign: "top" }}>
-                    <strong style={{ fontSize: "1.3rem", color: theme.textMain }}>$116,400 MXN</strong>
-                  </td>
-                </motion.tr>
-                <motion.tr variants={tableRowAnim} style={{ borderRadius: "16px" }}>
-                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", borderTopLeftRadius: "16px", borderBottomLeftRadius: "16px", background: "rgba(255,255,255,0.6)", verticalAlign: "top" }}>
-                    <strong style={{ color: theme.textMain, fontSize: "1.2rem" }}>2. Ecosistema Digital</strong>
-                  </td>
-                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", background: "rgba(255,255,255,0.6)", verticalAlign: "top" }}>
-                    <strong style={{ color: theme.superetteGreen }}>~71 Entregables Digitales:</strong>
-                    <ul style={{ paddingLeft: "1.2rem", marginTop: "0.8rem", color: theme.textMuted, lineHeight: 1.6 }}>
-                      <li>Volantes Digitales y Ofertas Flash (48)</li>
-                      <li>Parrilla de Redes Sociales (15)</li>
-                      <li>Banners Web y Medios Locales (8)</li>
-                    </ul>
-                  </td>
-                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", textAlign: "right", borderTopRightRadius: "16px", borderBottomRightRadius: "16px", background: "rgba(255,255,255,0.6)", verticalAlign: "top" }}>
-                    <strong style={{ fontSize: "1.3rem", color: theme.textMain }}>$49,000 MXN</strong>
-                  </td>
-                </motion.tr>
-                <motion.tr variants={tableRowAnim} style={{ borderRadius: "16px" }}>
-                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", borderTopLeftRadius: "16px", borderBottomLeftRadius: "16px", background: "rgba(255,255,255,0.6)", verticalAlign: "top" }}>
-                    <strong style={{ color: theme.textMain, fontSize: "1.2rem" }}>3. Dirección Estratégica</strong>
-                  </td>
-                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", background: "rgba(255,255,255,0.6)", verticalAlign: "top" }}>
-                    <strong style={{ color: theme.superetteGreen }}>8 Entregables Core + Pauta:</strong>
-                    <ul style={{ paddingLeft: "1.2rem", marginTop: "0.8rem", color: theme.textMuted, lineHeight: 1.6 }}>
-                      <li>Redacción de Notas Corporativas PR (4)</li>
-                      <li>Producción de Reels In-Situ (2)</li>
-                      <li>Transmisiones En Vivo (2)</li>
-                    </ul>
-                    <span style={{ display: "inline-block", background: "rgba(218, 41, 28, 0.1)", color: theme.superetteRed, padding: "8px 12px", borderRadius: "8px", fontSize: "0.85rem", marginTop: "1rem", fontWeight: "bold" }}>
-                      El Ad Spend corre por cuenta de Superette.
-                    </span>
-                  </td>
-                  <td style={{ padding: "clamp(1rem, 3vw, 2rem)", textAlign: "right", borderTopRightRadius: "16px", borderBottomRightRadius: "16px", background: "rgba(255,255,255,0.6)", verticalAlign: "top" }}>
-                    <strong style={{ fontSize: "1.3rem", color: theme.textMain }}>$70,000 MXN</strong>
-                  </td>
-                </motion.tr>
-                <motion.tr variants={tableRowAnim}>
-                  <td colSpan={2} style={{ padding: "clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem)", textAlign: "right", verticalAlign: "middle" }}>
-                    <strong style={{ color: theme.textMuted, fontSize: "1.2rem", textTransform: "uppercase", letterSpacing: "2px" }}>Inversión Mensual Total</strong>
-                  </td>
-                  <td style={{ padding: "clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem)", textAlign: "right", verticalAlign: "middle" }}>
-                    <motion.div 
-                      initial={{ scale: 0.9, opacity: 0 }}
-                      whileInView={{ scale: 1, opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.6, type: "spring" }}
-                      style={{ background: theme.textMain, color: "#fff", padding: "1.2rem 2rem", borderRadius: "16px", display: "inline-block", boxShadow: "0 10px 30px rgba(0,0,0,0.15)", whiteSpace: "nowrap" }}
-                    >
-                      <strong style={{ fontSize: "2rem", letterSpacing: "-1px" }}>$235,400 MXN</strong>
-                    </motion.div>
-                  </td>
-                </motion.tr>
-              </motion.tbody>
-            </table>
+          
+          <div style={{ display: "flex", flexDirection: "column", gap: "1.2rem", position: "relative", zIndex: 2 }}>
+            
+            {/* Phase 1 */}
+            <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ background: "rgba(255, 255, 255, 0.8)", border: `1px solid ${theme.borderSolid}`, borderRadius: "20px", padding: "1.5rem", display: "flex", gap: "1.5rem", alignItems: "center", flexWrap: "wrap", boxShadow: "0 4px 20px rgba(0,0,0,0.02)" }}>
+              <div style={{ flex: "1 1 200px" }}>
+                <h3 style={{ margin: 0, color: theme.textMain, fontSize: "1.3rem", fontWeight: 700 }}>1. Maquila Gráfica In-House</h3>
+              </div>
+              <div style={{ flex: "2 1 300px", background: "rgba(10, 130, 68, 0.04)", padding: "1.2rem 1.5rem", borderRadius: "12px" }}>
+                <strong style={{ color: theme.superetteGreen, fontSize: "1rem" }}>~118 Artes Impresos (Volumen Mensual):</strong>
+                <ul style={{ paddingLeft: "1.2rem", marginTop: "0.5rem", marginBottom: 0, color: theme.textMuted, lineHeight: 1.6 }}>
+                  <li>Lonas, Banners y Carteleras (54)</li>
+                  <li>Material POP y Cenefas (36)</li>
+                  <li>Planas de Periódico (16)</li>
+                  <li>Adaptaciones de formato (12)</li>
+                </ul>
+              </div>
+              <div style={{ flex: "1 1 150px", textAlign: "right" }}>
+                <strong style={{ fontSize: "1.6rem", color: theme.textMain, fontWeight: 900 }}>$116,400 <span style={{fontSize: "1rem", color: theme.textMuted, fontWeight: 500}}>MXN</span></strong>
+              </div>
+            </motion.div>
+
+            {/* Phase 2 */}
+            <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ background: "rgba(255, 255, 255, 0.8)", border: `1px solid ${theme.borderSolid}`, borderRadius: "20px", padding: "1.5rem", display: "flex", gap: "1.5rem", alignItems: "center", flexWrap: "wrap", boxShadow: "0 4px 20px rgba(0,0,0,0.02)" }}>
+              <div style={{ flex: "1 1 200px" }}>
+                <h3 style={{ margin: 0, color: theme.textMain, fontSize: "1.3rem", fontWeight: 700 }}>2. Ecosistema Digital</h3>
+              </div>
+              <div style={{ flex: "2 1 300px", background: "rgba(10, 130, 68, 0.04)", padding: "1.2rem 1.5rem", borderRadius: "12px" }}>
+                <strong style={{ color: theme.superetteGreen, fontSize: "1rem" }}>~71 Entregables Digitales:</strong>
+                <ul style={{ paddingLeft: "1.2rem", marginTop: "0.5rem", marginBottom: 0, color: theme.textMuted, lineHeight: 1.6 }}>
+                  <li>Volantes Digitales y Ofertas Flash (48)</li>
+                  <li>Parrilla de Redes Sociales (15)</li>
+                  <li>Banners Web y Medios Locales (8)</li>
+                </ul>
+              </div>
+              <div style={{ flex: "1 1 150px", textAlign: "right" }}>
+                <strong style={{ fontSize: "1.6rem", color: theme.textMain, fontWeight: 900 }}>$49,000 <span style={{fontSize: "1rem", color: theme.textMuted, fontWeight: 500}}>MXN</span></strong>
+              </div>
+            </motion.div>
+
+            {/* Phase 3 */}
+            <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ background: "rgba(255, 255, 255, 0.8)", border: `1px solid ${theme.borderSolid}`, borderRadius: "20px", padding: "1.5rem", display: "flex", gap: "1.5rem", alignItems: "center", flexWrap: "wrap", boxShadow: "0 4px 20px rgba(0,0,0,0.02)" }}>
+              <div style={{ flex: "1 1 200px" }}>
+                <h3 style={{ margin: 0, color: theme.textMain, fontSize: "1.3rem", fontWeight: 700 }}>3. Dirección Estratégica</h3>
+              </div>
+              <div style={{ flex: "2 1 300px", background: "rgba(10, 130, 68, 0.04)", padding: "1.2rem 1.5rem", borderRadius: "12px" }}>
+                <strong style={{ color: theme.superetteGreen, fontSize: "1rem" }}>8 Entregables Core + Pauta:</strong>
+                <ul style={{ paddingLeft: "1.2rem", marginTop: "0.5rem", marginBottom: 0, color: theme.textMuted, lineHeight: 1.6 }}>
+                  <li>Redacción de Notas Corporativas PR (4)</li>
+                  <li>Producción de Reels In-Situ (2)</li>
+                  <li>Transmisiones En Vivo (2)</li>
+                </ul>
+                <div style={{ display: "inline-block", background: "rgba(218, 41, 28, 0.1)", color: theme.superetteRed, padding: "6px 12px", borderRadius: "6px", fontSize: "0.85rem", marginTop: "1rem", fontWeight: "bold" }}>
+                  El Ad Spend corre por cuenta de Superette.
+                </div>
+              </div>
+              <div style={{ flex: "1 1 150px", textAlign: "right" }}>
+                <strong style={{ fontSize: "1.6rem", color: theme.textMain, fontWeight: 900 }}>$70,000 <span style={{fontSize: "1rem", color: theme.textMuted, fontWeight: 500}}>MXN</span></strong>
+              </div>
+            </motion.div>
+
+            {/* Total Row */}
+            <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ display: "flex", justifyContent: "flex-end", marginTop: "1rem" }}>
+              <div style={{ background: "linear-gradient(135deg, #0f172a, #1e293b)", color: "#fff", padding: "1.5rem 2.5rem", borderRadius: "100px", display: "flex", alignItems: "center", gap: "2rem", boxShadow: "0 20px 40px rgba(15, 23, 42, 0.25)", flexWrap: "wrap", justifyContent: "center" }}>
+                <span style={{ fontSize: "1.1rem", textTransform: "uppercase", letterSpacing: "1px", opacity: 0.8, fontWeight: 600 }}>Inversión Mensual Total</span>
+                <span style={{ fontSize: "2.5rem", fontWeight: 900, letterSpacing: "-1px" }}>$235,400 MXN</span>
+              </div>
+            </motion.div>
+
           </div>
         </GlassCard>
 
