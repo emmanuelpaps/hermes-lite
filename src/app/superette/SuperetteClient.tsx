@@ -158,8 +158,8 @@ export default function SuperetteClient() {
         {/* Overlay Overlay para fusionar el video con la página */}
         <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", background: "linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(240,253,244,1) 100%)", zIndex: -1 }} />
 
-        <motion.div initial="hidden" animate="visible" variants={staggerContainer} style={{ maxWidth: "900px", margin: "0 auto", position: "relative" }}>
-          <motion.div variants={fadeInUp} style={{ marginBottom: "2rem", display: "inline-block" }}>
+        <div style={{ maxWidth: "900px", margin: "0 auto", position: "relative" }}>
+          <div style={{ marginBottom: "2rem", display: "inline-block" }}>
             <Image 
               src="/assets/superette/Superette_Logo_White.png" 
               alt="Superette Logo" 
@@ -169,14 +169,14 @@ export default function SuperetteClient() {
               priority
               style={{ height: "90px", width: "auto", objectFit: "contain", filter: "drop-shadow(0 10px 20px rgba(0,0,0,0.1)) invert(1)" }}
             />
-          </motion.div>
-          <motion.h1 variants={fadeInUp} className={titleFont.className} style={{ fontSize: "clamp(2.5rem, 8vw, 4.5rem)", fontWeight: 800, margin: "0 0 1.5rem", letterSpacing: "-2px", lineHeight: 1.1, color: theme.superetteGreen }}>
+          </div>
+          <h1 className={titleFont.className} style={{ fontSize: "clamp(2.5rem, 8vw, 4.5rem)", fontWeight: 800, margin: "0 0 1.5rem", letterSpacing: "-2px", lineHeight: 1.1, color: theme.superetteGreen }}>
             Ingeniería Gráfica y Comercial
-          </motion.h1>
-          <motion.p variants={fadeInUp} style={{ fontSize: "1.4rem", color: theme.textMuted, maxWidth: "750px", margin: "0 auto", lineHeight: 1.6, fontWeight: 400 }}>
+          </h1>
+          <p style={{ fontSize: "1.4rem", color: theme.textMuted, maxWidth: "750px", margin: "0 auto", lineHeight: 1.6, fontWeight: 400 }}>
             Su exigencia comercial requiere un ecosistema que soporte la escala sin fallar. Heredamos, optimizamos y blindamos toda su operación gráfica.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
       </div>
 
       <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 2rem", position: "relative", zIndex: 10 }}>

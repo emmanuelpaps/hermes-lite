@@ -503,11 +503,8 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             />
           </>
         )}
-        <motion.div 
+        <div 
           className={styles.logoContainer}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1 }}
           style={{ position: 'relative', zIndex: 2 }}
         >
           {data.clientLogo && (
@@ -517,28 +514,21 @@ export default function MediaKitView({ data }: { data: ClientData }) {
               className={data.theme?.clientLogoRaw ? styles.logoLight : (isLight ? styles.logoLight : styles.logo)} 
             />
           )}
-        </motion.div>
+        </div>
         
-        <motion.h1 
+        <h1 
           className={`${styles.heroTitle} text-gradient`}
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
           style={{ position: 'relative', zIndex: 2 }}
         >
           {data.hero?.headline || data.heroTitle || `Propuesta Estratégica para ${data.clientName}`}
-        </motion.h1>
+        </h1>
         
-        <motion.p 
+        <p 
           className={styles.heroSubtitle}
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-          transition={{ delay: 0.2 }}
           style={{ position: 'relative', zIndex: 2 }}
         >
           {data.hero?.subheadline || data.heroText}
-        </motion.p>
+        </p>
       </section>
 
       {/* Brand Divider */}

@@ -226,18 +226,18 @@ export default function MysiClient() {
       <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 clamp(1rem, 5vw, 2rem)", position: "relative", zIndex: 10 }}>
         
         {/* HERO SECTION */}
-        <motion.section initial="hidden" animate="visible" variants={staggerContainer} style={{ paddingTop: "8rem", paddingBottom: "8rem" }}>
-          <motion.div variants={glassCardAnim} style={{ display: "inline-flex", alignItems: "center", gap: "10px", background: "rgba(56, 189, 248, 0.1)", padding: "8px 16px", borderRadius: "100px", color: theme.mysiAccent, fontWeight: 600, fontSize: "0.9rem", marginBottom: "2rem", border: "1px solid rgba(56, 189, 248, 0.2)" }}>
+        <section style={{ paddingTop: "8rem", paddingBottom: "8rem" }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: "10px", background: "rgba(56, 189, 248, 0.1)", padding: "8px 16px", borderRadius: "100px", color: theme.mysiAccent, fontWeight: 600, fontSize: "0.9rem", marginBottom: "2rem", border: "1px solid rgba(56, 189, 248, 0.2)" }}>
             <Video size={16} /> Gemelo Digital para Meta Quest
-          </motion.div>
-          <motion.h1 variants={glassCardAnim} style={{ fontSize: "clamp(3rem, 6vw, 4.5rem)", lineHeight: 1.1, margin: "0 0 1.5rem", letterSpacing: "-1.5px", color: "#FFF" }}>
+          </div>
+          <h1 style={{ fontSize: "clamp(3rem, 6vw, 4.5rem)", lineHeight: 1.1, margin: "0 0 1.5rem", letterSpacing: "-1.5px", color: "#FFF" }}>
             Experiencia Inmersiva VR:<br />
             <span style={{ color: theme.mysiAccent }}>MYSI Costa Rica</span>
-          </motion.h1>
-          <motion.p variants={glassCardAnim} style={{ fontSize: "clamp(1.2rem, 3vw, 1.5rem)", color: theme.textMuted, maxWidth: "700px", lineHeight: 1.5, margin: 0 }}>
+          </h1>
+          <p style={{ fontSize: "clamp(1.2rem, 3vw, 1.5rem)", color: theme.textMuted, maxWidth: "700px", lineHeight: 1.5, margin: 0 }}>
             Lleva toda tu planta industrial a Costa Rica dentro de un visor. Una experiencia interactiva de 10 minutos diseñada para que cualquier prospecto entienda exactamente por qué MYSI es líder en precisión y manufactura.
-          </motion.p>
-        </motion.section>
+          </p>
+        </section>
 
         {/* 1. ESPECIFICACIONES TÉCNICAS */}
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} style={{ marginBottom: "5rem" }}>
