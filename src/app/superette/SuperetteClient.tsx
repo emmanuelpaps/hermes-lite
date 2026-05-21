@@ -278,8 +278,8 @@ export default function SuperetteClient() {
                 <div style={{ padding: "1.5rem", background: "#ffffff", borderRadius: "12px", borderLeft: `6px solid ${theme.superetteRed}`, boxShadow: "0 10px 30px rgba(0,0,0,0.06)", display: "flex", alignItems: "flex-start", gap: "1rem" }}>
                   <div style={{ background: "rgba(218,41,28,0.1)", padding: "10px", borderRadius: "50%", color: theme.superetteRed }}><ShoppingCart size={24} /></div>
                   <div>
-                    <h4 style={{ margin: "0 0 0.5rem", color: theme.textMain, fontSize: "1.1rem" }}>Bottom Funnel (Conversión)</h4>
-                    <p style={{ margin: 0, color: theme.textMuted, fontSize: "1rem" }}>Distribución digital masiva del catálogo de ofertas en toda la ciudad (Jue-Dom).</p>
+                    <h4 style={{ margin: "0 0 0.5rem", color: theme.textMain, fontSize: "1.2rem", fontWeight: 700 }}>Bottom Funnel (Conversión)</h4>
+                    <p style={{ margin: 0, color: theme.textMuted, fontSize: "1rem" }}>Distribución digital masiva del catálogo de ofertas en toda la ciudad.</p>
                   </div>
                 </div>
               </div>
@@ -504,7 +504,7 @@ export default function SuperetteClient() {
                   <div style={{ background: "rgba(218,41,28,0.1)", color: theme.superetteRed, padding: "10px", borderRadius: "8px" }}><TrendingDown size={22} /></div>
                   <div>
                     <h4 style={{ margin: "0 0 0.2rem", color: theme.textMain, fontSize: "1.1rem" }}>Costo Por Clic (CPC)</h4>
-                    <p style={{ margin: 0, color: theme.textMuted, fontSize: "0.95rem", lineHeight: 1.5 }}>Monitoreo continuo del costo de tráfico para iterar y mejorar las ofertas de fin de semana.</p>
+                    <p style={{ margin: 0, color: theme.textMuted, fontSize: "0.95rem", lineHeight: 1.5 }}>Monitoreo continuo del costo de tráfico para iterar y mejorar las campañas activas.</p>
                   </div>
                 </div>
 
