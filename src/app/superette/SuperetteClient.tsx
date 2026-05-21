@@ -94,14 +94,20 @@ export default function SuperetteClient() {
       <div style={{ position: "fixed", top: "50%", left: "30%", width: "500px", height: "500px", background: "radial-gradient(circle, rgba(250, 204, 21, 0.1) 0%, rgba(255,255,255,0) 70%)", filter: "blur(70px)", zIndex: 0, pointerEvents: "none" }} />
 
       {/* Sticky Header */}
-      <header style={{
+      <style>{`
+        .superette-header { justify-content: flex-start; }
+        @media (max-width: 768px) {
+          .superette-header { justify-content: center !important; }
+        }
+      `}</style>
+      <header className="superette-header" style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000,
         background: isScrolled ? "rgba(255, 255, 255, 0.85)" : "transparent",
         backdropFilter: isScrolled ? "blur(12px)" : "none",
         WebkitBackdropFilter: isScrolled ? "blur(12px)" : "none",
         transition: "all 0.3s ease",
         padding: isScrolled ? "1rem clamp(1rem, 4vw, 2rem)" : "1.5rem clamp(1rem, 4vw, 2rem)",
-        display: "flex", justifyContent: "space-between", alignItems: "center"
+        display: "flex", alignItems: "center"
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: "clamp(0.5rem, 2vw, 1rem)", flexWrap: "nowrap" }}>
           <img src="/assets/fn1-logo-white.png" alt="Frontera Número Uno" style={{ height: isScrolled ? "clamp(12px, 2.5vw, 25px)" : "clamp(15px, 3.5vw, 30px)", width: "auto", transition: "height 0.3s ease", filter: "brightness(0)" }} />
