@@ -3,6 +3,7 @@
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { ChevronRight, Video, Target, Globe, ArrowRight, Download, Bot, Glasses, MonitorSmartphone, Tv } from "lucide-react";
 import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 
 // Paleta industrial para MYSI
 const theme = {
@@ -145,9 +146,9 @@ export default function MysiClient() {
               className="mobile-logos-stack"
               style={{ marginBottom: "2rem", display: "flex", alignItems: "center", gap: "1.5rem" }}
             >
-              <img src="/assets/fn1-logo-white.png" alt="FN1" style={{ height: "clamp(24px, 6vw, 45px)", opacity: 0.9 }} />
+              <Image src="/assets/fn1-logo-white.png" alt="FN1" width={415} height={43} sizes="(max-width: 768px) 150px, 415px" style={{ height: "clamp(24px, 6vw, 45px)", width: "auto", opacity: 0.9 }} />
               <div className="mobile-divider-hide" style={{ width: "1px", height: "35px", background: "rgba(255,255,255,0.2)" }} />
-              <img src="/assets/apolograma-logo-v2.png" alt="Apolograma" style={{ height: "clamp(12px, 3vw, 22px)", opacity: 0.9, filter: "brightness(0) invert(1)" }} />
+              <Image src="/assets/apolograma-logo-v2.png" alt="Apolograma" width={300} height={50} sizes="(max-width: 768px) 100px, 200px" style={{ height: "clamp(12px, 3vw, 22px)", width: "auto", opacity: 0.9, filter: "brightness(0) invert(1)" }} />
             </motion.div>
             
             <div style={{ fontSize: "5rem", fontWeight: 700, fontFamily: "system-ui", color: theme.mysiAccent, letterSpacing: "-2px" }}>
@@ -211,9 +212,9 @@ export default function MysiClient() {
         boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)"
       }}>
         <div className="mobile-logos-stack" style={{ display: "flex", alignItems: "center", gap: "clamp(0.5rem, 2vw, 1.5rem)", flexWrap: "nowrap" }}>
-          <img src="/assets/fn1-logo-white.png" alt="FN1" style={{ height: "clamp(20px, 4vw, 24px)", opacity: 0.95 }} />
+          <Image src="/assets/fn1-logo-white.png" alt="FN1" width={415} height={43} sizes="(max-width: 768px) 150px, 300px" style={{ height: "clamp(20px, 4vw, 24px)", width: "auto", opacity: 0.95 }} />
           <div className="mobile-divider-hide" style={{ width: "1px", height: "24px", background: "rgba(255,255,255,0.15)" }} />
-          <img src="/assets/apolograma-logo-v2.png" alt="Apolograma" style={{ height: "clamp(12px, 2.5vw, 16px)", opacity: 0.9, filter: "brightness(0) invert(1)" }} />
+          <Image src="/assets/apolograma-logo-v2.png" alt="Apolograma" width={300} height={50} sizes="(max-width: 768px) 100px, 200px" style={{ height: "clamp(12px, 2.5vw, 16px)", width: "auto", opacity: 0.9, filter: "brightness(0) invert(1)" }} />
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "8px", fontWeight: 600, color: "rgba(255,255,255,0.6)", fontSize: "0.8rem", letterSpacing: "2px", textTransform: "uppercase" }}>
           <span style={{ display: "inline-block", width: "8px", height: "8px", borderRadius: "50%", background: theme.mysiAccent, boxShadow: `0 0 10px ${theme.mysiAccent}` }}></span>
@@ -546,9 +547,9 @@ export default function MysiClient() {
             Construyendo el futuro de la manufactura inteligente en Realidad Virtual.
           </p>
           <div className="mobile-logos-stack" style={{ display: "flex", flexWrap: "nowrap", alignItems: "center", gap: "clamp(0.5rem, 2vw, 1.5rem)", justifyContent: "center" }}>
-            <img src="/assets/fn1-logo-white.png" alt="FN1" style={{ height: "clamp(16px, 3.5vw, 20px)", opacity: 0.5 }} />
+            <Image src="/assets/fn1-logo-white.png" alt="FN1" width={415} height={43} sizes="(max-width: 768px) 100px, 200px" style={{ height: "clamp(16px, 3.5vw, 20px)", width: "auto", opacity: 0.5 }} />
             <div className="mobile-divider-hide" style={{ width: "1px", height: "20px", background: "rgba(255,255,255,0.1)" }} />
-            <img src="/assets/apolograma-logo-v2.png" alt="Apolograma" style={{ height: "clamp(10px, 2vw, 14px)", opacity: 0.5, filter: "brightness(0) invert(1)" }} />
+            <Image src="/assets/apolograma-logo-v2.png" alt="Apolograma" width={300} height={50} sizes="(max-width: 768px) 80px, 150px" style={{ height: "clamp(10px, 2vw, 14px)", width: "auto", opacity: 0.5, filter: "brightness(0) invert(1)" }} />
           </div>
           <p style={{ color: "rgba(255,255,255,0.2)", fontSize: "0.8rem", margin: 0, letterSpacing: "1px" }}>
             © {new Date().getFullYear()} Frontera Número Uno & Apolograma. Todos los derechos reservados.

@@ -5,6 +5,7 @@ import styles from "./page.module.css";
 import React, { useRef, useState, useEffect } from "react";
 import { ViralChart, ApologramaShowcase, PremiumAudienceCard } from "./EcosystemAnimations";
 import { CursorSpotlight } from "./CursorSpotlight";
+import Image from "next/image";
 
 // --- Countdown Banner ---
 const CountdownBanner = ({ targetDate, label, isLight, primaryColor }: { targetDate: string; label: string; isLight: boolean; primaryColor: string }) => {
@@ -444,8 +445,8 @@ export default function MediaKitView({ data }: { data: ClientData }) {
       {/* Agency Header Navbar */}
       <header className={styles.header}>
         <div className={styles.agencyLogos}>
-          <img src="/assets/apolograma-logo-v2.png" alt="Apolograma" className={isLight ? styles.apologramaLogoImageLight : styles.apologramaLogoImage} />
-          <img src={isLight ? "/assets/fn1-logo-purple.png" : "/assets/fn1-logo-white.png"} alt="Frontera Número Uno" className={styles.agencyLogoImage} />
+          <Image src="/assets/apolograma-logo-v2.png" alt="Apolograma" width={300} height={50} sizes="(max-width: 768px) 150px, 300px" className={isLight ? styles.apologramaLogoImageLight : styles.apologramaLogoImage} />
+          <Image src={isLight ? "/assets/fn1-logo-purple.png" : "/assets/fn1-logo-white.png"} alt="Frontera Número Uno" width={415} height={43} sizes="(max-width: 768px) 200px, 415px" className={styles.agencyLogoImage} />
         </div>
       </header>
 
@@ -685,9 +686,11 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.2 }} style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
               <div style={{ padding: '2.5rem 2.5rem 0 2.5rem', flex: 1, position: 'relative', zIndex: 10 }}>
                 <div style={{ height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', marginBottom: '1.5rem' }}>
-                  <img 
+                  <Image 
                     src={isLight ? "/assets/fn1-logo-purple.png" : "/assets/fn1-logo-white.png"} 
                     alt="Frontera Número Uno" 
+                    width={170} height={18}
+                    sizes="170px"
                     style={{ width: '170px', height: 'auto', objectFit: 'contain' }} 
                   />
                 </div>
@@ -1073,8 +1076,8 @@ export default function MediaKitView({ data }: { data: ClientData }) {
         
         <div className={styles.footerContent}>
           <div className={styles.footerAgencyLogos}>
-            <img src="/assets/apolograma-logo-v2.png" alt="Apolograma" className={isLight ? styles.footerApologramaLogoLight : styles.footerApologramaLogo} />
-            <img src={isLight ? "/assets/fn1-logo-purple.png" : "/assets/fn1-logo-white.png"} alt="Frontera Número Uno" className={styles.agencyLogoImage} />
+            <Image src="/assets/apolograma-logo-v2.png" alt="Apolograma" width={300} height={50} sizes="(max-width: 768px) 150px, 300px" className={isLight ? styles.footerApologramaLogoLight : styles.footerApologramaLogo} />
+            <Image src={isLight ? "/assets/fn1-logo-purple.png" : "/assets/fn1-logo-white.png"} alt="Frontera Número Uno" width={415} height={43} sizes="(max-width: 768px) 200px, 415px" className={styles.agencyLogoImage} />
           </div>
           <p>© {new Date().getFullYear()} Frontera Número Uno & Apolograma.</p>
           <p>Propuesta confidencial preparada exclusivamente para {data.clientName}. Vigencia: 30 días naturales.</p>
