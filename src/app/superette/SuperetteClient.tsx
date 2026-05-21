@@ -138,7 +138,6 @@ export default function SuperetteClient() {
           loop 
           muted 
           playsInline 
-          poster="/assets/superette/hero.png"
           style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: -2, opacity: 0.8 }}
         >
           <source src="/assets/superette-hero.mp4" type="video/mp4" />
