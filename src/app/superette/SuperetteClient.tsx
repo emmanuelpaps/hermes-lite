@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { ShieldCheck, Zap, Layers } from "lucide-react";
 
 const theme = {
   superetteGreen: "#0a8244",
@@ -197,16 +198,31 @@ export default function SuperetteClient() {
         {/* Las Garantías */}
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))", gap: "clamp(1.5rem, 4vw, 2rem)", marginBottom: "5rem" }}>
           <GlassCard borderTopColor={theme.superetteGreen}>
-            <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.4rem" }}>Filtro Técnico Estricto</h3>
-            <p style={{ color: theme.textMuted, lineHeight: 1.6, margin: 0 }}>Dirección de arte y control de pre-prensa enfocados en ejecutar un riguroso control de calidad antes de mandar a producción.</p>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", height: "100%" }}>
+              <div style={{ background: "rgba(10, 130, 68, 0.1)", padding: "16px", borderRadius: "50%", color: theme.superetteGreen, marginBottom: "1.5rem" }}>
+                <ShieldCheck size={32} />
+              </div>
+              <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.4rem", marginBottom: "1rem" }}>Filtro Técnico Estricto</h3>
+              <p style={{ color: theme.textMuted, lineHeight: 1.6, margin: 0 }}>Dirección de arte y control de pre-prensa enfocados en ejecutar un riguroso control de calidad antes de mandar a producción.</p>
+            </div>
           </GlassCard>
           <GlassCard borderTopColor={theme.superetteRed}>
-            <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.4rem" }}>Velocidad Operativa</h3>
-            <p style={{ color: theme.textMuted, lineHeight: 1.6, margin: 0 }}>Tiempos de respuesta blindados (L-V 8a5). Flujos optimizados para entregas exprés de alto volumen, minimizando tiempos de espera.</p>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", height: "100%" }}>
+              <div style={{ background: "rgba(218, 41, 28, 0.1)", padding: "16px", borderRadius: "50%", color: theme.superetteRed, marginBottom: "1.5rem" }}>
+                <Zap size={32} />
+              </div>
+              <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.4rem", marginBottom: "1rem" }}>Velocidad Operativa</h3>
+              <p style={{ color: theme.textMuted, lineHeight: 1.6, margin: 0 }}>Tiempos de respuesta blindados (L-V 8a5). Flujos optimizados para entregas exprés de alto volumen, minimizando tiempos de espera.</p>
+            </div>
           </GlassCard>
           <GlassCard borderTopColor={theme.superetteYellow}>
-            <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.4rem" }}>Flujo Anti-Burocracia</h3>
-            <p style={{ color: theme.textMuted, lineHeight: 1.6, margin: 0 }}>Un Solo Canal (Asana/Chat) y Un Solo Filtro (una persona autorizando) para erradicar cuellos de botella.</p>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", height: "100%" }}>
+              <div style={{ background: "rgba(250, 204, 21, 0.15)", padding: "16px", borderRadius: "50%", color: "#b45309", marginBottom: "1.5rem" }}>
+                <Layers size={32} />
+              </div>
+              <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.4rem", marginBottom: "1rem" }}>Flujo Anti-Burocracia</h3>
+              <p style={{ color: theme.textMuted, lineHeight: 1.6, margin: 0 }}>Un Solo Canal (Asana/Chat) y Un Solo Filtro (una persona autorizando) para erradicar cuellos de botella.</p>
+            </div>
           </GlassCard>
         </motion.div>
 
