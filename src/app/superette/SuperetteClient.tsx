@@ -561,32 +561,32 @@ export default function SuperetteClient() {
           </p>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "2rem", position: "relative", zIndex: 2 }}>
-            <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ background: "rgba(255, 255, 255, 0.8)", border: `1px solid ${theme.borderSolid}`, borderRadius: "16px", padding: "2rem", boxShadow: "0 10px 30px rgba(0,0,0,0.03)" }}>
-              <div style={{ background: "rgba(10, 130, 68, 0.1)", width: "50px", height: "50px", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1.5rem", color: theme.superetteGreen }}>
-                <TrendingUp size={24} />
+            <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(0,0,0,0.06)" }} transition={{ duration: 0.3 }} style={{ background: "#ffffff", border: `1px solid ${theme.borderSolid}`, borderTop: `4px solid ${theme.superetteGreen}`, borderRadius: "16px", padding: "2.5rem 2rem", boxShadow: "0 10px 30px rgba(0,0,0,0.02)" }}>
+              <div style={{ background: "rgba(10, 130, 68, 0.08)", width: "60px", height: "60px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1.5rem", color: theme.superetteGreen }}>
+                <TrendingUp size={28} />
               </div>
-              <h3 style={{ color: theme.textMain, fontSize: "1.2rem", margin: "0 0 1rem", fontWeight: 700 }}>Omnicanalidad</h3>
-              <p style={{ color: theme.textMuted, margin: 0, fontSize: "0.95rem", lineHeight: 1.6 }}>
+              <h3 style={{ color: theme.textMain, fontSize: "1.3rem", margin: "0 0 1rem", fontWeight: 800 }}>Omnicanalidad</h3>
+              <p style={{ color: theme.textMuted, margin: 0, fontSize: "0.95rem", lineHeight: 1.7 }}>
                 Desplegamos los gráficos simultáneamente en <strong>Meta (Facebook e Instagram), Google y TikTok</strong>. No dependemos de una sola red; perseguimos la atención del usuario en todas las plataformas que frecuenta diariamente.
               </p>
             </motion.div>
 
-            <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ background: "rgba(255, 255, 255, 0.8)", border: `1px solid ${theme.borderSolid}`, borderRadius: "16px", padding: "2rem", boxShadow: "0 10px 30px rgba(0,0,0,0.03)" }}>
-              <div style={{ background: "rgba(250, 204, 21, 0.15)", width: "50px", height: "50px", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1.5rem", color: "#b45309" }}>
-                <Cpu size={24} />
+            <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(0,0,0,0.06)" }} transition={{ duration: 0.3 }} style={{ background: "#ffffff", border: `1px solid ${theme.borderSolid}`, borderTop: `4px solid #eab308`, borderRadius: "16px", padding: "2.5rem 2rem", boxShadow: "0 10px 30px rgba(0,0,0,0.02)" }}>
+              <div style={{ background: "rgba(250, 204, 21, 0.15)", width: "60px", height: "60px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1.5rem", color: "#b45309" }}>
+                <Cpu size={28} />
               </div>
-              <h3 style={{ color: theme.textMain, fontSize: "1.2rem", margin: "0 0 1rem", fontWeight: 700 }}>Fase Beta: OpenAI</h3>
-              <p style={{ color: theme.textMuted, margin: 0, fontSize: "0.95rem", lineHeight: 1.6 }}>
+              <h3 style={{ color: theme.textMain, fontSize: "1.3rem", margin: "0 0 1rem", fontWeight: 800 }}>Fase Beta: OpenAI</h3>
+              <p style={{ color: theme.textMuted, margin: 0, fontSize: "0.95rem", lineHeight: 1.7 }}>
                 Integramos experimentación temprana con IA para predecir qué diseños generarán mayor impacto, optimizando el <em>Ad Spend</em> con decisiones basadas en datos antes de lanzar una campaña al mercado.
               </p>
             </motion.div>
 
-            <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ background: "rgba(255, 255, 255, 0.8)", border: `1px solid ${theme.borderSolid}`, borderRadius: "16px", padding: "2rem", boxShadow: "0 10px 30px rgba(0,0,0,0.03)" }}>
-              <div style={{ background: "rgba(218, 41, 28, 0.1)", width: "50px", height: "50px", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1.5rem", color: theme.superetteRed }}>
-                <Target size={24} />
+            <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(0,0,0,0.06)" }} transition={{ duration: 0.3 }} style={{ background: "#ffffff", border: `1px solid ${theme.borderSolid}`, borderTop: `4px solid ${theme.superetteRed}`, borderRadius: "16px", padding: "2.5rem 2rem", boxShadow: "0 10px 30px rgba(0,0,0,0.02)" }}>
+              <div style={{ background: "rgba(218, 41, 28, 0.08)", width: "60px", height: "60px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1.5rem", color: theme.superetteRed }}>
+                <Target size={28} />
               </div>
-              <h3 style={{ color: theme.textMain, fontSize: "1.2rem", margin: "0 0 1rem", fontWeight: 700 }}>Conversión y Tráfico</h3>
-              <p style={{ color: theme.textMuted, margin: 0, fontSize: "0.95rem", lineHeight: 1.6 }}>
+              <h3 style={{ color: theme.textMain, fontSize: "1.3rem", margin: "0 0 1rem", fontWeight: 800 }}>Conversión y Tráfico</h3>
+              <p style={{ color: theme.textMuted, margin: 0, fontSize: "0.95rem", lineHeight: 1.7 }}>
                 Nuestra meta no son los "likes". Optimizamos el presupuesto de pauta ($20,000 MXN) exclusivamente para incentivar el <strong>Foot Traffic</strong> (visitas físicas a tienda) y la venta directa de las ofertas publicadas.
               </p>
             </motion.div>
