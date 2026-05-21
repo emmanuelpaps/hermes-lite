@@ -1,7 +1,23 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState, useRef } from "react";
+import { motion, useMotionValue, useTransform, animate, useInView } from "framer-motion";
+
+function AnimatedCounter({ from, to, format, delay = 0 }: { from: number, to: number, format: (val: number) => string, delay?: number }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const count = useMotionValue(from);
+  const display = useTransform(count, (latest) => format(latest));
+  
+  useEffect(() => {
+    if (isInView) {
+      const controls = animate(count, to, { duration: 2.5, ease: "easeOut", delay });
+      return controls.stop;
+    }
+  }, [count, to, delay, isInView]);
+
+  return <motion.span ref={ref}>{display}</motion.span>;
+}
 import { ShieldCheck, Zap, Layers, Eye, Magnet, ShoppingCart, ArrowDown, Radar, TrendingDown, Play } from "lucide-react";
 import { Outfit } from "next/font/google";
 
@@ -395,8 +411,12 @@ export default function SuperetteClient() {
                   </div>
                   
                   <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem", position: "relative", zIndex: 2 }}>
-                    <span style={{ fontSize: "clamp(2.5rem, 8vw, 3.5rem)", fontWeight: 900, color: "#fff", letterSpacing: "-2px", lineHeight: 1 }}>70.0M</span>
-                    <span style={{ fontSize: "clamp(1rem, 3vw, 1.2rem)", fontWeight: 700, color: "#4ade80" }}>↑ 50.1%</span>
+                    <span style={{ fontSize: "clamp(2.5rem, 8vw, 3.5rem)", fontWeight: 900, color: "#fff", letterSpacing: "-2px", lineHeight: 1 }}>
+                      <AnimatedCounter from={0} to={70.0} format={(v) => v.toFixed(1) + "M"} delay={0.5} />
+                    </span>
+                    <span style={{ fontSize: "clamp(1rem, 3vw, 1.2rem)", fontWeight: 700, color: "#4ade80" }}>
+                      ↑ <AnimatedCounter from={0} to={50.1} format={(v) => v.toFixed(1) + "%"} delay={0.7} />
+                    </span>
                   </div>
                 </div>
 
@@ -436,8 +456,12 @@ export default function SuperetteClient() {
                   </div>
                   
                   <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem", position: "relative", zIndex: 2 }}>
-                    <span style={{ fontSize: "clamp(2.5rem, 8vw, 3.5rem)", fontWeight: 900, color: "#fff", letterSpacing: "-2px", lineHeight: 1 }}>650.4K</span>
-                    <span style={{ fontSize: "clamp(1rem, 3vw, 1.2rem)", fontWeight: 700, color: "#4ade80" }}>↑ 41%</span>
+                    <span style={{ fontSize: "clamp(2.5rem, 8vw, 3.5rem)", fontWeight: 900, color: "#fff", letterSpacing: "-2px", lineHeight: 1 }}>
+                      <AnimatedCounter from={0} to={650.4} format={(v) => v.toFixed(1) + "K"} delay={0.5} />
+                    </span>
+                    <span style={{ fontSize: "clamp(1rem, 3vw, 1.2rem)", fontWeight: 700, color: "#4ade80" }}>
+                      ↑ <AnimatedCounter from={0} to={41} format={(v) => Math.round(v) + "%"} delay={0.7} />
+                    </span>
                   </div>
                 </div>
               </div>
