@@ -323,17 +323,17 @@ export default function SuperetteClient() {
                 Las agencias tradicionales te rentan tráfico pagando a Facebook o Google. Nosotros <strong>somos dueños de la plataforma de noticias digitales más leída en Juárez</strong>.
               </p>
               <p style={{ fontSize: "1.2rem", color: theme.textMuted, lineHeight: 1.8, marginTop: "1rem" }}>
-                Al integrarte con la Célula Operativa, tu catálogo de ofertas se inyecta directamente en el flujo de noticias de <strong>Frontera Número Uno</strong>. No dependemos de algoritmos externos; tenemos línea directa con millones de juarenses cautivos. El resultado es un alcance orgánico masivo y un costo de adquisición que nadie más puede igualar.
+                Tienes una <strong>doble ventaja competitiva:</strong> no solo optimizamos tu presupuesto de pauta con estrategias avanzadas, sino que tu catálogo de ofertas se inyecta directamente en el flujo de noticias de <strong>Frontera Número Uno</strong>. Usaremos nuestro canal de difusión orgánico masivo para asegurar tu alcance. El resultado es un costo de adquisición que nadie más puede igualar.
               </p>
               
-              <div style={{ display: "flex", gap: "1rem", marginTop: "2rem" }}>
-                <div style={{ background: "rgba(10,130,68,0.1)", padding: "1rem 1.5rem", borderRadius: "12px", border: `1px solid ${theme.superetteGreen}`, flex: 1 }}>
-                  <h4 style={{ margin: 0, color: theme.superetteGreen, fontSize: "1.3rem" }}>Tráfico Orgánico Masivo</h4>
-                  <p style={{ margin: 0, color: theme.textMain, fontSize: "0.95rem" }}>Tus ofertas frente a millones de juarenses</p>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "1rem", marginTop: "2rem" }}>
+                <div style={{ background: "rgba(10,130,68,0.1)", padding: "1.5rem", borderRadius: "12px", border: `1px solid ${theme.superetteGreen}`, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                  <h4 style={{ margin: "0 0 0.5rem", color: theme.superetteGreen, fontSize: "1.2rem", lineHeight: 1.2 }}>Doble Ventaja</h4>
+                  <p style={{ margin: 0, color: theme.textMain, fontSize: "0.95rem", lineHeight: 1.4 }}>Optimización de Pauta +<br/>Difusión Orgánica</p>
                 </div>
-                <div style={{ background: "rgba(10,130,68,0.1)", padding: "1rem 1.5rem", borderRadius: "12px", border: `1px solid ${theme.superetteGreen}`, flex: 1 }}>
-                  <h4 style={{ margin: 0, color: theme.superetteGreen, fontSize: "1.3rem" }}>Autoridad de Marca</h4>
-                  <p style={{ margin: 0, color: theme.textMain, fontSize: "0.95rem" }}>Respaldo de la fuente de noticias líder</p>
+                <div style={{ background: "rgba(10,130,68,0.1)", padding: "1.5rem", borderRadius: "12px", border: `1px solid ${theme.superetteGreen}`, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                  <h4 style={{ margin: "0 0 0.5rem", color: theme.superetteGreen, fontSize: "1.2rem", lineHeight: 1.2 }}>Tráfico Cautivo</h4>
+                  <p style={{ margin: 0, color: theme.textMain, fontSize: "0.95rem", lineHeight: 1.4 }}>Tus ofertas frente a millones de juarenses</p>
                 </div>
               </div>
             </div>
@@ -395,8 +395,8 @@ export default function SuperetteClient() {
                   </div>
                   
                   <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem", position: "relative", zIndex: 2 }}>
-                    <span style={{ fontSize: "2.2rem", fontWeight: 900, color: "#fff", letterSpacing: "-1px" }}>70.0M</span>
-                    <span style={{ fontSize: "1rem", fontWeight: 700, color: "#c084fc" }}>↑ 50.1%</span>
+                    <span style={{ fontSize: "3.5rem", fontWeight: 900, color: "#fff", letterSpacing: "-2px", lineHeight: 1 }}>70.0M</span>
+                    <span style={{ fontSize: "1.2rem", fontWeight: 700, color: "#4ade80" }}>↑ 50.1%</span>
                   </div>
                 </div>
 
@@ -436,8 +436,8 @@ export default function SuperetteClient() {
                   </div>
                   
                   <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem", position: "relative", zIndex: 2 }}>
-                    <span style={{ fontSize: "2.2rem", fontWeight: 900, color: "#fff", letterSpacing: "-1px" }}>650.4K</span>
-                    <span style={{ fontSize: "1rem", fontWeight: 700, color: "#f472b6" }}>↑ 41%</span>
+                    <span style={{ fontSize: "3.5rem", fontWeight: 900, color: "#fff", letterSpacing: "-2px", lineHeight: 1 }}>650.4K</span>
+                    <span style={{ fontSize: "1.2rem", fontWeight: 700, color: "#4ade80" }}>↑ 41%</span>
                   </div>
                 </div>
               </div>
