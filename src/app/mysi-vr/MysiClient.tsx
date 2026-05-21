@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence, useInView } from "framer-motion";
-import { ChevronRight, Video, Target, Globe, ArrowRight, Download, Bot } from "lucide-react";
+import { ChevronRight, Video, Target, Globe, ArrowRight, Download, Bot, Glasses, MonitorSmartphone, Tv } from "lucide-react";
 import React, { useState, useEffect, useRef } from "react";
 
 // Paleta industrial para MYSI
@@ -350,13 +350,67 @@ export default function MysiClient() {
               <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Máquina Interactiva:</strong> Referencias del panel de control de la HAAS VF-2SSYT y del Bar Feeder.</li>
               <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Arquitectura:</strong> Fotos y metros cuadrados exactos de la superficie de la planta en Costa Rica.</li>
               <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Voiceover:</strong> Aprobación final del guion comercial de 8 diálogos antes de enviar a grabar la locución profesional.</li>
-              <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Hardware VR:</strong> El cliente cuenta con y proveerá los visores Meta Quest para la instalación del software.</li>
-              <li><strong style={{ color: theme.textMain }}>Hardware de Exhibición (A definir):</strong> El cliente proveerá laptop, pantalla de proyección y router local (Te compartiremos especificaciones recomendadas en breve).</li>
+              <li style={{ marginBottom: "1rem" }}><strong style={{ color: theme.textMain }}>Equipamiento de Casting:</strong> El cliente proveerá los visores Meta Quest, además de la laptop, pantalla y router (ver recomendaciones de hardware en la siguiente sección).</li>
             </motion.ul>
           </GlassCard>
         </motion.div>
 
-        {/* 5. TABLA DE INVERSIÓN */}
+        {/* 5. EQUIPO RECOMENDADO PARA CASTING */}
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} style={{ marginBottom: "5rem" }}>
+          <GlassCard borderTopColor={theme.mysiAccent}>
+            <div style={{ position: "absolute", top: "-20px", right: "20px", fontSize: "15rem", fontWeight: 900, color: "rgba(255, 255, 255, 0.02)", pointerEvents: "none", lineHeight: 1 }}>5</div>
+            
+            <motion.h3 variants={itemAnim} style={{ color: theme.textMain, marginTop: 0, fontSize: "1.8rem", marginBottom: "2rem" }}>
+              Hardware Recomendado para Casting
+            </motion.h3>
+            
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "2rem", marginBottom: "2.5rem" }}>
+              <motion.div variants={itemAnim} style={{ background: "rgba(0,0,0,0.2)", padding: "1.5rem", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.05)" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "1rem", color: theme.mysiAccent }}>
+                  <Glasses size={24} /> <h4 style={{ margin: 0, fontSize: "1.2rem", color: "#FFF" }}>Visor y Accesorios</h4>
+                </div>
+                <ul style={{ paddingLeft: "1.2rem", color: theme.textMuted, lineHeight: 1.6, margin: 0 }}>
+                  <li style={{ marginBottom: "0.8rem" }}><strong style={{ color: theme.textMain }}>Visor:</strong> Meta Quest 3 o 3S.</li>
+                  <li style={{ marginBottom: "0.8rem" }}><strong style={{ color: theme.textMain }}>Soporte (Altamente Recomendado):</strong> <a href="https://www.amazon.com.mx/MNJKJHL-Ajustable-Recargables-Extendido-Comodidad/dp/B0DY3LHTML" target="_blank" rel="noreferrer" style={{ color: theme.mysiAccent, textDecoration: "underline", fontWeight: "bold" }}>Pila tipo headband</a> para extender la duración de la batería todo el día.</li>
+                  <li><strong style={{ color: theme.textMain }}>Cable (Opcional):</strong> <a href="https://www.amazon.com.mx/JSAUX-Compatible-Accesorios-Velocidad-Auriculares/dp/B0DK6KSWY3" target="_blank" rel="noreferrer" style={{ color: theme.mysiAccent, textDecoration: "underline", fontWeight: "bold" }}>Cable carga y juega 5m</a> (si prefieren conexión alámbrica a la laptop).</li>
+                </ul>
+              </motion.div>
+
+              <motion.div variants={itemAnim} style={{ background: "rgba(0,0,0,0.2)", padding: "1.5rem", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.05)" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "1rem", color: theme.mysiBlue }}>
+                  <MonitorSmartphone size={24} /> <h4 style={{ margin: 0, fontSize: "1.2rem", color: "#FFF" }}>Laptop y Red</h4>
+                </div>
+                <ul style={{ paddingLeft: "1.2rem", color: theme.textMuted, lineHeight: 1.6, margin: 0 }}>
+                  <li style={{ marginBottom: "0.8rem" }}><strong style={{ color: theme.textMain }}>Laptop:</strong> Capaz de correr <em>Meta Quest Developers Hub</em>. Requisitos: RTX 3060+, 16GB RAM, i5/i7 o Ryzen 5/7. <br/><a href="https://www.amazon.com.mx/MSI-Laptop-i5-13420H-GeForce-4060-16GB/dp/B0F538NQPH" target="_blank" rel="noreferrer" style={{ color: theme.mysiAccent, textDecoration: "underline", fontWeight: "bold" }}>Ver ejemplo (MSI Cyborg 15)</a></li>
+                  <li><strong style={{ color: theme.textMain }}>Router Local:</strong> Banda Dual 2.4 / 5.0 GHz dedicado para el stand. <br/><a href="https://www.amazon.com.mx/TP-Link-WiFi-AX3000-Router-802-11ax/dp/B09V3JG7JL" target="_blank" rel="noreferrer" style={{ color: theme.mysiAccent, textDecoration: "underline", fontWeight: "bold" }}>Ver ejemplo (TP-Link AX3000)</a></li>
+                </ul>
+              </motion.div>
+
+              <motion.div variants={itemAnim} style={{ background: "rgba(0,0,0,0.2)", padding: "1.5rem", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.05)" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "1rem", color: theme.mysiSteel }}>
+                  <Tv size={24} /> <h4 style={{ margin: 0, fontSize: "1.2rem", color: "#FFF" }}>Pantalla Externa</h4>
+                </div>
+                <ul style={{ paddingLeft: "1.2rem", color: theme.textMuted, lineHeight: 1.6, margin: 0 }}>
+                  <li style={{ marginBottom: "0.8rem" }}><strong style={{ color: theme.textMain }}>Display:</strong> Cualquier TV o monitor con entrada HDMI.</li>
+                  <li><strong style={{ color: theme.textMain }}>Cableado:</strong> Cable HDMI suficientemente largo para conectar la pantalla a la laptop. <br/><a href="https://www.amazon.com.mx/UGREEN-Velocidad-Aluminio-Compatible-Blu-ray/dp/B0DT9KJX65" target="_blank" rel="noreferrer" style={{ color: theme.mysiAccent, textDecoration: "underline", fontWeight: "bold" }}>Ver ejemplo (UGREEN 10m)</a></li>
+                </ul>
+              </motion.div>
+            </div>
+
+            <motion.div variants={itemAnim} style={{ background: "rgba(56, 189, 248, 0.05)", padding: "1.5rem", borderRadius: "16px", borderLeft: `4px solid ${theme.mysiAccent}` }}>
+              <h4 style={{ color: "#FFF", fontSize: "1.1rem", margin: "0 0 1rem" }}>Notas Operativas sobre el Casteo (Streaming a la Pantalla)</h4>
+              <p style={{ color: theme.textMuted, lineHeight: 1.6, fontSize: "0.95rem", margin: "0 0 1rem" }}>
+                El visor y la laptop deben estar conectados a la misma red (idealmente la banda <strong>5 GHz</strong> del router). 
+              </p>
+              <p style={{ color: theme.textMuted, lineHeight: 1.6, fontSize: "0.95rem", margin: 0 }}>
+                <strong>Proceso de Inicialización ("Jumpstart"):</strong> Para evitar pagar costosos servicios de internet dedicado en la expo, se utiliza el router de forma local (sin internet). Para que Meta permita iniciar el casteo, es necesario compartir temporalmente datos móviles (Hotspot) para que los equipos se comuniquen con los servidores. Una vez iniciada la transmisión de video, ambos dispositivos se regresan a la red local del router y se apagan los datos celulares. <em>Nota: Si se pierde la conexión por alguna razón, este "Jumpstart" debe repetirse.</em>
+              </p>
+            </motion.div>
+
+          </GlassCard>
+        </motion.div>
+
+        {/* 6. TABLA DE INVERSIÓN */}
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} style={{ marginBottom: "5rem" }}>
           <motion.h2 variants={itemAnim} style={{ color: "#FFF", fontSize: "2.5rem", marginBottom: "3rem", textAlign: "center" }}>Desglose de Ingeniería</motion.h2>
           
@@ -437,7 +491,7 @@ export default function MysiClient() {
           </div>
         </motion.div>
 
-        {/* 6. CONDICIONES Y DATOS BANCARIOS */}
+        {/* 7. CONDICIONES Y DATOS BANCARIOS */}
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} style={{ marginBottom: "5rem" }}>
           <GlassCard borderTopColor={theme.mysiSteel}>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))", gap: "3rem" }}>
