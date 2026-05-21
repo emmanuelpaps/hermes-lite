@@ -329,7 +329,7 @@ export default function SuperetteClient() {
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "1rem", marginTop: "2rem" }}>
                 <div style={{ background: "rgba(10,130,68,0.1)", padding: "1.5rem", borderRadius: "12px", border: `1px solid ${theme.superetteGreen}`, display: "flex", flexDirection: "column", justifyContent: "center" }}>
                   <h4 style={{ margin: "0 0 0.5rem", color: theme.superetteGreen, fontSize: "1.2rem", lineHeight: 1.2 }}>Doble Ventaja</h4>
-                  <p style={{ margin: 0, color: theme.textMain, fontSize: "0.95rem", lineHeight: 1.4 }}>Optimización de Pauta +<br/>Difusión Orgánica</p>
+                  <p style={{ margin: 0, color: theme.textMain, fontSize: "0.95rem", lineHeight: 1.4 }}>Optimización de Pauta + Difusión Orgánica</p>
                 </div>
                 <div style={{ background: "rgba(10,130,68,0.1)", padding: "1.5rem", borderRadius: "12px", border: `1px solid ${theme.superetteGreen}`, display: "flex", flexDirection: "column", justifyContent: "center" }}>
                   <h4 style={{ margin: "0 0 0.5rem", color: theme.superetteGreen, fontSize: "1.2rem", lineHeight: 1.2 }}>Tráfico Cautivo</h4>
@@ -353,14 +353,14 @@ export default function SuperetteClient() {
                 boxShadow: "0 20px 50px rgba(76, 29, 149, 0.4)" 
               }}>
               
-              <div style={{ background: "rgba(255, 255, 255, 0.1)", backdropFilter: "blur(20px)", padding: "1.5rem", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.2)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <div style={{ background: "rgba(255, 255, 255, 0.1)", backdropFilter: "blur(20px)", padding: "1.5rem", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.2)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" }}>
                 <img src="/assets/fn1-logo-purple.png" alt="Frontera Numero Uno" style={{ width: "150px", height: "auto", filter: "brightness(0) invert(1)" }} />
-                <span style={{ fontSize: "0.85rem", color: "#fff", fontWeight: 700, background: "rgba(255,255,255,0.2)", padding: "6px 14px", borderRadius: "20px" }}>Últimos 28 días</span>
+                <span style={{ fontSize: "0.85rem", color: "#fff", fontWeight: 700, background: "rgba(255,255,255,0.2)", padding: "6px 14px", borderRadius: "20px", whiteSpace: "nowrap" }}>Últimos 28 días</span>
               </div>
               
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "1.5rem" }}>
                 {/* Tarjeta 1: Views */}
-                <div style={{ background: "rgba(0, 0, 0, 0.4)", backdropFilter: "blur(20px)", padding: "1.5rem", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.1)", position: "relative", overflow: "hidden" }}>
+                <div style={{ background: "rgba(0, 0, 0, 0.4)", backdropFilter: "blur(20px)", padding: "1.5rem", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.1)", position: "relative" }}>
                   <h4 style={{ margin: "0 0 1rem", color: "rgba(255,255,255,0.8)", fontSize: "1.1rem", fontWeight: 600 }}>Visualizaciones</h4>
                   
                   <div style={{ width: "100%", height: "60px", marginBottom: "1rem", position: "relative" }}>
@@ -401,7 +401,7 @@ export default function SuperetteClient() {
                 </div>
 
                 {/* Tarjeta 2: Interacciones */}
-                <div style={{ background: "rgba(0, 0, 0, 0.4)", backdropFilter: "blur(20px)", padding: "1.5rem", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.1)", position: "relative", overflow: "hidden" }}>
+                <div style={{ background: "rgba(0, 0, 0, 0.4)", backdropFilter: "blur(20px)", padding: "1.5rem", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.1)", position: "relative" }}>
                   <h4 style={{ margin: "0 0 1rem", color: "rgba(255,255,255,0.8)", fontSize: "1.1rem", fontWeight: 600 }}>Interacciones</h4>
                   
                   <div style={{ width: "100%", height: "60px", marginBottom: "1rem", position: "relative" }}>
