@@ -310,9 +310,50 @@ export default function SuperetteClient() {
           </div>
         </GlassCard>
 
-        {/* 3. Transición y Métricas */}
+        {/* 3. Frontera Numero Uno */}
+        <GlassCard style={{ marginBottom: "5rem" }}>
+          <div style={{ position: "absolute", top: "-20px", right: "20px", fontSize: "15rem", fontWeight: 900, color: "rgba(10, 130, 68, 0.03)", pointerEvents: "none", lineHeight: 1 }}>3</div>
+          
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))", gap: "clamp(2rem, 5vw, 4rem)", alignItems: "center" }}>
+            <div>
+              <h2 className={titleFont.className} style={{ color: theme.superetteGreen, fontSize: "2.5rem", marginTop: 0, marginBottom: "1.5rem" }}>
+                Difusión Masiva:<br/>Frontera Número Uno
+              </h2>
+              <p style={{ fontSize: "1.2rem", color: theme.textMuted, lineHeight: 1.8 }}>
+                A diferencia de una agencia tradicional que depende 100% de comprar anuncios a Facebook o Google, <strong>nosotros somos dueños de nuestra propia audiencia</strong>.
+              </p>
+              <p style={{ fontSize: "1.2rem", color: theme.textMuted, lineHeight: 1.8, marginTop: "1rem" }}>
+                Al trabajar con la Célula Operativa, tu catálogo de ofertas se distribuye automáticamente en <strong>Frontera Número Uno</strong>, la plataforma de noticias digitales de mayor alcance en Ciudad Juárez. Esto significa impactos locales garantizados y tráfico orgánico masivo que ninguna otra agencia puede ofrecerte.
+              </p>
+              
+              <div style={{ display: "flex", gap: "1rem", marginTop: "2rem" }}>
+                <div style={{ background: "rgba(10,130,68,0.1)", padding: "1rem 1.5rem", borderRadius: "12px", border: `1px solid ${theme.superetteGreen}`, flex: 1 }}>
+                  <h4 style={{ margin: 0, color: theme.superetteGreen, fontSize: "1.3rem" }}>Audiencia Cautiva</h4>
+                  <p style={{ margin: 0, color: theme.textMain, fontSize: "0.95rem" }}>Lectores 100% locales en Juárez</p>
+                </div>
+                <div style={{ background: "rgba(10,130,68,0.1)", padding: "1rem 1.5rem", borderRadius: "12px", border: `1px solid ${theme.superetteGreen}`, flex: 1 }}>
+                  <h4 style={{ margin: 0, color: theme.superetteGreen, fontSize: "1.3rem" }}>Alcance Directo</h4>
+                  <p style={{ margin: 0, color: theme.textMain, fontSize: "0.95rem" }}>Tus ofertas en el ciclo de noticias</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Animación de Radar/Broadcast FN1 */}
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", position: "relative", minHeight: "350px" }}>
+              <motion.div animate={{ scale: [1, 1.5, 1], opacity: [0.1, 0, 0.1] }} transition={{ duration: 3, repeat: Infinity, ease: "easeOut" }} style={{ position: "absolute", width: "250px", height: "250px", borderRadius: "50%", border: `4px solid ${theme.superetteGreen}` }} />
+              <motion.div animate={{ scale: [1, 1.8, 1], opacity: [0.3, 0, 0.3] }} transition={{ duration: 3, delay: 1, repeat: Infinity, ease: "easeOut" }} style={{ position: "absolute", width: "200px", height: "200px", borderRadius: "50%", border: `4px solid ${theme.superetteGreen}` }} />
+              <motion.div animate={{ scale: [1, 2.2, 1], opacity: [0.5, 0, 0.5] }} transition={{ duration: 3, delay: 2, repeat: Infinity, ease: "easeOut" }} style={{ position: "absolute", width: "150px", height: "150px", borderRadius: "50%", border: `4px solid ${theme.superetteGreen}` }} />
+              
+              <div style={{ background: "#fff", padding: "2.5rem", borderRadius: "24px", boxShadow: "0 20px 50px rgba(0,0,0,0.15)", zIndex: 10, position: "relative", border: `1px solid ${theme.borderSolid}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <img src="/assets/fn1-logo-purple.png" alt="Frontera Numero Uno" style={{ width: "220px", height: "auto" }} />
+              </div>
+            </div>
+          </div>
+        </GlassCard>
+
+        {/* 4. Transición y Métricas */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 450px), 1fr))", gap: "clamp(1.5rem, 4vw, 2.5rem)", marginBottom: "5rem", position: "relative" }}>
-          <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontSize: "20rem", fontWeight: 900, color: "rgba(10, 130, 68, 0.03)", pointerEvents: "none", zIndex: -1 }}>3</div>
+          <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontSize: "20rem", fontWeight: 900, color: "rgba(10, 130, 68, 0.03)", pointerEvents: "none", zIndex: -1 }}>4</div>
           <GlassCard borderTopColor={theme.superetteGreen}>
             <video autoPlay loop muted playsInline style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.1, zIndex: 0 }} src="/assets/superette/transicion.mp4" />
             <div style={{ position: "relative", zIndex: 1 }}>
@@ -383,9 +424,9 @@ export default function SuperetteClient() {
           </GlassCard>
         </div>
 
-        {/* 4. Tablas Animadas */}
+        {/* 5. Tablas Animadas */}
         <GlassCard style={{ marginBottom: "5rem" }}>
-          <div style={{ position: "absolute", top: "-20px", right: "20px", fontSize: "15rem", fontWeight: 900, color: "rgba(10, 130, 68, 0.03)", pointerEvents: "none", lineHeight: 1 }}>4</div>
+          <div style={{ position: "absolute", top: "-20px", right: "20px", fontSize: "15rem", fontWeight: 900, color: "rgba(10, 130, 68, 0.03)", pointerEvents: "none", lineHeight: 1 }}>5</div>
           <h2 className={titleFont.className} style={{ color: theme.superetteGreen, fontSize: "2.5rem", marginTop: 0, marginBottom: "2.5rem", fontWeight: 800 }}>
             Desglose Operativo Mensual
           </h2>
