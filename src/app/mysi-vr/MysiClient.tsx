@@ -1,8 +1,8 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { ChevronRight, Video, Target, Globe, ArrowRight, Download, Bot } from "lucide-react";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 // Paleta industrial para MYSI
 const theme = {
@@ -56,6 +56,22 @@ const GlassCard = ({ children, style = {}, borderTopColor = theme.mysiAccent }: 
     <div style={{ position: "relative", zIndex: 1 }}>{children}</div>
   </motion.div>
 );
+
+// Componente para cargar videos solo cuando entran en pantalla
+const LazyVideo = ({ src, style, ...props }: any) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "200px" });
+
+  return (
+    <div ref={ref} style={{ width: "100%", height: "100%", position: "absolute", inset: 0 }}>
+      {isInView && (
+        <video autoPlay loop muted playsInline style={style} {...props}>
+          <source src={src} type="video/mp4" />
+        </video>
+      )}
+    </div>
+  );
+};
 
 export default function MysiClient() {
   const [loadingProgress, setLoadingProgress] = useState(0);
@@ -231,9 +247,7 @@ export default function MysiClient() {
                   Desarrollado con la misma tecnología usada en videojuegos de última generación (Unity 3D). Diseñamos el recorrido para que dure <strong>máximo 10 minutos</strong>, asegurando que cientos de personas en la expo puedan probarlo sin causar cuellos de botella.
                 </p>
                 <div style={{ marginTop: "2rem", borderRadius: "16px", overflow: "hidden", position: "relative", aspectRatio: "16/9", width: "100%", border: `1px solid rgba(255,255,255,0.2)`, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}>
-                  <video autoPlay loop muted playsInline style={{ width: "100%", height: "100%", objectFit: "cover" }}>
-                    <source src="/assets/leads-video.mp4" type="video/mp4" />
-                  </video>
+                  <LazyVideo src="/assets/leads-video.mp4" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                   <div style={{ position: "absolute", inset: 0, background: "linear-gradient(0deg, rgba(15,23,42,0.6) 0%, transparent 40%)" }} />
                   <div style={{ position: "absolute", bottom: "1.5rem", left: "1.5rem", color: "#FFF", fontWeight: 600, fontSize: "1.1rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
                     <span style={{ display: "inline-block", width: "8px", height: "8px", borderRadius: "50%", background: theme.mysiAccent, boxShadow: `0 0 10px ${theme.mysiAccent}` }}></span>
@@ -282,9 +296,7 @@ export default function MysiClient() {
               </ul>
             </div>
             <div style={{ position: "relative", aspectRatio: "4/5", width: "100%", borderRadius: "16px", overflow: "hidden", background: "rgba(0,0,0,0.3)", display: "flex", alignItems: "center", justifyContent: "center", border: `1px solid rgba(255,255,255,0.2)`, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}>
-              <video autoPlay loop muted playsInline style={{ position: "absolute", width: "100%", height: "100%", objectFit: "cover", opacity: 0.95 }}>
-                <source src="/assets/tablet-leads-video.mp4" type="video/mp4" />
-              </video>
+              <LazyVideo src="/assets/tablet-leads-video.mp4" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.95 }} />
               <div style={{ position: "absolute", inset: 0, background: "linear-gradient(0deg, rgba(15,23,42,0.6) 0%, transparent 40%)" }} />
               <div style={{ textAlign: "center", zIndex: 1, position: "absolute", bottom: "1.5rem" }}>
                 <h3 style={{ margin: 0, fontSize: "1.5rem", fontWeight: 600, color: "#FFF" }}>Captura Segura de Leads</h3>
