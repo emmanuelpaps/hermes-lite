@@ -160,7 +160,7 @@ interface AccordionProps {
   formatPrice: (n:number)=>string;
   variants: Variants;
   isOpen: boolean;
-  onToggle: () => void;
+  onToggle?: () => void;
   isSelectable?: boolean;
   isSelected?: boolean;
   onSelect?: () => void;
@@ -179,6 +179,7 @@ const AccordionCard = ({ service, formatPrice, variants, isOpen, onToggle, isSel
       viewport={{ once: true }}
       variants={variants}
       style={{ 
+        cursor: onToggle ? 'pointer' : 'default',
         position: 'relative', zIndex: isOpen ? 45 : 1,
         ...(isSelectable && isSelected ? { 
           borderColor: 'var(--primary-color, #4ade80)',
@@ -205,13 +206,15 @@ const AccordionCard = ({ service, formatPrice, variants, isOpen, onToggle, isSel
                 verticalAlign: 'middle'
               }}>{service.badge}</span>
             )}
-            <motion.div 
-              animate={{ rotate: isOpen ? 180 : 0 }}
-              transition={{ duration: 0.3 }}
-              style={{ display: 'inline-block', marginLeft: '0.75rem' }}
-            >
-              ▼
-            </motion.div>
+            {onToggle && (
+              <motion.div 
+                animate={{ rotate: isOpen ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+                style={{ display: 'inline-block', marginLeft: '0.75rem' }}
+              >
+                ▼
+              </motion.div>
+            )}
           </h3>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -845,8 +848,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 service={service} 
                 formatPrice={formatPrice} 
                 variants={fadeUp} 
-                isOpen={activeService === service.name}
-                onToggle={() => setActiveService(activeService === service.name ? null : service.name)}
+                isOpen={true}
                 isSelectable={true}
                 isSelected={selectedServices[service.name]}
                 onSelect={() => toggleServiceSelection(service.name)}
