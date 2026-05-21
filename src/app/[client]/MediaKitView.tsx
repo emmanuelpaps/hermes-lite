@@ -3,7 +3,12 @@
 import { motion, Variants, useMotionValue, useSpring, useTransform, AnimatePresence, animate, useInView } from "framer-motion";
 import styles from "./page.module.css";
 import React, { useRef, useState, useEffect } from "react";
-import { ViralChart, ApologramaShowcase, PremiumAudienceCard, InsightCard } from "./EcosystemAnimations";
+import dynamic from "next/dynamic";
+
+const ViralChart = dynamic(() => import("./EcosystemAnimations").then(mod => mod.ViralChart));
+const ApologramaShowcase = dynamic(() => import("./EcosystemAnimations").then(mod => mod.ApologramaShowcase));
+const PremiumAudienceCard = dynamic(() => import("./EcosystemAnimations").then(mod => mod.PremiumAudienceCard));
+const InsightCard = dynamic(() => import("./EcosystemAnimations").then(mod => mod.InsightCard));
 import { CursorSpotlight } from "./CursorSpotlight";
 import Image from "next/image";
 
@@ -511,9 +516,11 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           style={{ position: 'relative', zIndex: 2 }}
         >
           {data.clientLogo && (
-            <img 
+            <Image 
               src={data.clientLogo} 
               alt={data.clientName} 
+              width={300}
+              height={300}
               className={data.theme?.clientLogoRaw ? styles.logoLight : (isLight ? styles.logoLight : styles.logo)} 
             />
           )}
