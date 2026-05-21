@@ -18,7 +18,7 @@ function AnimatedCounter({ from, to, format, delay = 0 }: { from: number, to: nu
 
   return <motion.span ref={ref}>{display}</motion.span>;
 }
-import { ShieldCheck, Zap, Layers, Eye, Magnet, ShoppingCart, ArrowDown, Radar, TrendingDown, Play, Cuboid, MonitorSmartphone, Camera, Megaphone, Target, Tv, Glasses, Bot } from "lucide-react";
+import { ShieldCheck, Zap, Layers, Eye, Magnet, ShoppingCart, ArrowDown, Radar, TrendingDown, Play, Cuboid, MonitorSmartphone, Camera, Megaphone, Target, Tv, Glasses, Bot, TrendingUp, Cpu } from "lucide-react";
 import { Outfit } from "next/font/google";
 
 const titleFont = Outfit({ subsets: ["latin"], weight: ["700", "800", "900"] });
@@ -550,9 +550,52 @@ export default function SuperetteClient() {
           </GlassCard>
         </div>
 
-        {/* 4. Desglose Operativo */}
+        {/* 4. Arquitectura de Distribución (Paid Media) */}
         <GlassCard style={{ marginBottom: "5rem" }}>
           <div style={{ position: "absolute", top: "-20px", right: "20px", fontSize: "15rem", fontWeight: 900, color: "rgba(10, 130, 68, 0.03)", pointerEvents: "none", lineHeight: 1 }}>4</div>
+          <h2 className={titleFont.className} style={{ color: theme.superetteGreen, fontSize: "clamp(1.8rem, 6vw, 2.5rem)", marginTop: 0, marginBottom: "1rem", fontWeight: 800 }}>
+            Arquitectura de Distribución
+          </h2>
+          <p style={{ color: theme.textMuted, fontSize: "1.1rem", lineHeight: 1.6, marginBottom: "3rem", maxWidth: "800px" }}>
+            El mejor diseño gráfico no sirve si no lo ve la persona correcta. La <strong>Gestión de Pauta</strong> es el puente estratégico que conecta el volumen de la Maquila Gráfica directamente con el consumidor final, garantizando que el presupuesto se traduzca en tráfico peatonal y conversiones medibles.
+          </p>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "2rem", position: "relative", zIndex: 2 }}>
+            <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ background: "rgba(255, 255, 255, 0.8)", border: `1px solid ${theme.borderSolid}`, borderRadius: "16px", padding: "2rem", boxShadow: "0 10px 30px rgba(0,0,0,0.03)" }}>
+              <div style={{ background: "rgba(10, 130, 68, 0.1)", width: "50px", height: "50px", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1.5rem", color: theme.superetteGreen }}>
+                <TrendingUp size={24} />
+              </div>
+              <h3 style={{ color: theme.textMain, fontSize: "1.2rem", margin: "0 0 1rem", fontWeight: 700 }}>Omnicanalidad</h3>
+              <p style={{ color: theme.textMuted, margin: 0, fontSize: "0.95rem", lineHeight: 1.6 }}>
+                Desplegamos los gráficos simultáneamente en <strong>Meta (Facebook e Instagram), Google y TikTok</strong>. No dependemos de una sola red; perseguimos la atención del usuario en todas las plataformas que frecuenta diariamente.
+              </p>
+            </motion.div>
+
+            <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ background: "rgba(255, 255, 255, 0.8)", border: `1px solid ${theme.borderSolid}`, borderRadius: "16px", padding: "2rem", boxShadow: "0 10px 30px rgba(0,0,0,0.03)" }}>
+              <div style={{ background: "rgba(250, 204, 21, 0.15)", width: "50px", height: "50px", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1.5rem", color: "#b45309" }}>
+                <Cpu size={24} />
+              </div>
+              <h3 style={{ color: theme.textMain, fontSize: "1.2rem", margin: "0 0 1rem", fontWeight: 700 }}>Fase Beta: OpenAI</h3>
+              <p style={{ color: theme.textMuted, margin: 0, fontSize: "0.95rem", lineHeight: 1.6 }}>
+                Integramos experimentación temprana con IA para predecir qué diseños generarán mayor impacto, optimizando el <em>Ad Spend</em> con decisiones basadas en datos antes de lanzar una campaña al mercado.
+              </p>
+            </motion.div>
+
+            <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ background: "rgba(255, 255, 255, 0.8)", border: `1px solid ${theme.borderSolid}`, borderRadius: "16px", padding: "2rem", boxShadow: "0 10px 30px rgba(0,0,0,0.03)" }}>
+              <div style={{ background: "rgba(218, 41, 28, 0.1)", width: "50px", height: "50px", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1.5rem", color: theme.superetteRed }}>
+                <Target size={24} />
+              </div>
+              <h3 style={{ color: theme.textMain, fontSize: "1.2rem", margin: "0 0 1rem", fontWeight: 700 }}>Conversión y Tráfico</h3>
+              <p style={{ color: theme.textMuted, margin: 0, fontSize: "0.95rem", lineHeight: 1.6 }}>
+                Nuestra meta no son los "likes". Optimizamos el presupuesto de pauta ($20,000 MXN) exclusivamente para incentivar el <strong>Foot Traffic</strong> (visitas físicas a tienda) y la venta directa de las ofertas publicadas.
+              </p>
+            </motion.div>
+          </div>
+        </GlassCard>
+
+        {/* 5. Desglose Operativo */}
+        <GlassCard style={{ marginBottom: "5rem" }}>
+          <div style={{ position: "absolute", top: "-20px", right: "20px", fontSize: "15rem", fontWeight: 900, color: "rgba(10, 130, 68, 0.03)", pointerEvents: "none", lineHeight: 1 }}>5</div>
           <h2 className={titleFont.className} style={{ color: theme.superetteGreen, fontSize: "clamp(1.8rem, 6vw, 2.5rem)", marginTop: 0, marginBottom: "2.5rem", fontWeight: 800 }}>
             Desglose Operativo Mensual
           </h2>
