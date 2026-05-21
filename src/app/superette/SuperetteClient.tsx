@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ShieldCheck, Zap, Layers } from "lucide-react";
+import { ShieldCheck, Zap, Layers, Eye, Magnet, ShoppingCart, ArrowDown } from "lucide-react";
 import { Outfit } from "next/font/google";
 
 const titleFont = Outfit({ subsets: ["latin"], weight: ["700", "800", "900"] });
@@ -261,34 +261,49 @@ export default function SuperetteClient() {
               </p>
               
               <div style={{ display: "flex", flexDirection: "column", gap: "1rem", marginTop: "2rem" }}>
-                <div style={{ padding: "1.5rem", background: "rgba(255,255,255,0.6)", borderRadius: "12px", borderLeft: `6px solid ${theme.superetteGreen}` }}>
-                  <h4 style={{ margin: "0 0 0.5rem", color: theme.textMain, fontSize: "1.1rem" }}>Top Funnel (Awareness)</h4>
-                  <p style={{ margin: 0, color: theme.textMuted, fontSize: "1rem" }}>Reproducciones de Reels In-Situ mostrando frescura.</p>
+                <div style={{ padding: "1.5rem", background: "#ffffff", borderRadius: "12px", borderLeft: `6px solid ${theme.superetteGreen}`, boxShadow: "0 10px 30px rgba(0,0,0,0.06)", display: "flex", alignItems: "flex-start", gap: "1rem" }}>
+                  <div style={{ background: "rgba(10,130,68,0.1)", padding: "10px", borderRadius: "50%", color: theme.superetteGreen }}><Eye size={24} /></div>
+                  <div>
+                    <h4 style={{ margin: "0 0 0.5rem", color: theme.textMain, fontSize: "1.1rem" }}>Top Funnel (Awareness)</h4>
+                    <p style={{ margin: 0, color: theme.textMuted, fontSize: "1rem" }}>Reproducciones de Reels In-Situ mostrando frescura.</p>
+                  </div>
                 </div>
-                <div style={{ padding: "1.5rem", background: "rgba(255,255,255,0.6)", borderRadius: "12px", borderLeft: `6px solid ${theme.superetteYellow}` }}>
-                  <h4 style={{ margin: "0 0 0.5rem", color: theme.textMain, fontSize: "1.1rem" }}>Mid Funnel (Retargeting)</h4>
-                  <p style={{ margin: 0, color: theme.textMuted, fontSize: "1rem" }}>Impacto a espectadores con Ofertas Flash.</p>
+                <div style={{ padding: "1.5rem", background: "#ffffff", borderRadius: "12px", borderLeft: `6px solid ${theme.superetteYellow}`, boxShadow: "0 10px 30px rgba(0,0,0,0.06)", display: "flex", alignItems: "flex-start", gap: "1rem" }}>
+                  <div style={{ background: "rgba(250,204,21,0.15)", padding: "10px", borderRadius: "50%", color: "#b45309" }}><Magnet size={24} /></div>
+                  <div>
+                    <h4 style={{ margin: "0 0 0.5rem", color: theme.textMain, fontSize: "1.1rem" }}>Mid Funnel (Retargeting)</h4>
+                    <p style={{ margin: 0, color: theme.textMuted, fontSize: "1rem" }}>Impacto a espectadores con Ofertas Flash.</p>
+                  </div>
                 </div>
-                <div style={{ padding: "1.5rem", background: "rgba(255,255,255,0.6)", borderRadius: "12px", borderLeft: `6px solid ${theme.superetteRed}` }}>
-                  <h4 style={{ margin: "0 0 0.5rem", color: theme.textMain, fontSize: "1.1rem" }}>Bottom Funnel (Conversión)</h4>
-                  <p style={{ margin: 0, color: theme.textMuted, fontSize: "1rem" }}>Ads geolocalizados a 3KM de distancia de cada sucursal (Jue-Dom).</p>
+                <div style={{ padding: "1.5rem", background: "#ffffff", borderRadius: "12px", borderLeft: `6px solid ${theme.superetteRed}`, boxShadow: "0 10px 30px rgba(0,0,0,0.06)", display: "flex", alignItems: "flex-start", gap: "1rem" }}>
+                  <div style={{ background: "rgba(218,41,28,0.1)", padding: "10px", borderRadius: "50%", color: theme.superetteRed }}><ShoppingCart size={24} /></div>
+                  <div>
+                    <h4 style={{ margin: "0 0 0.5rem", color: theme.textMain, fontSize: "1.1rem" }}>Bottom Funnel (Conversión)</h4>
+                    <p style={{ margin: 0, color: theme.textMuted, fontSize: "1rem" }}>Distribución digital masiva del catálogo de ofertas en toda la ciudad (Jue-Dom).</p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* GRÁFICA DE EMBUDO ANIMADA */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "5px" }}>
-              <motion.div variants={{ hidden: { opacity: 0, width: "0%" }, visible: { opacity: 1, width: "100%", transition: { duration: 0.8 } } }} style={{ height: "100px", background: theme.superetteGreen, borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", color: "#fff", fontWeight: 800, fontSize: "1.2rem", boxShadow: "0 10px 20px rgba(10,130,68,0.2)", padding: "0 1rem" }}>
+            {/* GRÁFICA DE EMBUDO ANIMADA (TRAPECIOS + FLECHAS) */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px", width: "100%", maxWidth: "400px", margin: "0 auto" }}>
+              <motion.div variants={{ hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1, transition: { duration: 0.8, type: "spring" } } }} style={{ width: "100%", height: "100px", background: theme.superetteGreen, clipPath: "polygon(0 0, 100% 0, 85% 100%, 15% 100%)", display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", color: "#fff", fontWeight: 800, fontSize: "1.2rem", boxShadow: "0 15px 30px rgba(10,130,68,0.3)" }}>
                 TODO JUÁREZ
               </motion.div>
-              <div style={{ width: 0, height: 0, borderLeft: "20px solid transparent", borderRight: "20px solid transparent", borderTop: "20px solid " + theme.superetteGreen }} />
               
-              <motion.div variants={{ hidden: { opacity: 0, width: "0%" }, visible: { opacity: 1, width: "75%", transition: { duration: 0.8, delay: 0.3 } } }} style={{ height: "90px", background: theme.superetteYellow, borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", color: "#b45309", fontWeight: 800, fontSize: "1.1rem", boxShadow: "0 10px 20px rgba(250,204,21,0.2)", padding: "0 1rem" }}>
+              <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }} style={{ color: theme.superetteGreen }}>
+                <ArrowDown size={32} strokeWidth={3} />
+              </motion.div>
+              
+              <motion.div variants={{ hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1, transition: { duration: 0.8, delay: 0.3, type: "spring" } } }} style={{ width: "70%", height: "90px", background: theme.superetteYellow, clipPath: "polygon(0 0, 100% 0, 80% 100%, 20% 100%)", display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", color: "#b45309", fontWeight: 800, fontSize: "1.1rem", boxShadow: "0 15px 30px rgba(250,204,21,0.3)" }}>
                 RETARGETING
               </motion.div>
-              <div style={{ width: 0, height: 0, borderLeft: "20px solid transparent", borderRight: "20px solid transparent", borderTop: "20px solid " + theme.superetteYellow }} />
+              
+              <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, delay: 0.2, repeat: Infinity, ease: "easeInOut" }} style={{ color: theme.superetteYellow }}>
+                <ArrowDown size={32} strokeWidth={3} />
+              </motion.div>
 
-              <motion.div variants={{ hidden: { opacity: 0, width: "0%" }, visible: { opacity: 1, width: "50%", transition: { duration: 0.8, delay: 0.6 } } }} style={{ height: "80px", background: theme.superetteRed, borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", color: "#fff", fontWeight: 800, fontSize: "1.1rem", boxShadow: "0 10px 20px rgba(218,41,28,0.2)", padding: "0 1rem", lineHeight: 1.2 }}>
+              <motion.div variants={{ hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1, transition: { duration: 0.8, delay: 0.6, type: "spring" } } }} style={{ width: "45%", height: "80px", background: theme.superetteRed, borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", color: "#fff", fontWeight: 800, fontSize: "1.1rem", boxShadow: "0 15px 30px rgba(218,41,28,0.3)", padding: "0 1rem", lineHeight: 1.2 }}>
                 VISITA A SUCURSAL
               </motion.div>
             </motion.div>
