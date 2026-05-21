@@ -154,6 +154,8 @@ export default function SuperetteClient() {
         
         {/* 1. El Desafío + Gráfica Animada */}
         <GlassCard style={{ marginBottom: "3rem" }}>
+          <div className={titleFont.className} style={{ position: "absolute", top: "-20px", right: "20px", fontSize: "15rem", fontWeight: 900, color: "rgba(10, 130, 68, 0.03)", pointerEvents: "none", lineHeight: 1 }}>1</div>
+          
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))", gap: "clamp(2rem, 5vw, 4rem)", alignItems: "center" }}>
             <div>
               <h2 className={titleFont.className} style={{ color: theme.superetteGreen, fontSize: "2.5rem", marginTop: 0, marginBottom: "1.5rem", position: "relative" }}>
