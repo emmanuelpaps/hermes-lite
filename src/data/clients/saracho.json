@@ -3,8 +3,8 @@
   "themeTemplate": "vercel",
   "theme": {
     "mode": "dark",
+    "clientLogoRaw": true,
     "primary": "#00539F",
-    "clientLogoRaw": false,
     "fontHeading": "'Playfair Display', serif",
     "fontBody": "'Inter', sans-serif"
   },
