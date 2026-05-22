@@ -1073,6 +1073,64 @@ export default function MediaKitView({ data }: { data: ClientData }) {
       </section>
       )}
 
+      {/* Datos Bancarios */}
+      {data.features?.showPricing !== false && (
+        <section className={styles.section} style={{ paddingTop: 0 }}>
+          <motion.div 
+            className="glass"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            style={{ 
+              padding: '2rem', 
+              borderRadius: '16px', 
+              background: 'var(--card-bg)', 
+              border: '1px solid var(--glass-border)',
+              maxWidth: '800px',
+              margin: '0 auto'
+            }}
+          >
+            <h3 style={{ color: 'var(--text-color)', marginTop: 0, fontSize: '1.5rem', marginBottom: '1.5rem', textAlign: 'center' }}>
+              Datos Bancarios
+            </h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', fontSize: '1.1rem' }}>
+              <div><strong style={{ color: 'var(--primary-color)' }}>Razón Social:</strong> <span style={{ color: 'var(--text-color)' }}>TECNOLOGIES TECZA, S. DE R.L. DE C.V.</span></div>
+              <div><strong style={{ color: 'var(--primary-color)' }}>Banco:</strong> <span style={{ color: 'var(--text-color)' }}>Banregio</span></div>
+              <div><strong style={{ color: 'var(--primary-color)' }}>Cuenta:</strong> <span style={{ color: 'var(--text-color)' }}>065-74924-002-9</span></div>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "wrap" }}>
+                <strong style={{ color: 'var(--primary-color)' }}>CLABE:</strong> 
+                <div 
+                  onClick={() => {
+                    navigator.clipboard.writeText("058164657492400290");
+                    alert("¡CLABE copiada al portapapeles!");
+                  }}
+                  style={{ 
+                    color: 'var(--text-color)', 
+                    cursor: "pointer", 
+                    background: isLight ? "rgba(0,0,0,0.05)" : "rgba(255,255,255,0.05)", 
+                    padding: "6px 12px", 
+                    borderRadius: "8px", 
+                    border: `1px solid var(--primary-color)`, 
+                    fontWeight: "bold", 
+                    display: "inline-flex", 
+                    alignItems: "center", 
+                    gap: "8px", 
+                    transition: "all 0.2s ease" 
+                  }}
+                  onMouseOver={(e) => e.currentTarget.style.opacity = "0.7"}
+                  onMouseOut={(e) => e.currentTarget.style.opacity = "1"}
+                  title="Copiar CLABE"
+                >
+                  058164657492400290 
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </section>
+      )}
+
       {/* Sticky CTA */}
       <motion.a 
         href={`https://wa.me/${data.contact?.phone || '526561031571'}?text=${encodeURIComponent(data.contact?.message || `Hola, revisé la propuesta de ${data.clientName} y estoy listo para avanzar.`)}`}
