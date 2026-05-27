@@ -619,8 +619,8 @@ export default function SuperetteClient() {
               <div style={{ flex: "2 1 300px", background: "rgba(10, 130, 68, 0.04)", padding: "1.2rem 1.5rem", borderRadius: "12px" }}>
                 <strong style={{ color: theme.superetteGreen, fontSize: "1rem" }}>~236 Artes Impresos (Volumen Mensual):</strong>
                 <ul style={{ paddingLeft: "1.2rem", marginTop: "0.5rem", marginBottom: 0, color: theme.textMuted, lineHeight: 1.6 }}>
-                  <li>16 Másteres / Diseños Originales ($1,800 MXN c/u).</li>
-                  <li>220 Adaptaciones Mecánicas y Formatos ($250 MXN c/u).</li>
+                  <li>16 Másteres / Diseños Originales.</li>
+                  <li>220 Adaptaciones Mecánicas y Formatos.</li>
                   <li>Lonas Express (24-36h, sujeto a programación y volumen), Material POP, Planas de Periódico.</li>
                 </ul>
               </div>
@@ -637,8 +637,8 @@ export default function SuperetteClient() {
               <div style={{ flex: "2 1 300px", background: "rgba(10, 130, 68, 0.04)", padding: "1.2rem 1.5rem", borderRadius: "12px" }}>
                 <strong style={{ color: theme.superetteGreen, fontSize: "1rem" }}>~71 Entregables Digitales:</strong>
                 <ul style={{ paddingLeft: "1.2rem", marginTop: "0.5rem", marginBottom: 0, color: theme.textMuted, lineHeight: 1.6 }}>
-                  <li>8 Másteres Digitales / Plantillas ($1,800 MXN c/u).</li>
-                  <li>63 Adaptaciones Digitales y Geolocalizadas ($250 MXN c/u).</li>
+                  <li>8 Másteres Digitales / Plantillas.</li>
+                  <li>63 Adaptaciones Digitales y Geolocalizadas.</li>
                   <li>Parrilla gráfica estática para Redes Sociales.</li>
                 </ul>
               </div>
@@ -655,9 +655,9 @@ export default function SuperetteClient() {
               <div style={{ flex: "2 1 300px", background: "rgba(10, 130, 68, 0.04)", padding: "1.2rem 1.5rem", borderRadius: "12px" }}>
                 <strong style={{ color: theme.superetteGreen, fontSize: "1rem" }}>6 Entregables Core:</strong>
                 <ul style={{ paddingLeft: "1.2rem", marginTop: "0.5rem", marginBottom: 0, color: theme.textMuted, lineHeight: 1.6 }}>
-                  <li>4 Notas Editoriales en la red de Frontera Número Uno ($4,500 MXN c/u).</li>
-                  <li>1 Transmisión En Vivo desde sucursal ($5,500 MXN c/u).</li>
-                  <li>1 Reel producido In-Situ ($4,000 MXN c/u).</li>
+                  <li>4 Notas Editoriales en la red de Frontera Número Uno.</li>
+                  <li>1 Transmisión En Vivo desde sucursal.</li>
+                  <li>1 Reel producido In-Situ.</li>
                 </ul>
               </div>
               <div style={{ flex: "1 1 150px", textAlign: "right" }}>
@@ -691,6 +691,65 @@ export default function SuperetteClient() {
               <div style={{ background: "linear-gradient(135deg, #0f172a, #1e293b)", color: "#fff", padding: "1.5rem 2.5rem", borderRadius: "100px", display: "flex", alignItems: "center", gap: "2rem", boxShadow: "0 20px 40px rgba(15, 23, 42, 0.25)", flexWrap: "wrap", justifyContent: "center" }}>
                 <span style={{ fontSize: "1.1rem", textTransform: "uppercase", letterSpacing: "1px", opacity: 0.8, fontWeight: 600 }}>Inversión Mensual Total</span>
                 <span style={{ fontSize: "clamp(1.8rem, 6vw, 2.5rem)", fontWeight: 900, letterSpacing: "-1px" }}>$155,450 MXN</span>
+              </div>
+            </motion.div>
+
+            {/* Precios Unitarios y Adicionales */}
+            <motion.div 
+              variants={fadeInUp} 
+              initial="hidden" 
+              whileInView="visible" 
+              viewport={{ once: true }} 
+              style={{ 
+                background: "rgba(255, 255, 255, 0.8)", 
+                backdropFilter: "blur(20px)",
+                WebkitBackdropFilter: "blur(20px)",
+                border: `1px solid ${theme.borderSolid}`, 
+                borderRadius: "24px", 
+                padding: "2.5rem", 
+                maxWidth: "600px", 
+                width: "100%",
+                margin: "3rem auto 0", 
+                boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
+                borderTop: `4px solid ${theme.superetteYellow}`
+              }}
+            >
+              <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.4rem", marginBottom: "1rem", textAlign: "center", fontWeight: 800 }}>
+                Precios Unitarios y Adicionales
+              </h3>
+              <p style={{ color: theme.textMuted, fontSize: "0.95rem", textAlign: "center", marginBottom: "1.5rem" }}>
+                En caso de requerir entregables adicionales a la iguala mensual contratada, se aplicarán los siguientes costos unitarios:
+              </p>
+              <div style={{ display: "flex", flexDirection: "column", gap: "1.2rem", color: theme.textMuted }}>
+                
+                <div style={{ borderBottom: `1px solid ${theme.borderSolid}`, paddingBottom: "0.8rem" }}>
+                  <h4 style={{ color: theme.superetteGreen, margin: "0 0 0.5rem", fontSize: "1.05rem", fontWeight: 700 }}>Diseño e Ingeniería Gráfica (Impreso y Digital)</h4>
+                  <div style={{ display: "flex", justifyContent: "space-between", margin: "0.3rem 0" }}>
+                    <span>Diseño Máster / Plantilla Original</span>
+                    <strong style={{ color: theme.textMain }}>$1,800 MXN c/u</strong>
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "space-between", margin: "0.3rem 0" }}>
+                    <span>Adaptación de Formato / Medida</span>
+                    <strong style={{ color: theme.textMain }}>$250 MXN c/u</strong>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 style={{ color: theme.superetteGreen, margin: "0 0 0.5rem", fontSize: "1.05rem", fontWeight: 700 }}>Difusión y Relaciones Públicas (Frontera)</h4>
+                  <div style={{ display: "flex", justifyContent: "space-between", margin: "0.3rem 0" }}>
+                    <span>Nota Editorial (Red FN1)</span>
+                    <strong style={{ color: theme.textMain }}>$4,500 MXN c/u</strong>
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "space-between", margin: "0.3rem 0" }}>
+                    <span>Transmisión en Vivo desde Sucursal</span>
+                    <strong style={{ color: theme.textMain }}>$5,500 MXN c/u</strong>
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "space-between", margin: "0.3rem 0" }}>
+                    <span>Reel Producido In-Situ</span>
+                    <strong style={{ color: theme.textMain }}>$4,000 MXN c/u</strong>
+                  </div>
+                </div>
+
               </div>
             </motion.div>
 
