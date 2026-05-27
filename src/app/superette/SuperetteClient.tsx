@@ -750,6 +750,21 @@ export default function SuperetteClient() {
                   </div>
                 </div>
 
+                <div style={{ borderTop: `1px solid ${theme.borderSolid}`, paddingTop: "1.2rem", marginTop: "0.5rem" }}>
+                  <h4 style={{ color: theme.superetteGreen, margin: "0 0 0.8rem", fontSize: "1.05rem", fontWeight: 700 }}>Políticas de Entrega y Trabajos Express</h4>
+                  <ul style={{ paddingLeft: "1.2rem", margin: 0, fontSize: "0.9rem", color: theme.textMuted, lineHeight: 1.6 }}>
+                    <li style={{ marginBottom: "0.5rem" }}>
+                      <strong>Lonas y Material POP Express:</strong> Tiempo de entrega estimado de <strong>24 a 36 horas hábiles</strong>, sujeto a programación de la célula y volumen.
+                    </li>
+                    <li style={{ marginBottom: "0.5rem" }}>
+                      <strong>Esquema de Iguala:</strong> Las piezas express solicitadas dentro del límite mensual se procesan sin costo adicional, consumiendo el saldo de la iguala.
+                    </li>
+                    <li>
+                      <strong>Excedentes / Adicionales:</strong> Las solicitudes que superen la iguala mensual se cotizarán con base en la tabla superior y se facturarán al cierre del periodo.
+                    </li>
+                  </ul>
+                </div>
+
               </div>
             </motion.div>
 
