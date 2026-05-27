@@ -682,7 +682,7 @@ export default function SuperetteClient() {
                 </div>
               </div>
               <div style={{ flex: "1 1 150px", textAlign: "right" }}>
-                <strong style={{ fontSize: "1.6rem", color: theme.textMain, fontWeight: 900 }}>$14,000 <span style={{fontSize: "1rem", color: theme.textMuted, fontWeight: 500}}>MXN</span></strong>
+                <strong style={{ fontSize: "1.6rem", color: theme.textMain, fontWeight: 900 }}>$12,500 <span style={{fontSize: "1rem", color: theme.textMuted, fontWeight: 500}}>MXN</span></strong>
               </div>
             </motion.div>
 
@@ -690,7 +690,7 @@ export default function SuperetteClient() {
             <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ display: "flex", justifyContent: "flex-end", marginTop: "1rem" }}>
               <div style={{ background: "linear-gradient(135deg, #0f172a, #1e293b)", color: "#fff", padding: "1.5rem 2.5rem", borderRadius: "100px", display: "flex", alignItems: "center", gap: "2rem", boxShadow: "0 20px 40px rgba(15, 23, 42, 0.25)", flexWrap: "wrap", justifyContent: "center" }}>
                 <span style={{ fontSize: "1.1rem", textTransform: "uppercase", letterSpacing: "1px", opacity: 0.8, fontWeight: 600 }}>Inversión Mensual Total</span>
-                <span style={{ fontSize: "clamp(1.8rem, 6vw, 2.5rem)", fontWeight: 900, letterSpacing: "-1px" }}>$155,450 MXN</span>
+                <span style={{ fontSize: "clamp(1.8rem, 6vw, 2.5rem)", fontWeight: 900, letterSpacing: "-1px" }}>$153,950 MXN</span>
               </div>
             </motion.div>
 
