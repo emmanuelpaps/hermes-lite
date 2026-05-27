@@ -262,7 +262,7 @@ export default function SuperetteClient() {
                 <Zap size={32} />
               </div>
               <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.4rem", marginBottom: "1rem" }}>Velocidad Operativa</h3>
-              <p style={{ color: theme.textMuted, lineHeight: 1.6, margin: 0 }}>Optimizamos la línea de producción para ir a la velocidad del retail. Garantizamos entregas ágiles de alto volumen para que tus ofertas nunca lleguen tarde a tienda.</p>
+              <p style={{ color: theme.textMuted, lineHeight: 1.6, margin: 0 }}>Optimizamos la línea de producción para ir a la velocidad del retail. Estructuramos procesos para entregas ágiles de alto volumen, facilitando que tus ofertas estén a tiempo en piso de venta.</p>
             </div>
           </GlassCard>
           <GlassCard borderTopColor={theme.superetteYellow}>
@@ -490,7 +490,7 @@ export default function SuperetteClient() {
             <div style={{ position: "relative", zIndex: 1 }}>
               <div style={{ background: "rgba(255, 255, 255, 0.75)", backdropFilter: "blur(12px)", padding: "1.5rem", borderRadius: "16px", marginBottom: "2rem", border: "1px solid rgba(255,255,255,0.6)", display: "inline-block" }}>
                 <h3 className={titleFont.className} style={{ color: theme.textMain, marginTop: 0, fontSize: "1.8rem", fontWeight: 700 }}>Plan de Transición Exprés</h3>
-                <p style={{ color: theme.textMuted, margin: 0, fontSize: "1.1rem" }}>Empalme en 10 días sin detener su ritmo comercial.</p>
+                <p style={{ color: theme.textMuted, margin: 0, fontSize: "1.1rem" }}>Empalme en 10 días sin detener su ritmo comercial (sujeto a la entrega oportuna de accesos e insumos).</p>
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: "1rem", position: "relative" }}>
                 {/* Línea vertical conectora */}
@@ -516,7 +516,7 @@ export default function SuperetteClient() {
                   <div style={{ width: "34px", height: "34px", borderRadius: "50%", background: theme.textMain, color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", fontSize: "1rem", flexShrink: 0 }}>3</div>
                   <div>
                     <h4 style={{ margin: "0 0 0.2rem", color: theme.textMain, fontSize: "1.1rem" }}>Día 10 (Takeover)</h4>
-                    <p style={{ margin: 0, color: theme.textMuted, fontSize: "0.95rem", lineHeight: 1.5 }}>Toma de control total de la producción.</p>
+                    <p style={{ margin: 0, color: theme.textMuted, fontSize: "0.95rem", lineHeight: 1.5 }}>Toma de control total de la producción coordinada.</p>
                   </div>
                 </div>
               </div>
@@ -566,7 +566,7 @@ export default function SuperetteClient() {
             Arquitectura de Distribución
           </h2>
           <p style={{ color: theme.textMuted, fontSize: "1.1rem", lineHeight: 1.6, marginBottom: "3rem", maxWidth: "800px" }}>
-            El mejor diseño gráfico no sirve si no lo ve la persona correcta. La <strong>Gestión de Pauta</strong> es el puente estratégico que conecta el volumen de la Maquila Gráfica directamente con el consumidor final, garantizando que el presupuesto se traduzca en tráfico peatonal y conversiones medibles.
+            El mejor diseño gráfico no sirve si no lo ve la persona correcta. La <strong>Gestión de Pauta</strong> es el puente estratégico que conecta el volumen de la Maquila Gráfica directamente con el consumidor final, diseñado para orientar el presupuesto hacia el tráfico peatonal y conversiones medibles.
           </p>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "2rem", position: "relative", zIndex: 2 }}>
@@ -621,7 +621,7 @@ export default function SuperetteClient() {
                 <ul style={{ paddingLeft: "1.2rem", marginTop: "0.5rem", marginBottom: 0, color: theme.textMuted, lineHeight: 1.6 }}>
                   <li>16 Másteres / Diseños Originales ($1,800 MXN c/u).</li>
                   <li>220 Adaptaciones Mecánicas y Formatos ($250 MXN c/u).</li>
-                  <li>Lonas Express (24-36h), Material POP, Planas de Periódico.</li>
+                  <li>Lonas Express (24-36h, sujeto a programación y volumen), Material POP, Planas de Periódico.</li>
                 </ul>
               </div>
               <div style={{ flex: "1 1 150px", textAlign: "right" }}>

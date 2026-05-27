@@ -32,16 +32,16 @@
         "content": "Proponemos instalar una Célula Operativa Dedicada que funcionará como su brazo externo (equivalente a 6 especialistas de tiempo completo). Nosotros asumimos la carga laboral, los costos de licencias y el estrés operativo, otorgándoles absoluta paz mental."
       }
     ],
-    "challenge": "Operar un volumen masivo de más de 197 entregables mensuales sin errores tipográficos ni retrasos en imprenta, garantizando la velocidad que exige el retail de 35 sucursales.",
+    "challenge": "Operar un volumen masivo de más de 197 entregables mensuales reduciendo al máximo errores tipográficos y retrasos en imprenta, respondiendo a la velocidad que exige el retail de 35 sucursales.",
     "pillars": [
       {
         "title": "Filtro Técnico Estricto",
-        "description": "Dirección de arte y control de pre-prensa dedicado exclusivamente a asegurar cero errores antes de mandar a imprimir.",
+        "description": "Dirección de arte y control de pre-prensa dedicado exclusivamente a prevenir errores antes de mandar a imprimir.",
         "image": "/assets/superette/Superette_Green.png"
       },
       {
-        "title": "Velocidad Garantizada (SLAs)",
-        "description": "Tiempos de respuesta blindados bajo horario hábil. Lonas Express en 24h-36h. Volantes en 24h. Sin retrasos para sus sucursales.",
+        "title": "Velocidad Eficiente (SLAs)",
+        "description": "Tiempos de respuesta optimizados bajo horario hábil. Lonas Express (sujeto a programación). Volantes a tiempo para sus sucursales.",
         "image": "/assets/superette/Superette_Yellow.png"
       },
       {
@@ -90,11 +90,11 @@
           {
             "name": "Diseño Industrial y Adaptaciones",
             "price": 83800,
-            "description": "Procesamiento de +230 entregables mensuales garantizando cero errores en pre-prensa e impresión.",
+            "description": "Procesamiento de +230 entregables mensuales diseñado para prevenir errores en pre-prensa e impresión.",
             "bullets": [
               "16 Másteres / Diseños Originales ($1,800 MXN c/u).",
               "220 Adaptaciones Mecánicas y Formatos ($250 MXN c/u).",
-              "Lonas Express (24-36h), Material POP, Planas de Periódico."
+              "Lonas Express (24-36h, sujeto a programación y volumen), Material POP, Planas de Periódico."
             ]
           }
         ]
