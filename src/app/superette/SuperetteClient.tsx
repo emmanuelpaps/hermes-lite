@@ -614,77 +614,75 @@ export default function SuperetteClient() {
             {/* Phase 1 */}
             <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ background: "rgba(255, 255, 255, 0.8)", border: `1px solid ${theme.borderSolid}`, borderRadius: "20px", padding: "1.5rem", display: "flex", gap: "1.5rem", alignItems: "center", flexWrap: "wrap", boxShadow: "0 4px 20px rgba(0,0,0,0.02)" }}>
               <div style={{ flex: "1 1 200px" }}>
-                <h3 style={{ margin: 0, color: theme.textMain, fontSize: "1.3rem", fontWeight: 700 }}>1. Maquila Gráfica In-House</h3>
+                <h3 style={{ margin: 0, color: theme.textMain, fontSize: "1.3rem", fontWeight: 700 }}>1. Maquila Gráfica y Pre-Prensa</h3>
               </div>
               <div style={{ flex: "2 1 300px", background: "rgba(10, 130, 68, 0.04)", padding: "1.2rem 1.5rem", borderRadius: "12px" }}>
-                <strong style={{ color: theme.superetteGreen, fontSize: "1rem" }}>~118 Artes Impresos (Volumen Mensual):</strong>
+                <strong style={{ color: theme.superetteGreen, fontSize: "1rem" }}>~236 Artes Impresos (Volumen Mensual):</strong>
                 <ul style={{ paddingLeft: "1.2rem", marginTop: "0.5rem", marginBottom: 0, color: theme.textMuted, lineHeight: 1.6 }}>
-                  <li>Lonas, Banners y Carteleras (54)</li>
-                  <li>Material POP y Cenefas (36)</li>
-                  <li>Planas de Periódico (16)</li>
-                  <li>Adaptaciones de formato (12)</li>
+                  <li>16 Másteres / Diseños Originales ($1,800 MXN c/u).</li>
+                  <li>220 Adaptaciones Mecánicas y Formatos ($250 MXN c/u).</li>
+                  <li>Lonas Express (24-36h), Material POP, Planas de Periódico.</li>
                 </ul>
               </div>
               <div style={{ flex: "1 1 150px", textAlign: "right" }}>
-                <strong style={{ fontSize: "1.6rem", color: theme.textMain, fontWeight: 900 }}>$116,400 <span style={{fontSize: "1rem", color: theme.textMuted, fontWeight: 500}}>MXN</span></strong>
+                <strong style={{ fontSize: "1.6rem", color: theme.textMain, fontWeight: 900 }}>$83,800 <span style={{fontSize: "1rem", color: theme.textMuted, fontWeight: 500}}>MXN</span></strong>
               </div>
             </motion.div>
 
             {/* Phase 2 */}
             <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ background: "rgba(255, 255, 255, 0.8)", border: `1px solid ${theme.borderSolid}`, borderRadius: "20px", padding: "1.5rem", display: "flex", gap: "1.5rem", alignItems: "center", flexWrap: "wrap", boxShadow: "0 4px 20px rgba(0,0,0,0.02)" }}>
               <div style={{ flex: "1 1 200px" }}>
-                <h3 style={{ margin: 0, color: theme.textMain, fontSize: "1.3rem", fontWeight: 700 }}>2. Ecosistema Digital</h3>
+                <h3 style={{ margin: 0, color: theme.textMain, fontSize: "1.3rem", fontWeight: 700 }}>2. Ecosistema Digital Masivo</h3>
               </div>
               <div style={{ flex: "2 1 300px", background: "rgba(10, 130, 68, 0.04)", padding: "1.2rem 1.5rem", borderRadius: "12px" }}>
                 <strong style={{ color: theme.superetteGreen, fontSize: "1rem" }}>~71 Entregables Digitales:</strong>
                 <ul style={{ paddingLeft: "1.2rem", marginTop: "0.5rem", marginBottom: 0, color: theme.textMuted, lineHeight: 1.6 }}>
-                  <li>Volantes Digitales y Ofertas Flash (48)</li>
-                  <li>Parrilla de Redes Sociales (15)</li>
-                  <li>Banners Web y Medios Locales (8)</li>
+                  <li>8 Másteres Digitales / Plantillas ($1,800 MXN c/u).</li>
+                  <li>63 Adaptaciones Digitales y Geolocalizadas ($250 MXN c/u).</li>
+                  <li>Parrilla gráfica estática para Redes Sociales.</li>
                 </ul>
               </div>
               <div style={{ flex: "1 1 150px", textAlign: "right" }}>
-                <strong style={{ fontSize: "1.6rem", color: theme.textMain, fontWeight: 900 }}>$49,000 <span style={{fontSize: "1rem", color: theme.textMuted, fontWeight: 500}}>MXN</span></strong>
+                <strong style={{ fontSize: "1.6rem", color: theme.textMain, fontWeight: 900 }}>$30,150 <span style={{fontSize: "1rem", color: theme.textMuted, fontWeight: 500}}>MXN</span></strong>
               </div>
             </motion.div>
 
             {/* Phase 3 */}
             <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ background: "rgba(255, 255, 255, 0.8)", border: `1px solid ${theme.borderSolid}`, borderRadius: "20px", padding: "1.5rem", display: "flex", gap: "1.5rem", alignItems: "center", flexWrap: "wrap", boxShadow: "0 4px 20px rgba(0,0,0,0.02)" }}>
               <div style={{ flex: "1 1 200px" }}>
-                <h3 style={{ margin: 0, color: theme.textMain, fontSize: "1.3rem", fontWeight: 700 }}>3. Dirección Estratégica</h3>
+                <h3 style={{ margin: 0, color: theme.textMain, fontSize: "1.3rem", fontWeight: 700 }}>3. Difusión y PR (Frontera Número Uno)</h3>
               </div>
               <div style={{ flex: "2 1 300px", background: "rgba(10, 130, 68, 0.04)", padding: "1.2rem 1.5rem", borderRadius: "12px" }}>
-                <strong style={{ color: theme.superetteGreen, fontSize: "1rem" }}>8 Entregables Core:</strong>
+                <strong style={{ color: theme.superetteGreen, fontSize: "1rem" }}>8 Entregables Core + Pauta:</strong>
                 <ul style={{ paddingLeft: "1.2rem", marginTop: "0.5rem", marginBottom: 0, color: theme.textMuted, lineHeight: 1.6 }}>
-                  <li>Redacción de Notas Corporativas PR (4)</li>
-                  <li>Producción de Reels In-Situ (2)</li>
-                  <li>Transmisiones En Vivo (2)</li>
+                  <li>4 Notas Editoriales en la red de Frontera Número Uno ($4,500 MXN c/u).</li>
+                  <li>2 Transmisiones En Vivo desde sucursal ($5,500 MXN c/u).</li>
+                  <li>2 Reels producidos In-Situ ($4,000 MXN c/u).</li>
                 </ul>
               </div>
               <div style={{ flex: "1 1 150px", textAlign: "right" }}>
-                <strong style={{ fontSize: "1.6rem", color: theme.textMain, fontWeight: 900 }}>$50,000 <span style={{fontSize: "1rem", color: theme.textMuted, fontWeight: 500}}>MXN</span></strong>
+                <strong style={{ fontSize: "1.6rem", color: theme.textMain, fontWeight: 900 }}>$37,000 <span style={{fontSize: "1rem", color: theme.textMuted, fontWeight: 500}}>MXN</span></strong>
               </div>
             </motion.div>
 
             {/* Phase 4 */}
             <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ background: "rgba(255, 255, 255, 0.8)", border: `1px solid ${theme.borderSolid}`, borderRadius: "20px", padding: "1.5rem", display: "flex", gap: "1.5rem", alignItems: "center", flexWrap: "wrap", boxShadow: "0 4px 20px rgba(0,0,0,0.02)" }}>
               <div style={{ flex: "1 1 200px" }}>
-                <h3 style={{ margin: 0, color: theme.textMain, fontSize: "1.3rem", fontWeight: 700 }}>4. Gestión de Pauta</h3>
+                <h3 style={{ margin: 0, color: theme.textMain, fontSize: "1.3rem", fontWeight: 700 }}>4. Administración Estratégica de Campañas</h3>
               </div>
               <div style={{ flex: "2 1 300px", background: "rgba(10, 130, 68, 0.04)", padding: "1.2rem 1.5rem", borderRadius: "12px" }}>
-                <strong style={{ color: theme.superetteGreen, fontSize: "1rem" }}>Campañas Digitales:</strong>
+                <strong style={{ color: theme.superetteGreen, fontSize: "1rem" }}>Traffic Management:</strong>
                 <ul style={{ paddingLeft: "1.2rem", marginTop: "0.5rem", marginBottom: 0, color: theme.textMuted, lineHeight: 1.6 }}>
-                  <li>Meta (Facebook e Instagram)</li>
-                  <li>Google Ads</li>
-                  <li>TikTok Ads</li>
-                  <li>OpenAI [Fase Beta]</li>
+                  <li>Configuración de Business Manager y Segmentación de audiencias.</li>
+                  <li>Distribución táctica del presupuesto publicitario.</li>
+                  <li>Análisis de conversiones y retorno de inversión.</li>
                 </ul>
                 <div style={{ display: "inline-block", background: "rgba(218, 41, 28, 0.1)", color: theme.superetteRed, padding: "6px 12px", borderRadius: "6px", fontSize: "0.85rem", marginTop: "1rem", fontWeight: "bold" }}>
                   El Ad Spend corre por cuenta de Superette.
                 </div>
               </div>
               <div style={{ flex: "1 1 150px", textAlign: "right" }}>
-                <strong style={{ fontSize: "1.6rem", color: theme.textMain, fontWeight: 900 }}>$20,000 <span style={{fontSize: "1rem", color: theme.textMuted, fontWeight: 500}}>MXN</span></strong>
+                <strong style={{ fontSize: "1.6rem", color: theme.textMain, fontWeight: 900 }}>$14,000 <span style={{fontSize: "1rem", color: theme.textMuted, fontWeight: 500}}>MXN</span></strong>
               </div>
             </motion.div>
 
@@ -692,7 +690,65 @@ export default function SuperetteClient() {
             <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ display: "flex", justifyContent: "flex-end", marginTop: "1rem" }}>
               <div style={{ background: "linear-gradient(135deg, #0f172a, #1e293b)", color: "#fff", padding: "1.5rem 2.5rem", borderRadius: "100px", display: "flex", alignItems: "center", gap: "2rem", boxShadow: "0 20px 40px rgba(15, 23, 42, 0.25)", flexWrap: "wrap", justifyContent: "center" }}>
                 <span style={{ fontSize: "1.1rem", textTransform: "uppercase", letterSpacing: "1px", opacity: 0.8, fontWeight: 600 }}>Inversión Mensual Total</span>
-                <span style={{ fontSize: "clamp(1.8rem, 6vw, 2.5rem)", fontWeight: 900, letterSpacing: "-1px" }}>$235,400 MXN</span>
+                <span style={{ fontSize: "clamp(1.8rem, 6vw, 2.5rem)", fontWeight: 900, letterSpacing: "-1px" }}>$164,950 MXN</span>
+              </div>
+            </motion.div>
+
+            {/* Datos Bancarios */}
+            <motion.div 
+              variants={fadeInUp} 
+              initial="hidden" 
+              whileInView="visible" 
+              viewport={{ once: true }} 
+              style={{ 
+                background: "rgba(255, 255, 255, 0.8)", 
+                backdropFilter: "blur(20px)",
+                WebkitBackdropFilter: "blur(20px)",
+                border: `1px solid ${theme.borderSolid}`, 
+                borderRadius: "24px", 
+                padding: "2.5rem", 
+                maxWidth: "600px", 
+                width: "100%",
+                margin: "3rem auto 0", 
+                boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
+                borderTop: `4px solid ${theme.superetteGreen}`
+              }}
+            >
+              <h3 style={{ color: theme.textMain, marginTop: 0, fontSize: "1.4rem", marginBottom: "1.5rem", textAlign: "center", fontWeight: 800 }}>
+                Datos Bancarios
+              </h3>
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.8rem", fontSize: "1.05rem", color: theme.textMuted }}>
+                <div><strong style={{ color: theme.superetteGreen }}>Razón Social:</strong> <span style={{ color: theme.textMain, fontWeight: 500 }}>TECNOLOGIES TECZA, S. DE R.L. DE C.V.</span></div>
+                <div><strong style={{ color: theme.superetteGreen }}>Banco:</strong> <span style={{ color: theme.textMain, fontWeight: 500 }}>Banregio</span></div>
+                <div><strong style={{ color: theme.superetteGreen }}>Cuenta:</strong> <span style={{ color: theme.textMain, fontWeight: 500 }}>065-74924-002-9</span></div>
+                <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "wrap" }}>
+                  <strong style={{ color: theme.superetteGreen }}>CLABE:</strong> 
+                  <div 
+                    onClick={() => {
+                      navigator.clipboard.writeText("058164657492400290");
+                      alert("¡CLABE copiada al portapapeles!");
+                    }}
+                    style={{ 
+                      color: theme.textMain, 
+                      cursor: "pointer", 
+                      background: "rgba(10, 130, 68, 0.05)", 
+                      padding: "6px 12px", 
+                      borderRadius: "8px", 
+                      border: `1px solid ${theme.superetteGreen}`, 
+                      fontWeight: "bold", 
+                      display: "inline-flex", 
+                      alignItems: "center", 
+                      gap: "8px", 
+                      transition: "all 0.2s ease" 
+                    }}
+                    onMouseOver={(e) => e.currentTarget.style.opacity = "0.7"}
+                    onMouseOut={(e) => e.currentTarget.style.opacity = "1"}
+                    title="Copiar CLABE"
+                  >
+                    058164657492400290 
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                  </div>
+                </div>
               </div>
             </motion.div>
 
