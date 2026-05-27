@@ -635,15 +635,15 @@ export default function SuperetteClient() {
                 <h3 style={{ margin: 0, color: theme.textMain, fontSize: "1.3rem", fontWeight: 700 }}>2. Ecosistema Digital Masivo</h3>
               </div>
               <div style={{ flex: "2 1 300px", background: "rgba(10, 130, 68, 0.04)", padding: "1.2rem 1.5rem", borderRadius: "12px" }}>
-                <strong style={{ color: theme.superetteGreen, fontSize: "1rem" }}>~71 Entregables Digitales:</strong>
+                <strong style={{ color: theme.superetteGreen, fontSize: "1rem" }}>~53 Entregables Digitales:</strong>
                 <ul style={{ paddingLeft: "1.2rem", marginTop: "0.5rem", marginBottom: 0, color: theme.textMuted, lineHeight: 1.6 }}>
-                  <li>8 Másteres Digitales / Plantillas.</li>
-                  <li>63 Adaptaciones Digitales y Geolocalizadas.</li>
+                  <li>6 Másteres Digitales / Plantillas.</li>
+                  <li>47 Adaptaciones Digitales y Geolocalizadas.</li>
                   <li>Parrilla gráfica estática para Redes Sociales.</li>
                 </ul>
               </div>
               <div style={{ flex: "1 1 150px", textAlign: "right" }}>
-                <strong style={{ fontSize: "1.6rem", color: theme.textMain, fontWeight: 900 }}>$30,150 <span style={{fontSize: "1rem", color: theme.textMuted, fontWeight: 500}}>MXN</span></strong>
+                <strong style={{ fontSize: "1.6rem", color: theme.textMain, fontWeight: 900 }}>$22,550 <span style={{fontSize: "1rem", color: theme.textMuted, fontWeight: 500}}>MXN</span></strong>
               </div>
             </motion.div>
 
@@ -690,7 +690,7 @@ export default function SuperetteClient() {
             <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ display: "flex", justifyContent: "flex-end", marginTop: "1rem" }}>
               <div style={{ background: "linear-gradient(135deg, #0f172a, #1e293b)", color: "#fff", padding: "1.5rem 2.5rem", borderRadius: "100px", display: "flex", alignItems: "center", gap: "2rem", boxShadow: "0 20px 40px rgba(15, 23, 42, 0.25)", flexWrap: "wrap", justifyContent: "center" }}>
                 <span style={{ fontSize: "1.1rem", textTransform: "uppercase", letterSpacing: "1px", opacity: 0.8, fontWeight: 600 }}>Inversión Mensual Total</span>
-                <span style={{ fontSize: "clamp(1.8rem, 6vw, 2.5rem)", fontWeight: 900, letterSpacing: "-1px" }}>$153,950 MXN</span>
+                <span style={{ fontSize: "clamp(1.8rem, 6vw, 2.5rem)", fontWeight: 900, letterSpacing: "-1px" }}>$146,350 MXN</span>
               </div>
             </motion.div>
 
