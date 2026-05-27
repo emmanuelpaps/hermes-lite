@@ -212,6 +212,19 @@ export default function SuperetteClient() {
             padding: 1rem !important;
           }
         }
+        .iva-note {
+          font-size: 0.85rem;
+          color: #475569;
+          margin-right: 1.5rem;
+          font-weight: 500;
+        }
+        @media (max-width: 768px) {
+          .iva-note {
+            margin-right: 0 !important;
+            text-align: center;
+            width: 100%;
+          }
+        }
       `}</style>
       <header className="superette-header" style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000,
@@ -790,11 +803,12 @@ export default function SuperetteClient() {
             </motion.div>
 
             {/* Total Row */}
-            <motion.div className="total-row-container" variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+            <motion.div className="total-row-container" variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ display: "flex", flexDirection: "column", gap: "0.5rem", alignItems: "flex-end" }}>
               <div className="total-row-card">
                 <span style={{ fontSize: "1.1rem", textTransform: "uppercase", letterSpacing: "1px", opacity: 0.8, fontWeight: 600 }}>Inversión Mensual Total</span>
                 <span style={{ fontSize: "clamp(1.8rem, 6vw, 2.5rem)", fontWeight: 900, letterSpacing: "-1px" }}>$146,350 MXN</span>
               </div>
+              <span className="iva-note">*Precios más 16% de IVA</span>
             </motion.div>
 
             {/* Precios Unitarios y Adicionales */}
@@ -816,7 +830,7 @@ export default function SuperetteClient() {
                 Precios Unitarios y Adicionales
               </h3>
               <p style={{ color: theme.textMuted, fontSize: "0.95rem", textAlign: "center", marginBottom: "1.5rem" }}>
-                En caso de requerir entregables adicionales a la iguala mensual contratada, se aplicarán los siguientes costos unitarios:
+                En caso de requerir entregables adicionales a la iguala mensual contratada, se aplicarán los siguientes costos unitarios (precios más 16% de IVA):
               </p>
               <div style={{ display: "flex", flexDirection: "column", gap: "1.2rem", color: theme.textMuted }}>
                 
