@@ -119,12 +119,12 @@
         "services": [
           {
             "name": "Producción In-Situ y Relaciones Públicas",
-            "price": 37000,
+            "price": 27500,
             "description": "Distribución masiva y producción comercial en punto de venta.",
             "bullets": [
               "4 Notas Editoriales en la red de Frontera Número Uno ($4,500 MXN c/u).",
-              "2 Transmisiones En Vivo desde sucursal ($5,500 MXN c/u).",
-              "2 Reels producidos In-Situ ($4,000 MXN c/u)."
+              "1 Transmisión En Vivo desde sucursal ($5,500 MXN c/u).",
+              "1 Reel producido In-Situ ($4,000 MXN c/u)."
             ]
           }
         ]
