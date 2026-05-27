@@ -115,16 +115,31 @@
         ]
       },
       {
-        "name": "Fase 3: Dirección Estratégica Multicanal",
+        "name": "Fase 3: Difusión y PR (Frontera Número Uno)",
         "services": [
           {
-            "name": "Producción Premium y Traffic Management",
-            "price": 70000,
-            "description": "NOTA CLARA: El presupuesto para la pauta publicitaria (Ad Spend) corre a cuenta de Superette.",
+            "name": "Producción In-Situ y Relaciones Públicas",
+            "price": 37000,
+            "description": "Distribución masiva y producción comercial en punto de venta.",
             "bullets": [
-              "Relaciones Públicas: 4 Notas Editoriales.",
-              "Producción In-Situ: 2 Reels y 2 Transmisiones En Vivo.",
-              "Administración Estratégica de Campañas (Traffic Management)."
+              "4 Notas Editoriales en la red de Frontera Número Uno ($4,500 MXN c/u).",
+              "2 Transmisiones En Vivo desde sucursal ($5,500 MXN c/u).",
+              "2 Reels producidos In-Situ ($4,000 MXN c/u)."
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Fase 4: Administración Estratégica de Campañas",
+        "services": [
+          {
+            "name": "Traffic Management",
+            "price": 0,
+            "description": "Gestión de pauta publicitaria en ecosistemas digitales. NOTA CLARA: El presupuesto para la pauta (Ad Spend) corre a cuenta de Superette.",
+            "bullets": [
+              "Configuración de Business Manager y Segmentación de audiencias.",
+              "Distribución táctica del presupuesto publicitario.",
+              "Análisis de conversiones y retorno de inversión."
             ]
           }
         ]
