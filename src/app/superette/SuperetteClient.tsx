@@ -96,11 +96,121 @@ export default function SuperetteClient() {
       <div style={{ position: "fixed", bottom: "10%", right: "-10%", width: "800px", height: "800px", background: "radial-gradient(circle, rgba(218, 41, 28, 0.08) 0%, rgba(255,255,255,0) 70%)", filter: "blur(80px)", zIndex: 0, pointerEvents: "none" }} />
       <div style={{ position: "fixed", top: "50%", left: "30%", width: "500px", height: "500px", background: "radial-gradient(circle, rgba(250, 204, 21, 0.1) 0%, rgba(255,255,255,0) 70%)", filter: "blur(70px)", zIndex: 0, pointerEvents: "none" }} />
 
-      {/* Sticky Header */}
+      {/* Sticky & Responsive Styles */}
       <style>{`
         .superette-header { justify-content: flex-start; }
+        .container-wrapper {
+          padding: 0 2rem;
+        }
+        .phase-row {
+          border-radius: 20px;
+          padding: 1.5rem;
+          display: flex;
+          gap: 1.5rem;
+          align-items: center;
+          flex-wrap: wrap;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
+        .phase-title {
+          flex: 1 1 200px;
+        }
+        .phase-details {
+          flex: 2 1 300px;
+        }
+        .phase-price {
+          flex: 1 1 150px;
+          text-align: right;
+        }
+        .total-row-container {
+          display: flex;
+          justify-content: flex-end;
+          margin-top: 1rem;
+        }
+        .total-row-card {
+          background: linear-gradient(135deg, #0f172a, #1e293b);
+          color: #fff;
+          padding: 1.5rem 2.5rem;
+          border-radius: 100px;
+          display: flex;
+          align-items: center;
+          gap: 2rem;
+          box-shadow: 0 20px 40px rgba(15, 23, 42, 0.25);
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+        .additional-prices-card, .bank-details-card {
+          border-radius: 24px;
+          padding: 2.5rem;
+          max-width: 600px;
+          width: 100%;
+          margin: 3rem auto 0;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .floating-cta {
+          position: fixed;
+          bottom: clamp(15px, 4vw, 30px);
+          right: clamp(15px, 4vw, 30px);
+          z-index: 100;
+          background: #0f172a;
+          color: #fff;
+          padding: clamp(0.8rem, 3vw, 1rem) clamp(1.2rem, 5vw, 2rem);
+          border-radius: 50px;
+          font-weight: bold;
+          text-decoration: none;
+          box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          border: 1px solid rgba(255,255,255,0.1);
+          transition: all 0.3s ease;
+        }
         @media (max-width: 768px) {
           .superette-header { justify-content: center !important; }
+          .container-wrapper {
+            padding: 0 1rem !important;
+          }
+          .phase-row {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 1rem !important;
+            padding: 1.2rem !important;
+          }
+          .phase-title {
+            flex: none !important;
+          }
+          .phase-details {
+            flex: none !important;
+            padding: 1rem !important;
+          }
+          .phase-price {
+            flex: none !important;
+            text-align: left !important;
+            margin-top: 0.5rem !important;
+            border-top: 1px solid rgba(0,0,0,0.08) !important;
+            padding-top: 0.8rem !important;
+          }
+          .total-row-container {
+            justify-content: center !important;
+          }
+          .total-row-card {
+            border-radius: 20px !important;
+            padding: 1.2rem 1.5rem !important;
+            gap: 1rem !important;
+            width: 100% !important;
+          }
+          .additional-prices-card, .bank-details-card {
+            padding: 1.5rem 1.2rem !important;
+          }
+        }
+        @media (max-width: 600px) {
+          .floating-cta {
+            left: 15px !important;
+            right: 15px !important;
+            bottom: 15px !important;
+            justify-content: center !important;
+            font-size: 1rem !important;
+            padding: 1rem !important;
+          }
         }
       `}</style>
       <header className="superette-header" style={{
@@ -121,6 +231,7 @@ export default function SuperetteClient() {
 
       {/* Floating CTA */}
       <motion.a 
+        className="floating-cta"
         href="https://wa.me/526566575959?text=Hola%20Jes%C3%BAs%2C%20revis%C3%A9%20la%20propuesta%20operativa%20de%20Superette%20y%20estoy%20listo%20para%20avanzar."
         target="_blank"
         rel="noopener noreferrer"
@@ -128,14 +239,6 @@ export default function SuperetteClient() {
         animate={{ scale: 1 }}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        style={{
-          position: "fixed", bottom: "clamp(15px, 4vw, 30px)", right: "clamp(15px, 4vw, 30px)", zIndex: 100,
-          background: theme.textMain, color: "#fff",
-          padding: "clamp(0.8rem, 3vw, 1rem) clamp(1.2rem, 5vw, 2rem)", borderRadius: "50px", fontWeight: "bold",
-          textDecoration: "none", boxShadow: "0 15px 35px rgba(0,0,0,0.2)",
-          display: "flex", alignItems: "center", gap: "10px",
-          border: "1px solid rgba(255,255,255,0.1)"
-        }}
       >
         <span>Aprobar Propuesta</span>
       </motion.a>
@@ -179,7 +282,7 @@ export default function SuperetteClient() {
         </div>
       </div>
 
-      <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 2rem", position: "relative", zIndex: 10 }}>
+      <div className="container-wrapper" style={{ maxWidth: "1100px", margin: "0 auto", position: "relative", zIndex: 10 }}>
         
         {/* 1. El Desafío + Gráfica Animada */}
         <GlassCard style={{ marginBottom: "3rem" }}>
@@ -612,11 +715,11 @@ export default function SuperetteClient() {
           <div style={{ display: "flex", flexDirection: "column", gap: "1.2rem", position: "relative", zIndex: 2 }}>
             
             {/* Phase 1 */}
-            <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ background: "rgba(255, 255, 255, 0.8)", border: `1px solid ${theme.borderSolid}`, borderRadius: "20px", padding: "1.5rem", display: "flex", gap: "1.5rem", alignItems: "center", flexWrap: "wrap", boxShadow: "0 4px 20px rgba(0,0,0,0.02)" }}>
-              <div style={{ flex: "1 1 200px" }}>
+            <motion.div className="phase-row" variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ background: "rgba(255, 255, 255, 0.8)", border: `1px solid ${theme.borderSolid}` }}>
+              <div className="phase-title">
                 <h3 style={{ margin: 0, color: theme.textMain, fontSize: "1.3rem", fontWeight: 700 }}>1. Maquila Gráfica y Pre-Prensa</h3>
               </div>
-              <div style={{ flex: "2 1 300px", background: "rgba(10, 130, 68, 0.04)", padding: "1.2rem 1.5rem", borderRadius: "12px" }}>
+              <div className="phase-details" style={{ background: "rgba(10, 130, 68, 0.04)", padding: "1.2rem 1.5rem", borderRadius: "12px" }}>
                 <strong style={{ color: theme.superetteGreen, fontSize: "1rem" }}>~236 Artes Impresos (Volumen Mensual):</strong>
                 <ul style={{ paddingLeft: "1.2rem", marginTop: "0.5rem", marginBottom: 0, color: theme.textMuted, lineHeight: 1.6 }}>
                   <li>16 Másteres / Diseños Originales.</li>
@@ -624,17 +727,17 @@ export default function SuperetteClient() {
                   <li>Lonas Express (24-36h, sujeto a programación y volumen), Material POP, Planas de Periódico.</li>
                 </ul>
               </div>
-              <div style={{ flex: "1 1 150px", textAlign: "right" }}>
+              <div className="phase-price">
                 <strong style={{ fontSize: "1.6rem", color: theme.textMain, fontWeight: 900 }}>$83,800 <span style={{fontSize: "1rem", color: theme.textMuted, fontWeight: 500}}>MXN</span></strong>
               </div>
             </motion.div>
 
             {/* Phase 2 */}
-            <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ background: "rgba(255, 255, 255, 0.8)", border: `1px solid ${theme.borderSolid}`, borderRadius: "20px", padding: "1.5rem", display: "flex", gap: "1.5rem", alignItems: "center", flexWrap: "wrap", boxShadow: "0 4px 20px rgba(0,0,0,0.02)" }}>
-              <div style={{ flex: "1 1 200px" }}>
+            <motion.div className="phase-row" variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ background: "rgba(255, 255, 255, 0.8)", border: `1px solid ${theme.borderSolid}` }}>
+              <div className="phase-title">
                 <h3 style={{ margin: 0, color: theme.textMain, fontSize: "1.3rem", fontWeight: 700 }}>2. Ecosistema Digital Masivo</h3>
               </div>
-              <div style={{ flex: "2 1 300px", background: "rgba(10, 130, 68, 0.04)", padding: "1.2rem 1.5rem", borderRadius: "12px" }}>
+              <div className="phase-details" style={{ background: "rgba(10, 130, 68, 0.04)", padding: "1.2rem 1.5rem", borderRadius: "12px" }}>
                 <strong style={{ color: theme.superetteGreen, fontSize: "1rem" }}>~53 Entregables Digitales:</strong>
                 <ul style={{ paddingLeft: "1.2rem", marginTop: "0.5rem", marginBottom: 0, color: theme.textMuted, lineHeight: 1.6 }}>
                   <li>6 Másteres Digitales / Plantillas.</li>
@@ -642,17 +745,17 @@ export default function SuperetteClient() {
                   <li>Parrilla gráfica estática para Redes Sociales.</li>
                 </ul>
               </div>
-              <div style={{ flex: "1 1 150px", textAlign: "right" }}>
+              <div className="phase-price">
                 <strong style={{ fontSize: "1.6rem", color: theme.textMain, fontWeight: 900 }}>$22,550 <span style={{fontSize: "1rem", color: theme.textMuted, fontWeight: 500}}>MXN</span></strong>
               </div>
             </motion.div>
 
             {/* Phase 3 */}
-            <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ background: "rgba(255, 255, 255, 0.8)", border: `1px solid ${theme.borderSolid}`, borderRadius: "20px", padding: "1.5rem", display: "flex", gap: "1.5rem", alignItems: "center", flexWrap: "wrap", boxShadow: "0 4px 20px rgba(0,0,0,0.02)" }}>
-              <div style={{ flex: "1 1 200px" }}>
+            <motion.div className="phase-row" variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ background: "rgba(255, 255, 255, 0.8)", border: `1px solid ${theme.borderSolid}` }}>
+              <div className="phase-title">
                 <h3 style={{ margin: 0, color: theme.textMain, fontSize: "1.3rem", fontWeight: 700 }}>3. Difusión y PR (Frontera Número Uno)</h3>
               </div>
-              <div style={{ flex: "2 1 300px", background: "rgba(10, 130, 68, 0.04)", padding: "1.2rem 1.5rem", borderRadius: "12px" }}>
+              <div className="phase-details" style={{ background: "rgba(10, 130, 68, 0.04)", padding: "1.2rem 1.5rem", borderRadius: "12px" }}>
                 <strong style={{ color: theme.superetteGreen, fontSize: "1rem" }}>6 Entregables Core:</strong>
                 <ul style={{ paddingLeft: "1.2rem", marginTop: "0.5rem", marginBottom: 0, color: theme.textMuted, lineHeight: 1.6 }}>
                   <li>4 Notas Editoriales en la red de Frontera Número Uno.</li>
@@ -660,17 +763,17 @@ export default function SuperetteClient() {
                   <li>1 Reel producido In-Situ.</li>
                 </ul>
               </div>
-              <div style={{ flex: "1 1 150px", textAlign: "right" }}>
+              <div className="phase-price">
                 <strong style={{ fontSize: "1.6rem", color: theme.textMain, fontWeight: 900 }}>$27,500 <span style={{fontSize: "1rem", color: theme.textMuted, fontWeight: 500}}>MXN</span></strong>
               </div>
             </motion.div>
 
             {/* Phase 4 */}
-            <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ background: "rgba(255, 255, 255, 0.8)", border: `1px solid ${theme.borderSolid}`, borderRadius: "20px", padding: "1.5rem", display: "flex", gap: "1.5rem", alignItems: "center", flexWrap: "wrap", boxShadow: "0 4px 20px rgba(0,0,0,0.02)" }}>
-              <div style={{ flex: "1 1 200px" }}>
+            <motion.div className="phase-row" variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ background: "rgba(255, 255, 255, 0.8)", border: `1px solid ${theme.borderSolid}` }}>
+              <div className="phase-title">
                 <h3 style={{ margin: 0, color: theme.textMain, fontSize: "1.3rem", fontWeight: 700 }}>4. Administración Estratégica de Campañas</h3>
               </div>
-              <div style={{ flex: "2 1 300px", background: "rgba(10, 130, 68, 0.04)", padding: "1.2rem 1.5rem", borderRadius: "12px" }}>
+              <div className="phase-details" style={{ background: "rgba(10, 130, 68, 0.04)", padding: "1.2rem 1.5rem", borderRadius: "12px" }}>
                 <strong style={{ color: theme.superetteGreen, fontSize: "1rem" }}>Traffic Management:</strong>
                 <ul style={{ paddingLeft: "1.2rem", marginTop: "0.5rem", marginBottom: 0, color: theme.textMuted, lineHeight: 1.6 }}>
                   <li>Configuración de Business Manager y Segmentación de audiencias.</li>
@@ -681,14 +784,14 @@ export default function SuperetteClient() {
                   El Ad Spend corre por cuenta de Superette.
                 </div>
               </div>
-              <div style={{ flex: "1 1 150px", textAlign: "right" }}>
+              <div className="phase-price">
                 <strong style={{ fontSize: "1.6rem", color: theme.textMain, fontWeight: 900 }}>$12,500 <span style={{fontSize: "1rem", color: theme.textMuted, fontWeight: 500}}>MXN</span></strong>
               </div>
             </motion.div>
 
             {/* Total Row */}
-            <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ display: "flex", justifyContent: "flex-end", marginTop: "1rem" }}>
-              <div style={{ background: "linear-gradient(135deg, #0f172a, #1e293b)", color: "#fff", padding: "1.5rem 2.5rem", borderRadius: "100px", display: "flex", alignItems: "center", gap: "2rem", boxShadow: "0 20px 40px rgba(15, 23, 42, 0.25)", flexWrap: "wrap", justifyContent: "center" }}>
+            <motion.div className="total-row-container" variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+              <div className="total-row-card">
                 <span style={{ fontSize: "1.1rem", textTransform: "uppercase", letterSpacing: "1px", opacity: 0.8, fontWeight: 600 }}>Inversión Mensual Total</span>
                 <span style={{ fontSize: "clamp(1.8rem, 6vw, 2.5rem)", fontWeight: 900, letterSpacing: "-1px" }}>$146,350 MXN</span>
               </div>
@@ -696,6 +799,7 @@ export default function SuperetteClient() {
 
             {/* Precios Unitarios y Adicionales */}
             <motion.div 
+              className="additional-prices-card"
               variants={fadeInUp} 
               initial="hidden" 
               whileInView="visible" 
@@ -705,12 +809,6 @@ export default function SuperetteClient() {
                 backdropFilter: "blur(20px)",
                 WebkitBackdropFilter: "blur(20px)",
                 border: `1px solid ${theme.borderSolid}`, 
-                borderRadius: "24px", 
-                padding: "2.5rem", 
-                maxWidth: "600px", 
-                width: "100%",
-                margin: "3rem auto 0", 
-                boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
                 borderTop: `4px solid ${theme.superetteYellow}`
               }}
             >
@@ -770,6 +868,7 @@ export default function SuperetteClient() {
 
             {/* Datos Bancarios */}
             <motion.div 
+              className="bank-details-card"
               variants={fadeInUp} 
               initial="hidden" 
               whileInView="visible" 
@@ -779,12 +878,6 @@ export default function SuperetteClient() {
                 backdropFilter: "blur(20px)",
                 WebkitBackdropFilter: "blur(20px)",
                 border: `1px solid ${theme.borderSolid}`, 
-                borderRadius: "24px", 
-                padding: "2.5rem", 
-                maxWidth: "600px", 
-                width: "100%",
-                margin: "3rem auto 0", 
-                boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
                 borderTop: `4px solid ${theme.superetteGreen}`
               }}
             >
