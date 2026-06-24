@@ -138,6 +138,95 @@ export default function SuperetteClient() {
           flex-wrap: wrap;
           justify-content: center;
         }
+        .discount-total-card {
+          background: linear-gradient(135deg, #0b1c15 0%, #111827 100%);
+          color: #fff;
+          padding: 2rem;
+          border-radius: 24px;
+          border: 1px solid rgba(10, 130, 68, 0.3);
+          border-left: 6px solid #da291c;
+          box-shadow: 0 20px 40px rgba(10, 130, 68, 0.15), 0 4px 12px rgba(0, 0, 0, 0.15);
+          width: 100%;
+          max-width: 550px;
+          display: flex;
+          flex-direction: column;
+          gap: 1.2rem;
+          position: relative;
+          overflow: hidden;
+        }
+        .discount-tag {
+          align-self: flex-start;
+          background: linear-gradient(90deg, #da291c 0%, #ea580c 100%);
+          color: #fff;
+          font-size: 0.75rem;
+          font-weight: 800;
+          letter-spacing: 1.5px;
+          text-transform: uppercase;
+          padding: 6px 16px;
+          border-radius: 50px;
+          box-shadow: 0 4px 12px rgba(218, 41, 28, 0.25);
+        }
+        .discount-content {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+        .original-price-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+        }
+        .price-label {
+          color: #94a3b8;
+          font-size: 0.95rem;
+          font-weight: 500;
+        }
+        .original-price {
+          color: #94a3b8;
+          font-size: 1.25rem;
+          font-weight: 700;
+          text-decoration: line-through;
+          text-decoration-color: #da291c;
+          text-decoration-thickness: 2px;
+          opacity: 0.7;
+        }
+        .divider-line {
+          height: 1px;
+          background: rgba(255, 255, 255, 0.08);
+          width: 100%;
+        }
+        .new-price-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          width: 100%;
+          gap: 1.5rem;
+        }
+        .new-price-label {
+          color: #ffffff;
+          font-size: 1.1rem;
+          font-weight: 700;
+          margin-top: 0.3rem;
+        }
+        .new-price-wrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          gap: 0.25rem;
+        }
+        .new-price {
+          color: #ffffff;
+          font-size: clamp(2rem, 6vw, 2.7rem);
+          font-weight: 900;
+          letter-spacing: -1px;
+          line-height: 1.1;
+        }
+        .iva-included-price {
+          color: #94a3b8;
+          font-size: 0.9rem;
+          font-weight: 500;
+        }
         .additional-prices-card, .bank-details-card {
           border-radius: 24px;
           padding: 2.5rem;
@@ -196,6 +285,19 @@ export default function SuperetteClient() {
             border-radius: 20px !important;
             padding: 1.2rem 1.5rem !important;
             gap: 1rem !important;
+            width: 100% !important;
+          }
+          .discount-total-card {
+            max-width: 100% !important;
+            padding: 1.5rem !important;
+          }
+          .new-price-row {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 0.5rem !important;
+          }
+          .new-price-wrapper {
+            align-items: flex-start !important;
             width: 100% !important;
           }
           .additional-prices-card, .bank-details-card {
@@ -803,12 +905,33 @@ export default function SuperetteClient() {
             </motion.div>
 
             {/* Total Row */}
-            <motion.div className="total-row-container" variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ display: "flex", flexDirection: "column", gap: "0.5rem", alignItems: "flex-end" }}>
-              <div className="total-row-card">
-                <span style={{ fontSize: "1.1rem", textTransform: "uppercase", letterSpacing: "1px", opacity: 0.8, fontWeight: 600 }}>Inversión Mensual Total</span>
-                <span style={{ fontSize: "clamp(1.8rem, 6vw, 2.5rem)", fontWeight: 900, letterSpacing: "-1px" }}>$146,350 MXN</span>
+            <motion.div 
+              className="total-row-container" 
+              variants={fadeInUp} 
+              initial="hidden" 
+              whileInView="visible" 
+              viewport={{ once: true }} 
+              style={{ display: "flex", flexDirection: "column", gap: "0.5rem", alignItems: "flex-end", width: "100%" }}
+            >
+              <div className="discount-total-card">
+                <div className="discount-tag">
+                  PROPUESTA COMERCIAL CON BENEFICIO ESPECIAL
+                </div>
+                <div className="discount-content">
+                  <div className="original-price-row">
+                    <span className="price-label">Inversión Mensual Regular</span>
+                    <span className="original-price">$146,350 MXN</span>
+                  </div>
+                  <div className="divider-line" />
+                  <div className="new-price-row">
+                    <span className="new-price-label">Inversión Especial</span>
+                    <div className="new-price-wrapper">
+                      <span className="new-price">$104,000 + IVA</span>
+                      <span className="iva-included-price">($120,640 con IVA incluido)</span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <span className="iva-note">*Precios más 16% de IVA</span>
             </motion.div>
 
             {/* Precios Unitarios y Adicionales */}
