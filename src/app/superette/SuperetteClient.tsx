@@ -868,25 +868,7 @@ export default function SuperetteClient() {
             {/* Phase 3 */}
             <motion.div className="phase-row" variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ background: "rgba(255, 255, 255, 0.8)", border: `1px solid ${theme.borderSolid}` }}>
               <div className="phase-title">
-                <h3 style={{ margin: 0, color: theme.textMain, fontSize: "1.3rem", fontWeight: 700 }}>3. Difusión y PR (Frontera Número Uno)</h3>
-              </div>
-              <div className="phase-details" style={{ background: "rgba(10, 130, 68, 0.04)", padding: "1.2rem 1.5rem", borderRadius: "12px" }}>
-                <strong style={{ color: theme.superetteGreen, fontSize: "1rem" }}>6 Entregables Core:</strong>
-                <ul style={{ paddingLeft: "1.2rem", marginTop: "0.5rem", marginBottom: 0, color: theme.textMuted, lineHeight: 1.6 }}>
-                  <li>4 Notas Editoriales en la red de Frontera Número Uno.</li>
-                  <li>1 Transmisión En Vivo desde sucursal.</li>
-                  <li>1 Reel producido In-Situ.</li>
-                </ul>
-              </div>
-              <div className="phase-price">
-                <strong style={{ fontSize: "1.6rem", color: theme.textMain, fontWeight: 900 }}>$27,500 <span style={{fontSize: "1rem", color: theme.textMuted, fontWeight: 500}}>MXN</span></strong>
-              </div>
-            </motion.div>
-
-            {/* Phase 4 */}
-            <motion.div className="phase-row" variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} style={{ background: "rgba(255, 255, 255, 0.8)", border: `1px solid ${theme.borderSolid}` }}>
-              <div className="phase-title">
-                <h3 style={{ margin: 0, color: theme.textMain, fontSize: "1.3rem", fontWeight: 700 }}>4. Administración Estratégica de Campañas</h3>
+                <h3 style={{ margin: 0, color: theme.textMain, fontSize: "1.3rem", fontWeight: 700 }}>3. Administración Estratégica de Campañas</h3>
               </div>
               <div className="phase-details" style={{ background: "rgba(10, 130, 68, 0.04)", padding: "1.2rem 1.5rem", borderRadius: "12px" }}>
                 <strong style={{ color: theme.superetteGreen, fontSize: "1rem" }}>Traffic Management:</strong>
@@ -920,7 +902,7 @@ export default function SuperetteClient() {
                 <div className="discount-content">
                   <div className="original-price-row">
                     <span className="price-label">Inversión Mensual Regular</span>
-                    <span className="original-price">$146,350 MXN</span>
+                    <span className="original-price">$118,850 MXN</span>
                   </div>
                   <div className="divider-line" />
                   <div className="new-price-row">
