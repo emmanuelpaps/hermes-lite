@@ -1002,7 +1002,7 @@ export default function SuperetteClient() {
                   Paquetes de Cobertura y Difusión
                 </h2>
                 <p style={{ color: theme.textMuted, fontSize: "1.1rem", lineHeight: 1.6, maxWidth: "800px", margin: "0 auto" }}>
-                  Amplifica la presencia de tu marca y conecta directamente con el consumidor local. Estos paquetes de difusión a través de <strong>Frontera Número Uno</strong> están diseñados para complementar la iguala operativa, inyectando tráfico físico a tus sucursales en momentos clave de venta.
+                  Amplifica la presencia de tu marca y conecta directamente con el consumidor local. Estos paquetes de difusión a través de <strong>Frontera Número Uno</strong> están diseñados para complementar la iguala operativa, incrementando el alcance y la visibilidad de tus promociones y ofertas comerciales.
                 </p>
               </div>
 
