@@ -999,10 +999,10 @@ export default function SuperetteClient() {
             >
               <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
                 <h2 className={titleFont.className} style={{ color: theme.superetteGreen, fontSize: "clamp(1.8rem, 6vw, 2.5rem)", marginBottom: "1rem", fontWeight: 800 }}>
-                  Paquetes de Cobertura y Difusión (Opcionales)
+                  Paquetes de Cobertura y Difusión
                 </h2>
                 <p style={{ color: theme.textMuted, fontSize: "1.1rem", lineHeight: 1.6, maxWidth: "800px", margin: "0 auto" }}>
-                  Amplifica la presencia de tu marca y conecta directamente con el consumidor local. Estos paquetes opcionales de difusión a través de <strong>Frontera Número Uno</strong> están diseñados para complementar la iguala operativa, inyectando tráfico físico a tus sucursales en momentos clave de venta.
+                  Amplifica la presencia de tu marca y conecta directamente con el consumidor local. Estos paquetes de difusión a través de <strong>Frontera Número Uno</strong> están diseñados para complementar la iguala operativa, inyectando tráfico físico a tus sucursales en momentos clave de venta.
                 </p>
               </div>
 
