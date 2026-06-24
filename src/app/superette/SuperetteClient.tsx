@@ -235,6 +235,71 @@ export default function SuperetteClient() {
           margin: 3rem auto 0;
           box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
+        .package-grid-two {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 2rem;
+          margin-top: 2rem;
+          width: 100%;
+        }
+        .package-card {
+          background: rgba(255, 255, 255, 0.85);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border-radius: 24px;
+          padding: 2.5rem 2rem;
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.5);
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          transition: all 0.3s ease;
+          position: relative;
+          overflow: hidden;
+        }
+        .package-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        }
+        .package-card-header {
+          margin-bottom: 1.5rem;
+        }
+        .package-card-title {
+          font-size: 1.6rem;
+          font-weight: 800;
+          color: #0f172a;
+          margin: 0 0 0.5rem;
+          letter-spacing: -0.5px;
+        }
+        .package-card-desc {
+          font-size: 0.95rem;
+          color: #475569;
+          line-height: 1.5;
+          margin: 0;
+        }
+        .package-card-price {
+          font-size: 1.8rem;
+          font-weight: 900;
+          color: #0a8244;
+          margin-top: 2rem;
+          border-top: 1px solid #e2e8f0;
+          padding-top: 1.5rem;
+        }
+        .package-card-price span {
+          font-size: 0.95rem;
+          color: #475569;
+          font-weight: 500;
+        }
+        .package-multimarca-badge {
+          background: rgba(10, 130, 68, 0.1);
+          color: #0a8244;
+          font-size: 0.8rem;
+          font-weight: 700;
+          padding: 4px 10px;
+          border-radius: 6px;
+          display: inline-block;
+          margin-top: 0.8rem;
+        }
         .floating-cta {
           position: fixed;
           bottom: clamp(15px, 4vw, 30px);
@@ -299,6 +364,13 @@ export default function SuperetteClient() {
           .new-price-wrapper {
             align-items: flex-start !important;
             width: 100% !important;
+          }
+          .package-grid-two {
+            grid-template-columns: 1fr !important;
+            gap: 1.5rem !important;
+          }
+          .package-card {
+            padding: 1.5rem !important;
           }
           .additional-prices-card, .bank-details-card {
             padding: 1.5rem 1.2rem !important;
@@ -916,6 +988,89 @@ export default function SuperetteClient() {
               </div>
             </motion.div>
 
+            {/* Paquetes Opcionales Frontera */}
+            <motion.div 
+              className="packages-section"
+              variants={fadeInUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              style={{ marginTop: "4rem", width: "100%" }}
+            >
+              <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
+                <h2 className={titleFont.className} style={{ color: theme.superetteGreen, fontSize: "clamp(1.8rem, 6vw, 2.5rem)", marginBottom: "1rem", fontWeight: 800 }}>
+                  Paquetes de Cobertura y Difusión (Opcionales)
+                </h2>
+                <p style={{ color: theme.textMuted, fontSize: "1.1rem", lineHeight: 1.6, maxWidth: "800px", margin: "0 auto" }}>
+                  Amplifica la presencia de tu marca y conecta directamente con el consumidor local. Estos paquetes opcionales de difusión a través de <strong>Frontera Número Uno</strong> están diseñados para complementar la iguala operativa, inyectando tráfico físico a tus sucursales en momentos clave de venta.
+                </p>
+              </div>
+
+              <div className="package-grid-two">
+                {/* Package 1: Paso del Norte */}
+                <div className="package-card" style={{ borderTop: `4px solid ${theme.superetteYellow}` }}>
+                  <div className="package-card-header">
+                    <h3 className="package-card-title" style={{ fontFamily: titleFont.style.fontFamily }}>Paquete Paso del Norte</h3>
+                    <p className="package-card-desc">
+                      Ideal para impulsar ofertas semanales, lanzamientos específicos y dinámicas de sucursal con cobertura local optimizada.
+                    </p>
+                  </div>
+                  
+                  <div style={{ display: "flex", flexDirection: "column", gap: "1rem", marginTop: "1rem" }}>
+                    <div style={{ background: "rgba(10, 130, 68, 0.04)", padding: "1rem", borderRadius: "12px", display: "flex", alignItems: "center", gap: "10px" }}>
+                      <div style={{ background: "rgba(10, 130, 68, 0.1)", color: theme.superetteGreen, padding: "6px", borderRadius: "8px", display: "flex" }}><Megaphone size={18} /></div>
+                      <span style={{ fontSize: "0.95rem", color: theme.textMain, fontWeight: 600 }}>6 Notas Editoriales en red digital</span>
+                    </div>
+                    <div style={{ background: "rgba(10, 130, 68, 0.04)", padding: "1rem", borderRadius: "12px", display: "flex", alignItems: "center", gap: "10px" }}>
+                      <div style={{ background: "rgba(10, 130, 68, 0.1)", color: theme.superetteGreen, padding: "6px", borderRadius: "8px", display: "flex" }}><Camera size={18} /></div>
+                      <span style={{ fontSize: "0.95rem", color: theme.textMain, fontWeight: 600 }}>1 Video Reel In-Situ</span>
+                    </div>
+                    <div style={{ background: "rgba(10, 130, 68, 0.04)", padding: "1rem", borderRadius: "12px", display: "flex", alignItems: "center", gap: "10px" }}>
+                      <div style={{ background: "rgba(10, 130, 68, 0.1)", color: theme.superetteGreen, padding: "6px", borderRadius: "8px", display: "flex" }}><Play size={18} /></div>
+                      <span style={{ fontSize: "0.95rem", color: theme.textMain, fontWeight: 600 }}>1 Transmisión en Vivo</span>
+                    </div>
+                  </div>
+
+                  <div className="package-card-price" style={{ fontFamily: titleFont.style.fontFamily }}>
+                    $45,500 <span>MXN + IVA / mes</span>
+                  </div>
+                </div>
+
+                {/* Package 2: Río Bravo */}
+                <div className="package-card" style={{ borderTop: `4px solid ${theme.superetteRed}` }}>
+                  <div className="package-card-header">
+                    <h3 className="package-card-title" style={{ fontFamily: titleFont.style.fontFamily }}>Paquete Río Bravo</h3>
+                    <p className="package-card-desc">
+                      La solución definitiva de difusión masiva con flexibilidad multimarca. Perfecto para campañas de temporada y aniversarios.
+                    </p>
+                  </div>
+                  
+                  <div style={{ display: "flex", flexDirection: "column", gap: "1rem", marginTop: "1rem" }}>
+                    <div style={{ background: "rgba(10, 130, 68, 0.04)", padding: "1rem", borderRadius: "12px", display: "flex", alignItems: "center", gap: "10px" }}>
+                      <div style={{ background: "rgba(10, 130, 68, 0.1)", color: theme.superetteGreen, padding: "6px", borderRadius: "8px", display: "flex" }}><Megaphone size={18} /></div>
+                      <div>
+                        <span style={{ fontSize: "0.95rem", color: theme.textMain, fontWeight: 600 }}>10 Notas Editoriales en red digital</span>
+                        <br />
+                        <span className="package-multimarca-badge">Notas distribuibles entre Del Rio, Superette y ARCO</span>
+                      </div>
+                    </div>
+                    <div style={{ background: "rgba(10, 130, 68, 0.04)", padding: "1rem", borderRadius: "12px", display: "flex", alignItems: "center", gap: "10px" }}>
+                      <div style={{ background: "rgba(10, 130, 68, 0.1)", color: theme.superetteGreen, padding: "6px", borderRadius: "8px", display: "flex" }}><Camera size={18} /></div>
+                      <span style={{ fontSize: "0.95rem", color: theme.textMain, fontWeight: 600 }}>2 Videos Reels In-Situ</span>
+                    </div>
+                    <div style={{ background: "rgba(10, 130, 68, 0.04)", padding: "1rem", borderRadius: "12px", display: "flex", alignItems: "center", gap: "10px" }}>
+                      <div style={{ background: "rgba(10, 130, 68, 0.1)", color: theme.superetteGreen, padding: "6px", borderRadius: "8px", display: "flex" }}><Play size={18} /></div>
+                      <span style={{ fontSize: "0.95rem", color: theme.textMain, fontWeight: 600 }}>2 Transmisiones en Vivo</span>
+                    </div>
+                  </div>
+
+                  <div className="package-card-price" style={{ color: theme.superetteRed, fontFamily: titleFont.style.fontFamily }}>
+                    $82,000 <span>MXN + IVA / mes</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
             {/* Precios Unitarios y Adicionales */}
             <motion.div 
               className="additional-prices-card"
@@ -963,7 +1118,7 @@ export default function SuperetteClient() {
                   </div>
                   <div style={{ display: "flex", justifyContent: "space-between", margin: "0.3rem 0" }}>
                     <span>Reel Producido In-Situ</span>
-                    <strong style={{ color: theme.textMain }}>$4,000 MXN c/u</strong>
+                    <strong style={{ color: theme.textMain }}>$13,000 MXN c/u</strong>
                   </div>
                 </div>
 
