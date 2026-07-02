@@ -50,17 +50,17 @@
       {
         "title": "Home y Accesos Rápidos",
         "description": "Una portada enfocada en los próximos eventos deportivos, partidos de local y accesos rápidos de compra y abonos.",
-        "image": "/assets/fc-juarez/logo.png"
+        "image": "/assets/fc-juarez/pilar-home.png"
       },
       {
         "title": "Ticket Section Interactiva",
         "description": "Diseño de la zona de boletaje con selección visual del mapa de graderías y asientos del estadio de manera intuitiva.",
-        "image": "/assets/fc-juarez/logo.png"
+        "image": "/assets/fc-juarez/pilar-tickets.png"
       },
       {
         "title": "Perfil y Abono Digital",
         "description": "Área privada para que el aficionado administre sus boletos comprados, descargue códigos QR de acceso y controle sus abonos.",
-        "image": "/assets/fc-juarez/logo.png"
+        "image": "/assets/fc-juarez/pilar-profile.png"
       }
     ]
   },
