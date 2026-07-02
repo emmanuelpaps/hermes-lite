@@ -672,7 +672,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
               visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
             }}
           >
-            {data.storytelling.pillars.map((pillar, idx) => (
+            {data.storytelling.pillars && data.storytelling.pillars.map((pillar, idx) => (
               <motion.div key={idx} variants={fadeUp} className={styles.storyPillarCard}>
                 {pillar.image && (
                   pillar.image.endsWith('.mp4') || pillar.image.endsWith('.webm') ? (

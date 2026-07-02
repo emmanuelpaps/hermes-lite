@@ -46,24 +46,7 @@
         "content": "Con un total estimado de 50 horas de trabajo y un 85% de avance actual, este sprint final de 7.5 horas completará el 15% restante de diseño para la entrega definitiva de las interfaces en Figma."
       }
     ],
-    "challenge": "Rediseñar los prototipos visuales de la boletera en Figma para las vistas de computadora y dispositivos móviles.",
-    "pillars": [
-      {
-        "title": "Home y Home móvil",
-        "description": "El diseño responsivo de la página de inicio para computadoras y dispositivos móviles.",
-        "image": "/assets/fc-juarez/pilar-home.png"
-      },
-      {
-        "title": "Ticket Section y móvil",
-        "description": "El diseño de la interfaz de venta de boletos adaptada a computadoras y móviles.",
-        "image": "/assets/fc-juarez/pilar-tickets.png"
-      },
-      {
-        "title": "Profile Section y móvil",
-        "description": "El diseño visual de la sección del perfil de usuario en sus versiones desktop y móvil.",
-        "image": "/assets/fc-juarez/pilar-profile.png"
-      }
-    ]
+    "challenge": "Rediseñar los prototipos visuales de la boletera en Figma para las vistas de computadora y dispositivos móviles."
   },
   "packages": {
     "fn1": [],
