@@ -1300,15 +1300,17 @@ export default function MediaKitView({ data }: { data: ClientData }) {
       </motion.a>
 
       <footer className={styles.footer}>
-        <motion.div 
-          className={styles.footerDecoration}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1 }}
-        >
-          <Image src="/assets/puerta-juarez.png" alt="Puerta Juárez" className={isLight ? styles.footerDecorationImageLight : styles.footerDecorationImage} width={150} height={183} />
-        </motion.div>
+        {data.config?.agency !== 'apolograma' && (
+          <motion.div 
+            className={styles.footerDecoration}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1 }}
+          >
+            <Image src="/assets/puerta-juarez.png" alt="Puerta Juárez" className={isLight ? styles.footerDecorationImageLight : styles.footerDecorationImage} width={150} height={183} />
+          </motion.div>
+        )}
         
         <div className={styles.footerContent}>
           <div className={styles.footerAgencyLogos}>
