@@ -1,6 +1,6 @@
 {
   "clientName": "FC Juárez",
-  "clientLogo": "/assets/fc-juarez/logo.png",
+  "clientLogo": "/assets/fc-juarez/logo.svg",
   "industry": "Deportes / Boletería Digital",
   "heroText": "Rediseño de la boletera digital para FC Juárez. Entregables en Figma de prototipos visuales listos para desarrollo.",
   "themeTemplate": "vercel",
