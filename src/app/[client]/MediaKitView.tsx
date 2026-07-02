@@ -639,7 +639,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           style={{ 
             position: 'relative', 
             zIndex: 2,
-            textShadow: '0 4px 15px rgba(0, 0, 0, 0.95), 0 2px 4px rgba(0, 0, 0, 0.95)'
+            filter: 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.95))'
           }}
         >
           {data.hero?.headline || data.heroTitle || `Propuesta Estratégica para ${data.clientName}`}
