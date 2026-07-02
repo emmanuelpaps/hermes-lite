@@ -43,53 +43,55 @@
     "narrative": [
       {
         "title": "El Desafío del Rediseño",
-        "content": "FC Juárez requiere el rediseño del sitio web para su boletera. El objetivo de este proyecto es entregar los prototipos visuales definitivos y consistentes para las secciones clave de la plataforma."
+        "content": "El objetivo de este proyecto es rediseñar y consolidar la experiencia visual de la boletera digital de los Bravos de Juárez. Apolograma se enfoca en entregar prototipos de interfaces UI/UX de alta fidelidad, listos para integrarse al desarrollo técnico de manera eficiente."
       },
       {
         "title": "Consolidación de las Pantallas Bravos",
-        "content": "Con un total estimado de 50 horas de trabajo y un 85% de avance actual, este sprint final de 7.5 horas completará el 15% restante de diseño para la entrega definitiva de las interfaces en Figma."
+        "content": "El proyecto completo comprende un total estimado de 50 horas de trabajo para el desarrollo de los flujos principales. Con un 85% de avance acumulado a la fecha, esta propuesta formaliza los entregables clave (Home, Boletería y Perfil) y asegura el sprint final de cierre para la entrega integral de las interfaces en Figma."
       }
     ],
-    "challenge": "Rediseñar los prototipos visuales de la boletera en Figma para las vistas de computadora y dispositivos móviles."
+    "challenge": "Diseñar la experiencia visual y el flujo interactivo de la boletera digital de FC Juárez en Figma, estableciendo una interfaz moderna y fluida optimizada tanto para escritorio como para dispositivos móviles."
   },
   "packages": {
+    "title": "Propuesta Económica",
+    "subtitle": "Inversión detallada para el diseño y entrega definitiva de los componentes en Figma:",
     "fn1": [],
     "apolograma": [],
     "blocks": [
       {
-        "name": "Sprints Finales de Diseño UI/UX (Boletera Bravos)",
+        "name": "Sprints de Diseño UI/UX (Boletera Bravos)",
         "services": [
           {
             "name": "Home & Home móvil",
             "price": 18000,
-            "description": "Diseño de la sección Home y su versión móvil en Figma.",
+            "description": "Diseño de la interfaz principal de acceso a la boletera (Home) en alta fidelidad, optimizada para escritorio y dispositivos móviles.",
             "image": "/assets/fc-juarez/pilar-home.png",
             "bullets": [
-              "Prototipo visual de la sección Home en versión desktop.",
-              "Prototipo visual de la sección Home en versión móvil.",
-              "Alineación visual y consistencia de componentes en Figma."
+              "Estructuración de banner principal dinámico para próximos partidos y eventos destacados.",
+              "Diseño UX intuitivo para el flujo rápido de selección de boletos desde la pantalla principal.",
+              "Adaptación responsive premium para asegurar una navegación fluida en dispositivos móviles."
             ]
           },
           {
             "name": "Ticket Section y móvil",
             "price": 24000,
-            "description": "Diseño de la sección Ticket y su versión móvil en Figma.",
+            "description": "Desarrollo visual detallado de la sección de selección de asientos y checkout en Figma, tanto en versión desktop como móvil.",
             "image": "/assets/fc-juarez/pilar-tickets.png",
             "bullets": [
-              "Prototipo visual de la sección Ticket en versión desktop.",
-              "Prototipo visual de la sección Ticket en versión móvil.",
-              "Alineación visual y consistencia de componentes en Figma."
+              "Diseño interactivo del mapa del estadio y selector dinámico de zonas/gradas.",
+              "Flujo de compra paso a paso simplificado para maximizar la tasa de conversión.",
+              "Componentes UX de confirmación de compra y visualización de boletos adquiridos."
             ]
           },
           {
             "name": "Profile Section y móvil",
             "price": 18000,
-            "description": "Diseño de la sección Profile y su versión móvil en Figma.",
+            "description": "Diseño de la sección de perfil de usuario (área privada del aficionado) en Figma, enfocado en la gestión de abonos e historial de compras.",
             "image": "/assets/fc-juarez/pilar-profile.png",
             "bullets": [
-              "Prototipo visual de la sección Profile en versión desktop.",
-              "Prototipo visual de la sección Profile en versión móvil.",
-              "Alineación visual y consistencia de componentes en Figma."
+              "Diseño de panel principal de usuario con visualización limpia de abonos digitales y membresías.",
+              "Flujo intuitivo de consulta de historial de compras y descarga de boletos.",
+              "Sección de configuración de cuenta y preferencias del aficionado (excluyendo códigos QR)."
             ]
           }
         ]
