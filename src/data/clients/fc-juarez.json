@@ -22,7 +22,8 @@
   "features": {
     "showEcosystem": false,
     "showAudiences": false,
-    "showPricing": true
+    "showPricing": true,
+    "disableSelection": true
   },
   "meta": {
     "title": "Propuesta de Rediseño Boletera | FC Juárez",

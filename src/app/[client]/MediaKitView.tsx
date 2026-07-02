@@ -965,7 +965,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 variants={fadeUp} 
                 isOpen={activeService === service.name}
                 onToggle={() => setActiveService(activeService === service.name ? null : service.name)}
-                isSelectable={true}
+                isSelectable={!data.features?.disableSelection}
                 isSelected={selectedServices[service.name]}
                 onSelect={() => toggleServiceSelection(service.name)}
                 selectionType="checkbox"
@@ -1019,13 +1019,13 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           variants={fadeUp}
         >
           <h2 className={styles.sectionTitle}>
-            {data.packages.blocks && data.packages.blocks.length > 0 ? "Ejecución Modular" : "Tu inversión, desglosada."}
+            {data.packages.blocks && data.packages.blocks.length > 0 && !data.features?.disableSelection ? "Ejecución Modular" : "Tu inversión, desglosada."}
           </h2>
           <p className={styles.sectionSubtitle} style={{marginBottom: "1rem"}}>
-            {isExclusive ? "Total basado en la opción seleccionada:" : (data.packages.blocks && data.packages.blocks.length > 0 ? "Inversión Total del Proyecto" : "Esto es exactamente lo que recibirás cada mes:")}
+            {isExclusive ? "Total basado en la opción seleccionada:" : (data.packages.blocks && data.packages.blocks.length > 0 && !data.features?.disableSelection ? "Inversión Total del Proyecto" : "Esto es exactamente lo que recibirás cada mes:")}
           </p>
 
-          {data.packages.blocks && data.packages.blocks.length > 0 && (
+          {data.packages.blocks && data.packages.blocks.length > 0 && !data.features?.disableSelection && (
             <div style={{
               background: "rgba(168, 85, 247, 0.1)", 
               border: "1px solid rgba(168, 85, 247, 0.3)", 
