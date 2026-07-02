@@ -145,12 +145,20 @@
           {
             "name": "Administración Mensual e Impacto Digital",
             "price": 22500,
-            "description": "Gestión continua de tu marca con Apolograma, más un fuerte impulso mediático recurrente a través de Frontera Número Uno y Meta Ads para retener a la audiencia de la Fase 1.",
+            "description": "Gestión continua de tu marca con Apolograma, más un fuerte impulso mediático recurrente a través de la plataforma de Frontera Número Uno.",
             "bullets": [
-              "12 Entregables mensuales (Diseños gráficos / Reels) para Instagram y Facebook.",
-              "1 Transmisión en Vivo mensual (Hasta 30 minutos) desde mostrador por Frontera Número Uno.",
-              "1 Publicación editorial / fotogalería mensual en la plataforma de Frontera Número Uno.",
-              "1 Campaña mensual de Meta Ads administrada y optimizada (Presupuesto publicitario no incluido)."
+              "12 Diseños gráficos mensuales para tus redes sociales.",
+              "3 Notas editoriales e historias en la red de Frontera Número Uno.",
+              "Administración y optimización de pauta (no incluye presupuesto de pauta)."
+            ]
+          },
+          {
+            "name": "Producción de Video Reel (Opcional)",
+            "price": 10000,
+            "description": "Producción opcional de video reel corto de alta retención con precio preferencial.",
+            "bullets": [
+              "1 Video Reel producido en sucursal Acá Las Tortas.",
+              "Edición dinámica orientada al alcance y engagement local."
             ]
           }
         ]

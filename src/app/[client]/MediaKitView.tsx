@@ -380,9 +380,23 @@ export default function MediaKitView({ data }: { data: ClientData }) {
   
   const [selectedServices, setSelectedServices] = useState<Record<string, boolean>>(() => {
     const initialState: Record<string, boolean> = {};
-    if (data.packages.fn1) data.packages.fn1.forEach(s => initialState[s.name] = true);
-    if (data.packages.blocks) data.packages.blocks.forEach(b => b.services.forEach(s => initialState[s.name] = true));
-    if (!isExclusive && data.packages.apolograma) data.packages.apolograma.forEach(s => initialState[s.name] = true);
+    if (data.packages.fn1) {
+      data.packages.fn1.forEach(s => {
+        initialState[s.name] = !(s.name.includes('(Opcional)') || s.name.includes('(Opcionales)'));
+      });
+    }
+    if (data.packages.blocks) {
+      data.packages.blocks.forEach(b => {
+        b.services.forEach(s => {
+          initialState[s.name] = !(s.name.includes('(Opcional)') || s.name.includes('(Opcionales)'));
+        });
+      });
+    }
+    if (!isExclusive && data.packages.apolograma) {
+      data.packages.apolograma.forEach(s => {
+        initialState[s.name] = !(s.name.includes('(Opcional)') || s.name.includes('(Opcionales)'));
+      });
+    }
     return initialState;
   });
 
