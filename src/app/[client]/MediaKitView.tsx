@@ -173,6 +173,31 @@ interface AccordionProps {
   selectionType?: 'radio' | 'checkbox';
 }
 
+const bulletContainerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.05
+    }
+  }
+};
+
+const bulletItemVariants: Variants = {
+  hidden: { opacity: 0, x: -15, y: 5 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    y: 0,
+    transition: { 
+      type: "spring", 
+      stiffness: 120, 
+      damping: 14 
+    }
+  }
+};
+
 const AccordionCard = ({ service, formatPrice, variants, isOpen, onToggle, isSelectable, isSelected, onSelect, priceSuffix, selectionType = 'radio' }: AccordionProps) => {
   return (
     <motion.div 
@@ -274,14 +299,38 @@ const AccordionCard = ({ service, formatPrice, variants, isOpen, onToggle, isSel
               </p>
               
               {service.bullets && (
-                <ul className={styles.bulletList}>
+                <motion.ul 
+                  className={styles.bulletList}
+                  variants={bulletContainerVariants}
+                  initial="hidden"
+                  animate="visible"
+                >
                   {service.bullets.map((bullet, idx) => (
-                    <li key={idx} className={styles.bulletItem}>
-                      <span className={styles.bulletCheck}>✓</span>
-                      {bullet}
-                    </li>
+                    <motion.li 
+                      key={idx} 
+                      className={styles.bulletItem}
+                      variants={bulletItemVariants}
+                      whileHover={{ scale: 1.015, x: 4 }}
+                      style={{
+                        background: 'rgba(255, 255, 255, 0.02)',
+                        border: '1px solid var(--glass-border)',
+                        borderRadius: '12px',
+                        padding: '0.8rem 1.2rem',
+                        boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.8rem',
+                        transition: 'border-color 0.2s, background 0.2s',
+                        cursor: 'default',
+                        width: '100%',
+                        boxSizing: 'border-box'
+                      }}
+                    >
+                      <span className={styles.bulletCheck} style={{ color: 'var(--primary-color, #a855f7)', fontSize: '1.1rem', marginRight: '0.2rem' }}>✦</span>
+                      <span style={{ color: 'var(--text-color)', fontSize: '0.95rem', fontWeight: 400 }}>{bullet}</span>
+                    </motion.li>
                   ))}
-                </ul>
+                </motion.ul>
               )}
             </div>
           </motion.div>
