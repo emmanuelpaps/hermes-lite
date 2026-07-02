@@ -2,7 +2,7 @@
   "clientName": "FC Juárez",
   "clientLogo": "/assets/fc-juarez/logo.png",
   "industry": "Deportes / Boletería Digital",
-  "heroText": "Rediseñamos la experiencia de boletaje digital para el club más grande de la frontera. Un flujo UI/UX optimizado para el aficionado de los Bravos.",
+  "heroText": "Rediseño de la boletera digital para FC Juárez. Entregables en Figma de prototipos visuales listos para desarrollo.",
   "themeTemplate": "vercel",
   "theme": {
     "mode": "dark",
@@ -37,29 +37,29 @@
   "storytelling": {
     "narrative": [
       {
-        "title": "El Desafío de la Experiencia de Boletaje",
-        "content": "Para un club de fútbol profesional, la boletera digital es el canal de venta más importante. El objetivo de este rediseño es simplificar la selección de asientos, reducir la fricción en el checkout y mejorar la experiencia de gestión de abonos del aficionado."
+        "title": "El Desafío del Rediseño",
+        "content": "FC Juárez requiere el rediseño del sitio web para su boletera. El objetivo de este proyecto es entregar los prototipos visuales definitivos y consistentes para las secciones clave de la plataforma."
       },
       {
         "title": "Consolidación de las Pantallas Bravos",
-        "content": "Con el proyecto al 80%, enfocaremos las 50 horas de diseño restantes en perfeccionar la consistencia de componentes, el flujo interactivo de compra de boletos, el perfil del aficionado y las adaptaciones responsivas para móvil."
+        "content": "Con el proyecto actualmente al 80%, utilizaremos las 50 horas restantes para completar y pulir el diseño de las vistas para computadora y adaptaciones móviles."
       }
     ],
-    "challenge": "Optimizar el flujo de compra de boletos y la visualización interactiva del Estadio Olímpico Benito Juárez en móvil y desktop, alineando la interfaz al ADN y colores oficiales del club.",
+    "challenge": "Rediseñar los prototipos visuales de la boletera en Figma para las vistas de computadora y dispositivos móviles.",
     "pillars": [
       {
-        "title": "Home y Accesos Rápidos",
-        "description": "Una portada enfocada en los próximos eventos deportivos, partidos de local y accesos rápidos de compra y abonos.",
+        "title": "Home y Home móvil",
+        "description": "El diseño responsivo de la página de inicio para computadoras y dispositivos móviles.",
         "image": "/assets/fc-juarez/pilar-home.png"
       },
       {
-        "title": "Ticket Section Interactiva",
-        "description": "Diseño de la zona de boletaje con selección visual del mapa de graderías y asientos del estadio de manera intuitiva.",
+        "title": "Ticket Section y móvil",
+        "description": "El diseño de la interfaz de venta de boletos adaptada a computadoras y móviles.",
         "image": "/assets/fc-juarez/pilar-tickets.png"
       },
       {
-        "title": "Perfil y Abono Digital",
-        "description": "Área privada para que el aficionado administre sus boletos comprados, descargue códigos QR de acceso y controle sus abonos.",
+        "title": "Profile Section y móvil",
+        "description": "El diseño visual de la sección del perfil de usuario en sus versiones desktop y móvil.",
         "image": "/assets/fc-juarez/pilar-profile.png"
       }
     ]
@@ -72,43 +72,33 @@
         "name": "Sprints Finales de Diseño UI/UX (Boletera Bravos)",
         "services": [
           {
-            "name": "Home & Experiencia Inicial (Desktop & Mobile)",
+            "name": "Home & Home móvil",
             "price": 18000,
-            "description": "Diseño de la página de inicio con accesos rápidos, partidos destacados y eventos.",
+            "description": "Diseño de la sección Home y su versión móvil en Figma.",
             "bullets": [
-              "Diseño de la vista desktop en alta definición.",
-              "Adaptación responsiva móvil completa de la vista inicial.",
-              "Alineación visual de banner de patrocinadores y colores del club."
+              "Prototipo visual de la sección Home en versión desktop.",
+              "Prototipo visual de la sección Home en versión móvil.",
+              "Alineación visual y consistencia de componentes en Figma."
             ]
           },
           {
-            "name": "Ticket Section & Selección de Asientos (Desktop & Mobile)",
+            "name": "Ticket Section y móvil",
             "price": 24000,
-            "description": "Flujo de compra interactiva de boletos y selección de asientos.",
+            "description": "Diseño de la sección Ticket y su versión móvil en Figma.",
             "bullets": [
-              "Diseño del mapa interactivo de secciones del Estadio Olímpico Benito Juárez.",
-              "Visualización de precios por zona y selección de asientos en desktop y móvil.",
-              "Diseño de pantalla del carrito de compra y resumen de selección."
+              "Prototipo visual de la sección Ticket en versión desktop.",
+              "Prototipo visual de la sección Ticket en versión móvil.",
+              "Alineación visual y consistencia de componentes en Figma."
             ]
           },
           {
-            "name": "Profile Section & Gestión de Boletos (Desktop & Mobile)",
+            "name": "Profile Section y móvil",
             "price": 18000,
-            "description": "Panel de usuario para consulta y gestión de boletos del aficionado.",
+            "description": "Diseño de la sección Profile y su versión móvil en Figma.",
             "bullets": [
-              "Diseño de panel de inicio de sesión y registro de aficionado.",
-              "Historial de compras y zona para descarga y visualización de boletos QR de acceso.",
-              "Módulo de control de abono digital."
-            ]
-          },
-          {
-            "name": "Prototipo Interactivo y Micro-interacciones (Opcional)",
-            "price": 10000,
-            "description": "Creación del prototipo navegable de alta fidelidad en Figma para demostración.",
-            "bullets": [
-              "Enlace interactivo de pantallas mediante transiciones inteligentes en Figma (Smart Animate).",
-              "Micro-interacciones completas en botones, inputs, modales y selección de asientos.",
-              "Simulación de experiencia real de usuario final lista para testing."
+              "Prototipo visual de la sección Profile en versión desktop.",
+              "Prototipo visual de la sección Profile en versión móvil.",
+              "Alineación visual y consistencia de componentes en Figma."
             ]
           }
         ]
