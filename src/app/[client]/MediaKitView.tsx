@@ -409,6 +409,8 @@ interface ClientData {
     primaryColor?: string;
     fontHeading?: string;
     fontBody?: string;
+    fontDisplay?: string;
+    fontDisplayStyle?: string;
     textColor?: string;
     mutedText?: string;
     textGradient?: string;
@@ -484,6 +486,8 @@ export default function MediaKitView({ data }: { data: ClientData }) {
   const customTheme = data.theme ? {
     '--font-heading': data.theme.fontHeading || 'Space Grotesk, sans-serif',
     '--font-body': data.theme.fontBody || 'Inter, sans-serif',
+    '--font-display': data.theme.fontDisplay || 'var(--font-heading)',
+    '--font-display-style': data.theme.fontDisplayStyle || 'normal',
     '--primary-gradient': `linear-gradient(135deg, ${data.theme.primaryColor || data.theme.primary || '#a855f7'} 0%, ${isLight ? '#990000' : '#000'} 100%)`,
     '--primary-color': data.theme.primaryColor || data.theme.primary || '#d4b895',
     '--text-gradient': data.theme.textGradient || (isLight ? 'linear-gradient(to right, #222, #555)' : 'linear-gradient(to right, #fff, #888)'),

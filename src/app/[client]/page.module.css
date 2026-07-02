@@ -126,6 +126,8 @@
   margin-bottom: 1.5rem;
   z-index: 1;
   position: relative;
+  font-family: var(--font-display, var(--font-heading));
+  font-style: var(--font-display-style, normal);
 }
 
 .heroSubtitle {
@@ -147,6 +149,8 @@
   margin-bottom: 1rem;
   text-align: center;
   color: var(--text-color);
+  font-family: var(--font-display, var(--font-heading));
+  font-style: var(--font-display-style, normal);
 }
 
 .sectionSubtitle {
@@ -748,7 +752,8 @@
 }
 
 .rowTitle {
-  font-family: var(--font-heading);
+  font-family: var(--font-display, var(--font-heading));
+  font-style: var(--font-display-style, normal);
   font-size: 2.5rem;
   font-weight: 700;
   margin: 0;
