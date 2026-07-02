@@ -1,0 +1,119 @@
+{
+  "clientName": "FC Juárez",
+  "clientLogo": "/assets/fc-juarez/logo.png",
+  "industry": "Deportes / Boletería Digital",
+  "heroText": "Rediseñamos la experiencia de boletaje digital para el club más grande de la frontera. Un flujo UI/UX optimizado para el aficionado de los Bravos.",
+  "themeTemplate": "vercel",
+  "theme": {
+    "mode": "dark",
+    "primary": "#78be20",
+    "primaryColor": "#78be20",
+    "fontHeading": "'Geist', 'Inter', sans-serif",
+    "fontBody": "'Geist', 'Inter', sans-serif",
+    "bgColor": "#0b0c10",
+    "textGradient": "linear-gradient(to right, #78be20, #a2e300)",
+    "surfaceGlass": "rgba(20, 24, 33, 0.7)",
+    "glassBorder": "rgba(120, 190, 32, 0.2)"
+  },
+  "config": {
+    "currency": "MXN",
+    "locale": "es-MX"
+  },
+  "features": {
+    "showEcosystem": false,
+    "showAudiences": false,
+    "showPricing": true
+  },
+  "meta": {
+    "title": "Propuesta de Rediseño Boletera | FC Juárez",
+    "description": "Propuesta de diseño de interfaces UI/UX para la boletera digital de los Bravos de Juárez.",
+    "ogImage": "/assets/fc-juarez/logo.png"
+  },
+  "hero": {
+    "headline": "Rediseño de Experiencia Boletera Bravos",
+    "subheadline": "Propuesta de Diseño UI/UX Visual para FC Juárez",
+    "backgroundImage": "/assets/fc-juarez/hero-bg.png"
+  },
+  "storytelling": {
+    "narrative": [
+      {
+        "title": "El Desafío de la Experiencia de Boletaje",
+        "content": "Para un club de fútbol profesional, la boletera digital es el canal de venta más importante. El objetivo de este rediseño es simplificar la selección de asientos, reducir la fricción en el checkout y mejorar la experiencia de gestión de abonos del aficionado."
+      },
+      {
+        "title": "Consolidación de las Pantallas Bravos",
+        "content": "Con el proyecto al 80%, enfocaremos las 50 horas de diseño restantes en perfeccionar la consistencia de componentes, el flujo interactivo de compra de boletos, el perfil del aficionado y las adaptaciones responsivas para móvil."
+      }
+    ],
+    "challenge": "Optimizar el flujo de compra de boletos y la visualización interactiva del Estadio Olímpico Benito Juárez en móvil y desktop, alineando la interfaz al ADN y colores oficiales del club.",
+    "pillars": [
+      {
+        "title": "Home y Accesos Rápidos",
+        "description": "Una portada enfocada en los próximos eventos deportivos, partidos de local y accesos rápidos de compra y abonos.",
+        "image": "/assets/fc-juarez/logo.png"
+      },
+      {
+        "title": "Ticket Section Interactiva",
+        "description": "Diseño de la zona de boletaje con selección visual del mapa de graderías y asientos del estadio de manera intuitiva.",
+        "image": "/assets/fc-juarez/logo.png"
+      },
+      {
+        "title": "Perfil y Abono Digital",
+        "description": "Área privada para que el aficionado administre sus boletos comprados, descargue códigos QR de acceso y controle sus abonos.",
+        "image": "/assets/fc-juarez/logo.png"
+      }
+    ]
+  },
+  "packages": {
+    "fn1": [],
+    "apolograma": [],
+    "blocks": [
+      {
+        "name": "Sprints Finales de Diseño UI/UX (Boletera Bravos)",
+        "services": [
+          {
+            "name": "Home & Experiencia Inicial (Desktop & Mobile)",
+            "price": 18000,
+            "description": "Diseño de la página de inicio con accesos rápidos, partidos destacados y eventos.",
+            "bullets": [
+              "Diseño de la vista desktop en alta definición.",
+              "Adaptación responsiva móvil completa de la vista inicial.",
+              "Alineación visual de banner de patrocinadores y colores del club."
+            ]
+          },
+          {
+            "name": "Ticket Section & Selección de Asientos (Desktop & Mobile)",
+            "price": 24000,
+            "description": "Flujo de compra interactiva de boletos y selección de asientos.",
+            "bullets": [
+              "Diseño del mapa interactivo de secciones del Estadio Olímpico Benito Juárez.",
+              "Visualización de precios por zona y selección de asientos en desktop y móvil.",
+              "Diseño de pantalla del carrito de compra y resumen de selección."
+            ]
+          },
+          {
+            "name": "Profile Section & Gestión de Boletos (Desktop & Mobile)",
+            "price": 18000,
+            "description": "Panel de usuario para consulta y gestión de boletos del aficionado.",
+            "bullets": [
+              "Diseño de panel de inicio de sesión y registro de aficionado.",
+              "Historial de compras y zona para descarga y visualización de boletos QR de acceso.",
+              "Módulo de control de abono digital."
+            ]
+          },
+          {
+            "name": "Prototipo Interactivo y Micro-interacciones (Opcional)",
+            "price": 10000,
+            "description": "Creación del prototipo navegable de alta fidelidad en Figma para demostración.",
+            "bullets": [
+              "Enlace interactivo de pantallas mediante transiciones inteligentes en Figma (Smart Animate).",
+              "Micro-interacciones completas en botones, inputs, modales y selección de asientos.",
+              "Simulación de experiencia real de usuario final lista para testing."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "discountPercent": 0
+}
