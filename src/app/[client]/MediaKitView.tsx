@@ -660,15 +660,17 @@ export default function MediaKitView({ data }: { data: ClientData }) {
       </section>
 
       {/* Brand Divider */}
-      <motion.div 
-        className={styles.brandDivider}
-        initial={{ opacity: 0, scale: 0.8 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true, amount: 0.5 }}
-        transition={{ duration: 0.8 }}
-      >
-        <Image src="/assets/stickers/x-purple.png" alt="Frontera X" width={412} height={394} />
-      </motion.div>
+      {data.config?.agency !== 'apolograma' && (
+        <motion.div 
+          className={styles.brandDivider}
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.8 }}
+        >
+          <Image src="/assets/stickers/x-purple.png" alt="Frontera X" width={412} height={394} />
+        </motion.div>
+      )}
 
       {/* Storytelling: The Narrative & Challenge */}
       {data.storytelling && (
