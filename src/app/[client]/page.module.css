@@ -697,3 +697,87 @@
     font-size: 2.5rem;
   }
 }
+
+/* =========================================
+   STAGGERED STORYTELLING ROWS
+   ========================================= */
+.staggeredRow {
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+  margin-bottom: 8rem;
+  width: 100%;
+}
+
+.staggeredRowReverse {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 4rem;
+  align-items: center;
+  margin-bottom: 8rem;
+  width: 100%;
+}
+
+.rowImageContainer {
+  flex: 1;
+  max-width: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.rowImage {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  border-radius: var(--border-radius, 16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-elevation-2);
+  transition: transform 0.5s ease;
+}
+
+.rowImage:hover {
+  transform: scale(1.025);
+}
+
+.rowTextContainer {
+  flex: 1;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.rowTitle {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+  background: var(--text-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.rowDescription {
+  color: var(--muted-text);
+  font-size: 1.15rem;
+  line-height: 1.7;
+  margin: 0;
+  font-weight: 300;
+}
+
+@media (max-width: 992px) {
+  .staggeredRow, .staggeredRowReverse {
+    flex-direction: column !important;
+    gap: 2rem;
+    margin-bottom: 5rem;
+  }
+  
+  .rowImageContainer {
+    max-width: 100%;
+  }
+
+  .rowTitle {
+    font-size: 2rem;
+  }
+}
+

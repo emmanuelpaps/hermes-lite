@@ -76,6 +76,7 @@
             "name": "Home & Home móvil",
             "price": 18000,
             "description": "Diseño de la sección Home y su versión móvil en Figma.",
+            "image": "/assets/fc-juarez/pilar-home.png",
             "bullets": [
               "Prototipo visual de la sección Home en versión desktop.",
               "Prototipo visual de la sección Home en versión móvil.",
@@ -86,6 +87,7 @@
             "name": "Ticket Section y móvil",
             "price": 24000,
             "description": "Diseño de la sección Ticket y su versión móvil en Figma.",
+            "image": "/assets/fc-juarez/pilar-tickets.png",
             "bullets": [
               "Prototipo visual de la sección Ticket en versión desktop.",
               "Prototipo visual de la sección Ticket en versión móvil.",
@@ -96,6 +98,7 @@
             "name": "Profile Section y móvil",
             "price": 18000,
             "description": "Diseño de la sección Profile y su versión móvil en Figma.",
+            "image": "/assets/fc-juarez/pilar-profile.png",
             "bullets": [
               "Prototipo visual de la sección Profile en versión desktop.",
               "Prototipo visual de la sección Profile en versión móvil.",

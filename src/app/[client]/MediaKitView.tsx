@@ -990,40 +990,120 @@ export default function MediaKitView({ data }: { data: ClientData }) {
       )}
 
       {/* Blocks Structure */}
-      {data.features?.showPricing !== false && data.packages.blocks && data.packages.blocks.map((block, blockIdx) => (
-        <section key={`block-${blockIdx}`} className={styles.section}>
-          <motion.h2 className={styles.sectionTitle} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-            {block.name}
-          </motion.h2>
-          
-          <motion.div 
-            className={styles.servicesGrid}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={{
-              hidden: { opacity: 0 },
-              visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
-            }}
-          >
-            {block.services.map((service, idx) => (
-              <AccordionCard 
-                key={`${blockIdx}-${idx}`} 
-                service={service} 
-                formatPrice={formatPrice} 
-                variants={fadeUp} 
-                isOpen={activeService === service.name}
-                onToggle={() => setActiveService(activeService === service.name ? null : service.name)}
-                isSelectable={!data.features?.disableSelection}
-                isSelected={selectedServices[service.name]}
-                onSelect={() => toggleServiceSelection(service.name)}
-                selectionType="checkbox"
-                priceSuffix={data.config?.priceSuffix}
-              />
-            ))}
-          </motion.div>
-        </section>
-      ))}
+      {data.features?.showPricing !== false && data.packages.blocks && data.packages.blocks.map((block, blockIdx) => {
+        const isStaggered = data.features?.disableSelection;
+        
+        return (
+          <section key={`block-${blockIdx}`} className={styles.section} style={{ overflow: 'hidden' }}>
+            <motion.h2 className={styles.sectionTitle} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} style={{ marginBottom: isStaggered ? '5rem' : '4rem' }}>
+              {block.name}
+            </motion.h2>
+            
+            {isStaggered ? (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', width: '100%' }}>
+                {block.services.map((service, idx) => {
+                  const isEven = idx % 2 === 0;
+                  return (
+                    <motion.div 
+                      key={`${blockIdx}-${idx}`}
+                      className={isEven ? styles.staggeredRow : styles.staggeredRowReverse}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, margin: "-100px" }}
+                      variants={{
+                        hidden: { opacity: 0, y: 50 },
+                        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+                      }}
+                    >
+                      {/* Image / Mockup Column */}
+                      {service.image && (
+                        <div className={styles.rowImageContainer}>
+                          <motion.img 
+                            src={service.image} 
+                            alt={service.name} 
+                            className={styles.rowImage}
+                            whileHover={{ scale: 1.025 }}
+                            transition={{ type: "spring", stiffness: 100, damping: 15 }}
+                          />
+                        </div>
+                      )}
+                      
+                      {/* Text & Deliverables Column */}
+                      <div className={styles.rowTextContainer}>
+                        <h3 className={styles.rowTitle}>{service.name}</h3>
+                        <p className={styles.rowDescription}>{service.description}</p>
+                        
+                        {service.bullets && (
+                          <motion.ul 
+                            className={styles.bulletList}
+                            variants={bulletContainerVariants}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                          >
+                            {service.bullets.map((bullet, bIdx) => (
+                              <motion.li 
+                                key={bIdx} 
+                                className={styles.bulletItem}
+                                variants={bulletItemVariants}
+                                whileHover={{ scale: 1.015, x: 4 }}
+                                style={{
+                                  background: 'rgba(255, 255, 255, 0.02)',
+                                  border: '1px solid var(--glass-border)',
+                                  borderRadius: '12px',
+                                  padding: '0.8rem 1.2rem',
+                                  boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  gap: '0.8rem',
+                                  transition: 'border-color 0.2s, background 0.2s',
+                                  cursor: 'default',
+                                  width: '100%',
+                                  boxSizing: 'border-box'
+                                }}
+                              >
+                                <span className={styles.bulletCheck} style={{ color: 'var(--primary-color, #a855f7)', fontSize: '1.1rem', marginRight: '0.2rem' }}>✦</span>
+                                <span style={{ color: 'var(--text-color)', fontSize: '0.95rem', fontWeight: 400 }}>{bullet}</span>
+                              </motion.li>
+                            ))}
+                          </motion.ul>
+                        )}
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            ) : (
+              <motion.div 
+                className={styles.servicesGrid}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+                }}
+              >
+                {block.services.map((service, idx) => (
+                  <AccordionCard 
+                    key={`${blockIdx}-${idx}`} 
+                    service={service} 
+                    formatPrice={formatPrice} 
+                    variants={fadeUp} 
+                    isOpen={activeService === service.name}
+                    onToggle={() => setActiveService(activeService === service.name ? null : service.name)}
+                    isSelectable={!data.features?.disableSelection}
+                    isSelected={selectedServices[service.name]}
+                    onSelect={() => toggleServiceSelection(service.name)}
+                    selectionType="checkbox"
+                    priceSuffix={data.config?.priceSuffix}
+                  />
+                ))}
+              </motion.div>
+            )}
+          </section>
+        );
+      })}
 
       {/* Footer Video */}
       {data.footerVideo && (
