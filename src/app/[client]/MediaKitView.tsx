@@ -1018,13 +1018,20 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                       {/* Image / Mockup Column */}
                       {service.image && (
                         <div className={styles.rowImageContainer}>
-                          <motion.img 
-                            src={service.image} 
-                            alt={service.name} 
-                            className={styles.rowImage}
+                          <motion.div
                             whileHover={{ scale: 1.025 }}
                             transition={{ type: "spring", stiffness: 100, damping: 15 }}
-                          />
+                            style={{ width: '100%', maxWidth: '480px' }}
+                          >
+                            <Image 
+                              src={service.image} 
+                              alt={service.name} 
+                              className={styles.rowImage}
+                              width={480}
+                              height={320}
+                              style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
+                            />
+                          </motion.div>
                         </div>
                       )}
                       
