@@ -636,14 +636,24 @@ export default function MediaKitView({ data }: { data: ClientData }) {
         
         <h1 
           className={`${styles.heroTitle} text-gradient`}
-          style={{ position: 'relative', zIndex: 2 }}
+          style={{ 
+            position: 'relative', 
+            zIndex: 2,
+            textShadow: '0 4px 15px rgba(0, 0, 0, 0.95), 0 2px 4px rgba(0, 0, 0, 0.95)'
+          }}
         >
           {data.hero?.headline || data.heroTitle || `Propuesta Estratégica para ${data.clientName}`}
         </h1>
         
         <p 
           className={styles.heroSubtitle}
-          style={{ position: 'relative', zIndex: 2 }}
+          style={{ 
+            position: 'relative', 
+            zIndex: 2,
+            color: '#ffffff',
+            textShadow: '0 2px 8px rgba(0, 0, 0, 0.95)',
+            fontWeight: 500
+          }}
         >
           {data.hero?.subheadline || data.heroText}
         </p>
