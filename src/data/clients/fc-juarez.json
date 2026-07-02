@@ -13,7 +13,8 @@
     "bgColor": "#0b0c10",
     "textGradient": "linear-gradient(to right, #78be20, #a2e300)",
     "surfaceGlass": "rgba(20, 24, 33, 0.7)",
-    "glassBorder": "rgba(120, 190, 32, 0.2)"
+    "glassBorder": "rgba(120, 190, 32, 0.2)",
+    "clientLogoRaw": true
   },
   "config": {
     "currency": "MXN",

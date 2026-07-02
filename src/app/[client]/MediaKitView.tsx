@@ -552,18 +552,30 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           </>
         ) : data.hero?.backgroundImage ? (
           <>
+            <motion.div 
+              initial={{ scale: 1 }}
+              animate={{ scale: 1.05 }}
+              transition={{
+                duration: 20,
+                repeat: Infinity,
+                repeatType: "reverse",
+                ease: "easeInOut"
+              }}
+              style={{
+                position: 'absolute',
+                top: 0, left: 0, width: '100%', height: '100%',
+                backgroundImage: `url(${data.hero.backgroundImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                zIndex: 0,
+              }} 
+            />
             <div style={{
               position: 'absolute',
               top: 0, left: 0, width: '100%', height: '100%',
-              backgroundImage: `url(${data.hero.backgroundImage})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              zIndex: 0,
-            }} />
-            <div style={{
-              position: 'absolute',
-              top: 0, left: 0, width: '100%', height: '100%',
-              background: isLight ? 'rgba(249, 246, 240, 0.60)' : 'linear-gradient(to bottom, rgba(5, 5, 5, 0.3), rgba(5, 5, 5, 0.9))',
+              background: isLight 
+                ? 'radial-gradient(circle at center, rgba(249, 246, 240, 0.40) 0%, rgba(249, 246, 240, 0.90) 100%)' 
+                : 'radial-gradient(circle at center, rgba(11, 12, 16, 0.20) 0%, rgba(11, 12, 16, 0.90) 100%)',
               backdropFilter: 'blur(1px)',
               zIndex: 1,
             }} />
@@ -581,16 +593,38 @@ export default function MediaKitView({ data }: { data: ClientData }) {
         )}
         <div 
           className={styles.logoContainer}
-          style={{ position: 'relative', zIndex: 2 }}
+          style={{ position: 'relative', zIndex: 2, display: 'flex', justifyContent: 'center', marginBottom: '2.5rem' }}
         >
           {data.clientLogo && (
-            <Image 
-              src={data.clientLogo} 
-              alt={data.clientName} 
-              width={300}
-              height={300}
-              className={data.theme?.clientLogoRaw ? styles.logoLight : (isLight ? styles.logoLight : styles.logo)} 
-            />
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ type: "spring", stiffness: 100, damping: 15 }}
+              whileHover={{ scale: 1.05, rotate: 3 }}
+              style={{
+                background: 'rgba(255, 255, 255, 0.02)',
+                border: '1.5px solid var(--glass-border, rgba(120, 190, 32, 0.3))',
+                borderRadius: '50%',
+                padding: '1.8rem',
+                boxShadow: '0 0 45px rgba(120, 190, 32, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.02)',
+                backdropFilter: 'blur(10px)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '160px',
+                height: '160px',
+                transition: 'border-color 0.3s, box-shadow 0.3s',
+                cursor: 'pointer'
+              }}
+            >
+              <Image 
+                src={data.clientLogo} 
+                alt={data.clientName} 
+                width={100}
+                height={100}
+                style={{ objectFit: 'contain', width: '100%', height: 'auto' }}
+              />
+            </motion.div>
           )}
         </div>
         
@@ -1300,17 +1334,19 @@ export default function MediaKitView({ data }: { data: ClientData }) {
       </motion.a>
 
       <footer className={styles.footer}>
-        {data.config?.agency !== 'apolograma' && (
-          <motion.div 
-            className={styles.footerDecoration}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-          >
+        <motion.div 
+          className={styles.footerDecoration}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+        >
+          {data.config?.agency === 'apolograma' ? (
+            <Image src="/assets/apolograma-decor.png" alt="Apolograma" className={isLight ? styles.footerDecorationImageLight : styles.footerDecorationImage} width={150} height={150} style={{ filter: 'drop-shadow(0 0 35px rgba(120, 190, 32, 0.3))' }} />
+          ) : (
             <Image src="/assets/puerta-juarez.png" alt="Puerta Juárez" className={isLight ? styles.footerDecorationImageLight : styles.footerDecorationImage} width={150} height={183} />
-          </motion.div>
-        )}
+          )}
+        </motion.div>
         
         <div className={styles.footerContent}>
           <div className={styles.footerAgencyLogos}>
