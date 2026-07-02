@@ -10,7 +10,7 @@
     "primaryColor": "#78be20",
     "fontHeading": "'Geist', 'Inter', sans-serif",
     "fontBody": "'Geist', 'Inter', sans-serif",
-    "fontDisplay": "'Road Rage', cursive",
+    "fontDisplay": "'RoadRageDaFont', sans-serif",
     "fontDisplayStyle": "normal",
     "bgColor": "#0b0c10",
     "textGradient": "linear-gradient(to right, #78be20, #a2e300)",
