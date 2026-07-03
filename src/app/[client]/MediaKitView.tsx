@@ -362,6 +362,7 @@ interface ClientData {
     locale?: string;
     priceSuffix?: string;
     agency?: 'both' | 'apolograma' | 'fn1';
+    ivaPercent?: number;
   };
   campaignDeepDive?: {
     title: string;
@@ -1261,6 +1262,18 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                     {data.config.priceSuffix}
                   </span>
                 )}
+              </div>
+              
+              <div style={{ 
+                fontSize: '1.05rem', 
+                color: 'var(--muted-text)', 
+                opacity: 0.7, 
+                marginTop: '0.5rem', 
+                marginBottom: '1.5rem',
+                fontWeight: 500,
+                textAlign: 'center'
+              }}>
+                {formatPrice(total * (1 + (data.config?.ivaPercent !== undefined ? data.config.ivaPercent : 16) / 100))} con IVA incluido
               </div>
             </>
           )}
