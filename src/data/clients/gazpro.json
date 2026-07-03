@@ -86,7 +86,9 @@
         "services": [
           {
             "name": "Paquete Multicanal Grupo GazPro (Bolsa Flexible)",
-            "price": 90000,
+            "price": 93450,
+            "originalPrice": 133500,
+            "badge": "30% Descuento",
             "description": "Bolsa unificada de productos digitales. El grupo decide libremente cómo asignar cada nota, live y reel entre cualquiera de sus marcas (Gasolineras, EMA, Fundación y Frigostar).",
             "bullets": [
               "10 Notas editoriales en el portal y redes oficiales (Facebook e Instagram) de Frontera Número Uno (a distribuir libremente entre las marcas).",

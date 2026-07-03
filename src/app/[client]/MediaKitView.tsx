@@ -107,6 +107,7 @@ const AnimatedPrice = ({ value, locale = 'es-MX', currency = 'MXN' }: { value: n
 interface Service {
   name: string;
   price: number;
+  originalPrice?: number;
   description: string;
   bullets?: string[];
   image?: string;
@@ -251,7 +252,12 @@ const AccordionCard = ({ service, formatPrice, variants, isOpen, onToggle, isSel
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <div className={styles.servicePrice} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'center' }}>
-            <span>{formatPrice(service.price)}</span>
+            {service.originalPrice && (
+              <span style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.4)', textDecoration: 'line-through', marginBottom: '0.15rem' }}>
+                {formatPrice(service.originalPrice)}
+              </span>
+            )}
+            <span style={{ fontWeight: 700 }}>{formatPrice(service.price)}</span>
             {priceSuffix && <span style={{ fontSize: '0.65rem', color: 'var(--muted-text)', marginTop: '0.1rem', textTransform: 'uppercase', fontWeight: 600 }}>{priceSuffix}</span>}
           </div>
           {isSelectable && (
