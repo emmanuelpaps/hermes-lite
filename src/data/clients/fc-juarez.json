@@ -63,7 +63,7 @@
         "services": [
           {
             "name": "Home & Home móvil",
-            "price": 18000,
+            "price": 10500,
             "description": "Diseño de la interfaz principal de acceso a la boletera (Home) en alta fidelidad, optimizada para escritorio y dispositivos móviles.",
             "image": "/assets/fc-juarez/pilar-home.png",
             "bullets": [
@@ -74,7 +74,7 @@
           },
           {
             "name": "Ticket Section y móvil",
-            "price": 24000,
+            "price": 14000,
             "description": "Desarrollo visual detallado de la sección de selección de asientos y checkout en Figma, tanto en versión desktop como móvil.",
             "image": "/assets/fc-juarez/pilar-tickets.png",
             "bullets": [
@@ -85,7 +85,7 @@
           },
           {
             "name": "Profile Section y móvil",
-            "price": 18000,
+            "price": 10500,
             "description": "Diseño de la sección de perfil de usuario (área privada del aficionado) en Figma, enfocado en la gestión de abonos e historial de compras.",
             "image": "/assets/fc-juarez/pilar-profile.png",
             "bullets": [
