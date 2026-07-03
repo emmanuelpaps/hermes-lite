@@ -418,6 +418,7 @@ interface ClientData {
     mutedText?: string;
     textGradient?: string;
     clientLogoRaw?: boolean;
+    clientLogoStyle?: 'circle' | 'square' | 'raw';
     bgColor?: string;
     surfaceGlass?: string;
     glassBorder?: string;
@@ -608,10 +609,18 @@ export default function MediaKitView({ data }: { data: ClientData }) {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ type: "spring", stiffness: 100, damping: 15 }}
               whileHover={{ scale: 1.05, rotate: 3 }}
-              style={{
+              style={data.theme?.clientLogoStyle === 'raw' || data.theme?.clientLogoRaw ? {
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '160px',
+                height: '160px',
+                cursor: 'pointer',
+                filter: 'drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5))'
+              } : {
                 background: 'rgba(255, 255, 255, 0.02)',
                 border: '1.5px solid var(--glass-border, rgba(120, 190, 32, 0.3))',
-                borderRadius: '50%',
+                borderRadius: data.theme?.clientLogoStyle === 'square' ? '24px' : '50%',
                 padding: '1.8rem',
                 boxShadow: '0 0 45px rgba(120, 190, 32, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.02)',
                 backdropFilter: 'blur(10px)',
@@ -627,9 +636,9 @@ export default function MediaKitView({ data }: { data: ClientData }) {
               <Image 
                 src={data.clientLogo} 
                 alt={data.clientName} 
-                width={100}
-                height={100}
-                style={{ objectFit: 'contain', width: '100%', height: 'auto' }}
+                width={120}
+                height={120}
+                style={{ objectFit: 'contain', width: '100%', height: '100%' }}
               />
             </motion.div>
           )}
