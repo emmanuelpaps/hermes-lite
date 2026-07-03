@@ -26,7 +26,8 @@
     "showEcosystem": false,
     "showAudiences": false,
     "showPricing": true,
-    "disableSelection": false
+    "disableSelection": false,
+    "disableAccordion": true
   },
   "meta": {
     "title": "Propuesta de Difusión Digital | GazPro",
@@ -88,7 +89,7 @@
             "price": 90000,
             "description": "Cobertura comercial integral a través de la red digital e internacional de Frontera Número Uno.",
             "bullets": [
-              "10 Notas editoriales en el portal y redes sociales oficiales de Frontera Número Uno.",
+              "10 Notas editoriales en el portal y redes sociales oficiales (Facebook e Instagram) de Frontera Número Uno.",
               "1 Transmisión en Vivo (Live) desde ubicaciones clave o eventos especiales.",
               "4 Reels / Videos verticales de alta producción y engagement."
             ]
@@ -100,12 +101,12 @@
         "services": [
           {
             "name": "Nota Editorial Adicional (15% Descuento)",
-            "price": 2550,
+            "price": 6375,
             "description": "Cobertura editorial adicional con precio preferencial de cliente recurrente.",
             "bullets": [
               "Redacción periodística profesional adaptada para SEO y buscadores.",
               "Publicación en el portal web y amplificación en las redes sociales de FN1.",
-              "Ahorro del 15% sobre la tarifa regular de lista ($3,000 MXN)."
+              "Ahorro del 15% sobre la tarifa regular de lista ($7,500 MXN)."
             ]
           }
         ]

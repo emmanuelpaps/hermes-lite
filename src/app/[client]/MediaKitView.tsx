@@ -171,6 +171,7 @@ interface AccordionProps {
   onSelect?: () => void;
   priceSuffix?: string;
   selectionType?: 'radio' | 'checkbox';
+  disableAccordion?: boolean;
 }
 
 const bulletContainerVariants: Variants = {
@@ -198,19 +199,20 @@ const bulletItemVariants: Variants = {
   }
 };
 
-const AccordionCard = ({ service, formatPrice, variants, isOpen, onToggle, isSelectable, isSelected, onSelect, priceSuffix, selectionType = 'radio' }: AccordionProps) => {
+const AccordionCard = ({ service, formatPrice, variants, isOpen, onToggle, isSelectable, isSelected, onSelect, priceSuffix, selectionType = 'radio', disableAccordion }: AccordionProps) => {
+  const showOpen = isOpen || disableAccordion;
   return (
     <motion.div 
       layout
-      className={`${styles.serviceItem} ${isOpen ? styles.serviceItemActive : 'glass'}`}
-      onClick={onToggle}
+      className={`${styles.serviceItem} ${showOpen ? styles.serviceItemActive : 'glass'}`}
+      onClick={disableAccordion ? (isSelectable ? onSelect : undefined) : onToggle}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
       variants={variants}
       style={{ 
-        cursor: onToggle ? 'pointer' : 'default',
-        position: 'relative', zIndex: isOpen ? 45 : 1,
+        cursor: disableAccordion ? (isSelectable ? 'pointer' : 'default') : 'pointer',
+        position: 'relative', zIndex: showOpen ? 45 : 1,
         ...(isSelectable && isSelected ? { 
           borderColor: 'var(--primary-color, #4ade80)',
           boxShadow: '0 0 20px rgba(74, 222, 128, 0.15)'
@@ -236,7 +238,7 @@ const AccordionCard = ({ service, formatPrice, variants, isOpen, onToggle, isSel
                 verticalAlign: 'middle'
               }}>{service.badge}</span>
             )}
-            {onToggle && (
+            {!disableAccordion && onToggle && (
               <motion.div 
                 animate={{ rotate: isOpen ? 180 : 0 }}
                 transition={{ duration: 0.3 }}
@@ -281,7 +283,7 @@ const AccordionCard = ({ service, formatPrice, variants, isOpen, onToggle, isSel
       </motion.div>
       
       <AnimatePresence>
-        {isOpen && (
+        {showOpen && (
           <motion.div
             layout
             initial={{ opacity: 0, height: 0 }}
@@ -388,6 +390,7 @@ interface ClientData {
     showPricing?: boolean;
     exclusivePackages?: boolean;
     disableSelection?: boolean;
+    disableAccordion?: boolean;
   };
   storytelling?: {
     narrative?: { title: string; content: string }[];
@@ -1084,6 +1087,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 onSelect={() => toggleServiceSelection(service.name)}
                 selectionType="checkbox"
                 priceSuffix={data.config?.priceSuffix}
+                disableAccordion={data.features?.disableAccordion}
               />
             ))}
           </motion.div>
@@ -1122,6 +1126,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 isSelected={selectedApoIdx === idx}
                 onSelect={() => setSelectedApoIdx(idx)}
                 priceSuffix={data.config?.priceSuffix}
+                disableAccordion={data.features?.disableAccordion}
               />
             ))}
           </motion.div>
@@ -1243,6 +1248,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                     onSelect={() => toggleServiceSelection(service.name)}
                     selectionType="checkbox"
                     priceSuffix={data.config?.priceSuffix}
+                    disableAccordion={data.features?.disableAccordion}
                   />
                 ))}
               </motion.div>
