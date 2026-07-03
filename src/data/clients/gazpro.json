@@ -1,19 +1,19 @@
 {
   "clientName": "GazPro",
-  "clientLogo": "/assets/fn1-logo-stacked.png",
+  "clientLogo": "/assets/gazpro/gazpro-logo.png",
   "industry": "Grupo Empresarial / Energía y Salud",
   "heroText": "Campaña de posicionamiento multicanal en la red digital de Frontera Número Uno. Cobertura editorial, transmisiones en vivo y contenidos de alto impacto para las marcas del grupo.",
   "themeTemplate": "vercel",
   "theme": {
     "mode": "dark",
-    "primary": "#004b93",
-    "primaryColor": "#004b93",
+    "primary": "#ff7f00",
+    "primaryColor": "#ff7f00",
     "fontHeading": "'Geist', 'Inter', sans-serif",
     "fontBody": "'Geist', 'Inter', sans-serif",
-    "bgColor": "#05070f",
+    "bgColor": "#030611",
     "textGradient": "linear-gradient(to right, #004b93, #ff7f00)",
-    "surfaceGlass": "rgba(10, 15, 30, 0.75)",
-    "glassBorder": "rgba(0, 75, 147, 0.25)"
+    "surfaceGlass": "rgba(8, 14, 32, 0.75)",
+    "glassBorder": "rgba(255, 127, 0, 0.2)"
   },
   "config": {
     "currency": "MXN",
@@ -53,15 +53,18 @@
     "pillars": [
       {
         "title": "Gasolineras GazPro",
-        "description": "Difusión de la red de estaciones de servicio, promociones especiales y la adopción de su aplicación móvil de lealtad en la región."
+        "description": "Difusión de la red de estaciones de servicio, promociones especiales y la adopción de su aplicación móvil de lealtad en la región.",
+        "image": "/assets/gazpro/gas-station.jpg"
       },
       {
         "title": "Centro Quirúrgico EMA",
-        "description": "Promoción de infraestructura médica, especialidades de salud y confianza clínica mediante videos explicativos y notas de valor."
+        "description": "Promoción de infraestructura médica, especialidades de salud y confianza clínica mediante videos explicativos y notas de valor.",
+        "image": "/assets/gazpro/ema-lobby.png"
       },
       {
         "title": "Fundación GazPro & Frigostar",
-        "description": "Visibilidad para la labor social comunitaria de la fundación y posicionamiento de productos esenciales en la red digital."
+        "description": "Visibilidad para la labor social comunitaria de la fundación y posicionamiento de productos esenciales en la red digital.",
+        "image": "/assets/gazpro/foundation.png"
       }
     ]
   },
