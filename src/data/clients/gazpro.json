@@ -63,9 +63,14 @@
         "image": "/assets/gazpro/ema-quirofano-3.webp"
       },
       {
-        "title": "Fundación GazPro & Frigostar",
-        "description": "Visibilidad para la labor social comunitaria de la fundación y posicionamiento de productos esenciales en la red digital.",
+        "title": "Fundación GazPro",
+        "description": "Visibilidad para la labor social comunitaria, apoyos alimenticios y programas de impacto en la región de Ciudad Juárez.",
         "image": "/assets/gazpro/foundation.png"
+      },
+      {
+        "title": "Frigostar",
+        "description": "Posicionamiento de la división de almacenamiento en frío, logística refrigerada y distribución de alimentos congelados.",
+        "image": "/assets/gazpro/frigostar.jpg"
       }
     ]
   },
