@@ -398,6 +398,7 @@ interface ClientData {
     disableSelection?: boolean;
     disableAccordion?: boolean;
     pillsLayout?: boolean;
+    hideModularMethodology?: boolean;
   };
   storytelling?: {
     narrative?: { title: string; content: string }[];
@@ -1370,7 +1371,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             {data.packages.subtitle || (isExclusive ? "Total basado en la opción seleccionada:" : (data.packages.blocks && data.packages.blocks.length > 0 && !data.features?.disableSelection ? "Inversión Total del Proyecto" : "Esto es exactamente lo que recibirás cada mes:"))}
           </p>
 
-          {data.packages.blocks && data.packages.blocks.length > 0 && !data.features?.disableSelection && (
+          {data.packages.blocks && data.packages.blocks.length > 0 && !data.features?.disableSelection && !data.features?.hideModularMethodology && (
             <div style={{
               background: "rgba(168, 85, 247, 0.1)", 
               border: "1px solid rgba(168, 85, 247, 0.3)", 

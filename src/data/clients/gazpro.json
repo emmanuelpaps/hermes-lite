@@ -27,7 +27,8 @@
     "showAudiences": false,
     "showPricing": true,
     "disableSelection": false,
-    "disableAccordion": true
+    "disableAccordion": true,
+    "hideModularMethodology": true
   },
   "meta": {
     "title": "Propuesta de Difusión Digital | GazPro",
