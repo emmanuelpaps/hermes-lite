@@ -998,7 +998,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             <InsightCard 
               title="Visualizaciones" 
               value="60.8M" 
-              increase="-17.3%" 
+              increase="" 
               isLight={isLight} 
             />
           </motion.div>
@@ -1006,7 +1006,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             <InsightCard 
               title="Interacciones" 
               value="701.8K" 
-              increase="+2.2%" 
+              increase="" 
               isLight={isLight} 
             />
           </motion.div>
@@ -1014,7 +1014,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             <InsightCard 
               title="Nuevos Seguidores" 
               value="8.9K" 
-              increase="-5.6%" 
+              increase="" 
               isLight={isLight} 
             />
           </motion.div>
@@ -1022,7 +1022,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             <InsightCard 
               title="Contactos por Mensaje" 
               value="569" 
-              increase="-37.4%" 
+              increase="" 
               isLight={isLight} 
             />
           </motion.div>
