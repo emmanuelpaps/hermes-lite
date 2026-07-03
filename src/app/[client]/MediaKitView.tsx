@@ -447,8 +447,9 @@ export default function MediaKitView({ data }: { data: ClientData }) {
     }
     if (data.packages.blocks) {
       data.packages.blocks.forEach(b => {
+        const isBlockOptional = b.name.toLowerCase().includes('opcional') || b.name.toLowerCase().includes('adicional');
         b.services.forEach(s => {
-          initialState[s.name] = !(s.name.includes('(Opcional)') || s.name.includes('(Opcionales)'));
+          initialState[s.name] = !isBlockOptional && !(s.name.includes('(Opcional)') || s.name.includes('(Opcionales)'));
         });
       });
     }
