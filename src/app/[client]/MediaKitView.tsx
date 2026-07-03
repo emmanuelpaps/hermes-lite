@@ -1233,13 +1233,12 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                   gap: '1.25rem', 
                   justifyContent: 'center', 
                   width: '100%',
-                  maxWidth: '960px',
+                  maxWidth: '1200px',
                   margin: '0 auto',
                   padding: '1.5rem 0'
                 }}
               >
                 {block.services.map((service, idx) => {
-                  const isSelected = selectedServices[service.name];
                   const primaryColor = data.theme?.primary || '#ff7f00';
                   return (
                     <motion.div
@@ -1248,51 +1247,36 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.4, delay: idx * 0.05 }}
-                      whileHover={{ scale: 1.03 }}
-                      whileTap={{ scale: 0.98 }}
-                      onClick={() => toggleServiceSelection(service.name)}
                       style={{
-                        background: isSelected ? `rgba(${primaryColor.startsWith('#') ? parseInt(primaryColor.slice(1,3), 16) : 255}, ${primaryColor.startsWith('#') ? parseInt(primaryColor.slice(3,5), 16) : 127}, ${primaryColor.startsWith('#') ? parseInt(primaryColor.slice(5,7), 16) : 0}, 0.08)` : 'rgba(255, 255, 255, 0.02)',
-                        border: `1.5px solid ${isSelected ? primaryColor : 'var(--glass-border, rgba(255, 255, 255, 0.08))'}`,
-                        borderRadius: '50px',
-                        padding: '0.8rem 1.6rem',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '1rem',
-                        cursor: 'pointer',
-                        transition: 'border-color 0.25s, background-color 0.25s, box-shadow 0.25s',
-                        boxShadow: isSelected ? `0 8px 24px rgba(${primaryColor.startsWith('#') ? parseInt(primaryColor.slice(1,3), 16) : 255}, ${primaryColor.startsWith('#') ? parseInt(primaryColor.slice(3,5), 16) : 127}, ${primaryColor.startsWith('#') ? parseInt(primaryColor.slice(5,7), 16) : 0}, 0.15)` : '0 4px 12px rgba(0,0,0,0.15)',
-                        backdropFilter: 'blur(10px)'
+                        background: 'rgba(255, 255, 255, 0.02)',
+                        border: '1.5px solid var(--glass-border, rgba(255, 255, 255, 0.08))',
+                        borderRadius: '20px',
+                        padding: '1.2rem 1.6rem',
+                        flex: '1 1 280px',
+                        maxWidth: '380px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '0.5rem',
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                        backdropFilter: 'blur(10px)',
+                        textAlign: 'left',
+                        boxSizing: 'border-box'
                       }}
                     >
-                      {/* Selection Checkbox */}
-                      <div 
-                        style={{
-                          width: '20px', height: '20px', 
-                          borderRadius: '50%',
-                          border: `2px solid ${isSelected ? primaryColor : 'rgba(255,255,255,0.4)'}`,
-                          display: 'flex', alignItems: 'center', justifyContent: 'center',
-                          background: isSelected ? primaryColor : 'transparent',
-                          transition: 'all 0.2s ease',
-                          flexShrink: 0
-                        }}
-                      >
-                        {isSelected && (
-                          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
-                            <polyline points="20 6 9 17 4 12"></polyline>
-                          </svg>
-                        )}
-                      </div>
-
                       {/* Service Name & Price */}
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        <span style={{ fontSize: '1rem', fontWeight: 500, color: isSelected ? '#fff' : 'rgba(255,255,255,0.85)' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+                        <span style={{ fontSize: '1rem', fontWeight: 600, color: '#fff' }}>
                           {service.name.replace(' (15% Descuento)', '')}
                         </span>
-                        <span style={{ fontSize: '0.95rem', fontWeight: 700, color: primaryColor }}>
+                        <span style={{ fontSize: '1rem', fontWeight: 700, color: primaryColor }}>
                           {formatPrice(service.price)}
                         </span>
                       </div>
+
+                      {/* Brief Description */}
+                      <p style={{ fontSize: '0.85rem', color: 'rgba(255, 255, 255, 0.65)', margin: 0, lineHeight: 1.45 }}>
+                        {service.description}
+                      </p>
                     </motion.div>
                   );
                 })}
