@@ -485,6 +485,28 @@ export default function MediaKitView({ data }: { data: ClientData }) {
   const discountAmount = subtotal * (discountPercent / 100);
   const total = subtotal - discountAmount;
 
+  // Calculate total original subtotal for selected services
+  const selectedOriginalTotal = Object.keys(selectedServices)
+    .filter(name => selectedServices[name])
+    .reduce((sum, name) => {
+      let service = data.packages.fn1?.find(s => s.name === name);
+      if (!service && data.packages.apolograma) {
+        service = data.packages.apolograma.find(s => s.name === name);
+      }
+      if (!service && data.packages.blocks) {
+        for (const block of data.packages.blocks) {
+          const found = block.services.find(s => s.name === name);
+          if (found) {
+            service = found;
+            break;
+          }
+        }
+      }
+      return sum + (service?.originalPrice || service?.price || 0);
+    }, 0);
+
+  const totalSavings = selectedOriginalTotal - subtotal;
+
   const currency = data.config?.currency || "MXN";
   const locale = data.config?.locale || "es-MX";
 
@@ -1405,6 +1427,27 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                     <span style={{ color: "#3b82f6" }}>Difusión y Alcance ({Math.round((fn1Total/subtotal)*100)}%)</span>
                   </div>
                 </>
+              )}
+
+              {totalSavings > 0 && (
+                <div style={{
+                  background: 'rgba(74, 222, 128, 0.08)',
+                  border: '1.5px solid rgba(74, 222, 128, 0.25)',
+                  borderRadius: '30px',
+                  padding: '0.6rem 1.2rem',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  marginTop: '1.5rem',
+                  marginBottom: '1.5rem',
+                  color: '#4ade80',
+                  fontSize: '0.9rem',
+                  fontWeight: 600,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.5px'
+                }}>
+                  ✦ ¡Ahorro de {formatPrice(totalSavings)} (30% Descuento) aplicado!
+                </div>
               )}
 
               <div className={`${styles.totalPrice} text-gradient`} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
