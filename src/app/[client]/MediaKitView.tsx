@@ -994,19 +994,35 @@ export default function MediaKitView({ data }: { data: ClientData }) {
         </div>
         
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', marginTop: '1.5rem' }}>
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.4 }} style={{ height: '100%' }}>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.3 }} style={{ height: '100%' }}>
             <InsightCard 
               title="Visualizaciones" 
-              value="70.0M" 
-              increase="50.1%" 
+              value="60.8M" 
+              increase="-17.3%" 
+              isLight={isLight} 
+            />
+          </motion.div>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.4 }} style={{ height: '100%' }}>
+            <InsightCard 
+              title="Interacciones" 
+              value="701.8K" 
+              increase="+2.2%" 
               isLight={isLight} 
             />
           </motion.div>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.5 }} style={{ height: '100%' }}>
             <InsightCard 
-              title="Interacciones" 
-              value="650.5K" 
-              increase="41%" 
+              title="Nuevos Seguidores" 
+              value="8.9K" 
+              increase="-5.6%" 
+              isLight={isLight} 
+            />
+          </motion.div>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.6 }} style={{ height: '100%' }}>
+            <InsightCard 
+              title="Contactos por Mensaje" 
+              value="569" 
+              increase="-37.4%" 
               isLight={isLight} 
             />
           </motion.div>

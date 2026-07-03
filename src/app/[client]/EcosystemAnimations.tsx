@@ -298,12 +298,24 @@ export const InsightCard = ({ title, value, increase, isLight }: { title: string
       <div style={{ fontSize: '1.1rem', fontWeight: 600, color: isLight ? '#333' : '#ccc' }}>{title}</div>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.75rem', marginTop: '2rem' }}>
         <div style={{ fontSize: '2.5rem', fontWeight: 800, color: isLight ? '#111' : '#fff', lineHeight: 1 }}>{value}</div>
-        <div style={{ color: '#10b981', fontSize: '1rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 19V5M5 12l7-7 7 7"/>
-          </svg>
-          {increase}
-        </div>
+        {increase && (
+          <div style={{ color: increase.startsWith('-') ? '#ef4444' : '#10b981', fontSize: '1rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <svg 
+              width="14" 
+              height="14" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="3" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+              style={{ transform: increase.startsWith('-') ? 'rotate(180deg)' : 'none' }}
+            >
+              <path d="M12 19V5M5 12l7-7 7 7"/>
+            </svg>
+            {increase.replace('+', '').replace('-', '').replace('%', '')}%
+          </div>
+        )}
       </div>
     </div>
   );
