@@ -641,8 +641,8 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                     <Image 
                       src={data.clientLogo} 
                       alt={data.clientName} 
-                      width={120}
-                      height={120}
+                      width={180}
+                      height={180}
                       style={{ objectFit: 'contain', width: '100%', height: '100%' }}
                     />
                   </div>
@@ -824,7 +824,10 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                     <Image src={pillar.image} alt={pillar.title} className={styles.pillarImage} width={509} height={380} />
                   )
                 )}
-                <div className={styles.pillarContent}>
+                <div 
+                  className={styles.pillarContent}
+                  style={{ borderLeft: `4px solid ${data.theme?.primary || '#8a2be2'}` }}
+                >
                   <h3>{pillar.title}</h3>
                   <p>{pillar.description}</p>
                 </div>
