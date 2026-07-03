@@ -418,7 +418,7 @@ interface ClientData {
     mutedText?: string;
     textGradient?: string;
     clientLogoRaw?: boolean;
-    clientLogoStyle?: 'circle' | 'square' | 'raw';
+    clientLogoStyle?: 'circle' | 'square' | 'raw' | 'split';
     bgColor?: string;
     surfaceGlass?: string;
     glassBorder?: string;
@@ -599,74 +599,143 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             />
           </>
         )}
-        <div 
-          className={styles.logoContainer}
-          style={{ position: 'relative', zIndex: 2, display: 'flex', justifyContent: 'center', marginBottom: '2.5rem' }}
-        >
-          {data.clientLogo && (
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ type: "spring", stiffness: 100, damping: 15 }}
-              whileHover={{ scale: 1.05, rotate: 3 }}
-              style={data.theme?.clientLogoStyle === 'raw' || data.theme?.clientLogoRaw ? {
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '160px',
-                height: '160px',
-                cursor: 'pointer',
-                filter: 'drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5))'
-              } : {
-                background: 'rgba(255, 255, 255, 0.02)',
-                border: '1.5px solid var(--glass-border, rgba(120, 190, 32, 0.3))',
-                borderRadius: data.theme?.clientLogoStyle === 'square' ? '24px' : '50%',
-                padding: '1.8rem',
-                boxShadow: '0 0 45px rgba(120, 190, 32, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.02)',
-                backdropFilter: 'blur(10px)',
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '160px',
-                height: '160px',
-                transition: 'border-color 0.3s, box-shadow 0.3s',
-                cursor: 'pointer'
+        {data.theme?.clientLogoStyle === 'split' ? (
+          <div className={styles.heroSplitContent}>
+            {/* Left Column: Headings */}
+            <div className={styles.heroLeft}>
+              <h1 
+                className={`${styles.heroTitle} text-gradient`}
+                style={{ 
+                  margin: 0,
+                  textAlign: 'left',
+                  filter: 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.95))'
+                }}
+              >
+                {data.hero?.headline || data.heroTitle || `Propuesta Estratégica para ${data.clientName}`}
+              </h1>
+              <p 
+                className={styles.heroSubtitle}
+                style={{ 
+                  margin: 0,
+                  textAlign: 'left',
+                  color: '#ffffff',
+                  textShadow: '0 2px 8px rgba(0, 0, 0, 0.95)',
+                  fontWeight: 500
+                }}
+              >
+                {data.hero?.subheadline || data.heroText}
+              </p>
+            </div>
+
+            {/* Right Column: Metadata Card */}
+            <div className={styles.heroRight}>
+              {data.clientLogo && (
+                <motion.div
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ type: "spring", stiffness: 100, damping: 15 }}
+                  whileHover={{ scale: 1.02 }}
+                  className={styles.heroMetaCard}
+                >
+                  <div className={styles.metaCardLogo}>
+                    <Image 
+                      src={data.clientLogo} 
+                      alt={data.clientName} 
+                      width={120}
+                      height={120}
+                      style={{ objectFit: 'contain', width: '100%', height: '100%' }}
+                    />
+                  </div>
+                  <div className={styles.metaCardDetails}>
+                    <div className={styles.metaCardRow}>
+                      <span>Cliente:</span>
+                      <span className={styles.metaCardValue}>{data.clientName}</span>
+                    </div>
+                    <div className={styles.metaCardRow}>
+                      <span>Fecha:</span>
+                      <span className={styles.metaCardValue}>Julio 2026</span>
+                    </div>
+                    <div className={styles.metaCardRow}>
+                      <span>Propuesta:</span>
+                      <span className={styles.metaCardValuePrimary}>Digital & PR</span>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </div>
+          </div>
+        ) : (
+          <>
+            <div 
+              className={styles.logoContainer}
+              style={{ position: 'relative', zIndex: 2, display: 'flex', justifyContent: 'center', marginBottom: '2.5rem' }}
+            >
+              {data.clientLogo && (
+                <motion.div
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ type: "spring", stiffness: 100, damping: 15 }}
+                  whileHover={{ scale: 1.05, rotate: 3 }}
+                  style={data.theme?.clientLogoStyle === 'raw' || data.theme?.clientLogoRaw ? {
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: '160px',
+                    height: '160px',
+                    cursor: 'pointer',
+                    filter: 'drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5))'
+                  } : {
+                    background: 'rgba(255, 255, 255, 0.02)',
+                    border: '1.5px solid var(--glass-border, rgba(120, 190, 32, 0.3))',
+                    borderRadius: data.theme?.clientLogoStyle === 'square' ? '24px' : '50%',
+                    padding: '1.8rem',
+                    boxShadow: '0 0 45px rgba(120, 190, 32, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.02)',
+                    backdropFilter: 'blur(10px)',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: '160px',
+                    height: '160px',
+                    transition: 'border-color 0.3s, box-shadow 0.3s',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <Image 
+                    src={data.clientLogo} 
+                    alt={data.clientName} 
+                    width={120}
+                    height={120}
+                    style={{ objectFit: 'contain', width: '100%', height: '100%' }}
+                  />
+                </motion.div>
+              )}
+            </div>
+            
+            <h1 
+              className={`${styles.heroTitle} text-gradient`}
+              style={{ 
+                position: 'relative', 
+                zIndex: 2,
+                filter: 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.95))'
               }}
             >
-              <Image 
-                src={data.clientLogo} 
-                alt={data.clientName} 
-                width={120}
-                height={120}
-                style={{ objectFit: 'contain', width: '100%', height: '100%' }}
-              />
-            </motion.div>
-          )}
-        </div>
-        
-        <h1 
-          className={`${styles.heroTitle} text-gradient`}
-          style={{ 
-            position: 'relative', 
-            zIndex: 2,
-            filter: 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.95))'
-          }}
-        >
-          {data.hero?.headline || data.heroTitle || `Propuesta Estratégica para ${data.clientName}`}
-        </h1>
-        
-        <p 
-          className={styles.heroSubtitle}
-          style={{ 
-            position: 'relative', 
-            zIndex: 2,
-            color: '#ffffff',
-            textShadow: '0 2px 8px rgba(0, 0, 0, 0.95)',
-            fontWeight: 500
-          }}
-        >
-          {data.hero?.subheadline || data.heroText}
-        </p>
+              {data.hero?.headline || data.heroTitle || `Propuesta Estratégica para ${data.clientName}`}
+            </h1>
+            
+            <p 
+              className={styles.heroSubtitle}
+              style={{ 
+                position: 'relative', 
+                zIndex: 2,
+                color: '#ffffff',
+                textShadow: '0 2px 8px rgba(0, 0, 0, 0.95)',
+                fontWeight: 500
+              }}
+            >
+              {data.hero?.subheadline || data.heroText}
+            </p>
+          </>
+        )}
       </section>
 
       {/* Brand Divider */}

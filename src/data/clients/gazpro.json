@@ -14,7 +14,7 @@
     "textGradient": "linear-gradient(to right, #004b93, #ff7f00)",
     "surfaceGlass": "rgba(8, 14, 32, 0.75)",
     "glassBorder": "rgba(255, 127, 0, 0.2)",
-    "clientLogoStyle": "raw"
+    "clientLogoStyle": "split"
   },
   "config": {
     "currency": "MXN",
