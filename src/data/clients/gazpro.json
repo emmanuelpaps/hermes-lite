@@ -2,7 +2,7 @@
   "clientName": "GazPro",
   "clientLogo": "/assets/gazpro/grupo-gazpro-logo.png",
   "industry": "Grupo Empresarial / Energía y Salud",
-  "heroText": "Campaña de posicionamiento multicanal en la red digital de Frontera Número Uno. Cobertura editorial, transmisiones en vivo y contenidos de alto impacto para las marcas del grupo.",
+  "heroText": "Paquete de cobertura digital integral en la red de Frontera Número Uno. El grupo adquiere una bolsa unificada de productos digitales y decide libremente cómo distribuirlos entre sus marcas (Gasolineras, EMA, Fundación y Frigostar).",
   "themeTemplate": "vercel",
   "theme": {
     "mode": "dark",
@@ -31,11 +31,11 @@
   },
   "meta": {
     "title": "Propuesta de Difusión Digital | GazPro",
-    "description": "Propuesta comercial de difusión digital multicanal en la plataforma de Frontera Número Uno.",
+    "description": "Propuesta comercial de difusión digital corporativa y flexible en la plataforma de Frontera Número Uno.",
     "ogImage": "/assets/fn1-logo-stacked.png"
   },
   "hero": {
-    "headline": "Estrategia de Difusión Multicanal GazPro",
+    "headline": "Paquete de Difusión Corporativa Grupo GazPro",
     "subheadline": "Propuesta Comercial de Cobertura y PR | Frontera Número Uno",
     "backgroundImage": "",
     "backgroundVideo": ""
@@ -44,14 +44,14 @@
     "narrative": [
       {
         "title": "La Red de Impacto Local",
-        "content": "El Grupo GazPro cuenta con una presencia corporativa robusta en la región norte. A través de este paquete de difusión en Frontera Número Uno, conectaremos de manera directa y orgánica sus principales unidades de negocio—como Gasolineras Gazpro y el Centro Quirúrgico EMA—con una audiencia activa de más de 460,000 seguidores en Ciudad Juárez y El Paso."
+        "content": "El Grupo GazPro cuenta con una presencia corporativa robusta en la región norte. A través de este paquete de difusión unificado en Frontera Número Uno, el grupo adquiere una bolsa de impactos digitales para posicionar de manera flexible sus cuatro unidades de negocio—Gasolineras GazPro, Centro Quirúrgico EMA, Fundación GazPro y Frigostar—conectando de manera orgánica con una audiencia activa de más de 460,000 seguidores en Ciudad Juárez y El Paso."
       },
       {
-        "title": "Flexibilidad y Distribución de Cobertura",
-        "content": "La estrategia está diseñada para dar flexibilidad total al grupo. El paquete de cobertura contratado puede ser distribuido libremente entre sus marcas (Gasolineras, EMA, Fundación y Frigostar) a lo largo del periodo de campaña, permitiendo enfocar los esfuerzos en las temporalidades y marcas prioritarias."
+        "title": "Bolsa Flexible de Cobertura",
+        "content": "Este paquete corporativo funciona como una bolsa unificada de contenidos (notas, transmisiones en vivo y reels). El grupo tiene absoluta libertad y flexibilidad para decidir qué porcentaje de la cobertura destinar a cada una de sus marcas (Gasolineras, EMA, Fundación o Frigostar) en el momento en que lo requiera durante la campaña."
       }
     ],
-    "challenge": "Posicionar los servicios del Grupo GazPro y sus unidades de negocio clave mediante contenidos dinámicos de alto impacto y notas periodísticas de relaciones públicas en la red digital de Frontera Número Uno.",
+    "challenge": "Desplegar un paquete corporativo de difusión digital flexible en la red de Frontera Número Uno, permitiendo al grupo distribuir estratégicamente notas, lives y reels entre sus diferentes marcas según sus prioridades comerciales.",
     "pillars": [
       {
         "title": "Gasolineras GazPro",
@@ -85,13 +85,13 @@
         "name": "Paquete de Difusión Comercial",
         "services": [
           {
-            "name": "Paquete Multicanal GazPro & EMA",
+            "name": "Paquete Multicanal Grupo GazPro (Bolsa Flexible)",
             "price": 90000,
-            "description": "Cobertura comercial integral a través de la red digital e internacional de Frontera Número Uno.",
+            "description": "Bolsa unificada de productos digitales. El grupo decide libremente cómo asignar cada nota, live y reel entre cualquiera de sus marcas (Gasolineras, EMA, Fundación y Frigostar).",
             "bullets": [
-              "10 Notas editoriales en el portal y redes sociales oficiales (Facebook e Instagram) de Frontera Número Uno.",
-              "1 Transmisión en Vivo (Live) desde ubicaciones clave o eventos especiales.",
-              "4 Reels / Videos verticales de alta producción y engagement."
+              "10 Notas editoriales en el portal y redes oficiales (Facebook e Instagram) de Frontera Número Uno (a distribuir libremente entre las marcas).",
+              "1 Transmisión en Vivo (Live) desde la ubicación de la marca que el grupo elija.",
+              "4 Reels / Videos verticales de alta producción y engagement (aplicables a cualquiera de las marcas del grupo)."
             ]
           }
         ]
