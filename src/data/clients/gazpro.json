@@ -24,7 +24,7 @@
   },
   "features": {
     "showEcosystem": false,
-    "showAudiences": false,
+    "showAudiences": true,
     "showPricing": true,
     "disableSelection": false,
     "disableAccordion": true,
