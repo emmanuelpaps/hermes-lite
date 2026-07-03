@@ -971,9 +971,9 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             <PremiumAudienceCard
               platform="facebook"
               title="The Millennials"
-              followers={391}
+              followers={406.6}
               ageRange="25-44 años"
-              agePercent={70}
+              agePercent={68}
               juarezPercent={72}
               elPasoPercent={18}
               isLight={isLight}
@@ -983,7 +983,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             <PremiumAudienceCard
               platform="instagram"
               title="The Centennials"
-              followers={69}
+              followers={69.8}
               ageRange="18-34 años"
               agePercent={65}
               juarezPercent={63}

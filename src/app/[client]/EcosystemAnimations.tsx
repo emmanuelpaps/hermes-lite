@@ -227,7 +227,7 @@ export const PremiumAudienceCard = ({
 
         <div style={{ marginBottom: '2.5rem' }}>
           <div style={{ fontSize: '4rem', fontWeight: 900, lineHeight: 1, letterSpacing: '-2px', color: isLight ? '#111' : '#fff' }}>
-            <AnimatedCounter from={0} to={followers} duration={2} formatter={(v) => Math.floor(v) + 'K'} />
+            <AnimatedCounter from={0} to={followers} duration={2} formatter={(v) => v.toFixed(1).replace('.0', '') + 'K'} />
           </div>
           <div style={{ fontSize: '0.9rem', opacity: 0.6, marginTop: '0.5rem', fontWeight: 500 }}>Seguidores Activos</div>
         </div>
