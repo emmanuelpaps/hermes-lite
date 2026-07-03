@@ -2,7 +2,7 @@
   "clientName": "GazPro",
   "clientLogo": "/assets/gazpro/grupo-gazpro-logo.png",
   "industry": "Grupo Empresarial / Energía y Salud",
-  "heroText": "Paquete de cobertura digital integral en la red de Frontera Número Uno. El grupo adquiere una bolsa unificada de productos digitales y decide libremente cómo distribuirlos entre sus marcas (Gasolineras, EMA, Fundación y Frigostar).",
+  "heroText": "Campaña unificada de relaciones públicas y contenidos orgánicos centrada en humanizar las marcas del Grupo GazPro. Una bolsa flexible para contar las historias de tu equipo, despachadores y especialistas médicos en la plataforma de Frontera Número Uno.",
   "themeTemplate": "vercel",
   "theme": {
     "mode": "dark",
@@ -44,34 +44,34 @@
   "storytelling": {
     "narrative": [
       {
-        "title": "La Red de Impacto Local",
-        "content": "El Grupo GazPro cuenta con una presencia corporativa robusta en la región norte. A través de este paquete de difusión unificado en Frontera Número Uno, el grupo adquiere una bolsa de impactos digitales para posicionar de manera flexible sus cuatro unidades de negocio—Gasolineras GazPro, Centro Quirúrgico EMA, Fundación GazPro y Frigostar—conectando de manera orgánica con una audiencia activa de más de 460,000 seguidores en Ciudad Juárez y El Paso."
+        "title": "Humanización y Narrativa de Valor",
+        "content": "El núcleo de esta campaña es humanizar al Grupo GazPro. A través de la red digital de Frontera Número Uno, daremos voz a quienes construyen la marca día a día: desde los despachadores de las gasolineras que saludan a los conductores locales, hasta las historias del equipo clínico y especialistas médicos del Centro Quirúrgico EMA. Conectaremos de manera orgánica con los más de 460,000 seguidores de la región mediante relatos auténticos que generen confianza y empatía."
       },
       {
         "title": "Bolsa Flexible de Cobertura",
-        "content": "Este paquete corporativo funciona como una bolsa unificada de contenidos (notas, transmisiones en vivo y reels). El grupo tiene absoluta libertad y flexibilidad para decidir qué porcentaje de la cobertura destinar a cada una de sus marcas (Gasolineras, EMA, Fundación o Frigostar) en el momento en que lo requiera durante la campaña."
+        "content": "Este paquete corporativo funciona como una bolsa unificada de contenidos (notas, transmisiones en vivo y reels). El grupo tiene absoluta libertad y flexibilidad para decidir qué porcentaje de la cobertura destinar a cada una de sus marcas (Gasolineras, EMA, Fundación o Frigostar) en el momento en que lo requiera durante la campaña, adaptándose a las necesidades de comunicación de cada división."
       }
     ],
-    "challenge": "Desplegar un paquete corporativo de difusión digital flexible en la red de Frontera Número Uno, permitiendo al grupo distribuir estratégicamente notas, lives y reels entre sus diferentes marcas según sus prioridades comerciales.",
+    "challenge": "Humanizar orgánicamente al Grupo GazPro y sus marcas a través de contenidos de valor y narrativas reales centradas en su equipo humano, especialistas y el impacto social y logístico que aportan a la comunidad.",
     "pillars": [
       {
         "title": "Gasolineras GazPro",
-        "description": "Difusión de la red de estaciones de servicio, promociones especiales y la adopción de su aplicación móvil de lealtad en la región.",
+        "description": "Humanización de la marca a través de historias de valor de sus despachadores y colaboradores, conectando emocionalmente con los conductores locales mientras promovemos la red de estaciones y su app.",
         "image": "/assets/gazpro/gas-station.jpg"
       },
       {
         "title": "Centro Quirúrgico EMA",
-        "description": "Promoción de infraestructura médica, especialidades de salud y confianza clínica mediante videos explicativos y notas de valor.",
+        "description": "Historias humanas y testimonios de sus especialistas médicos y del equipo clínico de EMA, transmitiendo calidez, confianza y excelencia en salud mediante contenidos orgánicos de alto valor.",
         "image": "/assets/gazpro/ema-quirofano-3.webp"
       },
       {
         "title": "Fundación GazPro",
-        "description": "Visibilidad para la labor social comunitaria, apoyos alimenticios y programas de impacto en la región de Ciudad Juárez.",
+        "description": "Historias de impacto social contadas desde las voces de los beneficiarios de los apoyos alimenticios y programas comunitarios de la fundación, visibilizando el corazón social del grupo.",
         "image": "/assets/gazpro/foundation.png"
       },
       {
         "title": "Frigostar",
-        "description": "Posicionamiento de la división de almacenamiento en frío, logística refrigerada y distribución de alimentos congelados.",
+        "description": "Visibilización del equipo humano detrás de la cadena de frío, la logística de alimentos y la distribución que abastece a la región, mostrando el compromiso y esfuerzo diario.",
         "image": "/assets/gazpro/frigostar.jpg"
       }
     ]
@@ -127,7 +127,7 @@
             "price": 11050,
             "description": "Producción de video vertical de alta calidad para Instagram Reels y Facebook Reels.",
             "bullets": [
-              "Edición dinámica, musicalización y guion adaptado a audiencias móviles.",
+              "Edición dinámica, musicalización y guion adaptado a audiences móviles.",
               "Publicación y distribución orgánica cruzada en plataformas de meta de FN1.",
               "Ahorro del 15% sobre la tarifa regular de lista ($13,000 MXN)."
             ]
