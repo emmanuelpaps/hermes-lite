@@ -1031,8 +1031,27 @@ export default function SuperetteClient() {
                     </div>
                   </div>
 
-                  <div className="package-card-price" style={{ fontFamily: titleFont.style.fontFamily }}>
-                    $45,500 <span>MXN + IVA / mes</span>
+                  <div className="package-card-price" style={{ fontFamily: titleFont.style.fontFamily, display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                      <span style={{ textDecoration: 'line-through', fontSize: '1.05rem', color: '#94a3b8', fontWeight: 600 }}>
+                        $45,500 MXN
+                      </span>
+                      <span style={{ 
+                        background: 'rgba(74, 222, 128, 0.15)', 
+                        color: '#16a34a', 
+                        fontSize: '0.75rem', 
+                        fontWeight: 700, 
+                        padding: '2px 8px', 
+                        borderRadius: '30px', 
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.5px'
+                      }}>
+                        10% DESCUENTO
+                      </span>
+                    </div>
+                    <div>
+                      $40,950 <span style={{ fontSize: '0.95rem', color: '#475569', fontWeight: 500 }}>MXN + IVA / mes</span>
+                    </div>
                   </div>
                 </div>
 
@@ -1064,8 +1083,27 @@ export default function SuperetteClient() {
                     </div>
                   </div>
 
-                  <div className="package-card-price" style={{ color: theme.superetteRed, fontFamily: titleFont.style.fontFamily }}>
-                    $82,000 <span>MXN + IVA / mes</span>
+                  <div className="package-card-price" style={{ color: theme.superetteRed, fontFamily: titleFont.style.fontFamily, display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                      <span style={{ textDecoration: 'line-through', fontSize: '1.05rem', color: '#94a3b8', fontWeight: 600 }}>
+                        $82,000 MXN
+                      </span>
+                      <span style={{ 
+                        background: 'rgba(74, 222, 128, 0.15)', 
+                        color: '#16a34a', 
+                        fontSize: '0.75rem', 
+                        fontWeight: 700, 
+                        padding: '2px 8px', 
+                        borderRadius: '30px', 
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.5px'
+                      }}>
+                        15% DESCUENTO
+                      </span>
+                    </div>
+                    <div>
+                      $69,700 <span style={{ fontSize: '0.95rem', color: '#475569', fontWeight: 500 }}>MXN + IVA / mes</span>
+                    </div>
                   </div>
                 </div>
               </div>
