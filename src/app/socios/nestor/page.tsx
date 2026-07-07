@@ -405,10 +405,10 @@ export default function NestorComisionesPage() {
                 </tr>
                 <tr>
                   <td>Transmisión en Vivo</td>
-                  <td className={styles.priceCol}>$5,500.00</td>
-                  <td className={styles.commissionCol}>$1,100.00</td>
-                  <td className={styles.commissionCol}>$1,375.00</td>
-                  <td className={styles.commissionCol}>$1,650.00</td>
+                  <td className={styles.priceCol}>$6,500.00</td>
+                  <td className={styles.commissionCol}>$1,300.00</td>
+                  <td className={styles.commissionCol}>$1,625.00</td>
+                  <td className={styles.commissionCol}>$1,950.00</td>
                 </tr>
                 <tr>
                   <td>Publicación Solo FB</td>
@@ -487,9 +487,9 @@ export default function NestorComisionesPage() {
                 </tr>
                 <tr>
                   <td>Landing Page</td>
-                  <td className={styles.priceCol}>$15,000.00</td>
+                  <td className={styles.priceCol}>$18,000.00</td>
                   <td style={{ color: "#94a3b8" }}>20%</td>
-                  <td className={styles.commissionCol}>$3,000.00</td>
+                  <td className={styles.commissionCol}>$3,600.00</td>
                 </tr>
                 <tr>
                   <td>Sitio Corporativo</td>
