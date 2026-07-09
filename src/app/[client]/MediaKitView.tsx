@@ -371,6 +371,8 @@ interface ClientData {
     priceSuffix?: string;
     agency?: 'both' | 'apolograma' | 'fn1';
     ivaPercent?: number;
+    exchangeRate?: number;
+    enableCurrencyToggle?: boolean;
   };
   campaignDeepDive?: {
     title: string;
@@ -507,11 +509,24 @@ export default function MediaKitView({ data }: { data: ClientData }) {
 
   const totalSavings = selectedOriginalTotal - subtotal;
 
+  const [selectedCurrency, setSelectedCurrency] = useState(data.config?.currency || "MXN");
+  const exchangeRate = data.config?.exchangeRate || 20;
+
+  const convertPrice = (num: number) => {
+    if (data.config?.enableCurrencyToggle && selectedCurrency === "USD") {
+      return num / exchangeRate;
+    }
+    return num;
+  };
+
   const currency = data.config?.currency || "MXN";
   const locale = data.config?.locale || "es-MX";
 
   const formatPrice = (num: number) => {
-    return new Intl.NumberFormat(locale, { style: 'currency', currency: currency }).format(num);
+    const converted = convertPrice(num);
+    const curr = data.config?.enableCurrencyToggle ? selectedCurrency : currency;
+    const loc = curr === "USD" ? "en-US" : locale;
+    return new Intl.NumberFormat(loc, { style: 'currency', currency: curr }).format(converted);
   };
 
   const fadeUp: Variants = {
@@ -1409,6 +1424,47 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             {data.packages.subtitle || (isExclusive ? "Total basado en la opción seleccionada:" : (data.packages.blocks && data.packages.blocks.length > 0 && !data.features?.disableSelection ? "Inversión Total del Proyecto" : "Esto es exactamente lo que recibirás cada mes:"))}
           </p>
 
+          {data.config?.enableCurrencyToggle && (
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '0.75rem', marginBottom: '2rem', marginTop: '1rem' }}>
+              <button 
+                onClick={() => setSelectedCurrency("MXN")}
+                style={{
+                  background: selectedCurrency === "MXN" ? 'var(--primary-color)' : 'transparent',
+                  color: selectedCurrency === "MXN" ? '#fff' : 'var(--text-color)',
+                  border: '1.5px solid var(--primary-color)',
+                  borderRadius: '30px',
+                  padding: '0.4rem 1.2rem',
+                  fontSize: '0.85rem',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  textTransform: 'uppercase',
+                  boxShadow: selectedCurrency === "MXN" ? '0 4px 12px rgba(0,0,0,0.1)' : 'none'
+                }}
+              >
+                MXN (Pesos)
+              </button>
+              <button 
+                onClick={() => setSelectedCurrency("USD")}
+                style={{
+                  background: selectedCurrency === "USD" ? 'var(--primary-color)' : 'transparent',
+                  color: selectedCurrency === "USD" ? '#fff' : 'var(--text-color)',
+                  border: '1.5px solid var(--primary-color)',
+                  borderRadius: '30px',
+                  padding: '0.4rem 1.2rem',
+                  fontSize: '0.85rem',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  textTransform: 'uppercase',
+                  boxShadow: selectedCurrency === "USD" ? '0 4px 12px rgba(0,0,0,0.1)' : 'none'
+                }}
+              >
+                USD (Dólares)
+              </button>
+            </div>
+          )}
+
           {data.packages.blocks && data.packages.blocks.length > 0 && !data.features?.disableSelection && !data.features?.hideModularMethodology && (
             <div style={{
               background: "rgba(168, 85, 247, 0.1)", 
@@ -1467,7 +1523,11 @@ export default function MediaKitView({ data }: { data: ClientData }) {
               )}
 
               <div className={`${styles.totalPrice} text-gradient`} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <AnimatedPrice value={total} locale={locale} currency={currency} />
+                <AnimatedPrice 
+                  value={data.config?.enableCurrencyToggle ? convertPrice(total) : total} 
+                  locale={data.config?.enableCurrencyToggle && selectedCurrency === "USD" ? "en-US" : locale} 
+                  currency={data.config?.enableCurrencyToggle ? selectedCurrency : currency} 
+                />
                 {data.config?.priceSuffix && (
                   <span style={{ fontSize: '1rem', color: 'var(--muted-text)', marginTop: '0.5rem', fontWeight: 600, textTransform: 'uppercase' }}>
                     {data.config.priceSuffix}

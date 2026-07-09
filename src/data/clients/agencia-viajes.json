@@ -1,0 +1,180 @@
+{
+  "clientName": "Agencia de Viajes",
+  "clientLogo": "",
+  "industry": "Turismo / Viajes Grupales",
+  "heroText": "Ecosistema digital completo para transformar la experiencia de cotización y ventas de tu agencia. Combinamos desarrollo web a la medida, un agente de IA interactivo de última generación y campañas masivas de difusión en la red de Frontera Número Uno.",
+  "themeTemplate": "vercel",
+  "theme": {
+    "mode": "light",
+    "primary": "#0066cc",
+    "primaryColor": "#0066cc",
+    "fontHeading": "'Geist', 'Inter', sans-serif",
+    "fontBody": "'Geist', 'Inter', sans-serif",
+    "bgColor": "#f8fafc",
+    "textGradient": "linear-gradient(to right, #0066cc, #10b981)",
+    "surfaceGlass": "rgba(255, 255, 255, 0.8)",
+    "glassBorder": "rgba(0, 102, 204, 0.15)",
+    "clientLogoStyle": "split"
+  },
+  "config": {
+    "currency": "MXN",
+    "locale": "es-MX",
+    "priceSuffix": "INVERSIÓN + IVA",
+    "enableCurrencyToggle": true,
+    "exchangeRate": 20
+  },
+  "features": {
+    "showEcosystem": false,
+    "showAudiences": false,
+    "showPricing": true,
+    "disableSelection": false,
+    "disableAccordion": true,
+    "hideModularMethodology": false
+  },
+  "meta": {
+    "title": "Propuesta Web, IA y PR | Agencia de Viajes",
+    "description": "Propuesta integrada de desarrollo de portal web, agente de IA conversacional y campaña de co-marketing con Frontera Número Uno.",
+    "ogImage": "/assets/fn1-logo-stacked.png"
+  },
+  "hero": {
+    "headline": "Propuesta Ejecutiva de Ecosistema Digital",
+    "subheadline": "Desarrollo de Software, IA y Campañas de Difusión | Apolograma & Frontera Número Uno",
+    "backgroundImage": "",
+    "backgroundVideo": ""
+  },
+  "storytelling": {
+    "narrative": [
+      {
+        "title": "Software de Alta Conversión",
+        "content": "Para una agencia de viajes grupal, la navegación debe ser visualmente inspiradora y simple. Desarrollamos un sitio web moderno que carga a la velocidad de la luz y organiza tus destinos de forma elegante, reduciendo la fricción y facilitando los apartados."
+      },
+      {
+        "title": "Asesoría de IA Inteligente",
+        "content": "Tu agente de IA no es solo un asistente de chat: es un cerrador experto que conoce a la perfección los itinerarios de viaje a Europa, Asia y EUA. Atiende dudas de equipaje, escalas y hoteles, acompañando al usuario y convenciéndolo en tiempo real de tomar el viaje."
+      },
+      {
+        "title": "Tracción de Leads Inmediata",
+        "content": "Un sitio web e IA son inútiles sin tráfico. Por ello, integramos de forma nativa los paquetes de co-marketing con la red de Frontera Número Uno para inyectar prospectos locales altamente calificados desde el primer día."
+      }
+    ],
+    "challenge": "Estructurar e integrar una plataforma web moderna con un asesor inteligente de IA capaz de automatizar la atención turística y el apartado de viajes grupales, complementado con campañas de difusión masiva.",
+    "pillars": [
+      {
+        "title": "Diseño Web Turístico UI/UX",
+        "description": "Diseño de interfaz optimizado para catálogos de viajes, enfocado en mostrar imágenes inmersivas de los itinerarios y capturar datos rápido.",
+        "image": ""
+      },
+      {
+        "title": "Agente de IA Consultivo",
+        "description": "Widget conversacional que responde dudas de itinerarios, calcula cotizaciones y genera enlaces de pago directos.",
+        "image": ""
+      },
+      {
+        "title": "Difusión Frontera",
+        "description": "Notas editoriales y cobertura de video en vivo para posicionar tus salidas grupales en Juárez y El Paso.",
+        "image": ""
+      }
+    ]
+  },
+  "packages": {
+    "title": "Propuesta Modular",
+    "subtitle": "Selecciona la combinación de software, interacción de IA y campaña de promoción para armar tu paquete corporativo:",
+    "fn1": [],
+    "apolograma": [],
+    "blocks": [
+      {
+        "name": "Fase 1: Sitio Web e Infraestructura de Software (Apolograma)",
+        "services": [
+          {
+            "name": "Opción A: Sitio Web Corporativo + Asesor de IA Consultivo (Base)",
+            "price": 48000,
+            "description": "Desarrollo de sitio web moderno e intuitivo para presentar los viajes grupales de la agencia. Incluye el Widget de IA flotante entrenado con itinerarios y políticas fijas.",
+            "bullets": [
+              "Diseño UI/UX responsivo a la medida de la marca (compatible con móviles, tablets y PC).",
+              "Panel de administración autogestionable para actualizar destinos y fotos.",
+              "Widget de IA flotante básico (Chatbot Pasivo) integrado en la esquina de la página.",
+              "Carga inicial de hasta 10 itinerarios grupales en la base de conocimientos de la IA."
+            ]
+          },
+          {
+            "name": "Opción B: Portal Web + Agente de IA con APIs de Reservas en Vivo (Avanzado)",
+            "price": 95000,
+            "description": "Desarrollo avanzado de portal turístico integrado en tiempo real con buscadores de vuelos y hoteles. Incluye agente de IA tipo Copiloto.",
+            "bullets": [
+              "Desarrollo frontend dinámico e integración técnica con APIs de vuelos y hoteles (ej. Sabre, Amadeus o similares).",
+              "Widget de IA Avanzado con capacidad de consultar disponibilidad y tarifas en tiempo real.",
+              "Buscador predictivo inteligente y diseño premium de alta fidelidad.",
+              "Configuración técnica del entorno del servidor y optimización extrema de carga."
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Fase 2: Módulos de Interacción de la IA (Opcionales / Apolograma)",
+        "services": [
+          {
+            "name": "Módulo de Copiloto UI Reactivo (Controlador de Interfaz)",
+            "price": 18500,
+            "description": "Permite al widget de IA interactuar directamente con la interfaz del sitio web según lo que converse el usuario.",
+            "bullets": [
+              "Control de scroll, filtros y apertura de galerías automáticas por comando de chat del usuario.",
+              "Sincronización del estado de la UI con las sugerencias de la IA.",
+              "Experiencia premium de navegación asistida por voz o texto."
+            ]
+          },
+          {
+            "name": "Módulo de Respuestas Visuales Híbridas",
+            "price": 12000,
+            "description": "El agente de IA responde dentro del chat con tarjetas visuales ricas, mapas de ruta e itinerarios en lugar de solo texto plano.",
+            "bullets": [
+              "Diseño y renderizado de itinerarios interactivos dentro del chat.",
+              "Mapas interactivos de rutas y paradas programadas del viaje.",
+              "Botones enriquecidos para agendar o iniciar el proceso de apartado."
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Fase 3: Campaña de Lanzamiento y PR Turístico (Frontera Número Uno)",
+        "services": [
+          {
+            "name": "Paquete de Cobertura Turística 'Escapada' (Promoción)",
+            "price": 24500,
+            "description": "Campaña de difusión digital local en Frontera Número Uno orientada a posicionar y vender los viajes grupales del mes.",
+            "bullets": [
+              "4 Notas Editoriales de recomendación turística publicadas en el portal y redes oficiales de FN1.",
+              "1 Video Reel producido In-Situ para transmitir la vibra y los atractivos de las salidas grupales.",
+              "Amplificación y pauta segmentada local (Juárez y El Paso) para la captación directa de prospectos."
+            ]
+          },
+          {
+            "name": "Paquete de Cobertura Turística 'Gran Destino' (Promoción Avanzada)",
+            "price": 45000,
+            "description": "Campaña de difusión de alto impacto con transmisiones en vivo y mayor volumen editorial para promover la marca y sus destinos.",
+            "bullets": [
+              "8 Notas Editoriales de recomendación de destinos distribuidas en el mes.",
+              "2 Videos Reels profesionales In-Situ mostrando dinámicas y testimoniales.",
+              "1 Transmisión en Vivo desde las oficinas de la agencia para platicar de las promociones cara a cara con la audiencia."
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Fase 4: Pasarela de Pago y Apartados (Opcional)",
+        "services": [
+          {
+            "name": "Integración de Pasarela de Pagos (Stripe / PayPal)",
+            "price": 15000,
+            "description": "Habilita el apartado de lugares en línea para los viajes grupales directamente desde la web o mediante enlace del widget de IA.",
+            "bullets": [
+              "Configuración y vinculación de Stripe / PayPal con la base de datos de reservas de la agencia.",
+              "Cifrado y seguridad SSL para transacciones directas seguras.",
+              "Generación dinámica de enlaces de cobro por el agente de IA para congelar tarifas de viaje (ej. anticipo de $5,000 MXN)."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "discountPercent": 0
+}
