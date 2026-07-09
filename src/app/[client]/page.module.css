@@ -282,24 +282,15 @@
 }
 
 .storyPillarsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-}
-
-@media (min-width: 993px) {
-  .storyPillarsGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1200px) {
-  .storyPillarsGrid {
-    grid-template-columns: repeat(4, 1fr);
-  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2.5rem;
 }
 
 .storyPillarCard {
+  flex: 1 1 320px;
+  max-width: 360px;
   padding: 0;
   text-align: left;
   background: var(--card-bg);
