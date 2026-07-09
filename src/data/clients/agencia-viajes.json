@@ -11,6 +11,8 @@
     "fontHeading": "'Geist', 'Inter', sans-serif",
     "fontBody": "'Geist', 'Inter', sans-serif",
     "bgColor": "#f8fafc",
+    "textColor": "#2b2d30",
+    "mutedText": "#5c677d",
     "textGradient": "linear-gradient(to right, #0066cc, #10b981)",
     "surfaceGlass": "rgba(255, 255, 255, 0.8)",
     "glassBorder": "rgba(0, 102, 204, 0.15)",
@@ -39,7 +41,7 @@
   "hero": {
     "headline": "Propuesta Ejecutiva de Ecosistema Digital",
     "subheadline": "Desarrollo de Software, IA y Campañas de Difusión | Apolograma & Frontera Número Uno",
-    "backgroundImage": "",
+    "backgroundImage": "/assets/agencia-viajes/hero-bg.jpg",
     "backgroundVideo": ""
   },
   "storytelling": {
@@ -62,17 +64,17 @@
       {
         "title": "Diseño Web Turístico UI/UX",
         "description": "Diseño de interfaz optimizado para catálogos de viajes, enfocado en mostrar imágenes inmersivas de los itinerarios y capturar datos rápido.",
-        "image": ""
+        "image": "/assets/agencia-viajes/web-pillar.jpg"
       },
       {
         "title": "Agente de IA Consultivo",
         "description": "Widget conversacional que responde dudas de itinerarios, calcula cotizaciones y genera enlaces de pago directos.",
-        "image": ""
+        "image": "/assets/agencia-viajes/ai-pillar.jpg"
       },
       {
         "title": "Difusión Frontera",
         "description": "Notas editoriales y cobertura de video en vivo para posicionar tus salidas grupales en Juárez y El Paso.",
-        "image": ""
+        "image": "/assets/agencia-viajes/marketing-pillar.jpg"
       }
     ]
   },
@@ -90,7 +92,7 @@
             "price": 48000,
             "description": "Desarrollo de sitio web moderno e intuitivo para presentar los viajes grupales de la agencia. Incluye el Widget de IA flotante entrenado con itinerarios y políticas fijas.",
             "bullets": [
-              "Diseño UI/UX responsivo a la medida de la marca (compatible con móviles, tablets y PC).",
+              "Diseño UI/UX responsivo a la medida de la marca (compatible con móviles, tablets and PC).",
               "Panel de administración autogestionable para actualizar destinos y fotos.",
               "Widget de IA flotante básico (Chatbot Pasivo) integrado en la esquina de la página.",
               "Carga inicial de hasta 10 itinerarios grupales en la base de conocimientos de la IA."
