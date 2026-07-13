@@ -590,6 +590,12 @@
    RESPONSIVE (MOBILE OPTIMIZATION)
    ========================================= */
 @media (max-width: 992px) {
+  .hero {
+    height: auto;
+    min-height: 100vh;
+    padding-bottom: 4rem;
+  }
+  
   .header {
     padding: 0.8rem 1rem;
     flex-direction: row;
