@@ -608,6 +608,18 @@
     width: 100%;
   }
 
+  .footerAgencyLogos {
+    flex-direction: column;
+    gap: 1.25rem;
+    align-items: center;
+    width: 100%;
+  }
+
+  .footerApologramaLogo,
+  .footerApologramaLogoLight {
+    height: 20px;
+  }
+
   .apologramaLogoImage,
   .apologramaLogoImageLight {
     height: 14px;
