@@ -48,15 +48,18 @@
     "narrative": [
       {
         "title": "PR y Autoridad en Frontera Número Uno",
-        "content": "Frontera, las notas y sus alcances. Aqui les damos exposicion inmediata al dr a los 409K seguidores. Cada nota con FN1 tiene un promedio de 300K Views con un 4% de interaccion."
+        "content": "Frontera, las notas y sus alcances. Aqui les damos exposicion inmediata al dr a los 409K seguidores. Cada nota con FN1 tiene un promedio de 300K Views con un 4% de interaccion.",
+        "image": "/assets/dr-david-mercado/narrative-1.jpg"
       },
       {
         "title": "Diseño Gráfico & Planeación Estratégica",
-        "content": "Planeacion y diseño grafico por parte de Apolograma, lo que con leva realizar su planeacion para mantener a los seguidores cautivos con atencion al dr."
+        "content": "Planeacion y diseño grafico por parte de Apolograma, lo que con leva realizar su planeacion para mantener a los seguidores cautivos con atencion al dr.",
+        "image": "/assets/dr-david-mercado/narrative-2.jpg"
       },
       {
         "title": "Asistente de IA 24/7 en WhatsApp",
-        "content": "El agente de IA por whatsapp no solamente da comodidad al equipo del Dr David Mercado, tambien lo vuelve sumamente eficiente, dandole tiempo y atencion a cada paciente, incluso con las dudas mas simples. Una vez que escale se envia a un humano."
+        "content": "El agente de IA por whatsapp no solamente da comodidad al equipo del Dr David Mercado, tambien lo vuelve sumamente eficiente, dandole tiempo y atencion a cada paciente, incluso con las dudas mas simples. Una vez que escale se envia a un humano.",
+        "image": "/assets/dr-david-mercado/narrative-3.jpg"
       }
     ],
     "challenge": "Posicionar la autoridad del Dr. David Mercado en la región, optimizar la atención de su consultorio mediante IA conversacional 24/7 y mantener a su comunidad cautiva con diseño de alto nivel.",

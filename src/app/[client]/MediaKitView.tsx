@@ -403,7 +403,7 @@ interface ClientData {
     hideModularMethodology?: boolean;
   };
   storytelling?: {
-    narrative?: { title: string; content: string }[];
+    narrative?: { title: string; content: string; image?: string }[];
     challenge?: string;
     countdownDate?: string;
     countdownLabel?: string;
@@ -810,26 +810,53 @@ export default function MediaKitView({ data }: { data: ClientData }) {
       {data.storytelling && (
         <section className={styles.storySection}>
           {data.storytelling.narrative ? (
-            <div style={{ marginBottom: '4rem', textAlign: 'left', maxWidth: '800px', margin: '0 auto 4rem auto' }}>
-              {data.storytelling.narrative.map((block, idx) => (
-                <motion.div 
-                  key={idx} 
-                  initial="hidden" 
-                  whileInView="visible" 
-                  viewport={{ once: true, margin: "-50px" }} 
-                  variants={fadeUp}
-                  className="glass"
-                  style={{ marginBottom: '2.5rem', padding: '2.5rem', position: 'relative', zIndex: 10 }}
-                >
-                  <h2 style={{ fontSize: '1.5rem', color: isLight ? '#222' : '#fff', marginBottom: '1rem', fontWeight: 700 }}>
-                    {block.title}
-                  </h2>
-                  <p 
-                    style={{ fontSize: '1.1rem', color: isLight ? '#555' : '#aaa', lineHeight: 1.6 }}
-                    dangerouslySetInnerHTML={{ __html: block.content }}
-                  />
-                </motion.div>
-              ))}
+            <div className={styles.narrativeContainer}>
+              {data.storytelling.narrative.map((block, idx) => {
+                const isEven = idx % 2 === 0;
+                return (
+                  <motion.div 
+                    key={idx} 
+                    initial="hidden" 
+                    whileInView="visible" 
+                    viewport={{ once: true, margin: "-50px" }} 
+                    variants={fadeUp}
+                    className={`${styles.narrativeCard} glass`}
+                  >
+                    {block.image ? (
+                      <div className={`${styles.narrativeSplit} ${isEven ? styles.narrativeSplitEven : styles.narrativeSplitOdd}`}>
+                        <div className={styles.narrativeText}>
+                          <h2 style={{ fontSize: '1.6rem', color: isLight ? '#222' : '#fff', marginBottom: '1.25rem', fontWeight: 800 }}>
+                            {block.title}
+                          </h2>
+                          <p 
+                            style={{ fontSize: '1.1rem', color: isLight ? '#444' : '#ccc', lineHeight: 1.65, margin: 0 }}
+                            dangerouslySetInnerHTML={{ __html: block.content }}
+                          />
+                        </div>
+                        <div className={styles.narrativeImageContainer}>
+                          <Image 
+                            src={block.image} 
+                            alt={block.title} 
+                            width={450} 
+                            height={338} 
+                            className={styles.narrativeImage}
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      <>
+                        <h2 style={{ fontSize: '1.5rem', color: isLight ? '#222' : '#fff', marginBottom: '1rem', fontWeight: 700 }}>
+                          {block.title}
+                        </h2>
+                        <p 
+                          style={{ fontSize: '1.1rem', color: isLight ? '#555' : '#aaa', lineHeight: 1.6 }}
+                          dangerouslySetInnerHTML={{ __html: block.content }}
+                        />
+                      </>
+                    )}
+                  </motion.div>
+                );
+              })}
             </div>
           ) : data.storytelling.challenge && (
             <motion.h2 

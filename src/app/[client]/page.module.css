@@ -886,3 +886,59 @@
 }
 
 
+.narrativeContainer {
+  margin-bottom: 4rem;
+  text-align: left;
+  max-width: 900px;
+  margin: 0 auto 4rem auto;
+}
+
+.narrativeCard {
+  margin-bottom: 3rem;
+  padding: 2.5rem;
+  position: relative;
+  z-index: 10;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.narrativeSplit {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.narrativeText {
+  flex: 1.2;
+}
+
+.narrativeImageContainer {
+  flex: 1;
+  width: 100%;
+}
+
+.narrativeImage {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .narrativeSplit {
+    align-items: center;
+  }
+  
+  .narrativeSplitEven {
+    flex-direction: row;
+  }
+  
+  .narrativeSplitOdd {
+    flex-direction: row-reverse;
+  }
+  
+  .narrativeImageContainer {
+    max-width: 45%;
+  }
+}
