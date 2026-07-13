@@ -23,8 +23,7 @@
     "locale": "es-MX",
     "priceSuffix": "INVERSIÓN + IVA",
     "enableCurrencyToggle": true,
-    "exchangeRate": 20,
-    "ivaPercent": 8
+    "exchangeRate": 20
   },
   "features": {
     "showEcosystem": false,
@@ -118,7 +117,7 @@
         ]
       },
       {
-        "name": "Fase 3: Adicionales y Extras Opcionales (Con 20% de Descuento)",
+        "name": "Extras Opcionales (Con 20% de Descuento)",
         "services": [
           {
             "name": "Nota Editorial Extra de Cobertura en Frontera",
