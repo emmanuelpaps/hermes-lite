@@ -1072,22 +1072,6 @@ export default function MediaKitView({ data }: { data: ClientData }) {
               isLight={isLight} 
             />
           </motion.div>
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.5 }} style={{ height: '100%' }}>
-            <InsightCard 
-              title="Nuevos Seguidores" 
-              value="8.9K" 
-              increase="" 
-              isLight={isLight} 
-            />
-          </motion.div>
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.6 }} style={{ height: '100%' }}>
-            <InsightCard 
-              title="Contactos por Mensaje" 
-              value="569" 
-              increase="" 
-              isLight={isLight} 
-            />
-          </motion.div>
         </div>
       </section>
       )}
