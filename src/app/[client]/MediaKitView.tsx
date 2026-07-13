@@ -657,7 +657,10 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 style={{ 
                   margin: 0,
                   textAlign: 'left',
-                  filter: 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.95))'
+                  filter: isLight 
+                    ? 'drop-shadow(0 4px 10px rgba(255, 255, 255, 0.95)) drop-shadow(0 2px 4px rgba(255, 255, 255, 0.95))' 
+                    : 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.95))',
+                  fontWeight: 900
                 }}
               >
                 {data.hero?.headline || data.heroTitle || `Propuesta Estratégica para ${data.clientName}`}
@@ -667,8 +670,8 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 style={{ 
                   margin: 0,
                   textAlign: 'left',
-                  color: '#ffffff',
-                  textShadow: '0 2px 8px rgba(0, 0, 0, 0.95)',
+                  color: isLight ? 'var(--text-color)' : '#ffffff',
+                  textShadow: isLight ? '0 1px 4px rgba(255, 255, 255, 0.9)' : '0 2px 8px rgba(0, 0, 0, 0.95)',
                   fontWeight: 500
                 }}
               >
@@ -765,7 +768,10 @@ export default function MediaKitView({ data }: { data: ClientData }) {
               style={{ 
                 position: 'relative', 
                 zIndex: 2,
-                filter: 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.95))'
+                filter: isLight 
+                  ? 'drop-shadow(0 4px 10px rgba(255, 255, 255, 0.95)) drop-shadow(0 2px 4px rgba(255, 255, 255, 0.95))' 
+                  : 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.95))',
+                fontWeight: 900
               }}
             >
               {data.hero?.headline || data.heroTitle || `Propuesta Estratégica para ${data.clientName}`}
@@ -776,8 +782,8 @@ export default function MediaKitView({ data }: { data: ClientData }) {
               style={{ 
                 position: 'relative', 
                 zIndex: 2,
-                color: '#ffffff',
-                textShadow: '0 2px 8px rgba(0, 0, 0, 0.95)',
+                color: isLight ? 'var(--text-color)' : '#ffffff',
+                textShadow: isLight ? '0 1px 4px rgba(255, 255, 255, 0.9)' : '0 2px 8px rgba(0, 0, 0, 0.95)',
                 fontWeight: 500
               }}
             >
