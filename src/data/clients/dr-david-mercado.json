@@ -27,7 +27,7 @@
   },
   "features": {
     "showEcosystem": false,
-    "showAudiences": false,
+    "showAudiences": true,
     "showPricing": true,
     "disableSelection": false,
     "disableAccordion": true,
@@ -62,24 +62,7 @@
         "image": "/assets/dr-david-mercado/narrative-3.jpg"
       }
     ],
-    "challenge": "Posicionar la autoridad del Dr. David Mercado en la región, optimizar la atención de su consultorio mediante IA conversacional 24/7 y mantener a su comunidad cautiva con diseño de alto nivel.",
-    "pillars": [
-      {
-        "title": "PR & Difusión Médica",
-        "description": "Notas de salud y casos de éxito en la red de Frontera Número Uno para exposición inmediata ante más de 409K seguidores.",
-        "image": "/assets/dr-david-mercado/frontera-pillar.jpg"
-      },
-      {
-        "title": "Diseño Gráfico & Planeación",
-        "description": "Desarrollo de piezas visuales y parrillas de contenido estratégicas para cautivar a tu audiencia y proyectar autoridad.",
-        "image": "/assets/dr-david-mercado/design-pillar.jpg"
-      },
-      {
-        "title": "Asistente de IA en WhatsApp",
-        "description": "Bot eficiente 24/7 para resolver dudas simples, dar comodidad a la asistente y derivar casos urgentes a humanos.",
-        "image": "/assets/dr-david-mercado/whatsapp-bot-pillar.jpg"
-      }
-    ]
+    "challenge": "Posicionar la autoridad del Dr. David Mercado en la región, optimizar la atención de su consultorio mediante IA conversacional 24/7 y mantener a su comunidad cautiva con diseño de alto nivel."
   },
   "packages": {
     "title": "Propuesta de Solución Integral",
