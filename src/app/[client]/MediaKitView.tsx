@@ -412,6 +412,7 @@ interface ClientData {
   packages: {
     title?: string;
     subtitle?: string;
+    methodologyText?: string;
     fn1: Service[];
     apolograma: Service[];
     blocks?: { name: string; services: Service[] }[];
@@ -1594,7 +1595,11 @@ export default function MediaKitView({ data }: { data: ClientData }) {
               lineHeight: "1.5",
               textAlign: "left"
             }}>
-              <strong>Metodología Flexible:</strong> Podemos ejecutar el ecosistema completo de forma simultánea, o bien, realizar un despliegue por bloques individuales <strong>(lapsos de 30 días naturales por bloque)</strong> para escalar la inversión a tu ritmo.
+              <strong>Metodología Flexible:</strong> {data.packages.methodologyText || (
+                <>
+                  Podemos ejecutar el ecosistema completo de forma simultánea, o bien, realizar un despliegue por bloques individuales <strong>(lapsos de 30 días naturales por bloque)</strong> para escalar la inversión a tu ritmo.
+                </>
+              )}
             </div>
           )}
           

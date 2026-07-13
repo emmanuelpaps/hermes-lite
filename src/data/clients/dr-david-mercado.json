@@ -67,6 +67,7 @@
   "packages": {
     "title": "Propuesta de Solución Integral",
     "subtitle": "Selecciona los módulos y el periodo de iguala para estructurar el paquete médico del consultorio:",
+    "methodologyText": "Puedes iniciar con el plan esencial de atención y posicionamiento (Fase 1 y Fase 2) e integrar de forma modular los extras adicionales (como el CRM de Pacientes o producción de video) en el momento en que tu consultorio lo requiera.",
     "fn1": [],
     "apolograma": [],
     "blocks": [
