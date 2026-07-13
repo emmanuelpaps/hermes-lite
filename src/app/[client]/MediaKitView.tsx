@@ -606,6 +606,13 @@ export default function MediaKitView({ data }: { data: ClientData }) {
               backgroundColor: isLight ? 'rgba(249, 246, 240, 0.40)' : 'rgba(5, 5, 5, 0.70)',
               zIndex: 1,
             }} />
+            <div style={{
+              position: 'absolute',
+              bottom: -1, left: 0, width: '100%', height: '220px',
+              background: 'linear-gradient(to bottom, transparent 0%, var(--bg-color) 100%)',
+              zIndex: 2,
+              pointerEvents: 'none'
+            }} />
           </>
         ) : data.hero?.backgroundImage ? (
           <>
@@ -635,6 +642,13 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 : 'radial-gradient(circle at center, rgba(11, 12, 16, 0.20) 0%, rgba(11, 12, 16, 0.90) 100%)',
               backdropFilter: 'blur(1px)',
               zIndex: 1,
+            }} />
+            <div style={{
+              position: 'absolute',
+              bottom: -1, left: 0, width: '100%', height: '220px',
+              background: 'linear-gradient(to bottom, transparent 0%, var(--bg-color) 100%)',
+              zIndex: 2,
+              pointerEvents: 'none'
             }} />
           </>
         ) : null}
