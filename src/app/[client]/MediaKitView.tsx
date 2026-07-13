@@ -457,8 +457,20 @@ export default function MediaKitView({ data }: { data: ClientData }) {
     if (data.packages.blocks) {
       data.packages.blocks.forEach(b => {
         const isBlockOptional = b.name.toLowerCase().includes('opcional') || b.name.toLowerCase().includes('adicional');
-        b.services.forEach(s => {
-          initialState[s.name] = !isBlockOptional && !(s.name.includes('(Opcional)') || s.name.includes('(Opcionales)'));
+        const isRadioBlock = !isBlockOptional && (
+          b.name.toLowerCase().includes('opción') || 
+          b.name.toLowerCase().includes('opcion') || 
+          b.name.toLowerCase().includes('iguala') ||
+          b.name.toLowerCase().includes('plan')
+        );
+        b.services.forEach((s, idx) => {
+          if (isBlockOptional) {
+            initialState[s.name] = false;
+          } else if (isRadioBlock) {
+            initialState[s.name] = idx === 0;
+          } else {
+            initialState[s.name] = !(s.name.includes('(Opcional)') || s.name.includes('(Opcionales)'));
+          }
         });
       });
     }
@@ -471,7 +483,35 @@ export default function MediaKitView({ data }: { data: ClientData }) {
   });
 
   const toggleServiceSelection = (name: string) => {
-    setSelectedServices(prev => ({ ...prev, [name]: !prev[name] }));
+    setSelectedServices(prev => {
+      const next = { ...prev, [name]: !prev[name] };
+      if (data.packages.blocks) {
+        data.packages.blocks.forEach(block => {
+          const serviceNames = block.services.map(s => s.name);
+          if (serviceNames.includes(name)) {
+            const isBlockOptional = block.name.toLowerCase().includes('opcional') || block.name.toLowerCase().includes('adicional');
+            const isRadioBlock = !isBlockOptional && (
+              block.name.toLowerCase().includes('opción') || 
+              block.name.toLowerCase().includes('opcion') || 
+              block.name.toLowerCase().includes('iguala') ||
+              block.name.toLowerCase().includes('plan')
+            );
+            if (isRadioBlock) {
+              if (!next[name]) {
+                next[name] = true; // Radio button cannot be deselected to empty
+              } else {
+                serviceNames.forEach(otherName => {
+                  if (otherName !== name) {
+                    next[otherName] = false;
+                  }
+                });
+              }
+            }
+          }
+        });
+      }
+      return next;
+    });
   };
 
   const fn1Total = data.packages.fn1 ? data.packages.fn1.reduce((acc, curr) => acc + (selectedServices[curr.name] ? curr.price : 0), 0) : 0;
@@ -1226,9 +1266,55 @@ export default function MediaKitView({ data }: { data: ClientData }) {
         </section>
       )}
 
+      {/* Propuesta Económica General Header */}
+      {data.features?.showPricing !== false && data.packages.blocks && data.packages.blocks.length > 0 && (
+        <section className={styles.section} style={{ paddingBottom: 0, overflow: 'hidden' }}>
+          <motion.h2 className={styles.sectionTitle} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+            {data.packages.title || "Propuesta de Solución Modular"}
+          </motion.h2>
+          <motion.p className={styles.sectionSubtitle} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+            {data.packages.subtitle || "Selecciona y personaliza los módulos del proyecto médico:"}
+          </motion.p>
+          {!data.features?.disableSelection && (
+            <motion.div 
+              initial="hidden" 
+              whileInView="visible" 
+              viewport={{ once: true }} 
+              variants={fadeUp}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.6rem',
+                margin: '-1rem auto 2.5rem auto',
+                background: 'rgba(0, 126, 255, 0.08)',
+                border: '1px solid rgba(0, 126, 255, 0.18)',
+                borderRadius: '50px',
+                padding: '0.6rem 1.4rem',
+                width: 'fit-content',
+                fontSize: '0.85rem',
+                color: 'var(--text-color)',
+                fontWeight: 500,
+                boxShadow: '0 4px 12px rgba(0, 126, 255, 0.05)'
+              }}
+            >
+              <span style={{ fontSize: '1.05rem', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))' }}>💡</span>
+              <span><strong>Instrucciones:</strong> Puedes activar o desactivar las casillas/círculos en el extremo derecho de cada servicio para personalizar tu inversión.</span>
+            </motion.div>
+          )}
+        </section>
+      )}
+
       {/* Blocks Structure */}
       {data.features?.showPricing !== false && data.packages.blocks && data.packages.blocks.map((block, blockIdx) => {
         const isStaggered = data.features?.disableSelection;
+        const isBlockOptional = block.name.toLowerCase().includes('opcional') || block.name.toLowerCase().includes('adicional');
+        const isRadioBlock = !isBlockOptional && (
+          block.name.toLowerCase().includes('opción') || 
+          block.name.toLowerCase().includes('opcion') || 
+          block.name.toLowerCase().includes('iguala') ||
+          block.name.toLowerCase().includes('plan')
+        );
         
         return (
           <section key={`block-${blockIdx}`} className={styles.section} style={{ overflow: 'hidden' }}>
@@ -1395,7 +1481,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                     isSelectable={!data.features?.disableSelection}
                     isSelected={selectedServices[service.name]}
                     onSelect={() => toggleServiceSelection(service.name)}
-                    selectionType="checkbox"
+                    selectionType={isRadioBlock ? "radio" : "checkbox"}
                     priceSuffix={data.config?.priceSuffix}
                     disableAccordion={data.features?.disableAccordion}
                   />
