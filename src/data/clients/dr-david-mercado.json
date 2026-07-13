@@ -23,7 +23,8 @@
     "locale": "es-MX",
     "priceSuffix": "INVERSIÓN + IVA",
     "enableCurrencyToggle": true,
-    "exchangeRate": 20
+    "exchangeRate": 20,
+    "ivaPercent": 8
   },
   "features": {
     "showEcosystem": false,
