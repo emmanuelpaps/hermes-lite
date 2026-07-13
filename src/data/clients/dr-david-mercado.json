@@ -2,7 +2,7 @@
   "clientName": "Dr. David Mercado",
   "clientLogo": "/assets/dr-david-mercado/doctor-portrait.jpeg",
   "industry": "Neurocirugía y Columna Vertebral",
-  "heroText": "Ecosistema digital completo para potenciar la consulta y la autoridad médica del Dr. David Mercado. Integramos planeación estratégica de marca, un asistente de IA por WhatsApp 24/7 con escalabilidad y alerta a humanos, un portal de gestión de pacientes (CRM) y pautas editoriales en la red de Frontera Número Uno.",
+  "heroText": "Ecosistema digital completo para potenciar la consulta y la autoridad médica del Dr. David Mercado. Integramos planeación estratégica de marca, un asistente de IA por WhatsApp 24/7 con escalabilidad y alertas conversacionales, diseño médico premium y pautas editoriales periódicas en la red de Frontera Número Uno.",
   "themeTemplate": "vercel",
   "theme": {
     "mode": "light",
@@ -35,12 +35,12 @@
   },
   "meta": {
     "title": "Propuesta Médica Digital | Dr. David Mercado",
-    "description": "Ecosistema integrado de automatización por WhatsApp, CRM de pacientes y posicionamiento editorial con Frontera Número Uno para el Dr. David Mercado.",
+    "description": "Ecosistema integrado de automatización por WhatsApp, diseño médico y posicionamiento editorial con Frontera Número Uno para el Dr. David Mercado.",
     "ogImage": "/assets/fn1-logo-stacked.png"
   },
   "hero": {
     "headline": "Propuesta de Ecosistema Médico Digital",
-    "subheadline": "Automatización de Consulta, Gestión de Pacientes y Posicionamiento | Apolograma & Frontera Número Uno",
+    "subheadline": "Automatización de Atención, Diseño Médico y Posicionamiento Editorial | Apolograma & Frontera Número Uno",
     "backgroundImage": "/assets/dr-david-mercado/hero-bg.jpg",
     "backgroundVideo": ""
   },
@@ -48,17 +48,17 @@
     "narrative": [
       {
         "title": "PR y Autoridad en Frontera Número Uno",
-        "content": "Frontera, las notas y sus alcances. Aqui les damos exposicion inmediata al dr a los 409K seguidores. Cada nota con FN1 tiene un promedio de 300K Views con un 4% de interaccion.",
+        "content": "Exposición inmediata ante más de 409,000 seguidores en la región. Las notas editoriales en Frontera Número Uno promedian 300,000 visualizaciones con una tasa de interacción del 4%, posicionando al Dr. David Mercado como el neurocirujano referente de Ciudad Juárez y El Paso.",
         "image": "/assets/dr-david-mercado/narrative-1.jpg"
       },
       {
         "title": "Diseño Gráfico & Planeación Estratégica",
-        "content": "Planeacion y diseño grafico por parte de Apolograma, lo que con leva realizar su planeacion para mantener a los seguidores cautivos con atencion al dr.",
+        "content": "Desarrollo de parrillas de contenidos estratégicas y diseño gráfico premium por parte de Apolograma. El objetivo es mantener a la audiencia educada y cautiva, convirtiendo seguidores en pacientes leales mediante información médica de alto valor.",
         "image": "/assets/dr-david-mercado/narrative-2.jpg"
       },
       {
         "title": "Asistente de IA 24/7 en WhatsApp",
-        "content": "El agente de IA por whatsapp no solamente da comodidad al equipo del Dr David Mercado, tambien lo vuelve sumamente eficiente, dandole tiempo y atencion a cada paciente, incluso con las dudas mas simples. Una vez que escale se envia a un humano.",
+        "content": "Atención inmediata y eficiente 24/7. El asistente de IA en WhatsApp resuelve dudas frecuentes sobre cirugías y agendamiento al instante, liberando de carga a la asistente y enviando una alerta automática (por llamada o mensaje) solo cuando se requiere intervención humana.",
         "image": "/assets/dr-david-mercado/narrative-3.jpg"
       }
     ],
