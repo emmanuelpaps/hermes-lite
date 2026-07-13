@@ -47,34 +47,34 @@
   "storytelling": {
     "narrative": [
       {
-        "title": "Automatización e IA 24/7 en WhatsApp",
-        "content": "Un especialista en neurocirugía requiere atención constante e inmediata. Desarrollamos un asistente de IA por WhatsApp entrenado con su base de conocimientos médica para resolver dudas de hernias discales, tumores cerebrales y cirugías, logrando atender el 85% de los contactos y alertando al consultorio por llamada/mensaje en casos urgentes."
-      },
-      {
-        "title": "CRM para Administración y Seguimiento de Pacientes",
-        "content": "Control total del flujo de consulta. Proporcionamos un sistema a medida (CRM) para que la asistente del doctor administre expedientes, historial de citas, estatus de cirugías programadas y realice un seguimiento oportuno posoperatorio."
-      },
-      {
         "title": "PR y Autoridad en Frontera Número Uno",
-        "content": "Posicionamiento editorial de alto nivel. Publicamos notas periódicas enfocadas tanto en la prevención médica de columna y cerebro como en proyectar la trayectoria del Dr. David de Jesús Mercado Rubio en Star Médica, inyectando confianza y atrayendo nuevos pacientes."
+        "content": "Frontera, las notas y sus alcances. Aqui les damos exposicion inmediata al dr a los 409K seguidores. Cada nota con FN1 tiene un promedio de 300K Views con un 4% de interaccion."
+      },
+      {
+        "title": "Diseño Gráfico & Planeación Estratégica",
+        "content": "Planeacion y diseño grafico por parte de Apolograma, lo que con leva realizar su planeacion para mantener a los seguidores cautivos con atencion al dr."
+      },
+      {
+        "title": "Asistente de IA 24/7 en WhatsApp",
+        "content": "El agente de IA por whatsapp no solamente da comodidad al equipo del Dr David Mercado, tambien lo vuelve sumamente eficiente, dandole tiempo y atencion a cada paciente, incluso con las dudas mas simples. Una vez que escale se envia a un humano."
       }
     ],
-    "challenge": "Diseñar e implementar un sistema de contención por WhatsApp de alta fidelidad, portal de expedientes CRM para consultorio y notas editoriales periódicas de difusión y relaciones públicas.",
+    "challenge": "Posicionar la autoridad del Dr. David Mercado en la región, optimizar la atención de su consultorio mediante IA conversacional 24/7 y mantener a su comunidad cautiva con diseño de alto nivel.",
     "pillars": [
       {
-        "title": "Asistente de IA en WhatsApp",
-        "description": "Bot entrenado para responder preguntas de neurocirugía y agendar citas 24/7 con redirección telefónica a humanos.",
-        "image": "/assets/dr-david-mercado/whatsapp-bot-pillar.jpg"
-      },
-      {
-        "title": "CRM de Pacientes",
-        "description": "Plataforma administrativa para registro de expedientes médicos, seguimiento posquirúrgico e historial clínico.",
-        "image": "/assets/dr-david-mercado/crm-pillar.jpg"
-      },
-      {
         "title": "PR & Difusión Médica",
-        "description": "Notas de salud y casos de éxito en la red editorial de Frontera Número Uno con pauta optimizada.",
+        "description": "Notas de salud y casos de éxito en la red de Frontera Número Uno para exposición inmediata ante más de 409K seguidores.",
         "image": "/assets/dr-david-mercado/frontera-pillar.jpg"
+      },
+      {
+        "title": "Diseño Gráfico & Planeación",
+        "description": "Desarrollo de piezas visuales y parrillas de contenido estratégicas para cautivar a tu audiencia y proyectar autoridad.",
+        "image": "/assets/dr-david-mercado/design-pillar.jpg"
+      },
+      {
+        "title": "Asistente de IA en WhatsApp",
+        "description": "Bot eficiente 24/7 para resolver dudas simples, dar comodidad a la asistente y derivar casos urgentes a humanos.",
+        "image": "/assets/dr-david-mercado/whatsapp-bot-pillar.jpg"
       }
     ]
   },
@@ -88,14 +88,13 @@
         "name": "Fase 1: Configuración e Implementación Inicial (Setup - Pago Único)",
         "services": [
           {
-            "name": "Setup Inicial: IA en WhatsApp Business + Configuración CRM de Pacientes",
+            "name": "Setup Inicial: Asistente de IA en WhatsApp Business",
             "price": 18000,
-            "description": "Implementación técnica desde cero de la API oficial de WhatsApp de Meta, entrenamiento médico del bot, y despliegue del portal CRM para el consultorio.",
+            "description": "Implementación técnica desde cero de la API oficial de WhatsApp de Meta, entrenamiento médico del bot y motor de alertas conversacionales.",
             "bullets": [
               "Configuración y alta oficial de la API de WhatsApp Business en la cuenta del Dr.",
               "Desarrollo del bot de IA con base de conocimientos de neurocirugía y columna.",
-              "Programación de alertas automáticas (por llamada o mensaje de WhatsApp) para casos urgentes.",
-              "Despliegue del CRM Patient Admin de Apolograma para control de expedientes."
+              "Programación de alertas automáticas (por llamada o mensaje de WhatsApp) para casos urgentes."
             ]
           }
         ]
@@ -106,10 +105,9 @@
           {
             "name": "Opción A: Plan Esencial (12 Diseños Mensuales)",
             "price": 24500,
-            "description": "Soporte técnico constante, licencia del CRM, planeación mensual de marketing, 12 diseños gráficos mensuales y 2 notas editoriales de Frontera.",
+            "description": "Soporte técnico constante, planeación mensual de marketing, 12 diseños gráficos mensuales y 2 notas editoriales de Frontera.",
             "bullets": [
               "Mantenimiento, optimización y actualización del bot de WhatsApp 24/7.",
-              "Licencia de uso del CRM de administración de pacientes (expedientes en la nube).",
               "Planeación mensual estratégica de contenidos de valor por parte de Apolograma.",
               "12 Diseños Gráficos mensuales a la medida (redes sociales, formatos digitales).",
               "2 Notas Editoriales de Cobertura al mes publicadas en Frontera Número Uno (Star Médica y prevención)."
@@ -118,10 +116,9 @@
           {
             "name": "Opción B: Plan Avanzado (20 Diseños Mensuales)",
             "price": 28500,
-            "description": "Soporte premium de IA, licencia del CRM, planeación mensual ampliada, 20 diseños gráficos mensuales y 2 notas editoriales de Frontera.",
+            "description": "Soporte premium de IA, planeación mensual de contenidos ampliada, 20 diseños gráficos mensuales y 2 notas editoriales de Frontera.",
             "bullets": [
               "Mantenimiento, optimización y actualización del bot de WhatsApp 24/7.",
-              "Licencia de uso del CRM de administración de pacientes (expedientes en la nube).",
               "Planeación mensual de marketing y contenidos ampliada por parte de Apolograma.",
               "20 Diseños Gráficos mensuales a la medida (redes, infografías de salud, folletos).",
               "2 Notas Editoriales de Cobertura al mes publicadas en Frontera Número Uno (Star Médica y prevención)."
@@ -132,6 +129,28 @@
       {
         "name": "Extras Opcionales (Con 20% de Descuento)",
         "services": [
+          {
+            "name": "CRM de Pacientes: Setup Inicial",
+            "price": 15000,
+            "badge": "20% DESCUENTO",
+            "description": "Implementación, diseño de flujos y despliegue del portal CRM para el consultorio. Precio regular de lista: $18,750 MXN (20% de descuento exclusivo aplicado).",
+            "bullets": [
+              "Despliegue del CRM Patient Admin de Apolograma para control de expedientes.",
+              "Configuración de accesos y roles para la asistente médica.",
+              "Carga inicial de catálogos de cirugías, tratamientos y estatus posoperatorios."
+            ]
+          },
+          {
+            "name": "CRM de Pacientes: Licencia Mensual",
+            "price": 4000,
+            "badge": "20% DESCUENTO",
+            "description": "Licencia de uso mensual y hosting seguro de la base de datos de pacientes. Precio regular de lista: $5,000 MXN (20% de descuento exclusivo aplicado).",
+            "bullets": [
+              "Almacenamiento de expedientes clínicos en la nube con altos estándares de seguridad.",
+              "Soporte técnico mensual y actualización de la plataforma.",
+              "Acceso ilimitado al historial clínico y estatus de cirugías."
+            ]
+          },
           {
             "name": "Nota Editorial Extra de Cobertura en Frontera",
             "price": 6000,
