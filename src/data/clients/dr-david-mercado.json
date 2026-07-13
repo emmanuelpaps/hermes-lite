@@ -104,14 +104,27 @@
         "name": "Fase 2: Iguala Recurrente Mensual (Compromiso Mínimo de 12 Meses)",
         "services": [
           {
-            "name": "Iguala Base: Soporte de IA, Licencia CRM y 2 Notas de Frontera al mes",
+            "name": "Opción A: Plan Esencial (12 Diseños Mensuales)",
             "price": 24500,
-            "description": "Soporte constante, hosting de la base de datos de pacientes, planeación estratégica de marketing y relaciones públicas digitales.",
+            "description": "Soporte técnico constante, licencia del CRM, planeación mensual de marketing, 12 diseños gráficos mensuales y 2 notas editoriales de Frontera.",
             "bullets": [
               "Mantenimiento, optimización y actualización del bot de WhatsApp 24/7.",
-              "Licencia de uso del CRM de administración de pacientes (almacenamiento en la nube seguro).",
+              "Licencia de uso del CRM de administración de pacientes (expedientes en la nube).",
               "Planeación mensual estratégica de contenidos de valor por parte de Apolograma.",
-              "2 Notas Editoriales de Cobertura al mes publicadas en Frontera Número Uno (Casos de éxito y prevención)."
+              "12 Diseños Gráficos mensuales a la medida (redes sociales, formatos digitales).",
+              "2 Notas Editoriales de Cobertura al mes publicadas en Frontera Número Uno (Star Médica y prevención)."
+            ]
+          },
+          {
+            "name": "Opción B: Plan Avanzado (20 Diseños Mensuales)",
+            "price": 28500,
+            "description": "Soporte premium de IA, licencia del CRM, planeación mensual ampliada, 20 diseños gráficos mensuales y 2 notas editoriales de Frontera.",
+            "bullets": [
+              "Mantenimiento, optimización y actualización del bot de WhatsApp 24/7.",
+              "Licencia de uso del CRM de administración de pacientes (expedientes en la nube).",
+              "Planeación mensual de marketing y contenidos ampliada por parte de Apolograma.",
+              "20 Diseños Gráficos mensuales a la medida (redes, infografías de salud, folletos).",
+              "2 Notas Editoriales de Cobertura al mes publicadas en Frontera Número Uno (Star Médica y prevención)."
             ]
           }
         ]
