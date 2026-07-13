@@ -1,6 +1,6 @@
 {
   "clientName": "Dr. David Mercado",
-  "clientLogo": "",
+  "clientLogo": "/assets/dr-david-mercado/doctor-portrait.jpeg",
   "industry": "Neurocirugía y Columna Vertebral",
   "heroText": "Ecosistema digital completo para potenciar la consulta y la autoridad médica del Dr. David Mercado. Integramos planeación estratégica de marca, un asistente de IA por WhatsApp 24/7 con escalabilidad y alerta a humanos, un portal de gestión de pacientes (CRM) y pautas editoriales en la red de Frontera Número Uno.",
   "themeTemplate": "vercel",
