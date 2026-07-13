@@ -130,11 +130,12 @@
             "name": "CRM de Pacientes: Licencia Mensual",
             "price": 4000,
             "badge": "20% DESCUENTO",
-            "description": "Licencia de uso mensual y hosting seguro de la base de datos de pacientes. Precio regular de lista: $5,000 MXN (20% de descuento exclusivo aplicado).",
+            "description": "Licencia de uso y hosting en servidor dedicado en la nube para expedientes. Precio regular de lista: $5,000 MXN (20% de descuento exclusivo aplicado).",
             "bullets": [
-              "Almacenamiento de expedientes clínicos en la nube con altos estándares de seguridad.",
-              "Soporte técnico mensual y actualización de la plataforma.",
-              "Acceso ilimitado al historial clínico y estatus de cirugías."
+              "Servidor cloud dedicado y base de datos con infraestructura de alta disponibilidad (incluido).",
+              "Respaldos automáticos diarios de expedientes, historiales y archivos del consultorio.",
+              "Seguridad SSL de grado médico y encriptación de datos de pacientes.",
+              "Actualizaciones automáticas del sistema y soporte técnico mensual incluido."
             ]
           },
           {
