@@ -1,0 +1,169 @@
+{
+  "clientName": "Dr. Elmo Aramburo",
+  "clientLogo": "/assets/dr-elmo-aramburo/doctor-portrait.jpg",
+  "industry": "Cirugía Bariátrica y Laparoscópica",
+  "heroText": "Ecosistema digital completo para potenciar la consulta y la autoridad médica del Dr. Elmo Aramburo. Integramos planeación estratégica de marca, un asistente de IA por WhatsApp 24/7 con pre-calificación metabólica, diseño médico educativo y pautas editoriales periódicas en la red de Frontera Número Uno.",
+  "themeTemplate": "vercel",
+  "theme": {
+    "mode": "light",
+    "primary": "#00BBAF",
+    "primaryColor": "#00BBAF",
+    "fontHeading": "'Geist', 'Inter', sans-serif",
+    "fontBody": "'Geist', 'Inter', sans-serif",
+    "bgColor": "#fdfcfb",
+    "textColor": "#2b2d30",
+    "mutedText": "#5c677d",
+    "textGradient": "linear-gradient(to right, #00BBAF, #007D75)",
+    "surfaceGlass": "rgba(255, 255, 255, 0.8)",
+    "glassBorder": "rgba(0, 187, 175, 0.15)",
+    "clientLogoStyle": "split"
+  },
+  "config": {
+    "currency": "MXN",
+    "locale": "es-MX",
+    "priceSuffix": "INVERSIÓN + IVA",
+    "enableCurrencyToggle": true,
+    "exchangeRate": 20
+  },
+  "features": {
+    "showEcosystem": false,
+    "showAudiences": true,
+    "showPricing": true,
+    "disableSelection": false,
+    "disableAccordion": true,
+    "hideModularMethodology": false
+  },
+  "meta": {
+    "title": "Propuesta Médica Digital | Dr. Elmo Aramburo",
+    "description": "Ecosistema integrado de automatización por WhatsApp, diseño médico y posicionamiento editorial con Frontera Número Uno para el Dr. Elmo Aramburo.",
+    "ogImage": "/assets/fn1-logo-stacked.png"
+  },
+  "hero": {
+    "headline": "Propuesta de Ecosistema Médico Digital",
+    "subheadline": "Automatización de Consulta, Diseño Educativo y Posicionamiento Editorial | Apolograma & Frontera Número Uno",
+    "backgroundImage": "/assets/dr-elmo-aramburo/hero-bg.jpg",
+    "backgroundVideo": ""
+  },
+  "storytelling": {
+    "narrative": [
+      {
+        "title": "PR y Autoridad en Frontera Número Uno",
+        "content": "Exposición inmediata ante más de 409,000 seguidores en la región. Las notas editoriales en Frontera Número Uno promedian 300,000 visualizaciones con una tasa de interacción del 4%, educando sobre salud metabólica y posicionando al Dr. Elmo Aramburo como el cirujano bariatra referente de la región.",
+        "image": "/assets/dr-elmo-aramburo/narrative-1.jpg"
+      },
+      {
+        "title": "Diseño Gráfico & Planeación Estratégica",
+        "content": "Desarrollo de parrillas de contenidos estratégicas y diseño gráfico premium por parte de Apolograma. El objetivo es mantener a la audiencia educada sobre la obesidad, desmitificar mitos de la manga y bypass gástrico, y convertir seguidores en pacientes.",
+        "image": "/assets/dr-elmo-aramburo/narrative-2.jpg"
+      },
+      {
+        "title": "Asistente de IA 24/7 en WhatsApp",
+        "content": "Atención y pre-calificación 24/7. El asistente de IA en WhatsApp resuelve dudas frecuentes sobre la recuperación bariátrica (dieta líquida, papillas, sólidos) y calcula el Índice de Masa Corporal (IMC) de los prospectos al instante, liberando de carga a la asistente y enviando alertas urgentes a humanos.",
+        "image": "/assets/dr-elmo-aramburo/narrative-3.jpg"
+      }
+    ],
+    "challenge": "Posicionar la autoridad del Dr. Elmo Aramburo en bariatría y laparoscopia, pre-calificar y educar pacientes automáticamente mediante WhatsApp IA 24/7 y consolidar su marca médica con diseño de alto nivel."
+  },
+  "packages": {
+    "title": "Propuesta de Solución Integral",
+    "subtitle": "Selecciona los módulos y el periodo de iguala para estructurar el paquete médico del consultorio:",
+    "methodologyText": "Puedes iniciar con el plan esencial de atención y posicionamiento (Fase 1 y Fase 2) e integrar de forma modular los extras adicionales (como el CRM de Pacientes o producción de video) en el momento en que tu consultorio lo requiera.",
+    "fn1": [],
+    "apolograma": [],
+    "blocks": [
+      {
+        "name": "Fase 1: Configuración e Implementación Inicial (Setup - Pago Único)",
+        "services": [
+          {
+            "name": "Setup Inicial: Asistente de IA en WhatsApp Business",
+            "price": 18000,
+            "description": "Implementación técnica desde cero de la API oficial de WhatsApp de Meta, entrenamiento bariátrico/médico del bot y motor de alertas conversacionales.",
+            "bullets": [
+              "Configuración y alta oficial de la API de WhatsApp Business en la cuenta del Dr.",
+              "Desarrollo del bot de IA entrenado en cirugía de manga gástrica, bypass gástrico e IMC.",
+              "Programación de alertas automáticas para casos de urgencia postoperatoria o prospectos de cirugía calificados."
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Fase 2: Iguala Recurrente Mensual (Compromiso Mínimo de 12 Meses)",
+        "services": [
+          {
+            "name": "Opción A: Plan Esencial (12 Diseños Mensuales)",
+            "price": 24500,
+            "description": "Soporte técnico constante de IA, planeación de contenidos, 12 diseños gráficos educativos mensuales y 2 notas editoriales de Frontera.",
+            "bullets": [
+              "Mantenimiento, optimización y actualización del bot de WhatsApp 24/7.",
+              "Planeación mensual de contenidos educativos de salud metabólica por Apolograma.",
+              "12 Diseños Gráficos mensuales a la medida (infografías, recetas bariátricas, mitos).",
+              "2 Notas Editoriales de Cobertura al mes publicadas en Frontera Número Uno (salud y obesidad)."
+            ]
+          },
+          {
+            "name": "Opción B: Plan Avanzado (20 Diseños Mensuales)",
+            "price": 28500,
+            "description": "Soporte premium de IA, planeación ampliada de contenidos, 20 diseños gráficos educativos mensuales y 2 notas editoriales de Frontera.",
+            "bullets": [
+              "Mantenimiento, optimización y actualización del bot de WhatsApp 24/7.",
+              "Planeación mensual de marketing y contenidos de salud metabólica ampliada por Apolograma.",
+              "20 Diseños Gráficos mensuales a la medida (redes, folletos digitales, guías alimentarias).",
+              "2 Notas Editoriales de Cobertura al mes publicadas en Frontera Número Uno (salud y obesidad)."
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Extras Opcionales (Con 20% de Descuento)",
+        "services": [
+          {
+            "name": "CRM de Pacientes: Setup Inicial",
+            "price": 15000,
+            "badge": "20% DESCUENTO",
+            "description": "Implementación, diseño de flujos y despliegue del portal CRM para el consultorio. Precio regular de lista: $18,750 MXN (20% de descuento exclusivo aplicado).",
+            "bullets": [
+              "Despliegue del CRM Patient Admin de Apolograma para control de expedientes bariátricos.",
+              "Configuración de accesos y roles para la asistente médica y nutrióloga.",
+              "Carga inicial de catálogos de cirugías (manga, bypass), seguimientos de peso y estatus posoperatorio."
+            ]
+          },
+          {
+            "name": "CRM de Pacientes: Licencia Mensual",
+            "price": 4000,
+            "badge": "20% DESCUENTO",
+            "description": "Licencia de uso y hosting en servidor dedicado en la nube para expedientes. Precio regular de lista: $5,000 MXN (20% de descuento exclusivo aplicado).",
+            "bullets": [
+              "Servidor cloud dedicado y base de datos con infraestructura de alta disponibilidad (incluido).",
+              "Respaldos automáticos diarios de expedientes, historiales y archivos del consultorio.",
+              "Seguridad SSL de grado médico y encriptación de datos de pacientes.",
+              "Actualizaciones automáticas del sistema y soporte técnico mensual incluido."
+            ]
+          },
+          {
+            "name": "Nota Editorial Extra de Cobertura en Frontera",
+            "price": 6000,
+            "badge": "20% DESCUENTO",
+            "description": "Nota editorial adicional para promover tratamientos especializados. Precio regular de lista: $7,500 MXN (20% de descuento exclusivo aplicado).",
+            "bullets": [
+              "Redacción profesional y publicación en portal de Frontera Número Uno.",
+              "Distribución optimizada en las redes sociales de Frontera.",
+              "Pauta digital segmentada local para tracción adicional."
+            ]
+          },
+          {
+            "name": "Video Reel Profesional (Star Médica)",
+            "price": 10000,
+            "badge": "20% DESCUENTO",
+            "description": "Producción in-situ en Star Médica de video promocional de alta definición. Precio regular de lista: $12,500 MXN (20% de descuento exclusivo aplicado).",
+            "bullets": [
+              "Grabación profesional en quirófano/consultorio con iluminación y audio de alta fidelidad.",
+              "Edición dinámica optimizada para formatos móviles (Instagram Reels, TikTok y YouTube Shorts).",
+              "Enfoque en instalaciones, tecnología laparoscópica y trato humano del Dr. Elmo Aramburo."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "discountPercent": 0
+}
