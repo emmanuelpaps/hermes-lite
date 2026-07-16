@@ -59,39 +59,17 @@
     "apolograma": [],
     "blocks": [
       {
-        "name": "Sprints de Diseño UI/UX (Boletera Bravos)",
+        "name": "Diseño UI/UX Completo (Boletera Bravos)",
         "services": [
           {
-            "name": "Home & Home móvil",
-            "price": 10500,
-            "description": "Diseño de la interfaz principal de acceso a la boletera (Home) en alta fidelidad, optimizada para escritorio y dispositivos móviles.",
-            "image": "/assets/fc-juarez/pilar-home.png",
-            "bullets": [
-              "Estructuración de banner principal dinámico para próximos partidos y eventos destacados.",
-              "Diseño UX intuitivo para el flujo rápido de selección de boletos desde la pantalla principal.",
-              "Adaptación responsive premium para asegurar una navegación fluida en dispositivos móviles."
-            ]
-          },
-          {
-            "name": "Ticket Section y móvil",
-            "price": 14000,
-            "description": "Desarrollo visual detallado de la sección de selección de asientos y checkout en Figma, tanto en versión desktop como móvil.",
+            "name": "Rediseño de Experiencia y Boletería Digital (Home, Tickets y Perfil)",
+            "price": 50000,
+            "description": "Diseño y estructuración completa de la experiencia de usuario (UI/UX) para la boletera digital de los Bravos de Juárez. Comprende el flujo interactivo completo optimizado para escritorio y dispositivos móviles en alta fidelidad dentro de Figma.",
             "image": "/assets/fc-juarez/pilar-tickets.png",
             "bullets": [
-              "Diseño interactivo del mapa del estadio y selector dinámico de zonas/gradas.",
-              "Flujo de compra paso a paso simplificado para maximizar la tasa de conversión.",
-              "Componentes UX de confirmación de compra y visualización de boletos adquiridos."
-            ]
-          },
-          {
-            "name": "Profile Section y móvil",
-            "price": 10500,
-            "description": "Diseño de la sección de perfil de usuario (área privada del aficionado) en Figma, enfocado en la gestión de abonos e historial de compras.",
-            "image": "/assets/fc-juarez/pilar-profile.png",
-            "bullets": [
-              "Diseño de panel principal de usuario con visualización limpia de abonos digitales y membresías.",
-              "Flujo intuitivo de consulta de historial de compras y descarga de boletos.",
-              "Sección de configuración de cuenta y preferencias del aficionado (excluyendo códigos QR)."
+              "Diseño de interfaz de acceso y banners dinámicos (Home y Home móvil).",
+              "Mapa interactivo del estadio, selector de zonas y flujo de checkout (Ticket Section y móvil).",
+              "Panel privado para abonos digitales y consulta de historial de compra (Profile Section y móvil)."
             ]
           }
         ]
