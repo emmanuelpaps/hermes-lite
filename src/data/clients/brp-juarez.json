@@ -1,0 +1,126 @@
+{
+  "clientName": "BRP Ciudad Juárez",
+  "clientLogo": "/assets/brp-juarez/logo.svg",
+  "industry": "Manufactura / Vehículos Recreativos",
+  "heroText": "Propuesta exclusiva de cobertura de medios y relaciones públicas para BRP Ciudad Juárez durante el período Agosto - Diciembre. Un mix de difusión multicanal en la plataforma líder de la región para potenciar la marca empleadora, la cultura Can-Am y el impacto comunitario del campus Juárez.",
+  "themeTemplate": "vercel",
+  "theme": {
+    "mode": "dark",
+    "primary": "#FFE600",
+    "primaryColor": "#FFE600",
+    "fontHeading": "'Geist', 'Inter', sans-serif",
+    "fontBody": "'Geist', 'Inter', sans-serif",
+    "bgColor": "#0b0c10",
+    "textColor": "#ffffff",
+    "mutedText": "#9e9e9e",
+    "textGradient": "linear-gradient(to right, #FFE600, #D1BD00)",
+    "surfaceGlass": "rgba(15, 16, 18, 0.85)",
+    "glassBorder": "rgba(255, 230, 0, 0.15)",
+    "clientLogoRaw": true,
+    "clientLogoStyle": "split"
+  },
+  "config": {
+    "currency": "MXN",
+    "locale": "es-MX",
+    "priceSuffix": "MENSUAL + IVA",
+    "agency": "fn1"
+  },
+  "features": {
+    "showEcosystem": false,
+    "showAudiences": true,
+    "showPricing": true,
+    "disableSelection": false,
+    "disableAccordion": true,
+    "hideModularMethodology": true
+  },
+  "meta": {
+    "title": "Propuesta de Cobertura de Medios | BRP Ciudad Juárez",
+    "description": "Propuesta comercial de difusión institucional y marca empleadora en la plataforma de Frontera Número Uno para BRP Ciudad Juárez.",
+    "ogImage": "/assets/fn1-logo-stacked.png"
+  },
+  "hero": {
+    "headline": "Campaña de Difusión BRP Juárez",
+    "subheadline": "Mix de Cobertura y Relaciones Públicas | Agosto - Diciembre 2026",
+    "backgroundImage": "/assets/brp-juarez/hero-bg.jpg",
+    "backgroundVideo": ""
+  },
+  "storytelling": {
+    "narrative": [
+      {
+        "title": "Atracción de Talento y Cultura Can-Am",
+        "content": "A través de reportajes de marca y videos dinámicos tipo Reel en Frontera Número Uno, visibilizaremos la cultura interna de BRP en Juárez. Promoveremos las vacantes activas y daremos a conocer las prestaciones competitivas y oportunidades de carrera dentro de las plantas para conectar con los trabajadores de la región.",
+        "image": "/assets/brp-juarez/narrative-1.jpg"
+      },
+      {
+        "title": "Responsabilidad Social y Comunidad",
+        "content": "Daremos una amplia cobertura editorial a los programas de responsabilidad social de BRP. Desde el patrocinio a eventos deportivos juveniles hasta las alianzas con centros de estudio tecnológico en Ciudad Juárez, compartiremos el impacto positivo de la marca en la comunidad.",
+        "image": "/assets/brp-juarez/narrative-2.jpg"
+      },
+      {
+        "title": "Cobertura de Eventos en Tiempo Real",
+        "content": "FN1 se convertirá en el canal de amplificación de BRP. Con transmisiones en vivo y coberturas de prensa ágiles, estaremos presentes en las ferias de empleo, aniversarios de planta e hitos industriales de BRP en Juárez, generando tracción inmediata.",
+        "image": "/assets/brp-juarez/narrative-3.jpg"
+      }
+    ],
+    "challenge": "Consolidar el posicionamiento de BRP como el empleador de elección en Ciudad Juárez, vinculando de forma orgánica el ensamble de alta precisión con el impacto comunitario local a través de la red digital de Frontera Número Uno."
+  },
+  "packages": {
+    "title": "Propuesta Económica",
+    "subtitle": "Selecciona la opción de cobertura mensual ideal para la campaña de difusión corporativa (Agosto - Diciembre):",
+    "methodologyText": "",
+    "fn1": [],
+    "apolograma": [],
+    "blocks": [
+      {
+        "name": "Esquemas de Cobertura Mensual (Agosto - Diciembre)",
+        "services": [
+          {
+            "name": "Opción A: Cobertura de Presencia y Atracción (Esencial)",
+            "price": 22500,
+            "description": "Plan esencial para el posicionamiento estratégico y amplificación constante de convocatorias y cultura interna.",
+            "bullets": [
+              "2 Notas editoriales de cobertura periodística en portal y redes oficiales de FN1.",
+              "1 Video vertical tipo Reel (FN1 Hit) mensual de alta producción de cultura y talento.",
+              "Campaña extendida de Historias (FB/IG) de apoyo a convocatorias de vacantes."
+            ]
+          },
+          {
+            "name": "Opción B: Dominio de Medios e Impacto Masivo (Premium)",
+            "price": 38000,
+            "description": "Plan premium para el dominio multicanal completo, relaciones públicas y máxima tracción local.",
+            "bullets": [
+              "4 Notas editoriales de cobertura periodística al mes (hitos, vinculación, RSE).",
+              "2 Videos verticales tipo Reel (FN1 Hit) mensuales de alta producción de cultura y talento.",
+              "1 Transmisión en vivo (Live) desde las plantas o eventos de BRP durante el periodo.",
+              "Cobertura permanente de Historias de amplificación de marca empleadora."
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Servicios Adicionales (Opcionales)",
+        "services": [
+          {
+            "name": "Cobertura en Vivo Adicional (Live FN1)",
+            "price": 5500,
+            "description": "Transmisión en vivo adicional con equipo de producción móvil y conductor local para eventos de reclutamiento o activaciones locales.",
+            "bullets": [
+              "Transmisión en tiempo real en la página oficial de Facebook de FN1.",
+              "Material guardado en alta calidad para uso institucional posterior."
+            ]
+          },
+          {
+            "name": "Video vertical / Reel Extra (Maquiladora Showcase)",
+            "price": 10000,
+            "description": "Producción in-situ de video vertical dinámico enfocado en infraestructura, ergonomía y procesos técnicos de BRP Juárez.",
+            "bullets": [
+              "Grabación profesional y edición dinámica optimizada para formatos móviles (Instagram Reels, TikTok y FB Reels).",
+              "Musicalización y guion adaptados al público de la región."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "discountPercent": 0
+}
