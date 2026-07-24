@@ -63,7 +63,7 @@
         "services": [
           {
             "name": "Rediseño de Experiencia y Boletería Digital (Home, Tickets y Perfil)",
-            "price": 50000,
+            "price": 40000,
             "description": "Diseño y estructuración completa de la experiencia de usuario (UI/UX) para la boletera digital de los Bravos de Juárez. Comprende el flujo interactivo completo optimizado para escritorio y dispositivos móviles en alta fidelidad dentro de Figma.",
             "image": "/assets/fc-juarez/pilar-tickets.png",
             "bullets": [
