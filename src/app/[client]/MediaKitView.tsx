@@ -570,6 +570,33 @@ export default function MediaKitView({ data }: { data: ClientData }) {
     return new Intl.NumberFormat(loc, { style: 'currency', currency: curr }).format(converted);
   };
 
+  const getWhatsAppMessage = () => {
+    if (data.contact?.message) return data.contact.message;
+    const selectedNames = Object.keys(selectedServices).filter(name => selectedServices[name]);
+    const cleanClientName = data.clientName || 'la propuesta';
+    if (selectedNames.length === 0) {
+      return `Hola, revisé la propuesta de ${cleanClientName} y me gustaría platicar al respecto.`;
+    }
+    const selectedPlans = selectedNames.filter(name => !name.toLowerCase().includes('adicional') && !name.toLowerCase().includes('extra'));
+    const selectedAdditionals = selectedNames.filter(name => name.toLowerCase().includes('adicional') || name.toLowerCase().includes('extra'));
+    let message = `¡Hola! Revisé la propuesta de ${cleanClientName} y me gustaría iniciar con el proyecto.\n\n`;
+    if (selectedPlans.length > 0) {
+      message += `📋 *Plan Seleccionado:*\n`;
+      selectedPlans.forEach(plan => {
+        message += `- ${plan}\n`;
+      });
+    }
+    if (selectedAdditionals.length > 0) {
+      message += `\n➕ *Servicios Adicionales:*\n`;
+      selectedAdditionals.forEach(add => {
+        message += `- ${add}\n`;
+      });
+    }
+    const totalWithIva = total * (1 + (data.config?.ivaPercent !== undefined ? data.config.ivaPercent : 16) / 100);
+    message += `\n💰 *Total Estimado:* ${formatPrice(totalWithIva)} (con IVA incluido)`;
+    return message;
+  };
+
   const fadeUp: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
@@ -1672,7 +1699,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           )}
           
           <motion.a 
-            href={`https://wa.me/${data.contact?.phone || '526561031571'}?text=${encodeURIComponent(data.contact?.message || `Hola, revisé la propuesta de ${data.clientName} y estoy listo para avanzar.`)}`}
+            href={`https://wa.me/${data.contact?.phone || '526561031571'}?text=${encodeURIComponent(getWhatsAppMessage())}`}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.ctaButton}
@@ -1746,7 +1773,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
 
       {/* Sticky CTA */}
       <motion.a 
-        href={`https://wa.me/${data.contact?.phone || '526561031571'}?text=${encodeURIComponent(data.contact?.message || `Hola, revisé la propuesta de ${data.clientName} y estoy listo para avanzar.`)}`}
+        href={`https://wa.me/${data.contact?.phone || '526561031571'}?text=${encodeURIComponent(getWhatsAppMessage())}`}
         target="_blank"
         rel="noopener noreferrer"
         className={styles.stickyCta}
