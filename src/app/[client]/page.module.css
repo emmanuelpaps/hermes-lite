@@ -1008,9 +1008,47 @@
   backdrop-filter: blur(10px);
 }
 
+.justificationChartWrapper {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chartCenterValue {
+  font-size: 2.8rem;
+  font-weight: 900;
+  display: block;
+  transition: color 0.2s;
+}
+
+.chartCenterLabel {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-top: 4px;
+  line-height: 1.1;
+}
+
 @media (max-width: 991px) {
   .justificationGrid {
     grid-template-columns: 1fr;
     gap: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .justificationChartWrapper {
+    width: 250px;
+    height: 250px;
+  }
+  .chartCenterValue {
+    font-size: 2.1rem;
+  }
+  .chartCenterLabel {
+    font-size: 0.75rem;
   }
 }

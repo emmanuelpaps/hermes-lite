@@ -944,8 +944,8 @@ export default function MediaKitView({ data }: { data: ClientData }) {
 
                     return (
                       <>
-                        <div style={{ position: 'relative', width: '320px', height: '320px' }}>
-                          <svg width="320" height="320" viewBox="0 0 320 320">
+                        <div className={styles.justificationChartWrapper}>
+                          <svg width="100%" height="100%" viewBox="0 0 320 320">
                             <circle cx="160" cy="160" r={radius} fill="transparent" stroke={isLight ? '#eee' : 'rgba(255, 255, 255, 0.05)'} strokeWidth="24" />
                             {segments.map((seg, idx) => {
                               const dashLength = (seg.value / 100) * circumference;
@@ -994,10 +994,16 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                             pointerEvents: 'none',
                             width: '180px'
                           }}>
-                            <span style={{ fontSize: '2.8rem', fontWeight: 900, color: hoveredSegment !== null ? segments[hoveredSegment].color : (isLight ? 'var(--text-color, #111)' : '#fff'), display: 'block', transition: 'color 0.2s' }}>
+                            <span 
+                              className={styles.chartCenterValue} 
+                              style={{ color: hoveredSegment !== null ? segments[hoveredSegment].color : (isLight ? 'var(--text-color, #111)' : '#fff') }}
+                            >
                               {hoveredSegment !== null ? `${segments[hoveredSegment].value}%` : '100%'}
                             </span>
-                            <span style={{ fontSize: '1rem', color: isLight ? '#666' : '#9e9e9e', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginTop: '4px', lineHeight: 1.1 }}>
+                            <span 
+                              className={styles.chartCenterLabel}
+                              style={{ color: isLight ? '#666' : '#9e9e9e' }}
+                            >
                               {hoveredSegment !== null ? segments[hoveredSegment].label : 'Mix Total'}
                             </span>
                           </div>
