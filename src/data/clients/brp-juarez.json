@@ -29,7 +29,7 @@
     "showEcosystem": false,
     "showAudiences": true,
     "showPricing": true,
-    "disableSelection": true,
+    "disableSelection": false,
     "disableAccordion": true,
     "hideModularMethodology": true
   },
@@ -66,21 +66,31 @@
   },
   "packages": {
     "title": "Propuesta Económica",
-    "subtitle": "Inversión total del mix de cobertura contratado para el campus BRP Juárez (Agosto - Diciembre):",
+    "subtitle": "Selecciona la opción de inversión total ideal para la campaña de difusión semestral (Agosto - Diciembre):",
     "methodologyText": "",
     "fn1": [],
     "apolograma": [],
     "blocks": [
       {
-        "name": "Bolsa Flexible de Cobertura Semestral",
+        "name": "Bolsas Flexibles de Cobertura Semestral (Agosto - Diciembre)",
         "services": [
           {
-            "name": "Paquete Multicanal BRP Juárez (Mix Semestral)",
+            "name": "Opción A: Bolsa Flexible Esencial (Presencia y Cobertura Semestral)",
             "price": 85000,
-            "description": "Bolsa unificada de contenidos digitales para consumir libremente durante el periodo Agosto - Diciembre de acuerdo a las necesidades del campus.",
+            "description": "Bolsa de contenidos semestral para posicionamiento y amplificación de convocatorias y cultura laboral de BRP.",
             "bullets": [
               "10 Notas editoriales de cobertura periodística en portal y redes oficiales de FN1 (todas las notas se comparten en las historias de Facebook e Instagram).",
               "2 Videos verticales tipo Reel (FN1 Hit) de alta producción de cultura y talento."
+            ]
+          },
+          {
+            "name": "Opción B: Bolsa Flexible Elite (Dominio y Cobertura Premium)",
+            "price": 160000,
+            "description": "Bolsa de contenidos premium para la máxima cobertura multicanal y difusión masiva institucional.",
+            "bullets": [
+              "20 Notas editoriales de cobertura periodística en portal y redes oficiales de FN1 (todas las notas se comparten en las historias de Facebook e Instagram).",
+              "5 Videos verticales tipo Reel (FN1 Hit) de alta producción de cultura y talento.",
+              "2 Transmisiones en vivo (Live FN1) para ferias de empleo o eventos especiales en planta."
             ]
           }
         ]
