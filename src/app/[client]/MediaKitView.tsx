@@ -1443,11 +1443,11 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                       }}
                     >
                       {/* Service Name & Price */}
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
-                        <span style={{ fontSize: '1rem', fontWeight: 600, color: '#fff' }}>
+                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '0.4rem', marginBottom: '0.75rem', borderBottom: '1px solid rgba(255, 255, 255, 0.08)', paddingBottom: '0.6rem' }}>
+                        <span style={{ fontSize: '1rem', fontWeight: 600, color: '#fff', lineHeight: 1.3 }}>
                           {service.name.replace(' (15% Descuento)', '')}
                         </span>
-                        <span style={{ fontSize: '1rem', fontWeight: 700, color: primaryColor }}>
+                        <span style={{ fontSize: '1.05rem', fontWeight: 700, color: primaryColor }}>
                           {formatPrice(service.price)}
                         </span>
                       </div>
