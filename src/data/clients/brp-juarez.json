@@ -25,6 +25,9 @@
     "priceSuffix": "INVERSIÓN TOTAL + IVA",
     "agency": "fn1"
   },
+  "contact": {
+    "phone": "526568681498"
+  },
   "features": {
     "showEcosystem": false,
     "showAudiences": true,
