@@ -1,8 +1,8 @@
 {
   "clientName": "BRP Ciudad Juárez",
   "clientLogo": "/assets/brp-juarez/logo.svg",
-  "industry": "Manufactura / Vehículos Recreativos",
-  "heroText": "Propuesta exclusiva de cobertura de medios y relaciones públicas para BRP Ciudad Juárez durante el período Agosto - Diciembre. Una bolsa flexible de difusión multicanal en la plataforma líder de la región para que decidas libremente cuándo y cómo consumir tus contenidos de marca empleadora, cultura Can-Am e impacto comunitario.",
+  "industry": "Manufactura / Responsabilidad Social",
+  "heroText": "Propuesta exclusiva de cobertura de medios y relaciones públicas para BRP Ciudad Juárez durante el período Agosto - Diciembre. Una bolsa flexible de difusión multicanal en la plataforma líder de la región para potenciar la comunicación de la cultura corporativa, los apoyos al personal y el impacto social y comunitario del campus Juárez.",
   "themeTemplate": "vercel",
   "theme": {
     "mode": "dark",
@@ -35,7 +35,7 @@
   },
   "meta": {
     "title": "Propuesta de Cobertura de Medios | BRP Ciudad Juárez",
-    "description": "Propuesta comercial de difusión institucional y marca empleadora en la plataforma de Frontera Número Uno para BRP Ciudad Juárez.",
+    "description": "Propuesta comercial de difusión institucional y responsabilidad social en la plataforma de Frontera Número Uno para BRP Ciudad Juárez.",
     "ogImage": "/assets/fn1-logo-stacked.png"
   },
   "hero": {
@@ -47,26 +47,26 @@
   "storytelling": {
     "narrative": [
       {
-        "title": "Atracción de Talento y Cultura Can-Am",
-        "content": "A través de reportajes de marca y videos dinámicos tipo Reel en Frontera Número Uno, visibilizaremos la cultura interna de BRP en Juárez. Promoveremos las vacantes activas y daremos a conocer las prestaciones competitivas y oportunidades de carrera dentro de las plantas para conectar con los trabajadores de la región.",
+        "title": "Apoyo al Colaborador y Cultura Interna",
+        "content": "Daremos a conocer los programas internos de BRP diseñados para el bienestar de su gente. Desde campañas de salud, becas de estudio, hasta torneos deportivos internos, compartiremos las historias reales que demuestran el compromiso de BRP con el desarrollo de su equipo humano en Ciudad Juárez.",
         "image": "/assets/brp-juarez/narrative-1.jpg"
       },
       {
-        "title": "Responsabilidad Social y Comunidad",
-        "content": "Daremos una amplia cobertura editorial a los programas de responsabilidad social de BRP. Desde el patrocinio a eventos deportivos juveniles hasta las alianzas con centros de estudio tecnológico en Ciudad Juárez, compartiremos el impacto positivo de la marca en la comunidad.",
+        "title": "Compromiso Social y Comunitario",
+        "content": "Visibilizaremos los esfuerzos de responsabilidad social de BRP en la región. Coberturas editoriales sobre sus donaciones a causas locales, iniciativas ecológicas y el apoyo constante al desarrollo social de las familias de Ciudad Juárez.",
         "image": "/assets/brp-juarez/narrative-2.jpg"
       },
       {
-        "title": "Cobertura de Eventos en Tiempo Real",
-        "content": "FN1 se convertirá en el canal de amplificación de BRP. Con transmisiones en vivo y coberturas de prensa ágiles, estaremos presentes en las ferias de empleo, aniversarios de planta e hitos industriales de BRP en Juárez, generando tracción inmediata.",
+        "title": "Impulso al Deporte y Talento Local",
+        "content": "Frontera Número Uno dará amplia difusión a los patrocinios y apoyos que BRP destina a atletas de la comunidad, impulsando el talento deportivo local y fomentando hábitos saludables e integración familiar en la frontera.",
         "image": "/assets/brp-juarez/narrative-3.jpg"
       }
     ],
-    "challenge": "Consolidar el posicionamiento de BRP como el empleador de elección en Ciudad Juárez, vinculando de forma orgánica el ensamble de alta precisión con el impacto comunitario local a través de la red digital de Frontera Número Uno."
+    "challenge": "Posicionar el liderazgo social de BRP en Ciudad Juárez, compartiendo con la comunidad fronteriza las iniciativas internas de apoyo a sus colaboradores y sus programas activos de impacto comunitario y deportivo."
   },
   "packages": {
     "title": "Propuesta Económica",
-    "subtitle": "Selecciona la opción de inversión total ideal para la campaña de difusión semestral (Agosto - Diciembre):",
+    "subtitle": "Selecciona la opción de inversión total ideal para la campaña de difusión de responsabilidad social y comunidad (Agosto - Diciembre):",
     "methodologyText": "Este mix de contenidos tiene una vigencia de uso improrrogable hasta el término de Diciembre de 2026. Los servicios adicionales que se anexan al final de la propuesta pueden contratarse y cubrirse para complementar la cobertura o una vez concluido el periodo de la bolsa principal.",
     "fn1": [],
     "apolograma": [],
@@ -75,22 +75,22 @@
         "name": "Planes de Bolsa Flexible Semestral (Agosto - Diciembre)",
         "services": [
           {
-            "name": "Opción A: Bolsa Flexible Esencial (Presencia y Cobertura Semestral)",
+            "name": "Opción A: Bolsa Flexible de Difusión Institucional (Esencial)",
             "price": 85000,
-            "description": "Bolsa de contenidos semestral para posicionamiento y amplificación de convocatorias y cultura laboral de BRP.",
+            "description": "Bolsa de contenidos semestral para la difusión de iniciativas comunitarias, apoyos al personal y campañas de responsabilidad social.",
             "bullets": [
               "10 Notas editoriales de cobertura periodística en portal y redes oficiales de FN1 (todas las notas se comparten en las historias de Facebook e Instagram).",
-              "2 Videos verticales tipo Reel (FN1 Hit) de alta producción de cultura y talento."
+              "2 Videos verticales tipo Reel (FN1 Hit) de alta producción de impacto social o cultural de colaboradores."
             ]
           },
           {
-            "name": "Opción B: Bolsa Flexible Elite (Dominio y Cobertura Premium)",
+            "name": "Opción B: Bolsa Flexible de Difusión de Impacto (Premium)",
             "price": 160000,
-            "description": "Bolsa de contenidos premium para la máxima cobertura multicanal y difusión masiva institucional.",
+            "description": "Bolsa de contenidos de máxima cobertura y difusión de relaciones públicas para hitos sociales, comunitarios y deportivos.",
             "bullets": [
               "20 Notas editoriales de cobertura periodística en portal y redes oficiales de FN1 (todas las notas se comparten en las historias de Facebook e Instagram).",
-              "5 Videos verticales tipo Reel (FN1 Hit) de alta producción de cultura y talento.",
-              "2 Transmisiones en vivo (Live FN1) para ferias de empleo o eventos especiales de BRP."
+              "5 Videos verticales tipo Reel (FN1 Hit) de alta producción enfocados en las historias de impacto social, deportivo y de colaboradores.",
+              "2 Transmisiones en vivo (Live FN1) para ruedas de prensa, inauguraciones o eventos especiales de vinculación comunitaria."
             ]
           }
         ]
@@ -101,16 +101,16 @@
           {
             "name": "Cobertura en Vivo Adicional (Live FN1)",
             "price": 5500,
-            "description": "Transmisión en vivo adicional con equipo de producción móvil y conductor local para eventos de reclutamiento o activaciones locales.",
+            "description": "Transmisión en vivo adicional con equipo de producción móvil y conductor local para eventos comunitarios, ruedas de prensa o inauguraciones benéficas.",
             "bullets": [
               "Transmisión en tiempo real en la página oficial de Facebook de FN1.",
               "Material guardado en alta calidad para uso institucional posterior."
             ]
           },
           {
-            "name": "Video vertical / Reel Extra (Maquiladora Showcase)",
+            "name": "Video vertical / Reel Extra (Showcase de Impacto)",
             "price": 10000,
-            "description": "Producción in-situ de video vertical dinámico enfocado en la cultura laboral, instalaciones comunes y testimoniales de colaboradores de BRP Juárez.",
+            "description": "Producción in-situ de video vertical dinámico enfocado en las iniciativas de responsabilidad social, entrega de apoyos o torneos deportivos patrocinados por BRP.",
             "bullets": [
               "Grabación profesional y edición dinámica optimizada para formatos móviles (Instagram Reels, TikTok y FB Reels).",
               "Musicalización y guion adaptados al público de la región."
