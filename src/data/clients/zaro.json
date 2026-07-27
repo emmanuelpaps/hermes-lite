@@ -1,0 +1,98 @@
+{
+  "clientName": "Zaro",
+  "clientLogo": "/assets/zaro/logo.png",
+  "industry": "Logística / Distribución Comercial",
+  "heroText": "Propuesta exclusiva de posicionamiento de marca, cultura interna y responsabilidad social para las tres plazas regionales de Zaro Distribuidora Comercial: Ciudad Juárez, Chihuahua y Durango. Una iguala mensual diseñada para estructurar tu presencia digital y conectar con tu equipo de trabajo y la comunidad local.",
+  "themeTemplate": "vercel",
+  "theme": {
+    "mode": "dark",
+    "primary": "#0072CE",
+    "primaryColor": "#0072CE",
+    "fontHeading": "'Geist', 'Inter', sans-serif",
+    "fontBody": "'Geist', 'Inter', sans-serif",
+    "bgColor": "#080d16",
+    "textColor": "#ffffff",
+    "mutedText": "#9e9e9e",
+    "textGradient": "linear-gradient(to right, #0072CE, #00C6FF)",
+    "surfaceGlass": "rgba(10, 15, 25, 0.85)",
+    "glassBorder": "rgba(0, 114, 206, 0.15)",
+    "clientLogoRaw": true,
+    "clientLogoStyle": "split"
+  },
+  "config": {
+    "currency": "MXN",
+    "locale": "es-MX",
+    "priceSuffix": "AL MES + IVA",
+    "agency": "apolograma"
+  },
+  "contact": {
+    "phone": "526561031571"
+  },
+  "features": {
+    "showEcosystem": false,
+    "showAudiences": false,
+    "showPricing": true,
+    "disableSelection": true,
+    "disableAccordion": true,
+    "hideModularMethodology": false
+  },
+  "meta": {
+    "title": "Propuesta de Gestión Digital | Zaro",
+    "description": "Propuesta comercial de posicionamiento de marca, comunicación interna y RSE de Apolograma para Zaro Distribuidora Comercial.",
+    "ogImage": "/assets/og-apolograma.png"
+  },
+  "hero": {
+    "headline": "Gestión Digital y Presencia Regional",
+    "subheadline": "Propuesta de Servicio Mensual para Zaro | Ciudad Juárez - Chihuahua - Durango",
+    "backgroundImage": "/assets/zaro/hero-bg.jpg",
+    "backgroundVideo": ""
+  },
+  "storytelling": {
+    "narrative": [
+      {
+        "title": "Presencia y Conectividad en 3 Regiones",
+        "content": "Estructuraremos y gestionaremos las páginas digitales de Zaro para cada una de sus ubicaciones (Ciudad Juárez, Chihuahua y Durango). A través de una estrategia de contenidos segmentada por plaza, reflejaremos la fuerza de distribución local y conectaremos de forma directa con los clientes y el personal de cada zona.",
+        "image": "/assets/zaro/narrative-1.jpg"
+      },
+      {
+        "title": "Cultura y Apoyo al Equipo Humano",
+        "content": "Diseñaremos campañas de comunicación interna enfocadas en el bienestar del colaborador. Destacaremos los beneficios, actividades y programas de apoyo al personal de Zaro para fortalecer la lealtad, el sentido de pertenencia y consolidar un ambiente de trabajo positivo.",
+        "image": "/assets/zaro/narrative-2.jpg"
+      },
+      {
+        "title": "Impacto Social y Vinculación Comunitaria",
+        "content": "Zaro es un actor clave en la región. Le daremos visibilidad a tus iniciativas de ayuda social, programas ecológicos y patrocinios a causas comunitarias, proyectando la responsabilidad social corporativa de la distribuidora de forma limpia y transparente.",
+        "image": "/assets/zaro/narrative-3.jpg"
+      }
+    ],
+    "challenge": "Consolidar la identidad digital de Zaro en el norte del país, promoviendo de forma balanceada su impacto social, los apoyos internos a sus colaboradores y el valor de su red logística de distribución comercial."
+  },
+  "packages": {
+    "title": "Propuesta Económica",
+    "subtitle": "Detalle de inversión mensual para la gestión digital integral de las plazas de Ciudad Juárez, Chihuahua y Durango:",
+    "methodologyText": "Instrucciones de Aprobación: Revisa los entregables de tu iguala mensual. Una vez de acuerdo, presiona el botón 'Iniciar Proyecto' para enviar tu aprobación y formalizar los detalles de inicio vía WhatsApp con nuestro equipo comercial.",
+    "fn1": [],
+    "apolograma": [],
+    "blocks": [
+      {
+        "name": "Esquema de Iguala Mensual",
+        "services": [
+          {
+            "name": "Servicio de Gestión Digital e Impacto Regional",
+            "price": 25000,
+            "description": "Gestión integral de redes sociales, pauta publicitaria y cobertura de comunicación interna y RSE para las 3 plazas de Zaro.",
+            "bullets": [
+              "Optimización y administración de las 3 páginas regionales (Juárez, Chihuahua y Durango).",
+              "Creación de parrilla mensual de contenido personalizado (diseños gráficos, redacción y adaptaciones regionales).",
+              "Campañas enfocadas en: Apoyos al personal, Torneos deportivos/Patrocinios de RSE e Hitos logísticos.",
+              "Community Management: Monitoreo y moderación diaria de comentarios y mensajes de entrada.",
+              "Estructuración de campañas de pauta digital (Media Buying) con segmentación local.",
+              "Reporte mensual de rendimiento y analítica con métricas clave de alcance y conversiones."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "discountPercent": 0
+}
