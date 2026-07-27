@@ -920,7 +920,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                   {data.storytelling.justification.points.map((point: string, pIdx: number) => (
                     <li key={pIdx} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.8rem', fontSize: '1rem', color: isLight ? '#666' : '#9e9e9e' }}>
                       <span style={{ color: data.theme?.primary || '#a855f7', fontWeight: 'bold' }}>✓</span>
-                      <span>{point}</span>
+                      <span dangerouslySetInnerHTML={{ __html: point.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
                     </li>
                   ))}
                 </ul>
