@@ -2,7 +2,7 @@
   "clientName": "Zaro",
   "clientLogo": "/assets/zaro/logo.png",
   "industry": "Logística / Distribución Comercial",
-  "heroText": "Estrategia digital de alto impacto para proyectar el liderazgo logístico, el orgullo de tu equipo humano y el valor comunitario de Zaro en Ciudad Juárez, Chihuahua y Durango. No solo gestionamos canales: estructuramos una narrativa de confianza regional para consolidar tu marca ante colaboradores, clientes e industria.",
+  "heroText": "Estrategia digital corporativa con enfoque principal en LinkedIn B2B para proyectar el liderazgo logístico, el orgullo de tu equipo humano y las relaciones públicas de Zaro en Ciudad Juárez, Chihuahua y Durango, respaldado por presencia de vinculación comunitaria en Facebook.",
   "themeTemplate": "vercel",
   "theme": {
     "mode": "dark",
@@ -37,35 +37,35 @@
     "hideModularMethodology": false
   },
   "meta": {
-    "title": "Propuesta de Gestión Digital | Zaro",
-    "description": "Propuesta comercial de posicionamiento de marca, comunicación interna y RSE de Apolograma para Zaro Distribuidora Comercial.",
+    "title": "Propuesta de Gestión Digital B2B | Zaro",
+    "description": "Propuesta comercial de posicionamiento en LinkedIn B2B y vinculación en Facebook de Apolograma para Zaro Distribuidora Comercial.",
     "ogImage": "/assets/og-apolograma.png"
   },
   "hero": {
     "headline": "Gestión Digital y Presencia Regional",
-    "subheadline": "Propuesta de Servicio Mensual para Zaro | Ciudad Juárez - Chihuahua - Durango",
+    "subheadline": "Estrategia en LinkedIn Corporativo (Principal) y Facebook (Secundario) para Zaro",
     "backgroundImage": "/assets/zaro/hero-bg.jpg",
     "backgroundVideo": ""
   },
   "storytelling": {
     "narrative": [
       {
-        "title": "Posicionamiento y Conexión Regional de Alto Alcance",
-        "content": "Transformamos la presencia de tus tres plazas en una red unificada de confianza. Mediante estrategias de contenido segmentado en Facebook y canales corporativos, proyectamos el músculo de distribución de Zaro, garantizando que el mercado reconozca la puntualidad, escala y valor de tus operaciones en Chihuahua, Juárez y Durango.",
+        "title": "Liderazgo Logístico y Reputación Corporativa B2B",
+        "content": "Establecemos a LinkedIn como el canal matriz de Zaro para comunicar su infraestructura, escala logística e hitos operativos. Proyectamos confianza y solidez institucional ante socios comerciales, proveedores y tomadores de decisiones clave en la región de Juárez, Chihuahua y Durango, manteniendo a Facebook como un canal secundario de apoyo.",
         "image": "/assets/zaro/narrative-1.jpg"
       },
       {
-        "title": "Fidelización y Orgullo de Nuestro Equipo Humano",
-        "content": "El motor de Zaro son sus colaboradores. Comunicamos de forma atractiva las prestaciones superiores, el fondo de ahorro, los beneficios de salud y las historias de éxito del personal. El resultado: blindamos tu marca empleadora, incrementamos el orgullo interno y disminuimos la rotación laboral.",
+        "title": "Marca Empleadora de Alto Nivel y Orgullo Zaro",
+        "content": "Aprovechamos el alcance profesional de LinkedIn para difundir el bienestar laboral, las prestaciones competitivas y las historias reales de nuestro personal. Atraemos talento calificado del sector logístico y fortalecemos la lealtad interna, reforzando campañas de vinculación en Facebook para el personal operativo.",
         "image": "/assets/zaro/narrative-2.jpg"
       },
       {
-        "title": "Liderazgo Social y Retribución a la Comunidad",
-        "content": "Zaro no solo entrega productos: aporta valor a la sociedad. Diseñamos narrativas de alto impacto en torno a tus programas de responsabilidad social, patrocinios deportivos locales y campañas benéficas, posicionando a Zaro como una marca humana y comprometida con el desarrollo social de la frontera.",
+        "title": "Responsabilidad Social y Relaciones Públicas",
+        "content": "Diseñamos y difundimos la narrativa de las iniciativas sociales, donaciones y patrocinios comunitarios de Zaro. Posicionamos a la marca de forma humana y comprometida con el desarrollo del norte del país, utilizando el prestigio corporativo de LinkedIn para RSE y el alcance masivo de Facebook para la comunidad local.",
         "image": "/assets/zaro/narrative-3.jpg"
       }
     ],
-    "challenge": "Convertir la escala física y el impacto social de Zaro en un activo reputacional digital indiscutible, unificando la comunicación de sus tres plazas bajo una narrativa de marca líder, humana y comprometida con el norte de México."
+    "challenge": "Posicionar a Zaro como el referente logístico e institucional del norte del país en LinkedIn, consolidando su marca corporativa B2B, atrayendo talento especializado y complementando el alcance comunitario con una presencia optimizada en Facebook."
   },
   "packages": {
     "title": "Propuesta Económica",
@@ -80,15 +80,15 @@
           {
             "name": "Estrategia Mensual de Gestión, Pauta e Impacto Regional",
             "price": 25000,
-            "description": "Servicio completo 'llave en mano' para liderar la conversación digital de Zaro en sus tres ubicaciones geográficas, integrando comunicación interna, RSE y canales corporativos.",
+            "description": "Servicio completo 'llave en mano' para liderar la conversación digital de Zaro en sus tres ubicaciones geográficas, priorizando la comunicación en LinkedIn B2B.",
             "bullets": [
-              "Administración y optimización activa de páginas regionales (Facebook) con enfoque en la comunidad y clientes locales de Juárez, Chihuahua y Durango.",
-              "Gestión y posicionamiento en LinkedIn Corporativo: Enfoque en B2B, marca empleadora institucional, relaciones públicas e hitos logísticos del sector.",
-              "Estrategia y diseño mensual de parrillas de contenido premium (diseño gráfico, copywriting y adaptaciones regionales).",
-              "Campañas estratégicas enfocadas en: Atracción y orgullo interno (Prestaciones, salud, torneos), Responsabilidad Social (Apoyos, donaciones) e Hitos Operativos.",
-              "Community Management Proactivo: Moderación diaria, atención oportuna de mensajes y fidelización de seguidores.",
-              "Propuesta de Pauta Digital (Proactiva/Opcional): Estructuración y optimización de micro-campañas de pauta (presupuesto sugerido y flexible) enfocadas en maximizar la interacción local.",
-              "Reporte mensual de analítica y rendimiento con métricas clave de alcance real, interacciones y conversiones de negocio."
+              "Gestión estratégica y posicionamiento activo en LinkedIn Corporativo (Canal Principal): Foco en B2B, marca empleadora institucional, relaciones públicas e hitos de la industria logística.",
+              "Optimización y administración complementaria de páginas de Facebook (Canal Secundario) para la comunicación local y vinculación directa con la comunidad de Juárez, Chihuahua y Durango.",
+              "Estrategia y diseño mensual de parrillas de contenido premium (diseño gráfico, copywriting y adaptaciones de formato para cada red).",
+              "Campañas de comunicación interna enfocadas en: Orgullo y atracción laboral (Prestaciones superiores, fondo de ahorro, salud, torneos) y Responsabilidad Social (RSE).",
+              "Community Management Proactivo: Moderación diaria y atención oportuna de mensajes en ambos canales.",
+              "Propuesta de Pauta Digital (Proactiva/Opcional): Campañas de interacción y alcance de pauta local sugerida para potenciar publicaciones clave.",
+              "Reporte mensual de rendimiento y analítica avanzada, contrastando el impacto corporativo en LinkedIn y el alcance en Facebook."
             ]
           }
         ]
