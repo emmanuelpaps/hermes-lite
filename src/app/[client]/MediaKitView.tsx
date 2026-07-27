@@ -442,10 +442,31 @@ interface ClientData {
     borderRadius?: string;
   };
 }
-
 export default function MediaKitView({ data }: { data: ClientData }) {
   const [activeService, setActiveService] = useState<string | null>(null);
   const [hoveredSegment, setHoveredSegment] = useState<number | null>(null);
+  const [isAutoplayActive, setIsAutoplayActive] = useState(true);
+
+  useEffect(() => {
+    if (!isAutoplayActive) return;
+    
+    // Start highlighting segment 0 after drawing animation completes (1.5s)
+    const timeout = setTimeout(() => {
+      setHoveredSegment(0);
+    }, 1500);
+
+    const interval = setInterval(() => {
+      setHoveredSegment((prev) => {
+        if (prev === null) return 0;
+        return (prev + 1) % 4;
+      });
+    }, 3200); // 3.2 seconds per segment
+
+    return () => {
+      clearTimeout(timeout);
+      clearInterval(interval);
+    };
+  }, [isAutoplayActive]);
   
   const isExclusive = data.features?.exclusivePackages === true;
   const [selectedApoIdx, setSelectedApoIdx] = useState<number>(0);
@@ -958,7 +979,14 @@ export default function MediaKitView({ data }: { data: ClientData }) {
 
                     return (
                       <>
-                        <div className={styles.justificationChartWrapper}>
+                        <div 
+                          className={styles.justificationChartWrapper}
+                          onMouseEnter={() => setIsAutoplayActive(false)}
+                          onMouseLeave={() => {
+                            setIsAutoplayActive(true);
+                            setHoveredSegment(null);
+                          }}
+                        >
                           <svg width="100%" height="100%" viewBox="0 0 320 320">
                             <circle cx="160" cy="160" r={radius} fill="transparent" stroke={isLight ? '#eee' : 'rgba(255, 255, 255, 0.05)'} strokeWidth="24" />
                             {segments.map((seg, idx) => {
