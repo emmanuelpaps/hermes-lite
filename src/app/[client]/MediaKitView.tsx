@@ -1100,16 +1100,16 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.3 }} style={{ height: '100%' }}>
             <InsightCard 
               title="Visualizaciones" 
-              value="60.8M" 
-              increase="" 
+              value="72.7M" 
+              increase="+30.1%" 
               isLight={isLight} 
             />
           </motion.div>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ delay: 0.4 }} style={{ height: '100%' }}>
             <InsightCard 
               title="Interacciones" 
-              value="701.8K" 
-              increase="" 
+              value="760.3K" 
+              increase="+28.8%" 
               isLight={isLight} 
             />
           </motion.div>
