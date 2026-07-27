@@ -1,0 +1,108 @@
+{
+  "clientName": "Jayza",
+  "clientLogo": "/assets/jayza/logo.png",
+  "industry": "Distribución Comercial y Logística Local",
+  "heroText": "Estrategia digital enfocada en posicionar el liderazgo comercial, alcance y flexibilidad de distribución de Jayza ante dueños de tiendas de abarrotes, pequeños comercios y socios comerciales en Ciudad Juárez, priorizando la vinculación en Facebook y el posicionamiento corporativo en LinkedIn.",
+  "themeTemplate": "vercel",
+  "theme": {
+    "mode": "dark",
+    "primary": "#E5E7EB",
+    "primaryColor": "#E5E7EB",
+    "fontHeading": "'Geist', 'Inter', sans-serif",
+    "fontBody": "'Geist', 'Inter', sans-serif",
+    "bgColor": "#0c0d0f",
+    "textColor": "#ffffff",
+    "mutedText": "#a1a1aa",
+    "textGradient": "linear-gradient(to right, #ffffff, #a1a1aa)",
+    "surfaceGlass": "rgba(15, 17, 20, 0.85)",
+    "glassBorder": "rgba(229, 231, 235, 0.15)",
+    "clientLogoRaw": true,
+    "clientLogoStyle": "split"
+  },
+  "config": {
+    "currency": "MXN",
+    "locale": "es-MX",
+    "priceSuffix": "AL MES + IVA",
+    "agency": "apolograma"
+  },
+  "contact": {
+    "phone": "526561031571"
+  },
+  "features": {
+    "showEcosystem": false,
+    "showAudiences": false,
+    "showPricing": true,
+    "disableSelection": true,
+    "disableAccordion": true,
+    "hideModularMethodology": false
+  },
+  "meta": {
+    "title": "Propuesta de Posicionamiento Digital | Jayza",
+    "description": "Propuesta comercial de posicionamiento en LinkedIn B2B y vinculación en Facebook de Apolograma para Jayza.",
+    "ogImage": "/assets/og-apolograma.png"
+  },
+  "hero": {
+    "headline": "Gestión Digital y Conexión Comercial",
+    "subheadline": "Estrategia en Facebook (Cercanía) y LinkedIn (Corporativo) para Jayza Juárez",
+    "backgroundImage": "/assets/jayza/hero-bg.jpg",
+    "backgroundVideo": ""
+  },
+  "storytelling": {
+    "justification": {
+      "title": "Justificación Estratégica: LinkedIn y Facebook para Jayza",
+      "content": "Jayza opera en el corazón de la distribución comercial de Ciudad Juárez, conectando de forma ágil y flexible a marcas de consumo con pequeños comercios locales. Para consolidar su posicionamiento ante proveedores e impulsar su comunicación directa con la red de tiendas de abarrotes, proponemos un enfoque estratégico dual: Facebook como la herramienta de vinculación y proximidad diaria, y LinkedIn como el eje de relaciones corporativas y reputación. Esta estructura responde a tres pilares de negocio:",
+      "points": [
+        "**Vinculación Directa con el Canal Detallista (Facebook):** Nos permite conectar de forma directa con los dueños de tiendas de abarrotes, misceláneas y minisuper locales, promoviendo el catálogo flexible de productos y la cercanía del servicio de entrega.",
+        "**Marca Empleadora y Atracción de Talento Operativo:** Proyectamos las ventajas de trabajar en Jayza, enfocándonos en la seguridad de sus rutas y el bienestar del equipo para facilitar el reclutamiento continuo de choferes, repartidores y personal de almacén.",
+        "**Confianza y Relaciones B2B (LinkedIn):** Posicionamos a Jayza ante marcas y proveedores nacionales como el socio logístico idóneo en la frontera norte, dándole visibilidad corporativa a los logros de infraestructura y expansión de la empresa."
+      ]
+    },
+    "narrative": [
+      {
+        "title": "Flexibilidad en Distribución y Operación Logística",
+        "content": "Proyectamos la agilidad, infraestructura y capacidad de Jayza para abastecer una amplia gama de productos a pequeños comercios y tienditas. Mostramos procesos de almacén y distribución eficientes que inspiran confianza a socios comerciales en la frontera.",
+        "image": "/assets/jayza/narrative-1.jpg"
+      },
+      {
+        "title": "Cercanía con el Pequeño Comercio y Tienditas Locales",
+        "content": "Utilizamos Facebook para crear una comunidad sólida con los dueños de negocios locales en Ciudad Juárez. Comunicamos ofertas, ventajas de surtido, y mostramos las visitas y el trato cercano de nuestros repartidores, humanizando la marca.",
+        "image": "/assets/jayza/narrative-2.jpg"
+      },
+      {
+        "title": "Consolidación de Marca y Rutas en la Frontera",
+        "content": "Proyectamos el crecimiento de Jayza en Ciudad Juárez, destacando la cobertura de nuestras rutas de entrega. Posicionamos a la marca en LinkedIn como el socio logístico ideal para marcas que buscan penetración efectiva en el mercado detallista regional.",
+        "image": "/assets/jayza/narrative-3.jpg"
+      }
+    ],
+    "challenge": "Posicionar a Jayza como el principal distribuidor de confianza y socio logístico del pequeño comercio en Ciudad Juárez, combinando el prestigio corporativo de LinkedIn para captar marcas con la cercanía comunitaria en Facebook para conectar con las tienditas locales."
+  },
+  "packages": {
+    "title": "Propuesta Económica",
+    "subtitle": "Inversión mensual para consolidar e impulsar la presencia digital de Jayza en Ciudad Juárez:",
+    "methodologyText": "Instrucciones de Aprobación: Revisa los entregables de tu iguala mensual. Una vez de acuerdo con los entregables detallados, presiona el botón 'Iniciar Proyecto' para enviar tu aprobación y formalizar los detalles del inicio de operaciones vía WhatsApp con nuestro equipo.",
+    "fn1": [],
+    "apolograma": [],
+    "blocks": [
+      {
+        "name": "Esquema de Iguala Mensual",
+        "services": [
+          {
+            "name": "Estrategia Mensual de Gestión, Contenido y Vinculación Local",
+            "price": 25000,
+            "description": "Servicio llave en mano enfocado en liderar la conversación digital de Jayza, conectando con pequeños comercios en Facebook y construyendo confianza corporativa en LinkedIn.",
+            "bullets": [
+              "Gestión estratégica y posicionamiento activo en Facebook (Canal Principal de Cercanía): Foco en dueños de tienditas, ofertas de catálogo, cobertura de rutas y testimonios de servicio.",
+              "Optimización y presencia de marca institucional en LinkedIn B2B (Canal de Relaciones Corporativas): Foco en alianzas comerciales, tomadores de decisiones, marcas aliadas y orgullo corporativo.",
+              "Estrategia y diseño mensual de parrillas de contenido premium (diseño gráfico, copywriting y adaptaciones de formato para cada red social).",
+              "Campañas de atracción de personal y marca empleadora enfocadas en choferes, repartidores y operadores de almacén (LinkedIn y Facebook).",
+              "Community Management Activo: Moderación diaria de comentarios y atención de mensajes de potenciales clientes locales.",
+              "Propuesta de Pauta Digital (Proactiva/Opcional): Campañas de interacción y alcance de pauta local sugerida para potenciar publicaciones clave.",
+              "Reporte mensual de rendimiento y analítica avanzada para medir el impacto de la estrategia en ambos canales."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "discountPercent": 0
+}
