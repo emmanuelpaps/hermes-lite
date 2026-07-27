@@ -952,6 +952,14 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                               const rotation = (accumulatedPercent / 100) * 360 - 90;
                               accumulatedPercent += seg.value;
 
+                              const circleVariants = {
+                                hidden: { strokeDashoffset: circumference },
+                                visible: { 
+                                  strokeDashoffset: strokeOffset,
+                                  transition: { duration: 1.2, ease: "easeOut", delay: 0.1 }
+                                }
+                              };
+
                               return (
                                 <motion.circle
                                   key={idx}
@@ -962,10 +970,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                                   stroke={seg.color}
                                   strokeWidth="12"
                                   strokeDasharray={circumference}
-                                  initial={{ strokeDashoffset: circumference }}
-                                  whileInView={{ strokeDashoffset: strokeOffset }}
-                                  viewport={{ once: true }}
-                                  transition={{ duration: 1.2, ease: "easeOut", delay: 0.1 }}
+                                  variants={circleVariants as any}
                                   style={{
                                     transform: `rotate(${rotation}deg)`,
                                     transformOrigin: '80px 80px',
