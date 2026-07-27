@@ -989,7 +989,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                             pointerEvents: 'none',
                             width: '100px'
                           }}>
-                            <span style={{ fontSize: '1.8rem', fontWeight: 900, color: hoveredSegment !== null ? segments[hoveredSegment].color : '#fff', display: 'block', transition: 'color 0.2s' }}>
+                            <span style={{ fontSize: '1.8rem', fontWeight: 900, color: hoveredSegment !== null ? segments[hoveredSegment].color : (isLight ? 'var(--text-color, #111)' : '#fff'), display: 'block', transition: 'color 0.2s' }}>
                               {hoveredSegment !== null ? `${segments[hoveredSegment].value}%` : '100%'}
                             </span>
                             <span style={{ fontSize: '0.75rem', color: isLight ? '#666' : '#9e9e9e', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginTop: '2px', lineHeight: 1.1 }}>
