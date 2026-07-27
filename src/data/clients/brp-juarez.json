@@ -2,7 +2,7 @@
   "clientName": "BRP Ciudad Juárez",
   "clientLogo": "/assets/brp-juarez/logo.svg",
   "industry": "Manufactura / Vehículos Recreativos",
-  "heroText": "Propuesta exclusiva de cobertura de medios y relaciones públicas para BRP Ciudad Juárez durante el período Agosto - Diciembre. Un mix de difusión multicanal en la plataforma líder de la región para potenciar la marca empleadora, la cultura Can-Am y el impacto comunitario del campus Juárez.",
+  "heroText": "Propuesta exclusiva de cobertura de medios y relaciones públicas para BRP Ciudad Juárez durante el período Agosto - Diciembre. Una bolsa flexible de difusión multicanal en la plataforma líder de la región para que decidas libremente cuándo y cómo consumir tus contenidos de marca empleadora, cultura Can-Am e impacto comunitario.",
   "themeTemplate": "vercel",
   "theme": {
     "mode": "dark",
@@ -22,7 +22,7 @@
   "config": {
     "currency": "MXN",
     "locale": "es-MX",
-    "priceSuffix": "MENSUAL + IVA",
+    "priceSuffix": "INVERSIÓN TOTAL + IVA",
     "agency": "fn1"
   },
   "features": {
@@ -66,33 +66,33 @@
   },
   "packages": {
     "title": "Propuesta Económica",
-    "subtitle": "Selecciona la opción de cobertura mensual ideal para la campaña de difusión corporativa (Agosto - Diciembre):",
+    "subtitle": "Selecciona la opción de inversión total ideal para la campaña de difusión semestral (Agosto - Diciembre):",
     "methodologyText": "",
     "fn1": [],
     "apolograma": [],
     "blocks": [
       {
-        "name": "Esquemas de Cobertura Mensual (Agosto - Diciembre)",
+        "name": "Bolsas Flexibles de Cobertura Semestral (Agosto - Diciembre)",
         "services": [
           {
-            "name": "Opción A: Cobertura de Presencia y Atracción (Esencial)",
-            "price": 22500,
-            "description": "Plan esencial para el posicionamiento estratégico y amplificación constante de convocatorias y cultura interna.",
+            "name": "Opción A: Bolsa Flexible Esencial (Presencia y Cobertura Semestral)",
+            "price": 85000,
+            "description": "Bolsa de contenidos semestral para posicionamiento y amplificación de convocatorias y cultura laboral de BRP.",
             "bullets": [
-              "2 Notas editoriales de cobertura periodística en portal y redes oficiales de FN1.",
-              "1 Video vertical tipo Reel (FN1 Hit) mensual de alta producción de cultura y talento.",
+              "10 Notas editoriales de cobertura periodística en portal y redes oficiales de FN1.",
+              "2 Videos verticales tipo Reel (FN1 Hit) de alta producción de cultura y talento.",
               "Campaña extendida de Historias (FB/IG) de apoyo a convocatorias de vacantes."
             ]
           },
           {
-            "name": "Opción B: Dominio de Medios e Impacto Masivo (Premium)",
-            "price": 38000,
-            "description": "Plan premium para el dominio multicanal completo, relaciones públicas y máxima tracción local.",
+            "name": "Opción B: Bolsa Flexible Elite (Dominio y Cobertura Premium)",
+            "price": 160000,
+            "description": "Bolsa de contenidos premium para la máxima cobertura multicanal y difusión masiva institucional.",
             "bullets": [
-              "4 Notas editoriales de cobertura periodística al mes (hitos, vinculación, RSE).",
-              "2 Videos verticales tipo Reel (FN1 Hit) mensuales de alta producción de cultura y talento.",
-              "1 Transmisión en vivo (Live) desde las plantas o eventos de BRP durante el periodo.",
-              "Cobertura permanente de Historias de amplificación de marca empleadora."
+              "20 Notas editoriales de cobertura periodística (hitos, vinculación, RSE).",
+              "5 Videos verticales tipo Reel (FN1 Hit) de alta producción de cultura y talento.",
+              "2 Transmisiones en vivo (Live FN1) para ferias de empleo o eventos especiales en planta.",
+              "Cobertura prioritaria en Historias de amplificación de marca empleadora."
             ]
           }
         ]
