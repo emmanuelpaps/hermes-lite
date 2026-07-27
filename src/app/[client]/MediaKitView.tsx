@@ -445,6 +445,7 @@ interface ClientData {
 
 export default function MediaKitView({ data }: { data: ClientData }) {
   const [activeService, setActiveService] = useState<string | null>(null);
+  const [hoveredSegment, setHoveredSegment] = useState<number | null>(null);
   
   const isExclusive = data.features?.exclusivePackages === true;
   const [selectedApoIdx, setSelectedApoIdx] = useState<number>(0);
@@ -900,7 +901,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
               variants={fadeUp}
               className={`${styles.narrativeCard} glass`}
               style={{
-                maxWidth: '900px',
+                maxWidth: '1000px',
                 margin: '0 auto 4rem auto',
                 padding: '2.5rem',
                 border: '1.5px solid var(--glass-border, rgba(0, 114, 206, 0.15))',
@@ -909,22 +910,115 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 backdropFilter: 'blur(10px)'
               }}
             >
-              <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#fff', marginBottom: '1rem', background: data.theme?.textGradient || 'linear-gradient(to right, #a855f7, #00d2ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontFamily: 'var(--font-heading)' }}>
-                {data.storytelling.justification.title}
-              </h2>
-              <p style={{ fontSize: '1.15rem', color: isLight ? '#444' : '#ccc', lineHeight: 1.7, margin: 0, fontWeight: 300 }}>
-                {data.storytelling.justification.content}
-              </p>
-              {data.storytelling.justification.points && (
-                <ul style={{ listStyle: 'none', padding: 0, marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-                  {data.storytelling.justification.points.map((point: string, pIdx: number) => (
-                    <li key={pIdx} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.8rem', fontSize: '1rem', color: isLight ? '#666' : '#9e9e9e' }}>
-                      <span style={{ color: data.theme?.primary || '#a855f7', fontWeight: 'bold' }}>✓</span>
-                      <span dangerouslySetInnerHTML={{ __html: point.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
-                    </li>
-                  ))}
-                </ul>
-              )}
+              <div className={styles.justificationGrid}>
+                <div className={styles.justificationInfo}>
+                  <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#fff', marginBottom: '1rem', background: data.theme?.textGradient || 'linear-gradient(to right, #a855f7, #00d2ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontFamily: 'var(--font-heading)' }}>
+                    {data.storytelling.justification.title}
+                  </h2>
+                  <p style={{ fontSize: '1.15rem', color: isLight ? '#444' : '#ccc', lineHeight: 1.7, margin: 0, fontWeight: 300 }}>
+                    {data.storytelling.justification.content}
+                  </p>
+                  {data.storytelling.justification.points && (
+                    <ul style={{ listStyle: 'none', padding: 0, marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+                      {data.storytelling.justification.points.map((point: string, pIdx: number) => (
+                        <li key={pIdx} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.8rem', fontSize: '1rem', color: isLight ? '#666' : '#9e9e9e' }}>
+                          <span style={{ color: data.theme?.primary || '#a855f7', fontWeight: 'bold' }}>✓</span>
+                          <span dangerouslySetInnerHTML={{ __html: point.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+
+                <div className={styles.justificationChartContainer}>
+                  {(() => {
+                    const segments = [
+                      { label: 'Reputación B2B', value: 35, color: data.theme?.primary || '#0072CE', desc: 'Hitos operativos, escala logística e infraestructura en LinkedIn.' },
+                      { label: 'Marca Empleadora', value: 30, color: '#00C6FF', desc: 'Prestaciones, orgullo interno, bienestar y vacantes en LinkedIn/Facebook.' },
+                      { label: 'Responsabilidad Social', value: 20, color: '#00EDB6', desc: 'Programas de ayuda comunitaria, ecología y patrocinios locales.' },
+                      { label: 'Interacción y Comunidad', value: 15, color: '#7800FF', desc: 'Campañas de interacción local y cobertura proactiva en Facebook.' }
+                    ];
+                    const radius = 50;
+                    const circumference = 2 * Math.PI * radius; // 314.159
+                    let accumulatedPercent = 0;
+
+                    return (
+                      <>
+                        <div style={{ position: 'relative', width: '160px', height: '160px' }}>
+                          <svg width="160" height="160" viewBox="0 0 160 160">
+                            <circle cx="80" cy="80" r={radius} fill="transparent" stroke={isLight ? '#eee' : 'rgba(255, 255, 255, 0.05)'} strokeWidth="12" />
+                            {segments.map((seg, idx) => {
+                              const strokeOffset = circumference - (seg.value / 100) * circumference;
+                              const rotation = (accumulatedPercent / 100) * 360 - 90;
+                              accumulatedPercent += seg.value;
+
+                              return (
+                                <motion.circle
+                                  key={idx}
+                                  cx="80"
+                                  cy="80"
+                                  r={radius}
+                                  fill="transparent"
+                                  stroke={seg.color}
+                                  strokeWidth="12"
+                                  strokeDasharray={circumference}
+                                  initial={{ strokeDashoffset: circumference }}
+                                  whileInView={{ strokeDashoffset: strokeOffset }}
+                                  viewport={{ once: true }}
+                                  transition={{ duration: 1.2, ease: "easeOut", delay: 0.1 }}
+                                  style={{
+                                    transform: `rotate(${rotation}deg)`,
+                                    transformOrigin: '80px 80px',
+                                    cursor: 'pointer',
+                                    opacity: hoveredSegment === null || hoveredSegment === idx ? 1 : 0.35,
+                                    transition: 'opacity 0.2s, stroke-width 0.2s',
+                                    strokeWidth: hoveredSegment === idx ? 15 : 12
+                                  }}
+                                  onMouseEnter={() => setHoveredSegment(idx)}
+                                  onMouseLeave={() => setHoveredSegment(null)}
+                                />
+                              );
+                            })}
+                          </svg>
+                          <div style={{
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            textAlign: 'center',
+                            pointerEvents: 'none',
+                            width: '100px'
+                          }}>
+                            <span style={{ fontSize: '1.8rem', fontWeight: 900, color: hoveredSegment !== null ? segments[hoveredSegment].color : '#fff', display: 'block', transition: 'color 0.2s' }}>
+                              {hoveredSegment !== null ? `${segments[hoveredSegment].value}%` : '100%'}
+                            </span>
+                            <span style={{ fontSize: '0.75rem', color: isLight ? '#666' : '#9e9e9e', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginTop: '2px', lineHeight: 1.1 }}>
+                              {hoveredSegment !== null ? segments[hoveredSegment].label : 'Mix Total'}
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className={styles.chartDetailsBox}>
+                          {hoveredSegment !== null ? (
+                            <>
+                              <h4 style={{ margin: '0 0 4px 0', fontSize: '0.95rem', fontWeight: 700, color: segments[hoveredSegment].color }}>
+                                {segments[hoveredSegment].label} ({segments[hoveredSegment].value}%)
+                              </h4>
+                              <p style={{ margin: 0, fontSize: '0.85rem', color: isLight ? '#555' : '#ccc', lineHeight: 1.35 }}>
+                                {segments[hoveredSegment].desc}
+                              </p>
+                            </>
+                          ) : (
+                            <p style={{ margin: 0, fontSize: '0.85rem', color: isLight ? '#777' : '#888', lineHeight: 1.35, fontStyle: 'italic', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+                              Pasa el cursor sobre los segmentos del gráfico para ver la estrategia de parrilla.
+                            </p>
+                          )}
+                        </div>
+                      </>
+                    );
+                  })()}
+                </div>
+              </div>
             </motion.div>
           )}
 

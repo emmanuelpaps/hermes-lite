@@ -978,3 +978,39 @@
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
   }
 }
+
+.justificationGrid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.justificationChartContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+
+.chartDetailsBox {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  width: 100%;
+  max-width: 280px;
+  text-align: center;
+  min-height: 80px;
+  backdrop-filter: blur(10px);
+}
+
+@media (max-width: 991px) {
+  .justificationGrid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
