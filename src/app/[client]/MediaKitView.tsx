@@ -939,7 +939,21 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                       { label: 'Interacción y Comunidad', value: 15, color: '#FFB703', desc: 'Campañas de interacción local y cobertura proactiva en Facebook.' }
                     ];
                     const radius = 100;
-                    const circumference = 2 * Math.PI * radius; // 628.318
+                    
+                    const getArcPath = (startPercent: number, endPercent: number, r: number) => {
+                      const startAngle = (startPercent / 100) * 360 * (Math.PI / 180) - Math.PI / 2;
+                      const endAngle = (endPercent / 100) * 360 * (Math.PI / 180) - Math.PI / 2;
+                      
+                      const x1 = 160 + r * Math.cos(startAngle);
+                      const y1 = 160 + r * Math.sin(startAngle);
+                      const x2 = 160 + r * Math.cos(endAngle);
+                      const y2 = 160 + r * Math.sin(endAngle);
+                      
+                      const largeArcFlag = (endPercent - startPercent) > 50 ? 1 : 0;
+                      
+                      return `M ${x1} ${y1} A ${r} ${r} 0 ${largeArcFlag} 1 ${x2} ${y2}`;
+                    };
+
                     let accumulatedPercent = 0;
 
                     return (
@@ -948,36 +962,32 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                           <svg width="100%" height="100%" viewBox="0 0 320 320">
                             <circle cx="160" cy="160" r={radius} fill="transparent" stroke={isLight ? '#eee' : 'rgba(255, 255, 255, 0.05)'} strokeWidth="24" />
                             {segments.map((seg, idx) => {
-                              const dashLength = (seg.value / 100) * circumference;
-                              const rotation = (accumulatedPercent / 100) * 360 - 90;
+                              const startPercent = accumulatedPercent;
                               accumulatedPercent += seg.value;
+                              const endPercent = accumulatedPercent;
+                              
+                              const pathD = getArcPath(startPercent, endPercent, radius);
 
-                              const circleVariants = {
-                                hidden: { strokeDashoffset: dashLength },
+                              const pathVariants = {
+                                hidden: { pathLength: 0 },
                                 visible: { 
-                                  strokeDashoffset: 0,
+                                  pathLength: 1,
                                   transition: { duration: 1.2, ease: "easeOut", delay: 0.1 }
                                 }
                               };
 
                               return (
-                                <motion.circle
+                                <motion.path
                                   key={idx}
-                                  cx="160"
-                                  cy="160"
-                                  r={radius}
-                                  fill="transparent"
+                                  d={pathD}
+                                  fill="none"
                                   stroke={seg.color}
-                                  strokeWidth="24"
-                                  strokeDasharray={`${dashLength} ${circumference}`}
-                                  variants={circleVariants as any}
+                                  strokeWidth={hoveredSegment === idx ? 30 : 24}
+                                  variants={pathVariants as any}
                                   style={{
-                                    transform: `rotate(${rotation}deg)`,
-                                    transformOrigin: '160px 160px',
                                     cursor: 'pointer',
                                     opacity: hoveredSegment === null || hoveredSegment === idx ? 1 : 0.35,
-                                    transition: 'opacity 0.2s, stroke-width 0.2s',
-                                    strokeWidth: hoveredSegment === idx ? 30 : 24
+                                    transition: 'opacity 0.2s, stroke-width 0.2s'
                                   }}
                                   onMouseEnter={() => setHoveredSegment(idx)}
                                   onMouseLeave={() => setHoveredSegment(null)}
