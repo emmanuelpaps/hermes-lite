@@ -948,14 +948,14 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                           <svg width="160" height="160" viewBox="0 0 160 160">
                             <circle cx="80" cy="80" r={radius} fill="transparent" stroke={isLight ? '#eee' : 'rgba(255, 255, 255, 0.05)'} strokeWidth="12" />
                             {segments.map((seg, idx) => {
-                              const strokeOffset = circumference - (seg.value / 100) * circumference;
+                              const dashLength = (seg.value / 100) * circumference;
                               const rotation = (accumulatedPercent / 100) * 360 - 90;
                               accumulatedPercent += seg.value;
 
                               const circleVariants = {
-                                hidden: { strokeDashoffset: circumference },
+                                hidden: { strokeDashoffset: dashLength },
                                 visible: { 
-                                  strokeDashoffset: strokeOffset,
+                                  strokeDashoffset: 0,
                                   transition: { duration: 1.2, ease: "easeOut", delay: 0.1 }
                                 }
                               };
@@ -969,7 +969,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                                   fill="transparent"
                                   stroke={seg.color}
                                   strokeWidth="12"
-                                  strokeDasharray={circumference}
+                                  strokeDasharray={`${dashLength} ${circumference}`}
                                   variants={circleVariants as any}
                                   style={{
                                     transform: `rotate(${rotation}deg)`,
