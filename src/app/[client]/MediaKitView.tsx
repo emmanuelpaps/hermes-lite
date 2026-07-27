@@ -408,6 +408,7 @@ interface ClientData {
     countdownDate?: string;
     countdownLabel?: string;
     pillars: { title: string; description: string; image?: string }[];
+    justification?: { title: string; content: string; points?: string[] };
   };
   packages: {
     title?: string;
@@ -891,6 +892,42 @@ export default function MediaKitView({ data }: { data: ClientData }) {
       {/* Storytelling: The Narrative & Challenge */}
       {data.storytelling && (
         <section className={styles.storySection}>
+          {data.storytelling.justification && (
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              className={`${styles.narrativeCard} glass`}
+              style={{
+                maxWidth: '900px',
+                margin: '0 auto 4rem auto',
+                padding: '2.5rem',
+                border: '1.5px solid var(--glass-border, rgba(0, 114, 206, 0.15))',
+                borderRadius: '24px',
+                textAlign: 'left',
+                backdropFilter: 'blur(10px)'
+              }}
+            >
+              <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#fff', marginBottom: '1rem', background: data.theme?.textGradient || 'linear-gradient(to right, #a855f7, #00d2ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontFamily: 'var(--font-heading)' }}>
+                {data.storytelling.justification.title}
+              </h2>
+              <p style={{ fontSize: '1.15rem', color: isLight ? '#444' : '#ccc', lineHeight: 1.7, margin: 0, fontWeight: 300 }}>
+                {data.storytelling.justification.content}
+              </p>
+              {data.storytelling.justification.points && (
+                <ul style={{ listStyle: 'none', padding: 0, marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+                  {data.storytelling.justification.points.map((point: string, pIdx: number) => (
+                    <li key={pIdx} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.8rem', fontSize: '1rem', color: isLight ? '#666' : '#9e9e9e' }}>
+                      <span style={{ color: data.theme?.primary || '#a855f7', fontWeight: 'bold' }}>✓</span>
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </motion.div>
+          )}
+
           {data.storytelling.narrative ? (
             <div className={styles.narrativeContainer}>
               {data.storytelling.narrative.map((block, idx) => {
