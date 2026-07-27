@@ -99,6 +99,15 @@
         "name": "Servicios Adicionales (Opcionales)",
         "services": [
           {
+            "name": "Nota Editorial Adicional (FN1)",
+            "price": 6375,
+            "description": "Redacción periodística profesional adaptada para SEO y publicación en el portal web y redes oficiales (Facebook e Instagram) de FN1.",
+            "bullets": [
+              "Cada nota se comparte en las historias de ambas redes sociales.",
+              "Precio preferencial con el 15% de descuento corporativo aplicado (Tarifa regular: $7,500 MXN)."
+            ]
+          },
+          {
             "name": "Cobertura en Vivo Adicional (Live FN1)",
             "price": 5500,
             "description": "Transmisión en vivo adicional con equipo de producción móvil y conductor local para eventos comunitarios, ruedas de prensa o inauguraciones benéficas.",
