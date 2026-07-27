@@ -31,7 +31,7 @@
     "showPricing": true,
     "disableSelection": false,
     "disableAccordion": true,
-    "hideModularMethodology": true
+    "hideModularMethodology": false
   },
   "meta": {
     "title": "Propuesta de Cobertura de Medios | BRP Ciudad Juárez",
@@ -67,12 +67,12 @@
   "packages": {
     "title": "Propuesta Económica",
     "subtitle": "Selecciona la opción de inversión total ideal para la campaña de difusión semestral (Agosto - Diciembre):",
-    "methodologyText": "",
+    "methodologyText": "Este mix de contenidos tiene una vigencia de uso improrrogable hasta el término de Diciembre de 2026. Los servicios adicionales que se anexan al final de la propuesta pueden contratarse y cubrirse para complementar la cobertura o una vez concluido el periodo de la bolsa principal.",
     "fn1": [],
     "apolograma": [],
     "blocks": [
       {
-        "name": "Bolsas Flexibles de Cobertura Semestral (Agosto - Diciembre)",
+        "name": "Planes de Bolsa Flexible Semestral (Agosto - Diciembre)",
         "services": [
           {
             "name": "Opción A: Bolsa Flexible Esencial (Presencia y Cobertura Semestral)",
@@ -90,7 +90,7 @@
             "bullets": [
               "20 Notas editoriales de cobertura periodística en portal y redes oficiales de FN1 (todas las notas se comparten en las historias de Facebook e Instagram).",
               "5 Videos verticales tipo Reel (FN1 Hit) de alta producción de cultura y talento.",
-              "2 Transmisiones en vivo (Live FN1) para ferias de empleo o eventos especiales en planta."
+              "2 Transmisiones en vivo (Live FN1) para ferias de empleo o eventos especiales de BRP."
             ]
           }
         ]
@@ -110,7 +110,7 @@
           {
             "name": "Video vertical / Reel Extra (Maquiladora Showcase)",
             "price": 10000,
-            "description": "Producción in-situ de video vertical dinámico enfocado en infraestructura, ergonomía y procesos técnicos de BRP Juárez.",
+            "description": "Producción in-situ de video vertical dinámico enfocado en la cultura laboral, instalaciones comunes y testimoniales de colaboradores de BRP Juárez.",
             "bullets": [
               "Grabación profesional y edición dinámica optimizada para formatos móviles (Instagram Reels, TikTok y FB Reels).",
               "Musicalización y guion adaptados al público de la región."
