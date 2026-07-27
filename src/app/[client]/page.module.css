@@ -690,7 +690,7 @@
 
   .servicePrice {
     font-size: 1.3rem;
-    color: #a855f7;
+    color: var(--primary-color, #a855f7);
   }
 
   .accordionContent {
@@ -958,5 +958,23 @@
   
   .narrativeImageContainer {
     max-width: 45%;
+  }
+}
+
+@media (max-width: 768px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  
+  .stickyCta {
+    left: 1.25rem;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    width: auto;
+    text-align: center;
+    padding: 0.85rem 1.5rem;
+    font-size: 1rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
   }
 }
