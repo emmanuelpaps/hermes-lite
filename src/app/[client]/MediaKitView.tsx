@@ -934,19 +934,19 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                   {(() => {
                     const segments = [
                       { label: 'Reputación B2B', value: 35, color: data.theme?.primary || '#0072CE', desc: 'Hitos operativos, escala logística e infraestructura en LinkedIn.' },
-                      { label: 'Marca Empleadora', value: 30, color: '#00C6FF', desc: 'Prestaciones, orgullo interno, bienestar y vacantes en LinkedIn/Facebook.' },
-                      { label: 'Responsabilidad Social', value: 20, color: '#00EDB6', desc: 'Programas de ayuda comunitaria, ecología y patrocinios locales.' },
-                      { label: 'Interacción y Comunidad', value: 15, color: '#7800FF', desc: 'Campañas de interacción local y cobertura proactiva en Facebook.' }
+                      { label: 'Marca Empleadora', value: 30, color: '#FF4D6D', desc: 'Prestaciones, orgullo interno, bienestar y vacantes en LinkedIn/Facebook.' },
+                      { label: 'Responsabilidad Social', value: 20, color: '#10B981', desc: 'Programas de ayuda comunitaria, ecología y patrocinios locales.' },
+                      { label: 'Interacción y Comunidad', value: 15, color: '#FFB703', desc: 'Campañas de interacción local y cobertura proactiva en Facebook.' }
                     ];
-                    const radius = 50;
-                    const circumference = 2 * Math.PI * radius; // 314.159
+                    const radius = 100;
+                    const circumference = 2 * Math.PI * radius; // 628.318
                     let accumulatedPercent = 0;
 
                     return (
                       <>
-                        <div style={{ position: 'relative', width: '160px', height: '160px' }}>
-                          <svg width="160" height="160" viewBox="0 0 160 160">
-                            <circle cx="80" cy="80" r={radius} fill="transparent" stroke={isLight ? '#eee' : 'rgba(255, 255, 255, 0.05)'} strokeWidth="12" />
+                        <div style={{ position: 'relative', width: '320px', height: '320px' }}>
+                          <svg width="320" height="320" viewBox="0 0 320 320">
+                            <circle cx="160" cy="160" r={radius} fill="transparent" stroke={isLight ? '#eee' : 'rgba(255, 255, 255, 0.05)'} strokeWidth="24" />
                             {segments.map((seg, idx) => {
                               const dashLength = (seg.value / 100) * circumference;
                               const rotation = (accumulatedPercent / 100) * 360 - 90;
@@ -963,21 +963,21 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                               return (
                                 <motion.circle
                                   key={idx}
-                                  cx="80"
-                                  cy="80"
+                                  cx="160"
+                                  cy="160"
                                   r={radius}
                                   fill="transparent"
                                   stroke={seg.color}
-                                  strokeWidth="12"
+                                  strokeWidth="24"
                                   strokeDasharray={`${dashLength} ${circumference}`}
                                   variants={circleVariants as any}
                                   style={{
                                     transform: `rotate(${rotation}deg)`,
-                                    transformOrigin: '80px 80px',
+                                    transformOrigin: '160px 160px',
                                     cursor: 'pointer',
                                     opacity: hoveredSegment === null || hoveredSegment === idx ? 1 : 0.35,
                                     transition: 'opacity 0.2s, stroke-width 0.2s',
-                                    strokeWidth: hoveredSegment === idx ? 15 : 12
+                                    strokeWidth: hoveredSegment === idx ? 30 : 24
                                   }}
                                   onMouseEnter={() => setHoveredSegment(idx)}
                                   onMouseLeave={() => setHoveredSegment(null)}
@@ -992,12 +992,12 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                             transform: 'translate(-50%, -50%)',
                             textAlign: 'center',
                             pointerEvents: 'none',
-                            width: '100px'
+                            width: '180px'
                           }}>
-                            <span style={{ fontSize: '1.8rem', fontWeight: 900, color: hoveredSegment !== null ? segments[hoveredSegment].color : (isLight ? 'var(--text-color, #111)' : '#fff'), display: 'block', transition: 'color 0.2s' }}>
+                            <span style={{ fontSize: '2.8rem', fontWeight: 900, color: hoveredSegment !== null ? segments[hoveredSegment].color : (isLight ? 'var(--text-color, #111)' : '#fff'), display: 'block', transition: 'color 0.2s' }}>
                               {hoveredSegment !== null ? `${segments[hoveredSegment].value}%` : '100%'}
                             </span>
-                            <span style={{ fontSize: '0.75rem', color: isLight ? '#666' : '#9e9e9e', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginTop: '2px', lineHeight: 1.1 }}>
+                            <span style={{ fontSize: '1rem', color: isLight ? '#666' : '#9e9e9e', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginTop: '4px', lineHeight: 1.1 }}>
                               {hoveredSegment !== null ? segments[hoveredSegment].label : 'Mix Total'}
                             </span>
                           </div>
