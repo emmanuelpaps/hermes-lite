@@ -29,7 +29,7 @@
     "showEcosystem": false,
     "showAudiences": true,
     "showPricing": true,
-    "disableSelection": false,
+    "disableSelection": true,
     "disableAccordion": true,
     "hideModularMethodology": true
   },
@@ -66,33 +66,22 @@
   },
   "packages": {
     "title": "Propuesta Económica",
-    "subtitle": "Selecciona la opción de inversión total ideal para la campaña de difusión semestral (Agosto - Diciembre):",
+    "subtitle": "Inversión total del mix de cobertura contratado para el campus BRP Juárez (Agosto - Diciembre):",
     "methodologyText": "",
     "fn1": [],
     "apolograma": [],
     "blocks": [
       {
-        "name": "Bolsas Flexibles de Cobertura Semestral (Agosto - Diciembre)",
+        "name": "Bolsa Flexible de Cobertura Semestral",
         "services": [
           {
-            "name": "Opción A: Bolsa Flexible Esencial (Presencia y Cobertura Semestral)",
+            "name": "Paquete Multicanal BRP Juárez (Mix Semestral)",
             "price": 85000,
-            "description": "Bolsa de contenidos semestral para posicionamiento y amplificación de convocatorias y cultura laboral de BRP.",
+            "description": "Bolsa unificada de contenidos digitales para consumir libremente durante el periodo Agosto - Diciembre de acuerdo a las necesidades del campus.",
             "bullets": [
               "10 Notas editoriales de cobertura periodística en portal y redes oficiales de FN1.",
               "2 Videos verticales tipo Reel (FN1 Hit) de alta producción de cultura y talento.",
               "Campaña extendida de Historias (FB/IG) de apoyo a convocatorias de vacantes."
-            ]
-          },
-          {
-            "name": "Opción B: Bolsa Flexible Elite (Dominio y Cobertura Premium)",
-            "price": 160000,
-            "description": "Bolsa de contenidos premium para la máxima cobertura multicanal y difusión masiva institucional.",
-            "bullets": [
-              "20 Notas editoriales de cobertura periodística (hitos, vinculación, RSE).",
-              "5 Videos verticales tipo Reel (FN1 Hit) de alta producción de cultura y talento.",
-              "2 Transmisiones en vivo (Live FN1) para ferias de empleo o eventos especiales en planta.",
-              "Cobertura prioritaria en Historias de amplificación de marca empleadora."
             ]
           }
         ]
