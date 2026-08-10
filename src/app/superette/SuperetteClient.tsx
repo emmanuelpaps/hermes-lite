@@ -947,7 +947,7 @@ export default function SuperetteClient() {
                 <ul style={{ paddingLeft: "1.2rem", marginTop: "0.5rem", marginBottom: 0, color: theme.textMuted, lineHeight: 1.6 }}>
                   <li>Configuración de Business Manager y Segmentación de audiencias.</li>
                   <li>Distribución táctica del presupuesto publicitario.</li>
-                  <li>Análisis de conversiones y retorno de inversión.</li>
+                  <li>Análisis de conversiones y optimización de tráfico.</li>
                 </ul>
                 <div style={{ display: "inline-block", background: "rgba(218, 41, 28, 0.1)", color: theme.superetteRed, padding: "6px 12px", borderRadius: "6px", fontSize: "0.85rem", marginTop: "1rem", fontWeight: "bold" }}>
                   El Ad Spend corre por cuenta de Superette.
