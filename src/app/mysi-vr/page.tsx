@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     description: "Desarrollo de entorno inmersivo y simulador VR.",
     images: [
       {
-        url: "https://fronteranumero1.tecza.com.mx/assets/og-apolograma.png",
+        url: "https://propuestas.tecza.com.mx/assets/og-apolograma.png",
         width: 615,
         height: 445,
         alt: "Apolograma Interactive Studio",

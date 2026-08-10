@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: { params: Promise<{ client: s
         description: data.meta?.description || `Ecosistema Digital Exclusivo para ${data.clientName}, desarrollado por Frontera Número Uno y Apolograma.`,
         images: [
           {
-            url: data.meta?.ogImage ? `https://fronteranumero1.tecza.com.mx${data.meta.ogImage}` : (data.clientLogo ? `https://fronteranumero1.tecza.com.mx${data.clientLogo}` : `https://fronteranumero1.tecza.com.mx/assets/fn1-logo-stacked.png`),
+            url: data.meta?.ogImage ? `https://propuestas.tecza.com.mx${data.meta.ogImage}` : (data.clientLogo ? `https://propuestas.tecza.com.mx${data.clientLogo}` : `https://propuestas.tecza.com.mx/assets/fn1-logo-stacked.png`),
             alt: `Propuesta para ${data.clientName}`,
           },
         ],
