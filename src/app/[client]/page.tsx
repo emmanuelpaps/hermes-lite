@@ -28,19 +28,35 @@ export async function generateMetadata({ params }: { params: Promise<{ client: s
     const fileContents = await fs.readFile(filePath, 'utf8');
     const data = JSON.parse(fileContents);
     
+    const pageTitle = data.meta?.title || `Propuesta para ${data.clientName} | Apolograma & Frontera`;
+    const pageDesc = data.meta?.description || `Ecosistema Digital Exclusivo para ${data.clientName}, desarrollado por Apolograma y Frontera Número Uno.`;
+    const rawOgImage = data.meta?.ogImage || data.clientLogo || '/assets/fn1-logo-stacked.png';
+    const ogImageUrl = rawOgImage.startsWith('http') ? rawOgImage : `https://propuestas.tecza.com.mx${rawOgImage}`;
+
     return {
-      title: data.meta?.title || `Propuesta para ${data.clientName} | Frontera Número Uno`,
-      description: data.meta?.description || `Ecosistema Digital Exclusivo para ${data.clientName}, desarrollado por Frontera Número Uno y Apolograma.`,
-      colorScheme: data.theme?.mode === 'light' ? 'light' : 'dark',
+      title: pageTitle,
+      description: pageDesc,
       openGraph: {
-        title: data.meta?.title || `Propuesta Ejecutiva: ${data.clientName}`,
-        description: data.meta?.description || `Ecosistema Digital Exclusivo para ${data.clientName}, desarrollado por Frontera Número Uno y Apolograma.`,
+        title: pageTitle,
+        description: pageDesc,
+        url: `https://propuestas.tecza.com.mx/${resolvedParams.client}`,
+        siteName: 'Apolograma & Frontera Número Uno',
+        locale: 'es_MX',
+        type: 'website',
         images: [
           {
-            url: data.meta?.ogImage ? `https://propuestas.tecza.com.mx${data.meta.ogImage}` : (data.clientLogo ? `https://propuestas.tecza.com.mx${data.clientLogo}` : `https://propuestas.tecza.com.mx/assets/fn1-logo-stacked.png`),
+            url: ogImageUrl,
+            width: 1200,
+            height: 630,
             alt: `Propuesta para ${data.clientName}`,
           },
         ],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: pageTitle,
+        description: pageDesc,
+        images: [ogImageUrl],
       },
     };
   } catch (error) {
