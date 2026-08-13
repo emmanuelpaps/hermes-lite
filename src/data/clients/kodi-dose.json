@@ -1,0 +1,138 @@
+{
+  "clientName": "Kodi dose™",
+  "clientLogo": "/assets/kodi-dose/logo.png",
+  "industry": "Suplementación Bio-Tech / Bienestar Circadiano",
+  "heroText": "Ecosistema digital propietario de comercio electrónico con asesor consultivo de IA, suscripciones recurrentes y estrategia omnicanal de adquisición en Meta Ads.",
+  "themeTemplate": "kodi-aura",
+  "theme": {
+    "name": "Kodi Aura",
+    "mode": "light",
+    "fontHeading": "'Playfair Display', 'Plus Jakarta Sans', Georgia, serif",
+    "fontBody": "'Plus Jakarta Sans', 'Inter', system-ui, sans-serif",
+    "primaryColor": "#1F1060",
+    "bgColor": "#F8F8F6",
+    "textColor": "#160B3F",
+    "mutedText": "#5A5278",
+    "surfaceGlass": "rgba(255, 255, 255, 0.8)",
+    "glassBorder": "rgba(31, 16, 96, 0.08)",
+    "borderRadius": "24px",
+    "primary": "#1F1060"
+  },
+  "config": {
+    "currency": "MXN",
+    "locale": "es-MX",
+    "priceSuffix": "(+ IVA)",
+    "agency": "joint"
+  },
+  "contact": {
+    "phone": "526561031571",
+    "message": "¡Hola Emmanuel! Revisamos la propuesta integral de Kodi dose™ ($42,000 MXN Setup + $22,000 MXN/mes de Meta Ads & Contenido). ¿Cuáles son los siguientes pasos para iniciar?"
+  },
+  "features": {
+    "showEcosystem": false,
+    "showAudiences": false,
+    "showPricing": true,
+    "disableSelection": false,
+    "disableAccordion": false,
+    "hideModularMethodology": false
+  },
+  "meta": {
+    "title": "Propuesta Digital y Crecimiento | Kodi dose™",
+    "description": "Propuesta integral de Apolograma y Frontera para el desarrollo del E-Commerce Propietario con IA, Suscripciones Stripe y Gestión Mensual de Meta Ads & Activaciones de Kodi dose™.",
+    "ogImage": "/assets/og-apolograma.png"
+  },
+  "hero": {
+    "headline": "Ciencia Clara, Bienestar Real",
+    "subheadline": "Infraestructura de Comercio Electrónico con Asesor IA, Suscripciones y Estrategia de Crecimiento en Meta",
+    "backgroundImage": "/assets/kodi-dose/hero-bg.png",
+    "backgroundVideo": ""
+  },
+  "storytelling": {
+    "justification": {
+      "title": "La Nueva Era del E-Commerce de Suplementos: Diagnóstico Circadiano y Retención (LTV)",
+      "content": "El mercado de suplementos tradicional compite por precio y sufre por carritos abandonados. Kodi dose™ se estructura sobre una propuesta de valor biológica y tecnológica: un Test Circadiano con IA que prescribe la dosis ideal del usuario y un motor de suscripción mensual que multiplica la retención y el valor de vida del cliente (LTV):",
+      "points": [
+        "**Asesor Consultivo con IA (Test Circadiano):** Diagnóstico inteligente de vigilia, energía y sueño que personaliza el stack de suplementos y conduce al checkout.",
+        "**Ingresos Recurrentes con Stripe Subscriptions:** Modelo de suscripción mensual automatizada con descuento por entrega periódica cada 30 días.",
+        "**Ecosistema Omnicanal y Activaciones:** Pauta hipersegmentada en Meta Ads, alianzas con micro-influencers y activaciones en nichos premium (Barre, Pilates y Coffee Raves)."
+      ]
+    },
+    "narrative": [
+      {
+        "title": "E-Commerce Propietario con Test Circadiano y Suscripciones Stripe",
+        "content": "Desarrollo a la medida sobre Next.js y Vercel con CMS privado en Firebase. Permite al cliente elegir entre compra única por frasco o suscripción mensual automatizada con Stripe Billing. Incluye el minigame interactivo del Ritmo Circadiano que prescribe los productos Rise, Focus, Balance y Unwind según las necesidades fisiológicas y hábitos del usuario.",
+        "image": "/assets/kodi-dose/narrative-1.png"
+      },
+      {
+        "title": "Chatbot Vendedor con IA y Conversión Consultiva",
+        "content": "Agente conversacional inteligente integrado en la tienda web y entrenado con la base biológica de Kodi dose. Responde dudas sobre ingredientes y certificaciones, derriba objeciones de compra, prescribe combinaciones de stacks y acompaña al usuario en tiempo real hasta cerrar el checkout de Stripe.",
+        "image": "/assets/kodi-dose/narrative-2.png"
+      },
+      {
+        "title": "Producción Visual de Alto Impacto: Feed, Stories 9:16 y Reels",
+        "content": "Maquetación y dirección de arte publicitaria continua: 20 diseños para Feed (renders 3D de producto, carruseles de educación nutricional y estilo de vida), 20 adaptaciones verticales a Stories (9:16) con llamados directos de compra, y producción de Reels en formato corto para detonar el alcance orgánico y nutrir creativos de pauta.",
+        "image": "/assets/kodi-dose/narrative-3.png"
+      },
+      {
+        "title": "Estrategia de Micro-influencers y Activaciones Vivenciales (Barre, Pilates y Coffee Raves)",
+        "content": "Estrategia de posicionamiento en el segmento de alto poder adquisitivo: Seeding y gifting a micro-influencers del nicho wellness, fitness y biohacking, junto con la coordinación de activaciones y pop-ups en estudios boutique de Barre, Pilates y eventos matutinos (Coffee Raves), diseñando material POP y stands de degustación.",
+        "image": "/assets/kodi-dose/narrative-activations.png"
+      },
+      {
+        "title": "Media Buying en Meta Ads, Meta Business Agent y Cobertura en FN1",
+        "content": "Estructuración y optimización de campañas de conversión en Meta Ads Manager (Adquisición, Retargeting y Suscripciones). Incluye 1 publicación mensual en Frontera Número Uno para inyectar autoridad de marca masiva y el entrenamiento del Meta Business Agent (IA) para responder y cerrar ventas por Messenger, Instagram DMs y WhatsApp 24/7.",
+        "image": "/assets/kodi-dose/narrative-meta-fn1.png"
+      }
+    ],
+    "challenge": "Construir una marca de suplementación de alto rendimiento que no compita por precio, sino por diferenciación biológica, cerrando ventas mediante un asesor con Inteligencia Artificial que guía al usuario en su ritmo circadiano y fideliza a través de suscripciones recurrentes."
+  },
+  "packages": {
+    "title": "Propuesta de Inversión y Esquema de Trabajo",
+    "subtitle": "Estructura modular dividida en Construcción Inicial (Setup) y Acompañamiento Mensual de Crecimiento:",
+    "methodologyText": "Ecosistema Integral 'Llave en Mano': La Fase 1 cubre la ingeniería, dominio y lanzamiento de la plataforma propia, mientras que la Fase 2 impulsa la adquisición continua de clientes, contenido y optimización de pauta. El mantenimiento técnico web está 100% incluido en el fee mensual (o $4,000 MXN/mes en póliza standalone). Los consumos de pauta en Meta y API de IA corren por cuenta del cliente a costo directo optimizado.",
+    "fn1": [],
+    "apolograma": [],
+    "blocks": [
+      {
+        "name": "Fase 1: Infraestructura E-Commerce Propietaria + Chatbot IA (Setup Único)",
+        "services": [
+          {
+            "name": "Desarrollo de E-Commerce, CMS a Medida, Stripe y Chatbot Vendedor IA",
+            "price": 42000,
+            "description": "Construcción e ingeniería integral de la plataforma de comercio electrónico de Kodi dose™.",
+            "bullets": [
+              "Esquema de Pago por Hitos: 50% al arranque ($21,000 MXN), 25% a la 1ra entrega funcional ($10,500 MXN) y 25% a la entrega final y lanzamiento ($10,500 MXN).",
+              "Compra de Dominio Oficial (.com): Incluido por 1 año con configuración DNS completa y certificados de seguridad SSL (HTTPS).",
+              "Frontend Next.js en Vercel: Carga ultrarrápida optimizada para Core Web Vitals y conversión móvil.",
+              "CMS Propietario en Firebase: Panel privado para administrar catálogo, precios, stock y órdenes de compra.",
+              "Pasarela de Pago Stripe Dual: Checkout de compra única y suscripciones recurrentes de dosis mensual.",
+              "Minigame Circadiano Interactivo: Test interactivo de diagnóstico biológico y recomendación de producto.",
+              "Chatbot Vendedor con IA: Agente consultivo entrenado con la base biológica de la marca para recomendar suplementos y cerrar ventas (consumo de API de IA directo a costo optimizado).",
+              "Cero Costos Ocultos en Servidores: Arquitectura serverless de mínimo costo operativo en Vercel y Firebase."
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Fase 2: Gestión Mensual de Meta Ads, Contenido y Crecimiento (Fee Mensual)",
+        "services": [
+          {
+            "name": "Programa Mensual de Pauta, Contenidos, FN1 y Coordinación de Activaciones",
+            "price": 22000,
+            "description": "Gestión mensual continua de posicionamiento, tráfico pagado y adquisición omnicanal.",
+            "bullets": [
+              "20 Diseños Mensuales para Feed: Gráficos de producto, carruseles educativos y estilo de vida.",
+              "20 Adaptaciones para Stories (9:16): Contenido dinámico con links de compra y promociones.",
+              "Creación y Edición de Reels: Formatos cortos de video para alcance orgánico y anuncios de pauta.",
+              "1 Publicación Mensual en Frontera Número Uno: Cobertura y autoridad con alcance regional.",
+              "Entrenamiento Meta Business Agent: IA de respuestas en Messenger, Instagram DMs y WhatsApp.",
+              "Mantenimiento Web y Soporte IA Incluido: Monitoreo técnico de servidor, actualizaciones de catálogo en Firebase y calibración del Chatbot IA sin costo extra durante el fee activo.",
+              "Media Buying y Optimización de Anuncios: Gestión de campañas de conversión en Meta Ads Manager.",
+              "Coordinación de Micro-influencers y Activaciones: Estrategia y material POP para eventos Barre/Pilates."
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

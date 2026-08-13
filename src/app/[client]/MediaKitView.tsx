@@ -576,6 +576,184 @@ export default function MediaKitView({ data }: { data: ClientData }) {
   const totalSavings = selectedOriginalTotal - subtotal;
 
   const [selectedCurrency, setSelectedCurrency] = useState(data.config?.currency || "MXN");
+  const [circadianState, setCircadianState] = useState<'rise' | 'focus' | 'balance' | 'unwind'>('balance');
+  const [kodiDemoMode, setKodiDemoMode] = useState<'quiz' | 'chat'>('quiz');
+  
+  // Quiz Minigame State
+  const [quizStep, setQuizStep] = useState<number>(1);
+  const [quizAnswers, setQuizAnswers] = useState<{ goal?: string; energyDrop?: string; sleep?: string }>({});
+  const [selectedOptionTemp, setSelectedOptionTemp] = useState<string | null>(null);
+  const [isQuizAnalyzing, setIsQuizAnalyzing] = useState<boolean>(false);
+
+  // Chatbot Live State
+  const [chatMessages, setChatMessages] = useState<Array<{
+    id: number;
+    sender: 'bot' | 'user';
+    text: string;
+    productCard?: {
+      tag: string;
+      title: string;
+      dose: string;
+      color: string;
+      singlePrice: string;
+      subPrice: string;
+    };
+  }>>([
+    {
+      id: 1,
+      sender: 'bot',
+      text: '¡Hola! Soy tu Asesor Biológico Kodi dose (IA) 🧬. Estoy conectado a la base científica de ingredientes, cronobiología y planes de suscripción. ¿Qué objetivo de salud te gustaría optimizar hoy?',
+    }
+  ]);
+  const [chatInput, setChatInput] = useState<string>('');
+  const [isBotTyping, setIsBotTyping] = useState<boolean>(false);
+  const [cartNotification, setCartNotification] = useState<string | null>(null);
+
+  const renderFormattedChatMessage = (content: string) => {
+    const lines = content.split('\n');
+    return lines.map((line, lIdx) => {
+      const parts = line.split(/(\*\*.*?\*\*)/g);
+      const formattedLine = parts.map((part, pIdx) => {
+        if (part.startsWith('**') && part.endsWith('**')) {
+          return <strong key={pIdx} style={{ color: '#160B3F', fontWeight: 800 }}>{part.slice(2, -2)}</strong>;
+        }
+        return part;
+      });
+
+      if (line.trim().startsWith('•')) {
+        return (
+          <div key={lIdx} style={{ display: 'flex', gap: '8px', alignItems: 'baseline', margin: '4px 0 4px 6px' }}>
+            <span style={{ color: '#7044EC', fontSize: '9px' }}>●</span>
+            <span>{formattedLine}</span>
+          </div>
+        );
+      }
+
+      return (
+        <div key={lIdx} style={{ margin: line.trim() === '' ? '4px 0' : '2px 0' }}>
+          {formattedLine}
+        </div>
+      );
+    });
+  };
+
+  const handleSelectQuizOption = (key: 'goal' | 'energyDrop' | 'sleep', value: string) => {
+    setSelectedOptionTemp(value);
+    const updated = { ...quizAnswers, [key]: value };
+    setQuizAnswers(updated);
+    
+    setTimeout(() => {
+      setSelectedOptionTemp(null);
+      if (quizStep === 1) {
+        setQuizStep(2);
+      } else if (quizStep === 2) {
+        setQuizStep(3);
+      } else if (quizStep === 3) {
+        setIsQuizAnalyzing(true);
+        setTimeout(() => {
+          setIsQuizAnalyzing(false);
+          setQuizStep(4);
+        }, 1400);
+      }
+    }, 220);
+  };
+
+  const handleResetQuiz = () => {
+    setQuizStep(1);
+    setQuizAnswers({});
+    setSelectedOptionTemp(null);
+    setIsQuizAnalyzing(false);
+  };
+
+  const handleSwitchToChatWithContext = () => {
+    setKodiDemoMode('chat');
+    const goalText = quizAnswers.goal || 'tu bienestar integral';
+    setTimeout(() => {
+      handleSendChatMessage(`Hola, acabo de realizar mi test circadiano enfocado en "${goalText}". ¿Por qué me conviene pedir el stack en suscripción mensual?`);
+    }, 300);
+  };
+
+  const handleAddToCartSimulated = (productName: string) => {
+    setCartNotification(`✅ "${productName}" añadido con 15% OFF por suscripción`);
+    setTimeout(() => setCartNotification(null), 3500);
+  };
+
+  const handleSendChatMessage = (textToSend?: string) => {
+    const messageText = (textToSend || chatInput).trim();
+    if (!messageText) return;
+
+    const userMsgId = Date.now();
+    setChatMessages((prev) => [
+      ...prev,
+      { id: userMsgId, sender: 'user', text: messageText }
+    ]);
+    setChatInput('');
+    setIsBotTyping(true);
+
+    setTimeout(() => {
+      const lower = messageText.toLowerCase();
+      let botResponse = '';
+      let productCard: any = null;
+
+      if (lower.includes('suscrip') || lower.includes('recurrente') || lower.includes('mes') || lower.includes('descuento') || lower.includes('pausar') || lower.includes('cancelar')) {
+        botResponse = '✨ **Ventajas del Modelo de Suscripción Kodi dose™:**\n• **15% de Descuento Permanente** en cada entrega.\n• **Envío Prioritario Gratuito** directo a tu puerta cada 30 días.\n• **Flexibilidad Total:** Puedes pausar, adelantar o cancelar en 1 clic desde tu cuenta sin penalizaciones ni contratos forzosos.';
+        productCard = {
+          tag: 'Suscripción Inteligente',
+          title: 'Full Circadian Stack (3 Fórmulas)',
+          dose: 'Entrega Cada 30 Días · Envío Gratis Incluido',
+          singlePrice: '$2,200 MXN',
+          subPrice: '$1,870 MXN / mes',
+          color: 'radial-gradient(circle, #7044EC 0%, #B8A7EA 70%)'
+        };
+      } else if (lower.includes('green') || lower.includes('ayuna') || lower.includes('mañana') || lower.includes('despertar') || lower.includes('rise')) {
+        botResponse = '🌿 **Green Start™ (Dose 05) · Protocolo Matutino:**\nFormulado con **Matcha Ceremonial Uji, Clorofila micronizada, Espirulina orgánica y Adaptógenos (Rhodiola)**.\n\nTomarlo en ayunas con agua templada sincroniza tu curva natural de cortisol matutino, alcaliniza el tracto gastrointestinal y provee hasta **6 horas de energía cognitiva limpia** sin temblor ni el posterior crash de la cafeína tradicional.';
+        productCard = {
+          tag: 'Energía Limpia Matutina',
+          title: 'Green Start™ (Dose 05)',
+          dose: 'Polvo Micronizado · 400g (30 Tomas)',
+          singlePrice: '$790 MXN',
+          subPrice: '$670 MXN / mes',
+          color: 'radial-gradient(circle, #EF5126 0%, #FFA843 70%)'
+        };
+      } else if (lower.includes('daily') || lower.includes('balance') || lower.includes('vitamina') || lower.includes('ingrediente')) {
+        botResponse = '🧬 **Daily Balance™ (Dose 01) · Nutrición & Homeostasis:**\nContiene **24 micronutrientes bio-quelados** de absorción celular inmediata: Complejo B metilado (B12 Metilcobalamina), Vitamina D3+K2 para fijación ósea y Zinc quelado.\n\nDiseñado para tomarse con el almuerzo para sostener la inmunidad, evitar la pesadez digestiva y neutralizar radicales libres.';
+        productCard = {
+          tag: 'Nutrición Celular & Homeostasis',
+          title: 'Daily Balance™ Multivitamínico',
+          dose: 'Dose 01 · 60 Cápsulas Veganas Gastro-resistentes',
+          singlePrice: '$690 MXN',
+          subPrice: '$585 MXN / mes',
+          color: 'radial-gradient(circle, #073B3A 0%, #74D7B8 70%)'
+        };
+      } else if (lower.includes('sueño') || lower.includes('dormir') || lower.includes('noche') || lower.includes('descans') || lower.includes('unwind') || lower.includes('calma') || lower.includes('rest')) {
+        botResponse = '🌙 **Restorative Rest™ (Dose 04) · Al Alma Calma:**\nFórmula nootrópica nocturna con **Bisglicinato de Magnesio de alta absorción, L-Teanina pura y Extracto estandarizado de Melisa**.\n\nDesactiva el sistema nervioso simpático 30 minutos antes de dormir, induciendo fases de **sueño REM profundo y reparación celular tisular** sin generar dependencia ni letargo matutino.';
+        productCard = {
+          tag: 'Reparación Celular Nocturna',
+          title: 'Restorative Rest™ (Dose 04)',
+          dose: 'Al Alma Calma · 60 Cápsulas',
+          singlePrice: '$720 MXN',
+          subPrice: '$610 MXN / mes',
+          color: 'radial-gradient(circle, #23155B 0%, #B8A7EA 70%)'
+        };
+      } else if (lower.includes('envio') || lower.includes('envío') || lower.includes('mexico') || lower.includes('méxico') || lower.includes('donde') || lower.includes('dónde') || lower.includes('tiempo')) {
+        botResponse = '📦 **Logística y Envíos a todo México:**\nRealizamos despachos diarios asegurados a cualquier código postal del país vía FedEx y DHL Express. Los envíos tardan de 2 a 4 días hábiles. En todas las suscripciones recurrentes el costo de envío es **$0.00 MXN (100% Gratuito)**.';
+      } else {
+        botResponse = `✨ Gracias por tu pregunta sobre "${messageText}". En Kodi dose™ sincronizamos cada bio-activo con tu ritmo circadiano (Rise, Focus, Balance, Unwind). ¿Te gustaría que armemos tu stack personalizado con 15% de descuento por suscripción?`;
+      }
+
+      setChatMessages((prev) => [
+        ...prev,
+        {
+          id: Date.now() + 1,
+          sender: 'bot',
+          text: botResponse,
+          productCard: productCard || undefined
+        }
+      ]);
+      setIsBotTyping(false);
+    }, 700);
+  };
+
   const exchangeRate = data.config?.exchangeRate || 20;
 
   const convertPrice = (num: number) => {
@@ -937,6 +1115,871 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             <div style={{ color: '#64748b', fontSize: '11px' }}>
               © 2026 Apolograma / {data.clientName}. Todos los derechos reservados. Infraestructura desarrollada exclusivamente para Superette.
             </div>
+          </footer>
+        </div>
+      </div>
+    );
+  }
+
+  const isKodiAura = data.themeTemplate === 'kodi-aura' || data.theme?.name?.toLowerCase().includes('kodi') || data.theme?.name?.toLowerCase().includes('aura');
+
+  if (isKodiAura) {
+    const circadianData = {
+      rise: {
+        name: 'RISE',
+        time: '06:00 - 10:00',
+        title: 'Inicios y Despertar',
+        color: '#EF5126',
+        gradient: 'radial-gradient(circle, #EF5126 0%, #FFA843 70%, transparent 100%)',
+        chat: '🌅 Diagnóstico IA: Para optimizar tu curva de cortisol matutina y activar tu energía celular sin taquicardia ni picos de cafeína, tu fórmula ideal es el concentrado Green Start™ (Dose 05). ¿Programamos tu entrega mensual automatizada con 15% OFF?',
+        product: 'Green Start™ Concentrado en Polvo (400 g)',
+        tag: 'Energía Limpia & Digestión',
+        dose: 'Dose 05 · Polvo Micronizado'
+      },
+      focus: {
+        name: 'FOCUS',
+        time: '10:00 - 16:00',
+        title: 'Energía y Activación',
+        color: '#D51B3A',
+        gradient: 'radial-gradient(circle, #D51B3A 0%, #FF85A1 70%, transparent 100%)',
+        chat: '⚡ Diagnóstico IA: Para tus bloques de alta demanda cognitiva en el trabajo y entrenamientos de alta intensidad, prescribimos Focus Blend Nootrópico. Claridad mental y neuroprotección sostenida.',
+        product: 'Focus Blend Nootrópico Activo',
+        tag: 'Cognición & Rendimiento',
+        dose: 'Dose 03 · 60 Cápsulas'
+      },
+      balance: {
+        name: 'BALANCE',
+        time: '16:00 - 20:00',
+        title: 'Equilibrio y Bienestar',
+        color: '#073B3A',
+        gradient: 'radial-gradient(circle, #073B3A 0%, #74D7B8 70%, transparent 100%)',
+        chat: '🌿 Diagnóstico IA: Para mantener la homeostasis de tu organismo y cubrir tus requerimientos de micronutrientes diarios, tu dosis base obligatoria es el Multivitamínico Daily Balance™ (Dose 01). Cápsulas veganas de máxima absorción.',
+        product: 'Daily Balance™ Multivitamínico (Dose 01)',
+        tag: 'Nutrición Celular & Homeostasis',
+        dose: 'Dose 01 · 60 Cápsulas Veganas'
+      },
+      unwind: {
+        name: 'UNWIND',
+        time: '20:00 - 02:00',
+        title: 'Relajación y Descanso',
+        color: '#23155B',
+        gradient: 'radial-gradient(circle, #23155B 0%, #B8A7EA 70%, transparent 100%)',
+        chat: '🌙 Diagnóstico IA: Para inducir la secreción natural de melatonina y alcanzar fases profundas de sueño REM reparador, tu dosis nocturna es Restorative Rest™ Calma. Despierta renovado y sin somnolencia residual.',
+        product: 'Restorative Rest™ Al Alma Calma',
+        tag: 'Sueño Reparador & Descompresión',
+        dose: 'Dose 04 · 60 Cápsulas'
+      }
+    };
+
+    const currentCircadian = circadianData[circadianState];
+    const totalWithIva = total * 1.16;
+
+    return (
+      <div className={styles.kodiFrame}>
+        {/* Background Aura Spheres */}
+        <div className={styles.kodiAuraBgLayer}>
+          <div className={`${styles.kodiOrb} ${styles.kodiOrbOrange}`} />
+          <div className={`${styles.kodiOrb} ${styles.kodiOrbPurple}`} />
+          <div className={`${styles.kodiOrb} ${styles.kodiOrbGreen}`} />
+        </div>
+
+        <div className={styles.kodiContainer}>
+          {/* Top Status Banner */}
+          <div className={styles.kodiTopBanner}>
+            <div className={styles.kodiBadgeLive}>
+              <span className={styles.kodiStatusDot}></span>
+              <span>KODI DOSE™ · ECOSISTEMA DIGITAL & META ADS</span>
+            </div>
+            <div className={styles.kodiTaglinePill}>
+              ✨ Nutre tu brillo interior · Propuesta Exclusiva
+            </div>
+          </div>
+
+          {/* Agency Navigation Header */}
+          <header className={styles.kodiAgencyNav}>
+            <div className={styles.kodiAgencyLogos}>
+              <Image src="/assets/apolograma-logo-v2.png" alt="Apolograma" width={160} height={32} className={styles.apologramaLogoImageLight} />
+              <span style={{ opacity: 0.3, color: '#160B3F' }}>×</span>
+              <Image src="/assets/fn1-logo-purple.png" alt="Frontera Número Uno" width={180} height={26} />
+            </div>
+            <div className={styles.kodiClientLogoPill}>
+              {data.clientLogo && <Image src={data.clientLogo} alt={data.clientName || 'Kodi dose'} width={110} height={26} />}
+            </div>
+          </header>
+
+          {/* Hero Section */}
+          <section className={styles.kodiHeroCard}>
+            <div className={styles.kodiHeroBgMedia}>
+              <motion.div
+                initial={{ scale: 1.0 }}
+                animate={{ scale: [1.0, 1.1, 1.0] }}
+                transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  backgroundImage: `url(${data.hero?.backgroundImage || '/assets/kodi-dose/hero-bg.png'})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              />
+            </div>
+            <div className={styles.kodiHeroContent}>
+              <div className={styles.kodiEyebrowBadge}>
+                <span>🧬 BIENESTAR CIRCADIANO · NEXT.JS + STRIPE + META ADS</span>
+              </div>
+              <h1 className={styles.kodiHeroTitle}>
+                Ciencia <span className={styles.kodiEditorialSerif}>Clara,</span> Bienestar <span className={styles.kodiEditorialSerif}>Real</span>
+              </h1>
+              <p className={styles.kodiHeroSubtitle}>
+                {data.hero?.subheadline || data.heroText}
+              </p>
+              <div className={styles.kodiHeroActions}>
+                <a href="#propuesta-economica" className={styles.kodiButtonPrimary}>
+                  <span>VER PROPUESTA ECONÓMICA</span>
+                  <span>↓</span>
+                </a>
+                <a href={`https://wa.me/${data.contact?.phone || '526561031571'}?text=${encodeURIComponent(getWhatsAppMessage())}`} target="_blank" rel="noopener noreferrer" className={styles.kodiButtonSecondary}>
+                  <span>📱 CONTACTAR POR WHATSAPP</span>
+                </a>
+              </div>
+            </div>
+          </section>
+
+          {/* Strategic Narrative / Circadian System */}
+          <section style={{ marginBottom: '48px' }}>
+            <h2 className={styles.kodiSectionTitle}>
+              El Sistema Biológico: <span className={styles.kodiEditorialSerif}>Ritmo Circadiano</span>
+            </h2>
+            <p className={styles.kodiSectionSubtext}>
+              Kodi dose™ acompaña la fisiología del cuerpo a lo largo de las 24 horas. Cuatro estados accionables sincronizados con luz, energía y descanso:
+            </p>
+
+            <div className={styles.kodiCircadianGrid}>
+              <div className={styles.kodiCircadianCard}>
+                <div className={styles.kodiCircadianOrbPreview} style={{ background: 'radial-gradient(circle, #EF5126 0%, #FFA843 70%, transparent 100%)' }} />
+                <div className={styles.kodiCircadianPillarName}>Rise</div>
+                <div className={styles.kodiCircadianPillarTime}>06:00 - 10:00</div>
+                <p className={styles.kodiCircadianPillarDesc}>Inicios y Despertar. Activación matutina y energía celular limpia.</p>
+              </div>
+
+              <div className={styles.kodiCircadianCard}>
+                <div className={styles.kodiCircadianOrbPreview} style={{ background: 'radial-gradient(circle, #D51B3A 0%, #FF85A1 70%, transparent 100%)' }} />
+                <div className={styles.kodiCircadianPillarName}>Focus</div>
+                <div className={styles.kodiCircadianPillarTime}>10:00 - 16:00</div>
+                <p className={styles.kodiCircadianPillarDesc}>Energía y Activación. Claridad cognitiva y neuroprotección sostenida.</p>
+              </div>
+
+              <div className={styles.kodiCircadianCard}>
+                <div className={styles.kodiCircadianOrbPreview} style={{ background: 'radial-gradient(circle, #073B3A 0%, #74D7B8 70%, transparent 100%)' }} />
+                <div className={styles.kodiCircadianPillarName}>Balance</div>
+                <div className={styles.kodiCircadianPillarTime}>16:00 - 20:00</div>
+                <p className={styles.kodiCircadianPillarDesc}>Equilibrio y Bienestar. Homeostasis, micronutrientes e inmunidad.</p>
+              </div>
+
+              <div className={styles.kodiCircadianCard}>
+                <div className={styles.kodiCircadianOrbPreview} style={{ background: 'radial-gradient(circle, #23155B 0%, #B8A7EA 70%, transparent 100%)' }} />
+                <div className={styles.kodiCircadianPillarName}>Unwind</div>
+                <div className={styles.kodiCircadianPillarTime}>20:00 - 02:00</div>
+                <p className={styles.kodiCircadianPillarDesc}>Relajación y Descanso. Secreción de melatonina y sueño REM profundo.</p>
+              </div>
+            </div>
+          </section>
+
+          {/* Interactive Demos: Circadian Quiz & Live Consultative Chatbot */}
+          <section className={styles.kodiSimulatorContainer}>
+            <div className={styles.kodiSimulatorHeader}>
+              <div>
+                <div className={styles.kodiPillarBadge}>✨ DEMOS INTERACTIVOS EN VIVO</div>
+                <h3 style={{ fontSize: '26px', fontWeight: 800, color: '#160B3F', margin: '4px 0' }}>
+                  Test Circadiano & <span className={styles.kodiEditorialSerif}>Asesor IA Consultivo</span>
+                </h3>
+                <p style={{ fontSize: '14.5px', color: '#5A5278', margin: 0 }}>
+                  Prueba la experiencia de usuario que convertirá visitas frías en suscriptores recurrentes:
+                </p>
+              </div>
+
+              {/* Demo Switcher */}
+              <div className={styles.kodiDemoSwitcher}>
+                <button
+                  type="button"
+                  onClick={() => setKodiDemoMode('quiz')}
+                  className={`${styles.kodiDemoSwitchBtn} ${kodiDemoMode === 'quiz' ? styles.kodiDemoSwitchBtnActive : ''}`}
+                >
+                  <span>🧪 Test Circadiano (Minigame)</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setKodiDemoMode('chat')}
+                  className={`${styles.kodiDemoSwitchBtn} ${kodiDemoMode === 'chat' ? styles.kodiDemoSwitchBtnActive : ''}`}
+                >
+                  <span>💬 Chatbot Vendedor IA</span>
+                </button>
+              </div>
+            </div>
+
+            {/* DEMO 1: QUIZ MINIGAME */}
+            {kodiDemoMode === 'quiz' && (
+              <div>
+                {/* Progress bar and back button */}
+                {quizStep < 4 && (
+                  <div className={styles.kodiQuizProgressContainer}>
+                    <div className={styles.kodiQuizProgressHeader}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        {quizStep > 1 && (
+                          <button
+                            type="button"
+                            onClick={() => setQuizStep((prev) => Math.max(1, prev - 1))}
+                            className={styles.kodiQuizBackBtn}
+                          >
+                            ← Anterior
+                          </button>
+                        )}
+                        <span>Diagnóstico de Ritmo Biológico</span>
+                      </div>
+                      <span>Paso {quizStep} de 3 ({Math.round((quizStep / 3) * 100)}%)</span>
+                    </div>
+                    <div className={styles.kodiQuizProgressTrack}>
+                      <div
+                        className={styles.kodiQuizProgressBar}
+                        style={{ width: `${(quizStep / 3) * 100}%` }}
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {/* Step 1 */}
+                {quizStep === 1 && (
+                  <div>
+                    <h4 className={styles.kodiQuizQuestionTitle}>1. ¿Cuál es tu principal objetivo biológico?</h4>
+                    <p className={styles.kodiQuizQuestionSubtitle}>Selecciona la prioridad que deseas optimizar en tu rutina diaria:</p>
+                    <div className={styles.kodiQuizOptionsGrid}>
+                      {[
+                        { icon: '🌅', title: 'Energía Limpia Matutina', desc: 'Despertar activo sin pesadez ni taquicardia por cafeína' },
+                        { icon: '⚡', title: 'Claridad & Alto Enfoque', desc: 'Sostener concentración mental profunda durante el día' },
+                        { icon: '🌿', title: 'Homeostasis & Longevidad', desc: 'Refuerzo de micronutrientes, salud digestiva e inmune' },
+                        { icon: '🌙', title: 'Sueño REM & Descompresión', desc: 'Conciliar sueño rápido y reparar tejidos celulares' },
+                      ].map((opt, i) => (
+                        <div
+                          key={i}
+                          onClick={() => handleSelectQuizOption('goal', opt.title)}
+                          className={`${styles.kodiQuizOptionCard} ${selectedOptionTemp === opt.title ? styles.kodiQuizOptionCardActive : ''}`}
+                        >
+                          <span className={styles.kodiQuizOptionIcon}>{opt.icon}</span>
+                          <h5 className={styles.kodiQuizOptionTitle}>{opt.title}</h5>
+                          <p className={styles.kodiQuizOptionDesc}>{opt.desc}</p>
+                          {selectedOptionTemp === opt.title && (
+                            <span style={{ position: 'absolute', top: '16px', right: '16px', color: '#7044EC', fontWeight: 800 }}>✓</span>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Step 2 */}
+                {quizStep === 2 && (
+                  <div>
+                    <h4 className={styles.kodiQuizQuestionTitle}>2. ¿En qué momento sientes tu mayor bajón de energía?</h4>
+                    <p className={styles.kodiQuizQuestionSubtitle}>Identificamos el desfase en tu curva de cortisol y metabolismo:</p>
+                    <div className={styles.kodiQuizOptionsGrid}>
+                      {[
+                        { icon: '⏰', title: 'Primeras 2 horas al despertar', desc: 'Sensación de aturdimiento y dificultad para arrancar' },
+                        { icon: '☕', title: 'Media tarde (14:00 - 16:00)', desc: 'Niebla mental y somnolencia post-comida' },
+                        { icon: '🌇', title: 'Al anochecer (18:00 - 21:00)', desc: 'Agotamiento acumulado que bloquea la vida personal' },
+                        { icon: '📉', title: 'Fatiga constante sostenida', desc: 'Nivel bajo de energía a lo largo de toda la jornada' },
+                      ].map((opt, i) => (
+                        <div
+                          key={i}
+                          onClick={() => handleSelectQuizOption('energyDrop', opt.title)}
+                          className={`${styles.kodiQuizOptionCard} ${selectedOptionTemp === opt.title ? styles.kodiQuizOptionCardActive : ''}`}
+                        >
+                          <span className={styles.kodiQuizOptionIcon}>{opt.icon}</span>
+                          <h5 className={styles.kodiQuizOptionTitle}>{opt.title}</h5>
+                          <p className={styles.kodiQuizOptionDesc}>{opt.desc}</p>
+                          {selectedOptionTemp === opt.title && (
+                            <span style={{ position: 'absolute', top: '16px', right: '16px', color: '#7044EC', fontWeight: 800 }}>✓</span>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Step 3 */}
+                {quizStep === 3 && !isQuizAnalyzing && (
+                  <div>
+                    <h4 className={styles.kodiQuizQuestionTitle}>3. ¿Cómo calificarías tu calidad de descanso nocturno?</h4>
+                    <p className={styles.kodiQuizQuestionSubtitle}>El sueño regula la secreción hormonal y la recuperación celular:</p>
+                    <div className={styles.kodiQuizOptionsGrid}>
+                      {[
+                        { icon: '🤯', title: 'Me cuesta apagar la mente', desc: 'Tardo más de 45 minutos en conciliar el sueño' },
+                        { icon: '👀', title: 'Sueño ligero e interrumpido', desc: 'Despierto varias veces por ruidos o estrés' },
+                        { icon: '⏳', title: 'Duermo menos de 6 horas', desc: 'Horarios exigentes y deuda crónica de descanso' },
+                        { icon: '🔋', title: 'Duermo 7+ hrs pero despierto cansado', desc: 'Falta de fase REM y regeneración profunda' },
+                      ].map((opt, i) => (
+                        <div
+                          key={i}
+                          onClick={() => handleSelectQuizOption('sleep', opt.title)}
+                          className={`${styles.kodiQuizOptionCard} ${selectedOptionTemp === opt.title ? styles.kodiQuizOptionCardActive : ''}`}
+                        >
+                          <span className={styles.kodiQuizOptionIcon}>{opt.icon}</span>
+                          <h5 className={styles.kodiQuizOptionTitle}>{opt.title}</h5>
+                          <p className={styles.kodiQuizOptionDesc}>{opt.desc}</p>
+                          {selectedOptionTemp === opt.title && (
+                            <span style={{ position: 'absolute', top: '16px', right: '16px', color: '#7044EC', fontWeight: 800 }}>✓</span>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Analyzing animation */}
+                {isQuizAnalyzing && (
+                  <div className={styles.kodiQuizAnalyzingBox}>
+                    <div className={styles.kodiQuizAnalyzingOrb} />
+                    <h4 style={{ fontSize: '20px', fontWeight: 800, color: '#160B3F', margin: '0 0 8px 0' }}>
+                      Analizando biomarcadores y ritmo circadiano...
+                    </h4>
+                    <p style={{ fontSize: '13.5px', color: '#7044EC', fontWeight: 600 }}>
+                      ✓ Evaluando curva de cortisol · ✓ Sincronizando dosis Rise, Balance y Unwind
+                    </p>
+                  </div>
+                )}
+
+                {/* Step 4: Result Deck */}
+                {quizStep === 4 && (
+                  <div className={styles.kodiQuizResultGrid}>
+                    <div className={styles.kodiQuizResultSummary}>
+                      <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#7044EC', color: '#FFF', padding: '5px 14px', borderRadius: '100px', fontSize: '11px', fontWeight: 800, textTransform: 'uppercase', marginBottom: '14px' }}>
+                        🧬 Diagnóstico Bio-Tech Prescrito
+                      </div>
+                      <h4 style={{ fontSize: '22px', fontWeight: 800, color: '#160B3F', margin: '0 0 6px 0' }}>
+                        Stack Circadiano: <span style={{ color: '#7044EC' }}>Bio-Equilibrio Integral</span>
+                      </h4>
+                      <p style={{ fontSize: '13.5px', color: '#5A5278', margin: '0 0 16px 0', lineHeight: 1.5 }}>
+                        Para tu objetivo de <strong>{quizAnswers.goal || 'Energía Limpia Matutina'}</strong>, este protocolo sincroniza tus 3 fases de absorción celular:
+                      </p>
+
+                      {/* Score metric bar */}
+                      <div className={styles.kodiQuizScoreBox}>
+                        <div className={styles.kodiQuizScoreHeader}>
+                          <span style={{ color: '#5A5278' }}>Sincronización Actual: <strong style={{ color: '#EF5126' }}>62% (Desfasado)</strong></span>
+                          <span style={{ color: '#7044EC' }}>Proyectada con Kodi: <strong>98% (Óptima)</strong></span>
+                        </div>
+                        <div className={styles.kodiQuizScoreTrack}>
+                          <div className={styles.kodiQuizScoreFill} style={{ width: '98%' }} />
+                        </div>
+                      </div>
+
+                      {/* 3 Intake Timeline Cards */}
+                      <div className={styles.kodiQuizStackTimeline}>
+                        <div className={styles.kodiTimelineItem}>
+                          <div className={styles.kodiTimelineDot} style={{ background: '#EF5126' }} />
+                          <div>
+                            <div style={{ fontWeight: 800, color: '#160B3F', fontSize: '13.5px' }}>
+                              07:30 AM · Fase Rise: Green Start™ (Dose 05)
+                            </div>
+                            <div style={{ fontSize: '12px', color: '#7044EC', fontWeight: 600, margin: '2px 0' }}>
+                              Matcha Ceremonial + Clorofila + Adaptógenos (Rhodiola)
+                            </div>
+                            <div style={{ fontSize: '12px', color: '#5A5278' }}>
+                              Tomar en ayunas. Alcaliniza y sincroniza cortisol sin temblor ni taquicardia.
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className={styles.kodiTimelineItem}>
+                          <div className={styles.kodiTimelineDot} style={{ background: '#073B3A' }} />
+                          <div>
+                            <div style={{ fontWeight: 800, color: '#160B3F', fontSize: '13.5px' }}>
+                              01:30 PM · Fase Balance: Daily Balance™ (Dose 01)
+                            </div>
+                            <div style={{ fontSize: '12px', color: '#073B3A', fontWeight: 600, margin: '2px 0' }}>
+                              24 Micronutrientes Quelados + Complejo B Metilado + D3/K2
+                            </div>
+                            <div style={{ fontSize: '12px', color: '#5A5278' }}>
+                              Tomar con el almuerzo. Mantiene homeostasis celular y evita la niebla post-comida.
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className={styles.kodiTimelineItem}>
+                          <div className={styles.kodiTimelineDot} style={{ background: '#23155B' }} />
+                          <div>
+                            <div style={{ fontWeight: 800, color: '#160B3F', fontSize: '13.5px' }}>
+                              10:00 PM · Fase Unwind: Restorative Rest™ (Dose 04)
+                            </div>
+                            <div style={{ fontSize: '12px', color: '#7044EC', fontWeight: 600, margin: '2px 0' }}>
+                              Bisglicinato de Magnesio + L-Teanina Pura + Melisa
+                            </div>
+                            <div style={{ fontSize: '12px', color: '#5A5278' }}>
+                              Tomar 30 min antes de dormir. Induce fase REM profunda y desactiva el estrés.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className={styles.kodiQuizActionRow}>
+                        <button type="button" onClick={handleSwitchToChatWithContext} className={styles.kodiQuizAskAiBtn}>
+                          💬 Consultar con el Asesor IA
+                        </button>
+                        <button type="button" onClick={handleResetQuiz} className={styles.kodiQuizResetBtn}>
+                          ↺ Repetir Test
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className={styles.kodiProductPreviewCard}>
+                      <div className={styles.kodiCircadianOrbPreview} style={{ background: 'radial-gradient(circle, #7044EC 0%, #FFA843 50%, #74D7B8 100%)', width: '60px', height: '60px', marginBottom: '10px' }} />
+                      <div className={styles.kodiProductPreviewTag}>Suscripción Recomendada</div>
+                      <h4 className={styles.kodiProductPreviewTitle}>Full Circadian Stack</h4>
+                      <div className={styles.kodiProductPreviewDose}>Green Start + Daily Balance + Restorative Rest</div>
+                      
+                      <div className={styles.kodiPriceCompareBox}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', color: '#7A7298', textDecoration: 'line-through', marginBottom: '4px' }}>
+                          <span>Compra Única:</span>
+                          <span>$2,200.00 MXN</span>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', color: '#160B3F', fontWeight: 800, fontSize: '14px' }}>
+                          <span>Plan Mensual (15% OFF):</span>
+                          <span style={{ color: '#7044EC' }}>$1,870.00 MXN</span>
+                        </div>
+                        <div style={{ fontSize: '11px', color: '#22C55E', fontWeight: 700, marginTop: '4px' }}>
+                          ✓ Envío gratis cada 30 días · Cancela cuando quieras
+                        </div>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => handleAddToCartSimulated('Full Circadian Stack')}
+                        className={styles.kodiStripeCheckoutBtn}
+                      >
+                        <span>💳 Iniciar Suscripción ($1,870 MXN)</span>
+                      </button>
+
+                      {cartNotification && (
+                        <div style={{ marginTop: '12px', fontSize: '12px', color: '#22C55E', fontWeight: 700, background: 'rgba(34, 197, 94, 0.1)', padding: '6px 12px', borderRadius: '100px' }}>
+                          {cartNotification}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* DEMO 2: LIVE CHATBOT IA */}
+            {kodiDemoMode === 'chat' && (
+              <div className={styles.kodiChatWindow}>
+                <div className={styles.kodiChatHeader}>
+                  <div className={styles.kodiChatHeaderLeft}>
+                    <div className={styles.kodiChatAvatarCircle}>🧬</div>
+                    <div>
+                      <h4 className={styles.kodiChatTitle}>Asesor Biológico Kodi dose (IA)</h4>
+                      <p className={styles.kodiChatSubtitle}>
+                        <span className={styles.kodiChatStatusGreenDot} /> En Línea · Conectado a Base Científica y Stripe
+                      </p>
+                    </div>
+                  </div>
+                  <div style={{ fontSize: '11px', background: 'rgba(255,255,255,0.12)', padding: '4px 12px', borderRadius: '100px', fontWeight: 700 }}>
+                    Vendedor Consultivo
+                  </div>
+                </div>
+
+                <div className={styles.kodiChatMessagesArea}>
+                  {chatMessages.map((msg) => (
+                    <div
+                      key={msg.id}
+                      className={msg.sender === 'user' ? styles.kodiChatBubbleUser : styles.kodiChatBubbleBot}
+                    >
+                      <div>{renderFormattedChatMessage(msg.text)}</div>
+                      {msg.productCard && (
+                        <div className={styles.kodiChatProductCard}>
+                          <div>
+                            <div style={{ fontSize: '10.5px', fontWeight: 800, color: '#7044EC', textTransform: 'uppercase' }}>
+                              {msg.productCard.tag}
+                            </div>
+                            <div style={{ fontSize: '14px', fontWeight: 800, color: '#160B3F' }}>
+                              {msg.productCard.title}
+                            </div>
+                            <div style={{ fontSize: '11.5px', color: '#5A5278', margin: '2px 0' }}>
+                              {msg.productCard.dose}
+                            </div>
+                            <div style={{ fontSize: '12px', fontWeight: 700, color: '#160B3F' }}>
+                              <span style={{ textDecoration: 'line-through', color: '#7A7298', marginRight: '6px' }}>{msg.productCard.singlePrice}</span>
+                              <span style={{ color: '#7044EC' }}>{msg.productCard.subPrice}</span>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => handleAddToCartSimulated(msg.productCard!.title)}
+                            className={styles.kodiChatProductBtn}
+                          >
+                            💳 Añadir (15% OFF)
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+
+                  {isBotTyping && (
+                    <div className={styles.kodiChatTyping}>
+                      <span className={styles.kodiTypingDot} />
+                      <span className={styles.kodiTypingDot} />
+                      <span className={styles.kodiTypingDot} />
+                    </div>
+                  )}
+                </div>
+
+                {cartNotification && (
+                  <div style={{ margin: '0 20px 8px 20px', fontSize: '12px', color: '#22C55E', fontWeight: 700, background: 'rgba(34, 197, 94, 0.1)', padding: '6px 14px', borderRadius: '100px', textAlign: 'center' }}>
+                    {cartNotification}
+                  </div>
+                )}
+
+                {/* Quick Chips */}
+                <div className={styles.kodiChatQuickChips}>
+                  {[
+                    '💡 ¿Por qué suscripción mensual?',
+                    '🍵 ¿Cómo tomar Green Start en ayunas?',
+                    '💊 ¿Qué vitaminas tiene Daily Balance?',
+                    '🌙 ¿Cómo descansar mejor con Restorative Rest?',
+                    '📦 ¿Tiempos de envío en México?',
+                    '💳 ¿Puedo cancelar cuando quiera?',
+                  ].map((chip, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => handleSendChatMessage(chip)}
+                      className={styles.kodiChatChip}
+                    >
+                      {chip}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Input Form */}
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    handleSendChatMessage();
+                  }}
+                  className={styles.kodiChatInputArea}
+                >
+                  <input
+                    type="text"
+                    value={chatInput}
+                    onChange={(e) => setChatInput(e.target.value)}
+                    placeholder="Escribe una pregunta sobre suplementación, ritmo circadiano o compras..."
+                    className={styles.kodiChatTextInput}
+                  />
+                  <button type="submit" className={styles.kodiChatSendBtn}>
+                    Enviar
+                  </button>
+                </form>
+              </div>
+            )}
+          </section>
+
+          {/* 3 Core Narrative Pillars */}
+          <section className={styles.kodiNarrativeList}>
+            {(data.storytelling?.narrative || []).map((narrative, idx) => (
+              <div key={idx} className={styles.kodiNarrativeCard}>
+                <div className={styles.kodiNarrativeContent}>
+                  <div className={styles.kodiPillarBadge}>PILAR 0{idx + 1}</div>
+                  <h3 className={styles.kodiNarrativeTitle}>{narrative.title}</h3>
+                  <p className={styles.kodiNarrativeText}>{narrative.content}</p>
+                </div>
+                <div className={styles.kodiNarrativeImageArea}>
+                  <motion.div
+                    initial={{ scale: 1.0 }}
+                    animate={{ scale: [1.0, 1.08, 1.0] }}
+                    transition={{ duration: 14 + idx * 2, repeat: Infinity, ease: "easeInOut" }}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      backgroundImage: `url(${narrative.image})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                    }}
+                  />
+                </div>
+              </div>
+            ))}
+          </section>
+
+          {/* Pricing & Investment Calculator */}
+          <section id="propuesta-economica" className={styles.kodiPricingSection}>
+            <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto' }}>
+              <div className={styles.kodiPillarBadge}>PROPUESTA ECONÓMICA MODULAR</div>
+              <h2 className={styles.kodiSectionTitle}>
+                Tu Inversión, <span className={styles.kodiEditorialSerif}>Estructurada y Transparente</span>
+              </h2>
+              <p className={styles.kodiSectionSubtext} style={{ margin: '0 auto' }}>
+                Selecciona los componentes para personalizar tu plan. La Fase 1 cubre la ingeniería y puesta en marcha; la Fase 2 asegura la adquisición continua de clientes:
+              </p>
+            </div>
+
+            <div className={styles.kodiPricingCardsGrid}>
+              {(data.packages.blocks || []).map((block, bIdx) => {
+                const service = block.services[0];
+                if (!service) return null;
+                const isSelected = !!selectedServices[service.name];
+
+                return (
+                  <div
+                    key={bIdx}
+                    onClick={() => toggleServiceSelection(service.name)}
+                    className={`${styles.kodiPriceCard} ${isSelected ? styles.kodiPriceCardSelected : ''}`}
+                  >
+                    <div className={styles.kodiPriceCardHeader}>
+                      <span className={`${styles.kodiPriceCardBadge} ${bIdx === 1 ? styles.kodiPriceCardBadgeSecondary : ''}`}>
+                        {bIdx === 0 ? '⚡ FASE 1: SETUP ÚNICO' : '🚀 FASE 2: MENSUAL RECURRENTE'}
+                      </span>
+                      <div className={`${styles.kodiCustomCheckbox} ${isSelected ? styles.kodiCustomCheckboxChecked : ''}`}>
+                        {isSelected && '✓'}
+                      </div>
+                    </div>
+
+                    <h3 style={{ fontSize: '20px', fontWeight: 800, color: '#160B3F', margin: '0 0 8px 0', lineHeight: 1.25 }}>
+                      {service.name}
+                    </h3>
+                    <p style={{ fontSize: '13.5px', color: '#5A5278', margin: '0 0 16px 0', lineHeight: 1.45 }}>
+                      {service.description}
+                    </p>
+
+                    {bIdx === 0 ? (
+                      <div>
+                        <div style={{ fontSize: '11px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em', color: '#7044EC', marginBottom: '2px' }}>
+                          Anticipo de Arranque (50%):
+                        </div>
+                        <div className={styles.kodiPriceAmount}>
+                          {formatPrice(service.price * 0.5)}
+                        </div>
+                        <div className={styles.kodiPricePeriod}>
+                          + IVA para iniciar desarrollo
+                        </div>
+                        <div className={styles.kodiTotalProjectPill}>
+                          <span>Inversión Total Fase 1: <strong>{formatPrice(service.price)} + IVA</strong></span>
+                          <span style={{ fontSize: '11px', color: '#5A5278' }}>Diferido en 3 hitos (50% · 25% · 25%)</span>
+                        </div>
+                      </div>
+                    ) : (
+                      <div>
+                        <div style={{ fontSize: '11px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em', color: '#7044EC', marginBottom: '2px' }}>
+                          Inversión Mensual Recurrente:
+                        </div>
+                        <div className={styles.kodiPriceAmount}>
+                          {formatPrice(service.price)}
+                        </div>
+                        <div className={styles.kodiPricePeriod} style={{ marginBottom: '18px' }}>
+                          + IVA / mes (Tráfico pagado, 40 contenidos y soporte web)
+                        </div>
+                      </div>
+                    )}
+
+                    <ul className={styles.kodiBulletList}>
+                      {(service.bullets || []).map((bullet, bullIdx) => (
+                        <li key={bullIdx} className={styles.kodiBulletItem}>
+                          <span className={styles.kodiBulletCheck}>✓</span>
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Commercial Policies & Technical Specifications Section */}
+            <div className={styles.kodiTermsSection}>
+              <div className={styles.kodiTermsSectionHeader}>
+                <div className={styles.kodiPillarBadge}>🛡️ CONDICIONES OPERATIVAS Y TRANSPARENCIA</div>
+                <h3 className={styles.kodiTermsSectionTitle}>
+                  Especificaciones Clave de la <span className={styles.kodiEditorialSerif}>Alianza y Servicios</span>
+                </h3>
+                <p className={styles.kodiTermsSectionSubtitle}>
+                  Estructura transparente, sin letras pequeñas ni costos ocultos:
+                </p>
+              </div>
+
+              <div className={styles.kodiTermsGrid}>
+                {/* 1. Hitos de Pago */}
+                <div className={styles.kodiTermCard}>
+                  <div className={styles.kodiTermCardTop}>
+                    <div className={styles.kodiTermIconBubble}>💳</div>
+                    <div>
+                      <span className={styles.kodiTermTag}>Fase 1 · Setup</span>
+                      <h4 className={styles.kodiTermTitle}>Esquema de Pago por Hitos</h4>
+                    </div>
+                  </div>
+                  <div className={styles.kodiMilestonesList}>
+                    <div className={styles.kodiMilestoneItem}>
+                      <span className={styles.kodiMilestonePercent}>50%</span>
+                      <div>
+                        <strong>$21,000 MXN</strong> · Arranque & Arquitectura UX/UI
+                      </div>
+                    </div>
+                    <div className={styles.kodiMilestoneItem}>
+                      <span className={styles.kodiMilestonePercent}>25%</span>
+                      <div>
+                        <strong>$10,500 MXN</strong> · 1ra Entrega Funcional (Test & Stripe)
+                      </div>
+                    </div>
+                    <div className={styles.kodiMilestoneItem}>
+                      <span className={styles.kodiMilestonePercent}>25%</span>
+                      <div>
+                        <strong>$10,500 MXN</strong> · Lanzamiento Final & CMS
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 2. Consumo API IA */}
+                <div className={styles.kodiTermCard}>
+                  <div className={styles.kodiTermCardTop}>
+                    <div className={styles.kodiTermIconBubble}>🧬</div>
+                    <div>
+                      <span className={styles.kodiTermTag}>Transparencia Médica</span>
+                      <h4 className={styles.kodiTermTitle}>Consumo de API de IA</h4>
+                    </div>
+                  </div>
+                  <p className={styles.kodiTermText}>
+                    El motor de Inteligencia Artificial (OpenAI / Gemini) factura por cada palabra procesada. La cuenta oficial queda a nombre directo de <strong>Kodi dose™</strong>.
+                  </p>
+                  <div className={styles.kodiTermHighlightBox}>
+                    <span style={{ fontSize: '11px', color: '#7044EC', fontWeight: 800 }}>⚡ CONSUMO ESTIMADO MENSUAL:</span>
+                    <strong style={{ fontSize: '15px', color: '#160B3F' }}>$5 a $15 USD / mes</strong>
+                    <span style={{ fontSize: '11px', color: '#5A5278' }}>Optimizado por código para máximo ahorro.</span>
+                  </div>
+                </div>
+
+                {/* 3. Mantenimiento Web */}
+                <div className={styles.kodiTermCard}>
+                  <div className={styles.kodiTermCardTop}>
+                    <div className={styles.kodiTermIconBubble}>🛠️</div>
+                    <div>
+                      <span className={styles.kodiTermTag}>Soporte & Uptime</span>
+                      <h4 className={styles.kodiTermTitle}>Póliza de Mantenimiento Web</h4>
+                    </div>
+                  </div>
+                  <p className={styles.kodiTermText}>
+                    Vigilancia de pasarela Stripe, parches de seguridad, backups y soporte del catálogo en Firebase:
+                  </p>
+                  <div className={styles.kodiMaintenanceDual}>
+                    <div className={styles.kodiMaintItemActive}>
+                      <span>Con Fase 2 Activa:</span>
+                      <strong>$0 MXN (Incluido)</strong>
+                    </div>
+                    <div className={styles.kodiMaintItem}>
+                      <span>Póliza Standalone:</span>
+                      <strong>$4,000 MXN / mes</strong>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 4. Dominio & Servidores */}
+                <div className={styles.kodiTermCard}>
+                  <div className={styles.kodiTermCardTop}>
+                    <div className={styles.kodiTermIconBubble}>🌐</div>
+                    <div>
+                      <span className={styles.kodiTermTag}>Infraestructura & Marca</span>
+                      <h4 className={styles.kodiTermTitle}>Dominio (.com) & Servidores</h4>
+                    </div>
+                  </div>
+                  <p className={styles.kodiTermText}>
+                    La compra del dominio <strong>kodidose.com está 100% incluida por 1 año</strong>, gestionando la titularidad legal a su nombre.
+                  </p>
+                  <div className={styles.kodiServerBadges}>
+                    <span>✓ Certificado SSL HTTPS</span>
+                    <span>✓ DNS Apuntadas</span>
+                    <span>✓ Hosting Serverless Vercel / Firebase</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Total Calculation & WhatsApp Call to Action */}
+            <div className={styles.kodiSummaryBox}>
+              <div className={styles.kodiSummaryLeft}>
+                <div className={styles.kodiSummaryBadge}>📋 ALCANCE DEL PROYECTO</div>
+                <h3 className={styles.kodiSummaryTitle}>Resumen de Inversión Seleccionada</h3>
+                <p className={styles.kodiSummarySubtext}>
+                  {data.packages.methodologyText || 'Infraestructura propietaria en Next.js/Firebase y pauta en Meta Ads administrada con presupuesto operativo del cliente.'}
+                </p>
+
+                <div className={styles.kodiSummarySelectedList}>
+                  {data.packages.blocks?.map((block, bIdx) => {
+                    const svc = block.services?.[0];
+                    if (!svc || !selectedServices[svc.name]) return null;
+                    return (
+                      <div key={bIdx} className={styles.kodiSummarySelectedItem}>
+                        <span className={styles.kodiSummarySelectedCheck}>✓</span>
+                        <div style={{ flex: 1 }}>
+                          <strong style={{ color: '#FFFFFF', fontSize: '13px' }}>{bIdx === 0 ? 'Fase 1 (Setup Inicial): ' : 'Fase 2 (Fee Mensual): '}</strong>
+                          <span style={{ color: '#B8A7EA', fontSize: '12.5px' }}>{svc.name}</span>
+                        </div>
+                        <span style={{ color: '#74D7B8', fontWeight: 800, fontSize: '13px' }}>{formatPrice(svc.price)}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <div className={styles.kodiSummaryNote}>
+                  * Presupuestos directos de pauta publicitaria en Meta y costos de activaciones físicas en gimnasios/eventos son administrados con presupuesto adicional de Kodi dose™.
+                </div>
+              </div>
+
+              <div className={styles.kodiSummaryRight}>
+                <div className={styles.kodiSummaryCardInner}>
+                  <div className={styles.kodiSummaryRow}>
+                    <span style={{ color: '#B8A7EA', fontSize: '13px' }}>Subtotal Neto:</span>
+                    <span style={{ color: '#FFFFFF', fontWeight: 700, fontSize: '14px' }}>{formatPrice(total)}</span>
+                  </div>
+                  <div className={styles.kodiSummaryRow}>
+                    <span style={{ color: '#B8A7EA', fontSize: '13px' }}>IVA Trasladado (16%):</span>
+                    <span style={{ color: '#FFFFFF', fontWeight: 700, fontSize: '14px' }}>{formatPrice(total * 0.16)}</span>
+                  </div>
+                  <div className={styles.kodiSummaryDivider} />
+                  <div className={styles.kodiSummaryTotalRow}>
+                    <div>
+                      <div className={styles.kodiTotalLabel}>TOTAL ESTIMADO CON IVA</div>
+                      <div className={styles.kodiTotalValue}>{formatPrice(totalWithIva)}</div>
+                    </div>
+                  </div>
+
+                  <a
+                    href={`https://wa.me/${data.contact?.phone || '526561031571'}?text=${encodeURIComponent(getWhatsAppMessage())}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.kodiWhatsAppCta}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                    </svg>
+                    <span>CONFIRMAR POR WHATSAPP</span>
+                    <span>→</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Minimalist Brand Footer */}
+          <footer className={styles.kodiFooter}>
+            <div className={styles.kodiFooterLinks}>
+              <a href="#">Términos de Servicio</a>
+              <span>·</span>
+              <a href="#">Soporte Apolograma</a>
+              <span>·</span>
+              <a href="#">Frontera Número Uno</a>
+              <span>·</span>
+              <a href={`tel:${data.contact?.phone || '526561031571'}`}>Línea Directa: 656-103-1571</a>
+            </div>
+            <p style={{ margin: 0, opacity: 0.7 }}>
+              © 2026 Apolograma & Frontera Número Uno. Desarrollado exclusivamente para Kodi dose™.
+            </p>
           </footer>
         </div>
       </div>

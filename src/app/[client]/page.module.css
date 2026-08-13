@@ -1695,4 +1695,1935 @@
   }
 }
 
+/* ==========================================================================
+   KODI AURA / BIO-TECH WELLNESS DESIGN SYSTEM
+   ========================================================================== */
+
+.kodiFrame {
+  min-height: 100vh;
+  background-color: #F8F8F6;
+  color: #160B3F;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  position: relative;
+  overflow-x: hidden;
+  padding: 0;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+.kodiAuraBgLayer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.kodiOrb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.28;
+  animation: kodiAuraDrift 18s ease-in-out infinite alternate;
+}
+
+.kodiOrbOrange {
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, #EF5126 0%, #FFA843 70%, transparent 100%);
+  top: 5%;
+  right: -5%;
+}
+
+.kodiOrbPurple {
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, #7044EC 0%, #B8A7EA 70%, transparent 100%);
+  top: 40%;
+  left: -10%;
+  animation-duration: 22s;
+  animation-delay: -5s;
+}
+
+.kodiOrbGreen {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #073B3A 0%, #74D7B8 70%, transparent 100%);
+  bottom: 10%;
+  right: -8%;
+  animation-duration: 25s;
+  animation-delay: -10s;
+}
+
+@keyframes kodiAuraDrift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(40px, 30px) scale(1.08);
+  }
+  100% {
+    transform: translate(-30px, 50px) scale(0.95);
+  }
+}
+
+.kodiContainer {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 20px 80px 20px;
+}
+
+/* Header & Top Bar */
+.kodiTopBanner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(31, 16, 96, 0.06);
+  border-radius: 100px;
+  margin-bottom: 24px;
+  font-size: 13px;
+  box-shadow: 0 4px 20px rgba(31, 16, 96, 0.03);
+}
+
+.kodiBadgeLive {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #1F1060;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+.kodiStatusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #7044EC;
+  box-shadow: 0 0 10px #7044EC;
+  animation: kodiPulse 2s infinite;
+}
+
+@keyframes kodiPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.6; }
+}
+
+.kodiTaglinePill {
+  font-size: 12px;
+  color: #5A5278;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+.kodiAgencyNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  padding: 0 6px;
+}
+
+.kodiAgencyLogos {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.kodiAgencyLogos img {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+}
+
+.kodiClientLogoPill {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(31, 16, 96, 0.08);
+  padding: 8px 18px;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 15px rgba(31, 16, 96, 0.04);
+}
+
+.kodiClientLogoPill img {
+  height: 22px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Hero Section */
+.kodiHeroCard {
+  position: relative;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(31, 16, 96, 0.08);
+  border-radius: 32px;
+  padding: 56px 40px;
+  overflow: hidden;
+  margin-bottom: 32px;
+  box-shadow: 0 20px 50px rgba(31, 16, 96, 0.05);
+}
+
+.kodiHeroBgMedia {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 55%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+  mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 85%);
+  -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 85%);
+}
+
+.kodiHeroContent {
+  position: relative;
+  z-index: 1;
+  max-width: 650px;
+}
+
+.kodiEyebrowBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(112, 68, 236, 0.08);
+  color: #7044EC;
+  border: 1px solid rgba(112, 68, 236, 0.18);
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.kodiHeroTitle {
+  font-size: 52px;
+  line-height: 1.08;
+  font-weight: 700;
+  color: #160B3F;
+  margin: 0 0 18px 0;
+  letter-spacing: -0.02em;
+}
+
+.kodiEditorialSerif {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: #7044EC;
+  padding: 0 4px;
+}
+
+.kodiHeroSubtitle {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #5A5278;
+  margin: 0 0 32px 0;
+  font-weight: 400;
+}
+
+.kodiHeroActions {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.kodiButtonPrimary {
+  background: #160B3F;
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.03em;
+  padding: 16px 28px;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 10px 25px rgba(22, 11, 63, 0.25);
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+.kodiButtonPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(22, 11, 63, 0.35);
+  background: #23155B;
+}
+
+.kodiButtonSecondary {
+  background: rgba(255, 255, 255, 0.85);
+  color: #160B3F;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 16px 24px;
+  border-radius: 100px;
+  border: 1px solid rgba(31, 16, 96, 0.12);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.kodiButtonSecondary:hover {
+  background: #FFFFFF;
+  border-color: rgba(31, 16, 96, 0.25);
+  transform: translateY(-2px);
+}
+
+/* Strategic Justification / Circadian Grid */
+.kodiSectionTitle {
+  font-size: 32px;
+  line-height: 1.15;
+  font-weight: 700;
+  color: #160B3F;
+  margin: 0 0 12px 0;
+  letter-spacing: -0.01em;
+}
+
+.kodiSectionSubtext {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #5A5278;
+  margin: 0 0 28px 0;
+  max-width: 800px;
+}
+
+.kodiCircadianGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.kodiCircadianCard {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(31, 16, 96, 0.08);
+  border-radius: 24px;
+  padding: 24px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(31, 16, 96, 0.03);
+}
+
+.kodiCircadianCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(31, 16, 96, 0.08);
+  border-color: rgba(31, 16, 96, 0.18);
+}
+
+.kodiCircadianOrbPreview {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin: 0 auto 16px auto;
+  filter: blur(4px);
+  transition: transform 0.3s ease;
+}
+
+.kodiCircadianCard:hover .kodiCircadianOrbPreview {
+  transform: scale(1.15);
+}
+
+.kodiCircadianPillarName {
+  font-size: 17px;
+  font-weight: 800;
+  color: #160B3F;
+  margin: 0 0 4px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.kodiCircadianPillarTime {
+  font-size: 12px;
+  color: #7044EC;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.kodiCircadianPillarDesc {
+  font-size: 13px;
+  line-height: 1.45;
+  color: #5A5278;
+  margin: 0;
+}
+
+/* Interactive Simulator */
+/* Interactive Simulator: Quiz & Live Chatbot Demos */
+.kodiSimulatorContainer {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(112, 68, 236, 0.18);
+  border-radius: 32px;
+  padding: 40px;
+  margin-bottom: 48px;
+  box-shadow: 0 24px 60px rgba(112, 68, 236, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.kodiDemoSwitcher {
+  display: flex;
+  gap: 8px;
+  background: rgba(22, 11, 63, 0.06);
+  padding: 6px;
+  border-radius: 100px;
+  margin-bottom: 28px;
+  width: fit-content;
+}
+
+.kodiDemoSwitchBtn {
+  background: transparent;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 100px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #5A5278;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+}
+
+.kodiDemoSwitchBtnActive {
+  background: #160B3F;
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(22, 11, 63, 0.25);
+}
+
+/* --- Quiz Minigame Styles --- */
+.kodiQuizProgressContainer {
+  margin-bottom: 24px;
+}
+
+.kodiQuizProgressHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #7044EC;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.kodiQuizBackBtn {
+  background: transparent;
+  border: none;
+  color: #5A5278;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.kodiQuizBackBtn:hover {
+  color: #160B3F;
+  background: rgba(22, 11, 63, 0.05);
+}
+
+.kodiQuizProgressTrack {
+  height: 6px;
+  background: rgba(112, 68, 236, 0.12);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.kodiQuizProgressBar {
+  height: 100%;
+  background: linear-gradient(90deg, #7044EC 0%, #B8A7EA 100%);
+  border-radius: 100px;
+  transition: width 0.4s ease;
+}
+
+.kodiQuizQuestionTitle {
+  font-size: 24px;
+  font-weight: 800;
+  color: #160B3F;
+  margin: 0 0 6px 0;
+  line-height: 1.25;
+}
+
+.kodiQuizQuestionSubtitle {
+  font-size: 14px;
+  color: #5A5278;
+  margin: 0 0 24px 0;
+}
+
+.kodiQuizOptionsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.kodiQuizOptionCard {
+  background: #FFFFFF;
+  border: 1.5px solid rgba(31, 16, 96, 0.08);
+  border-radius: 20px;
+  padding: 20px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+
+.kodiQuizOptionCard:hover {
+  border-color: #7044EC;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(112, 68, 236, 0.12);
+}
+
+.kodiQuizOptionCardActive {
+  background: #F4F1FD !important;
+  border-color: #7044EC !important;
+  box-shadow: 0 0 0 2px rgba(112, 68, 236, 0.3), 0 10px 28px rgba(112, 68, 236, 0.15) !important;
+  transform: scale(0.99);
+}
+
+.kodiQuizOptionIcon {
+  font-size: 26px;
+  margin-bottom: 4px;
+}
+
+.kodiQuizOptionTitle {
+  font-size: 15.5px;
+  font-weight: 800;
+  color: #160B3F;
+  margin: 0;
+}
+
+.kodiQuizOptionDesc {
+  font-size: 12.5px;
+  color: #5A5278;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Quiz Analyzing State */
+.kodiQuizAnalyzingBox {
+  text-align: center;
+  padding: 48px 20px;
+}
+
+.kodiQuizAnalyzingOrb {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #7044EC 0%, #FFA843 50%, #74D7B8 100%);
+  margin: 0 auto 24px auto;
+  filter: blur(8px);
+  animation: kodiAuraSpin 2.5s infinite linear;
+}
+
+@keyframes kodiAuraSpin {
+  0% { transform: rotate(0deg) scale(0.9); }
+  50% { transform: rotate(180deg) scale(1.15); }
+  100% { transform: rotate(360deg) scale(0.9); }
+}
+
+/* Quiz Score Metric Box */
+.kodiQuizScoreBox {
+  background: #FFFFFF;
+  border: 1px solid rgba(112, 68, 236, 0.15);
+  border-radius: 16px;
+  padding: 14px 18px;
+  margin-bottom: 18px;
+}
+
+.kodiQuizScoreHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.kodiQuizScoreTrack {
+  height: 8px;
+  background: rgba(22, 11, 63, 0.06);
+  border-radius: 100px;
+  overflow: hidden;
+  position: relative;
+}
+
+.kodiQuizScoreFill {
+  height: 100%;
+  background: linear-gradient(90deg, #FFA843 0%, #74D7B8 50%, #7044EC 100%);
+  border-radius: 100px;
+  transition: width 1s ease;
+}
+
+/* Quiz Result Deck */
+.kodiQuizResultGrid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.kodiQuizResultSummary {
+  background: #F4F1FD;
+  border: 1px solid rgba(112, 68, 236, 0.2);
+  border-radius: 24px;
+  padding: 28px;
+}
+
+.kodiQuizStackTimeline {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.kodiTimelineItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: #FFFFFF;
+  padding: 14px 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(112, 68, 236, 0.1);
+  font-size: 13px;
+  box-shadow: 0 4px 12px rgba(31, 16, 96, 0.02);
+}
+
+.kodiTimelineDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.kodiQuizActionRow {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.kodiQuizResetBtn {
+  background: transparent;
+  border: 1px solid rgba(31, 16, 96, 0.2);
+  color: #160B3F;
+  padding: 12px 18px;
+  border-radius: 100px;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.kodiQuizResetBtn:hover {
+  background: #FFFFFF;
+}
+
+.kodiQuizAskAiBtn {
+  background: #160B3F;
+  color: #FFFFFF;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 100px;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.kodiQuizAskAiBtn:hover {
+  background: #7044EC;
+}
+
+.kodiProductPreviewCard {
+  background: #FFFFFF;
+  border: 1.5px solid rgba(112, 68, 236, 0.2);
+  border-radius: 28px;
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: 0 14px 40px rgba(112, 68, 236, 0.08);
+}
+
+.kodiProductPreviewTitle {
+  font-size: 20px;
+  font-weight: 800;
+  color: #160B3F;
+  margin: 0 0 4px 0;
+}
+
+.kodiProductPreviewDose {
+  font-size: 13px;
+  color: #5A5278;
+  font-weight: 600;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+.kodiProductPreviewTag {
+  display: inline-block;
+  background: #F4F1FD;
+  border: 1px solid rgba(112, 68, 236, 0.2);
+  padding: 4px 14px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #7044EC;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.kodiPriceCompareBox {
+  background: #F8F8F6;
+  border-radius: 16px;
+  padding: 14px;
+  margin-bottom: 18px;
+  text-align: left;
+  font-size: 12.5px;
+}
+
+.kodiStripeCheckoutBtn {
+  background: #635BFF;
+  color: #FFFFFF;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 100px;
+  font-size: 13.5px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(99, 91, 255, 0.25);
+  transition: all 0.2s ease;
+  width: 100%;
+  justify-content: center;
+}
+
+.kodiStripeCheckoutBtn:hover {
+  background: #4E44E6;
+  transform: translateY(-2px);
+}
+
+/* --- Live Chatbot Demo Styles --- */
+.kodiChatWindow {
+  background: #FFFFFF;
+  border: 1px solid rgba(31, 16, 96, 0.1);
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(31, 16, 96, 0.04);
+}
+
+.kodiChatHeader {
+  background: #160B3F;
+  color: #FFFFFF;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kodiChatHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.kodiChatAvatarCircle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7044EC 0%, #B8A7EA 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+}
+
+.kodiChatTitle {
+  font-size: 14.5px;
+  font-weight: 800;
+  margin: 0;
+}
+
+.kodiChatSubtitle {
+  font-size: 11px;
+  color: #B8A7EA;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.kodiChatStatusGreenDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #22C55E;
+  display: inline-block;
+  box-shadow: 0 0 6px #22C55E;
+}
+
+.kodiChatMessagesArea {
+  padding: 24px;
+  height: 380px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: #FAF9FD;
+}
+
+.kodiChatBubbleBot {
+  background: #FFFFFF;
+  border: 1px solid rgba(112, 68, 236, 0.15);
+  border-radius: 18px 18px 18px 4px;
+  padding: 16px 20px;
+  max-width: 85%;
+  align-self: flex-start;
+  box-shadow: 0 4px 14px rgba(31, 16, 96, 0.03);
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #160B3F;
+}
+
+.kodiChatBubbleUser {
+  background: #160B3F;
+  color: #FFFFFF;
+  border-radius: 18px 18px 4px 18px;
+  padding: 14px 20px;
+  max-width: 80%;
+  align-self: flex-end;
+  font-size: 13.5px;
+  line-height: 1.5;
+  box-shadow: 0 4px 14px rgba(22, 11, 63, 0.15);
+}
+
+.kodiChatProductCard {
+  margin-top: 12px;
+  background: #F8F8F6;
+  border: 1px solid rgba(31, 16, 96, 0.08);
+  border-radius: 16px;
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+}
+
+.kodiChatProductBtn {
+  background: #635BFF;
+  color: #FFFFFF;
+  border: none;
+  padding: 9px 16px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.kodiChatProductBtn:hover {
+  background: #4E44E6;
+}
+
+.kodiChatTyping {
+  display: flex;
+  gap: 4px;
+  padding: 8px 14px;
+  background: #FFFFFF;
+  border-radius: 100px;
+  width: fit-content;
+  border: 1px solid rgba(112, 68, 236, 0.15);
+}
+
+.kodiTypingDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #7044EC;
+  animation: kodiTypingBounce 1.2s infinite ease-in-out;
+}
+
+.kodiTypingDot:nth-child(2) { animation-delay: 0.2s; }
+.kodiTypingDot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes kodiTypingBounce {
+  0%, 80%, 100% { transform: scale(0); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+.kodiChatQuickChips {
+  padding: 12px 20px;
+  background: #FFFFFF;
+  border-top: 1px solid rgba(31, 16, 96, 0.06);
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.kodiChatChip {
+  background: #F4F1FD;
+  border: 1px solid rgba(112, 68, 236, 0.15);
+  color: #7044EC;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 100px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.kodiChatChip:hover {
+  background: #7044EC;
+  color: #FFFFFF;
+}
+
+.kodiChatInputArea {
+  padding: 14px 20px;
+  background: #FFFFFF;
+  border-top: 1px solid rgba(31, 16, 96, 0.08);
+  display: flex;
+  gap: 10px;
+}
+
+.kodiChatTextInput {
+  flex: 1;
+  border: 1px solid rgba(31, 16, 96, 0.12);
+  border-radius: 100px;
+  padding: 12px 20px;
+  font-size: 13.5px;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.kodiChatTextInput:focus {
+  border-color: #7044EC;
+}
+
+.kodiChatSendBtn {
+  background: #160B3F;
+  color: #FFFFFF;
+  border: none;
+  padding: 0 22px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.kodiChatSendBtn:hover {
+  background: #23155B;
+}
+
+.kodiChatSendBtn:hover {
+  background: #23155B;
+}
+
+/* Narrative Pillar Cards */
+.kodiNarrativeList {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-bottom: 48px;
+}
+
+.kodiNarrativeCard {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(31, 16, 96, 0.08);
+  border-radius: 28px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  align-items: center;
+  box-shadow: 0 12px 36px rgba(31, 16, 96, 0.04);
+}
+
+.kodiNarrativeCard:nth-child(even) {
+  grid-template-columns: 1.15fr 1fr;
+}
+
+.kodiNarrativeCard:nth-child(even) .kodiNarrativeImageArea {
+  order: 2;
+}
+
+.kodiNarrativeImageArea {
+  position: relative;
+  height: 380px;
+  overflow: hidden;
+  background: #ECE7FB;
+}
+
+.kodiNarrativeContent {
+  padding: 40px;
+}
+
+.kodiPillarBadge {
+  display: inline-block;
+  background: rgba(112, 68, 236, 0.08);
+  color: #7044EC;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 100px;
+  margin-bottom: 12px;
+}
+
+.kodiNarrativeTitle {
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #160B3F;
+  margin: 0 0 14px 0;
+  letter-spacing: -0.01em;
+}
+
+.kodiNarrativeText {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #5A5278;
+  margin: 0;
+}
+
+/* Pricing Section */
+.kodiPricingSection {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(31, 16, 96, 0.1);
+  border-radius: 32px;
+  padding: 48px 40px;
+  margin-bottom: 40px;
+  box-shadow: 0 20px 60px rgba(31, 16, 96, 0.06);
+}
+
+.kodiPricingCardsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.kodiPriceCard {
+  background: #FFFFFF;
+  border: 2px solid rgba(31, 16, 96, 0.08);
+  border-radius: 24px;
+  padding: 32px;
+  position: relative;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.kodiPriceCardSelected {
+  border-color: #7044EC;
+  box-shadow: 0 12px 36px rgba(112, 68, 236, 0.12);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAF8FF 100%);
+}
+
+.kodiPriceCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.kodiPriceCardBadge {
+  display: inline-block;
+  background: #160B3F;
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 6px 12px;
+  border-radius: 100px;
+  text-transform: uppercase;
+}
+
+.kodiPriceCardBadgeSecondary {
+  background: #7044EC;
+}
+
+.kodiCustomCheckbox {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #7044EC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.kodiCustomCheckboxChecked {
+  background: #7044EC;
+  color: #FFFFFF;
+}
+
+.kodiPriceAmount {
+  font-size: 38px;
+  font-weight: 800;
+  color: #160B3F;
+  line-height: 1;
+  margin: 12px 0 6px 0;
+}
+
+.kodiPricePeriod {
+  font-size: 13px;
+  color: #5A5278;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.kodiTotalProjectPill {
+  margin-top: 10px;
+  margin-bottom: 18px;
+  background: #F4F1FD;
+  border: 1px solid rgba(112, 68, 236, 0.18);
+  border-radius: 12px;
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 12.5px;
+  color: #160B3F;
+}
+
+.kodiTotalProjectPill strong {
+  color: #7044EC;
+  font-weight: 800;
+}
+
+.kodiBulletList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.kodiBulletItem {
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: #332856;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.kodiBulletCheck {
+  color: #7044EC;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+/* Pricing Terms & Policies Section */
+.kodiTermsSection {
+  margin-top: 48px;
+  background: #FBFBFA;
+  border: 1px solid rgba(31, 16, 96, 0.08);
+  border-radius: 28px;
+  padding: 36px 32px;
+}
+
+.kodiTermsSectionHeader {
+  margin-bottom: 24px;
+}
+
+.kodiTermsSectionTitle {
+  font-size: 24px;
+  font-weight: 800;
+  color: #160B3F;
+  margin: 6px 0;
+}
+
+.kodiTermsSectionSubtitle {
+  font-size: 14px;
+  color: #5A5278;
+  margin: 0;
+}
+
+.kodiTermsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.kodiTermCard {
+  background: #FFFFFF;
+  border: 1px solid rgba(31, 16, 96, 0.08);
+  border-radius: 22px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 18px rgba(22, 11, 63, 0.03);
+  transition: all 0.25s ease;
+}
+
+.kodiTermCard:hover {
+  transform: translateY(-3px);
+  border-color: rgba(112, 68, 236, 0.3);
+  box-shadow: 0 12px 30px rgba(112, 68, 236, 0.09);
+}
+
+.kodiTermCardTop {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.kodiTermIconBubble {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: #F4F1FD;
+  color: #7044EC;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.kodiTermTag {
+  font-size: 10.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #7044EC;
+}
+
+.kodiTermTitle {
+  font-size: 16px;
+  font-weight: 800;
+  color: #160B3F;
+  margin: 2px 0 0 0;
+}
+
+.kodiTermText {
+  font-size: 13px;
+  color: #5A5278;
+  line-height: 1.5;
+  margin: 0 0 14px 0;
+}
+
+.kodiMilestonesList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.kodiMilestoneItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #F8F8F6;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 12.5px;
+  color: #160B3F;
+}
+
+.kodiMilestonePercent {
+  background: #160B3F;
+  color: #FFFFFF;
+  font-size: 10.5px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.kodiTermHighlightBox {
+  background: #F4F1FD;
+  border: 1px solid rgba(112, 68, 236, 0.15);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: auto;
+}
+
+.kodiMaintenanceDual {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.kodiMaintItemActive {
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 12px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 11.5px;
+  color: #166534;
+}
+
+.kodiMaintItemActive strong {
+  font-size: 13px;
+  color: #15803D;
+}
+
+.kodiMaintItem {
+  background: #F8F8F6;
+  border: 1px solid rgba(31, 16, 96, 0.08);
+  border-radius: 12px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 11.5px;
+  color: #5A5278;
+}
+
+.kodiMaintItem strong {
+  font-size: 13px;
+  color: #160B3F;
+}
+
+.kodiServerBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.kodiServerBadges span {
+  background: #F4F1FD;
+  color: #7044EC;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+
+/* Pricing Summary Box */
+.kodiSummaryBox {
+  background: #160B3F;
+  color: #FFFFFF;
+  border-radius: 28px;
+  padding: 36px 40px;
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 36px;
+  align-items: center;
+  box-shadow: 0 20px 50px rgba(22, 11, 63, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.kodiSummaryBadge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  color: #B8A7EA;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 4px 12px;
+  border-radius: 100px;
+  margin-bottom: 12px;
+}
+
+.kodiSummaryTitle {
+  font-size: 22px;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0 0 10px 0;
+  line-height: 1.25;
+}
+
+.kodiSummarySubtext {
+  font-size: 13px;
+  color: #B8A7EA;
+  margin: 0 0 18px 0;
+  line-height: 1.5;
+}
+
+.kodiSummarySelectedList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.kodiSummarySelectedItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 10px 14px;
+  border-radius: 12px;
+}
+
+.kodiSummarySelectedCheck {
+  color: #74D7B8;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.kodiSummaryNote {
+  font-size: 11px;
+  color: rgba(184, 167, 234, 0.7);
+  line-height: 1.4;
+}
+
+.kodiSummaryRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kodiSummaryCardInner {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 22px;
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.kodiSummaryRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kodiSummaryDivider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.12);
+  margin: 2px 0;
+}
+
+.kodiSummaryTotalRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 4px;
+}
+
+.kodiTotalLabel {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #B8A7EA;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.kodiTotalValue {
+  font-size: 36px;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.kodiWhatsAppCta {
+  background: #25D366;
+  color: #FFFFFF;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 14px;
+  padding: 16px 24px;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+  transition: all 0.25s ease;
+  width: 100%;
+}
+
+.kodiWhatsAppCta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.45);
+}
+
+/* Footer */
+.kodiFooter {
+  text-align: center;
+  padding: 40px 20px;
+  color: #5A5278;
+  font-size: 12px;
+}
+
+.kodiFooterLinks {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 12px;
+}
+
+.kodiFooterLinks a {
+  color: #7044EC;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN: IPAD, TABLET & MOBILE OPTIMIZATIONS
+   ========================================================================== */
+
+/* Tablet & iPad (768px to 1024px) */
+@media (max-width: 1024px) {
+  .kodiContainer {
+    padding: 20px 24px 80px 24px;
+    max-width: 100%;
+  }
+
+  .kodiCircadianGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .kodiSimulatorContainer {
+    padding: 32px 24px;
+  }
+
+  .kodiQuizResultGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .kodiNarrativeCard, .kodiNarrativeCard:nth-child(even) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .kodiNarrativeCard:nth-child(even) .kodiNarrativeImageArea {
+    order: 0;
+  }
+
+  .kodiNarrativeImageArea {
+    height: 300px;
+  }
+
+  .kodiPricingCardsGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .kodiTermsSection {
+    padding: 32px 24px;
+  }
+
+  .kodiTermsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .kodiSummaryBox {
+    grid-template-columns: 1fr;
+    padding: 32px 28px;
+    gap: 28px;
+  }
+}
+
+/* Small Tablet & iPad Portrait (768px to 900px) */
+@media (max-width: 900px) {
+  .kodiHeroTitle {
+    font-size: 38px;
+  }
+
+  .kodiHeroCard {
+    padding: 40px 28px;
+  }
+
+  .kodiDemoSwitcher {
+    width: 100%;
+  }
+
+  .kodiDemoSwitchBtn {
+    flex: 1;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+/* Mobile Devices (max-width: 640px) */
+@media (max-width: 640px) {
+  .kodiContainer {
+    padding: 12px 10px 60px 10px;
+  }
+
+  /* Top Banner */
+  .kodiTopBanner {
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px 12px;
+    text-align: center;
+    border-radius: 16px;
+  }
+
+  /* Agency Header Nav */
+  .kodiAgencyNav {
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+    padding: 12px 6px;
+  }
+
+  .kodiAgencyLogos {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .kodiAgencyLogos img {
+    height: 18px;
+    max-width: 130px;
+    object-fit: contain;
+  }
+
+  .kodiClientLogoPill {
+    padding: 6px 14px;
+    font-size: 11px;
+  }
+
+  .kodiClientLogoPill img {
+    height: 16px;
+  }
+
+  /* Hero Section */
+  .kodiHeroCard {
+    padding: 32px 18px;
+    border-radius: 24px;
+    background-position: right center;
+  }
+
+  .kodiHeroTitle {
+    font-size: 30px;
+    line-height: 1.15;
+  }
+
+  .kodiHeroSubtitle {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .kodiHeroActions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .kodiButtonPrimary, .kodiButtonSecondary {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 20px;
+    font-size: 13.5px;
+  }
+
+  /* Circadian Grid 2x2 on Mobile */
+  .kodiCircadianGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .kodiCircadianCard {
+    padding: 16px 10px;
+    border-radius: 18px;
+  }
+
+  .kodiCircadianOrb {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 8px;
+  }
+
+  .kodiCircadianPhaseTitle {
+    font-size: 13px;
+  }
+
+  .kodiCircadianPhaseTime {
+    font-size: 10.5px;
+    margin-bottom: 6px;
+  }
+
+  .kodiCircadianPhaseDesc {
+    font-size: 11px;
+    line-height: 1.35;
+  }
+
+  /* Demos Section */
+  .kodiSimulatorContainer {
+    padding: 22px 14px;
+    border-radius: 24px;
+  }
+
+  .kodiSimulatorHeader {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .kodiDemoSwitcher {
+    flex-direction: column;
+    width: 100%;
+    gap: 6px;
+    padding: 4px;
+  }
+
+  .kodiDemoSwitchBtn {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 12.5px;
+    justify-content: center;
+  }
+
+  /* Quiz Minigame */
+  .kodiQuizOptionsGrid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .kodiQuizOptionCard {
+    padding: 16px 14px;
+    border-radius: 16px;
+  }
+
+  .kodiQuizResultSummary {
+    padding: 0;
+  }
+
+  .kodiQuizStackTimeline {
+    gap: 10px;
+  }
+
+  .kodiTimelineItem {
+    padding: 12px;
+    border-radius: 14px;
+    font-size: 12.5px;
+  }
+
+  .kodiProductPreviewCard {
+    padding: 22px 16px;
+    border-radius: 20px;
+  }
+
+  /* Chatbot UI */
+  .kodiChatWindow {
+    border-radius: 20px;
+  }
+
+  .kodiChatHeader {
+    padding: 12px 16px;
+  }
+
+  .kodiChatTitle {
+    font-size: 13px;
+  }
+
+  .kodiChatSubtitle {
+    font-size: 10.5px;
+  }
+
+  .kodiChatMessagesArea {
+    padding: 14px 12px;
+    max-height: 380px;
+  }
+
+  .kodiChatBubbleBot, .kodiChatBubbleUser {
+    max-width: 92%;
+    padding: 12px 14px;
+    font-size: 12.5px;
+  }
+
+  .kodiChatProductCard {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .kodiChatProductBtn {
+    width: 100%;
+    text-align: center;
+    padding: 10px 14px;
+  }
+
+  .kodiChatQuickChips {
+    padding: 8px 12px;
+    gap: 6px;
+  }
+
+  .kodiChatChip {
+    font-size: 11px;
+    padding: 5px 12px;
+  }
+
+  .kodiChatInputArea {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .kodiChatTextInput {
+    padding: 10px 16px;
+    font-size: 12.5px;
+  }
+
+  .kodiChatSendBtn {
+    padding: 0 16px;
+    font-size: 12px;
+  }
+
+  /* Narrative Pillars */
+  .kodiNarrativeContent {
+    padding: 24px 18px;
+  }
+
+  .kodiNarrativeTitle {
+    font-size: 20px;
+  }
+
+  .kodiNarrativeText {
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  .kodiNarrativeImageArea {
+    height: 220px;
+  }
+
+  /* Pricing Cards */
+  .kodiPricingSection {
+    padding: 28px 12px;
+    border-radius: 24px;
+  }
+
+  .kodiPriceCard {
+    padding: 24px 18px;
+    border-radius: 22px;
+  }
+
+  .kodiPriceAmount {
+    font-size: 32px;
+  }
+
+  .kodiTotalProjectPill {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 8px 12px;
+  }
+
+  .kodiBulletItem {
+    font-size: 12.5px;
+  }
+
+  /* Terms Section */
+  .kodiTermsSection {
+    padding: 22px 14px;
+    border-radius: 22px;
+  }
+
+  .kodiTermsSectionTitle {
+    font-size: 20px;
+  }
+
+  .kodiTermsGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .kodiTermCard {
+    padding: 18px 16px;
+    border-radius: 18px;
+  }
+
+  .kodiMaintenanceDual {
+    grid-template-columns: 1fr;
+  }
+
+  /* Summary Box */
+  .kodiSummaryBox {
+    padding: 24px 16px;
+    border-radius: 22px;
+    gap: 20px;
+  }
+
+  .kodiSummaryTitle {
+    font-size: 19px;
+  }
+
+  .kodiSummaryCardInner {
+    padding: 20px 16px;
+    border-radius: 18px;
+  }
+
+  .kodiTotalValue {
+    font-size: 30px;
+  }
+
+  .kodiWhatsAppCta {
+    padding: 15px 20px;
+    font-size: 13px;
+  }
+
+  /* Footer */
+  .kodiFooterLinks {
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 11.5px;
+  }
+}
+
+
 

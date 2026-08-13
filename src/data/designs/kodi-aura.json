@@ -1,0 +1,16 @@
+{
+  "name": "Kodi Aura",
+  "mode": "light",
+  "fontHeading": "'Playfair Display', 'Plus Jakarta Sans', Georgia, serif",
+  "fontBody": "'Plus Jakarta Sans', 'Inter', system-ui, sans-serif",
+  "primaryColor": "#1F1060",
+  "bgColor": "#F8F8F6",
+  "textColor": "#160B3F",
+  "mutedText": "#5A5278",
+  "surfaceGlass": "rgba(255, 255, 255, 0.8)",
+  "glassBorder": "rgba(31, 16, 96, 0.08)",
+  "shadowElevation1": "0 10px 30px rgba(31, 16, 96, 0.06)",
+  "shadowElevation2": "0 24px 60px rgba(31, 16, 96, 0.10)",
+  "borderRadius": "24px",
+  "textGradient": "linear-gradient(135deg, #160B3F 0%, #4A3B80 100%)"
+}
