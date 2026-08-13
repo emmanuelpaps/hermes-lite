@@ -1209,20 +1209,6 @@ export default function MediaKitView({ data }: { data: ClientData }) {
 
           {/* Hero Section */}
           <section className={styles.kodiHeroCard}>
-            <div className={styles.kodiHeroBgMedia}>
-              <motion.div
-                initial={{ scale: 1.0 }}
-                animate={{ scale: [1.0, 1.1, 1.0] }}
-                transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  backgroundImage: `url(${data.hero?.backgroundImage || '/assets/kodi-dose/hero-bg.png'})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                }}
-              />
-            </div>
             <div className={styles.kodiHeroContent}>
               <div className={styles.kodiEyebrowBadge}>
                 <span>🧬 BIENESTAR CIRCADIANO · NEXT.JS + STRIPE + META ADS</span>
@@ -1241,6 +1227,33 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 <a href={`https://wa.me/${data.contact?.phone || '526561031571'}?text=${encodeURIComponent(getWhatsAppMessage())}`} target="_blank" rel="noopener noreferrer" className={styles.kodiButtonSecondary}>
                   <span>📱 CONTACTAR POR WHATSAPP</span>
                 </a>
+              </div>
+              <div className={styles.kodiHeroTrustBadges}>
+                <span>⚡ Next.js + Vercel</span>
+                <span>•</span>
+                <span>💳 Stripe Billing</span>
+                <span>•</span>
+                <span>🤖 Chatbot IA</span>
+              </div>
+            </div>
+
+            <div className={styles.kodiHeroVisualArea}>
+              <div className={styles.kodiHeroVisualCard}>
+                <motion.div
+                  initial={{ scale: 1.0 }}
+                  animate={{ scale: [1.0, 1.06, 1.0] }}
+                  transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    backgroundImage: `url(${data.hero?.backgroundImage || '/assets/kodi-dose/hero-bg.png'})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  }}
+                />
+                <div className={styles.kodiHeroVisualTag}>
+                  <span>KODI DOSE™ · BIO-TECH</span>
+                </div>
               </div>
             </div>
           </section>

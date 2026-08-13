@@ -1866,37 +1866,29 @@
 /* Hero Section */
 .kodiHeroCard {
   position: relative;
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(24px);
   border: 1px solid rgba(31, 16, 96, 0.08);
   border-radius: 32px;
-  padding: 56px 40px;
-  overflow: hidden;
-  margin-bottom: 32px;
-  box-shadow: 0 20px 50px rgba(31, 16, 96, 0.05);
-}
-
-.kodiHeroBgMedia {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 55%;
-  height: 100%;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 0;
-  mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 85%);
-  -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 85%);
+  padding: 48px;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 36px;
+  margin-bottom: 36px;
+  box-shadow: 0 20px 60px rgba(31, 16, 96, 0.05);
 }
 
 .kodiHeroContent {
   position: relative;
-  z-index: 1;
-  max-width: 650px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
 }
 
 .kodiEyebrowBadge {
   display: inline-flex;
+  align-self: flex-start;
   align-items: center;
   gap: 8px;
   background: rgba(112, 68, 236, 0.08);
@@ -1906,17 +1898,17 @@
   border-radius: 100px;
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .kodiHeroTitle {
-  font-size: 52px;
-  line-height: 1.08;
-  font-weight: 700;
+  font-size: 46px;
+  line-height: 1.12;
+  font-weight: 800;
   color: #160B3F;
-  margin: 0 0 18px 0;
+  margin: 0 0 16px 0;
   letter-spacing: -0.02em;
 }
 
@@ -1929,11 +1921,12 @@
 }
 
 .kodiHeroSubtitle {
-  font-size: 17px;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.55;
   color: #5A5278;
-  margin: 0 0 32px 0;
+  margin: 0 0 28px 0;
   font-weight: 400;
+  max-width: 520px;
 }
 
 .kodiHeroActions {
@@ -1941,6 +1934,55 @@
   gap: 14px;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.kodiHeroTrustBadges {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 22px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #7044EC;
+}
+
+.kodiHeroTrustBadges span:nth-child(even) {
+  opacity: 0.3;
+  color: #160B3F;
+}
+
+.kodiHeroVisualArea {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.kodiHeroVisualCard {
+  width: 100%;
+  height: 380px;
+  border-radius: 26px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(22, 11, 63, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.kodiHeroVisualTag {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  color: #160B3F;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 6px 14px;
+  border-radius: 100px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 .kodiButtonPrimary {
@@ -3278,12 +3320,19 @@
 
 /* Small Tablet & iPad Portrait (768px to 900px) */
 @media (max-width: 900px) {
-  .kodiHeroTitle {
-    font-size: 38px;
+  .kodiHeroCard {
+    grid-template-columns: 1fr;
+    padding: 36px 24px;
+    gap: 28px;
   }
 
-  .kodiHeroCard {
-    padding: 40px 28px;
+  .kodiHeroVisualCard {
+    height: 280px;
+    order: -1;
+  }
+
+  .kodiHeroTitle {
+    font-size: 36px;
   }
 
   .kodiDemoSwitcher {
@@ -3314,47 +3363,60 @@
 
   /* Agency Header Nav */
   .kodiAgencyNav {
-    flex-direction: column;
-    gap: 14px;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    padding: 12px 6px;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 100px;
+    margin-bottom: 20px;
   }
 
   .kodiAgencyLogos {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
   }
 
   .kodiAgencyLogos img {
-    height: 18px;
-    max-width: 130px;
+    height: 15px;
+    max-width: 105px;
     object-fit: contain;
   }
 
   .kodiClientLogoPill {
-    padding: 6px 14px;
-    font-size: 11px;
+    padding: 4px 10px;
+    font-size: 10px;
   }
 
   .kodiClientLogoPill img {
-    height: 16px;
+    height: 14px;
   }
 
   /* Hero Section */
   .kodiHeroCard {
-    padding: 32px 18px;
+    grid-template-columns: 1fr;
+    padding: 22px 16px;
+    gap: 18px;
     border-radius: 24px;
-    background-position: right center;
+  }
+
+  .kodiHeroVisualArea {
+    order: -1;
+  }
+
+  .kodiHeroVisualCard {
+    height: 220px;
+    border-radius: 18px;
   }
 
   .kodiHeroTitle {
-    font-size: 30px;
+    font-size: 28px;
     line-height: 1.15;
   }
 
   .kodiHeroSubtitle {
-    font-size: 14px;
+    font-size: 13.5px;
     line-height: 1.45;
   }
 
@@ -3362,13 +3424,21 @@
     flex-direction: column;
     align-items: stretch;
     gap: 10px;
+    width: 100%;
   }
 
   .kodiButtonPrimary, .kodiButtonSecondary {
     width: 100%;
     justify-content: center;
     padding: 14px 20px;
-    font-size: 13.5px;
+    font-size: 13px;
+  }
+
+  .kodiHeroTrustBadges {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-size: 11px;
   }
 
   /* Circadian Grid 2x2 on Mobile */
