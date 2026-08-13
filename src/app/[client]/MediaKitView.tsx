@@ -666,7 +666,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           </div>
           <div className={styles.dellBannerRight}>
             <span className={styles.dellYellowSticker}>
-              <span className={styles.dellPurpleStripe}>1996</span> 100% AMORTIZABLE
+              <span className={styles.dellPurpleStripe}>APOLOGRAMA</span> INFRAESTRUCTURA PROPIETARIA
             </span>
             <a href={`tel:${data.contact?.phone || '526561031571'}`} className={styles.dellPhoneCallout}>
               📞 1-800-PROMOS ({data.contact?.phone || '656-103-1571'})
@@ -685,7 +685,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             </span>
           </div>
 
-          {/* Hero Section with Infinite Ken Burns Zoom + System Specs Sheet */}
+          {/* Hero Section with Infinite Ken Burns Zoom + Client Logo Box */}
           <div className={styles.dellHeroSection}>
             {data.hero?.backgroundImage && (
               <motion.div 
@@ -728,43 +728,29 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 </div>
               </div>
 
-              {/* System Specs Catalog Box */}
+              {/* Client Logo Card */}
               <div className={styles.dellHeroRight}>
-                <div className={styles.dellSpecsCard}>
-                  <div className={styles.dellSpecsTitle}>
-                    <span>FICHA TÉCNICA DE DESPLIEGUE</span>
-                    <span>v2.4</span>
-                  </div>
-                  <div className={styles.dellSpecsRow}>
-                    <span>MODALIDAD</span>
-                    <span className={styles.dellSpecsValue}>Software Propietario</span>
-                  </div>
-                  <div className={styles.dellSpecsRow}>
-                    <span>COSTO EN REPOSO</span>
-                    <span className={styles.dellSpecsValue} style={{ color: '#34D399' }}>$0.00 MXN / Mes</span>
-                  </div>
-                  <div className={styles.dellSpecsRow}>
-                    <span>ACCESO CONSUMIDOR</span>
-                    <span className={styles.dellSpecsValue}>1-Scan QR (Sin Apps)</span>
-                  </div>
-                  <div className={styles.dellSpecsRow}>
-                    <span>DINÁMICA DE SORTEO</span>
-                    <span className={styles.dellSpecsValue}>Tómbola Live (Laptop + TV)</span>
-                  </div>
-                  <div className={styles.dellSpecsRow}>
-                    <span>ENLACE CORPORATIVO</span>
-                    <span className={styles.dellSpecsValue}>promos.superette.mx</span>
-                  </div>
-                  <div className={styles.dellSpecsRow} style={{ marginBottom: 0 }}>
-                    <span>SOPORTE TÉCNICO</span>
-                    <span className={styles.dellSpecsValue}>30 Días Monitoreo</span>
+                <div className={styles.dellHeroLogoCard}>
+                  {data.clientLogo && (
+                    <Image 
+                      src={data.clientLogo} 
+                      alt={data.clientName} 
+                      width={220} 
+                      height={90} 
+                      className={styles.dellHeroLogoImg}
+                      priority
+                    />
+                  )}
+                  <div className={styles.dellHeroLogoBadge}>
+                    <span className={styles.dellStatusDot}></span>
+                    <span>PLATAFORMA OFICIAL</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Justification Box (Amortizable Asset) */}
+          {/* Justification Box (Reutilizable Infrastructure) */}
           {data.storytelling?.justification && (
             <div className={styles.dellRibbonCard} style={{ marginBottom: '36px' }}>
               <div className={styles.dellRibbonTitle}>
@@ -772,7 +758,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                   <span style={{ color: '#34D399' }}>●</span>
                   <span>{data.storytelling.justification.title}</span>
                 </div>
-                <span className={styles.dellYellowSticker}>ACTIVO AMORTIZABLE</span>
+                <span className={styles.dellYellowSticker}>INFRAESTRUCTURA REUTILIZABLE</span>
               </div>
               <div className={styles.dellRibbonBody} style={{ flexDirection: 'column', alignItems: 'flex-start', backgroundColor: 'rgba(10, 130, 68, 0.05)' }}>
                 <p style={{ margin: '0 0 16px 0', fontSize: '15px', color: '#e2e8f0', lineHeight: 1.6 }}>{data.storytelling.justification.content}</p>
@@ -931,7 +917,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             <div className={styles.dellFooterNav}>
               <span>[ 🔍 ESPECIFICACIÓN TÉCNICA ]</span>
               <span>[ 📱 FLUJO QR ]</span>
-              <span>[ 💼 RETORNO CON PROVEEDORES ]</span>
+              <span>[ 🏢 GESTIÓN DE SORTEOS ]</span>
               <span>[ 🛠️ SOPORTE APOLOGRAMA ]</span>
             </div>
             <div style={{ marginBottom: '12px' }}>

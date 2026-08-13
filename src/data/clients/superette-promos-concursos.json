@@ -2,7 +2,7 @@
   "clientName": "Superette",
   "clientLogo": "/assets/superette-promos/logo.png",
   "industry": "Retail / Campañas y Promociones Comerciales",
-  "heroText": "Plataforma web independiente y escalable para la captura, validación de tickets de compra y sorteos digitales de Superette, diseñada como un activo tecnológico amortizable y monetizable con marcas proveedoras.",
+  "heroText": "Plataforma web independiente y escalable para la captura, validación de tickets de compra y sorteos digitales de Superette, diseñada con capacidad multimarca para activaciones promocionales continuas.",
   "themeTemplate": "dell-1996",
   "theme": {
     "name": "Dell 1996",
@@ -42,18 +42,18 @@
   },
   "hero": {
     "headline": "Plataforma de Campañas y Concursos Digitales",
-    "subheadline": "Infraestructura propietaria de validación de tickets y sorteos para Superette y sus proveedores",
+    "subheadline": "Infraestructura propietaria de validación de tickets y sorteos para Superette y sus activaciones",
     "backgroundImage": "/assets/superette-promos/hero-bg.jpg",
     "backgroundVideo": ""
   },
   "storytelling": {
     "justification": {
-      "title": "Justificación de Negocio: Un Activo Tecnológico Amortizable",
-      "content": "Las dinámicas tradicionales de rifas con urnas de papel y cupones físicos generan fricción, falta de transparencia y altos costos de captura manual. Esta plataforma transforma cada campaña en un activo digital monetizable que Superette puede paquetizar a sus marcas proveedoras (ej. activaciones de refrescos, botanas, carnes frías o marcas de temporada), recuperando la inversión de desarrollo y generando ingresos directos por patrocinio:",
+      "title": "Justificación Técnica: Activo Digital Reutilizable y Multimarca",
+      "content": "Las dinámicas tradicionales de rifas con urnas de papel y cupones físicos generan fricción, falta de trazabilidad y altos costos de captura manual. Esta plataforma dota a Superette de una infraestructura tecnológica propia y reutilizable para operar activaciones comerciales de forma ágil, permitiendo albergar campañas con marcas proveedoras (refrescos, botanas, carnes frías o temporadas) bajo un entorno digital estandarizado y profesional:",
       "points": [
-        "**Activo Propietario Amortizable:** Superette invierte una sola vez en la infraestructura base del software y cobra a cada marca proveedora un paquete de patrocinio por activación, convirtiendo una herramienta operativa en una fuente de ingresos.",
+        "**Infraestructura Propietaria y Reutilizable:** Superette adquiere una plataforma base propia que puede reactivarse para futuros sorteos y campañas con distintas marcas patrocinadoras, sin necesidad de reconstruir el software en cada evento.",
         "**Cero Fricción para el Cliente (Sin Apps):** El consumidor escanea un código QR en tienda o empaque, sube la foto de su ticket desde su navegador móvil en segundos y recibe su confirmación con folio de participación.",
-        "**Auditoría y Transparencia en Sorteos:** Mesa de control para validar tickets y tómbola digital en vivo que blinda la reputación de Superette ante clientes y proveedores, eliminando el extravío o duplicidad de registros."
+        "**Certeza Operativa y Control de Folios:** Mesa de control con validación visual y asignación de folios únicos para mitigar duplicidades y asegurar un proceso de sorteo transparente ante clientes y participantes."
       ]
     },
     "narrative": [
@@ -73,7 +73,7 @@
         "image": "/assets/superette-promos/narrative-3.jpg"
       }
     ],
-    "challenge": "Desarrollar una infraestructura digital propietaria y escalable que permita a Superette operar concursos promocionales automatizados, eliminar urnas de papel y ofrecer a sus proveedores una plataforma llave en mano para activaciones de marca."
+    "challenge": "Desarrollar una infraestructura digital propietaria y escalable que permita a Superette operar concursos promocionales automatizados, eliminar urnas de papel y ofrecer una plataforma ágil para activaciones de marca."
   },
   "packages": {
     "title": "Propuesta Económica (Fase Piloto)",
@@ -93,9 +93,9 @@
               "Portal Web para Participantes: Formulario ligero y seguro accesible al instante vía código QR (sin descargas de apps).",
               "Mesa de Control Administrativa: Panel privado para auditar tickets en un clic y exportar la base de datos a Excel.",
               "Tómbola Digital en Vivo: Interfaz interactiva para proyectar en pantalla/TV desde laptop durante transmisiones en redes sociales.",
-              "Infraestructura Cloud en Reposo ($0.00 MXN): Servidores configurados sin costos fijos mensuales entre campañas.",
-              "Configuración de Enlace Corporativo: Conexión en subdominio oficial de la empresa (ej. promos.superette.mx).",
-              "Soporte y Monitoreo de Campaña: Acompañamiento y asistencia técnica continua durante los 30 días de la dinámica."
+              "Arquitectura Cloud Bajo Demanda: Diseñada para operar sin costos fijos de servidor durante periodos de inactividad entre campañas.",
+              "Configuración de Enlace Corporativo: Asesoría y vinculación en subdominio de la empresa o dominio dedicado de la campaña.",
+              "Soporte y Monitoreo de Campaña: Acompañamiento y soporte técnico operativo en horario laboral durante los 30 días de vigencia de la dinámica."
             ]
           }
         ]
