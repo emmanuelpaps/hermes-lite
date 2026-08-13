@@ -1584,9 +1584,6 @@
   .dellHeroRight {
     width: 100%;
   }
-  .dellSpecsCard {
-    max-width: 100%;
-  }
 }
 
 @media (max-width: 768px) {
@@ -1595,28 +1592,102 @@
   }
   .dellTopBanner {
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
+    padding: 10px 12px;
     text-align: center;
+  }
+  .dellBannerLeft {
+    flex-direction: column;
+    gap: 4px;
+  }
+  .dellBannerRight {
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+  }
+  .dellPhoneCallout {
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  .dellContainer {
+    padding: 16px 10px;
+  }
+  .dellHeroSection {
+    padding: 24px 14px;
+    min-height: auto;
+  }
+  .dellHeroLogoCard {
+    max-width: 100%;
+    padding: 20px 16px;
+  }
+  .dellHeroLogoImg {
+    max-width: 180px;
+  }
+  .dellEyebrowBlock {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px 14px;
+  }
+  .dellEyebrowTitle {
+    font-size: 19px;
+  }
+  .dellRibbonTitle {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 10px 14px;
+    font-size: 13px;
   }
   .dellRibbonBody {
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
+    padding: 16px 14px;
   }
   .dellRibbonImageContainer {
     max-width: 100%;
+    width: 100%;
   }
-  .dellEyebrowTitle {
-    font-size: 20px;
+  .dellRibbonImage {
+    box-shadow: 3px 3px 0px rgba(10, 130, 68, 0.35);
+  }
+  .dellCtaBlockRed {
+    padding: 20px 16px;
+    margin: 24px 0;
+  }
+  .dellCtaTitle {
+    font-size: 21px;
+  }
+  .dellButtonPrimary, .dellButtonSecondary {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    display: block;
+    padding: 14px 16px;
+  }
+  .dellFooterBand {
+    padding: 20px 12px;
+    margin-top: 32px;
   }
   .dellFooterNav {
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  .dellContainer {
-    padding: 20px 14px;
-  }
-  .dellHeroSection {
-    padding: 24px 16px;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
   }
 }
+
+@media (max-width: 480px) {
+  .dellEyebrowTitle {
+    font-size: 17.5px;
+  }
+  .dellHeroSection {
+    padding: 20px 12px;
+  }
+  .dellCtaTitle {
+    font-size: 19px;
+  }
+}
+
 

@@ -2,7 +2,7 @@
   "clientName": "Superette",
   "clientLogo": "/assets/superette-promos/logo.png",
   "industry": "Retail / Campañas y Promociones Comerciales",
-  "heroText": "Plataforma web independiente y escalable para la captura, validación de tickets de compra y sorteos digitales de Superette, diseñada con capacidad multimarca para activaciones promocionales continuas.",
+  "heroText": "Plataforma web independiente y escalable para la captura, validación de tickets de compra y sorteos digitales de Superette, diseñada con capacidad multimarca para activaciones continuas.",
   "themeTemplate": "dell-1996",
   "theme": {
     "name": "Dell 1996",
@@ -43,43 +43,43 @@
   },
   "hero": {
     "headline": "Plataforma de Campañas y Concursos Digitales",
-    "subheadline": "Infraestructura propietaria de validación de tickets y sorteos para Superette y sus activaciones",
+    "subheadline": "Infraestructura propietaria de validación de tickets y sorteos digitales para Superette",
     "backgroundImage": "/assets/superette-promos/hero-bg.jpg",
     "backgroundVideo": ""
   },
   "storytelling": {
     "justification": {
       "title": "Justificación Técnica: Activo Digital Reutilizable y Multimarca",
-      "content": "Las dinámicas tradicionales de rifas con urnas de papel y cupones físicos generan fricción, falta de trazabilidad y altos costos de captura manual. Esta plataforma dota a Superette de una infraestructura tecnológica propia y reutilizable para operar activaciones comerciales de forma ágil, permitiendo albergar campañas con marcas proveedoras (refrescos, botanas, carnes frías o temporadas) bajo un entorno digital estandarizado y profesional:",
+      "content": "Las rifas tradicionales con urnas físicas generan fricción y altos costos de captura. Esta solución dota a Superette de un activo tecnológico propio y reutilizable para operar sorteos continuos con marcas proveedoras de forma ágil y profesional:",
       "points": [
-        "**Infraestructura Propietaria y Reutilizable:** Superette adquiere una plataforma base propia que puede reactivarse para futuros sorteos y campañas con distintas marcas patrocinadoras, sin necesidad de reconstruir el software en cada evento.",
-        "**Cero Fricción para el Cliente (Sin Apps):** El consumidor escanea un código QR en tienda o empaque, sube la foto de su ticket desde su navegador móvil en segundos y recibe su confirmación con folio de participación.",
-        "**Certeza Operativa y Control de Folios:** Mesa de control con validación visual y asignación de folios únicos para mitigar duplicidades y asegurar un proceso de sorteo transparente ante clientes y participantes."
+        "**Infraestructura Reutilizable:** Software base propio listo para reactivarse en futuros sorteos con proveedores sin rehacer el desarrollo.",
+        "**Cero Fricción (Sin Apps):** El cliente escanea el QR en tienda, sube su ticket en segundos desde el navegador móvil y recibe su folio.",
+        "**Certeza y Control de Folios:** Mesa de control con validación visual y folios únicos para mitigar duplicidades y dar total transparencia."
       ]
     },
     "narrative": [
       {
         "title": "Experiencia Móvil Ágil y Captura de Tickets vía QR",
-        "content": "Una aplicación web responsiva y ultrarrápida donde el cliente accede al instante escaneando el código QR de la promoción en tienda. Registra sus datos de contacto y sube la fotografía de su ticket de compra sin necesidad de descargar aplicaciones de terceros.",
+        "content": "Aplicación web ultrarrápida accesible vía código QR en tienda. El cliente registra sus datos y sube la foto de su ticket al instante, sin descargar apps.",
         "image": "/assets/superette-promos/narrative-1.jpg"
       },
       {
         "title": "Mesa de Control y Auditoría Operativa en Tiempo Real",
-        "content": "Panel de administración centralizado para el equipo de Superette. Permite auditar y revisar las imágenes de los tickets registrados con un solo clic (Aprobar / Rechazar), filtrar por fechas o sucursales y exportar la base de datos completa de clientes a Excel.",
+        "content": "Panel administrativo centralizado para auditar y validar tickets en un clic (Aprobar / Rechazar), filtrar por sucursal y exportar la base a Excel.",
         "image": "/assets/superette-promos/narrative-2.jpg"
       },
       {
         "title": "Tómbola Digital y Transmisión en Vivo desde Tienda",
-        "content": "El día del evento final, la selección de ganadores se realiza mediante una transmisión en vivo en redes sociales directamente desde una sucursal de Superette. La logística es 100% sencilla: solo se requiere una laptop conectada a una pantalla o televisión para proyectar la tómbola web interactiva, seleccionando al ganador de forma aleatoria, transparente y verificable ante la audiencia en tiempo real.",
+        "content": "Sorteo en vivo desde tienda con logística 100% sencilla: proyecta la tómbola digital interactiva desde una laptop a cualquier pantalla o TV, eligiendo ganadores en tiempo real ante la audiencia.",
         "image": "/assets/superette-promos/narrative-3.jpg"
       }
     ],
-    "challenge": "Desarrollar una infraestructura digital propietaria y escalable que permita a Superette operar concursos promocionales automatizados, eliminar urnas de papel y ofrecer una plataforma ágil para activaciones de marca."
+    "challenge": "Plataforma digital para automatizar sorteos promocionales, eliminar urnas de papel y operar dinámicas comerciales con proveedores de forma ágil y transparente."
   },
   "packages": {
     "title": "Propuesta Económica (Fase Piloto)",
     "subtitle": "Inversión de construcción y puesta en marcha para la primera campaña promocional de 30 días:",
-    "methodologyText": "Justificación de la Inversión: En lugar de cotizar un desarrollo desde cero ($72,810 MXN), implementamos la Arquitectura Base de Campañas de Apolograma ya probada y optimizada, reduciendo el tiempo de ingeniería a una adaptación a la medida de Superette. Al presionar 'Aprobar Propuesta' confirmarás los entregables con nuestro equipo vía WhatsApp.",
+    "methodologyText": "Inversión optimizada: Al implementar la Arquitectura Base de Apolograma reducimos el costo y tiempo de ingeniería en más de un 50% vs un desarrollo desde cero. Presiona el botón para confirmar el inicio vía WhatsApp.",
     "fn1": [],
     "apolograma": [],
     "blocks": [
@@ -91,12 +91,12 @@
             "price": 33650,
             "description": "Solución integral 'llave en mano' para el lanzamiento de la primera campaña promocional de 30 días de Superette.",
             "bullets": [
-              "Portal Web para Participantes: Formulario ligero y seguro accesible al instante vía código QR (sin descargas de apps).",
-              "Mesa de Control Administrativa: Panel privado para auditar tickets en un clic y exportar la base de datos a Excel.",
-              "Tómbola Digital en Vivo: Interfaz interactiva para proyectar en pantalla/TV desde laptop durante transmisiones en redes sociales.",
-              "Arquitectura Cloud Bajo Demanda: Diseñada para operar sin costos fijos de servidor durante periodos de inactividad entre campañas.",
-              "Configuración de Enlace Corporativo: Asesoría y vinculación en subdominio de la empresa o dominio dedicado de la campaña.",
-              "Soporte y Monitoreo de Campaña: Acompañamiento y soporte técnico operativo en horario laboral durante los 30 días de vigencia de la dinámica."
+              "Portal Web de Registro: Formulario seguro vía código QR en tienda (sin descargar apps).",
+              "Mesa de Control Privada: Auditoría visual de tickets en 1-clic y exportación a Excel.",
+              "Tómbola Digital en Vivo: Interfaz web para proyectar en pantalla/TV durante el sorteo.",
+              "Arquitectura Cloud Serverless: Sin costos fijos de servidor durante periodos de inactividad.",
+              "Enlace Corporativo Oficial: Conexión en subdominio de Superette o dominio dedicado.",
+              "Soporte Operativo 30 Días: Asistencia técnica durante toda la vigencia de la dinámica."
             ]
           }
         ]
