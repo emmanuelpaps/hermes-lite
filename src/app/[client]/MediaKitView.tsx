@@ -1302,11 +1302,14 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           <section className={styles.kodiSimulatorContainer}>
             <div className={styles.kodiSimulatorHeader}>
               <div>
-                <div className={styles.kodiPillarBadge}>✨ DEMOS INTERACTIVOS EN VIVO</div>
-                <h3 style={{ fontSize: '26px', fontWeight: 800, color: '#160B3F', margin: '4px 0' }}>
+                <div className={styles.kodiPillarBadgeLive}>
+                  <span className={styles.kodiLivePingDot} />
+                  <span>SIMULADOR 100% OPERATIVO · PRUEBA EL FLUJO</span>
+                </div>
+                <h3 style={{ fontSize: '28px', fontWeight: 800, color: '#160B3F', margin: '6px 0 4px 0', letterSpacing: '-0.01em' }}>
                   Test Circadiano & <span className={styles.kodiEditorialSerif}>Asesor IA Consultivo</span>
                 </h3>
-                <p style={{ fontSize: '14.5px', color: '#5A5278', margin: 0 }}>
+                <p style={{ fontSize: '15px', color: '#5A5278', margin: 0, lineHeight: 1.5 }}>
                   Prueba la experiencia de usuario que convertirá visitas frías en suscriptores recurrentes:
                 </p>
               </div>
@@ -1318,17 +1321,32 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                   onClick={() => setKodiDemoMode('quiz')}
                   className={`${styles.kodiDemoSwitchBtn} ${kodiDemoMode === 'quiz' ? styles.kodiDemoSwitchBtnActive : ''}`}
                 >
-                  <span>🧪 Test Circadiano (Minigame)</span>
+                  <span className={styles.kodiSwitchBtnIcon}>🧪</span>
+                  <span>Test Circadiano (Minigame)</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => setKodiDemoMode('chat')}
                   className={`${styles.kodiDemoSwitchBtn} ${kodiDemoMode === 'chat' ? styles.kodiDemoSwitchBtnActive : ''}`}
                 >
-                  <span>💬 Chatbot Vendedor IA</span>
+                  <span className={styles.kodiSwitchBtnIcon}>💬</span>
+                  <span>Chatbot Vendedor IA</span>
                 </button>
               </div>
             </div>
+
+            {/* Interactive Callout Banner with Bounce */}
+            <motion.div 
+              className={styles.kodiInteractiveCallout}
+              animate={{ y: [0, -3, 0] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <div className={styles.kodiCalloutLeft}>
+                <span className={styles.kodiCalloutHandIcon}>⚡</span>
+                <span><strong>Simulación en Vivo:</strong> {kodiDemoMode === 'quiz' ? 'Haz clic en una de las 4 opciones abajo para diagnosticar tu rutina:' : 'Escribe una duda de suplementación o haz clic en las sugerencias:'}</span>
+              </div>
+              <span className={styles.kodiCalloutPillBadge}>¡HAZ CLIC PARA PROBAR! 👇</span>
+            </motion.div>
 
             {/* DEMO 1: QUIZ MINIGAME */}
             {kodiDemoMode === 'quiz' && (
