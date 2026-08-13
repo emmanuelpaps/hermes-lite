@@ -967,15 +967,157 @@
     gap: 1.25rem;
   }
   
+  .section {
+    padding: 3.5rem 1.25rem !important;
+  }
+
+  .sectionTitle {
+    font-size: 1.85rem !important;
+    line-height: 1.25 !important;
+    margin-bottom: 1.5rem !important;
+    word-break: break-word;
+  }
+
+  .sectionSubtitle {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 2rem !important;
+  }
+
+  .hero {
+    padding: 5.5rem 1.25rem 3rem 1.25rem !important;
+    height: auto !important;
+    min-height: 90vh !important;
+  }
+
+  .heroSplitContent {
+    padding: 0 !important;
+    gap: 2.25rem !important;
+  }
+
+  .heroTitle {
+    font-size: 2rem !important;
+    line-height: 1.18 !important;
+    word-break: break-word;
+    margin-bottom: 1rem !important;
+  }
+
+  .heroSubtitle {
+    font-size: 1.05rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .heroMetaCard {
+    width: 100% !important;
+    max-width: 340px !important;
+    padding: 1.5rem 1.25rem !important;
+    border-radius: 20px !important;
+  }
+
+  .metaCardLogo {
+    width: 140px !important;
+    height: 140px !important;
+  }
+
+  .narrativeContainer {
+    margin-bottom: 2.5rem !important;
+    padding: 0 !important;
+  }
+
+  .narrativeCard {
+    padding: 1.5rem 1.25rem !important;
+    border-radius: 20px !important;
+    margin-bottom: 2rem !important;
+  }
+
+  .narrativeSplit {
+    gap: 1.25rem !important;
+  }
+
+  .narrativeText h2 {
+    font-size: 1.35rem !important;
+    line-height: 1.3 !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .narrativeText p {
+    font-size: 0.98rem !important;
+    line-height: 1.6 !important;
+  }
+
+  .narrativeImage {
+    border-radius: 14px !important;
+    width: 100% !important;
+    max-height: 260px !important;
+    object-fit: cover !important;
+  }
+
+  .staggeredRow, .staggeredRowReverse {
+    margin-bottom: 3rem !important;
+    gap: 1.5rem !important;
+  }
+
+  .rowTitle {
+    font-size: 1.55rem !important;
+    line-height: 1.25 !important;
+    word-break: break-word;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .rowDescription {
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+  }
+
+  .bulletList {
+    gap: 0.65rem !important;
+  }
+
+  .bulletItem {
+    padding: 0.75rem 1rem !important;
+    font-size: 0.92rem !important;
+    line-height: 1.45 !important;
+    border-radius: 10px !important;
+  }
+
+  .summarySection {
+    padding: 3.5rem 1.25rem 6.5rem 1.25rem !important;
+  }
+
+  .summaryCard {
+    padding: 2rem 1.25rem !important;
+    border-radius: 20px !important;
+  }
+
+  .totalPrice {
+    font-size: 2.35rem !important;
+    word-break: break-word;
+  }
+
+  .ctaButton {
+    width: 100% !important;
+    padding: 0.9rem 1.5rem !important;
+    font-size: 1.05rem !important;
+  }
+
   .stickyCta {
-    left: 1.25rem;
-    right: 1.25rem;
-    bottom: 1.25rem;
-    width: auto;
-    text-align: center;
-    padding: 0.85rem 1.5rem;
-    font-size: 1rem;
+    left: 1rem !important;
+    right: 1rem !important;
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px)) !important;
+    width: auto !important;
+    padding: 0.9rem 1.25rem !important;
+    font-size: 1rem !important;
+    border-radius: 50px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  }
+
+  .footer {
+    padding-bottom: calc(6.5rem + env(safe-area-inset-bottom, 0px)) !important;
+    font-size: 0.8rem !important;
   }
 }
 
@@ -1041,6 +1183,22 @@
 }
 
 @media (max-width: 480px) {
+  .heroTitle {
+    font-size: 1.75rem !important;
+  }
+
+  .sectionTitle {
+    font-size: 1.6rem !important;
+  }
+
+  .rowTitle {
+    font-size: 1.35rem !important;
+  }
+
+  .totalPrice {
+    font-size: 2rem !important;
+  }
+
   .justificationChartWrapper {
     width: 250px;
     height: 250px;
