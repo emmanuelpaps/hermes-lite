@@ -710,11 +710,11 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 <div style={{ display: 'inline-block', backgroundColor: '#0d1a14', border: '1px solid #0A8244', color: '#34D399', padding: '4px 10px', fontSize: '11px', fontWeight: 800, textTransform: 'uppercase', marginBottom: '14px', fontFamily: 'Helvetica, Arial, sans-serif' }}>
                   ★ INFRAESTRUCTURA PROPIETARIA
                 </div>
-                <h2 style={{ fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '22px', fontWeight: 800, margin: '0 0 14px 0', textTransform: 'uppercase', color: '#ffffff', lineHeight: 1.25 }}>
+                <h2 style={{ fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '22px', fontWeight: 800, margin: '0 0 14px 0', textTransform: 'uppercase', color: '#ffffff', lineHeight: 1.25, textShadow: '0 2px 10px rgba(0,0,0,0.85)' }}>
                   {data.hero?.subheadline || data.heroText}
                 </h2>
                 {data.storytelling?.challenge && (
-                  <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '14.5px', lineHeight: 1.6, color: '#cbd5e1', margin: '0 0 20px 0' }}>
+                  <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '14.5px', lineHeight: 1.6, color: '#cbd5e1', margin: '0 0 20px 0', textShadow: '0 1px 6px rgba(0,0,0,0.8)' }}>
                     {data.storytelling.challenge}
                   </p>
                 )}
@@ -807,13 +807,24 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                     </div>
                     {item.image && (
                       <div className={styles.dellRibbonImageContainer}>
-                        <Image 
-                          src={item.image} 
-                          alt={item.title} 
-                          width={360} 
-                          height={270} 
-                          className={styles.dellRibbonImage}
-                        />
+                        <motion.div
+                          initial={{ scale: 1.0 }}
+                          animate={{ scale: [1.0, 1.10, 1.0] }}
+                          transition={{
+                            duration: 14 + nIdx * 2,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                          }}
+                          style={{ width: '100%', height: '100%', transformOrigin: 'center center' }}
+                        >
+                          <Image 
+                            src={item.image} 
+                            alt={item.title} 
+                            width={360} 
+                            height={270} 
+                            className={styles.dellRibbonImage}
+                          />
+                        </motion.div>
                       </div>
                     )}
                   </div>
