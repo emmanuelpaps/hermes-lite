@@ -88,57 +88,19 @@
     "apolograma": [],
     "blocks": [
       {
-        "name": "Desarrollo y Puesta en Marcha (Campaña Piloto)",
+        "name": "Esquema de Desarrollo y Puesta en Marcha",
         "services": [
           {
-            "name": "Módulo PWA Participantes (Registro Móvil y Carga de Tickets)",
-            "price": 9800,
-            "description": "Aplicación web ligera para registro de concursantes vía código QR.",
+            "name": "Desarrollo y Puesta en Marcha de la Plataforma de Campañas",
+            "price": 33650,
+            "description": "Solución integral 'llave en mano' para el lanzamiento de la primera campaña promocional de 30 días de Superette.",
             "bullets": [
-              "Formulario web responsivo accesible vía QR sin descarga de aplicaciones.",
-              "Validación de formato de imagen y captura segura de datos del participante.",
-              "Generación y confirmación inmediata de folio único de participación."
-            ]
-          },
-          {
-            "name": "Mesa de Control y Auditoría Operativa (Panel Administrativo)",
-            "price": 8500,
-            "description": "Panel administrativo para supervisión y validación de compras.",
-            "bullets": [
-              "Dashboard privado para visualización y revisión de tickets en un clic.",
-              "Filtros por fecha, folio y estado de validación (Aprobado / Pendiente / Rechazado).",
-              "Descarga directa de base de datos completa de participantes en formato Excel."
-            ]
-          },
-          {
-            "name": "Módulo de Tómbola Digital y Selección de Ganadores en Vivo",
-            "price": 6200,
-            "description": "Sistema de sorteo interactivo proyectable en pantalla para transmisiones en vivo.",
-            "bullets": [
-              "Interfaz web interactiva proyectable en cualquier pantalla o televisión conectada a una laptop.",
-              "Diseñada para dinámicas y sorteos transmitidos en vivo en redes sociales (Facebook/Instagram Live).",
-              "Algoritmo de selección aleatoria transparente y verificable entre todos los tickets aprobados.",
-              "Registro y confirmación visual inmediata del folio y datos del ganador en pantalla."
-            ]
-          },
-          {
-            "name": "Despliegue Serverless, Configuración DNS y Pruebas de Carga",
-            "price": 3750,
-            "description": "Puesta a punto de infraestructura en la nube y enlace web.",
-            "bullets": [
-              "Configuración de infraestructura en la nube sin costo fijo mensual en reposo ($0.00 MXN).",
-              "Vinculación en subdominio corporativo de confianza (ej. promos.superette.mx).",
-              "Pruebas integrales de carga y compatibilidad móvil."
-            ]
-          },
-          {
-            "name": "Soporte Técnico y Monitoreo durante Campaña (30 días)",
-            "price": 5400,
-            "description": "Acompañamiento técnico y monitoreo durante el mes de la dinámica.",
-            "bullets": [
-              "Monitoreo continuo de uptime y base de datos durante el mes de la dinámica.",
-              "Atención prioritaria ante incidencias técnicas del panel o formulario.",
-              "Cierre de campaña y entrega de reporte consolidado de participación."
+              "Portal Web para Participantes: Formulario ligero y seguro accesible al instante vía código QR (sin descargas de apps).",
+              "Mesa de Control Administrativa: Panel privado para auditar tickets en un clic y exportar la base de datos a Excel.",
+              "Tómbola Digital en Vivo: Interfaz interactiva para proyectar en pantalla/TV desde laptop durante transmisiones en redes sociales.",
+              "Infraestructura Cloud en Reposo ($0.00 MXN): Servidores configurados sin costos fijos mensuales entre campañas.",
+              "Configuración de Enlace Corporativo: Conexión en subdominio oficial de la empresa (ej. promos.superette.mx).",
+              "Soporte y Monitoreo de Campaña: Acompañamiento y asistencia técnica continua durante los 30 días de la dinámica."
             ]
           }
         ]
