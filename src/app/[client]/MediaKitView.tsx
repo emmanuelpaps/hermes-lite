@@ -354,6 +354,7 @@ interface ClientData {
   industry: string;
   heroTitle?: string;
   heroText: string;
+  themeTemplate?: string;
   hero?: {
     headline?: string;
     subheadline?: string;
@@ -422,6 +423,7 @@ interface ClientData {
   hideTotal?: boolean;
   footerVideo?: string;
   theme?: {
+    name?: string;
     mode?: 'dark' | 'light';
     primary?: string;
     primaryColor?: string;
@@ -645,6 +647,225 @@ export default function MediaKitView({ data }: { data: ClientData }) {
     '--shadow-elevation-2': data.theme.shadowElevation2 || '0 8px 32px rgba(0,0,0,0.08)',
     '--border-radius': data.theme.borderRadius || '16px',
   } as unknown as React.CSSProperties : {};
+
+  const isDell1996 = data.themeTemplate === 'dell-1996' || data.theme?.name?.toLowerCase().includes('dell') || data.theme?.name?.toLowerCase().includes('1996');
+
+  if (isDell1996) {
+    const catalogTints = ['#b3bd95', '#d77a7a', '#9ab6c8', '#e6915d', '#c0d4a7', '#a5b8c0', '#8c9ae0', '#8e8a25'];
+    return (
+      <div className={styles.dellFrame}>
+        {/* Top Banner */}
+        <div className={styles.dellTopBanner}>
+          <div className={styles.dellBannerLeft}>
+            <span style={{ color: '#fcc20f' }}>★</span>
+            <span>{data.clientName?.toUpperCase()} · PROPUESTA DE SOFTWARE Y CAMPAÑAS</span>
+          </div>
+          <div className={styles.dellBannerRight}>
+            <span className={styles.dellYellowSticker}>
+              <span className={styles.dellPurpleStripe}>1996</span> APOLOGRAMA
+            </span>
+            <a href={`tel:${data.contact?.phone || '526561031571'}`} className={styles.dellPhoneCallout}>
+              📞 1-800-PROMOS ({data.contact?.phone || '656-103-1571'})
+            </a>
+          </div>
+        </div>
+
+        <div className={styles.dellContainer}>
+          {/* Eyebrow Header */}
+          <div className={styles.dellEyebrowBlock} style={{ backgroundColor: '#8e8a25' }}>
+            <h1 className={styles.dellEyebrowTitle}>
+              {data.hero?.headline || data.heroTitle || `PROPUESTA PARA ${data.clientName?.toUpperCase()}`}
+            </h1>
+          </div>
+
+          {/* Hero Section */}
+          <div className={styles.dellHeroSection}>
+            <div className={styles.dellHeroLeft}>
+              <div style={{ display: 'inline-block', backgroundColor: '#fcc20f', border: '1px solid #000', padding: '4px 10px', fontSize: '11px', fontWeight: 800, textTransform: 'uppercase', marginBottom: '12px', fontFamily: 'Helvetica, Arial, sans-serif' }}>
+                INFRAESTRUCTURA PROPIETARIA
+              </div>
+              <h2 style={{ fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '20px', fontWeight: 700, margin: '0 0 12px 0', textTransform: 'uppercase', color: '#000' }}>
+                {data.hero?.subheadline || data.heroText}
+              </h2>
+              {data.storytelling?.challenge && (
+                <p style={{ fontFamily: 'Times New Roman, Times, serif', fontSize: '15px', lineHeight: 1.5, color: '#000', margin: '0 0 16px 0' }}>
+                  {data.storytelling.challenge}
+                </p>
+              )}
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <a href="#propuesta-economica" className={styles.dellButtonPrimary}>
+                  VER PROPUESTA ECONÓMICA →
+                </a>
+                <a href={`https://wa.me/${data.contact?.phone || '526561031571'}?text=${encodeURIComponent(getWhatsAppMessage())}`} className={styles.dellButtonSecondary} target="_blank" rel="noopener noreferrer">
+                  CONTACTAR ASESOR
+                </a>
+              </div>
+            </div>
+            {data.hero?.backgroundImage && (
+              <div className={styles.dellHeroRight}>
+                <Image 
+                  src={data.hero.backgroundImage} 
+                  alt={data.clientName} 
+                  width={400} 
+                  height={300} 
+                  className={styles.dellHeroImage}
+                  priority
+                />
+              </div>
+            )}
+          </div>
+
+          {/* Justification Box */}
+          {data.storytelling?.justification && (
+            <div className={styles.dellRibbonCard} style={{ marginBottom: '32px' }}>
+              <div className={styles.dellRibbonTitle} style={{ backgroundColor: '#d77a7a', color: '#000' }}>
+                <span>{data.storytelling.justification.title}</span>
+                <span className={styles.dellYellowSticker}>ACTIVO AMORTIZABLE</span>
+              </div>
+              <div className={styles.dellRibbonBody} style={{ backgroundColor: '#fff', flexDirection: 'column', alignItems: 'flex-start' }}>
+                <p style={{ margin: '0 0 12px 0', fontSize: '15px' }}>{data.storytelling.justification.content}</p>
+                {data.storytelling.justification.points && (
+                  <ul style={{ margin: 0, paddingLeft: '20px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {data.storytelling.justification.points.map((pt, pIdx) => (
+                      <li key={pIdx} style={{ fontSize: '14px', lineHeight: 1.4 }} dangerouslySetInnerHTML={{ __html: pt.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Storytelling Narrative Ribbon Cards */}
+          {data.storytelling?.narrative && data.storytelling.narrative.length > 0 && (
+            <div style={{ marginBottom: '36px' }}>
+              <div className={styles.dellEyebrowBlock} style={{ backgroundColor: '#d77a7a' }}>
+                <h2 className={styles.dellEyebrowTitle} style={{ fontSize: '22px' }}>
+                  ARQUITECTURA DE EXPERIENCIA Y OPERACIÓN
+                </h2>
+              </div>
+              {data.storytelling.narrative.map((item, nIdx) => {
+                const tintColor = catalogTints[nIdx % catalogTints.length];
+                return (
+                  <div key={nIdx} className={styles.dellRibbonCard}>
+                    <div className={styles.dellRibbonTitle}>
+                      <span>MÓDULO {nIdx + 1}: {item.title}</span>
+                      <span style={{ fontSize: '11px', color: '#666' }}>ESPECIFICACIÓN OFICIAL</span>
+                    </div>
+                    <div className={styles.dellRibbonBody} style={{ backgroundColor: tintColor }}>
+                      <div className={styles.dellRibbonText}>
+                        <p style={{ margin: 0, fontSize: '15px', color: '#000', fontWeight: 400 }} dangerouslySetInnerHTML={{ __html: item.content }} />
+                      </div>
+                      {item.image && (
+                        <div className={styles.dellRibbonImageContainer}>
+                          <Image 
+                            src={item.image} 
+                            alt={item.title} 
+                            width={340} 
+                            height={255} 
+                            className={styles.dellRibbonImage}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {/* Pricing & Package Section */}
+          <div id="propuesta-economica" style={{ marginTop: '40px' }}>
+            <div className={styles.dellEyebrowBlock} style={{ backgroundColor: '#8e8a25' }}>
+              <h2 className={styles.dellEyebrowTitle} style={{ fontSize: '22px' }}>
+                {data.packages?.title?.toUpperCase() || 'PROPUESTA ECONÓMICA'}
+              </h2>
+            </div>
+            
+            {data.packages?.subtitle && (
+              <p style={{ fontSize: '15px', fontStyle: 'italic', margin: '0 0 16px 0', color: '#333' }}>
+                {data.packages.subtitle}
+              </p>
+            )}
+
+            {data.packages?.blocks && data.packages.blocks.map((block, bIdx) => (
+              <div key={bIdx} className={styles.dellRibbonCard}>
+                <div className={styles.dellRibbonTitle} style={{ backgroundColor: '#000', color: '#fff' }}>
+                  <span>{block.name?.toUpperCase()}</span>
+                  <span className={styles.dellYellowSticker}>LLAVE EN MANO</span>
+                </div>
+                <div className={styles.dellRibbonBody} style={{ backgroundColor: '#c0d4a7', flexDirection: 'column', alignItems: 'flex-start' }}>
+                  {block.services.map((service, sIdx) => (
+                    <div key={sIdx} style={{ width: '100%' }}>
+                      <h3 style={{ fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '16px', fontWeight: 700, margin: '0 0 8px 0', textTransform: 'uppercase' }}>
+                        {service.name}
+                      </h3>
+                      {service.description && (
+                        <p style={{ margin: '0 0 12px 0', fontSize: '14px' }}>
+                          {service.description}
+                        </p>
+                      )}
+                      {service.bullets && (
+                        <ul style={{ margin: 0, paddingLeft: '20px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                          {service.bullets.map((bullet, buIdx) => (
+                            <li key={buIdx} style={{ fontSize: '14px', lineHeight: 1.4 }}>
+                              {bullet}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+
+            {/* Red CTA Investment Box */}
+            <div className={styles.dellCtaBlockRed}>
+              <h3 className={styles.dellCtaTitle}>
+                TOTAL DE INVERSIÓN: {formatPrice(total)} (+ IVA)
+              </h3>
+              <p style={{ fontSize: '15px', margin: '0 0 12px 0', color: '#fff' }}>
+                {data.packages?.methodologyText || "Propuesta aprobable de inmediato con confirmación vía WhatsApp."}
+              </p>
+              <div style={{ fontSize: '18px', fontWeight: 700, margin: '0 0 16px 0', color: '#fcc20f', fontFamily: 'Helvetica, Arial, sans-serif' }}>
+                Total con IVA incluido (16%): {formatPrice(total * 1.16)}
+              </div>
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
+                <a 
+                  href={`https://wa.me/${data.contact?.phone || '526561031571'}?text=${encodeURIComponent(getWhatsAppMessage())}`}
+                  className={styles.dellButtonPrimary}
+                  style={{ backgroundColor: '#000', color: '#fff', border: '1px solid #fff', fontSize: '14px', padding: '14px 32px' }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  APROBAR PROPUESTA VÍA WHATSAPP →
+                </a>
+                <span style={{ fontSize: '13px', color: '#fff', fontStyle: 'italic' }}>
+                  Vigencia oficial de cotización: 30 días naturales.
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Footer Band */}
+          <footer className={styles.dellFooterBand}>
+            <div className={styles.dellFooterNav}>
+              <span>[ 🔍 BUSCAR ]</span>
+              <span>[ 🏠 INICIO ]</span>
+              <span>[ 🛒 CATÁLOGO ]</span>
+              <span>[ 🛠️ SOPORTE TÉCNICO ]</span>
+            </div>
+            <div style={{ marginBottom: '12px' }}>
+              <a href="#" className={styles.dellClassicLink}>Términos de Servicio</a> · <a href="#" className={styles.dellClassicLink}>Soporte Apolograma</a> · <a href="#" className={styles.dellClassicLink}>Privacidad</a> · <a href={`tel:${data.contact?.phone || '526561031571'}`} className={styles.dellClassicLink}>Línea Directa 656-103-1571</a>
+            </div>
+            <div style={{ color: '#444', fontSize: '11px' }}>
+              © 1996–2026 Apolograma / {data.clientName}. Todos los derechos reservados. Este sitio está optimizado para cualquier navegador web moderno.
+            </div>
+          </footer>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>

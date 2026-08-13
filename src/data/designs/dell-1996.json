@@ -1,0 +1,17 @@
+{
+  "name": "Dell 1996",
+  "mode": "light",
+  "fontHeading": "'Arial Black', Impact, sans-serif",
+  "fontBody": "'Times New Roman', Times, Georgia, serif",
+  "primaryColor": "#e91d2a",
+  "bgColor": "#ffffff",
+  "textColor": "#000000",
+  "mutedText": "#333333",
+  "surfaceGlass": "#ffffff",
+  "glassBorder": "#000000",
+  "shadowElevation1": "2px 2px 0px #000000",
+  "shadowElevation2": "4px 4px 0px #000000",
+  "borderRadius": "0px",
+  "textGradient": "linear-gradient(to right, #000000, #333333)",
+  "primary": "#e91d2a"
+}

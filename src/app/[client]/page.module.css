@@ -1210,3 +1210,305 @@
     font-size: 0.75rem;
   }
 }
+
+/* =========================================
+   DELL 1996 RETRO DESIGN SYSTEM
+   ========================================= */
+.dellFrame {
+  border: 8px solid #000000;
+  background-color: #ffffff;
+  color: #000000;
+  min-height: 100vh;
+  box-sizing: border-box;
+  font-family: 'Times New Roman', Times, Georgia, serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.dellTopBanner {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 10px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #000000;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.dellBannerLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dellBannerRight {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.dellYellowSticker {
+  background-color: #fcc20f;
+  color: #000000;
+  border: 1px solid #000000;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 8px;
+  text-transform: uppercase;
+  box-shadow: 1px 1px 0 #000000;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dellPurpleStripe {
+  background-color: #6a26a4;
+  color: #ffffff;
+  padding: 1px 4px;
+  font-size: 10px;
+}
+
+.dellPhoneCallout {
+  color: #e91d2a !important;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+  background: #000000;
+  padding: 2px 6px;
+}
+
+.dellPhoneCallout:hover {
+  text-decoration: underline;
+}
+
+.dellContainer {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+
+.dellEyebrowBlock {
+  background-color: #8e8a25; /* Olive default */
+  color: #000000;
+  padding: 16px 20px;
+  border: 1px solid #000000;
+  margin-bottom: 24px;
+}
+
+.dellEyebrowTitle {
+  font-family: 'Arial Black', Arial, Impact, sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1.1;
+  text-transform: uppercase;
+  margin: 0;
+  color: #000000;
+  letter-spacing: -0.5px;
+}
+
+.dellHeroSection {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  margin-bottom: 32px;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #000000;
+}
+
+.dellHeroLeft {
+  flex: 1.4;
+}
+
+.dellHeroRight {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.dellHeroImage {
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+  border: 1px solid #000000;
+  box-shadow: 4px 4px 0 #000000;
+}
+
+.dellRibbonCard {
+  border: 1px solid #000000;
+  margin-bottom: 28px;
+  background-color: #ffffff;
+  position: relative;
+}
+
+.dellRibbonTitle {
+  background-color: #ffffff;
+  color: #000000;
+  border-bottom: 1px solid #000000;
+  padding: 8px 16px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dellRibbonBody {
+  padding: 20px;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  font-family: 'Times New Roman', Times, Georgia, serif;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #000000;
+}
+
+.dellRibbonText {
+  flex: 1.4;
+}
+
+.dellRibbonImageContainer {
+  flex: 1;
+  max-width: 320px;
+}
+
+.dellRibbonImage {
+  width: 100%;
+  height: auto;
+  border: 1px solid #000000;
+  box-shadow: 3px 3px 0 #000000;
+  display: block;
+}
+
+.dellCtaBlockRed {
+  background-color: #e91d2a;
+  color: #ffffff;
+  border: 2px solid #000000;
+  padding: 24px 28px;
+  font-family: 'Times New Roman', Times, Georgia, serif;
+  margin: 32px 0;
+  box-shadow: 4px 4px 0 #000000;
+}
+
+.dellCtaTitle {
+  font-family: 'Arial Black', Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin: 0 0 12px 0;
+  color: #ffffff;
+  line-height: 1.1;
+}
+
+.dellButtonPrimary {
+  background-color: #000000;
+  color: #ffffff !important;
+  border: 1px solid #000000;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 12px 28px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 0px !important;
+  box-shadow: 2px 2px 0 #333333;
+}
+
+.dellButtonPrimary:hover {
+  background-color: #222222;
+}
+
+.dellButtonSecondary {
+  background-color: #ffffff;
+  color: #000000 !important;
+  border: 1px solid #000000;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 12px 28px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 0px !important;
+  box-shadow: 2px 2px 0 #000000;
+}
+
+.dellFooterBand {
+  background-color: #ffffff;
+  border-top: 1px solid #000000;
+  padding: 24px 16px;
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 12px;
+  color: #000000;
+  margin-top: 40px;
+}
+
+.dellFooterNav {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #8e8a25; /* green-olive rule */
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.dellClassicLink {
+  color: #0000ee !important;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .dellFrame {
+    border-width: 4px;
+  }
+  .dellTopBanner {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+  .dellHeroSection {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .dellRibbonBody {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .dellRibbonImageContainer {
+    max-width: 100%;
+  }
+  .dellEyebrowTitle {
+    font-size: 20px;
+  }
+  .dellFooterNav {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dellFrame {
+    border-width: 2px;
+  }
+  .dellContainer {
+    padding: 16px 12px;
+  }
+}
