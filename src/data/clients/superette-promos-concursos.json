@@ -1,0 +1,148 @@
+{
+  "clientName": "Superette",
+  "clientLogo": "/assets/superette-promos/logo.png",
+  "industry": "Retail / Campañas y Promociones Comerciales",
+  "heroText": "Plataforma web independiente y escalable para la captura, validación de tickets de compra y sorteos digitales de Superette, diseñada como un activo tecnológico amortizable y monetizable con marcas proveedoras.",
+  "themeTemplate": "vercel",
+  "theme": {
+    "name": "Vercel",
+    "mode": "dark",
+    "fontHeading": "'Geist', 'Inter', sans-serif",
+    "fontBody": "'Geist', 'Inter', sans-serif",
+    "primaryColor": "#0A8244",
+    "bgColor": "#080d16",
+    "textColor": "#ffffff",
+    "mutedText": "#9e9e9e",
+    "surfaceGlass": "rgba(10, 15, 25, 0.85)",
+    "glassBorder": "rgba(10, 130, 68, 0.25)",
+    "shadowElevation1": "0 4px 6px rgba(0, 0, 0, 0.4)",
+    "shadowElevation2": "0 10px 40px rgba(0, 0, 0, 0.5)",
+    "borderRadius": "6px",
+    "textGradient": "linear-gradient(to right, #0A8244, #34D399)",
+    "primary": "#0A8244",
+    "clientLogoRaw": true,
+    "clientLogoStyle": "split"
+  },
+  "config": {
+    "currency": "MXN",
+    "locale": "es-MX",
+    "priceSuffix": "Construcción Base (+ IVA)",
+    "agency": "apolograma"
+  },
+  "contact": {
+    "phone": "526561031571"
+  },
+  "features": {
+    "showEcosystem": false,
+    "showAudiences": false,
+    "showPricing": true,
+    "disableSelection": true,
+    "disableAccordion": true,
+    "hideModularMethodology": false
+  },
+  "meta": {
+    "title": "Plataforma de Campañas Promocionales | Superette",
+    "description": "Propuesta técnica y comercial de Apolograma para el desarrollo de la Plataforma de Campañas, Validación de Tickets y Tómbola Digital de Superette.",
+    "ogImage": "/assets/og-apolograma.png"
+  },
+  "hero": {
+    "headline": "Plataforma de Campañas y Concursos Digitales",
+    "subheadline": "Infraestructura propietaria de validación de tickets y sorteos para Superette y sus proveedores",
+    "backgroundImage": "/assets/superette-promos/hero-bg.jpg",
+    "backgroundVideo": ""
+  },
+  "storytelling": {
+    "justification": {
+      "title": "Justificación de Negocio: Un Activo Tecnológico Amortizable",
+      "content": "Las dinámicas tradicionales de rifas con urnas de papel y cupones físicos generan fricción, falta de transparencia y altos costos de captura manual. Esta plataforma transforma cada campaña en un activo digital monetizable que Superette puede paquetizar a sus marcas proveedoras (ej. activaciones de refrescos, botanas, carnes frías o marcas de temporada), recuperando la inversión de desarrollo y generando ingresos directos por patrocinio:",
+      "points": [
+        "**Activo Propietario Amortizable:** Superette invierte una sola vez en la infraestructura base del software y cobra a cada marca proveedora un paquete de patrocinio por activación, convirtiendo una herramienta operativa en una fuente de ingresos.",
+        "**Cero Fricción para el Cliente (Sin Apps):** El consumidor escanea un código QR en tienda o empaque, sube la foto de su ticket desde su navegador móvil en segundos y recibe su confirmación con folio de participación.",
+        "**Auditoría y Transparencia en Sorteos:** Mesa de control para validar tickets y tómbola digital en vivo que blinda la reputación de Superette ante clientes y proveedores, eliminando el extravío o duplicidad de registros."
+      ]
+    },
+    "narrative": [
+      {
+        "title": "Experiencia Móvil Ágil y Captura de Tickets vía QR",
+        "content": "Una aplicación web responsiva y ultrarrápida donde el cliente accede al instante escaneando el código QR de la promoción en tienda. Registra sus datos de contacto y sube la fotografía de su ticket de compra sin necesidad de descargar aplicaciones de terceros.",
+        "image": "/assets/superette-promos/narrative-1.jpg"
+      },
+      {
+        "title": "Mesa de Control y Auditoría Operativa en Tiempo Real",
+        "content": "Panel de administración centralizado para el equipo de Superette. Permite auditar y revisar las imágenes de los tickets registrados con un solo clic (Aprobar / Rechazar), filtrar por fechas o sucursales y exportar la base de datos completa de clientes a Excel.",
+        "image": "/assets/superette-promos/narrative-2.jpg"
+      },
+      {
+        "title": "Tómbola Digital y Activaciones Llave en Mano con Proveedores",
+        "content": "Módulo de sorteo digital aleatorio y transparente, listo para ser proyectado en pantallas dentro de tienda o utilizado en transmisiones en vivo. Facilita que Superette venda paquetes de concurso 'llave en mano' a marcas aliadas (asadores, pantallas, hieleras o viajes).",
+        "image": "/assets/superette-promos/narrative-3.jpg"
+      }
+    ],
+    "challenge": "Desarrollar una infraestructura digital propietaria y escalable que permita a Superette operar concursos promocionales automatizados, eliminar urnas de papel y ofrecer a sus proveedores una plataforma llave en mano para activaciones de marca."
+  },
+  "packages": {
+    "title": "Propuesta Económica (Fase Piloto)",
+    "subtitle": "Inversión de construcción y puesta en marcha para la primera campaña promocional de 30 días:",
+    "methodologyText": "Justificación de la Inversión: En lugar de cotizar un desarrollo desde cero ($72,810 MXN), implementamos la Arquitectura Base de Campañas de Apolograma ya probada y optimizada, reduciendo el tiempo de ingeniería a una adaptación a la medida de Superette. Al presionar 'Aprobar Propuesta' confirmarás los entregables con nuestro equipo vía WhatsApp.",
+    "fn1": [],
+    "apolograma": [],
+    "blocks": [
+      {
+        "name": "Desarrollo y Puesta en Marcha (Campaña Piloto)",
+        "services": [
+          {
+            "name": "Módulo PWA Participantes (Registro Móvil y Carga de Tickets)",
+            "price": 9800,
+            "description": "Aplicación web ligera para registro de concursantes vía código QR.",
+            "bullets": [
+              "Formulario web responsivo accesible vía QR sin descarga de aplicaciones.",
+              "Validación de formato de imagen y captura segura de datos del participante.",
+              "Generación y confirmación inmediata de folio único de participación."
+            ]
+          },
+          {
+            "name": "Mesa de Control y Auditoría Operativa (Panel Administrativo)",
+            "price": 8500,
+            "description": "Panel administrativo para supervisión y validación de compras.",
+            "bullets": [
+              "Dashboard privado para visualización y revisión de tickets en un clic.",
+              "Filtros por fecha, folio y estado de validación (Aprobado / Pendiente / Rechazado).",
+              "Descarga directa de base de datos completa de participantes en formato Excel."
+            ]
+          },
+          {
+            "name": "Módulo de Tómbola Digital y Selección de Ganadores",
+            "price": 6200,
+            "description": "Sistema de sorteo aleatorio transparente para eventos en vivo.",
+            "bullets": [
+              "Interfaz interactiva para proyectar en pantallas de tienda o transmisiones en vivo.",
+              "Algoritmo de selección aleatoria transparente entre tickets validados.",
+              "Registro histórico de folios ganadores con marca de tiempo."
+            ]
+          },
+          {
+            "name": "Despliegue Serverless, Configuración DNS y Pruebas de Carga",
+            "price": 3750,
+            "description": "Puesta a punto de infraestructura en la nube y enlace web.",
+            "bullets": [
+              "Configuración de infraestructura en la nube sin costo fijo mensual en reposo ($0.00 MXN).",
+              "Vinculación en subdominio corporativo de confianza (ej. promos.superette.mx).",
+              "Pruebas integrales de carga y compatibilidad móvil."
+            ]
+          },
+          {
+            "name": "Soporte Técnico y Monitoreo durante Campaña (30 días)",
+            "price": 5400,
+            "description": "Acompañamiento técnico y monitoreo durante el mes de la dinámica.",
+            "bullets": [
+              "Monitoreo continuo de uptime y base de datos durante el mes de la dinámica.",
+              "Atención prioritaria ante incidencias técnicas del panel o formulario.",
+              "Cierre de campaña y entrega de reporte consolidado de participación."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "discountPercent": 0
+}
