@@ -708,12 +708,11 @@ export default function MediaKitView({ data }: { data: ClientData }) {
         ) : data.hero?.backgroundImage ? (
           <>
             <motion.div 
-              initial={{ scale: 1 }}
-              animate={{ scale: 1.05 }}
+              initial={{ scale: 1.0 }}
+              animate={{ scale: [1.0, 1.12, 1.0] }}
               transition={{
-                duration: 20,
+                duration: 16,
                 repeat: Infinity,
-                repeatType: "reverse",
                 ease: "easeInOut"
               }}
               style={{
@@ -722,6 +721,8 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 backgroundImage: `url(${data.hero.backgroundImage})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
+                transformOrigin: 'center center',
+                willChange: 'transform',
                 zIndex: 0,
               }} 
             />
