@@ -73,8 +73,8 @@
         "image": "/assets/superette-promos/narrative-2.jpg"
       },
       {
-        "title": "Tómbola Digital y Activaciones Llave en Mano con Proveedores",
-        "content": "Módulo de sorteo digital aleatorio y transparente, listo para ser proyectado en pantallas dentro de tienda o utilizado en transmisiones en vivo. Facilita que Superette venda paquetes de concurso 'llave en mano' a marcas aliadas (asadores, pantallas, hieleras o viajes).",
+        "title": "Tómbola Digital y Transmisión en Vivo desde Tienda",
+        "content": "El día del evento final, la selección de ganadores se realiza mediante una transmisión en vivo en redes sociales directamente desde una sucursal de Superette. La logística es 100% sencilla: solo se requiere una laptop conectada a una pantalla o televisión para proyectar la tómbola web interactiva, seleccionando al ganador de forma aleatoria, transparente y verificable ante la audiencia en tiempo real.",
         "image": "/assets/superette-promos/narrative-3.jpg"
       }
     ],
@@ -111,13 +111,14 @@
             ]
           },
           {
-            "name": "Módulo de Tómbola Digital y Selección de Ganadores",
+            "name": "Módulo de Tómbola Digital y Selección de Ganadores en Vivo",
             "price": 6200,
-            "description": "Sistema de sorteo aleatorio transparente para eventos en vivo.",
+            "description": "Sistema de sorteo interactivo proyectable en pantalla para transmisiones en vivo.",
             "bullets": [
-              "Interfaz interactiva para proyectar en pantallas de tienda o transmisiones en vivo.",
-              "Algoritmo de selección aleatoria transparente entre tickets validados.",
-              "Registro histórico de folios ganadores con marca de tiempo."
+              "Interfaz web interactiva proyectable en cualquier pantalla o televisión conectada a una laptop.",
+              "Diseñada para dinámicas y sorteos transmitidos en vivo en redes sociales (Facebook/Instagram Live).",
+              "Algoritmo de selección aleatoria transparente y verificable entre todos los tickets aprobados.",
+              "Registro y confirmación visual inmediata del folio y datos del ganador en pantalla."
             ]
           },
           {
