@@ -1,7 +1,10 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import MediaKitView from './MediaKitView';
+
+export const dynamicParams = false;
 
 // Next.js App Router Static Export requires this for dynamic routes
 export async function generateStaticParams() {
@@ -88,7 +91,7 @@ export default async function ClientPage({ params }: { params: Promise<{ client:
       }
     }
   } catch (error) {
-    return <div>Error: Client data not found.</div>;
+    notFound();
   }
 
   return <MediaKitView data={data} />;
