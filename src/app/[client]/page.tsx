@@ -63,9 +63,7 @@ export async function generateMetadata({ params }: { params: Promise<{ client: s
       },
     };
   } catch (error) {
-    return {
-      title: 'Media Kit | Frontera Número Uno',
-    };
+    notFound();
   }
 }
 
