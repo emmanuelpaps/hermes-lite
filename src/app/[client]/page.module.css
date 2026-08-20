@@ -3804,5 +3804,1161 @@
   }
 }
 
+/* ==========================================================================
+   DOCTOR AURA DESIGN SYSTEM (Dr. Elmo Aramburo / Medical Luxury)
+   ========================================================================== */
+
+.docFrame {
+  position: relative;
+  min-height: 100vh;
+  background-color: #F8FAF9;
+  color: #0F172A;
+  font-family: var(--font-body, 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+  overflow-x: hidden;
+  padding-bottom: 80px;
+}
+
+.docAuraBgLayer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.docOrb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.28;
+  animation: docFloatOrb 20s infinite ease-in-out alternate;
+}
+
+.docOrbTeal {
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, #0D9488 0%, #14B8A6 60%, transparent 80%);
+  top: -80px;
+  right: 5%;
+  animation-duration: 18s;
+}
+
+.docOrbNavy {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, #0F172A 0%, #1E3A8A 60%, transparent 80%);
+  bottom: 10%;
+  left: -100px;
+  opacity: 0.12;
+  animation-duration: 25s;
+}
+
+.docOrbEmerald {
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, #059669 0%, #10B981 60%, transparent 80%);
+  top: 45%;
+  right: 15%;
+  opacity: 0.15;
+  animation-duration: 22s;
+}
+
+@keyframes docFloatOrb {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-30px, 40px) scale(1.06); }
+  100% { transform: translate(30px, -30px) scale(0.96); }
+}
+
+.docContainer {
+  position: relative;
+  z-index: 10;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 24px 24px 0 24px;
+}
+
+/* Top Banner */
+.docTopBanner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 12px;
+}
+
+.docBadgeLive {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFFFFF;
+  border: 1px solid rgba(13, 148, 136, 0.2);
+  box-shadow: 0 2px 10px rgba(13, 148, 136, 0.08);
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #0D9488;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.docStatusDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #0D9488;
+  box-shadow: 0 0 8px #0D9488;
+  animation: docPulse 2s infinite;
+}
+
+@keyframes docPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.docTaglinePill {
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(203, 213, 225, 0.6);
+  padding: 6px 14px;
+  border-radius: 100px;
+}
+
+/* Agency Navigation */
+.docAgencyNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  padding: 14px 24px;
+  border-radius: 20px;
+  margin-bottom: 28px;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+}
+
+.docAgencyLogos {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.docClientLogoPill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #F0FDF4;
+  border: 1px solid rgba(13, 148, 136, 0.2);
+  padding: 6px 14px;
+  border-radius: 100px;
+}
+
+.docClientAvatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid #0D9488;
+}
+
+.docClientPillText {
+  font-size: 12px;
+  font-weight: 800;
+  color: #0D9488;
+  letter-spacing: 0.02em;
+}
+
+/* Hero Section */
+.docHeroCard {
+  display: grid;
+  grid-template-columns: 1.25fr 0.95fr;
+  gap: 40px;
+  align-items: center;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 253, 250, 0.9) 100%);
+  border: 1px solid rgba(13, 148, 136, 0.18);
+  border-radius: 32px;
+  padding: 48px;
+  margin-bottom: 48px;
+  box-shadow: 0 20px 50px rgba(13, 148, 136, 0.06), 0 1px 3px rgba(0, 0, 0, 0.02);
+  position: relative;
+  overflow: hidden;
+}
+
+.docHeroContent {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: relative;
+  z-index: 2;
+}
+
+.docEyebrowBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(13, 148, 136, 0.08);
+  border: 1px solid rgba(13, 148, 136, 0.25);
+  padding: 6px 14px;
+  border-radius: 100px;
+  width: fit-content;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: #0D9488;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.docHeroTitle {
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: #0F172A;
+  margin: 0;
+}
+
+.docEditorialSerif {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: #0D9488;
+  letter-spacing: normal;
+}
+
+.docHeroSubtitle {
+  font-size: 16px;
+  line-height: 1.55;
+  color: #475569;
+  margin: 0;
+}
+
+.docHeroActions {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.docBtnPrimary {
+  background: linear-gradient(135deg, #0D9488 0%, #0A5C5A 100%);
+  color: #FFFFFF;
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 14px 26px;
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(13, 148, 136, 0.28);
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.docBtnPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(13, 148, 136, 0.38);
+}
+
+.docBtnSecondary {
+  background: #FFFFFF;
+  color: #0F172A;
+  border: 1px solid rgba(203, 213, 225, 0.9);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 14px 22px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.docBtnSecondary:hover {
+  background: #F8FAFC;
+  border-color: #0D9488;
+  color: #0D9488;
+}
+
+.docTrustBadges {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.docTrustBadgeItem {
+  background: #FFFFFF;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  padding: 6px 12px;
+  border-radius: 100px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #334155;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Hero Visual Column */
+.docHeroVisual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.docVisualWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 480px;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(13, 148, 136, 0.18), 0 4px 20px rgba(15, 23, 42, 0.08);
+  border: 2px solid rgba(13, 148, 136, 0.25);
+  background: #0F172A;
+}
+
+.docVisualWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.docFloatingBadgeTop {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.docFloatingBadgeBottom {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  right: 18px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(13, 148, 136, 0.25);
+  padding: 14px 18px;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.docBadgeTitle {
+  font-size: 14px;
+  font-weight: 800;
+  color: #0F172A;
+  margin-bottom: 2px;
+}
+
+.docBadgeSubtitle {
+  font-size: 11.5px;
+  color: #0D9488;
+  font-weight: 600;
+}
+
+/* Sections */
+.docSection {
+  margin-bottom: 56px;
+}
+
+.docSectionHeader {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 36px auto;
+}
+
+.docPillarBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(13, 148, 136, 0.08);
+  border: 1px solid rgba(13, 148, 136, 0.2);
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #0D9488;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.docSectionTitle {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #0F172A;
+  margin: 0 0 12px 0;
+  line-height: 1.2;
+}
+
+.docSectionSubtext {
+  font-size: 15px;
+  line-height: 1.55;
+  color: #64748B;
+  margin: 0;
+}
+
+/* Pillars Grid */
+.docPillarsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.docPillarCard {
+  background: #FFFFFF;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 24px;
+  padding: 28px 22px;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.docPillarCard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(13, 148, 136, 0.35);
+  box-shadow: 0 14px 35px rgba(13, 148, 136, 0.08);
+}
+
+.docPillarCardFeatured {
+  border-color: rgba(13, 148, 136, 0.4);
+  background: linear-gradient(180deg, #FFFFFF 0%, #F0FDF4 100%);
+}
+
+.docPillarIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(13, 148, 136, 0.1);
+  color: #0D9488;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 18px;
+}
+
+.docPillarNum {
+  font-size: 11px;
+  font-weight: 800;
+  color: #0D9488;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.docPillarTitle {
+  font-size: 17px;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 0 0 10px 0;
+  line-height: 1.3;
+}
+
+.docPillarDesc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #64748B;
+  margin: 0;
+  flex: 1;
+}
+
+.docPillarTag {
+  margin-top: 18px;
+  display: inline-flex;
+  padding: 4px 10px;
+  border-radius: 100px;
+  background: #F1F5F9;
+  color: #475569;
+  font-size: 11px;
+  font-weight: 700;
+  width: fit-content;
+}
+
+/* AI Clause Callout Box */
+.docAiClauseCard {
+  background: linear-gradient(135deg, #091E1D 0%, #0F2D2A 100%);
+  border: 1px solid rgba(94, 234, 212, 0.25);
+  border-radius: 24px;
+  padding: 32px 36px;
+  color: #FFFFFF;
+  box-shadow: 0 15px 40px rgba(9, 30, 29, 0.25);
+  margin-bottom: 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.docAiClauseHeader {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.docAiBadge {
+  background: rgba(94, 234, 212, 0.2);
+  border: 1px solid rgba(94, 234, 212, 0.4);
+  color: #5EEAD4;
+  font-size: 11.5px;
+  font-weight: 800;
+  padding: 5px 14px;
+  border-radius: 100px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.docAiClauseTitle {
+  font-size: 20px;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.docAiClauseText {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #CBD5E1;
+  margin: 0 0 18px 0;
+}
+
+.docAiFeaturesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 18px;
+}
+
+.docAiFeatureItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.docAiFeatureIcon {
+  color: #5EEAD4;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.docAiFeatureText {
+  font-size: 12.5px;
+  color: #E2E8F0;
+  line-height: 1.4;
+}
+
+/* Interactive Demo Showcase */
+.docDemoSection {
+  background: #FFFFFF;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 28px;
+  padding: 36px;
+  margin-bottom: 56px;
+  box-shadow: 0 10px 35px rgba(15, 23, 42, 0.04);
+}
+
+.docDemoTabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid #E2E8F0;
+  padding-bottom: 14px;
+  overflow-x: auto;
+}
+
+.docDemoTabBtn {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.docDemoTabBtnActive {
+  background: #0D9488;
+  border-color: #0D9488;
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(13, 148, 136, 0.25);
+}
+
+.docDemoContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: center;
+}
+
+.docDemoMockupCard {
+  background: #0F172A;
+  border-radius: 22px;
+  padding: 20px;
+  color: #FFFFFF;
+  box-shadow: 0 15px 35px rgba(15, 23, 42, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.docDemoMockupHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+.docDemoDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.docDemoDetailBadge {
+  background: rgba(13, 148, 136, 0.1);
+  color: #0D9488;
+  border: 1px solid rgba(13, 148, 136, 0.25);
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 800;
+  width: fit-content;
+  text-transform: uppercase;
+}
+
+.docDemoDetailTitle {
+  font-size: 24px;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.docDemoDetailText {
+  font-size: 14px;
+  line-height: 1.55;
+  color: #475569;
+  margin: 0;
+}
+
+.docDemoSpecList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.docDemoSpecItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #334155;
+  font-weight: 600;
+}
+
+/* Pricing Section */
+.docPricingSection {
+  margin-bottom: 56px;
+}
+
+.docBillingToggleWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 36px;
+}
+
+.docBillingToggleBox {
+  display: inline-flex;
+  background: #FFFFFF;
+  border: 1.5px solid rgba(13, 148, 136, 0.25);
+  padding: 6px;
+  border-radius: 100px;
+  box-shadow: 0 4px 20px rgba(13, 148, 136, 0.08);
+  gap: 6px;
+}
+
+.docBillingToggleBtn {
+  background: transparent;
+  border: none;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.docBillingToggleBtnActive {
+  background: #0D9488;
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+}
+
+.docDiscountPill {
+  background: #FEF08A;
+  color: #854D0E;
+  font-size: 10.5px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 100px;
+  letter-spacing: 0.02em;
+}
+
+.docPricingGrid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.95fr;
+  gap: 28px;
+  align-items: stretch;
+  margin-bottom: 40px;
+}
+
+.docPriceCard {
+  background: #FFFFFF;
+  border: 1.5px solid rgba(226, 232, 240, 0.9);
+  border-radius: 28px;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.docPriceCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+}
+
+.docPriceCardFeatured {
+  border-color: #0D9488;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F0FDF4 100%);
+  box-shadow: 0 15px 45px rgba(13, 148, 136, 0.12);
+}
+
+.docPriceCardSelected {
+  border-width: 2.5px;
+  border-color: #0D9488;
+  box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.15), 0 20px 50px rgba(13, 148, 136, 0.15);
+}
+
+.docFeaturedRibbon {
+  position: absolute;
+  top: -14px;
+  left: 36px;
+  background: linear-gradient(135deg, #0D9488 0%, #0A5C5A 100%);
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 16px;
+  border-radius: 100px;
+  letter-spacing: 0.04em;
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.35);
+}
+
+.docPriceHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.docPricePlanName {
+  font-size: 22px;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 0 0 6px 0;
+  line-height: 1.2;
+}
+
+.docPricePlanDesc {
+  font-size: 13.5px;
+  color: #64748B;
+  margin: 0;
+}
+
+.docCustomRadio {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #CBD5E1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.docCustomRadioChecked {
+  border-color: #0D9488;
+  background: #0D9488;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.docPriceAmountBox {
+  margin: 18px 0 24px 0;
+  padding: 18px 20px;
+  background: #F8FAFC;
+  border-radius: 18px;
+  border: 1px solid #E2E8F0;
+}
+
+.docPriceCardFeatured .docPriceAmountBox {
+  background: #FFFFFF;
+  border-color: rgba(13, 148, 136, 0.2);
+}
+
+.docPriceNumber {
+  font-size: 38px;
+  font-weight: 800;
+  color: #0F172A;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.docPricePeriod {
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748B;
+  margin-left: 6px;
+}
+
+.docPriceMonthlyEquiv {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0D9488;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.docSavingsBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #FEF08A;
+  color: #854D0E;
+  font-size: 11.5px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 100px;
+  margin-top: 6px;
+}
+
+.docDeliverablesList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex: 1;
+}
+
+.docDeliverableItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #334155;
+}
+
+.docCheckIcon {
+  color: #0D9488;
+  font-size: 15px;
+  font-weight: 800;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* Transparency Cards */
+.docTermsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 48px;
+}
+
+.docTermCard {
+  background: #FFFFFF;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 20px;
+  padding: 22px 18px;
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.02);
+}
+
+.docTermIconBubble {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: rgba(13, 148, 136, 0.1);
+  color: #0D9488;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.docTermTitle {
+  font-size: 14px;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 0 0 6px 0;
+}
+
+.docTermText {
+  font-size: 12px;
+  line-height: 1.45;
+  color: #64748B;
+  margin: 0;
+}
+
+/* Summary Box & WhatsApp CTA */
+.docSummaryBox {
+  background: linear-gradient(135deg, #061918 0%, #0B2B28 100%);
+  border: 1px solid rgba(94, 234, 212, 0.25);
+  border-radius: 28px;
+  padding: 40px;
+  color: #FFFFFF;
+  display: grid;
+  grid-template-columns: 1.3fr 0.9fr;
+  gap: 36px;
+  align-items: center;
+  box-shadow: 0 20px 50px rgba(6, 25, 24, 0.35);
+  margin-bottom: 48px;
+}
+
+.docSummaryLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.docSummaryBadge {
+  background: rgba(94, 234, 212, 0.2);
+  border: 1px solid rgba(94, 234, 212, 0.4);
+  color: #5EEAD4;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 100px;
+  width: fit-content;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.docSummaryTitle {
+  font-size: 26px;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.docSummaryDesc {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #94A3B8;
+  margin: 0;
+}
+
+.docSummaryRight {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 22px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.docSummaryTotalLabel {
+  font-size: 12px;
+  font-weight: 700;
+  color: #94A3B8;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.docSummaryTotalValue {
+  font-size: 38px;
+  font-weight: 800;
+  color: #5EEAD4;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.docSummaryTotalSub {
+  font-size: 12px;
+  color: #CBD5E1;
+}
+
+.docWhatsAppBtn {
+  background: #25D366;
+  color: #FFFFFF;
+  border: none;
+  font-size: 14px;
+  font-weight: 800;
+  padding: 16px 24px;
+  border-radius: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.35);
+  transition: all 0.25s ease;
+}
+
+.docWhatsAppBtn:hover {
+  background: #20BA5A;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.45);
+}
+
+/* Footer */
+.docFooter {
+  text-align: center;
+  padding-top: 24px;
+  border-top: 1px solid rgba(226, 232, 240, 0.8);
+  font-size: 12px;
+  color: #64748B;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.docFooterLinks {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  font-size: 12px;
+  color: #475569;
+}
+
+.docFooterLinks a {
+  color: #0D9488;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+  .docHeroCard {
+    grid-template-columns: 1fr;
+    padding: 32px 24px;
+    gap: 32px;
+  }
+
+  .docHeroTitle {
+    font-size: 34px;
+  }
+
+  .docPillarsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .docAiFeaturesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .docDemoContent {
+    grid-template-columns: 1fr;
+  }
+
+  .docPricingGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .docTermsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .docSummaryBox {
+    grid-template-columns: 1fr;
+    padding: 28px 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .docHeroTitle {
+    font-size: 28px;
+  }
+
+  .docHeroActions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .docBtnPrimary, .docBtnSecondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .docPillarsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .docTermsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .docTopBanner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .docAgencyNav {
+    flex-direction: column;
+    gap: 14px;
+    align-items: flex-start;
+  }
+}
+
 
 

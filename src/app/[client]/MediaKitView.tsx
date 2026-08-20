@@ -1121,6 +1121,643 @@ export default function MediaKitView({ data }: { data: ClientData }) {
     );
   }
 
+  const isDoctorAura = data.themeTemplate === 'doctor-aura' || data.clientName?.toLowerCase().includes('elmo') || data.clientName?.toLowerCase().includes('aramburo');
+
+  if (isDoctorAura) {
+    const [billingOption, setBillingOption] = useState<'annual' | 'monthly'>('annual');
+    const [activeDemoTab, setActiveDemoTab] = useState<'feed' | 'stories' | 'reels' | 'ia_engine'>('feed');
+
+    const annualPrice = 120000;
+    const monthlyPrice = 12000;
+    const annualMonthlyEquiv = 10000;
+    const annualSavings = 24000; // $144,000 - $120,000
+    const annualSavingsPercent = 16.7;
+
+    const currentPrice = billingOption === 'annual' ? annualPrice : monthlyPrice;
+    const currentPriceWithIva = currentPrice * 1.16;
+
+    const waMsg = billingOption === 'annual'
+      ? '¡Hola Emmanuel! Revisamos la propuesta de Marketing Médico con IA para el Dr. Elmo Aramburo y nos interesa el Plan Anual ($120,000 MXN con 16.7% de descuento). ¿Cuáles son los siguientes pasos?'
+      : '¡Hola Emmanuel! Revisamos la propuesta de Marketing Médico con IA para el Dr. Elmo Aramburo y nos interesa el Plan Mensual ($12,000 MXN/mes). ¿Cuáles son los siguientes pasos?';
+
+    const waUrl = `https://wa.me/${data.contact?.phone || '526561031571'}?text=${encodeURIComponent(waMsg)}`;
+
+    return (
+      <div className={styles.docFrame}>
+        {/* Ambient Medical Bio-Tech Aura Spheres */}
+        <div className={styles.docAuraBgLayer}>
+          <div className={`${styles.docOrb} ${styles.docOrbTeal}`} />
+          <div className={`${styles.docOrb} ${styles.docOrbNavy}`} />
+          <div className={`${styles.docOrb} ${styles.docOrbEmerald}`} />
+        </div>
+
+        <div className={styles.docContainer}>
+          {/* Top Status Banner */}
+          <div className={styles.docTopBanner}>
+            <div className={styles.docBadgeLive}>
+              <span className={styles.docStatusDot}></span>
+              <span>DR. ELMO ARAMBURO · CIRUGÍA BARIÁTRICA & METABÓLICA · STAR MÉDICA</span>
+            </div>
+            <div className={styles.docTaglinePill}>
+              ✨ Marketing Médico & Generación Visual con IA · Propuesta Exclusiva
+            </div>
+          </div>
+
+          {/* Agency Navigation Header */}
+          <header className={styles.docAgencyNav}>
+            <div className={styles.docAgencyLogos}>
+              <Image src="/assets/apolograma-logo-v2.png" alt="Apolograma" width={150} height={30} className={styles.apologramaLogoImageLight} />
+              <span style={{ opacity: 0.3, color: '#0F172A', fontWeight: 800 }}>×</span>
+              <Image src="/assets/fn1-logo-purple.png" alt="Frontera Número Uno" width={165} height={24} />
+            </div>
+            <div className={styles.docClientLogoPill}>
+              <Image src={data.clientLogo || '/assets/dr-elmo-aramburo/doctor-portrait.jpg'} alt="Dr. Elmo Aramburo" width={28} height={28} className={styles.docClientAvatar} />
+              <span className={styles.docClientPillText}>DR. ELMO ARAMBURO</span>
+            </div>
+          </header>
+
+          {/* Hero Section (2 Columns) */}
+          <section className={styles.docHeroCard}>
+            <div className={styles.docHeroContent}>
+              <div className={styles.docEyebrowBadge}>
+                <span>🩺 MARKETING DIGITAL & IA GENERATIVA · STAR MÉDICA</span>
+              </div>
+              <h1 className={styles.docHeroTitle}>
+                Autoridad Médica <span className={styles.docEditorialSerif}>y Pacientes</span> con <span className={styles.docEditorialSerif}>Inteligencia Artificial</span>
+              </h1>
+              <p className={styles.docHeroSubtitle}>
+                Estrategia de comunicación y crecimiento mensual: <strong>20 diseños educativos para Feed</strong>, <strong>20 adaptaciones verticales a Stories (9:16)</strong> y <strong>1 Reel mensual</strong>. Creación visual generada con los modelos de IA más potentes del mercado, supervisados y perfeccionados por directores de arte de Apolograma.
+              </p>
+
+              <div className={styles.docHeroActions}>
+                <a href="#propuesta-economica" className={styles.docBtnPrimary}>
+                  <span>VER OPCIONES DE INVERSIÓN</span>
+                  <span>↓</span>
+                </a>
+                <a href={waUrl} target="_blank" rel="noopener noreferrer" className={styles.docBtnSecondary}>
+                  <span>📱 CONTACTAR POR WHATSAPP</span>
+                </a>
+              </div>
+
+              <div className={styles.docTrustBadges}>
+                <div className={styles.docTrustBadgeItem}>
+                  <span>🤖</span>
+                  <span>Modelos de IA de Última Generación</span>
+                </div>
+                <div className={styles.docTrustBadgeItem}>
+                  <span>🎨</span>
+                  <span>20 Diseños + 20 Stories</span>
+                </div>
+                <div className={styles.docTrustBadgeItem}>
+                  <span>🎬</span>
+                  <span>1 Reel Mensual</span>
+                </div>
+                <div className={styles.docTrustBadgeItem}>
+                  <span>🏥</span>
+                  <span>Star Médica Juárez</span>
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.docHeroVisual}>
+              <div className={styles.docVisualWrapper}>
+                <img src="/assets/dr-elmo-aramburo/doctor-portrait.jpg" alt="Dr. Elmo Aramburo" />
+                <div className={styles.docFloatingBadgeTop}>
+                  <span>👨‍⚕️</span>
+                  <span>DR. ELMO ARAMBURO</span>
+                </div>
+                <div className={styles.docFloatingBadgeBottom}>
+                  <div className={styles.docBadgeTitle}>Cirugía Bariátrica & Laparoscópica</div>
+                  <div className={styles.docBadgeSubtitle}>Hospital Star Médica · Ciudad Juárez, Chih.</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* 4 Pillars Section */}
+          <section className={styles.docSection}>
+            <div className={styles.docSectionHeader}>
+              <div className={styles.docPillarBadge}>ESTRATEGIA MENSUAL DE CONTENIDOS</div>
+              <h2 className={styles.docSectionTitle}>
+                Los 4 Pilares del <span className={styles.docEditorialSerif}>Ecosistema de Marketing</span>
+              </h2>
+              <p className={styles.docSectionSubtext}>
+                Un sistema integral diseñado para educar a pacientes sobre salud metabólica, desmitificar la cirugía bariátrica y generar consultas de valoración continuas:
+              </p>
+            </div>
+
+            <div className={styles.docPillarsGrid}>
+              <div className={styles.docPillarCard}>
+                <div className={styles.docPillarIcon}>🖼️</div>
+                <div className={styles.docPillarNum}>PILAR 01</div>
+                <h3 className={styles.docPillarTitle}>20 Diseños para Feed con IA Generativa</h3>
+                <p className={styles.docPillarDesc}>
+                  Infografías médicas fotorrealistas sobre manga gástrica, bypass, platos nutricionales y derribo de mitos. Imágenes generadas con modelos de IA médica y retocadas por diseñadores.
+                </p>
+                <div className={styles.docPillarTag}>Formato 4:5 · 20 Posts/mes</div>
+              </div>
+
+              <div className={styles.docPillarCard}>
+                <div className={styles.docPillarIcon}>📱</div>
+                <div className={styles.docPillarNum}>PILAR 02</div>
+                <h3 className={styles.docPillarTitle}>20 Adaptaciones a Stories (9:16)</h3>
+                <p className={styles.docPillarDesc}>
+                  Contenido vertical diario con encuestas de síntomas, cajas de preguntas frecuentes, testimonios y botones directos para agendar valoración por WhatsApp.
+                </p>
+                <div className={styles.docPillarTag}>Formato 9:16 · 20 Stories/mes</div>
+              </div>
+
+              <div className={styles.docPillarCard}>
+                <div className={styles.docPillarIcon}>🎬</div>
+                <div className={styles.docPillarNum}>PILAR 03</div>
+                <h3 className={styles.docPillarTitle}>1 Reel Mensual de Alta Retención</h3>
+                <p className={styles.docPillarDesc}>
+                  Producción y edición dinámica de video en formato corto para Instagram Reels, TikTok y YouTube Shorts, con tomas en Star Médica y subtítulos animados.
+                </p>
+                <div className={styles.docPillarTag}>Video 9:16 · 1 Reel/mes</div>
+              </div>
+
+              <div className={`${styles.docPillarCard} ${styles.docPillarCardFeatured}`}>
+                <div className={styles.docPillarIcon} style={{ background: 'rgba(13, 148, 136, 0.2)' }}>🧬</div>
+                <div className={styles.docPillarNum} style={{ color: '#0D9488' }}>PILAR 04</div>
+                <h3 className={styles.docPillarTitle}>Modelos de IA Supervisados</h3>
+                <p className={styles.docPillarDesc}>
+                  Uso de los modelos generativos más potentes (Midjourney v6, GPT Image, Flux) guiados por directores de arte para una estética médica exclusiva sin fotos de stock.
+                </p>
+                <div className={styles.docPillarTag} style={{ background: '#0D9488', color: '#FFFFFF' }}>Supervisión 100% Humana</div>
+              </div>
+            </div>
+
+            {/* Crucial AI Clause Callout Box */}
+            <div className={styles.docAiClauseCard}>
+              <div className={styles.docAiClauseHeader}>
+                <div className={styles.docAiBadge}>🧬 CLÁUSULA TECNOLÓGICA CLAVE</div>
+                <h3 className={styles.docAiClauseTitle}>Metodología de Creación con Inteligencia Artificial</h3>
+              </div>
+              <p className={styles.docAiClauseText}>
+                Todos los diseños, composiciones y adaptaciones visuales se desarrollan utilizando los <strong>modelos de Inteligencia Artificial generativa más potentes y avanzados de la industria</strong>, siendo rigurosamente <strong>supervisados, dirigidos y perfeccionados por el equipo de diseño y dirección de arte de Apolograma</strong>. Esto nos permite entregar fotorrealismo clínico impecable, precisión anatómica y una identidad médica vanguardista sin recurrir a bancos de imágenes genéricos.
+              </p>
+              <div className={styles.docAiFeaturesGrid}>
+                <div className={styles.docAiFeatureItem}>
+                  <span className={styles.docAiFeatureIcon}>✓</span>
+                  <span className={styles.docAiFeatureText}>Modelos generativos de última generación (Midjourney v6, GPT Image, Flux).</span>
+                </div>
+                <div className={styles.docAiFeatureItem}>
+                  <span className={styles.docAiFeatureIcon}>✓</span>
+                  <span className={styles.docAiFeatureText}>Supervisión clínica, tipografía y retoque por diseñadores profesionales.</span>
+                </div>
+                <div className={styles.docAiFeatureItem}>
+                  <span className={styles.docAiFeatureIcon}>✓</span>
+                  <span className={styles.docAiFeatureText}>Propiedad intelectual y cesión de derechos 100% exclusiva para el doctor.</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Interactive Demo Showcase */}
+          <section className={styles.docDemoSection}>
+            <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+              <div className={styles.docPillarBadge}>DEMOSTRADOR DE ENTREGABLES</div>
+              <h2 className={styles.docSectionTitle} style={{ fontSize: '28px' }}>
+                Estructura de Formatos <span className={styles.docEditorialSerif}>en Cada Publicación</span>
+              </h2>
+            </div>
+
+            <div className={styles.docDemoTabs}>
+              <button
+                onClick={() => setActiveDemoTab('feed')}
+                className={`${styles.docDemoTabBtn} ${activeDemoTab === 'feed' ? styles.docDemoTabBtnActive : ''}`}
+              >
+                <span>🖼️ 20 Diseños Feed (4:5)</span>
+              </button>
+              <button
+                onClick={() => setActiveDemoTab('stories')}
+                className={`${styles.docDemoTabBtn} ${activeDemoTab === 'stories' ? styles.docDemoTabBtnActive : ''}`}
+              >
+                <span>📱 20 Stories (9:16)</span>
+              </button>
+              <button
+                onClick={() => setActiveDemoTab('reels')}
+                className={`${styles.docDemoTabBtn} ${activeDemoTab === 'reels' ? styles.docDemoTabBtnActive : ''}`}
+              >
+                <span>🎬 1 Reel Mensual (Video)</span>
+              </button>
+              <button
+                onClick={() => setActiveDemoTab('ia_engine')}
+                className={`${styles.docDemoTabBtn} ${activeDemoTab === 'ia_engine' ? styles.docDemoTabBtnActive : ''}`}
+              >
+                <span>🧬 Motor de IA Generativa</span>
+              </button>
+            </div>
+
+            <div className={styles.docDemoContent}>
+              {activeDemoTab === 'feed' && (
+                <>
+                  <div className={styles.docDemoMockupCard}>
+                    <div className={styles.docDemoMockupHeader}>
+                      <span style={{ fontSize: '12px', color: '#5EEAD4', fontWeight: 800 }}>POST 01/20 · FEED EDUCATIVO (4:5)</span>
+                      <span style={{ fontSize: '11px', color: '#94A3B8' }}>Instagram / Facebook</span>
+                    </div>
+                    <div style={{ background: '#1E293B', borderRadius: '14px', padding: '20px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+                      <div style={{ fontSize: '10px', color: '#5EEAD4', fontWeight: 800, textTransform: 'uppercase', marginBottom: '6px' }}>
+                        🧬 SALUD METABÓLICA & CIRUGÍA
+                      </div>
+                      <div style={{ fontSize: '17px', fontWeight: 800, color: '#FFFFFF', marginBottom: '12px', lineHeight: 1.25 }}>
+                        ¿Manga o Bypass Gástrico? Conoce cuál es el procedimiento ideal para tu IMC.
+                      </div>
+                      <div style={{ fontSize: '12px', color: '#94A3B8', lineHeight: 1.45, marginBottom: '16px' }}>
+                        • <strong>Manga Gástrica:</strong> Reducción del 80% del estómago y control de la hormona grelina.<br/>
+                        • <strong>Bypass Gástrico:</strong> Procedimiento mixto para pacientes con diabetes y reflujo severo.
+                      </div>
+                      <div style={{ padding: '8px 12px', background: 'rgba(13, 148, 136, 0.2)', borderRadius: '8px', border: '1px solid rgba(13, 148, 136, 0.4)', fontSize: '11px', color: '#5EEAD4', fontWeight: 700 }}>
+                        📍 Dr. Elmo Aramburo · Star Médica Juárez · Consultorio 412
+                      </div>
+                    </div>
+                  </div>
+                  <div className={styles.docDemoDetails}>
+                    <div className={styles.docDemoDetailBadge}>ENTREGABLE 01</div>
+                    <h3 className={styles.docDemoDetailTitle}>20 Publicaciones Educativas al Mes</h3>
+                    <p className={styles.docDemoDetailText}>
+                      Diseñadas en formato vertical 4:5 (el de mayor área visible en el feed de Instagram y Facebook). Enfocadas en resolver dudas de pacientes, nutrición bariátrica, preparativos prequirúrgicos y beneficios a largo plazo.
+                    </p>
+                    <div className={styles.docDemoSpecList}>
+                      <div className={styles.docDemoSpecItem}><span>✓</span> 20 artes originales al mes con IA generativa.</div>
+                      <div className={styles.docDemoSpecItem}><span>✓</span> Tipografía médica de alta legibilidad y jerarquía visual.</div>
+                      <div className={styles.docDemoSpecItem}><span>✓</span> Copywriting médico y llamados directos a WhatsApp.</div>
+                    </div>
+                  </div>
+                </>
+              )}
+
+              {activeDemoTab === 'stories' && (
+                <>
+                  <div className={styles.docDemoMockupCard}>
+                    <div className={styles.docDemoMockupHeader}>
+                      <span style={{ fontSize: '12px', color: '#5EEAD4', fontWeight: 800 }}>STORY 01/20 · FORMATO VERTICAL (9:16)</span>
+                      <span style={{ fontSize: '11px', color: '#94A3B8' }}>24 Horas Activa</span>
+                    </div>
+                    <div style={{ background: '#1E293B', borderRadius: '14px', padding: '24px 20px', border: '1px solid rgba(255, 255, 255, 0.08)', textAlign: 'center' }}>
+                      <div style={{ width: '40px', height: '4px', background: 'rgba(255, 255, 255, 0.2)', borderRadius: '100px', margin: '0 auto 16px auto' }}></div>
+                      <div style={{ fontSize: '11px', color: '#5EEAD4', fontWeight: 800, marginBottom: '6px' }}>📊 ENCUESTA INTERACTIVA</div>
+                      <div style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF', marginBottom: '16px' }}>
+                        ¿Sabías que la cirugía bariátrica puede revertir la Diabetes Tipo 2 en semanas?
+                      </div>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px' }}>
+                        <div style={{ padding: '10px', background: 'rgba(13, 148, 136, 0.3)', border: '1px solid #0D9488', borderRadius: '10px', fontSize: '12px', fontWeight: 700, color: '#FFFFFF' }}>
+                          ¡No lo sabía! Quiero información (82%)
+                        </div>
+                        <div style={{ padding: '10px', background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: '10px', fontSize: '12px', color: '#94A3B8' }}>
+                          Ya lo había escuchado (18%)
+                        </div>
+                      </div>
+                      <div style={{ fontSize: '11px', color: '#CBD5E1' }}>💬 Responde esta historia para agendar tu consulta</div>
+                    </div>
+                  </div>
+                  <div className={styles.docDemoDetails}>
+                    <div className={styles.docDemoDetailBadge}>ENTREGABLE 02</div>
+                    <h3 className={styles.docDemoDetailTitle}>20 Adaptaciones a Stories al Mes</h3>
+                    <p className={styles.docDemoDetailText}>
+                      Adaptación de los 20 temas a formato pantalla completa (9:16) con stickers interactivos de encuestas, cajas de preguntas y botones de enlace directo al WhatsApp del consultorio.
+                    </p>
+                    <div className={styles.docDemoSpecList}>
+                      <div className={styles.docDemoSpecItem}><span>✓</span> Formato 1080 × 1920 px vertical optimizado para móviles.</div>
+                      <div className={styles.docDemoSpecItem}><span>✓</span> Incremento constante de mensajes directos (DMs) de prospectos.</div>
+                      <div className={styles.docDemoSpecItem}><span>✓</span> Recordatorios de consulta y disponibilidad en Star Médica.</div>
+                    </div>
+                  </div>
+                </>
+              )}
+
+              {activeDemoTab === 'reels' && (
+                <>
+                  <div className={styles.docDemoMockupCard}>
+                    <div className={styles.docDemoMockupHeader}>
+                      <span style={{ fontSize: '12px', color: '#5EEAD4', fontWeight: 800 }}>REEL MENSUAL · VIDEO CORTO (9:16)</span>
+                      <span style={{ fontSize: '11px', color: '#94A3B8' }}>00:45 min · HD</span>
+                    </div>
+                    <div style={{ background: '#1E293B', borderRadius: '14px', padding: '24px 20px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
+                        <span style={{ background: '#EF4444', color: '#FFFFFF', fontSize: '10px', fontWeight: 800, padding: '2px 8px', borderRadius: '4px' }}>REC 4K</span>
+                        <span style={{ fontSize: '11px', color: '#94A3B8' }}>Star Médica Juárez</span>
+                      </div>
+                      <div style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF', marginBottom: '8px' }}>
+                        "3 cosas que cambian en tu vida durante los primeros 30 días post-manga gástrica..."
+                      </div>
+                      <div style={{ padding: '12px', background: 'rgba(0, 0, 0, 0.4)', borderRadius: '10px', borderLeft: '3px solid #5EEAD4', fontSize: '12px', color: '#E2E8F0', marginBottom: '14px' }}>
+                        🎬 Subtítulos dinámicos de alta retención palabra por palabra + corrección de color y audio clínico profesional.
+                      </div>
+                      <div style={{ fontSize: '11.5px', color: '#5EEAD4', fontWeight: 700 }}>
+                        ▶️ Optimizado para Reels, TikTok y YouTube Shorts
+                      </div>
+                    </div>
+                  </div>
+                  <div className={styles.docDemoDetails}>
+                    <div className={styles.docDemoDetailBadge}>ENTREGABLE 03</div>
+                    <h3 className={styles.docDemoDetailTitle}>1 Reel Producido y Editado al Mes</h3>
+                    <p className={styles.docDemoDetailText}>
+                      Cápsula audiovisual de alto impacto para potenciar el alcance orgánico y la autoridad médica del Dr. Elmo Aramburo, mostrando instalaciones, tecnología laparoscópica y trato humano.
+                    </p>
+                    <div className={styles.docDemoSpecList}>
+                      <div className={styles.docDemoSpecItem}><span>✓</span> Edición dinámica con subtítulos animados estilo viral.</div>
+                      <div className={styles.docDemoSpecItem}><span>✓</span> Tomas de consultorio, quirófano y explicaciones médicas.</div>
+                      <div className={styles.docDemoSpecItem}><span>✓</span> Distribución multiplataforma (Instagram, TikTok, Shorts).</div>
+                    </div>
+                  </div>
+                </>
+              )}
+
+              {activeDemoTab === 'ia_engine' && (
+                <>
+                  <div className={styles.docDemoMockupCard}>
+                    <div className={styles.docDemoMockupHeader}>
+                      <span style={{ fontSize: '12px', color: '#5EEAD4', fontWeight: 800 }}>MOTOR DE IA GENERATIVA DE VANGUARDIA</span>
+                      <span style={{ fontSize: '11px', color: '#94A3B8' }}>Midjourney v6 + GPT</span>
+                    </div>
+                    <div style={{ background: '#1E293B', borderRadius: '14px', padding: '20px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+                      <div style={{ fontSize: '11px', color: '#94A3B8', marginBottom: '8px' }}>
+                        1. INGENIERÍA DE PROMPTS CLÍNICOS:
+                      </div>
+                      <div style={{ background: '#0F172A', padding: '10px 12px', borderRadius: '8px', fontSize: '11px', color: '#5EEAD4', fontFamily: 'monospace', marginBottom: '12px', lineHeight: 1.4 }}>
+                        "Hyperrealistic surgical illustration of laparoscopic bariatric sleeve, clean medical lighting, 85mm lens, anatomical precision, modern clinical aesthetic..."
+                      </div>
+                      <div style={{ fontSize: '11px', color: '#94A3B8', marginBottom: '4px' }}>
+                        2. CURADURÍA Y RETOQUE HUMANO:
+                      </div>
+                      <div style={{ fontSize: '12px', color: '#FFFFFF', lineHeight: 1.45 }}>
+                        Nuestros directores de arte verifican la exactitud anatómica, corrigen detalles y aplican la tipografía y paleta oficial del Dr. Elmo Aramburo.
+                      </div>
+                    </div>
+                  </div>
+                  <div className={styles.docDemoDetails}>
+                    <div className={styles.docDemoDetailBadge}>TECNOLOGÍA APOLOGRAMA</div>
+                    <h3 className={styles.docDemoDetailTitle}>IA Generativa Supervisada por Diseñadores</h3>
+                    <p className={styles.docDemoDetailText}>
+                      Combinamos la velocidad y potencia de los modelos generativos más avanzados con el criterio visual y la precisión quirúrgica de diseñadores humanos, logrando un estándar visual superior.
+                    </p>
+                    <div className={styles.docDemoSpecList}>
+                      <div className={styles.docDemoSpecItem}><span>✓</span> Cero fotografías de stock genéricas o repetitivas.</div>
+                      <div className={styles.docDemoSpecItem}><span>✓</span> Renders anatómicos y conceptuales a la medida.</div>
+                      <div className={styles.docDemoSpecItem}><span>✓</span> Máxima coherencia de marca y prestigio profesional.</div>
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+          </section>
+
+          {/* Pricing Section with Annual vs Monthly Toggle */}
+          <section id="propuesta-economica" className={styles.docPricingSection}>
+            <div className={styles.docSectionHeader}>
+              <div className={styles.docPillarBadge}>OPCIONES DE CONTRATACIÓN</div>
+              <h2 className={styles.docSectionTitle}>
+                Propuesta Económica <span className={styles.docEditorialSerif}>Transparente</span>
+              </h2>
+              <p className={styles.docSectionSubtext}>
+                Selecciona la modalidad de pago que mejor se adapte al flujo y planeación del consultorio:
+              </p>
+            </div>
+
+            {/* Interactive Billing Selector Toggle */}
+            <div className={styles.docBillingToggleWrapper}>
+              <div className={styles.docBillingToggleBox}>
+                <button
+                  onClick={() => setBillingOption('annual')}
+                  className={`${styles.docBillingToggleBtn} ${billingOption === 'annual' ? styles.docBillingToggleBtnActive : ''}`}
+                >
+                  <span>⭐ PAGO ANUAL ANTICIPADO</span>
+                  <span className={styles.docDiscountPill}>16.7% OFF</span>
+                </button>
+                <button
+                  onClick={() => setBillingOption('monthly')}
+                  className={`${styles.docBillingToggleBtn} ${billingOption === 'monthly' ? styles.docBillingToggleBtnActive : ''}`}
+                >
+                  <span>📅 PAGO MENSUAL RECURRENTE</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Pricing Cards Grid */}
+            <div className={styles.docPricingGrid}>
+              {/* Option 1: Annual Plan (Featured) */}
+              <div
+                onClick={() => setBillingOption('annual')}
+                className={`${styles.docPriceCard} ${styles.docPriceCardFeatured} ${billingOption === 'annual' ? styles.docPriceCardSelected : ''}`}
+              >
+                <div className={styles.docFeaturedRibbon}>
+                  ⭐ MEJOR VALOR · RECOMENDADO
+                </div>
+
+                <div className={styles.docPriceHeader}>
+                  <div>
+                    <h3 className={styles.docPricePlanName}>Plan Anual Anticipado</h3>
+                    <p className={styles.docPricePlanDesc}>Cobertura total de 12 meses de marketing médico continuo</p>
+                  </div>
+                  <div className={`${styles.docCustomRadio} ${billingOption === 'annual' ? styles.docCustomRadioChecked : ''}`}>
+                    {billingOption === 'annual' && '✓'}
+                  </div>
+                </div>
+
+                <div className={styles.docPriceAmountBox}>
+                  <div style={{ display: 'flex', alignItems: 'baseline' }}>
+                    <span className={styles.docPriceNumber}>{formatPrice(annualPrice)}</span>
+                    <span className={styles.docPricePeriod}>+ IVA / año</span>
+                  </div>
+                  <div className={styles.docPriceMonthlyEquiv}>
+                    <span>⚡ Equivalente a:</span>
+                    <strong>{formatPrice(annualMonthlyEquiv)} / mes</strong>
+                  </div>
+                  <div className={styles.docSavingsBadge}>
+                    <span>🔥</span>
+                    <span>Ahorro de $24,000.00 MXN al año ({annualSavingsPercent}% de Descuento)</span>
+                  </div>
+                </div>
+
+                <div className={styles.docDeliverablesList}>
+                  <div className={styles.docDeliverableItem}>
+                    <span className={styles.docCheckIcon}>✓</span>
+                    <span><strong>20 Diseños Mensuales para Feed</strong> (Infografías médicas, salud metabólica, mitos y recetas).</span>
+                  </div>
+                  <div className={styles.docDeliverableItem}>
+                    <span className={styles.docCheckIcon}>✓</span>
+                    <span><strong>20 Adaptaciones a Stories (9:16)</strong> optimizadas con llamados a agendar cita.</span>
+                  </div>
+                  <div className={styles.docDeliverableItem}>
+                    <span className={styles.docCheckIcon}>✓</span>
+                    <span><strong>1 Reel Mensual</strong> Producido y Editado con subtítulos animados de alta retención.</span>
+                  </div>
+                  <div className={styles.docDeliverableItem}>
+                    <span className={styles.docCheckIcon}>✓</span>
+                    <span><strong>Creación Visual con Modelos de IA</strong> generativa de última generación.</span>
+                  </div>
+                  <div className={styles.docDeliverableItem}>
+                    <span className={styles.docCheckIcon}>✓</span>
+                    <span><strong>Supervisión y Retoque por Diseñadores</strong> profesionales de Apolograma.</span>
+                  </div>
+                  <div className={styles.docDeliverableItem}>
+                    <span className={styles.docCheckIcon}>✓</span>
+                    <span><strong>Parrillas Quincenales</strong> de contenido para revisión y aprobación previa del doctor.</span>
+                  </div>
+                </div>
+
+                <button className={styles.docBtnPrimary} style={{ width: '100%', justifyContent: 'center' }}>
+                  <span>{billingOption === 'annual' ? 'OPCIÓN SELECCIONADA ✓' : 'SELECCIONAR PLAN ANUAL'}</span>
+                </button>
+              </div>
+
+              {/* Option 2: Monthly Plan */}
+              <div
+                onClick={() => setBillingOption('monthly')}
+                className={`${styles.docPriceCard} ${billingOption === 'monthly' ? styles.docPriceCardSelected : ''}`}
+              >
+                <div className={styles.docPriceHeader}>
+                  <div>
+                    <h3 className={styles.docPricePlanName}>Plan Mensual Recurrente</h3>
+                    <p className={styles.docPricePlanDesc}>Flexibilidad mes a mes sin compromiso forzoso anual</p>
+                  </div>
+                  <div className={`${styles.docCustomRadio} ${billingOption === 'monthly' ? styles.docCustomRadioChecked : ''}`}>
+                    {billingOption === 'monthly' && '✓'}
+                  </div>
+                </div>
+
+                <div className={styles.docPriceAmountBox}>
+                  <div style={{ display: 'flex', alignItems: 'baseline' }}>
+                    <span className={styles.docPriceNumber}>{formatPrice(monthlyPrice)}</span>
+                    <span className={styles.docPricePeriod}>+ IVA / mes</span>
+                  </div>
+                  <div style={{ fontSize: '13px', color: '#64748B', marginTop: '6px' }}>
+                    Facturación recurrente mensual con CFDI
+                  </div>
+                </div>
+
+                <div className={styles.docDeliverablesList}>
+                  <div className={styles.docDeliverableItem}>
+                    <span className={styles.docCheckIcon}>✓</span>
+                    <span><strong>20 Diseños Mensuales para Feed</strong> (Infografías médicas, salud metabólica, mitos y recetas).</span>
+                  </div>
+                  <div className={styles.docDeliverableItem}>
+                    <span className={styles.docCheckIcon}>✓</span>
+                    <span><strong>20 Adaptaciones a Stories (9:16)</strong> optimizadas con llamados a agendar cita.</span>
+                  </div>
+                  <div className={styles.docDeliverableItem}>
+                    <span className={styles.docCheckIcon}>✓</span>
+                    <span><strong>1 Reel Mensual</strong> Producido y Editado con subtítulos animados de alta retención.</span>
+                  </div>
+                  <div className={styles.docDeliverableItem}>
+                    <span className={styles.docCheckIcon}>✓</span>
+                    <span><strong>Creación Visual con Modelos de IA</strong> generativa de última generación.</span>
+                  </div>
+                  <div className={styles.docDeliverableItem}>
+                    <span className={styles.docCheckIcon}>✓</span>
+                    <span><strong>Supervisión y Retoque por Diseñadores</strong> profesionales de Apolograma.</span>
+                  </div>
+                  <div className={styles.docDeliverableItem}>
+                    <span className={styles.docCheckIcon}>✓</span>
+                    <span><strong>Flexibilidad</strong> de pago mes con mes sin plazos forzosos.</span>
+                  </div>
+                </div>
+
+                <button className={styles.docBtnSecondary} style={{ width: '100%', justifyContent: 'center' }}>
+                  <span>{billingOption === 'monthly' ? 'OPCIÓN SELECCIONADA ✓' : 'SELECCIONAR PLAN MENSUAL'}</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Transparency Cards */}
+            <div className={styles.docTermsGrid}>
+              <div className={styles.docTermCard}>
+                <div className={styles.docTermIconBubble}>🧬</div>
+                <h4 className={styles.docTermTitle}>Supervisión de IA Humana</h4>
+                <p className={styles.docTermText}>
+                  Toda pieza visual es generada con los modelos más potentes de IA y perfeccionada manualmente por diseñadores.
+                </p>
+              </div>
+
+              <div className={styles.docTermCard}>
+                <div className={styles.docTermIconBubble}>📅</div>
+                <h4 className={styles.docTermTitle}>Calendarios Quincenales</h4>
+                <p className={styles.docTermText}>
+                  Entregas organizadas con anticipación para revisión, retroalimentación y aprobación previa del Dr. Elmo Aramburo.
+                </p>
+              </div>
+
+              <div className={styles.docTermCard}>
+                <div className={styles.docTermIconBubble}>🛡️</div>
+                <h4 className={styles.docTermTitle}>Derechos 100% Exclusivos</h4>
+                <p className={styles.docTermText}>
+                  Todos los artes, composiciones gráficas y videos son propiedad intelectual exclusiva de la marca del doctor.
+                </p>
+              </div>
+
+              <div className={styles.docTermCard}>
+                <div className={styles.docTermIconBubble}>🧾</div>
+                <h4 className={styles.docTermTitle}>Facturación Fiscal (CFDI)</h4>
+                <p className={styles.docTermText}>
+                  Emisión formal de facturas fiscales deducibles al 100% como gastos de publicidad y mercadotecnia médica.
+                </p>
+              </div>
+            </div>
+
+            {/* Summary Box & WhatsApp Call to Action */}
+            <div className={styles.docSummaryBox}>
+              <div className={styles.docSummaryLeft}>
+                <div className={styles.docSummaryBadge}>📋 RESUMEN DE MODALIDAD SELECCIONADA</div>
+                <h3 className={styles.docSummaryTitle}>
+                  {billingOption === 'annual' ? 'Plan Anual con 16.7% de Descuento' : 'Plan Mensual Recurrente'}
+                </h3>
+                <p className={styles.docSummaryDesc}>
+                  {billingOption === 'annual'
+                    ? 'Pago anual anticipado de $120,000 MXN (+ IVA). Incluye 240 diseños para Feed, 240 Stories y 12 Reels durante el año, ahorrando $24,000 MXN frente al esquema mensual.'
+                    : 'Pago mensual de $12,000 MXN (+ IVA). Incluye 20 diseños para Feed, 20 Stories y 1 Reel mensual, con renovación y flexibilidad mes a mes.'}
+                </p>
+                <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginTop: '6px' }}>
+                  <span style={{ background: 'rgba(255, 255, 255, 0.1)', padding: '4px 12px', borderRadius: '100px', fontSize: '12px', color: '#5EEAD4' }}>✓ 20 Diseños Feed/mes</span>
+                  <span style={{ background: 'rgba(255, 255, 255, 0.1)', padding: '4px 12px', borderRadius: '100px', fontSize: '12px', color: '#5EEAD4' }}>✓ 20 Stories/mes</span>
+                  <span style={{ background: 'rgba(255, 255, 255, 0.1)', padding: '4px 12px', borderRadius: '100px', fontSize: '12px', color: '#5EEAD4' }}>✓ 1 Reel Mensual</span>
+                  <span style={{ background: 'rgba(255, 255, 255, 0.1)', padding: '4px 12px', borderRadius: '100px', fontSize: '12px', color: '#5EEAD4' }}>✓ IA Supervisada</span>
+                </div>
+              </div>
+
+              <div className={styles.docSummaryRight}>
+                <div>
+                  <div className={styles.docSummaryTotalLabel}>INVERSIÓN TOTAL {billingOption === 'annual' ? 'ANUAL' : 'MENSUAL'}</div>
+                  <div className={styles.docSummaryTotalValue}>{formatPrice(currentPrice)}</div>
+                  <div className={styles.docSummaryTotalSub}>
+                    Total con I.V.A. (16%): <strong>{formatPrice(currentPriceWithIva)}</strong>
+                  </div>
+                </div>
+
+                <a
+                  href={waUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.docWhatsAppBtn}
+                >
+                  <span>📱 APROBAR PLAN POR WHATSAPP</span>
+                </a>
+              </div>
+            </div>
+          </section>
+
+          {/* Minimalist Medical Brand Footer */}
+          <footer className={styles.docFooter}>
+            <div className={styles.docFooterLinks}>
+              <a href="#">Términos de Servicio</a>
+              <span>·</span>
+              <a href="#">Apolograma Medical Growth</a>
+              <span>·</span>
+              <a href="#">Frontera Número Uno</a>
+              <span>·</span>
+              <a href={`tel:${data.contact?.phone || '526561031571'}`}>Contacto Directo: 656-103-1571</a>
+            </div>
+            <p style={{ margin: 0, opacity: 0.7 }}>
+              © 2026 Apolograma & Frontera Número Uno. Estrategia desarrollada exclusivamente para el Dr. Elmo Aramburo (Star Médica Juárez).
+            </p>
+          </footer>
+        </div>
+      </div>
+    );
+  }
+
   const isKodiAura = data.themeTemplate === 'kodi-aura' || data.theme?.name?.toLowerCase().includes('kodi') || data.theme?.name?.toLowerCase().includes('aura');
 
   if (isKodiAura) {

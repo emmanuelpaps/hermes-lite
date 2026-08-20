@@ -1,169 +1,130 @@
 {
   "clientName": "Dr. Elmo Aramburo",
   "clientLogo": "/assets/dr-elmo-aramburo/doctor-portrait.jpg",
-  "industry": "Cirugía Bariátrica y Laparoscópica",
-  "heroText": "Ecosistema digital completo para potenciar la consulta y la autoridad médica del Dr. Elmo Aramburo. Integramos planeación estratégica de marca, un asistente de IA por WhatsApp 24/7 con pre-calificación metabólica, diseño médico educativo y pautas editoriales periódicas en la red de Frontera Número Uno.",
-  "themeTemplate": "vercel",
+  "industry": "Cirugía Bariátrica & Laparoscópica · Star Médica",
+  "heroText": "Estrategia de marketing médico y producción visual de alto impacto para el Dr. Elmo Aramburo. Generación mensual de 20 diseños educativos para Feed, 20 adaptaciones verticales a Stories (9:16) y 1 Reel mensual, utilizando los modelos de Inteligencia Artificial generativa más potentes del mercado, supervisados y perfeccionados por directores de arte de Apolograma.",
+  "themeTemplate": "doctor-aura",
   "theme": {
+    "name": "Doctor Aura",
     "mode": "light",
-    "primary": "#00BBAF",
-    "primaryColor": "#00BBAF",
-    "fontHeading": "'Geist', 'Inter', sans-serif",
-    "fontBody": "'Geist', 'Inter', sans-serif",
-    "bgColor": "#fdfcfb",
-    "textColor": "#2b2d30",
-    "mutedText": "#5c677d",
-    "textGradient": "linear-gradient(to right, #00BBAF, #007D75)",
-    "surfaceGlass": "rgba(255, 255, 255, 0.8)",
-    "glassBorder": "rgba(0, 187, 175, 0.15)",
-    "clientLogoStyle": "split"
+    "primaryColor": "#0D9488",
+    "bgColor": "#F8FAF9",
+    "textColor": "#0F172A",
+    "mutedText": "#475569",
+    "surfaceGlass": "rgba(255, 255, 255, 0.85)",
+    "glassBorder": "rgba(13, 148, 136, 0.12)",
+    "borderRadius": "24px",
+    "primary": "#0D9488"
   },
   "config": {
     "currency": "MXN",
     "locale": "es-MX",
-    "priceSuffix": "INVERSIÓN + IVA",
-    "enableCurrencyToggle": true,
-    "exchangeRate": 20
+    "priceSuffix": "(+ IVA)",
+    "agency": "joint"
+  },
+  "contact": {
+    "phone": "526561031571",
+    "message": "¡Hola Emmanuel! Revisamos la propuesta de Marketing Médico con IA para el Dr. Elmo Aramburo. ¿Cuáles son los siguientes pasos para iniciar?"
   },
   "features": {
     "showEcosystem": false,
-    "showAudiences": true,
+    "showAudiences": false,
     "showPricing": true,
     "disableSelection": false,
-    "disableAccordion": true,
+    "disableAccordion": false,
     "hideModularMethodology": false
   },
   "meta": {
-    "title": "Propuesta Médica Digital | Dr. Elmo Aramburo",
-    "description": "Ecosistema integrado de automatización por WhatsApp, diseño médico y posicionamiento editorial con Frontera Número Uno para el Dr. Elmo Aramburo.",
-    "ogImage": "/assets/fn1-logo-stacked.png"
+    "title": "Dr. Elmo Aramburo · Propuesta de Marketing Médico & IA Generativa",
+    "description": "Estrategia de Marketing Médico con IA: 20 Diseños para Feed, 20 Stories (9:16) y 1 Reel mensual, supervisados por diseñadores con modelos generativos de alta potencia.",
+    "ogImage": "/assets/dr-elmo-aramburo/og-image.png"
   },
   "hero": {
-    "headline": "Propuesta de Ecosistema Médico Digital",
-    "subheadline": "Automatización de Consulta, Diseño Educativo y Posicionamiento Editorial | Apolograma & Frontera Número Uno",
+    "headline": "Autoridad Médica y Pacientes con IA Generativa",
+    "subheadline": "Estrategia integral de contenidos: 20 diseños para Feed, 20 adaptaciones a Stories (9:16) y 1 Reel mensual. Creación visual con Inteligencia Artificial generativa de grado médico supervisada por diseñadores de Apolograma.",
     "backgroundImage": "/assets/dr-elmo-aramburo/hero-bg.jpg",
     "backgroundVideo": ""
   },
   "storytelling": {
+    "justification": {
+      "title": "Marketing Médico de Alta Precisión: Educación y Conversión de Pacientes",
+      "content": "Los pacientes de cirugía bariátrica requieren confianza absoluta, educación clara y derribo de mitos antes de dar el paso a una consulta de valoración. Esta estrategia combina dirección de arte médica y los modelos de IA generativa más avanzados para posicionar al Dr. Elmo Aramburo en Star Médica:",
+      "points": [
+        "**IA Generativa Supervisada por Diseñadores:** Creación de imágenes anatómicas, infografías nutricionales y situaciones clínicas hiperrealistas sin depender de bancos de imágenes genéricos.",
+        "**20 Diseños para Feed + 20 Stories:** Presencia diaria y educativa para resolver dudas sobre manga gástrica, bypass, recuperación y calidad de vida.",
+        "**1 Reel Mensual de Alta Retención:** Video dinámico con tomas en consultorio/quirófano y subtítulos animados para alcance orgánico y pauta."
+      ]
+    },
     "narrative": [
       {
-        "title": "PR y Autoridad en Frontera Número Uno",
-        "content": "Exposición inmediata ante más de 409,000 seguidores en la región. Las notas editoriales en Frontera Número Uno promedian 300,000 visualizaciones con una tasa de interacción del 4%, educando sobre salud metabólica y posicionando al Dr. Elmo Aramburo como el cirujano bariatra referente de la región.",
+        "title": "20 Diseños Mensuales para Feed con IA Generativa",
+        "content": "Composiciones gráficas de alto impacto visual orientadas a educar al paciente: infografías sobre la diferencia entre manga y bypass gástrico, platos y porciones postoperatorias, derribo de mitos de la cirugía bariátrica y consejos de salud metabólica. Todas las imágenes se generan con modelos de IA médica y son perfeccionadas por diseñadores profesionales.",
         "image": "/assets/dr-elmo-aramburo/narrative-1.jpg"
       },
       {
-        "title": "Diseño Gráfico & Planeación Estratégica",
-        "content": "Desarrollo de parrillas de contenidos estratégicas y diseño gráfico premium por parte de Apolograma. El objetivo es mantener a la audiencia educada sobre la obesidad, desmitificar mitos de la manga y bypass gástrico, y convertir seguidores en pacientes.",
+        "title": "20 Adaptaciones Verticales para Stories (9:16)",
+        "content": "Contenido diario optimizado para historias de Instagram y Facebook: encuestas de síntomas metabólicos, cajas de preguntas frecuentes, testimonios de progreso y llamados directos a agendar cita de valoración por WhatsApp en Star Médica.",
         "image": "/assets/dr-elmo-aramburo/narrative-2.jpg"
       },
       {
-        "title": "Asistente de IA 24/7 en WhatsApp",
-        "content": "Atención y pre-calificación 24/7. El asistente de IA en WhatsApp resuelve dudas frecuentes sobre la recuperación bariátrica (dieta líquida, papillas, sólidos) y calcula el Índice de Masa Corporal (IMC) de los prospectos al instante, liberando de carga a la asistente y enviando alertas urgentes a humanos.",
+        "title": "1 Reel Mensual de Alta Retención en Quirófano/Consultorio",
+        "content": "Producción y edición de video en formato corto (1080 x 1920 px) para Instagram Reels, TikTok y YouTube Shorts. Enfoque en instalaciones de Star Médica, tecnología laparoscópica avanzada, trato humano del Dr. Elmo Aramburo y respuestas a dudas clínicas comunes.",
         "image": "/assets/dr-elmo-aramburo/narrative-3.jpg"
+      },
+      {
+        "title": "Dirección de Arte & Modelos de IA Generativa de Vanguardia",
+        "content": "Implementamos los modelos de Inteligencia Artificial generativa más potentes de la industria (Midjourney v6, GPT Image y Flux) bajo la supervisión directa y curaduría de nuestro equipo de diseño. Esto garantiza precisión visual, elegancia quirúrgica y una identidad de marca médica irrepetible.",
+        "image": "/assets/dr-elmo-aramburo/doctor-portrait.jpg"
       }
     ],
-    "challenge": "Posicionar la autoridad del Dr. Elmo Aramburo en bariatría y laparoscopia, pre-calificar y educar pacientes automáticamente mediante WhatsApp IA 24/7 y consolidar su marca médica con diseño de alto nivel."
+    "challenge": "Consolidar la marca médica del Dr. Elmo Aramburo como el cirujano bariatra de referencia en Ciudad Juárez y El Paso, educando a prospectos calificados mediante contenido visual premium y video de alta retención."
   },
   "packages": {
-    "title": "Propuesta de Solución Integral",
-    "subtitle": "Selecciona los módulos y el periodo de iguala para estructurar el paquete médico del consultorio:",
-    "methodologyText": "Puedes iniciar con el plan esencial de atención y posicionamiento (Fase 1 y Fase 2) e integrar de forma modular los extras adicionales (como el CRM de Pacientes o producción de video) en el momento en que tu consultorio lo requiera.",
+    "title": "Propuesta de Inversión en Marketing Médico",
+    "subtitle": "Selecciona la modalidad de pago que mejor se adapte a la planeación de tu consultorio:",
+    "methodologyText": "El servicio incluye la creación y entrega mensual de 20 diseños para Feed, 20 adaptaciones a Stories (9:16) y 1 Reel mensual. Toda la producción visual es generada mediante modelos avanzados de IA y supervisada por directores de arte de Apolograma. El pago anual ofrece un 16.7% de descuento directo ($24,000 MXN de ahorro anual).",
     "fn1": [],
     "apolograma": [],
     "blocks": [
       {
-        "name": "Fase 1: Configuración e Implementación Inicial (Setup - Pago Único)",
+        "name": "Opciones de Contratación (Marketing Médico Integral)",
         "services": [
           {
-            "name": "Setup Inicial: Asistente de IA en WhatsApp Business",
-            "price": 18000,
-            "description": "Implementación técnica desde cero de la API oficial de WhatsApp de Meta, entrenamiento bariátrico/médico del bot y motor de alertas conversacionales.",
+            "name": "Plan Anual Anticipado (Mejor Valor · 16.7% OFF)",
+            "price": 120000,
+            "period": "anual (+ IVA)",
+            "monthlyEquivalent": "$10,000.00 MXN / mes",
+            "savings": "Ahorras $24,000.00 MXN al año",
+            "badge": "⭐ RECOMENDADO · 16.7% DESCUENTO",
+            "description": "Cobertura integral de 12 meses de marketing médico. Pago único anual de $120,000 MXN (equivalente a solo $10,000 MXN/mes).",
             "bullets": [
-              "Configuración y alta oficial de la API de WhatsApp Business en la cuenta del Dr.",
-              "Desarrollo del bot de IA entrenado en cirugía de manga gástrica, bypass gástrico e IMC.",
-              "Programación de alertas automáticas para casos de urgencia postoperatoria o prospectos de cirugía calificados."
-            ]
-          }
-        ]
-      },
-      {
-        "name": "Fase 2: Iguala Recurrente Mensual (Compromiso Mínimo de 12 Meses)",
-        "services": [
-          {
-            "name": "Opción A: Plan Esencial (12 Diseños Mensuales)",
-            "price": 24500,
-            "description": "Soporte técnico constante de IA, planeación de contenidos, 12 diseños gráficos educativos mensuales y 2 notas editoriales de Frontera.",
-            "bullets": [
-              "Mantenimiento, optimización y actualización del bot de WhatsApp 24/7.",
-              "Planeación mensual de contenidos educativos de salud metabólica por Apolograma.",
-              "12 Diseños Gráficos mensuales a la medida (infografías, recetas bariátricas, mitos).",
-              "2 Notas Editoriales de Cobertura al mes publicadas en Frontera Número Uno (salud y obesidad)."
+              "20 Diseños Mensuales para Feed (Infografías médicas, salud metabólica, mitos y recetas).",
+              "20 Adaptaciones Mensuales a Stories (9:16) con llamados a agendar consulta.",
+              "1 Reel Mensual Producido y Editado con subtitulaje dinámico de alta retención.",
+              "Creación Visual con Modelos de IA Generativa de última generación.",
+              "Supervisión, retoque y dirección de arte por el equipo de diseño de Apolograma.",
+              "Parrillas quincenales de contenido para revisión y visto bueno del doctor.",
+              "Ahorro directo de $24,000.00 MXN al año frente al esquema mensual."
             ]
           },
           {
-            "name": "Opción B: Plan Avanzado (20 Diseños Mensuales)",
-            "price": 28500,
-            "description": "Soporte premium de IA, planeación ampliada de contenidos, 20 diseños gráficos educativos mensuales y 2 notas editoriales de Frontera.",
+            "name": "Plan Mensual Recurrente (Flexibilidad Mes a Mes)",
+            "price": 12000,
+            "period": "mensual (+ IVA)",
+            "badge": "📅 MES A MES",
+            "description": "Gestión mensual continua de marketing médico y contenidos sin compromiso forzoso anual.",
             "bullets": [
-              "Mantenimiento, optimización y actualización del bot de WhatsApp 24/7.",
-              "Planeación mensual de marketing y contenidos de salud metabólica ampliada por Apolograma.",
-              "20 Diseños Gráficos mensuales a la medida (redes, folletos digitales, guías alimentarias).",
-              "2 Notas Editoriales de Cobertura al mes publicadas en Frontera Número Uno (salud y obesidad)."
-            ]
-          }
-        ]
-      },
-      {
-        "name": "Extras Opcionales (Con 20% de Descuento)",
-        "services": [
-          {
-            "name": "CRM de Pacientes: Setup Inicial",
-            "price": 15000,
-            "badge": "20% DESCUENTO",
-            "description": "Implementación, diseño de flujos y despliegue del portal CRM para el consultorio. Precio regular de lista: $18,750 MXN (20% de descuento exclusivo aplicado).",
-            "bullets": [
-              "Despliegue del CRM Patient Admin de Apolograma para control de expedientes bariátricos.",
-              "Configuración de accesos y roles para la asistente médica y nutrióloga.",
-              "Carga inicial de catálogos de cirugías (manga, bypass), seguimientos de peso y estatus posoperatorio."
-            ]
-          },
-          {
-            "name": "CRM de Pacientes: Licencia Mensual",
-            "price": 4000,
-            "badge": "20% DESCUENTO",
-            "description": "Licencia de uso y hosting en servidor dedicado en la nube para expedientes. Precio regular de lista: $5,000 MXN (20% de descuento exclusivo aplicado).",
-            "bullets": [
-              "Servidor cloud dedicado y base de datos con infraestructura de alta disponibilidad (incluido).",
-              "Respaldos automáticos diarios de expedientes, historiales y archivos del consultorio.",
-              "Seguridad SSL de grado médico y encriptación de datos de pacientes.",
-              "Actualizaciones automáticas del sistema y soporte técnico mensual incluido."
-            ]
-          },
-          {
-            "name": "Nota Editorial Extra de Cobertura en Frontera",
-            "price": 6000,
-            "badge": "20% DESCUENTO",
-            "description": "Nota editorial adicional para promover tratamientos especializados. Precio regular de lista: $7,500 MXN (20% de descuento exclusivo aplicado).",
-            "bullets": [
-              "Redacción profesional y publicación en portal de Frontera Número Uno.",
-              "Distribución optimizada en las redes sociales de Frontera.",
-              "Pauta digital segmentada local para tracción adicional."
-            ]
-          },
-          {
-            "name": "Video Reel Profesional (Star Médica)",
-            "price": 10000,
-            "badge": "20% DESCUENTO",
-            "description": "Producción in-situ en Star Médica de video promocional de alta definición. Precio regular de lista: $12,500 MXN (20% de descuento exclusivo aplicado).",
-            "bullets": [
-              "Grabación profesional en quirófano/consultorio con iluminación y audio de alta fidelidad.",
-              "Edición dinámica optimizada para formatos móviles (Instagram Reels, TikTok y YouTube Shorts).",
-              "Enfoque en instalaciones, tecnología laparoscópica y trato humano del Dr. Elmo Aramburo."
+              "20 Diseños Mensuales para Feed (Infografías médicas, salud metabólica, mitos y recetas).",
+              "20 Adaptaciones Mensuales a Stories (9:16) con llamados a agendar consulta.",
+              "1 Reel Mensual Producido y Editado con subtitulaje dinámico de alta retención.",
+              "Creación Visual con Modelos de IA Generativa de última generación.",
+              "Supervisión, retoque y dirección de arte por el equipo de diseño de Apolograma.",
+              "Parrillas quincenales de contenido para revisión y visto bueno del doctor.",
+              "Flexibilidad de pago mes con mes."
             ]
           }
         ]
       }
     ]
-  },
-  "discountPercent": 0
+  }
 }

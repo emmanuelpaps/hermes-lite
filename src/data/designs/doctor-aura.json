@@ -1,0 +1,12 @@
+{
+  "name": "Doctor Aura",
+  "mode": "light",
+  "primaryColor": "#0D9488",
+  "bgColor": "#F8FAF9",
+  "textColor": "#0F172A",
+  "mutedText": "#475569",
+  "surfaceGlass": "rgba(255, 255, 255, 0.85)",
+  "glassBorder": "rgba(13, 148, 136, 0.12)",
+  "borderRadius": "24px",
+  "primary": "#0D9488"
+}
