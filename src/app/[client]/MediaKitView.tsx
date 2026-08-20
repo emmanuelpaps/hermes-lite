@@ -1125,7 +1125,6 @@ export default function MediaKitView({ data }: { data: ClientData }) {
 
   if (isDoctorAura) {
     const [billingOption, setBillingOption] = useState<'annual' | 'monthly'>('annual');
-    const [activeDemoTab, setActiveDemoTab] = useState<'feed' | 'stories' | 'reels' | 'ia_engine'>('feed');
 
     const annualPrice = 120000;
     const monthlyPrice = 12000;
@@ -1247,7 +1246,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             </div>
 
             <div className={styles.docPillarsGrid}>
-              <div className={styles.docPillarCard} onClick={() => { setActiveDemoTab('feed'); const el = document.getElementById('doc-demostrador'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }}>
+              <div className={styles.docPillarCard}>
                 <div className={styles.docPillarCover}>
                   <img src="/assets/dr-elmo-aramburo/pillar-1-feed.jpg" alt="20 Diseños para Feed con IA" className={styles.docPillarCoverImg} />
                   <div className={styles.docPillarFormatBadge}>📐 4:5 FEED</div>
@@ -1260,7 +1259,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 <div className={styles.docPillarTag}>Formato 4:5 · 20 Posts/mes</div>
               </div>
 
-              <div className={styles.docPillarCard} onClick={() => { setActiveDemoTab('stories'); const el = document.getElementById('doc-demostrador'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }}>
+              <div className={styles.docPillarCard}>
                 <div className={styles.docPillarCover}>
                   <img src="/assets/dr-elmo-aramburo/pillar-2-stories.jpg" alt="20 Adaptaciones a Stories" className={styles.docPillarCoverImg} />
                   <div className={styles.docPillarFormatBadge}>📱 9:16 STORY</div>
@@ -1273,7 +1272,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 <div className={styles.docPillarTag}>Formato 9:16 · 20 Stories/mes</div>
               </div>
 
-              <div className={styles.docPillarCard} onClick={() => { setActiveDemoTab('reels'); const el = document.getElementById('doc-demostrador'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }}>
+              <div className={styles.docPillarCard}>
                 <div className={styles.docPillarCover}>
                   <img src="/assets/dr-elmo-aramburo/pillar-3-reels.jpg" alt="1 Reel Mensual de Alta Retención" className={styles.docPillarCoverImg} />
                   <div className={styles.docPillarFormatBadge}>🎬 4K REEL</div>
@@ -1286,7 +1285,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 <div className={styles.docPillarTag}>Video 9:16 · 1 Reel/mes</div>
               </div>
 
-              <div className={`${styles.docPillarCard} ${styles.docPillarCardFeatured}`} onClick={() => { setActiveDemoTab('ia_engine'); const el = document.getElementById('doc-demostrador'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }}>
+              <div className={`${styles.docPillarCard} ${styles.docPillarCardFeatured}`}>
                 <div className={styles.docPillarCover}>
                   <img src="/assets/dr-elmo-aramburo/pillar-4-ai.jpg" alt="Modelos de IA Supervisados" className={styles.docPillarCoverImg} />
                   <div className={styles.docPillarFormatBadge} style={{ background: 'rgba(13, 148, 136, 0.85)', color: '#FFFFFF' }}>🧬 AI-CORE 100%</div>
@@ -1323,205 +1322,6 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                   <span className={styles.docAiFeatureText}>Propiedad intelectual y cesión de derechos 100% exclusiva para el doctor.</span>
                 </div>
               </div>
-            </div>
-          </section>
-
-          {/* Interactive Demo Showcase */}
-          <section id="doc-demostrador" className={styles.docDemoSection}>
-            <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-              <div className={styles.docPillarBadge}>DEMOSTRADOR DE ENTREGABLES</div>
-              <h2 className={styles.docSectionTitle} style={{ fontSize: '28px' }}>
-                Estructura de Formatos <span className={styles.docEditorialSerif}>en Cada Publicación</span>
-              </h2>
-            </div>
-
-            <div className={styles.docDemoTabs}>
-              <button
-                onClick={() => setActiveDemoTab('feed')}
-                className={`${styles.docDemoTabBtn} ${activeDemoTab === 'feed' ? styles.docDemoTabBtnActive : ''}`}
-              >
-                <span>🖼️ 20 Diseños Feed (4:5)</span>
-              </button>
-              <button
-                onClick={() => setActiveDemoTab('stories')}
-                className={`${styles.docDemoTabBtn} ${activeDemoTab === 'stories' ? styles.docDemoTabBtnActive : ''}`}
-              >
-                <span>📱 20 Stories (9:16)</span>
-              </button>
-              <button
-                onClick={() => setActiveDemoTab('reels')}
-                className={`${styles.docDemoTabBtn} ${activeDemoTab === 'reels' ? styles.docDemoTabBtnActive : ''}`}
-              >
-                <span>🎬 1 Reel Mensual (Video)</span>
-              </button>
-              <button
-                onClick={() => setActiveDemoTab('ia_engine')}
-                className={`${styles.docDemoTabBtn} ${activeDemoTab === 'ia_engine' ? styles.docDemoTabBtnActive : ''}`}
-              >
-                <span>🧬 Motor de IA Generativa</span>
-              </button>
-            </div>
-
-            <div className={styles.docDemoContent}>
-              {activeDemoTab === 'feed' && (
-                <>
-                  <div className={styles.docDemoMockupCard}>
-                    <div className={styles.docDemoMockupHeader}>
-                      <span style={{ fontSize: '12px', color: '#5EEAD4', fontWeight: 800 }}>POST 01/20 · FEED EDUCATIVO (4:5)</span>
-                      <span style={{ fontSize: '11px', color: '#94A3B8' }}>Instagram / Facebook</span>
-                    </div>
-                    <div style={{ borderRadius: '14px', overflow: 'hidden', marginBottom: '14px', height: '180px' }}>
-                      <img src="/assets/dr-elmo-aramburo/pillar-1-feed.jpg" alt="Feed Post Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    </div>
-                    <div style={{ background: '#1E293B', borderRadius: '14px', padding: '18px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
-                      <div style={{ fontSize: '10px', color: '#5EEAD4', fontWeight: 800, textTransform: 'uppercase', marginBottom: '6px' }}>
-                        🧬 SALUD METABÓLICA & CIRUGÍA
-                      </div>
-                      <div style={{ fontSize: '16px', fontWeight: 800, color: '#FFFFFF', marginBottom: '10px', lineHeight: 1.25 }}>
-                        ¿Manga o Bypass Gástrico? Conoce cuál es el procedimiento ideal para tu IMC.
-                      </div>
-                      <div style={{ fontSize: '12px', color: '#94A3B8', lineHeight: 1.45, marginBottom: '14px' }}>
-                        • <strong>Manga Gástrica:</strong> Reducción del 80% del estómago y control de la grelina.<br/>
-                        • <strong>Bypass Gástrico:</strong> Procedimiento mixto para pacientes con reflujo o diabetes.
-                      </div>
-                      <div style={{ padding: '8px 12px', background: 'rgba(13, 148, 136, 0.2)', borderRadius: '8px', border: '1px solid rgba(13, 148, 136, 0.4)', fontSize: '11px', color: '#5EEAD4', fontWeight: 700 }}>
-                        📍 Dr. Elmo Aramburo · Star Médica Juárez · Consultorio 412
-                      </div>
-                    </div>
-                  </div>
-                  <div className={styles.docDemoDetails}>
-                    <div className={styles.docDemoDetailBadge}>ENTREGABLE 01</div>
-                    <h3 className={styles.docDemoDetailTitle}>20 Publicaciones Educativas al Mes</h3>
-                    <p className={styles.docDemoDetailText}>
-                      Diseñadas en formato vertical 4:5 (el de mayor área visible en el feed de Instagram y Facebook). Enfocadas en resolver dudas de pacientes, nutrición bariátrica, preparativos prequirúrgicos y beneficios a largo plazo.
-                    </p>
-                    <div className={styles.docDemoSpecList}>
-                      <div className={styles.docDemoSpecItem}><span>✓</span> 20 artes originales al mes con IA generativa.</div>
-                      <div className={styles.docDemoSpecItem}><span>✓</span> Tipografía médica de alta legibilidad y jerarquía visual.</div>
-                      <div className={styles.docDemoSpecItem}><span>✓</span> Copywriting médico y llamados directos a WhatsApp.</div>
-                    </div>
-                  </div>
-                </>
-              )}
-
-              {activeDemoTab === 'stories' && (
-                <>
-                  <div className={styles.docDemoMockupCard}>
-                    <div className={styles.docDemoMockupHeader}>
-                      <span style={{ fontSize: '12px', color: '#5EEAD4', fontWeight: 800 }}>STORY 01/20 · FORMATO VERTICAL (9:16)</span>
-                      <span style={{ fontSize: '11px', color: '#94A3B8' }}>24 Horas Activa</span>
-                    </div>
-                    <div style={{ borderRadius: '14px', overflow: 'hidden', marginBottom: '14px', height: '180px' }}>
-                      <img src="/assets/dr-elmo-aramburo/pillar-2-stories.jpg" alt="Story Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    </div>
-                    <div style={{ background: '#1E293B', borderRadius: '14px', padding: '18px', border: '1px solid rgba(255, 255, 255, 0.08)', textAlign: 'center' }}>
-                      <div style={{ fontSize: '11px', color: '#5EEAD4', fontWeight: 800, marginBottom: '6px' }}>📊 ENCUESTA INTERACTIVA</div>
-                      <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF', marginBottom: '14px' }}>
-                        ¿Sabías que la cirugía bariátrica puede revertir la Diabetes Tipo 2 en semanas?
-                      </div>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '14px' }}>
-                        <div style={{ padding: '8px 10px', background: 'rgba(13, 148, 136, 0.3)', border: '1px solid #0D9488', borderRadius: '8px', fontSize: '12px', fontWeight: 700, color: '#FFFFFF' }}>
-                          ¡No lo sabía! Quiero información (82%)
-                        </div>
-                        <div style={{ padding: '8px 10px', background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: '8px', fontSize: '12px', color: '#94A3B8' }}>
-                          Ya lo había escuchado (18%)
-                        </div>
-                      </div>
-                      <div style={{ fontSize: '11px', color: '#CBD5E1' }}>💬 Responde esta historia para agendar tu consulta</div>
-                    </div>
-                  </div>
-                  <div className={styles.docDemoDetails}>
-                    <div className={styles.docDemoDetailBadge}>ENTREGABLE 02</div>
-                    <h3 className={styles.docDemoDetailTitle}>20 Adaptaciones a Stories al Mes</h3>
-                    <p className={styles.docDemoDetailText}>
-                      Adaptación de los 20 temas a formato pantalla completa (9:16) con stickers interactivos de encuestas, cajas de preguntas y botones de enlace directo al WhatsApp del consultorio.
-                    </p>
-                    <div className={styles.docDemoSpecList}>
-                      <div className={styles.docDemoSpecItem}><span>✓</span> Formato 1080 × 1920 px vertical optimizado para móviles.</div>
-                      <div className={styles.docDemoSpecItem}><span>✓</span> Incremento constante de mensajes directos (DMs) de prospectos.</div>
-                      <div className={styles.docDemoSpecItem}><span>✓</span> Recordatorios de consulta y disponibilidad en Star Médica.</div>
-                    </div>
-                  </div>
-                </>
-              )}
-
-              {activeDemoTab === 'reels' && (
-                <>
-                  <div className={styles.docDemoMockupCard}>
-                    <div className={styles.docDemoMockupHeader}>
-                      <span style={{ fontSize: '12px', color: '#5EEAD4', fontWeight: 800 }}>REEL MENSUAL · VIDEO CORTO (9:16)</span>
-                      <span style={{ fontSize: '11px', color: '#94A3B8' }}>00:45 min · HD</span>
-                    </div>
-                    <div style={{ borderRadius: '14px', overflow: 'hidden', marginBottom: '14px', height: '180px' }}>
-                      <img src="/assets/dr-elmo-aramburo/pillar-3-reels.jpg" alt="Reel Production Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    </div>
-                    <div style={{ background: '#1E293B', borderRadius: '14px', padding: '18px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
-                        <span style={{ background: '#EF4444', color: '#FFFFFF', fontSize: '10px', fontWeight: 800, padding: '2px 8px', borderRadius: '4px' }}>REC 4K</span>
-                        <span style={{ fontSize: '11px', color: '#94A3B8' }}>Star Médica Juárez</span>
-                      </div>
-                      <div style={{ fontSize: '15px', fontWeight: 800, color: '#FFFFFF', marginBottom: '8px' }}>
-                        "3 cosas que cambian en tu vida durante los primeros 30 días post-manga gástrica..."
-                      </div>
-                      <div style={{ padding: '10px', background: 'rgba(0, 0, 0, 0.4)', borderRadius: '8px', borderLeft: '3px solid #5EEAD4', fontSize: '11.5px', color: '#E2E8F0', marginBottom: '12px' }}>
-                        🎬 Subtítulos dinámicos de alta retención palabra por palabra + corrección de color y audio clínico profesional.
-                      </div>
-                      <div style={{ fontSize: '11.5px', color: '#5EEAD4', fontWeight: 700 }}>
-                        ▶️ Optimizado para Reels, TikTok y YouTube Shorts
-                      </div>
-                    </div>
-                  </div>
-                  <div className={styles.docDemoDetails}>
-                    <div className={styles.docDemoDetailBadge}>ENTREGABLE 03</div>
-                    <h3 className={styles.docDemoDetailTitle}>1 Reel Producido y Editado al Mes</h3>
-                    <p className={styles.docDemoDetailText}>
-                      Cápsula audiovisual de alto impacto para potenciar el alcance orgánico y la autoridad médica del Dr. Elmo Aramburo, mostrando instalaciones, tecnología laparoscópica y trato humano.
-                    </p>
-                    <div className={styles.docDemoSpecList}>
-                      <div className={styles.docDemoSpecItem}><span>✓</span> Edición dinámica con subtítulos animados estilo viral.</div>
-                      <div className={styles.docDemoSpecItem}><span>✓</span> Tomas de consultorio, quirófano y explicaciones médicas.</div>
-                      <div className={styles.docDemoSpecItem}><span>✓</span> Distribución multiplataforma (Instagram, TikTok, Shorts).</div>
-                    </div>
-                  </div>
-                </>
-              )}
-
-              {activeDemoTab === 'ia_engine' && (
-                <>
-                  <div className={styles.docDemoMockupCard}>
-                    <div className={styles.docDemoMockupHeader}>
-                      <span style={{ fontSize: '12px', color: '#5EEAD4', fontWeight: 800 }}>MOTOR IA · FLUJO DE TRABAJO SUPERVISADO</span>
-                      <span style={{ fontSize: '11px', color: '#94A3B8' }}>Dirección de Arte Humana</span>
-                    </div>
-                    <div style={{ borderRadius: '14px', overflow: 'hidden', marginBottom: '14px', height: '180px' }}>
-                      <img src="/assets/dr-elmo-aramburo/pillar-4-ai.jpg" alt="AI Engine Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    </div>
-                    <div style={{ background: '#1E293B', borderRadius: '14px', padding: '18px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
-                      <div style={{ fontSize: '10px', color: '#5EEAD4', fontWeight: 800, textTransform: 'uppercase', marginBottom: '6px' }}>
-                        🤖 INGENIERÍA DE PROMPTS CLÍNICOS
-                      </div>
-                      <div style={{ fontSize: '12px', color: '#CBD5E1', fontFamily: 'monospace', background: 'rgba(0, 0, 0, 0.5)', padding: '10px', borderRadius: '8px', marginBottom: '12px', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
-                        &gt; "Microscopía 3D y anatomía translúcida de manga gástrica con luz esmeralda clínica, f/4, 100mm macro..."
-                      </div>
-                      <div style={{ fontSize: '11.5px', color: '#5EEAD4', fontWeight: 700 }}>
-                        ✨ Resultado: Imagen hiperrealista sin costo de sesión fotográfica
-                      </div>
-                    </div>
-                  </div>
-                  <div className={styles.docDemoDetails}>
-                    <div className={styles.docDemoDetailBadge}>TECNOLOGÍA CLAVE</div>
-                    <h3 className={styles.docDemoDetailTitle}>Modelos IA + Dirección Humana</h3>
-                    <p className={styles.docDemoDetailText}>
-                      No utilizamos fotos de stock repetitivas. Combinamos Midjourney v6, GPT Image y Flux con dirección de arte humana para crear composiciones anatómicas exactas y exclusivas.
-                    </p>
-                    <div className={styles.docDemoSpecList}>
-                      <div className={styles.docDemoSpecItem}><span>✓</span> Precisión anatómica y rigor médico supervisado.</div>
-                      <div className={styles.docDemoSpecItem}><span>✓</span> Identidad visual irrepetible para el consultorio.</div>
-                      <div className={styles.docDemoSpecItem}><span>✓</span> Cesión total de derechos de uso comercial.</div>
-                    </div>
-                  </div>
-                </>
-              )}
             </div>
           </section>
 
