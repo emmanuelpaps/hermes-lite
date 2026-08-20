@@ -1166,9 +1166,9 @@ export default function MediaKitView({ data }: { data: ClientData }) {
           {/* Agency Navigation Header */}
           <header className={styles.docAgencyNav}>
             <div className={styles.docAgencyLogos}>
-              <Image src="/assets/apolograma-logo-v2.png" alt="Apolograma" width={150} height={30} className={styles.apologramaLogoImageLight} />
-              <span style={{ opacity: 0.3, color: '#0F172A', fontWeight: 800 }}>×</span>
-              <Image src="/assets/fn1-logo-purple.png" alt="Frontera Número Uno" width={165} height={24} />
+              <Image src="/assets/apolograma-logo-v2.png" alt="Apolograma" width={220} height={18} className={styles.docAgencyLogoApolograma} priority />
+              <span className={styles.docCrossSeparator}>×</span>
+              <Image src="/assets/fn1-logo-purple.png" alt="Frontera Número Uno" width={230} height={24} className={styles.docAgencyLogoFn1} priority />
             </div>
             <div className={styles.docClientLogoPill}>
               <Image src={data.clientLogo || '/assets/dr-elmo-aramburo/doctor-portrait.jpg'} alt="Dr. Elmo Aramburo" width={28} height={28} className={styles.docClientAvatar} />
