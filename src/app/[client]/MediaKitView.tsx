@@ -1573,6 +1573,21 @@ export default function MediaKitView({ data }: { data: ClientData }) {
               © 2026 Apolograma & Frontera Número Uno. Estrategia desarrollada exclusivamente para el Dr. Elmo Aramburo (Star Médica Juárez).
             </p>
           </footer>
+
+          {/* Mobile Sticky Conversion Floating Bar */}
+          <div className={styles.docStickyBottomBar}>
+            <div className={styles.docStickyBarLeft}>
+              <div className={styles.docStickyPlanName}>
+                {billingOption === 'annual' ? 'Plan Anual · 16.7% OFF' : 'Plan Mensual'}
+              </div>
+              <div className={styles.docStickyPlanPrice}>
+                {formatPrice(currentPrice)} <span style={{ fontSize: '11px', color: '#94A3B8', fontWeight: 500 }}>+ IVA</span>
+              </div>
+            </div>
+            <a href={waUrl} target="_blank" rel="noopener noreferrer" className={styles.docStickyWaBtn}>
+              <span>💬 APROBAR POR WHATSAPP</span>
+            </a>
+          </div>
         </div>
       </div>
     );
