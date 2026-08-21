@@ -5144,9 +5144,17 @@
   }
 
   .docVisualWrapper {
-    height: 300px !important;
+    height: 340px !important;
     width: 100% !important;
     box-sizing: border-box !important;
+  }
+
+  .docVisualWrapper img {
+    object-position: center 15% !important;
+  }
+
+  .docFloatingBadgeTop {
+    display: none !important;
   }
 
   /* Smooth Touch Swipe for Trust Badges */
