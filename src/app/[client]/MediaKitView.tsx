@@ -1124,7 +1124,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
   const isDoctorAura = data.themeTemplate === 'doctor-aura' || data.clientName?.toLowerCase().includes('elmo') || data.clientName?.toLowerCase().includes('aramburo');
 
   if (isDoctorAura) {
-    const [billingOption, setBillingOption] = useState<'annual' | 'monthly'>('monthly');
+    const [billingOption, setBillingOption] = useState<'annual' | 'monthly'>('annual');
 
     const annualPrice = 120000;
     const monthlyPrice = 12000;
