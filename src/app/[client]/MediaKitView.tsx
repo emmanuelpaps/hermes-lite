@@ -1185,7 +1185,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 Autoridad Médica <span className={styles.docEditorialSerif}>y Pacientes</span> con <span className={styles.docEditorialSerif}>Inteligencia Artificial</span>
               </h1>
               <p className={styles.docHeroSubtitle}>
-                Estrategia de comunicación y crecimiento mensual: <strong>20 diseños educativos para Feed</strong>, <strong>20 adaptaciones verticales a Stories (9:16)</strong> y <strong>1 Reel mensual</strong>. Creación visual generada con los modelos de IA más potentes del mercado, supervisados y perfeccionados por directores de arte de Apolograma.
+                Estrategia mensual: <strong>20 diseños para Feed</strong>, <strong>20 Stories (9:16)</strong> y <strong>1 Reel mensual</strong>. Producción visual con IA médica avanzada, supervisada por directores de arte de Apolograma.
               </p>
 
               <div className={styles.docHeroActions}>
@@ -1201,11 +1201,11 @@ export default function MediaKitView({ data }: { data: ClientData }) {
               <div className={styles.docTrustBadges}>
                 <div className={styles.docTrustBadgeItem}>
                   <span>🤖</span>
-                  <span>Modelos de IA de Última Generación</span>
+                  <span>Modelos IA de Vanguardia</span>
                 </div>
                 <div className={styles.docTrustBadgeItem}>
                   <span>🎨</span>
-                  <span>20 Diseños + 20 Stories</span>
+                  <span>20 Posts + 20 Stories</span>
                 </div>
                 <div className={styles.docTrustBadgeItem}>
                   <span>🎬</span>
@@ -1241,7 +1241,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 Los 4 Pilares del <span className={styles.docEditorialSerif}>Ecosistema de Marketing</span>
               </h2>
               <p className={styles.docSectionSubtext}>
-                Un sistema integral diseñado para educar a pacientes sobre salud metabólica, desmitificar la cirugía bariátrica y generar consultas de valoración continuas:
+                Sistema integral para educar pacientes, desmitificar la cirugía bariátrica y generar consultas de valoración:
               </p>
             </div>
 
@@ -1252,9 +1252,9 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                   <div className={styles.docPillarFormatBadge}>📐 4:5 FEED</div>
                 </div>
                 <div className={styles.docPillarNum}>PILAR 01</div>
-                <h3 className={styles.docPillarTitle}>20 Diseños para Feed con IA Generativa</h3>
+                <h3 className={styles.docPillarTitle}>20 Diseños para Feed con IA</h3>
                 <p className={styles.docPillarDesc}>
-                  Infografías médicas fotorrealistas sobre manga gástrica, bypass, nutrición y derribo de mitos. Imágenes generadas con modelos de IA médica y retocadas por diseñadores.
+                  Infografías fotorrealistas sobre manga gástrica, bypass y nutrición, creadas con IA médica y perfeccionadas por diseñadores.
                 </p>
                 <div className={styles.docPillarTag}>Formato 4:5 · 20 Posts/mes</div>
               </div>
@@ -1267,7 +1267,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 <div className={styles.docPillarNum}>PILAR 02</div>
                 <h3 className={styles.docPillarTitle}>20 Adaptaciones a Stories (9:16)</h3>
                 <p className={styles.docPillarDesc}>
-                  Contenido vertical diario con encuestas de síntomas, cajas de preguntas frecuentes, testimonios y botones directos para agendar valoración por WhatsApp.
+                  Historias diarias con encuestas interactivas, preguntas frecuentes y llamados directos a agendar valoración por WhatsApp.
                 </p>
                 <div className={styles.docPillarTag}>Formato 9:16 · 20 Stories/mes</div>
               </div>
@@ -1280,7 +1280,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 <div className={styles.docPillarNum}>PILAR 03</div>
                 <h3 className={styles.docPillarTitle}>1 Reel Mensual de Alta Retención</h3>
                 <p className={styles.docPillarDesc}>
-                  Producción y edición dinámica de video en formato corto para Instagram Reels, TikTok y YouTube Shorts, con tomas en Star Médica y subtítulos animados.
+                  Video corto en Star Médica con subtítulos dinámicos de alto impacto para Reels, TikTok y YouTube Shorts.
                 </p>
                 <div className={styles.docPillarTag}>Video 9:16 · 1 Reel/mes</div>
               </div>
@@ -1293,7 +1293,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 <div className={styles.docPillarNum} style={{ color: '#0D9488' }}>PILAR 04</div>
                 <h3 className={styles.docPillarTitle}>Modelos de IA Supervisados</h3>
                 <p className={styles.docPillarDesc}>
-                  Uso de los modelos generativos más potentes (Midjourney v6, GPT Image, Flux) guiados por directores de arte para una estética médica exclusiva sin fotos de stock.
+                  Modelos generativos de vanguardia guiados por directores de arte para una identidad médica exclusiva sin fotos de stock.
                 </p>
                 <div className={styles.docPillarTag} style={{ background: '#0D9488', color: '#FFFFFF' }}>Supervisión 100% Humana</div>
               </div>
@@ -1306,20 +1306,20 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 <h3 className={styles.docAiClauseTitle}>Metodología de Creación con Inteligencia Artificial</h3>
               </div>
               <p className={styles.docAiClauseText}>
-                Todos los diseños, composiciones y adaptaciones visuales se desarrollan utilizando los <strong>modelos de Inteligencia Artificial generativa más potentes y avanzados de la industria</strong>, siendo rigurosamente <strong>supervisados, dirigidos y perfeccionados por el equipo de diseño y dirección de arte de Apolograma</strong>. Esto nos permite entregar fotorrealismo clínico impecable, precisión anatómica y una identidad médica vanguardista sin recurrir a bancos de imágenes genéricos.
+                Cada diseño y adaptación se desarrolla con los <strong>modelos de IA más avanzados del mercado</strong>, bajo la <strong>supervisión y dirección de arte del equipo de Apolograma</strong>. Garantizamos precisión clínica, fotorrealismo y exclusividad total sin fotos de stock.
               </p>
               <div className={styles.docAiFeaturesGrid}>
                 <div className={styles.docAiFeatureItem}>
                   <span className={styles.docAiFeatureIcon}>✓</span>
-                  <span className={styles.docAiFeatureText}>Modelos generativos de última generación (Midjourney v6, GPT Image, Flux).</span>
+                  <span className={styles.docAiFeatureText}>Modelos generativos de última generación médica.</span>
                 </div>
                 <div className={styles.docAiFeatureItem}>
                   <span className={styles.docAiFeatureIcon}>✓</span>
-                  <span className={styles.docAiFeatureText}>Supervisión clínica, tipografía y retoque por diseñadores profesionales.</span>
+                  <span className={styles.docAiFeatureText}>Supervisión clínica, tipografía y retoque por diseñadores.</span>
                 </div>
                 <div className={styles.docAiFeatureItem}>
                   <span className={styles.docAiFeatureIcon}>✓</span>
-                  <span className={styles.docAiFeatureText}>Propiedad intelectual y cesión de derechos 100% exclusiva para el doctor.</span>
+                  <span className={styles.docAiFeatureText}>Cesión total de derechos de autor para el consultorio.</span>
                 </div>
               </div>
             </div>
@@ -1333,7 +1333,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 Propuesta Económica <span className={styles.docEditorialSerif}>Transparente</span>
               </h2>
               <p className={styles.docSectionSubtext}>
-                Selecciona la modalidad de pago que mejor se adapte al flujo y planeación del consultorio:
+                Selecciona la modalidad de pago que mejor se adapte a tu consultorio:
               </p>
             </div>
 
@@ -1386,34 +1386,34 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                     </div>
                     <div className={styles.docSavingsBadge}>
                       <span>🔥</span>
-                      <span>Ahorro de $24,000.00 MXN al año ({annualSavingsPercent}% de Descuento)</span>
+                      <span>Ahorro de $24,000.00 MXN al año ({annualSavingsPercent}% OFF)</span>
                     </div>
                   </div>
 
                   <div className={styles.docDeliverablesList}>
                     <div className={styles.docDeliverableItem}>
                       <span className={styles.docCheckIcon}>✓</span>
-                      <span><strong>20 Diseños Mensuales para Feed</strong> (Infografías médicas, salud metabólica, mitos y recetas).</span>
+                      <span><strong>20 Diseños para Feed:</strong> Infografías médicas y nutrición bariátrica.</span>
                     </div>
                     <div className={styles.docDeliverableItem}>
                       <span className={styles.docCheckIcon}>✓</span>
-                      <span><strong>20 Adaptaciones a Stories (9:16)</strong> optimizadas con llamados a agendar cita.</span>
+                      <span><strong>20 Stories (9:16):</strong> Contenido diario con llamadas a agendar cita.</span>
                     </div>
                     <div className={styles.docDeliverableItem}>
                       <span className={styles.docCheckIcon}>✓</span>
-                      <span><strong>1 Reel Mensual</strong> Producido y Editado con subtítulos animados de alta retención.</span>
+                      <span><strong>1 Reel Mensual:</strong> Video producido en Star Médica con subtítulos dinámicos.</span>
                     </div>
                     <div className={styles.docDeliverableItem}>
                       <span className={styles.docCheckIcon}>✓</span>
-                      <span><strong>Creación Visual con Modelos de IA</strong> generativa de última generación.</span>
+                      <span><strong>IA Generativa Médica:</strong> Visuales exclusivos sin stock genérico.</span>
                     </div>
                     <div className={styles.docDeliverableItem}>
                       <span className={styles.docCheckIcon}>✓</span>
-                      <span><strong>Supervisión y Retoque por Diseñadores</strong> profesionales de Apolograma.</span>
+                      <span><strong>Supervisión de Arte:</strong> Curaduría y retoque por diseñadores.</span>
                     </div>
                     <div className={styles.docDeliverableItem}>
                       <span className={styles.docCheckIcon}>✓</span>
-                      <span><strong>Parrillas Quincenales</strong> de contenido para revisión y aprobación previa del doctor.</span>
+                      <span><strong>Parrillas Quincenales:</strong> Aprobación previa antes de publicar.</span>
                     </div>
                   </div>
 
@@ -1443,7 +1443,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                       <span className={styles.docPriceNumber}>{formatPrice(monthlyPrice)}</span>
                       <span className={styles.docPricePeriod}>+ IVA / mes</span>
                     </div>
-                    <div style={{ fontSize: '13px', color: '#64748B', marginTop: '6px' }}>
+                    <div style={{ fontSize: '13.5px', color: '#64748B', marginTop: '6px' }}>
                       Facturación recurrente mensual con CFDI · Sin plazos forzosos
                     </div>
                   </div>
@@ -1451,27 +1451,27 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                   <div className={styles.docDeliverablesList}>
                     <div className={styles.docDeliverableItem}>
                       <span className={styles.docCheckIcon}>✓</span>
-                      <span><strong>20 Diseños Mensuales para Feed</strong> (Infografías médicas, salud metabólica, mitos y recetas).</span>
+                      <span><strong>20 Diseños para Feed:</strong> Infografías médicas y nutrición bariátrica.</span>
                     </div>
                     <div className={styles.docDeliverableItem}>
                       <span className={styles.docCheckIcon}>✓</span>
-                      <span><strong>20 Adaptaciones a Stories (9:16)</strong> optimizadas con llamados a agendar cita.</span>
+                      <span><strong>20 Stories (9:16):</strong> Contenido diario con llamadas a agendar cita.</span>
                     </div>
                     <div className={styles.docDeliverableItem}>
                       <span className={styles.docCheckIcon}>✓</span>
-                      <span><strong>1 Reel Mensual</strong> Producido y Editado con subtítulos animados de alta retención.</span>
+                      <span><strong>1 Reel Mensual:</strong> Video producido en Star Médica con subtítulos dinámicos.</span>
                     </div>
                     <div className={styles.docDeliverableItem}>
                       <span className={styles.docCheckIcon}>✓</span>
-                      <span><strong>Creación Visual con Modelos de IA</strong> generativa de última generación.</span>
+                      <span><strong>IA Generativa Médica:</strong> Visuales exclusivos sin stock genérico.</span>
                     </div>
                     <div className={styles.docDeliverableItem}>
                       <span className={styles.docCheckIcon}>✓</span>
-                      <span><strong>Supervisión y Retoque por Diseñadores</strong> profesionales de Apolograma.</span>
+                      <span><strong>Supervisión de Arte:</strong> Curaduría y retoque por diseñadores.</span>
                     </div>
                     <div className={styles.docDeliverableItem}>
                       <span className={styles.docCheckIcon}>✓</span>
-                      <span><strong>Flexibilidad</strong> de pago mes con mes sin plazos forzosos.</span>
+                      <span><strong>Flexibilidad:</strong> Pago mes con mes sin plazos forzosos.</span>
                     </div>
                   </div>
 
@@ -1488,7 +1488,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 <div className={styles.docTermIconBubble}>🧬</div>
                 <h4 className={styles.docTermTitle}>Supervisión de IA Humana</h4>
                 <p className={styles.docTermText}>
-                  Toda pieza visual es generada con los modelos más potentes de IA y perfeccionada manualmente por diseñadores.
+                  Toda imagen es creada con IA y perfeccionada por diseñadores.
                 </p>
               </div>
 
@@ -1496,7 +1496,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 <div className={styles.docTermIconBubble}>📅</div>
                 <h4 className={styles.docTermTitle}>Calendarios Quincenales</h4>
                 <p className={styles.docTermText}>
-                  Entregas organizadas con anticipación para revisión, retroalimentación y aprobación previa del Dr. Elmo Aramburo.
+                  Entregas programadas para visto bueno previo del Dr. Elmo.
                 </p>
               </div>
 
@@ -1504,7 +1504,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 <div className={styles.docTermIconBubble}>🛡️</div>
                 <h4 className={styles.docTermTitle}>Derechos 100% Exclusivos</h4>
                 <p className={styles.docTermText}>
-                  Todos los artes, composiciones gráficas y videos son propiedad intelectual exclusiva de la marca del doctor.
+                  Artes y videos son propiedad intelectual exclusiva de la marca.
                 </p>
               </div>
 
@@ -1512,7 +1512,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
                 <div className={styles.docTermIconBubble}>🧾</div>
                 <h4 className={styles.docTermTitle}>Facturación Fiscal (CFDI)</h4>
                 <p className={styles.docTermText}>
-                  Emisión formal de facturas fiscales deducibles al 100% como gastos de publicidad y mercadotecnia médica.
+                  Facturas deducibles al 100% como mercadotecnia médica.
                 </p>
               </div>
             </div>

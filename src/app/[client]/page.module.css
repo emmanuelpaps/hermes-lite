@@ -4045,7 +4045,7 @@
 }
 
 .docHeroTitle {
-  font-size: 44px;
+  font-size: 46px;
   font-weight: 800;
   line-height: 1.12;
   letter-spacing: -0.025em;
@@ -4062,7 +4062,7 @@
 }
 
 .docHeroSubtitle {
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.55;
   color: #475569;
   margin: 0;
@@ -4080,9 +4080,9 @@
   background: linear-gradient(135deg, #0D9488 0%, #0A5C5A 100%);
   color: #FFFFFF;
   border: none;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
-  padding: 14px 26px;
+  padding: 15px 28px;
   border-radius: 14px;
   cursor: pointer;
   box-shadow: 0 8px 24px rgba(13, 148, 136, 0.28);
@@ -4102,9 +4102,9 @@
   background: #FFFFFF;
   color: #0F172A;
   border: 1px solid rgba(203, 213, 225, 0.9);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
-  padding: 14px 22px;
+  padding: 15px 24px;
   border-radius: 14px;
   cursor: pointer;
   transition: all 0.25s ease;
@@ -4130,9 +4130,9 @@
 .docTrustBadgeItem {
   background: #FFFFFF;
   border: 1px solid rgba(226, 232, 240, 0.9);
-  padding: 6px 12px;
+  padding: 6px 14px;
   border-radius: 100px;
-  font-size: 11.5px;
+  font-size: 12.5px;
   font-weight: 600;
   color: #334155;
   display: flex;
@@ -4174,7 +4174,7 @@
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   color: #FFFFFF;
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 700;
   padding: 6px 14px;
   border-radius: 100px;
@@ -4205,12 +4205,12 @@
 }
 
 .docBadgeSubtitle {
-  font-size: 11.5px;
+  font-size: 12px;
   color: #0D9488;
   font-weight: 600;
 }
 
-/* Sections */
+/* Sections Global */
 .docSection {
   margin-bottom: 56px;
 }
@@ -4229,7 +4229,7 @@
   border: 1px solid rgba(13, 148, 136, 0.2);
   padding: 6px 16px;
   border-radius: 100px;
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 800;
   color: #0D9488;
   letter-spacing: 0.05em;
@@ -4238,7 +4238,7 @@
 }
 
 .docSectionTitle {
-  font-size: 34px;
+  font-size: 36px;
   font-weight: 800;
   letter-spacing: -0.02em;
   color: #0F172A;
@@ -4247,7 +4247,7 @@
 }
 
 .docSectionSubtext {
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.55;
   color: #64748B;
   margin: 0;
@@ -4265,7 +4265,7 @@
   background: #FFFFFF;
   border: 1px solid rgba(226, 232, 240, 0.9);
   border-radius: 24px;
-  padding: 16px 16px 22px 16px;
+  padding: 18px 18px 24px 18px;
   box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
   transition: all 0.28s ease;
   display: flex;
@@ -4318,10 +4318,10 @@
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #5EEAD4;
-  font-size: 10px;
+  font-size: 10.5px;
   font-weight: 800;
   letter-spacing: 0.05em;
-  padding: 4px 9px;
+  padding: 4px 10px;
   border-radius: 100px;
   display: flex;
   align-items: center;
@@ -4344,7 +4344,7 @@
 }
 
 .docPillarNum {
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 800;
   color: #0D9488;
   letter-spacing: 0.06em;
@@ -4354,7 +4354,7 @@
 }
 
 .docPillarTitle {
-  font-size: 16.5px;
+  font-size: 18px;
   font-weight: 800;
   color: #0F172A;
   margin: 0 0 8px 0;
@@ -4363,7 +4363,7 @@
 }
 
 .docPillarDesc {
-  font-size: 12.5px;
+  font-size: 14px;
   line-height: 1.5;
   color: #64748B;
   margin: 0;
@@ -4374,60 +4374,58 @@
 .docPillarTag {
   margin-top: 16px;
   display: inline-flex;
-  padding: 5px 12px;
+  padding: 6px 14px;
   border-radius: 100px;
   background: #F1F5F9;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   color: #475569;
   width: fit-content;
-  margin-left: 4px;
 }
 
 /* AI Clause Callout Box */
 .docAiClauseCard {
-  background: linear-gradient(135deg, #091E1D 0%, #0F2D2A 100%);
-  border: 1px solid rgba(94, 234, 212, 0.25);
-  border-radius: 24px;
-  padding: 32px 36px;
+  background: linear-gradient(135deg, #061918 0%, #0F2E2B 100%);
+  border: 1.5px solid rgba(94, 234, 212, 0.3);
+  border-radius: 28px;
+  padding: 36px 40px;
   color: #FFFFFF;
-  box-shadow: 0 15px 40px rgba(9, 30, 29, 0.25);
-  margin-bottom: 48px;
-  position: relative;
-  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(6, 25, 24, 0.25);
 }
 
 .docAiClauseHeader {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .docAiBadge {
-  background: rgba(94, 234, 212, 0.2);
-  border: 1px solid rgba(94, 234, 212, 0.4);
+  background: rgba(94, 234, 212, 0.15);
+  border: 1px solid rgba(94, 234, 212, 0.35);
   color: #5EEAD4;
   font-size: 11.5px;
   font-weight: 800;
-  padding: 5px 14px;
+  padding: 4px 12px;
   border-radius: 100px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
 .docAiClauseTitle {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 800;
   color: #FFFFFF;
   margin: 0;
+  letter-spacing: -0.01em;
 }
 
 .docAiClauseText {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.6;
   color: #CBD5E1;
-  margin: 0 0 18px 0;
+  margin: 0 0 24px 0;
 }
 
 .docAiFeaturesGrid {
@@ -4435,7 +4433,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 18px;
+  padding-top: 20px;
 }
 
 .docAiFeatureItem {
@@ -4446,14 +4444,17 @@
 
 .docAiFeatureIcon {
   color: #5EEAD4;
-  font-size: 16px;
   font-weight: 800;
+  font-size: 15px;
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .docAiFeatureText {
-  font-size: 12.5px;
+  font-size: 14.5px;
+  line-height: 1.45;
   color: #E2E8F0;
-  line-height: 1.4;
+  font-weight: 500;
 }
 
 /* Interactive Demo Showcase */
@@ -4691,7 +4692,7 @@
 }
 
 .docPricePlanName {
-  font-size: 22px;
+  font-size: 25px;
   font-weight: 800;
   color: #0F172A;
   margin: 0 0 6px 0;
@@ -4699,14 +4700,14 @@
 }
 
 .docPricePlanDesc {
-  font-size: 13.5px;
+  font-size: 15px;
   color: #64748B;
   margin: 0;
 }
 
 .docCustomRadio {
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   border: 2px solid #CBD5E1;
   display: flex;
@@ -4720,13 +4721,13 @@
   border-color: #0D9488;
   background: #0D9488;
   color: #FFFFFF;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 800;
 }
 
 .docPriceAmountBox {
   margin: 18px 0 24px 0;
-  padding: 18px 20px;
+  padding: 20px 22px;
   background: #F8FAFC;
   border-radius: 18px;
   border: 1px solid #E2E8F0;
@@ -4738,7 +4739,7 @@
 }
 
 .docPriceNumber {
-  font-size: 38px;
+  font-size: 42px;
   font-weight: 800;
   color: #0F172A;
   letter-spacing: -0.03em;
@@ -4746,14 +4747,14 @@
 }
 
 .docPricePeriod {
-  font-size: 13px;
+  font-size: 14.5px;
   font-weight: 600;
   color: #64748B;
   margin-left: 6px;
 }
 
 .docPriceMonthlyEquiv {
-  font-size: 14px;
+  font-size: 15.5px;
   font-weight: 700;
   color: #0D9488;
   margin-top: 8px;
@@ -4768,18 +4769,18 @@
   gap: 6px;
   background: #FEF08A;
   color: #854D0E;
-  font-size: 11.5px;
+  font-size: 12.5px;
   font-weight: 800;
-  padding: 4px 10px;
+  padding: 4px 12px;
   border-radius: 100px;
-  margin-top: 6px;
+  margin-top: 8px;
 }
 
 .docDeliverablesList {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: 13px;
+  margin-bottom: 26px;
   flex: 1;
 }
 
@@ -4787,14 +4788,14 @@
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.45;
   color: #334155;
 }
 
 .docCheckIcon {
   color: #0D9488;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 800;
   flex-shrink: 0;
   margin-top: 1px;
@@ -4817,27 +4818,27 @@
 }
 
 .docTermIconBubble {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border-radius: 12px;
   background: rgba(13, 148, 136, 0.1);
   color: #0D9488;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 20px;
   margin-bottom: 12px;
 }
 
 .docTermTitle {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 800;
   color: #0F172A;
   margin: 0 0 6px 0;
 }
 
 .docTermText {
-  font-size: 12px;
+  font-size: 13.5px;
   line-height: 1.45;
   color: #64748B;
   margin: 0;
@@ -4868,13 +4869,27 @@
   background: rgba(94, 234, 212, 0.2);
   border: 1px solid rgba(94, 234, 212, 0.4);
   color: #5EEAD4;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   padding: 4px 12px;
   border-radius: 100px;
   width: fit-content;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+}
+
+.docSummaryTitle {
+  font-size: 28px;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.docSummaryDesc {
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: #94A3B8;
+  margin: 0;
 }
 
 .docSummaryTitle {
@@ -5116,15 +5131,15 @@
   }
 
   .docHeroTitle {
-    font-size: 24px !important;
+    font-size: 28px !important;
     line-height: 1.18 !important;
     word-break: break-word !important;
     overflow-wrap: break-word !important;
   }
 
   .docHeroSubtitle {
-    font-size: 13.5px !important;
-    line-height: 1.5 !important;
+    font-size: 15.5px !important;
+    line-height: 1.55 !important;
     word-break: break-word !important;
     overflow-wrap: break-word !important;
   }
@@ -5139,8 +5154,8 @@
   .docBtnPrimary, .docBtnSecondary {
     width: 100% !important;
     justify-content: center;
-    padding: 13px 16px !important;
-    font-size: 13px !important;
+    padding: 14px 18px !important;
+    font-size: 14.5px !important;
     box-sizing: border-box !important;
   }
 
@@ -5182,8 +5197,8 @@
 
   .docTrustBadgeItem {
     flex-shrink: 0;
-    padding: 5px 10px !important;
-    font-size: 11px !important;
+    padding: 6px 12px !important;
+    font-size: 12px !important;
   }
 
   .docPillarsGrid {
@@ -5192,7 +5207,7 @@
   }
 
   .docPillarCard {
-    padding: 14px 14px 18px 14px;
+    padding: 16px 16px 20px 16px;
     border-radius: 20px;
   }
 
@@ -5201,22 +5216,36 @@
     margin-bottom: 12px;
   }
 
+  .docPillarTitle {
+    font-size: 18px !important;
+  }
+
+  .docPillarDesc {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+  }
+
   .docAiClauseCard {
-    padding: 22px 18px;
+    padding: 24px 20px;
     border-radius: 22px;
   }
 
   .docAiClauseTitle {
-    font-size: 18px;
+    font-size: 20px !important;
   }
 
   .docAiClauseText {
-    font-size: 13px;
+    font-size: 15px !important;
+    line-height: 1.6 !important;
   }
 
   .docAiFeaturesGrid {
     grid-template-columns: 1fr;
     gap: 10px;
+  }
+
+  .docAiFeatureText {
+    font-size: 13.5px !important;
   }
 
   /* 2x2 Grid for Terms / Trust Cards */
@@ -5228,26 +5257,26 @@
   }
 
   .docTermCard {
-    padding: 14px 12px !important;
+    padding: 16px 14px !important;
     border-radius: 16px !important;
   }
 
   .docTermIconBubble {
-    width: 32px !important;
-    height: 32px !important;
-    font-size: 15px !important;
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 18px !important;
     margin-bottom: 8px !important;
   }
 
   .docTermTitle {
-    font-size: 12px !important;
+    font-size: 14px !important;
     margin-bottom: 4px !important;
     line-height: 1.25 !important;
   }
 
   .docTermText {
-    font-size: 10.5px !important;
-    line-height: 1.35 !important;
+    font-size: 12px !important;
+    line-height: 1.4 !important;
   }
 
   .docPricingGrid {
@@ -5256,8 +5285,16 @@
   }
 
   .docPriceCard {
-    padding: 24px 18px !important;
+    padding: 26px 20px !important;
     border-radius: 22px !important;
+  }
+
+  .docPricePlanName {
+    font-size: 22px !important;
+  }
+
+  .docPricePlanDesc {
+    font-size: 14px !important;
   }
 
   .docPriceAmountBox {
@@ -5265,26 +5302,34 @@
   }
 
   .docPriceNumber {
-    font-size: 34px !important;
+    font-size: 38px !important;
+  }
+
+  .docDeliverableItem {
+    font-size: 14px !important;
   }
 
   .docSummaryBox {
-    padding: 22px 16px;
+    padding: 24px 18px;
     border-radius: 22px;
     margin-bottom: 24px;
   }
 
   .docSummaryTitle {
-    font-size: 20px;
+    font-size: 22px !important;
+  }
+
+  .docSummaryDesc {
+    font-size: 14.5px !important;
   }
 
   .docSummaryTotalValue {
-    font-size: 32px;
+    font-size: 34px !important;
   }
 
   .docWhatsAppBtn {
-    padding: 14px 18px;
-    font-size: 13.5px;
+    padding: 15px 20px;
+    font-size: 14.5px !important;
   }
 
   /* Sticky Conversion Bottom Bar on Mobile */
@@ -5312,7 +5357,7 @@
   }
 
   .docStickyPlanName {
-    font-size: 10.5px;
+    font-size: 11px;
     font-weight: 800;
     color: #5EEAD4;
     letter-spacing: 0.03em;
@@ -5320,7 +5365,7 @@
   }
 
   .docStickyPlanPrice {
-    font-size: 16.5px;
+    font-size: 17.5px;
     font-weight: 800;
     color: #FFFFFF;
     line-height: 1.1;
@@ -5329,9 +5374,9 @@
   .docStickyWaBtn {
     background: #25D366;
     color: #FFFFFF;
-    padding: 11px 16px;
+    padding: 12px 18px;
     border-radius: 12px;
-    font-size: 11.5px;
+    font-size: 12px;
     font-weight: 800;
     text-decoration: none;
     display: inline-flex;
