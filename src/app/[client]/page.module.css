@@ -5011,7 +5011,16 @@
 
 @media (max-width: 640px) {
   .docFrame {
-    padding: 16px 12px 100px 12px;
+    padding: 14px 12px 100px 12px !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+
+  .docContainer {
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .docTopBanner {
@@ -5023,8 +5032,10 @@
     gap: 10px;
     align-items: center;
     padding: 12px 14px;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
     border-radius: 18px;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .docAgencyLogos {
@@ -5069,10 +5080,22 @@
   }
 
   .docHeroCard {
-    padding: 24px 16px;
-    border-radius: 24px;
-    gap: 22px;
-    margin-bottom: 28px;
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 20px 16px !important;
+    border-radius: 22px !important;
+    gap: 18px !important;
+    margin-bottom: 24px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+
+  .docHeroContent {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .docEyebrowBadge {
@@ -5081,29 +5104,49 @@
     white-space: normal !important;
     line-height: 1.35 !important;
     text-align: left;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .docHeroTitle {
-    font-size: 26px;
-    line-height: 1.15;
+    font-size: 24px !important;
+    line-height: 1.18 !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
   }
 
   .docHeroSubtitle {
-    font-size: 14px;
-    line-height: 1.5;
+    font-size: 13.5px !important;
+    line-height: 1.5 !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
   }
 
   .docHeroActions {
     flex-direction: column;
     width: 100%;
     gap: 10px;
+    box-sizing: border-box !important;
   }
 
   .docBtnPrimary, .docBtnSecondary {
-    width: 100%;
+    width: 100% !important;
     justify-content: center;
-    padding: 14px 18px;
-    font-size: 13.5px;
+    padding: 13px 16px !important;
+    font-size: 13px !important;
+    box-sizing: border-box !important;
+  }
+
+  .docHeroVisual {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .docVisualWrapper {
+    height: 300px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   /* Smooth Touch Swipe for Trust Badges */
