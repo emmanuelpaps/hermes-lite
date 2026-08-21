@@ -1124,7 +1124,7 @@ export default function MediaKitView({ data }: { data: ClientData }) {
   const isDoctorAura = data.themeTemplate === 'doctor-aura' || data.clientName?.toLowerCase().includes('elmo') || data.clientName?.toLowerCase().includes('aramburo');
 
   if (isDoctorAura) {
-    const [billingOption, setBillingOption] = useState<'annual' | 'monthly'>('annual');
+    const [billingOption, setBillingOption] = useState<'annual' | 'monthly'>('monthly');
 
     const annualPrice = 120000;
     const monthlyPrice = 12000;
@@ -1341,145 +1341,145 @@ export default function MediaKitView({ data }: { data: ClientData }) {
             <div className={styles.docBillingToggleWrapper}>
               <div className={styles.docBillingToggleBox}>
                 <button
+                  onClick={() => setBillingOption('monthly')}
+                  className={`${styles.docBillingToggleBtn} ${billingOption === 'monthly' ? styles.docBillingToggleBtnActive : ''}`}
+                >
+                  <span>📅 PAGO MENSUAL RECURRENTE</span>
+                </button>
+                <button
                   onClick={() => setBillingOption('annual')}
                   className={`${styles.docBillingToggleBtn} ${billingOption === 'annual' ? styles.docBillingToggleBtnActive : ''}`}
                 >
                   <span>⭐ PAGO ANUAL ANTICIPADO</span>
                   <span className={styles.docDiscountPill}>16.7% OFF</span>
                 </button>
-                <button
-                  onClick={() => setBillingOption('monthly')}
-                  className={`${styles.docBillingToggleBtn} ${billingOption === 'monthly' ? styles.docBillingToggleBtnActive : ''}`}
-                >
-                  <span>📅 PAGO MENSUAL RECURRENTE</span>
-                </button>
               </div>
             </div>
 
-            {/* Pricing Cards Grid */}
-            <div className={styles.docPricingGrid}>
-              {/* Option 1: Annual Plan (Featured) */}
-              <div
-                onClick={() => setBillingOption('annual')}
-                className={`${styles.docPriceCard} ${styles.docPriceCardFeatured} ${billingOption === 'annual' ? styles.docPriceCardSelected : ''}`}
-              >
-                <div className={styles.docFeaturedRibbon}>
-                  ⭐ MEJOR VALOR · RECOMENDADO
+            {/* Dynamic Single Pricing Card Projection */}
+            <div className={styles.docPricingSingleWrapper}>
+              {billingOption === 'annual' ? (
+                /* Option 1: Annual Plan (Featured) */
+                <div className={`${styles.docPriceCard} ${styles.docPriceCardFeatured} ${styles.docPriceCardSelected}`}>
+                  <div className={styles.docFeaturedRibbon}>
+                    ⭐ MEJOR VALOR · RECOMENDADO (16.7% DESCUENTO)
+                  </div>
+
+                  <div className={styles.docPriceHeader}>
+                    <div>
+                      <h3 className={styles.docPricePlanName}>Plan Anual Anticipado</h3>
+                      <p className={styles.docPricePlanDesc}>Cobertura total de 12 meses de marketing médico continuo</p>
+                    </div>
+                    <div className={`${styles.docCustomRadio} ${styles.docCustomRadioChecked}`}>
+                      ✓
+                    </div>
+                  </div>
+
+                  <div className={styles.docPriceAmountBox}>
+                    <div style={{ display: 'flex', alignItems: 'baseline' }}>
+                      <span className={styles.docPriceNumber}>{formatPrice(annualPrice)}</span>
+                      <span className={styles.docPricePeriod}>+ IVA / año</span>
+                    </div>
+                    <div className={styles.docPriceMonthlyEquiv}>
+                      <span>⚡ Equivalente a:</span>
+                      <strong>{formatPrice(annualMonthlyEquiv)} / mes</strong>
+                    </div>
+                    <div className={styles.docSavingsBadge}>
+                      <span>🔥</span>
+                      <span>Ahorro de $24,000.00 MXN al año ({annualSavingsPercent}% de Descuento)</span>
+                    </div>
+                  </div>
+
+                  <div className={styles.docDeliverablesList}>
+                    <div className={styles.docDeliverableItem}>
+                      <span className={styles.docCheckIcon}>✓</span>
+                      <span><strong>20 Diseños Mensuales para Feed</strong> (Infografías médicas, salud metabólica, mitos y recetas).</span>
+                    </div>
+                    <div className={styles.docDeliverableItem}>
+                      <span className={styles.docCheckIcon}>✓</span>
+                      <span><strong>20 Adaptaciones a Stories (9:16)</strong> optimizadas con llamados a agendar cita.</span>
+                    </div>
+                    <div className={styles.docDeliverableItem}>
+                      <span className={styles.docCheckIcon}>✓</span>
+                      <span><strong>1 Reel Mensual</strong> Producido y Editado con subtítulos animados de alta retención.</span>
+                    </div>
+                    <div className={styles.docDeliverableItem}>
+                      <span className={styles.docCheckIcon}>✓</span>
+                      <span><strong>Creación Visual con Modelos de IA</strong> generativa de última generación.</span>
+                    </div>
+                    <div className={styles.docDeliverableItem}>
+                      <span className={styles.docCheckIcon}>✓</span>
+                      <span><strong>Supervisión y Retoque por Diseñadores</strong> profesionales de Apolograma.</span>
+                    </div>
+                    <div className={styles.docDeliverableItem}>
+                      <span className={styles.docCheckIcon}>✓</span>
+                      <span><strong>Parrillas Quincenales</strong> de contenido para revisión y aprobación previa del doctor.</span>
+                    </div>
+                  </div>
+
+                  <a href={waUrl} target="_blank" rel="noopener noreferrer" className={styles.docBtnPrimary} style={{ width: '100%', justifyContent: 'center' }}>
+                    <span>CONTRATAR PLAN ANUAL CON DESCUENTO →</span>
+                  </a>
                 </div>
+              ) : (
+                /* Option 2: Monthly Plan */
+                <div className={`${styles.docPriceCard} ${styles.docPriceCardFeatured} ${styles.docPriceCardSelected}`}>
+                  <div className={styles.docFeaturedRibbon} style={{ background: 'linear-gradient(135deg, #0F172A 0%, #334155 100%)' }}>
+                    📅 MODALIDAD MENSUAL RECURRENTE
+                  </div>
 
-                <div className={styles.docPriceHeader}>
-                  <div>
-                    <h3 className={styles.docPricePlanName}>Plan Anual Anticipado</h3>
-                    <p className={styles.docPricePlanDesc}>Cobertura total de 12 meses de marketing médico continuo</p>
+                  <div className={styles.docPriceHeader}>
+                    <div>
+                      <h3 className={styles.docPricePlanName}>Plan Mensual Recurrente</h3>
+                      <p className={styles.docPricePlanDesc}>Flexibilidad mes a mes sin compromiso forzoso anual</p>
+                    </div>
+                    <div className={`${styles.docCustomRadio} ${styles.docCustomRadioChecked}`}>
+                      ✓
+                    </div>
                   </div>
-                  <div className={`${styles.docCustomRadio} ${billingOption === 'annual' ? styles.docCustomRadioChecked : ''}`}>
-                    {billingOption === 'annual' && '✓'}
+
+                  <div className={styles.docPriceAmountBox}>
+                    <div style={{ display: 'flex', alignItems: 'baseline' }}>
+                      <span className={styles.docPriceNumber}>{formatPrice(monthlyPrice)}</span>
+                      <span className={styles.docPricePeriod}>+ IVA / mes</span>
+                    </div>
+                    <div style={{ fontSize: '13px', color: '#64748B', marginTop: '6px' }}>
+                      Facturación recurrente mensual con CFDI · Sin plazos forzosos
+                    </div>
                   </div>
+
+                  <div className={styles.docDeliverablesList}>
+                    <div className={styles.docDeliverableItem}>
+                      <span className={styles.docCheckIcon}>✓</span>
+                      <span><strong>20 Diseños Mensuales para Feed</strong> (Infografías médicas, salud metabólica, mitos y recetas).</span>
+                    </div>
+                    <div className={styles.docDeliverableItem}>
+                      <span className={styles.docCheckIcon}>✓</span>
+                      <span><strong>20 Adaptaciones a Stories (9:16)</strong> optimizadas con llamados a agendar cita.</span>
+                    </div>
+                    <div className={styles.docDeliverableItem}>
+                      <span className={styles.docCheckIcon}>✓</span>
+                      <span><strong>1 Reel Mensual</strong> Producido y Editado con subtítulos animados de alta retención.</span>
+                    </div>
+                    <div className={styles.docDeliverableItem}>
+                      <span className={styles.docCheckIcon}>✓</span>
+                      <span><strong>Creación Visual con Modelos de IA</strong> generativa de última generación.</span>
+                    </div>
+                    <div className={styles.docDeliverableItem}>
+                      <span className={styles.docCheckIcon}>✓</span>
+                      <span><strong>Supervisión y Retoque por Diseñadores</strong> profesionales de Apolograma.</span>
+                    </div>
+                    <div className={styles.docDeliverableItem}>
+                      <span className={styles.docCheckIcon}>✓</span>
+                      <span><strong>Flexibilidad</strong> de pago mes con mes sin plazos forzosos.</span>
+                    </div>
+                  </div>
+
+                  <a href={waUrl} target="_blank" rel="noopener noreferrer" className={styles.docBtnPrimary} style={{ width: '100%', justifyContent: 'center' }}>
+                    <span>CONTRATAR PLAN MENSUAL →</span>
+                  </a>
                 </div>
-
-                <div className={styles.docPriceAmountBox}>
-                  <div style={{ display: 'flex', alignItems: 'baseline' }}>
-                    <span className={styles.docPriceNumber}>{formatPrice(annualPrice)}</span>
-                    <span className={styles.docPricePeriod}>+ IVA / año</span>
-                  </div>
-                  <div className={styles.docPriceMonthlyEquiv}>
-                    <span>⚡ Equivalente a:</span>
-                    <strong>{formatPrice(annualMonthlyEquiv)} / mes</strong>
-                  </div>
-                  <div className={styles.docSavingsBadge}>
-                    <span>🔥</span>
-                    <span>Ahorro de $24,000.00 MXN al año ({annualSavingsPercent}% de Descuento)</span>
-                  </div>
-                </div>
-
-                <div className={styles.docDeliverablesList}>
-                  <div className={styles.docDeliverableItem}>
-                    <span className={styles.docCheckIcon}>✓</span>
-                    <span><strong>20 Diseños Mensuales para Feed</strong> (Infografías médicas, salud metabólica, mitos y recetas).</span>
-                  </div>
-                  <div className={styles.docDeliverableItem}>
-                    <span className={styles.docCheckIcon}>✓</span>
-                    <span><strong>20 Adaptaciones a Stories (9:16)</strong> optimizadas con llamados a agendar cita.</span>
-                  </div>
-                  <div className={styles.docDeliverableItem}>
-                    <span className={styles.docCheckIcon}>✓</span>
-                    <span><strong>1 Reel Mensual</strong> Producido y Editado con subtítulos animados de alta retención.</span>
-                  </div>
-                  <div className={styles.docDeliverableItem}>
-                    <span className={styles.docCheckIcon}>✓</span>
-                    <span><strong>Creación Visual con Modelos de IA</strong> generativa de última generación.</span>
-                  </div>
-                  <div className={styles.docDeliverableItem}>
-                    <span className={styles.docCheckIcon}>✓</span>
-                    <span><strong>Supervisión y Retoque por Diseñadores</strong> profesionales de Apolograma.</span>
-                  </div>
-                  <div className={styles.docDeliverableItem}>
-                    <span className={styles.docCheckIcon}>✓</span>
-                    <span><strong>Parrillas Quincenales</strong> de contenido para revisión y aprobación previa del doctor.</span>
-                  </div>
-                </div>
-
-                <button className={styles.docBtnPrimary} style={{ width: '100%', justifyContent: 'center' }}>
-                  <span>{billingOption === 'annual' ? 'OPCIÓN SELECCIONADA ✓' : 'SELECCIONAR PLAN ANUAL'}</span>
-                </button>
-              </div>
-
-              {/* Option 2: Monthly Plan */}
-              <div
-                onClick={() => setBillingOption('monthly')}
-                className={`${styles.docPriceCard} ${billingOption === 'monthly' ? styles.docPriceCardSelected : ''}`}
-              >
-                <div className={styles.docPriceHeader}>
-                  <div>
-                    <h3 className={styles.docPricePlanName}>Plan Mensual Recurrente</h3>
-                    <p className={styles.docPricePlanDesc}>Flexibilidad mes a mes sin compromiso forzoso anual</p>
-                  </div>
-                  <div className={`${styles.docCustomRadio} ${billingOption === 'monthly' ? styles.docCustomRadioChecked : ''}`}>
-                    {billingOption === 'monthly' && '✓'}
-                  </div>
-                </div>
-
-                <div className={styles.docPriceAmountBox}>
-                  <div style={{ display: 'flex', alignItems: 'baseline' }}>
-                    <span className={styles.docPriceNumber}>{formatPrice(monthlyPrice)}</span>
-                    <span className={styles.docPricePeriod}>+ IVA / mes</span>
-                  </div>
-                  <div style={{ fontSize: '13px', color: '#64748B', marginTop: '6px' }}>
-                    Facturación recurrente mensual con CFDI
-                  </div>
-                </div>
-
-                <div className={styles.docDeliverablesList}>
-                  <div className={styles.docDeliverableItem}>
-                    <span className={styles.docCheckIcon}>✓</span>
-                    <span><strong>20 Diseños Mensuales para Feed</strong> (Infografías médicas, salud metabólica, mitos y recetas).</span>
-                  </div>
-                  <div className={styles.docDeliverableItem}>
-                    <span className={styles.docCheckIcon}>✓</span>
-                    <span><strong>20 Adaptaciones a Stories (9:16)</strong> optimizadas con llamados a agendar cita.</span>
-                  </div>
-                  <div className={styles.docDeliverableItem}>
-                    <span className={styles.docCheckIcon}>✓</span>
-                    <span><strong>1 Reel Mensual</strong> Producido y Editado con subtítulos animados de alta retención.</span>
-                  </div>
-                  <div className={styles.docDeliverableItem}>
-                    <span className={styles.docCheckIcon}>✓</span>
-                    <span><strong>Creación Visual con Modelos de IA</strong> generativa de última generación.</span>
-                  </div>
-                  <div className={styles.docDeliverableItem}>
-                    <span className={styles.docCheckIcon}>✓</span>
-                    <span><strong>Supervisión y Retoque por Diseñadores</strong> profesionales de Apolograma.</span>
-                  </div>
-                  <div className={styles.docDeliverableItem}>
-                    <span className={styles.docCheckIcon}>✓</span>
-                    <span><strong>Flexibilidad</strong> de pago mes con mes sin plazos forzosos.</span>
-                  </div>
-                </div>
-
-                <button className={styles.docBtnSecondary} style={{ width: '100%', justifyContent: 'center' }}>
-                  <span>{billingOption === 'monthly' ? 'OPCIÓN SELECCIONADA ✓' : 'SELECCIONAR PLAN MENSUAL'}</span>
-                </button>
-              </div>
+              )}
             </div>
 
             {/* Transparency Cards */}
