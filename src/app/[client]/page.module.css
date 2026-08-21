@@ -5039,25 +5039,27 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     width: 100%;
+    overflow: hidden;
   }
 
   .docAgencyLogoApolograma {
-    height: 11.5px;
-    max-width: 115px;
-    width: auto;
+    height: 10px !important;
+    width: auto !important;
+    max-width: 120px !important;
   }
 
   .docCrossSeparator {
-    font-size: 11px;
-    margin: 0 1px;
+    font-size: 10px !important;
+    margin: 0 1px !important;
+    line-height: 1;
   }
 
   .docAgencyLogoFn1 {
-    height: 20px;
-    max-width: 140px;
-    width: auto;
+    height: 14px !important;
+    width: auto !important;
+    max-width: 135px !important;
   }
 
   .docClientLogoPill {
