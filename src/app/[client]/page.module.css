@@ -5005,37 +5005,153 @@
 }
 
 @media (max-width: 640px) {
+  .docFrame {
+    padding: 16px 12px 40px 12px;
+  }
+
+  .docTopBanner {
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 12px;
+    align-items: stretch;
+  }
+
+  .docBadgeLive, .docTaglinePill {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    font-size: 10.5px;
+    padding: 5px 10px;
+    line-height: 1.35;
+    box-sizing: border-box;
+  }
+
+  .docAgencyNav {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    padding: 14px 12px;
+    margin-bottom: 20px;
+    border-radius: 18px;
+  }
+
+  .docAgencyLogos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .docAgencyLogoApolograma {
+    height: 11.5px;
+    max-width: 115px;
+    width: auto;
+  }
+
+  .docCrossSeparator {
+    font-size: 11px;
+    margin: 0 1px;
+  }
+
+  .docAgencyLogoFn1 {
+    height: 20px;
+    max-width: 140px;
+    width: auto;
+  }
+
+  .docClientLogoPill {
+    padding: 4px 12px;
+    gap: 8px;
+  }
+
+  .docClientAvatar {
+    width: 22px;
+    height: 22px;
+  }
+
+  .docClientPillText {
+    font-size: 11px;
+  }
+
+  .docHeroCard {
+    padding: 24px 16px;
+    border-radius: 24px;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
   .docHeroTitle {
-    font-size: 28px;
+    font-size: 27px;
+    line-height: 1.15;
+  }
+
+  .docHeroSubtitle {
+    font-size: 14.5px;
   }
 
   .docHeroActions {
     flex-direction: column;
     width: 100%;
+    gap: 10px;
   }
 
   .docBtnPrimary, .docBtnSecondary {
     width: 100%;
     justify-content: center;
+    padding: 14px 18px;
+    font-size: 13.5px;
   }
 
   .docPillarsGrid {
     grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .docPillarCard {
+    padding: 14px 14px 20px 14px;
+  }
+
+  .docPillarCover {
+    height: 155px;
+    margin-bottom: 14px;
   }
 
   .docTermsGrid {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
 
-  .docTopBanner {
-    flex-direction: column;
-    align-items: flex-start;
+  .docPricingGrid {
+    grid-template-columns: 1fr;
   }
 
-  .docAgencyNav {
-    flex-direction: column;
-    gap: 14px;
-    align-items: flex-start;
+  .docPricingCard {
+    padding: 26px 18px;
+    border-radius: 24px;
+  }
+
+  .docPriceAmount {
+    font-size: 38px;
+  }
+
+  .docSummaryBox {
+    padding: 24px 16px;
+    border-radius: 24px;
+    margin-bottom: 32px;
+  }
+
+  .docSummaryTitle {
+    font-size: 22px;
+  }
+
+  .docSummaryTotalValue {
+    font-size: 32px;
+  }
+
+  .docWhatsAppBtn {
+    padding: 14px 18px;
+    font-size: 13.5px;
   }
 }
 
