@@ -1451,72 +1451,235 @@
     <!-- ════════════════════════════════════════════════════════════════════════════ -->
     <div id="tab-herosku" class="mkt-pane hidden space-y-6">
       
-      <!-- La Cascada de Monetización Visual -->
-      <div class="bg-slate-900 text-white p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl space-y-4">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-          <div class="flex items-center gap-2">
-            <span class="text-lg">🎯</span>
-            <h3 class="text-sm sm:text-base font-bold text-white">Estrategia Front-End: Adquisición con Hero SKUs ($649 / $699)</h3>
+      <!-- Header Banner de Estrategia & Unit Economics -->
+      <div class="bg-gradient-to-r from-slate-900 via-purple-950 to-indigo-950 text-white p-6 sm:p-7 rounded-3xl border border-purple-900/50 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <span class="text-xs font-mono font-bold text-emerald-400 uppercase tracking-widest block mb-1">ARQUITECTURA DE NEGOCIO · UNIT ECONOMICS & RETENCIÓN</span>
+          <h2 class="text-xl sm:text-2xl font-black text-white">Validación de Hero SKUs & Fosos Defensivos (Moats)</h2>
+          <p class="text-xs text-slate-300 mt-1 max-w-2xl leading-relaxed">
+            La estrategia comercial que garantiza <strong>Payback en el Día 1</strong> y un <strong>LTV de $15,633 MXN</strong> por suscriptor, protegida por barreras que los competidores tradicionales no pueden replicar sin destruir sus propios modelos.
+          </p>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <div class="p-3 bg-purple-900/40 rounded-2xl border border-purple-500/40 text-center">
+            <span class="text-lg font-black text-emerald-400 block">72%</span>
+            <span class="text-[9px] uppercase font-mono text-purple-200 font-bold">Margen Bruto D2C</span>
           </div>
-          <span class="text-[10px] font-mono bg-purple-950 text-purple-300 px-2.5 py-0.5 rounded-full border border-purple-800 font-bold">CAC $200-$300</span>
+          <div class="p-3 bg-purple-900/40 rounded-2xl border border-purple-500/40 text-center">
+            <span class="text-lg font-black text-purple-300 block">6.2x</span>
+            <span class="text-[9px] uppercase font-mono text-purple-200 font-bold">Ratio LTV / CAC</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Funnel Financiero de Adquisición y Monetización (La Cascada) -->
+      <div class="bg-slate-900 text-white p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl space-y-4">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
+          <div>
+            <span class="text-xs font-mono font-bold text-purple-400 uppercase tracking-widest block">FUNNEL DE CONVERSIÓN FINANCIERA</span>
+            <h3 class="text-base sm:text-lg font-bold text-white mt-0.5">La Cascada de Monetización: De Compra Única a Suscripción LTV</h3>
+          </div>
+          <span class="text-[10px] font-mono bg-purple-950 text-purple-300 px-3 py-1 rounded-full border border-purple-800 font-bold">Payback Día 1</span>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
           
-          <div class="p-4 bg-white/5 rounded-2xl border border-white/10 space-y-1.5">
-            <span class="text-purple-300 font-mono font-bold text-[10px] uppercase block">PASO 1 · ADQUISICIÓN</span>
-            <strong class="text-sm text-white block">Magnesio ($649) / Jugo ($699)</strong>
-            <p class="text-slate-400 text-[11px]">Búsqueda orgánica en pico (+240% en México). Adquisición con <strong>CAC bajo de $200-$300 MXN</strong>.</p>
+          <!-- Paso 1 -->
+          <div class="p-4 bg-white/5 rounded-2xl border border-white/10 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-purple-300 font-mono font-bold text-[10px] uppercase">PASO 1 · ADQUISICIÓN FRONT-END</span>
+              <span class="text-[9px] font-mono bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded-full font-bold">CAC $200-$300</span>
+            </div>
+            <strong class="text-sm text-white block">Hero SKU Individual ($649 / $699 MXN)</strong>
+            <p class="text-slate-400 text-[11px] leading-relaxed">
+              Adquisición masiva apalancada en búsqueda viral (Magnesio +240% / Jugo Verde). <strong>Margen neto positivo desde la 1ra orden</strong>; financia la pauta sin quemar caja.
+            </p>
+            <div class="p-2 bg-black/40 rounded-xl text-[10px] font-mono text-emerald-300 flex justify-between">
+              <span>Margen Contribución:</span>
+              <span class="font-bold">+$280 MXN netos/orden</span>
+            </div>
           </div>
 
-          <div class="p-4 bg-white/5 rounded-2xl border border-white/10 space-y-1.5">
-            <span class="text-purple-300 font-mono font-bold text-[10px] uppercase block">PASO 2 · EXPERIENCIA QR</span>
-            <strong class="text-sm text-white block">Test Circadiano en Bote</strong>
-            <p class="text-slate-400 text-[11px]">Al abrir el bote, el cliente escanea el QR. <strong>38 de cada 100 completan el test</strong>.</p>
+          <!-- Paso 2 -->
+          <div class="p-4 bg-white/5 rounded-2xl border border-white/10 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-purple-300 font-mono font-bold text-[10px] uppercase">PASO 2 · ACTIVACIÓN ONBOARDING</span>
+              <span class="text-[9px] font-mono bg-purple-950 text-purple-300 px-2 py-0.5 rounded-full font-bold">38% Tasa Escaneo</span>
+            </div>
+            <strong class="text-sm text-white block">Test Circadiano QR en Bote Físico</strong>
+            <p class="text-slate-400 text-[11px] leading-relaxed">
+              Al abrir el bote, el cliente escanea el QR y diagnostica su perfil de sueño, energía y digestión con el Asesor IA. <strong>Transforma un bote estático en experiencia interactiva</strong>.
+            </p>
+            <div class="p-2 bg-black/40 rounded-xl text-[10px] font-mono text-purple-300 flex justify-between">
+              <span>Conversión al Test:</span>
+              <span class="font-bold">38 de cada 100 compradores</span>
+            </div>
           </div>
 
-          <div class="p-4 bg-gradient-to-br from-purple-900 to-indigo-900 rounded-2xl border border-purple-500 space-y-1.5">
-            <span class="text-emerald-300 font-mono font-bold text-[10px] uppercase block">PASO 3 · UPSELL ($0 CAC)</span>
-            <strong class="text-sm text-white block">Stack 24h ($2,299/mes)</strong>
-            <p class="text-purple-100 text-[11px]"><strong>16 de cada 100 suben a suscripción</strong>, generando +$15,600 MXN LTV sin costo extra.</p>
+          <!-- Paso 3 -->
+          <div class="p-4 bg-gradient-to-br from-purple-950 to-indigo-900 rounded-2xl border-2 border-purple-500 space-y-2 shadow-sm">
+            <div class="flex items-center justify-between">
+              <span class="text-emerald-300 font-mono font-bold text-[10px] uppercase">PASO 3 · UPSELL & RETENCIÓN</span>
+              <span class="text-[9px] font-mono bg-emerald-900 text-white px-2 py-0.5 rounded-full font-bold">$0 CAC Adicional</span>
+            </div>
+            <strong class="text-sm text-white block">Suscripción Stack 24H ($2,299/mes)</strong>
+            <p class="text-purple-100 text-[11px] leading-relaxed">
+              16 de cada 100 usuarios que hicieron el test suben a la suscripción completa del Stack 24h, desbloqueando el Welcome Kit con Shaker Eléctrico y <strong>generando $15,633 MXN de LTV</strong>.
+            </p>
+            <div class="p-2 bg-black/50 rounded-xl text-[10px] font-mono text-emerald-400 flex justify-between border border-emerald-500/30">
+              <span>LTV Retención (6.8 Meses):</span>
+              <span class="font-bold">$15,633 MXN / Cliente</span>
+            </div>
           </div>
 
         </div>
       </div>
 
-      <!-- Los 4 Fosos Defensivos (Moats) Visual Cards -->
+      <!-- Criterio Científico de Selección: ¿Por qué estos 4 Hero SKUs? -->
       <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-        <div class="flex items-center justify-between">
-          <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white">Los 4 Fosos Defensivos Infranqueables (Moats)</h3>
-          <span class="text-[10px] font-mono text-purple-600 bg-purple-50 dark:bg-purple-950 px-2.5 py-0.5 rounded-full font-bold">Barreras de Entrada</span>
+        <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+          <div>
+            <span class="text-xs font-mono font-bold text-purple-600 uppercase tracking-widest block">FUNDAMENTO BIOLÓGICO</span>
+            <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white mt-0.5">Criterio Científico: ¿Por qué exactamente estos 4 Hero SKUs?</h3>
+          </div>
+          <span class="text-[10px] font-mono text-purple-600 bg-purple-50 dark:bg-purple-950 px-2.5 py-0.5 rounded-full font-bold">Ciclo Circadiano 24H</span>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
           
-          <div class="p-3.5 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-1">
-            <span class="text-lg">🧬</span>
-            <strong class="text-slate-900 dark:text-white text-xs block">1. Ecosistema 24H</strong>
-            <p class="text-slate-500 text-[10px]">Copiarlo destruiría el catálogo de 150 botes genéricos de B-Life.</p>
+          <div class="p-3.5 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-1.5">
+            <div class="flex items-center gap-1.5">
+              <span class="text-lg">🌅</span>
+              <strong class="text-slate-900 dark:text-white text-xs block">1. Rise (Matutino)</strong>
+            </div>
+            <span class="text-[9px] font-mono text-emerald-600 font-bold uppercase block">El Ancla de Hábito</span>
+            <p class="text-slate-500 text-[10px] leading-relaxed">
+              Resuelve la inflamación estomacal y pesadez matutina. Sus 10B UFC de probióticos y enzimas crean una sensación inmediata de ligereza en ayuno.
+            </p>
           </div>
 
-          <div class="p-3.5 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-1">
-            <span class="text-lg">🎁</span>
-            <strong class="text-slate-900 dark:text-white text-xs block">2. Welcome Kit</strong>
-            <p class="text-slate-500 text-[10px]">Nadie regala Shakers USB-C porque sus márgenes están comidos por intermediarios.</p>
+          <div class="p-3.5 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-1.5">
+            <div class="flex items-center gap-1.5">
+              <span class="text-lg">⚡</span>
+              <strong class="text-slate-900 dark:text-white text-xs block">2. Focus (Diurno)</strong>
+            </div>
+            <span class="text-[9px] font-mono text-amber-600 font-bold uppercase block">Puente de Productividad</span>
+            <p class="text-slate-500 text-[10px] leading-relaxed">
+              Energía celular y síntesis de ATP cerebral sin cafeína ni choques de azúcar; evita el bajón de energía de las 2:00 PM en profesionistas.
+            </p>
           </div>
 
-          <div class="p-3.5 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-1">
-            <span class="text-lg">🤖</span>
-            <strong class="text-slate-900 dark:text-white text-xs block">3. Asesor IA</strong>
-            <p class="text-slate-500 text-[10px]">Test interactivo y WhatsApp IA recordando tomas diarias a las 8 AM y 8 PM.</p>
+          <div class="p-3.5 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-1.5">
+            <div class="flex items-center gap-1.5">
+              <span class="text-lg">🌸</span>
+              <strong class="text-slate-900 dark:text-white text-xs block">3. Balance (Tarde)</strong>
+            </div>
+            <span class="text-[9px] font-mono text-rose-600 font-bold uppercase block">Motor de Retención</span>
+            <p class="text-slate-500 text-[10px] leading-relaxed">
+              Efectos visibles en firmeza de piel, uñas y cabello en 21 días gracias a la sinergia con Ácido Hialurónico; garantiza la renovación del Mes 2.
+            </p>
           </div>
 
-          <div class="p-3.5 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-1">
-            <span class="text-lg">🧘‍♀️</span>
-            <strong class="text-slate-900 dark:text-white text-xs block">4. Exclusividad Barre</strong>
-            <p class="text-slate-500 text-[10px]">Presencia física con 40% margen mayorista en estudios boutique premium.</p>
+          <div class="p-3.5 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-1.5">
+            <div class="flex items-center gap-1.5">
+              <span class="text-lg">🌙</span>
+              <strong class="text-slate-900 dark:text-white text-xs block">4. Unwind (Nocturno)</strong>
+            </div>
+            <span class="text-[9px] font-mono text-purple-600 font-bold uppercase block">Gancho Viral Front-End</span>
+            <p class="text-slate-500 text-[10px] leading-relaxed">
+              El ingrediente #1 en aceleración de búsqueda (+240%). Cruza la barrera cerebral, apaga el cortisol y entrega un sueño REM reparador medible en Oura/Apple Watch.
+            </p>
           </div>
 
+        </div>
+      </div>
+
+      <!-- Los 4 Fosos Defensivos Infranqueables (Moats) -->
+      <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+          <div>
+            <span class="text-xs font-mono font-bold text-purple-600 uppercase tracking-widest block">VENTAJA COMPETITIVA ESTRUCTURAL</span>
+            <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white mt-0.5">Los 4 Fosos Defensivos Infranqueables (Moats)</h3>
+          </div>
+          <span class="text-[10px] font-mono text-purple-600 bg-purple-50 dark:bg-purple-950 px-2.5 py-0.5 rounded-full font-bold">Inmunidad Competitiva</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+          
+          <div class="p-3.5 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="text-xl">🧬</span>
+              <strong class="text-slate-900 dark:text-white text-xs block">1. Arquitectura 24H</strong>
+            </div>
+            <p class="text-slate-500 text-[10px] leading-relaxed">
+              B-Life y GNC viven de vender 500 botes sueltos. Si intentaran promover un stack cerrado de 4 productos, <strong>canibalizarían el 90% de su catálogo disperso</strong>.
+            </p>
+          </div>
+
+          <div class="p-3.5 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="text-xl">🎁</span>
+              <strong class="text-slate-900 dark:text-white text-xs block">2. Welcome Kit Shaker</strong>
+            </div>
+            <p class="text-slate-500 text-[10px] leading-relaxed">
+              Las marcas de farmacia operan con márgenes del 15% tras comisiones de distribuidores. Kodi Dose vende D2C directo (72% margen) y <strong>puede regalar hardware premium USB-C</strong> en la 1ra suscripción.
+            </p>
+          </div>
+
+          <div class="p-3.5 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="text-xl">🤖</span>
+              <strong class="text-slate-900 dark:text-white text-xs block">3. Asesor WhatsApp IA</strong>
+            </div>
+            <p class="text-slate-500 text-[10px] leading-relaxed">
+              Atención 24/7 con recordatorios matutinos y nocturnos a las 8 AM y 8 PM; resuelve dudas de biohacking y gestiona renovaciones/dunning sin fricción de call center.
+            </p>
+          </div>
+
+          <div class="p-3.5 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="text-xl">🧘‍♀️</span>
+              <strong class="text-slate-900 dark:text-white text-xs block">4. Alianzas Boutique</strong>
+            </div>
+            <p class="text-slate-500 text-[10px] leading-relaxed">
+              Presencia física en estudios de Barre, Pilates y Crossfit con 40% de margen mayorista; un canal de alta confianza donde las marcas de Amazon o supermercado no tienen entrada.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Veredicto Estratégico para el Consejo de Socios -->
+      <div class="bg-gradient-to-r from-purple-950 via-slate-900 to-indigo-950 text-white p-6 sm:p-7 rounded-3xl border-2 border-purple-500/50 shadow-xl space-y-4">
+        <div class="flex items-center justify-between border-b border-purple-800/60 pb-3">
+          <div class="flex items-center gap-2">
+            <span class="text-xl">👑</span>
+            <h3 class="text-base font-black text-white">Veredicto Estratégico para el Consejo de Socios</h3>
+          </div>
+          <span class="text-[10px] font-mono bg-emerald-500 text-slate-950 font-black px-3 py-1 rounded-full uppercase tracking-wider">Viabilidad Aprobada</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+          <div class="p-3 bg-black/40 rounded-2xl border border-purple-500/30">
+            <span class="text-[9px] font-mono text-purple-300 block uppercase">PAYBACK DE ADQUISICIÓN</span>
+            <strong class="text-lg font-black text-emerald-400 block">Día 1 (0 Días)</strong>
+            <span class="text-[10px] text-slate-400">CAC cubierto con la primera compra.</span>
+          </div>
+          <div class="p-3 bg-black/40 rounded-2xl border border-purple-500/30">
+            <span class="text-[9px] font-mono text-purple-300 block uppercase">LTV ACUMULADO</span>
+            <strong class="text-lg font-black text-purple-300 block">$15,633 MXN</strong>
+            <span class="text-[10px] text-slate-400">6.8 meses de retención promedio.</span>
+          </div>
+          <div class="p-3 bg-black/40 rounded-2xl border border-purple-500/30">
+            <span class="text-[9px] font-mono text-purple-300 block uppercase">META FINANCIERA (SOM)</span>
+            <strong class="text-lg font-black text-emerald-400 block">$50M MXN / año</strong>
+            <span class="text-[10px] text-slate-400">Solo 5,000 suscriptores (0.13% SAM).</span>
+          </div>
+          <div class="p-3 bg-black/40 rounded-2xl border border-purple-500/30">
+            <span class="text-[9px] font-mono text-purple-300 block uppercase">DEPENDENCIA DE TERCEROS</span>
+            <strong class="text-lg font-black text-white block">0% Intermediarios</strong>
+            <span class="text-[10px] text-slate-400">Control total del dato, margen y cliente.</span>
+          </div>
         </div>
       </div>
 
