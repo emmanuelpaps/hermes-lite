@@ -36,12 +36,13 @@ export async function POST(req: NextRequest) {
 
     // Extract headers
     const userAgent = req.headers.get('user-agent') || 'Desconocido';
-    const clientIp = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 
-                     req.headers.get('x-real-ip') || 
-                     'IP no disponible';
+    const rawXForwarded = req.headers.get('x-forwarded-for') || '';
+    const rawRealIp = req.headers.get('x-real-ip') || '';
+    const allIps = (rawXForwarded + ',' + rawRealIp).split(',').map(s => s.trim()).filter(Boolean);
+    const clientIp = allIps[0] || 'IP no disponible';
     
-    // Check if the request comes from an excluded admin IP
-    if (EXCLUDED_IPS.includes(clientIp)) {
+    // Check if any IP in the chain matches an excluded admin IP
+    if (allIps.some(ip => EXCLUDED_IPS.includes(ip))) {
       return NextResponse.json({ success: true, bypassed: true, reason: 'excluded_admin_ip' });
     }
 
