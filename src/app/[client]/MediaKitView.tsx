@@ -449,6 +449,39 @@ export default function MediaKitView({ data }: { data: ClientData }) {
   const [hoveredSegment, setHoveredSegment] = useState<number | null>(null);
   const [isAutoplayActive, setIsAutoplayActive] = useState(true);
 
+  // Real-time Telegram Open Alert
+  useEffect(() => {
+    try {
+      const slug = window.location.pathname.replace(/^\//, '') || 'general';
+      const sessionKey = `apolo_opened_${slug}`;
+      const lastNotified = sessionStorage.getItem(sessionKey);
+      
+      // Avoid spamming if same user refreshes in the same session within 5 minutes
+      if (lastNotified && Date.now() - parseInt(lastNotified, 10) < 300000) {
+        return;
+      }
+      
+      sessionStorage.setItem(sessionKey, Date.now().toString());
+
+      const payload = {
+        clientName: data.clientName || slug,
+        clientSlug: slug,
+        url: window.location.href,
+        referrer: document.referrer || 'Directo',
+        screenResolution: `${window.screen.width}x${window.screen.height}`,
+      };
+
+      fetch('/api/notify-open', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        keepalive: true,
+      }).catch(() => {});
+    } catch (e) {
+      // Non-blocking telemetry
+    }
+  }, [data.clientName]);
+
   useEffect(() => {
     if (!isAutoplayActive) return;
     
