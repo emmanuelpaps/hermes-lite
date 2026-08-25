@@ -449,9 +449,89 @@ export default function MediaKitView({ data }: { data: ClientData }) {
   const [hoveredSegment, setHoveredSegment] = useState<number | null>(null);
   const [isAutoplayActive, setIsAutoplayActive] = useState(true);
 
-  // Real-time Telegram Open Alert
+  // Real-time Telegram Open Alert with 3-Layer Device Exclusion
   useEffect(() => {
     try {
+      const isLocalhost = Boolean(
+        typeof window !== 'undefined' && (
+          window.location.hostname === 'localhost' ||
+          window.location.hostname === '127.0.0.1' ||
+          window.location.hostname.startsWith('192.168.') ||
+          window.location.hostname.endsWith('.local')
+        )
+      );
+
+      // Toast notification helper
+      const showToast = (msg: string) => {
+        if (typeof document === 'undefined') return;
+        let toast = document.getElementById('apolo-admin-toast');
+        if (!toast) {
+          toast = document.createElement('div');
+          toast.id = 'apolo-admin-toast';
+          toast.style.cssText = 'position:fixed;top:20px;right:20px;z-index:99999;background:rgba(11,20,38,0.95);border:1px solid rgba(0,163,224,0.6);color:#fff;padding:10px 18px;border-radius:12px;font-family:sans-serif;font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,0.8);backdrop-filter:blur(10px);transition:all 0.3s ease;opacity:0;transform:translateY(-10px);pointer-events:none;display:flex;align-items:center;gap:8px;';
+          document.body.appendChild(toast);
+        }
+        toast.innerHTML = msg;
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateY(0)';
+        setTimeout(() => {
+          if (toast) {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(-10px)';
+          }
+        }, 3500);
+      };
+
+      // Check URL parameters for admin activation / deactivation (?admin, ?admin=1, ?admin=0)
+      if (typeof window !== 'undefined') {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('admin') || urlParams.has('bypass') || urlParams.has('preview')) {
+          const val = urlParams.get('admin') || urlParams.get('bypass') || urlParams.get('preview') || '';
+          if (val === '0' || val === 'false' || val === 'off') {
+            localStorage.removeItem('apolo_admin_device');
+            showToast('🔔 <b>Alertas Reactivadas:</b> Este dispositivo registrará notificaciones.');
+          } else {
+            localStorage.setItem('apolo_admin_device', 'true');
+            showToast('🛡️ <b>Modo Administrador:</b> Alertas silenciadas permanentemente en este dispositivo.');
+          }
+          // Clean URL parameters cleanly without page refresh
+          const cleanUrl = window.location.pathname;
+          window.history.replaceState({}, document.title, cleanUrl);
+        }
+      }
+
+      const isAdminDevice = typeof localStorage !== 'undefined' && localStorage.getItem('apolo_admin_device') === 'true';
+
+      // Triple click on header brand cluster to toggle admin mode
+      let logoClicks = 0;
+      let logoClickTimer: any = null;
+      const logoEl = document.querySelector('.brand-cluster') || document.querySelector('header');
+      if (logoEl) {
+        const handleLogoClick = () => {
+          logoClicks++;
+          clearTimeout(logoClickTimer);
+          if (logoClicks >= 3) {
+            logoClicks = 0;
+            const current = localStorage.getItem('apolo_admin_device') === 'true';
+            if (current) {
+              localStorage.removeItem('apolo_admin_device');
+              showToast('🔔 <b>Alertas Reactivadas:</b> Notificaciones encendidas.');
+            } else {
+              localStorage.setItem('apolo_admin_device', 'true');
+              showToast('🛡️ <b>Modo Administrador:</b> Alertas silenciadas en este dispositivo.');
+            }
+          } else {
+            logoClickTimer = setTimeout(() => { logoClicks = 0; }, 600);
+          }
+        };
+        logoEl.addEventListener('click', handleLogoClick);
+      }
+
+      // If localhost or marked admin device, skip dispatching alert
+      if (isLocalhost || isAdminDevice) {
+        return;
+      }
+
       const slug = window.location.pathname.replace(/^\//, '') || 'general';
       const sessionKey = `apolo_opened_${slug}`;
       const lastNotified = sessionStorage.getItem(sessionKey);
