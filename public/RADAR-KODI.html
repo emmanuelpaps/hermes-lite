@@ -354,6 +354,99 @@
             </div>
           </div>
         </div>
+
+        <!-- PUNTO 1: MATRIZ DE DEPENDENCIA DE CANALES & VULNERABILIDAD OPERATIVA -->
+        <div class="bg-slate-900 text-white p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl space-y-6 mt-6">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+            <div>
+              <span class="text-xs font-mono font-bold text-purple-400 uppercase tracking-widest block">ANÁLISIS DE RESILIENCIA FINANCIERA</span>
+              <h3 class="text-lg sm:text-xl font-bold text-white mt-0.5">1. Matriz de Dependencia de Canales & Vulnerabilidad de Competidores</h3>
+            </div>
+            <span class="text-[11px] font-mono bg-purple-950 text-purple-300 px-3 py-1 rounded-full border border-purple-800 font-bold">
+              Riesgo Operativo vs Control D2C
+            </span>
+          </div>
+
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Analizar de dónde proviene el flujo de ingresos de cada competidor revela su verdadero talón de Aquiles frente a cambios de algoritmos, comisiones y costos de arrendamiento:
+          </p>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="border-b border-slate-800 text-slate-400 uppercase text-[10px] font-mono">
+                  <th class="py-3 px-3">Marca / Competidor</th>
+                  <th class="py-3 px-3">Mix de Canales de Venta</th>
+                  <th class="py-3 px-3">Margen Bruto Real</th>
+                  <th class="py-3 px-3">Propiedad de Datos (Data Ownership)</th>
+                  <th class="py-3 px-3 text-rose-400">Vulnerabilidad Crítica / Riesgo de Plataforma</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800 text-slate-300">
+                <tr>
+                  <td class="py-3 px-3 font-bold text-white">B-Life</td>
+                  <td class="py-3 px-3"><strong>85% Amazon & Mercado Libre</strong><br><span class="text-[10px] text-slate-400">10% Farmacias · 5% Web propia</span></td>
+                  <td class="py-3 px-3 text-amber-400 font-semibold">45% – 50%<br><span class="text-[10px] text-slate-400">(Tras comisiones y Amazon PPC)</span></td>
+                  <td class="py-3 px-3 text-rose-400 font-bold">0% (Amazon es el dueño)</td>
+                  <td class="py-3 px-3 text-[11px] text-rose-300">
+                    <strong>Atrapados en Amazon:</strong> Si Amazon eleva comisiones del 15% al 20% o lanza "Amazon Basics Magnesium", su margen se desploma. Cero comunicación directa con el cliente.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-3 font-bold text-white">GNC México</td>
+                  <td class="py-3 px-3"><strong>90% Tiendas Físicas (Malls)</strong><br><span class="text-[10px] text-slate-400">10% E-Commerce</span></td>
+                  <td class="py-3 px-3 text-rose-400 font-semibold">30% – 38%<br><span class="text-[10px] text-slate-400">(Comido por rentas y nóminas)</span></td>
+                  <td class="py-3 px-3 text-amber-400 font-bold">Media (Club GNC físico)</td>
+                  <td class="py-3 px-3 text-[11px] text-rose-300">
+                    <strong>Asfixia de Costos Fijos:</strong> Rentas en centros comerciales de lujo ($60k-$120k/mes por local), luz comercial y nóminas de vendedores. Vulnerables a caídas de tráfico físico.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-3 font-bold text-white">Birdman</td>
+                  <td class="py-3 px-3"><strong>65% Supermercados (Costco/HEB)</strong><br><span class="text-[10px] text-slate-400">35% Web & Marketplaces</span></td>
+                  <td class="py-3 px-3 text-amber-400 font-semibold">48% – 55%<br><span class="text-[10px] text-slate-400">(Tras descuento a retail 35%)</span></td>
+                  <td class="py-3 px-3 text-amber-400 font-bold">Baja en 65% de ventas</td>
+                  <td class="py-3 px-3 text-[11px] text-rose-300">
+                    <strong>Cobros a 90-120 Días:</strong> El retail masivo impone plazos de crédito largos, cargos por derecho de anaquel (*slotting fees*) y devoluciones de botes próximos a vencer.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-3 font-bold text-white">Sesēn</td>
+                  <td class="py-3 px-3"><strong>50% Spas / Clínicas / Boutiques</strong><br><span class="text-[10px] text-slate-400">35% Web D2C · 15% Liverpool</span></td>
+                  <td class="py-3 px-3 text-purple-300 font-semibold">58% – 64%</td>
+                  <td class="py-3 px-3 text-purple-300 font-bold">Media (Fuerte en Web)</td>
+                  <td class="py-3 px-3 text-[11px] text-slate-400">
+                    <strong>Dependencia de Mayoristas:</strong> Depende de que spas y dermatólogas prescriban su producto; margen recortado por comisión mayorista en el 65% de su volumen.
+                  </td>
+                </tr>
+                <tr class="bg-purple-950/40 border-2 border-purple-500 font-bold">
+                  <td class="py-3.5 px-3 text-purple-300 text-sm">⭐ KODI DOSE+</td>
+                  <td class="py-3.5 px-3 text-emerald-300"><strong>80% E-Commerce D2C Propietario</strong><br><span class="text-[10px] text-purple-200">20% B2B Boutique (Barre/Pilates)</span></td>
+                  <td class="py-3.5 px-3 text-emerald-400 font-black text-sm">68% – 72% Neto<br><span class="text-[10px] text-emerald-200">($1,383 MXN por Stack)</span></td>
+                  <td class="py-3.5 px-3 text-emerald-400 font-black">100% First-Party Data<br><span class="text-[10px] text-purple-200">(WhatsApp + Correo)</span></td>
+                  <td class="py-3.5 px-3 text-[11px] text-emerald-200">
+                    <strong>Cero Intermediarios:</strong> Cobro instantáneo en Stripe (T+2), sin comisiones de Amazon, sin rentas de locales y canal directo de retención automatizada por WhatsApp Concierge.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs pt-2">
+            <div class="p-3 bg-white/5 rounded-xl border border-white/10">
+              <strong class="text-purple-300 block mb-0.5">1. Cobro Inmediato (T+2)</strong>
+              <p class="text-slate-400 text-[11px]">Liquidez inmediata para reinvertir en inventario y pauta publicitaria en vez de esperar 90 días como en Costco.</p>
+            </div>
+            <div class="p-3 bg-white/5 rounded-xl border border-white/10">
+              <strong class="text-purple-300 block mb-0.5">2. Control de Audiencia 100%</strong>
+              <p class="text-slate-400 text-[11px]">Poseemos el WhatsApp y correo del suscriptor, permitiendo remarketing y cross-sell a costo $0.00 MXN.</p>
+            </div>
+            <div class="p-3 bg-white/5 rounded-xl border border-white/10">
+              <strong class="text-purple-300 block mb-0.5">3. Protección contra Copias</strong>
+              <p class="text-slate-400 text-[11px]">Al no depender de Amazon, no estamos expuestos a marcas blancas genéricas que compitan en los mismos resultados.</p>
+            </div>
+          </div>
+        </div>
       </div>
 
     </div>
