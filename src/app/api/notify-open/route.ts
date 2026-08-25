@@ -3,6 +3,23 @@ import { NextRequest, NextResponse } from 'next/server';
 const DEFAULT_BOT_TOKEN = '8539545294:AAHw5rsj7Z0Dg9dA6YiXaXU23uf_LnIYZUY';
 const DEFAULT_CHAT_ID = '1813977310';
 
+// Excluded Admin IPs (Agency / Creator connections)
+const EXCLUDED_IPS = [
+  '187.188.65.131', // Emmanuel Padilla Office / Studio IP (Ciudad Juárez)
+  '127.0.0.1',
+  '::1',
+  ...(process.env.EXCLUDED_IPS ? process.env.EXCLUDED_IPS.split(',').map(s => s.trim()) : [])
+];
+
+function safeDecode(val: string): string {
+  if (!val) return '';
+  try {
+    return decodeURIComponent(val);
+  } catch {
+    return val;
+  }
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json().catch(() => ({}));
@@ -23,10 +40,19 @@ export async function POST(req: NextRequest) {
                      req.headers.get('x-real-ip') || 
                      'IP no disponible';
     
-    // Vercel Geolocation headers
-    const city = req.headers.get('x-vercel-ip-city') || '';
-    const region = req.headers.get('x-vercel-ip-country-region') || '';
-    const country = req.headers.get('x-vercel-ip-country') || '';
+    // Check if the request comes from an excluded admin IP
+    if (EXCLUDED_IPS.includes(clientIp)) {
+      return NextResponse.json({ success: true, bypassed: true, reason: 'excluded_admin_ip' });
+    }
+
+    // Vercel Geolocation headers with clean UTF-8 decoding
+    const rawCity = req.headers.get('x-vercel-ip-city') || '';
+    const rawRegion = req.headers.get('x-vercel-ip-country-region') || '';
+    const rawCountry = req.headers.get('x-vercel-ip-country') || '';
+
+    const city = safeDecode(rawCity);
+    const region = safeDecode(rawRegion);
+    const country = safeDecode(rawCountry);
     const location = [city, region, country].filter(Boolean).join(', ') || 'Ubicación no disponible';
 
     // Device parser
