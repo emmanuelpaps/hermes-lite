@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import LlantasTecnologicoClient from './LlantasTecnologicoClient';
 
 export const metadata: Metadata = {
-  title: 'Llantas y Servicios Tecnológico | Alianza Estratégica Apolograma & Frontera',
-  description: 'Carta de Presentación & Credenciales de Agencia preparadas exclusivamente para la Dirección General de Llantas y Servicios Tecnológico.',
+  title: 'Llantas y Servicios Tecnológico | Propuesta Comercial Apolograma & Frontera',
+  description: 'Propuesta de Servicios de Marketing Estratégico, IA, Pauta Publicitaria y Software para Llantas y Servicios Tecnológico.',
   robots: { index: false, follow: false },
 };
 
