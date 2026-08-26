@@ -3,9 +3,12 @@ import { NextRequest, NextResponse } from 'next/server';
 const DEFAULT_BOT_TOKEN = '8539545294:AAHw5rsj7Z0Dg9dA6YiXaXU23uf_LnIYZUY';
 const DEFAULT_CHAT_ID = '1813977310';
 
-// Excluded Admin IPs (Agency / Creator connections)
+// Excluded Admin IPs (Agency / Emmanuel Padilla / Dev connections)
 const EXCLUDED_IPS = [
-  '187.188.65.131', // Emmanuel Padilla Office / Studio IP (Ciudad Juárez)
+  '187.188.65.131', // Emmanuel Padilla Studio IP 1
+  '187.190.183.21',  // Emmanuel Padilla Studio / Home IP 2
+  '187.190.',       // Range block for local dynamic IP
+  '187.188.',       // Range block for local dynamic IP
   '127.0.0.1',
   '::1',
   ...(process.env.EXCLUDED_IPS ? process.env.EXCLUDED_IPS.split(',').map(s => s.trim()) : [])
@@ -29,22 +32,57 @@ export async function POST(req: NextRequest) {
       url = '',
       referrer = '',
       screenResolution = '',
+      isAdmin = false,
     } = body;
 
-    const botToken = process.env.TELEGRAM_BOT_TOKEN || DEFAULT_BOT_TOKEN;
-    const chatId = process.env.TELEGRAM_CHAT_ID || DEFAULT_CHAT_ID;
+    // 1. Check explicit client-side admin flag
+    if (isAdmin) {
+      return NextResponse.json({ success: true, bypassed: true, reason: 'client_admin_flag' });
+    }
 
-    // Extract headers
+    // 2. Check Custom Audit & Admin Headers
+    if (
+      req.headers.get('x-icm-audit') === 'true' ||
+      req.headers.get('x-admin-device') === 'true' ||
+      req.headers.get('x-puppeteer') === 'true'
+    ) {
+      return NextResponse.json({ success: true, bypassed: true, reason: 'admin_audit_header' });
+    }
+
+    // 3. Check Cookie
+    const adminCookie = req.cookies.get('apolo_admin_device')?.value;
+    if (adminCookie === 'true' || adminCookie === '1') {
+      return NextResponse.json({ success: true, bypassed: true, reason: 'admin_cookie' });
+    }
+
     const userAgent = req.headers.get('user-agent') || 'Desconocido';
+    const uaLower = userAgent.toLowerCase();
+
+    // 4. Exclude Headless / Puppeteer / Automated Audits
+    if (
+      uaLower.includes('headlesschrome') ||
+      uaLower.includes('puppeteer') ||
+      uaLower.includes('playwright') ||
+      uaLower.includes('selenium') ||
+      uaLower.includes('bot') ||
+      uaLower.includes('spider') ||
+      uaLower.includes('crawler')
+    ) {
+      return NextResponse.json({ success: true, bypassed: true, reason: 'headless_bot_agent' });
+    }
+
+    // 5. Exclude Admin IPs
     const rawXForwarded = req.headers.get('x-forwarded-for') || '';
     const rawRealIp = req.headers.get('x-real-ip') || '';
     const allIps = (rawXForwarded + ',' + rawRealIp).split(',').map(s => s.trim()).filter(Boolean);
     const clientIp = allIps[0] || 'IP no disponible';
     
-    // Check if any IP in the chain matches an excluded admin IP
-    if (allIps.some(ip => EXCLUDED_IPS.includes(ip))) {
+    if (allIps.some(ip => EXCLUDED_IPS.some(ex => ip === ex || (ex.endsWith('.') && ip.startsWith(ex))))) {
       return NextResponse.json({ success: true, bypassed: true, reason: 'excluded_admin_ip' });
     }
+
+    const botToken = process.env.TELEGRAM_BOT_TOKEN || DEFAULT_BOT_TOKEN;
+    const chatId = process.env.TELEGRAM_CHAT_ID || DEFAULT_CHAT_ID;
 
     // Vercel Geolocation headers with clean UTF-8 decoding
     const rawCity = req.headers.get('x-vercel-ip-city') || '';
