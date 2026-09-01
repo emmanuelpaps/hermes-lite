@@ -9,7 +9,17 @@ export default function Page() {
   return (
     <iframe
       src="/PRESENTACION-KODI.html"
-      className="w-full h-screen border-0"
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100dvh",
+        border: "none",
+        margin: 0,
+        padding: 0,
+        zIndex: 999999,
+      }}
       title="KODI DOSE Presentación Maestra"
     />
   );
