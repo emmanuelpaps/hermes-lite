@@ -37,20 +37,11 @@
     body { font-family: 'Inter', sans-serif; background-color: #040711; }
     .glass-nav { background: rgba(11, 15, 25, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
     .glass-card { background: rgba(15, 22, 38, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
-    .iphone-shell {
-      max-width: 393px;
-      height: 800px;
-      border-radius: 48px;
-      border: 10px solid #1e293b;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 0 2px rgba(255, 255, 255, 0.1);
-      position: relative;
-      display: flex;
-      flex-direction: column;
-    }
     .custom-scroll::-webkit-scrollbar { width: 5px; height: 5px; }
     .custom-scroll::-webkit-scrollbar-track { background: transparent; }
     .custom-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-    .tap-highlight:active { transform: scale(0.98); transition: transform 0.1s ease; }
+    .link-badge { transition: all 0.15s ease; }
+    .link-badge:hover { transform: translateY(-1px); border-color: rgba(168, 85, 247, 0.6); }
   </style>
 </head>
 <body class="text-slate-100 min-h-screen flex flex-col selection:bg-purple-500 selection:text-white">
@@ -103,7 +94,7 @@
   <main class="flex-1 p-4 md:p-8 overflow-y-auto max-w-7xl mx-auto w-full">
     
     <!-- ========================================================================= -->
-    <!-- MÓDULO 1: FASE 1 - DUE DILIGENCE DE LA COMPETENCIA -->
+    <!-- MÓDULO 1: FASE 1 - DUE DILIGENCE DE LA COMPETENCIA (CON TODOS LOS LINKS) -->
     <!-- ========================================================================= -->
     <section id="module-fase1" class="master-module space-y-8">
       
@@ -113,73 +104,161 @@
         </div>
         <h1 class="text-3xl md:text-4xl font-black text-white">Due Diligence de 3 Benchmarks en México</h1>
         <p class="text-sm text-slate-400 max-w-3xl">
-          Análisis químico, publicitario y financiero de las 3 marcas líderes: <strong>Ami Fitness</strong> (Influencer), <strong>Sesēn Company</strong> (Alta Gama) y <strong>B-Life</strong> (Volumen).
+          Análisis químico, publicitario y financiero con enlaces de evidencia verificados: <strong>Ami Fitness</strong>, <strong>Sesēn Company</strong> y <strong>B-Life México</strong>.
         </p>
       </div>
 
-      <!-- 3 BRAND PROFILE CARDS -->
+      <!-- 3 BRAND PROFILE CARDS CON LINKS DIRECTOS -->
       <div class="grid md:grid-cols-3 gap-6">
         
         <!-- BRAND 1: AMI FITNESS -->
-        <div class="glass-card rounded-3xl p-6 border border-amber-500/20 space-y-4 shadow-xl">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-lg bg-amber-950 text-amber-300 border border-amber-800">🟠 AMI FITNESS</span>
-            <a href="https://amifitness.mx" target="_blank" class="text-[11px] font-mono text-purple-400 hover:underline">amifitness.mx ↗</a>
+        <div class="glass-card rounded-3xl p-6 border border-amber-500/20 space-y-4 shadow-xl flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-lg bg-amber-950 text-amber-300 border border-amber-800">🟠 AMI FITNESS</span>
+              <a href="https://amifitness.mx" target="_blank" class="text-xs font-mono text-purple-400 hover:text-purple-300 font-bold flex items-center gap-1">
+                amifitness.mx ↗
+              </a>
+            </div>
+            
+            <div class="space-y-1">
+              <h3 class="font-black text-white text-lg">Ami Glow Greens</h3>
+              <p class="text-xs text-slate-400">
+                Fundador: <a href="https://www.instagram.com/jhonssosa" target="_blank" class="text-purple-400 underline font-semibold">Jhons Sosa (@jhonssosa)</a>
+              </p>
+            </div>
+
+            <!-- UNIT ECONOMICS -->
+            <div class="space-y-1.5 text-xs font-mono bg-slate-950/80 p-3.5 rounded-2xl border border-slate-800">
+              <div class="flex justify-between"><span class="text-slate-400">Precio Público:</span><span class="text-amber-300 font-bold">$598.00 MXN</span></div>
+              <div class="flex justify-between"><span class="text-slate-400">COGS Planta:</span><span class="text-slate-300">~$135.00 MXN</span></div>
+              <div class="flex justify-between"><span class="text-slate-400">Margen Bruto:</span><span class="text-emerald-400 font-bold">77.4%</span></div>
+            </div>
+
+            <!-- HALLAZGOS Y TRAMPAS -->
+            <div class="space-y-1.5 text-xs text-slate-300">
+              <p><strong class="text-rose-400">❌ Trampas:</strong> Solo 2B UFC y Ácido fólico sintético.</p>
+              <p><strong class="text-purple-300">🎯 Anuncios:</strong> 90% UGC ("desinflama panza en ayunas").</p>
+            </div>
           </div>
-          <div class="space-y-1">
-            <h3 class="font-black text-white text-lg">Ami Glow Greens</h3>
-            <p class="text-xs text-slate-400">Fundador: Jhons Sosa (Nutriólogo Influencer)</p>
-          </div>
-          <div class="space-y-2 text-xs font-mono bg-slate-950/80 p-3.5 rounded-2xl border border-slate-800">
-            <div class="flex justify-between"><span class="text-slate-400">Precio Público:</span><span class="text-amber-300 font-bold">$598.00 MXN</span></div>
-            <div class="flex justify-between"><span class="text-slate-400">COGS Planta:</span><span class="text-slate-300">~$135.00 MXN</span></div>
-            <div class="flex justify-between"><span class="text-slate-400">Margen Bruto:</span><span class="text-emerald-400 font-bold">77.4%</span></div>
-          </div>
-          <div class="space-y-1.5 text-xs text-slate-300">
-            <p><strong class="text-rose-400">❌ Trampas:</strong> Solo 2B UFC y Ácido fólico sintético.</p>
-            <p><strong class="text-purple-300">🎯 Anuncios:</strong> 90% UGC ("desinflama panza en ayunas").</p>
+
+          <!-- BOTONES DE EVIDENCIA VERIFICADA -->
+          <div class="pt-3 border-t border-slate-800/80 space-y-1.5">
+            <span class="text-[10px] font-mono text-slate-500 font-bold uppercase block">Evidencia & Enlaces Oficiales:</span>
+            <div class="grid grid-cols-2 gap-1.5 text-[11px] font-mono">
+              <a href="https://amifitness.mx/products/glow-greens-mango" target="_blank" class="link-badge p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-center hover:text-white">
+                📄 Ficha Glow ↗
+              </a>
+              <a href="https://amifitness.mx/products/clear-protein" target="_blank" class="link-badge p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-center hover:text-white">
+                🥛 Clear Protein ↗
+              </a>
+              <a href="https://listado.mercadolibre.com.mx/ami-fitness" target="_blank" class="link-badge p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-center hover:text-white">
+                📦 Mercado Libre ↗
+              </a>
+              <a href="https://certezadiario.com" target="_blank" class="link-badge p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-center hover:text-white">
+                📰 Reportaje ↗
+              </a>
+            </div>
           </div>
         </div>
 
         <!-- BRAND 2: SESĒN COMPANY -->
-        <div class="glass-card rounded-3xl p-6 border border-pink-500/20 space-y-4 shadow-xl">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-lg bg-pink-950 text-pink-300 border border-pink-800">🌸 SESĒN COMPANY</span>
-            <a href="https://sesencompany.com" target="_blank" class="text-[11px] font-mono text-purple-400 hover:underline">sesencompany.com ↗</a>
+        <div class="glass-card rounded-3xl p-6 border border-pink-500/20 space-y-4 shadow-xl flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-lg bg-pink-950 text-pink-300 border border-pink-800">🌸 SESĒN COMPANY</span>
+              <a href="https://sesencompany.com" target="_blank" class="text-xs font-mono text-purple-400 hover:text-purple-300 font-bold flex items-center gap-1">
+                sesencompany.com ↗
+              </a>
+            </div>
+            
+            <div class="space-y-1">
+              <h3 class="font-black text-white text-lg">Colágeno Pink & Silver</h3>
+              <p class="text-xs text-slate-400">
+                Fundadores: <a href="https://www.quien.com" target="_blank" class="text-purple-400 underline font-semibold">Mariel Fernández & Karim Nakid</a>
+              </p>
+            </div>
+
+            <!-- UNIT ECONOMICS -->
+            <div class="space-y-1.5 text-xs font-mono bg-slate-950/80 p-3.5 rounded-2xl border border-slate-800">
+              <div class="flex justify-between"><span class="text-slate-400">Precio Público:</span><span class="text-pink-300 font-bold">$1,499.00 MXN</span></div>
+              <div class="flex justify-between"><span class="text-slate-400">COGS Planta:</span><span class="text-slate-300">~$255.00 MXN</span></div>
+              <div class="flex justify-between"><span class="text-slate-400">Margen Bruto:</span><span class="text-emerald-400 font-bold">83.0%</span></div>
+            </div>
+
+            <!-- HALLAZGOS Y TRAMPAS -->
+            <div class="space-y-1.5 text-xs text-slate-300">
+              <p><strong class="text-rose-400">❌ Trampas:</strong> Precio prohibitivo ($1.5k) y cero 24H.</p>
+              <p><strong class="text-purple-300">🎯 Canales:</strong> Palacio de Hierro, Spas y Liverpool.</p>
+            </div>
           </div>
-          <div class="space-y-1">
-            <h3 class="font-black text-white text-lg">Colágeno Pink & Silver</h3>
-            <p class="text-xs text-slate-400">Fundadores: Mariel Fernández & Karim Nakid</p>
-          </div>
-          <div class="space-y-2 text-xs font-mono bg-slate-950/80 p-3.5 rounded-2xl border border-slate-800">
-            <div class="flex justify-between"><span class="text-slate-400">Precio Público:</span><span class="text-pink-300 font-bold">$1,499.00 MXN</span></div>
-            <div class="flex justify-between"><span class="text-slate-400">COGS Planta:</span><span class="text-slate-300">~$255.00 MXN</span></div>
-            <div class="flex justify-between"><span class="text-slate-400">Margen Bruto:</span><span class="text-emerald-400 font-bold">83.0%</span></div>
-          </div>
-          <div class="space-y-1.5 text-xs text-slate-300">
-            <p><strong class="text-rose-400">❌ Trampas:</strong> Precio prohibitivo ($1.5k) y cero 24H.</p>
-            <p><strong class="text-purple-300">🎯 Canales:</strong> Palacio de Hierro, Spas y Liverpool.</p>
+
+          <!-- BOTONES DE EVIDENCIA VERIFICADA -->
+          <div class="pt-3 border-t border-slate-800/80 space-y-1.5">
+            <span class="text-[10px] font-mono text-slate-500 font-bold uppercase block">Evidencia & Enlaces Oficiales:</span>
+            <div class="grid grid-cols-2 gap-1.5 text-[11px] font-mono">
+              <a href="https://sesencompany.com/products/colageno-pink" target="_blank" class="link-badge p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-center hover:text-white">
+                🌸 Colágeno Pink ↗
+              </a>
+              <a href="https://sesencompany.com/products/colageno-clasico" target="_blank" class="link-badge p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-center hover:text-white">
+                🥛 Colágeno Clásico ↗
+              </a>
+              <a href="https://www.elpalaciodehierro.com/buscar?q=sesen" target="_blank" class="link-badge p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-center hover:text-white">
+                🏛️ Palacio Hierro ↗
+              </a>
+              <a href="https://www.amazon.com.mx/sesen" target="_blank" class="link-badge p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-center hover:text-white">
+                📦 Amazon Store ↗
+              </a>
+            </div>
           </div>
         </div>
 
         <!-- BRAND 3: B-LIFE MÉXICO -->
-        <div class="glass-card rounded-3xl p-6 border border-blue-500/20 space-y-4 shadow-xl">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-lg bg-blue-950 text-blue-300 border border-blue-800">🔵 B-LIFE MÉXICO</span>
-            <a href="https://blife.mx" target="_blank" class="text-[11px] font-mono text-purple-400 hover:underline">blife.mx ↗</a>
+        <div class="glass-card rounded-3xl p-6 border border-blue-500/20 space-y-4 shadow-xl flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-lg bg-blue-950 text-blue-300 border border-blue-800">🔵 B-LIFE MÉXICO</span>
+              <a href="https://blife.mx" target="_blank" class="text-xs font-mono text-purple-400 hover:text-purple-300 font-bold flex items-center gap-1">
+                blife.mx ↗
+              </a>
+            </div>
+            
+            <div class="space-y-1">
+              <h3 class="font-black text-white text-lg">Glicinato de Magnesio</h3>
+              <p class="text-xs text-slate-400">Líder masivo de Amazon, Mercado Libre y Costco</p>
+            </div>
+
+            <!-- UNIT ECONOMICS -->
+            <div class="space-y-1.5 text-xs font-mono bg-slate-950/80 p-3.5 rounded-2xl border border-slate-800">
+              <div class="flex justify-between"><span class="text-slate-400">Precio Público:</span><span class="text-blue-300 font-bold">$399.00 MXN</span></div>
+              <div class="flex justify-between"><span class="text-slate-400">COGS Planta:</span><span class="text-slate-300">~$95.00 MXN</span></div>
+              <div class="flex justify-between"><span class="text-slate-400">Margen Bruto:</span><span class="text-emerald-400 font-bold">76.2%</span></div>
+            </div>
+
+            <!-- HALLAZGOS Y TRAMPAS -->
+            <div class="space-y-1.5 text-xs text-slate-300">
+              <p><strong class="text-rose-400">❌ Quejas:</strong> Dosis de 4 pastillas y óxidos irritantes.</p>
+              <p><strong class="text-purple-300">🎯 Modelo:</strong> Carruseles con promociones "4x3".</p>
+            </div>
           </div>
-          <div class="space-y-1">
-            <h3 class="font-black text-white text-lg">Glicinato de Magnesio</h3>
-            <p class="text-xs text-slate-400">Líder masivo de Amazon, Mercado Libre y Costco</p>
-          </div>
-          <div class="space-y-2 text-xs font-mono bg-slate-950/80 p-3.5 rounded-2xl border border-slate-800">
-            <div class="flex justify-between"><span class="text-slate-400">Precio Público:</span><span class="text-blue-300 font-bold">$399.00 MXN</span></div>
-            <div class="flex justify-between"><span class="text-slate-400">COGS Planta:</span><span class="text-slate-300">~$95.00 MXN</span></div>
-            <div class="flex justify-between"><span class="text-slate-400">Margen Bruto:</span><span class="text-emerald-400 font-bold">76.2%</span></div>
-          </div>
-          <div class="space-y-1.5 text-xs text-slate-300">
-            <p><strong class="text-rose-400">❌ Quejas:</strong> Dosis de 4 pastillas y óxidos irritantes.</p>
-            <p><strong class="text-purple-300">🎯 Modelo:</strong> Carruseles con promociones "4x3".</p>
+
+          <!-- BOTONES DE EVIDENCIA VERIFICADA -->
+          <div class="pt-3 border-t border-slate-800/80 space-y-1.5">
+            <span class="text-[10px] font-mono text-slate-500 font-bold uppercase block">Evidencia & Enlaces Oficiales:</span>
+            <div class="grid grid-cols-2 gap-1.5 text-[11px] font-mono">
+              <a href="https://blife.mx/products/glicinato-de-magnesio-180-capsulas" target="_blank" class="link-badge p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-center hover:text-white">
+                💊 Glicinato Mg ↗
+              </a>
+              <a href="https://blife.mx/products/omega-3-180-capsulas" target="_blank" class="link-badge p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-center hover:text-white">
+                🐟 Omega 3 Ultra ↗
+              </a>
+              <a href="https://www.amazon.com.mx/blife" target="_blank" class="link-badge p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-center hover:text-white">
+                📦 Amazon Store ↗
+              </a>
+              <a href="https://www.costco.com.mx" target="_blank" class="link-badge p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-center hover:text-white">
+                🛒 Costco México ↗
+              </a>
+            </div>
           </div>
         </div>
 
@@ -236,7 +315,7 @@
     </section>
 
     <!-- ========================================================================= -->
-    <!-- MÓDULO 2: FASE 2 - BLINDAJE REGULATORIO COFEPRIS -->
+    <!-- MÓDULO 2: FASE 2 - BLINDAJE REGULATORIO COFEPRIS (CON LINKS DE LEYES) -->
     <!-- ========================================================================= -->
     <section id="module-fase2" class="master-module hidden space-y-8">
       
@@ -252,29 +331,33 @@
 
       <!-- 4 LEGAL PILLARS -->
       <div class="grid md:grid-cols-4 gap-4">
-        <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-2">
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-3">
           <div class="w-8 h-8 rounded-xl bg-purple-950 border border-purple-800 flex items-center justify-center font-bold text-xs">1</div>
           <h4 class="font-bold text-white text-sm">Aviso de Funcionamiento</h4>
           <p class="text-xs text-slate-400">Trámite COFEPRIS-05-018 en DIGIPRiS. Costo $0.00 con emisión inmediata de Acuse QR.</p>
+          <a href="https://www.gob.mx/cofepris/acciones-y-programas/digipris" target="_blank" class="text-[11px] font-mono text-purple-400 hover:underline block font-bold">Portal DIGIPRiS ↗</a>
         </div>
-        <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-2">
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-3">
           <div class="w-8 h-8 rounded-xl bg-purple-950 border border-purple-800 flex items-center justify-center font-bold text-xs">2</div>
           <h4 class="font-bold text-white text-sm">Etiqueta de 10 Zonas</h4>
           <p class="text-xs text-slate-400">Denominación en mayúsculas, tabla por 100g/porción y datos de maquilador Europharma.</p>
+          <a href="https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf" target="_blank" class="text-[11px] font-mono text-purple-400 hover:underline block font-bold">Ley Gral. Salud (PDF) ↗</a>
         </div>
-        <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-2">
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-3">
           <div class="w-8 h-8 rounded-xl bg-purple-950 border border-purple-800 flex items-center justify-center font-bold text-xs">3</div>
           <h4 class="font-bold text-white text-sm">Expediente Técnico COA</h4>
           <p class="text-xs text-slate-400">Análisis microbiológico y metales pesados en bodega + descargable vía Código QR.</p>
+          <span class="text-[11px] font-mono text-emerald-400 font-bold block">Conforme a FHEUM ✓</span>
         </div>
-        <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-2">
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-3">
           <div class="w-8 h-8 rounded-xl bg-purple-950 border border-purple-800 flex items-center justify-center font-bold text-xs">4</div>
           <h4 class="font-bold text-white text-sm">Aviso de Publicidad</h4>
           <p class="text-xs text-slate-400">Trámite COFEPRIS-02-002 para pauta en Meta Ads con claims funcionales seguros.</p>
+          <a href="https://www.gob.mx/cofepris" target="_blank" class="text-[11px] font-mono text-purple-400 hover:underline block font-bold">Guía Publicidad COFEPRIS ↗</a>
         </div>
       </div>
 
-      <!-- CLAIMS MATRIX: PROHIBIDO VS PERMITIDO -->
+      <!-- CLAIMS MATRIX -->
       <div class="glass-card rounded-3xl p-6 border border-slate-800 space-y-4">
         <h3 class="text-xl font-black text-white">🚫 Matriz de Claims: Cómo Protegemos a los Médicos en Meta Ads</h3>
         <div class="grid md:grid-cols-2 gap-4 text-xs">
@@ -328,7 +411,7 @@
     </section>
 
     <!-- ========================================================================= -->
-    <!-- MÓDULO 4: ROADMAP - PLAN DE SPRINTS PARA ASEGURAR EL RESULTADO -->
+    <!-- MÓDULO 4: ROADMAP - PLAN DE SPRINTS -->
     <!-- ========================================================================= -->
     <section id="module-sprints" class="master-module hidden space-y-8">
       
