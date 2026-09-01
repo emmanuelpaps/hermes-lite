@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KODI DOSE+ · Presentación Maestra Ejecutiva (3 Fases & Sprints)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              purple: '#581C87',
+              accent: '#A855F7',
+              dark: '#070A13',
+              card: '#0F1626',
+              border: '#1E293B',
+              rise: '#F59E0B',
+              focus: '#3B82F6',
+              balance: '#10B981',
+              unwind: '#8B5CF6'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #040711; }
+    .glass-nav { background: rgba(11, 15, 25, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+    .glass-card { background: rgba(15, 22, 38, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    .iphone-shell {
+      max-width: 393px;
+      height: 800px;
+      border-radius: 48px;
+      border: 10px solid #1e293b;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 0 2px rgba(255, 255, 255, 0.1);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .custom-scroll::-webkit-scrollbar { width: 5px; height: 5px; }
+    .custom-scroll::-webkit-scrollbar-track { background: transparent; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    .tap-highlight:active { transform: scale(0.98); transition: transform 0.1s ease; }
+  </style>
+</head>
+<body class="text-slate-100 min-h-screen flex flex-col selection:bg-purple-500 selection:text-white">
+
+  <!-- ========================================================================= -->
+  <!-- TOP MASTER CONTROLLER BAR (NAVEGACIÓN MAESTRA DE 4 MÓDULOS) -->
+  <!-- ========================================================================= -->
+  <header class="sticky top-0 z-50 glass-nav px-4 md:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
+    
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-purple-700 via-indigo-600 to-purple-400 flex items-center justify-center font-black text-white text-sm shadow-xl shadow-purple-900/60">
+        KD+
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="font-black text-white text-base tracking-tight">KODI DOSE™</span>
+          <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-purple-950 text-purple-300 border border-purple-800 font-bold uppercase tracking-wider">Executive Suite 2026</span>
+        </div>
+        <p class="text-xs text-slate-400">Junta de Kickoff con <strong class="text-slate-200">Dr. Elmo Aramburo & Dra. Marisol</strong></p>
+      </div>
+    </div>
+
+    <!-- 4 MASTER NAVIGATION TABS -->
+    <div class="flex items-center bg-slate-950/90 p-1.5 rounded-2xl border border-slate-800 text-xs font-semibold overflow-x-auto custom-scroll shadow-inner">
+      <button onclick="switchMasterTab('fase1')" id="tab-fase1" class="master-tab px-4 py-2 rounded-xl transition-all bg-purple-600 text-white font-bold shadow-lg shadow-purple-600/30 flex items-center gap-2">
+        <span>📊 FASE 1: Competencia</span>
+      </button>
+      <button onclick="switchMasterTab('fase2')" id="tab-fase2" class="master-tab px-4 py-2 rounded-xl transition-all text-slate-400 hover:text-white flex items-center gap-2">
+        <span>⚖️ FASE 2: Legal COFEPRIS</span>
+      </button>
+      <button onclick="switchMasterTab('fase3')" id="tab-fase3" class="master-tab px-4 py-2 rounded-xl transition-all text-slate-400 hover:text-white flex items-center gap-2">
+        <span>📱 FASE 3: Tienda Web Live</span>
+      </button>
+      <button onclick="switchMasterTab('sprints')" id="tab-sprints" class="master-tab px-4 py-2 rounded-xl transition-all text-slate-400 hover:text-white flex items-center gap-2">
+        <span>🚀 ROADMAP: Plan de Sprints</span>
+      </button>
+    </div>
+
+    <!-- BADGE DE APOLOGRAMA -->
+    <div class="hidden lg:flex items-center gap-2 text-xs font-mono text-slate-400 bg-slate-900 px-3 py-1.5 rounded-xl border border-slate-800">
+      <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+      <span>Apolograma Digital Health</span>
+    </div>
+
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- MAIN WORKSPACE / CONTENT VIEWER -->
+  <!-- ========================================================================= -->
+  <main class="flex-1 p-4 md:p-8 overflow-y-auto max-w-7xl mx-auto w-full">
+    
+    <!-- ========================================================================= -->
+    <!-- MÓDULO 1: FASE 1 - DUE DILIGENCE DE LA COMPETENCIA -->
+    <!-- ========================================================================= -->
+    <section id="module-fase1" class="master-module space-y-8">
+      
+      <div class="space-y-2 border-b border-slate-800 pb-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950 text-purple-300 border border-purple-800 text-xs font-bold font-mono">
+          FASE 1 · RADIOGRAFÍA FORENSE DE MERCADO
+        </div>
+        <h1 class="text-3xl md:text-4xl font-black text-white">Due Diligence de 3 Benchmarks en México</h1>
+        <p class="text-sm text-slate-400 max-w-3xl">
+          Análisis químico, publicitario y financiero de las 3 marcas líderes: <strong>Ami Fitness</strong> (Influencer), <strong>Sesēn Company</strong> (Alta Gama) y <strong>B-Life</strong> (Volumen).
+        </p>
+      </div>
+
+      <!-- 3 BRAND PROFILE CARDS -->
+      <div class="grid md:grid-cols-3 gap-6">
+        
+        <!-- BRAND 1: AMI FITNESS -->
+        <div class="glass-card rounded-3xl p-6 border border-amber-500/20 space-y-4 shadow-xl">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-lg bg-amber-950 text-amber-300 border border-amber-800">🟠 AMI FITNESS</span>
+            <a href="https://amifitness.mx" target="_blank" class="text-[11px] font-mono text-purple-400 hover:underline">amifitness.mx ↗</a>
+          </div>
+          <div class="space-y-1">
+            <h3 class="font-black text-white text-lg">Ami Glow Greens</h3>
+            <p class="text-xs text-slate-400">Fundador: Jhons Sosa (Nutriólogo Influencer)</p>
+          </div>
+          <div class="space-y-2 text-xs font-mono bg-slate-950/80 p-3.5 rounded-2xl border border-slate-800">
+            <div class="flex justify-between"><span class="text-slate-400">Precio Público:</span><span class="text-amber-300 font-bold">$598.00 MXN</span></div>
+            <div class="flex justify-between"><span class="text-slate-400">COGS Planta:</span><span class="text-slate-300">~$135.00 MXN</span></div>
+            <div class="flex justify-between"><span class="text-slate-400">Margen Bruto:</span><span class="text-emerald-400 font-bold">77.4%</span></div>
+          </div>
+          <div class="space-y-1.5 text-xs text-slate-300">
+            <p><strong class="text-rose-400">❌ Trampas:</strong> Solo 2B UFC y Ácido fólico sintético.</p>
+            <p><strong class="text-purple-300">🎯 Anuncios:</strong> 90% UGC ("desinflama panza en ayunas").</p>
+          </div>
+        </div>
+
+        <!-- BRAND 2: SESĒN COMPANY -->
+        <div class="glass-card rounded-3xl p-6 border border-pink-500/20 space-y-4 shadow-xl">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-lg bg-pink-950 text-pink-300 border border-pink-800">🌸 SESĒN COMPANY</span>
+            <a href="https://sesencompany.com" target="_blank" class="text-[11px] font-mono text-purple-400 hover:underline">sesencompany.com ↗</a>
+          </div>
+          <div class="space-y-1">
+            <h3 class="font-black text-white text-lg">Colágeno Pink & Silver</h3>
+            <p class="text-xs text-slate-400">Fundadores: Mariel Fernández & Karim Nakid</p>
+          </div>
+          <div class="space-y-2 text-xs font-mono bg-slate-950/80 p-3.5 rounded-2xl border border-slate-800">
+            <div class="flex justify-between"><span class="text-slate-400">Precio Público:</span><span class="text-pink-300 font-bold">$1,499.00 MXN</span></div>
+            <div class="flex justify-between"><span class="text-slate-400">COGS Planta:</span><span class="text-slate-300">~$255.00 MXN</span></div>
+            <div class="flex justify-between"><span class="text-slate-400">Margen Bruto:</span><span class="text-emerald-400 font-bold">83.0%</span></div>
+          </div>
+          <div class="space-y-1.5 text-xs text-slate-300">
+            <p><strong class="text-rose-400">❌ Trampas:</strong> Precio prohibitivo ($1.5k) y cero 24H.</p>
+            <p><strong class="text-purple-300">🎯 Canales:</strong> Palacio de Hierro, Spas y Liverpool.</p>
+          </div>
+        </div>
+
+        <!-- BRAND 3: B-LIFE MÉXICO -->
+        <div class="glass-card rounded-3xl p-6 border border-blue-500/20 space-y-4 shadow-xl">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-lg bg-blue-950 text-blue-300 border border-blue-800">🔵 B-LIFE MÉXICO</span>
+            <a href="https://blife.mx" target="_blank" class="text-[11px] font-mono text-purple-400 hover:underline">blife.mx ↗</a>
+          </div>
+          <div class="space-y-1">
+            <h3 class="font-black text-white text-lg">Glicinato de Magnesio</h3>
+            <p class="text-xs text-slate-400">Líder masivo de Amazon, Mercado Libre y Costco</p>
+          </div>
+          <div class="space-y-2 text-xs font-mono bg-slate-950/80 p-3.5 rounded-2xl border border-slate-800">
+            <div class="flex justify-between"><span class="text-slate-400">Precio Público:</span><span class="text-blue-300 font-bold">$399.00 MXN</span></div>
+            <div class="flex justify-between"><span class="text-slate-400">COGS Planta:</span><span class="text-slate-300">~$95.00 MXN</span></div>
+            <div class="flex justify-between"><span class="text-slate-400">Margen Bruto:</span><span class="text-emerald-400 font-bold">76.2%</span></div>
+          </div>
+          <div class="space-y-1.5 text-xs text-slate-300">
+            <p><strong class="text-rose-400">❌ Quejas:</strong> Dosis de 4 pastillas y óxidos irritantes.</p>
+            <p><strong class="text-purple-300">🎯 Modelo:</strong> Carruseles con promociones "4x3".</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- MASTER CHEMICAL COMPARISON TABLE -->
+      <div class="glass-card rounded-3xl p-6 border border-slate-800 space-y-4">
+        <h3 class="text-xl font-black text-white">🔬 Comparativa Química Forense: Los 3 vs. KODI DOSE+</h3>
+        <div class="overflow-x-auto custom-scroll">
+          <table class="w-full text-xs text-left">
+            <thead class="bg-slate-950 text-slate-400 font-mono border-b border-slate-800">
+              <tr>
+                <th class="p-3">Parámetro Molecular</th>
+                <th class="p-3">🟠 Ami Fitness</th>
+                <th class="p-3">🌸 Sesēn Company</th>
+                <th class="p-3">🔵 B-Life México</th>
+                <th class="p-3 bg-purple-950/40 text-purple-300 font-bold">👑 KODI DOSE+</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800/60 font-medium">
+              <tr>
+                <td class="p-3 text-slate-300">Probióticos Vivos (UFC)</td>
+                <td class="p-3 text-slate-400">2.0B UFC</td>
+                <td class="p-3 text-slate-500">0 UFC</td>
+                <td class="p-3 text-slate-500">0 UFC</td>
+                <td class="p-3 bg-purple-950/20 text-emerald-400 font-bold">6.5B UFC (Cepa BLC1)</td>
+              </tr>
+              <tr>
+                <td class="p-3 text-slate-300">Forma de Ácido Fólico</td>
+                <td class="p-3 text-rose-400">Sintético</td>
+                <td class="p-3 text-slate-500">No contiene</td>
+                <td class="p-3 text-slate-500">No contiene</td>
+                <td class="p-3 bg-purple-950/20 text-purple-300 font-bold">L-Methylfolato Activo (200mcg)</td>
+              </tr>
+              <tr>
+                <td class="p-3 text-slate-300">Tipo de Magnesio</td>
+                <td class="p-3 text-slate-500">No ofrece</td>
+                <td class="p-3 text-slate-500">No ofrece</td>
+                <td class="p-3 text-amber-400">Mezcla con Óxidos (4 caps)</td>
+                <td class="p-3 bg-purple-950/20 text-emerald-400 font-bold">Bisglicinato Quelado al 80%</td>
+              </tr>
+              <tr>
+                <td class="p-3 text-slate-300">Sistema Circadiano 24H</td>
+                <td class="p-3 text-rose-500">❌ No</td>
+                <td class="p-3 text-rose-500">❌ No</td>
+                <td class="p-3 text-rose-500">❌ No</td>
+                <td class="p-3 bg-purple-950/20 text-amber-300 font-bold">✅ Sincronización 4 Fases</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- MÓDULO 2: FASE 2 - BLINDAJE REGULATORIO COFEPRIS -->
+    <!-- ========================================================================= -->
+    <section id="module-fase2" class="master-module hidden space-y-8">
+      
+      <div class="space-y-2 border-b border-slate-800 pb-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-800 text-xs font-bold font-mono">
+          FASE 2 · BLINDAJE MÉDICO-LEGAL INTEGRAL
+        </div>
+        <h1 class="text-3xl md:text-4xl font-black text-white">Marco Regulatorio COFEPRIS & Etiquetado</h1>
+        <p class="text-sm text-slate-400 max-w-3xl">
+          Protección absoluta para la cédula profesional del Dr. Elmo y la Dra. Marisol. Cumplimiento bajo la Ley General de Salud, NOM y DIGIPRiS.
+        </p>
+      </div>
+
+      <!-- 4 LEGAL PILLARS -->
+      <div class="grid md:grid-cols-4 gap-4">
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-2">
+          <div class="w-8 h-8 rounded-xl bg-purple-950 border border-purple-800 flex items-center justify-center font-bold text-xs">1</div>
+          <h4 class="font-bold text-white text-sm">Aviso de Funcionamiento</h4>
+          <p class="text-xs text-slate-400">Trámite COFEPRIS-05-018 en DIGIPRiS. Costo $0.00 con emisión inmediata de Acuse QR.</p>
+        </div>
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-2">
+          <div class="w-8 h-8 rounded-xl bg-purple-950 border border-purple-800 flex items-center justify-center font-bold text-xs">2</div>
+          <h4 class="font-bold text-white text-sm">Etiqueta de 10 Zonas</h4>
+          <p class="text-xs text-slate-400">Denominación en mayúsculas, tabla por 100g/porción y datos de maquilador Europharma.</p>
+        </div>
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-2">
+          <div class="w-8 h-8 rounded-xl bg-purple-950 border border-purple-800 flex items-center justify-center font-bold text-xs">3</div>
+          <h4 class="font-bold text-white text-sm">Expediente Técnico COA</h4>
+          <p class="text-xs text-slate-400">Análisis microbiológico y metales pesados en bodega + descargable vía Código QR.</p>
+        </div>
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-2">
+          <div class="w-8 h-8 rounded-xl bg-purple-950 border border-purple-800 flex items-center justify-center font-bold text-xs">4</div>
+          <h4 class="font-bold text-white text-sm">Aviso de Publicidad</h4>
+          <p class="text-xs text-slate-400">Trámite COFEPRIS-02-002 para pauta en Meta Ads con claims funcionales seguros.</p>
+        </div>
+      </div>
+
+      <!-- CLAIMS MATRIX: PROHIBIDO VS PERMITIDO -->
+      <div class="glass-card rounded-3xl p-6 border border-slate-800 space-y-4">
+        <h3 class="text-xl font-black text-white">🚫 Matriz de Claims: Cómo Protegemos a los Médicos en Meta Ads</h3>
+        <div class="grid md:grid-cols-2 gap-4 text-xs">
+          <div class="p-4 rounded-2xl bg-rose-950/20 border border-rose-900/40 space-y-2">
+            <span class="text-rose-400 font-bold block text-sm">❌ PROHIBIDO (Causa Multas y Baneo)</span>
+            <ul class="space-y-1.5 text-slate-300 list-disc list-inside">
+              <li>"Cura el insomnio y la ansiedad nocturna."</li>
+              <li>"Quema grasa abdominal y desinflama en 3 días."</li>
+              <li>"Te ayuda a ir al baño y cura el estreñimiento."</li>
+              <li>"Borra las arrugas y regenera el cartílago."</li>
+            </ul>
+          </div>
+          <div class="p-4 rounded-2xl bg-emerald-950/20 border border-emerald-900/40 space-y-2">
+            <span class="text-emerald-400 font-bold block text-sm">✅ PERMITIDO (Soporte Funcional Blindado)</span>
+            <ul class="space-y-1.5 text-slate-300 list-disc list-inside">
+              <li>"Favorece el tránsito intestinal y el equilibrio de la microbiota."</li>
+              <li>"Optimiza la disponibilidad de energía celular (ATP) en el ejercicio."</li>
+              <li>"Aporta péptidos bioactivos para la nutrición dérmica y articular."</li>
+              <li>"Contribuye a la relajación neuromuscular y al descanso profundo."</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- MÓDULO 3: FASE 3 - TIENDA WEB INTERACTIVA (EMBED DEL PROTOTIPO) -->
+    <!-- ========================================================================= -->
+    <section id="module-fase3" class="master-module hidden space-y-6">
+      
+      <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 pb-4">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950 text-purple-300 border border-purple-800 text-xs font-bold font-mono">
+            FASE 3 · PROTOTIPO INTERACTIVO EN VIVO
+          </div>
+          <h1 class="text-3xl font-black text-white">E-Commerce kodidose.com</h1>
+        </div>
+        <div class="flex gap-2">
+          <a href="/WIREFRAMES-KODI.html" target="_blank" class="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold transition flex items-center gap-1.5 shadow-lg shadow-purple-600/30">
+            <span>Abrir Pantalla Completa ↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- IFRAME DEL PROTOTIPO MASTER V3.0 -->
+      <div class="w-full h-[850px] rounded-3xl border border-slate-800 overflow-hidden shadow-2xl bg-slate-950">
+        <iframe src="/WIREFRAMES-KODI.html" class="w-full h-full border-0" title="Kodi Dose Live Wireframe"></iframe>
+      </div>
+
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- MÓDULO 4: ROADMAP - PLAN DE SPRINTS PARA ASEGURAR EL RESULTADO -->
+    <!-- ========================================================================= -->
+    <section id="module-sprints" class="master-module hidden space-y-8">
+      
+      <div class="space-y-2 border-b border-slate-800 pb-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-950 text-indigo-300 border border-indigo-800 text-xs font-bold font-mono">
+          ROADMAP OFICIAL · EJECUCIÓN ÁGIL
+        </div>
+        <h1 class="text-3xl md:text-4xl font-black text-white">Plan de Sprints: De la Mesa al Lanzamiento</h1>
+        <p class="text-sm text-slate-400 max-w-3xl">
+          Estructura de 4 Sprints cronometrados para asegurar el cumplimiento de metas, blindaje legal, producción en Europharma y despliegue tecnológico.
+        </p>
+      </div>
+
+      <!-- 4 SPRINTS CARDS -->
+      <div class="grid md:grid-cols-2 gap-6">
+        
+        <!-- SPRINT 1 -->
+        <div class="glass-card rounded-3xl p-6 border border-purple-500/30 space-y-4">
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-mono font-bold px-3 py-1 rounded-lg bg-purple-950 text-purple-300 border border-purple-800">SPRINT 1 · SEMANAS 1-2</span>
+            <span class="text-xs font-mono text-emerald-400 font-bold">En Curso 🟢</span>
+          </div>
+          <h3 class="text-xl font-black text-white">Cierre Legal, Maquila & Testing de Sabores</h3>
+          <ul class="space-y-2 text-xs text-slate-300 list-disc list-inside">
+            <li>Ingreso de <strong>Aviso de Funcionamiento (COFEPRIS-05-018)</strong> en DIGIPRiS.</li>
+            <li>Validación final de etiquetas de 240g/500g con el área técnica de Europharma.</li>
+            <li>Lanzamiento de campaña de <strong>Testing en Meta Ads (16 conceptos)</strong> para validar el Top 4 de sabores.</li>
+            <li>Firma de orden de maquila de Lote 1 con el fabricante.</li>
+          </ul>
+        </div>
+
+        <!-- SPRINT 2 -->
+        <div class="glass-card rounded-3xl p-6 border border-slate-800 space-y-4">
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-mono font-bold px-3 py-1 rounded-lg bg-slate-900 text-slate-300 border border-slate-700">SPRINT 2 · SEMANAS 3-4</span>
+            <span class="text-xs font-mono text-purple-400 font-bold">Programado ⏳</span>
+          </div>
+          <h3 class="text-xl font-black text-white">E-Commerce, Quiz IA & Pasarelas</h3>
+          <ul class="space-y-2 text-xs text-slate-300 list-disc list-inside">
+            <li>Desarrollo completo de <strong>kodidose.com en Next.js 15 PWA</strong>.</li>
+            <li>Programación del motor de prescripción del <strong>Quiz Circadiano con IA</strong>.</li>
+            <li>Integración de Stripe Billing para suscripciones Smart Re-Fill ($2,299/m).</li>
+            <li>Configuración del bot de WhatsApp para recordatorios de 4 tomas y COA.</li>
+          </ul>
+        </div>
+
+        <!-- SPRINT 3 -->
+        <div class="glass-card rounded-3xl p-6 border border-slate-800 space-y-4">
+          <div class="grid justify-between items-center">
+            <span class="text-xs font-mono font-bold px-3 py-1 rounded-lg bg-slate-900 text-slate-300 border border-slate-700">SPRINT 3 · SEMANAS 5-6</span>
+            <span class="text-xs font-mono text-slate-500 font-bold">Programado ⏳</span>
+          </div>
+          <h3 class="text-xl font-black text-white">Hub Logístico, Shakers & Packaging</h3>
+          <ul class="space-y-2 text-xs text-slate-300 list-disc list-inside">
+            <li>Acondicionamiento del hub climatizado en Juárez (<24°C y <60% HR).</li>
+            <li>Recepción de muestra de <strong>10 Shakers USB-C</strong> y cajas Kraft para Welcome Kit.</li>
+            <li>Conexión de API con FedEx Express para guías automáticas con 1-clic.</li>
+            <li>Protocolo PEPS (FIFO) de inventario y trazabilidad por lote.</li>
+          </ul>
+        </div>
+
+        <!-- SPRINT 4 -->
+        <div class="glass-card rounded-3xl p-6 border border-slate-800 space-y-4">
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-mono font-bold px-3 py-1 rounded-lg bg-slate-900 text-slate-300 border border-slate-700">SPRINT 4 · SEMANAS 7-8</span>
+            <span class="text-xs font-mono text-slate-500 font-bold">Programado ⏳</span>
+          </div>
+          <h3 class="text-xl font-black text-white">Lanzamiento Oficial & Ad Scaling</h3>
+          <ul class="space-y-2 text-xs text-slate-300 list-disc list-inside">
+            <li>Recepción del Lote 1 de Europharma en bodega con análisis COA firmado.</li>
+            <li>Apertura oficial del E-Commerce y activación de pre-órdenes registradas.</li>
+            <li>Despliegue de campañas de Storytelling Médico con el Dr. Elmo & Dra. Marisol.</li>
+            <li>Activación de suscripciones y seguimiento post-venta en WhatsApp.</li>
+          </ul>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- JAVASCRIPT MASTER LOGIC -->
+  <script>
+    function switchMasterTab(tabId) {
+      document.querySelectorAll('.master-module').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.master-tab').forEach(el => {
+        el.classList.remove('bg-purple-600', 'text-white', 'font-bold', 'shadow-lg', 'shadow-purple-600/30');
+        el.classList.add('text-slate-400');
+      });
+
+      const targetMod = document.getElementById('module-' + tabId);
+      const targetTab = document.getElementById('tab-' + tabId);
+
+      if (targetMod) targetMod.classList.remove('hidden');
+      if (targetTab) {
+        targetTab.classList.add('bg-purple-600', 'text-white', 'font-bold', 'shadow-lg', 'shadow-purple-600/30');
+        targetTab.classList.remove('text-slate-400');
+      }
+    }
+  </script>
+</body>
+</html>
