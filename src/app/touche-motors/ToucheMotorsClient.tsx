@@ -1,10 +1,182 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+
+interface AddonItem {
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  amount: number;
+  type: "monthly" | "onetime";
+  badge?: string;
+  isIncludedByDefault?: boolean;
+}
+
+const ADDONS_CATALOG: AddonItem[] = [
+  {
+    id: "stories_pack",
+    name: "Lote Ampliado de Variantes Stories & Reels 9:16",
+    category: "FORMATO VERTICAL MÓVIL",
+    description: "Adaptaciones verticales continuas (+12 variantes mensuales) diseñadas para capturar el 80% de atención móvil en Instagram con llamados de acción directa.",
+    amount: 3500,
+    type: "monthly",
+    badge: "ALTO ALCANCE",
+  },
+  {
+    id: "pauta_pro",
+    name: "Optimización Avanzada de Pauta Meta Ads",
+    category: "DISTRIBUCIÓN QUIRÚRGICA",
+    description: "Pruebas A/B continuas de creativos y segmentación de alto poder adquisitivo (Campestre, Campos Elíseos, El Paso) para alimentar de prospectos a tu Call Center.",
+    amount: 3000,
+    type: "monthly",
+    badge: "LEADS DIRECTOS",
+  },
+  {
+    id: "foto_entregas",
+    name: "Cobertura de Entregas Nuevas en Piso (Reels VIP)",
+    category: "PRUEBA SOCIAL EN SALA",
+    description: "Sesión mensual en Paseo Triunfo 6080 documentando la entrega de llaves y emoción de clientes estrenando sus unidades (video corto de alto impacto).",
+    amount: 4500,
+    type: "monthly",
+  },
+  {
+    id: "landing_web",
+    name: "Plataforma Web & Catálogo Digital de Inventario",
+    category: "SHOWROOM DIGITAL (FASE 3/4)",
+    description: "Webapp de ultra-baja latencia con catálogo dinámico de inventario Paseo Triunfo y cotizador de financiamiento para clientes web.",
+    amount: 40000,
+    type: "onetime",
+    badge: "PAGO ÚNICO",
+  },
+];
+
+interface Pillar2ArtData {
+  model: string;
+  badge: string;
+  tagline: string;
+  headline: string;
+  feedSpecs: string;
+  storyHook: string;
+  creativeApproval: string;
+}
+
+const PILLAR2_DATA: Record<"ram" | "jeep" | "dodge", Pillar2ArtData> = {
+  ram: {
+    model: "RAM 1500 TRX Supercharged",
+    badge: "LÍNEA CORPORATIVA // FLAME RED",
+    tagline: "Poder de Negocio & Deducción Fiscal 100%",
+    headline: "702 HP SOBREALIMENTADOS // ARRENDAMIENTO PURO DEDUCIBLE",
+    feedSpecs: "Formato 1:1 / 4:5 • Tipografía Stellantis • Aprobado para pauta",
+    storyHook: "¿Tu empresa lista para deducir con 702 HP? Cotiza en sala.",
+    creativeApproval: "SUPERVISIÓN: AHIEZER, LUIS & JESSICA // IA ASISTIDA",
+  },
+  jeep: {
+    model: "Jeep Grand Cherokee Summit Reserve",
+    badge: "LÍNEA EJECUTIVA // DIAMOND BLACK",
+    tagline: "Lujo Silencioso & Estatus Familiar",
+    headline: "LA CUMBRE DEL CONFORT 4X4 // PIEL PALERMO & MCINTOSH",
+    feedSpecs: "Formato 1:1 / 4:5 • Paleta de Lujo Silencioso • Entrega inmediata",
+    storyHook: "El confort y seguridad que tu familia merece en Juárez.",
+    creativeApproval: "SUPERVISIÓN: AHIEZER, LUIS & JESSICA // IA ASISTIDA",
+  },
+  dodge: {
+    model: "Dodge Charger SRT Hellcat",
+    badge: "LÍNEA MOTORSPORT // INDIGO BLUE",
+    tagline: "Músculo Americano & Adrenalina Pura",
+    headline: "MÚSCULO AMERICANO AUTÉNTICO // MOTOR HEMI SOBREALIMENTADO",
+    feedSpecs: "Formato 1:1 / 4:5 • Contraste Deportivo • Unidad Demo en Sala",
+    storyHook: "Siente el rugido HEMI en Paseo Triunfo 6080.",
+    creativeApproval: "SUPERVISIÓN: AHIEZER, LUIS & JESSICA // IA ASISTIDA",
+  },
+};
+
+interface CampaignModelData {
+  id: number;
+  vehicleName: string;
+  vehicleBadge: string;
+  vehicleCategory: string;
+  image: string;
+  priceTag: string;
+  // Bloque 1: Feed Banner (1:1 / 4:5)
+  feedHeadline: string;
+  feedCopy: string;
+  feedBenefit: string;
+  feedSpecs: string;
+  // Bloque 2: Story 9:16 Vertical
+  storyHook: string;
+  storyTag: string;
+  storyCta: string;
+  // Bloque 3: Campaña de Pauta (Meta Ads para Call Center)
+  adTargeting: string;
+  adAngle: string;
+  adObjective: string;
+  adDailyLeads: string;
+}
+
+const CAMPAIGN_SYSTEM_DATA: Record<number, CampaignModelData> = {
+  1: {
+    id: 1,
+    vehicleName: "RAM 1500 TRX Supercharged",
+    vehicleBadge: "CAMPAÑA: PODER BRUTO & DEDUCCIÓN 100%",
+    vehicleCategory: "Pickup Insignia 702 HP",
+    image: "/assets/touche-motors/hero_ram_trx.jpg?v=20260918_center",
+    priceTag: "Enganche estimado desde $280,000 MXN",
+    feedHeadline: "702 HP DE FUERZA SOBREALIMENTADA // DEDUCCIÓN FISCAL TOTAL",
+    feedCopy: "La pickup más imponente del planeta disponible en Paseo Triunfo 6080. Planes de arrendamiento puro y crédito empresarial deducibles al 100%.",
+    feedBenefit: "Deducción de impuestos para empresas + Asignación inmediata de unidad",
+    feedSpecs: "Motor HEMI 6.2L Supercharged • 0-100 km/h en 4.5s • Tracción 4x4 Off-Road",
+    storyHook: "¿Tu empresa necesita deducir este trimestre con 702 HP?",
+    storyTag: "NUEVO INVENTARIO PASEO TRIUNFO",
+    storyCta: "Desliza para cotizar con un asesor ➔",
+    adTargeting: "Directivos, constructores y empresarios en Ciudad Juárez y El Paso",
+    adAngle: "Beneficio fiscal en arrendamiento puro + Estatus de poder",
+    adObjective: "Alimentar al Call Center con empresarios y dueños de negocio",
+    adDailyLeads: "Flujo constante de empresarios solicitando cotización fiscal",
+  },
+  2: {
+    id: 2,
+    vehicleName: "Jeep Grand Cherokee Summit",
+    vehicleBadge: "CAMPAÑA: CONFORT FAMILIAR & ESTATUS EJECUTIVO",
+    vehicleCategory: "SUV Premium 4x4",
+    image: "/assets/touche-motors/hero_jeep.jpg?v=20260918_center",
+    priceTag: "Entrega inmediata en sala Paseo Triunfo",
+    feedHeadline: "LA CUMBRE DEL CONFORT 4X4 // PIEL PALERMO & SONIDO MCINTOSH",
+    feedCopy: "El estándar de lujo que tu familia merece en Juárez. Máxima calificación de seguridad internacional, suspensión neumática y acabados artesanales.",
+    feedBenefit: "Seguridad blindada para tu familia + Tasa preferencial Stellantis",
+    feedSpecs: "Interiores piel Palermo • Sonido McIntosh 19 bocinas • Tracción Quadra-Trac II",
+    storyHook: "El verdadero lujo silencioso para tu familia en Ciudad Juárez.",
+    storyTag: "SALA DE EXHIBICIÓN // DISPONIBLE HOY",
+    storyCta: "Toca para agendar cita en sala ➔",
+    adTargeting: "Familias de alto patrimonio en Campestre, Campos Elíseos y San Jerónimo",
+    adAngle: "Confort supremo, seguridad para hijos y distinción ejecutiva",
+    adObjective: "Citas presenciales en sala con médicos, especialistas y ejecutivos",
+    adDailyLeads: "Contactos de familias interesadas en pruebas de manejo familiares",
+  },
+  3: {
+    id: 3,
+    vehicleName: "Dodge Charger SRT Hellcat",
+    vehicleBadge: "CAMPAÑA: MÚSCULO AMERICANO & PURA ADRENALINA",
+    vehicleCategory: "Muscle Car Deportivo",
+    image: "/assets/touche-motors/hero_dodge.jpg?v=20260918_center",
+    priceTag: "Unidad de prueba disponible con cita previa",
+    feedHeadline: "MÚSCULO AMERICANO AUTÉNTICO // LA FIERA DE LAS CALLES",
+    feedCopy: "Aceleración sin concesiones con garantía de fábrica Touché Motors. Siente la potencia del motor HEMI en el asfalto de Ciudad Juárez.",
+    feedBenefit: "Crédito automotriz pre-aprobado + Garantía oficial de planta",
+    feedSpecs: "Carrocería Widebody • Frenos Brembo 6 pistones • Escape activo deportivo",
+    storyHook: "Siente el rugido del motor HEMI antes de que termine el mes.",
+    storyTag: "EDICIÓN ESPECIAL // SOLO EN TOUCHÉ",
+    storyCta: "Toca para apartar tu prueba de manejo ➔",
+    adTargeting: "Profesionistas jóvenes, ingenieros y entusiastas automotrices",
+    adAngle: "Emoción al volante, exclusividad y sonido de escape inigualable",
+    adObjective: "Prospectos calificados de alto ingreso listos para prueba de manejo",
+    adDailyLeads: "Leads calificados con interés en crédito y pruebas en pista",
+  },
+};
 
 export default function ToucheMotorsClient() {
+  // Telemetry & Admin Mode
   useEffect(() => {
-    // 1. Real-time Telegram Open Alert with 3-Layer Device Exclusion
     try {
       const isLocalhost = Boolean(
         typeof window !== "undefined" && (
@@ -21,7 +193,7 @@ export default function ToucheMotorsClient() {
         if (!toast) {
           toast = document.createElement("div");
           toast.id = "apolo-admin-toast";
-          toast.style.cssText = "position:fixed;top:20px;right:20px;z-index:99999;background:rgba(8,11,17,0.95);border:1px solid rgba(255,184,0,0.6);color:#fff;padding:10px 18px;border-radius:12px;font-family:sans-serif;font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,0.8);backdrop-filter:blur(10px);transition:all 0.3s ease;opacity:0;transform:translateY(-10px);pointer-events:none;display:flex;align-items:center;gap:8px;";
+          toast.style.cssText = "position:fixed;top:76px;right:24px;z-index:99999;background:rgba(11,11,13,0.96);border:1px solid rgba(213,197,169,0.5);color:#fff;padding:10px 18px;border-radius:4px;font-family:monospace;font-size:11px;box-shadow:0 10px 30px rgba(0,0,0,0.8);backdrop-filter:blur(10px);transition:all 0.3s ease;opacity:0;transform:translateY(-10px);pointer-events:none;display:flex;align-items:center;gap:8px;";
           document.body.appendChild(toast);
         }
         toast.innerHTML = msg;
@@ -40,7 +212,7 @@ export default function ToucheMotorsClient() {
         if (urlParams.has("admin") || urlParams.has("bypass") || urlParams.has("preview")) {
           localStorage.setItem("apolo_admin_device", "true");
           document.cookie = "apolo_admin_device=true; path=/; max-age=31536000";
-          showToast("🛡️ <strong>Modo Administrador Activo:</strong> Alertas en Telegram silenciadas");
+          showToast("🛡️ <strong>MODO ADMINISTRADOR APOLOGRAMA:</strong> Alertas Telegram Silenciadas");
         }
 
         const isAdmin = localStorage.getItem("apolo_admin_device") === "true" ||
@@ -54,2164 +226,1994 @@ export default function ToucheMotorsClient() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               clientSlug: "touche-motors",
-              clientName: "Touché Motors Cd. Juárez",
+              clientName: "Touché Motors Cd. Juárez (Stellantis)",
               path: window.location.pathname,
               userAgent: navigator.userAgent
             })
           }).catch(() => {});
         }
       }
-    } catch (err) {}
-
-    // 2. Chat Simulator Logic
-    const chatResponses: Record<string, string> = {
-      opt1: "Excelente elección. Para la RAM 1500 contamos con planes desde 20% de enganche ($180,000 MXN aprox.) y plazos hasta 60 meses. ¿Tienes algún vehículo para toma a cuenta o deseas agendar tu prueba de manejo hoy mismo?",
-      opt2: "¡Con gusto! Tenemos unidades Grand Cherokee y Wrangler listas en Paseo Triunfo 6080. Tenemos espacio disponible hoy a las 4:30 PM o mañana sábado a las 11:00 AM. ¿Cuál te acomoda mejor?",
-      opt3: "¡Tomamos tu vehículo a cuenta con avalúo certificado! Por favor compártenos Marca, Modelo, Año y Kilometraje aproximado para que nuestro valuador te prepare una propuesta preliminar antes de que llegues."
-    };
-
-    (window as any).sendChatOption = function(optId: string, userText: string) {
-      const stream = document.getElementById('chat-stream');
-      if (!stream) return;
-      
-      const userBubble = document.createElement('div');
-      userBubble.className = 'c-bubble c-user';
-      userBubble.innerText = userText;
-      stream.appendChild(userBubble);
-      stream.scrollTop = stream.scrollHeight;
-
-      setTimeout(() => {
-        const botBubble = document.createElement('div');
-        botBubble.className = 'c-bubble c-bot';
-        botBubble.innerText = chatResponses[optId] || "En un momento un asesor de Touché Motors se pondrá en contacto.";
-        stream.appendChild(botBubble);
-        stream.scrollTop = stream.scrollHeight;
-      }, 600);
-    };
-
-    // 3. Before/After Slider Touch & Mouse Logic
-    const baContainer = document.getElementById('ba-container');
-    if (baContainer) {
-      const handleSlide = (clientX: number) => {
-        const rect = baContainer.getBoundingClientRect();
-        let relX = clientX - rect.left;
-        if (relX < 0) relX = 0;
-        if (relX > rect.width) relX = rect.width;
-        const percent = (relX / rect.width) * 100;
-        const afterWrap = document.getElementById('ba-after-wrap');
-        if (afterWrap) afterWrap.style.width = percent + '%';
-      };
-
-      baContainer.addEventListener('mousemove', (e) => handleSlide(e.clientX));
-      baContainer.addEventListener('touchmove', (e) => {
-        handleSlide(e.touches[0].clientX);
-      }, { passive: true });
-      baContainer.addEventListener('touchstart', (e) => {
-        handleSlide(e.touches[0].clientX);
-      }, { passive: true });
+    } catch (e) {
+      console.warn("Telemetry init skipped", e);
     }
-
-    // 4. Scope Calculator Logic
-    let selectedPkg = 'b';
-    let selectedAddons = {
-      bot_wa: false,
-      bot_call: false,
-      suite_crm: false,
-      landing: false
-    };
-
-    function recalculate() {
-      const basePrice = selectedPkg === 'a' ? 20000 : 10000;
-      const pkgName = selectedPkg === 'a' ? 'Paquete A ($20,000)' : 'Paquete B ($10,000)';
-      
-      const elPkgName = document.getElementById('sum-pkg-name');
-      if (elPkgName) elPkgName.innerText = pkgName;
-
-      let addonsMonthly = 0;
-      if (selectedAddons.bot_wa && selectedAddons.bot_call && selectedAddons.suite_crm) {
-        addonsMonthly = 8500;
-      } else {
-        if (selectedAddons.bot_wa) addonsMonthly += 4000;
-        if (selectedAddons.bot_call) addonsMonthly += 4500;
-        if (selectedAddons.suite_crm) addonsMonthly += 3500;
-      }
-
-      const totalMonthly = basePrice + addonsMonthly;
-      const totalMonthlyWithIva = Math.round(totalMonthly * 1.16);
-
-      const elAddonsM = document.getElementById('sum-addons-monthly');
-      if (elAddonsM) elAddonsM.innerText = '$' + addonsMonthly.toLocaleString('es-MX') + ' MXN';
-
-      const elSubM = document.getElementById('sum-subtotal-monthly');
-      if (elSubM) elSubM.innerText = '$' + totalMonthly.toLocaleString('es-MX') + ' MXN';
-
-      const elTotM = document.getElementById('sum-total-monthly');
-      if (elTotM) elTotM.innerHTML = '$' + totalMonthly.toLocaleString('es-MX') + ' <span style="font-size: 0.9rem; color: var(--amber-racing);">MXN / mes</span>';
-
-      const elIvaM = document.getElementById('sum-iva-monthly');
-      if (elIvaM) elIvaM.innerText = '+ IVA ($' + totalMonthlyWithIva.toLocaleString('es-MX') + ' Total)';
-
-      const onetimeBlock = document.getElementById('block-onetime-summary');
-      if (onetimeBlock) {
-        onetimeBlock.style.display = selectedAddons.landing ? 'block' : 'none';
-      }
-
-      const ctaBtn = document.getElementById('btn-cta-dynamic');
-      if (ctaBtn) {
-        const pkgTag = selectedPkg === 'a' ? 'Paquete A' : 'Paquete B';
-        ctaBtn.innerHTML = '<i class="fa fa-calendar-check"></i> Agendar Junta para ' + pkgTag + ' ($' + totalMonthly.toLocaleString('es-MX') + ' + IVA)';
-      }
-    }
-
-    (window as any).selectPackageInView = function(pkgId: string) {
-      (window as any).togglePackage(pkgId);
-      const calcSec = document.getElementById('sec-calculator');
-      if (calcSec) calcSec.scrollIntoView({ behavior: 'smooth' });
-    };
-
-    (window as any).togglePackage = function(pkgId: string) {
-      selectedPkg = pkgId;
-      const optB = document.getElementById('opt-pkg-b');
-      const optA = document.getElementById('opt-pkg-a');
-      if (optB) optB.classList.toggle('selected', pkgId === 'b');
-      if (optA) optA.classList.toggle('selected', pkgId === 'a');
-
-      const cardB = document.getElementById('card-pkg-b');
-      const cardA = document.getElementById('card-pkg-a');
-      if (cardB) cardB.classList.toggle('featured', pkgId === 'b');
-      if (cardA) cardA.classList.toggle('featured', pkgId === 'a');
-
-      recalculate();
-    };
-
-    (window as any).toggleAddon = function(addonId: 'bot_wa' | 'bot_call' | 'suite_crm' | 'landing') {
-      selectedAddons[addonId] = !selectedAddons[addonId];
-
-      const comboSelected = Boolean(selectedAddons.bot_wa && selectedAddons.bot_call && selectedAddons.suite_crm);
-      const checkCombo = document.getElementById('check-combo');
-      const optCombo = document.getElementById('opt-addon-combo');
-      if (checkCombo && checkCombo.firstElementChild) {
-        (checkCombo.firstElementChild as HTMLElement).style.display = comboSelected ? 'block' : 'none';
-      }
-      if (optCombo) optCombo.classList.toggle('selected', comboSelected);
-
-      const checkEl = document.getElementById('check-' + addonId);
-      if (checkEl && checkEl.firstElementChild) {
-        (checkEl.firstElementChild as HTMLElement).style.display = selectedAddons[addonId] ? 'block' : 'none';
-      }
-
-      const optCardId = 'opt-addon-' + (addonId === 'landing' ? 'landing' : (addonId === 'suite_crm' ? 'suite-crm' : (addonId === 'bot_call' ? 'bot-call' : 'bot-wa')));
-      const optCard = document.getElementById(optCardId);
-      if (optCard) optCard.classList.toggle('selected', selectedAddons[addonId]);
-
-      recalculate();
-    };
-
-    (window as any).toggleComboSuite = function() {
-      const willSelect = !(selectedAddons.bot_wa && selectedAddons.bot_call && selectedAddons.suite_crm);
-      selectedAddons.bot_wa = willSelect;
-      selectedAddons.bot_call = willSelect;
-      selectedAddons.suite_crm = willSelect;
-
-      ['bot_wa', 'bot_call', 'suite_crm'].forEach(id => {
-        const ch = document.getElementById('check-' + id);
-        if (ch && ch.firstElementChild) (ch.firstElementChild as HTMLElement).style.display = willSelect ? 'block' : 'none';
-        const cardId = 'opt-addon-' + (id === 'suite_crm' ? 'suite-crm' : (id === 'bot_call' ? 'bot-call' : 'bot-wa'));
-        const el = document.getElementById(cardId);
-        if (el) el.classList.toggle('selected', willSelect);
-      });
-
-      const checkCombo = document.getElementById('check-combo');
-      if (checkCombo && checkCombo.firstElementChild) {
-        (checkCombo.firstElementChild as HTMLElement).style.display = willSelect ? 'block' : 'none';
-      }
-      const optCombo = document.getElementById('opt-addon-combo');
-      if (optCombo) optCombo.classList.toggle('selected', willSelect);
-
-      recalculate();
-    };
-
-    // 5. Meeting Modal Logic
-    (window as any).openMeetingModal = function() {
-      const modal = document.getElementById('meeting-modal');
-      if (modal) modal.style.display = 'flex';
-      
-      const dateInput = document.getElementById('m-date') as HTMLInputElement | null;
-      if (dateInput && !dateInput.value) {
-        const tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        if (tomorrow.getDay() === 6) tomorrow.setDate(tomorrow.getDate() + 2);
-        if (tomorrow.getDay() === 0) tomorrow.setDate(tomorrow.getDate() + 1);
-        dateInput.value = tomorrow.toISOString().split('T')[0];
-      }
-    };
-
-    (window as any).closeMeetingModal = function() {
-      const modal = document.getElementById('meeting-modal');
-      if (modal) modal.style.display = 'none';
-    };
-
-    (window as any).selectTimeSlot = function(btn: HTMLElement, time: string) {
-      document.querySelectorAll('.time-slot-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const timeInput = document.getElementById('m-time') as HTMLInputElement | null;
-      if (timeInput) timeInput.value = time;
-    };
-
-    (window as any).handleMeetingSubmit = async function(e: React.FormEvent) {
-      e.preventDefault();
-      const btn = document.getElementById('btn-submit-meeting') as HTMLButtonElement | null;
-      if (!btn) return;
-      const originalText = btn.innerHTML;
-      btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Registrando...';
-      btn.disabled = true;
-
-      const dateVal = (document.getElementById('m-date') as HTMLInputElement)?.value || '';
-      const timeVal = (document.getElementById('m-time') as HTMLInputElement)?.value || '';
-      const nameVal = (document.getElementById('m-name') as HTMLInputElement)?.value || '';
-      const phoneVal = (document.getElementById('m-phone') as HTMLInputElement)?.value || '';
-
-      const selectedModules = [];
-      selectedModules.push(selectedPkg === 'a' ? 'Paquete A ($20,000 + IVA / mes)' : 'Paquete B ($10,000 + IVA / mes)');
-      if (selectedAddons.bot_wa) selectedModules.push('Bot Cotizador por WhatsApp ($4,000 + IVA / mes)');
-      if (selectedAddons.bot_call) selectedModules.push('Bot para Llamadas con IA ($4,500 + IVA / mes)');
-      if (selectedAddons.suite_crm) selectedModules.push('CRM Automotriz ($3,500 + IVA / mes)');
-      if (selectedAddons.landing) selectedModules.push('Plataforma Web Touché ($40,000 + IVA pago único)');
-
-      const payload = {
-        clientName: 'Touché Motors Cd. Juárez',
-        clientSlug: 'touche-motors',
-        attendeeName: nameVal,
-        phone: phoneVal,
-        date: dateVal,
-        time: timeVal,
-        selectedModules: selectedModules,
-        url: window.location.href,
-      };
-
-      try {
-        await fetch('/api/schedule-meeting', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-      } catch (err) {}
-
-      btn.innerHTML = originalText;
-      btn.disabled = false;
-
-      const sDate = document.getElementById('succ-date');
-      const sTime = document.getElementById('succ-time');
-      const sPhone = document.getElementById('succ-phone');
-      if (sDate) sDate.innerText = dateVal;
-      if (sTime) sTime.innerText = timeVal;
-      if (sPhone) sPhone.innerText = phoneVal;
-
-      const fState = document.getElementById('meeting-form-state');
-      const sState = document.getElementById('meeting-success-state');
-      if (fState) fState.style.display = 'none';
-      if (sState) sState.style.display = 'block';
-    };
-
   }, []);
 
+  // Widget 1: Before / After Slider State
+  const [sliderPos, setSliderPos] = useState<number>(50);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const sliderRef = useRef<HTMLDivElement>(null);
+
+  const handleSliderMove = (clientX: number) => {
+    if (!sliderRef.current) return;
+    const rect = sliderRef.current.getBoundingClientRect();
+    const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
+    const percent = Math.round((x / rect.width) * 100);
+    setSliderPos(percent);
+  };
+
+  // Widget 2: Dirección de Arte & Banners Multiformato State
+  const [activeLeadKey, setActiveLeadKey] = useState<"ram" | "jeep" | "dodge">("ram");
+  const currentPillar2 = PILLAR2_DATA[activeLeadKey];
+
+  // Gallery Stage State (Sistema Visual de Campaña: RAM, Jeep, Dodge)
+  const [galleryTab, setGalleryTab] = useState<number>(1);
+
+  // Widget 3 & Pricing Engine: Interactive Proposal Calculator State
+  const [basePlan, setBasePlan] = useState<"b" | "a">("b");
+  const [selectedAddons, setSelectedAddons] = useState<string[]>([]);
+  const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
+  const [isAuthorizing, setIsAuthorizing] = useState<boolean>(false);
+
+  const toggleAddon = (id: string) => {
+    setSelectedAddons(prev =>
+      prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
+    );
+  };
+
+  // Pricing Math
+  const basePrice = basePlan === "b" ? 10000 : 20000;
+  const platformAdSpend = 2000; // Fixed direct to Meta
+
+  const monthlyAddonsCost = selectedAddons.reduce((acc, id) => {
+    const addon = ADDONS_CATALOG.find(a => a.id === id);
+    if (!addon) return acc;
+    return addon.type === "monthly" ? acc + addon.amount : acc;
+  }, 0);
+
+  const onetimeAddonsCost = selectedAddons.reduce((acc, id) => {
+    const addon = ADDONS_CATALOG.find(a => a.id === id);
+    if (!addon) return acc;
+    return addon.type === "onetime" ? acc + addon.amount : acc;
+  }, 0);
+
+  // Retainer Monthly Math (Billed 100% upfront at start of each service month)
+  const totalAgencyFeeMonthly = basePrice + monthlyAddonsCost;
+  const ivaMonthly = Math.round(totalAgencyFeeMonthly * 0.16);
+  const totalAgencyWithIVA = totalAgencyFeeMonthly + ivaMonthly;
+
+  // One-time software development (50% upfront retainer if selected)
+  const onetimeAnticipo = Math.round(onetimeAddonsCost * 0.5);
+  const onetimeIVA = Math.round(onetimeAnticipo * 0.16);
+
+  // Totals for Month 1 / Start
+  const initialMonthSubtotal = totalAgencyFeeMonthly + platformAdSpend + onetimeAnticipo;
+  const initialMonthTotalNeto = totalAgencyWithIVA + platformAdSpend + onetimeAnticipo + onetimeIVA;
+
+  // WhatsApp Dynamic URL Builder
+  const getDynamicWhatsAppUrl = () => {
+    const planText = basePlan === "b" ? "Paquete B ($10,000 MXN / mes)" : "Paquete A ($20,000 MXN / mes)";
+    const activeAddonNames = selectedAddons.map(id => ADDONS_CATALOG.find(a => a.id === id)?.name).filter(Boolean);
+    const addonsSummary = activeAddonNames.length > 0 ? activeAddonNames.join(" + ") : "Sin addons adicionales";
+
+    let onetimeLine = "";
+    if (onetimeAddonsCost > 0) {
+      onetimeLine = `• Desarrollo Web One-Time (50% anticipo): $${onetimeAnticipo.toLocaleString("es-MX")} MXN (+ IVA)%0A`;
+    }
+
+    const msg = `Hola Apolograma, hemos ratificado formalmente la propuesta ejecutiva para Touché Motors:%0A%0A` +
+      `• Plan Seleccionado: ${planText}%0A` +
+      `• Módulos Activos: ${addonsSummary}%0A` +
+      `• Factura Agencia Mes 1: $${totalAgencyFeeMonthly.toLocaleString("es-MX")} MXN (+ IVA $${ivaMonthly.toLocaleString("es-MX")} = $${totalAgencyWithIVA.toLocaleString("es-MX")} MXN)%0A` +
+      onetimeLine +
+      `• Pauta Directa Meta Ads: $${platformAdSpend.toLocaleString("es-MX")} MXN / mes (facturada a Touché)%0A` +
+      `• Total Desembolso de Arranque Mes 1: $${initialMonthSubtotal.toLocaleString("es-MX")} MXN (+ IVA en servicios = $${initialMonthTotalNeto.toLocaleString("es-MX")} MXN)%0A%0A` +
+      `Favor de confirmar fecha para el rodaje de estudio en Paseo Triunfo 6080.`;
+
+    return `https://wa.me/526563261237?text=${msg}`;
+  };
+
+  const handleAuthorize = () => {
+    if (isAuthorized) return;
+    setIsAuthorizing(true);
+    setTimeout(() => {
+      setIsAuthorizing(false);
+      setIsAuthorized(true);
+      setTimeout(() => {
+        if (typeof window !== "undefined") {
+          window.open(getDynamicWhatsAppUrl(), "_blank");
+        }
+      }, 700);
+    }, 900);
+  };
+
   return (
-    <>
+    <div className="apolo-mandate-root">
+      {/* Global CSS Embedded for 100% Visual Fidelity & Zero External Framework Discrepancy */}
       <style dangerouslySetInnerHTML={{ __html: `
-        :root {
-            --bg-carbon: #080B11;
-            --bg-card: rgba(14, 19, 28, 0.92);
-            --bg-card-hover: rgba(20, 28, 42, 0.98);
-            --border-carbon: rgba(255, 184, 0, 0.22);
-            --border-glow: rgba(255, 184, 0, 0.5);
-            
-            --amber-racing: #FFB800;
-            --amber-glow: rgba(255, 184, 0, 0.28);
-            --orange-flame: #FF5500;
-            --cyan-velocity: #00E5FF;
-            --cyan-glow: rgba(0, 229, 255, 0.25);
-            --emerald-online: #10B981;
-            
-            --text-white: #FFFFFF;
-            --text-body: #94A3B8;
-            --text-muted: #64748B;
-            --text-steel: #CBD5E1;
-            
-            --font-display: 'Space Grotesk', sans-serif;
-            --font-body: 'Plus Jakarta Sans', sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+        .apolo-mandate-root {
+          --bg-main: #0A0A0C;
+          --bg-surface: #111215;
+          --bg-surface-low: #16171B;
+          --bg-surface-high: #202126;
+          --text-primary: #FFFFFF;
+          --text-on-surface: #E8E6E3;
+          --text-muted: #9E9D97;
+          --accent-champagne: #F5C563;
+          --accent-champagne-light: #FFD982;
+          --accent-mopar-red: #FF2A44;
+          --accent-mopar-dark: #C40E24;
+          --border-subtle: rgba(255, 255, 255, 0.09);
+          --border-gold: rgba(245, 197, 99, 0.4);
+          --border-red: rgba(255, 42, 68, 0.45);
+
+          background-color: var(--bg-main);
+          background-image: 
+            radial-gradient(circle at 50% 0%, rgba(255, 42, 68, 0.12) 0%, transparent 60%),
+            radial-gradient(circle at 85% 25%, rgba(245, 197, 99, 0.09) 0%, transparent 50%),
+            radial-gradient(circle at 15% 70%, rgba(255, 42, 68, 0.06) 0%, transparent 55%);
+          color: var(--text-on-surface);
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+          min-height: 100vh;
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          overflow-x: hidden;
+          line-height: 1.6;
+          -webkit-font-smoothing: antialiased;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            scroll-behavior: smooth;
+        .apolo-mandate-root * {
+          box-sizing: border-box;
         }
 
-        html, body {
-            overflow-x: hidden;
-            width: 100%;
-            max-width: 100%;
+        /* Typography Classes */
+        .apolo-font-serif {
+          font-family: 'Playfair Display', Georgia, serif;
         }
 
-        body {
-            background-color: var(--bg-carbon);
-            color: var(--text-body);
-            font-family: var(--font-body);
-            line-height: 1.65;
-            position: relative;
-            min-height: 100vh;
+        .apolo-font-mono {
+          font-family: 'JetBrains Mono', monospace;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
         }
 
-        #ambient-glow {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 700px;
-            height: 700px;
-            background: radial-gradient(circle, rgba(255, 184, 0, 0.08) 0%, rgba(0, 229, 255, 0.03) 40%, rgba(8, 11, 17, 0) 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            z-index: 0;
+        .apolo-tabular-num {
+          font-family: 'JetBrains Mono', monospace;
+          font-variant-numeric: tabular-nums;
+          letter-spacing: -0.02em;
         }
 
-        .bg-carbon-mesh {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0),
-                linear-gradient(to right, rgba(255,184,0,0.012) 1px, transparent 1px);
-            background-size: 32px 32px, 64px 64px;
-            pointer-events: none;
-            z-index: 0;
+        /* Layout Containers */
+        .apolo-container {
+          max-width: 1240px;
+          margin: 0 auto;
+          padding: 0 24px;
         }
 
-        .wrapper {
-            position: relative;
-            z-index: 1;
-            max-width: 1240px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            width: 100%;
-            box-sizing: border-box;
+        @media (min-width: 1024px) {
+          .apolo-container {
+            padding: 0 48px;
+          }
         }
 
-        /* Header Navigation */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(8, 11, 17, 0.94);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 184, 0, 0.18);
-            padding: 1.1rem 0;
-            width: 100%;
+        /* Header */
+        .apolo-header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          width: 100%;
+          z-index: 100;
+          background: rgba(11, 11, 13, 0.94);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border-bottom: 1px solid var(--border-subtle);
+          height: 64px;
         }
 
-        .nav-container {
+        .apolo-header-inner {
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .apolo-brand-lockup {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+        }
+
+        .apolo-logo-img {
+          height: 18px;
+          width: auto;
+          display: block;
+        }
+
+        .apolo-brand-divider {
+          width: 1px;
+          height: 18px;
+          background: rgba(255, 255, 255, 0.2);
+        }
+
+        .apolo-client-logo-img {
+          height: 16px;
+          width: auto;
+          display: block;
+          filter: brightness(1.2);
+        }
+
+        .apolo-protocol-badge {
+          display: none;
+          align-items: center;
+          gap: 8px;
+          padding: 4px 12px;
+          background: var(--bg-surface);
+          border: 1px solid var(--border-subtle);
+          font-size: 10px;
+          color: var(--text-muted);
+        }
+
+        @media (min-width: 860px) {
+          .apolo-protocol-badge {
             display: flex;
+          }
+        }
+
+        .apolo-status-indicator {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 10px;
+          color: var(--accent-champagne);
+        }
+
+        .apolo-pulse-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: var(--accent-champagne);
+          box-shadow: 0 0 10px var(--accent-champagne);
+        }
+
+        /* Section Rhythm */
+        .apolo-section {
+          padding: 80px 0;
+          border-bottom: 1px solid var(--border-subtle);
+        }
+
+        @media (min-width: 1024px) {
+          .apolo-section {
+            padding: 104px 0;
+          }
+        }
+
+        /* Hero */
+        .apolo-hero-pre {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          padding-bottom: 20px;
+          border-bottom: 1px solid var(--border-subtle);
+        }
+
+        @media (min-width: 768px) {
+          .apolo-hero-pre {
+            flex-direction: row;
+            align-items: center;
             justify-content: space-between;
-            align-items: center;
-            width: 100%;
+          }
         }
 
-        .brand-cluster {
-            display: flex;
-            align-items: center;
-            gap: 1.25rem;
+        .apolo-hero-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 32px;
+          margin-top: 40px;
         }
 
-        .brand-logo-img {
-            height: 24px;
-            width: auto;
-            object-fit: contain;
+        @media (min-width: 1024px) {
+          .apolo-hero-grid {
+            grid-template-columns: 7fr 5fr;
+            gap: 56px;
+            align-items: end;
+          }
         }
 
-        .brand-divider {
-            width: 1px;
-            height: 18px;
-            background: rgba(255,255,255,0.18);
+        .apolo-hero-h1 {
+          font-size: clamp(34px, 5.5vw, 64px);
+          line-height: 1.05;
+          font-weight: 400;
+          color: var(--text-primary);
+          margin: 0;
+          letter-spacing: -0.02em;
         }
 
-        .client-header-logo {
-            height: 20px;
-            width: auto;
-            object-fit: contain;
+        .apolo-hero-h1 span.apolo-italic {
+          font-style: italic;
+          color: var(--accent-champagne);
         }
 
-        .target-badge {
-            font-size: 0.72rem;
-            font-family: var(--font-mono);
-            background: rgba(255, 184, 0, 0.12);
-            color: var(--amber-racing);
-            padding: 4px 12px;
-            border-radius: 6px;
-            border: 1px solid rgba(255, 184, 0, 0.35);
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
+        .apolo-hero-lead {
+          font-size: 15px;
+          line-height: 1.75;
+          color: #B2B0A8;
+          border-left: 1px solid var(--border-subtle);
+          padding-left: 24px;
+          margin: 0;
         }
 
-        .btn-action {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.6rem 1.3rem;
-            border-radius: 8px;
-            font-size: 0.88rem;
-            font-weight: 700;
-            font-family: var(--font-display);
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            border: none;
+        /* Stats Cards */
+        .apolo-stats-strip {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 16px;
+          margin-top: 32px;
+          padding-top: 24px;
+          border-top: 1px solid var(--border-subtle);
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--amber-racing), #E69D00);
-            color: #080B11;
-            box-shadow: 0 4px 18px rgba(255, 184, 0, 0.35);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(255, 184, 0, 0.55);
-            background: #FFC42B;
-        }
-
-        .btn-outline {
-            background: rgba(255, 255, 255, 0.04);
-            color: var(--text-white);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
-        .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--amber-racing);
-            color: #fff;
-        }
-
-        /* Section Global */
-        section {
-            padding: 4.5rem 0;
-            position: relative;
-        }
-
-        .section-tag {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--amber-racing);
-            text-transform: uppercase;
-            letter-spacing: 2.5px;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.8rem;
-            font-weight: 700;
-        }
-
-        .section-title {
-            font-family: var(--font-display);
-            font-size: 2.6rem;
-            font-weight: 900;
-            color: var(--text-white);
-            line-height: 1.15;
-            letter-spacing: -0.5px;
-            margin-bottom: 1rem;
-        }
-
-        .section-subtitle {
-            font-size: 1.05rem;
-            color: var(--text-body);
-            max-width: 820px;
-            line-height: 1.65;
-        }
-
-        /* HERO SECTION */
-        .hero {
-            padding: 2.5rem 0 2.5rem 0;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero-banner-container {
-            position: relative;
-            border-radius: 24px;
-            overflow: hidden;
-            border: 1px solid var(--border-carbon);
-            padding: 4.5rem 2.2rem 3.5rem 2.2rem;
-            background: #0D111A;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.8), inset 0 0 60px rgba(255, 184, 0, 0.06);
-        }
-
-        .hero-bg-img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.78;
-            filter: contrast(1.15) brightness(0.9);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .hero-gradient-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(8,11,17,0.3) 0%, rgba(8,11,17,0.75) 100%), linear-gradient(180deg, rgba(8,11,17,0.2) 0%, rgba(8,11,17,0.88) 100%);
-            z-index: 1;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            background: rgba(255, 184, 0, 0.18);
-            border: 1px solid rgba(255, 184, 0, 0.45);
-            backdrop-filter: blur(12px);
-            padding: 0.45rem 1.4rem;
-            border-radius: 50px;
-            margin-bottom: 1.8rem;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--amber-racing);
-            font-family: var(--font-mono);
-            letter-spacing: 0.5px;
-        }
-
-        .hero-pill .dot {
-            width: 8px;
-            height: 8px;
-            background: var(--emerald-online);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--emerald-online);
-        }
-
-        .hero h1 {
-            font-family: var(--font-display);
-            font-size: 3.4rem;
-            font-weight: 900;
-            color: var(--text-white);
-            line-height: 1.12;
-            letter-spacing: -1px;
-            max-width: 1150px;
-            margin: 0 auto 1.6rem auto;
-            text-transform: uppercase;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.8);
-        }
-
-        .hero h1 span.gradient-text {
-            background: linear-gradient(135deg, #FFFFFF 20%, var(--amber-racing) 70%, var(--orange-flame) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-manifesto {
-            font-size: 1.15rem;
-            color: var(--text-steel);
-            max-width: 920px;
-            margin: 0 auto 2.4rem auto;
-            line-height: 1.8;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.7);
-        }
-
-        .hero-manifesto strong { color: #fff; }
-
-        /* DOMINANT STATS BAR (APOLOGRAMA EFFICIENCY) */
-        .hero-stats-container {
-            background: rgba(14, 19, 28, 0.94);
-            backdrop-filter: blur(25px);
-            border: 1px solid var(--border-carbon);
-            border-radius: 18px;
-            margin-top: 2rem;
-            overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.7);
-        }
-
-        .stats-box-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.75rem 1.8rem;
-            background: rgba(255, 184, 0, 0.08);
-            border-bottom: 1px solid rgba(255, 184, 0, 0.18);
-            font-family: var(--font-mono);
-            font-size: 0.76rem;
-            color: var(--amber-racing);
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
-        .stats-box-source strong {
-            color: #fff;
-            letter-spacing: 0.8px;
-        }
-
-        .hero-stats-intro {
-            padding: 1rem 1.8rem 0 1.8rem;
-            text-align: left;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-        }
-
-        .hero-stats-intro p {
-            font-size: 0.92rem;
-            color: #CBD5E1;
-            line-height: 1.55;
-            padding-bottom: 0.9rem;
-        }
-
-        .hero-stats-grid {
-            display: grid;
+        @media (min-width: 768px) {
+          .apolo-stats-strip {
             grid-template-columns: repeat(4, 1fr);
-            gap: 1.2rem;
-            padding: 1.6rem 1.5rem;
+          }
         }
 
-        .stat-card {
-            text-align: center;
-            position: relative;
+        .apolo-stat-item {
+          padding: 16px 20px;
+          background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+          border: 1px solid var(--border-subtle);
+          border-radius: 2px;
+          transition: border-color 0.3s ease;
         }
 
-        .stat-card:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            right: -0.75rem;
-            top: 15%;
-            height: 70%;
-            width: 1px;
-            background: rgba(255,255,255,0.08);
+        .apolo-stat-item:hover {
+          border-color: var(--border-gold);
         }
 
-        .stat-number {
-            font-family: var(--font-mono);
-            font-size: 3rem;
-            font-weight: 800;
-            color: #fff;
-            line-height: 1;
-            margin-bottom: 0.4rem;
-            display: flex;
-            align-items: baseline;
-            justify-content: center;
-            gap: 2px;
+        .apolo-stat-val {
+          font-size: 26px;
+          font-weight: 600;
+          color: var(--text-primary);
+          line-height: 1;
         }
 
-        .stat-number .unit {
-            font-size: 1.6rem;
-            color: var(--amber-racing);
+        .apolo-stat-lbl {
+          font-size: 9px;
+          color: var(--text-muted);
+          margin-top: 8px;
+          display: block;
         }
 
-        .stat-label {
-            font-size: 0.82rem;
-            font-weight: 700;
-            color: var(--text-steel);
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            margin-bottom: 0.25rem;
-            font-family: var(--font-display);
+        /* Museum Vitrine */
+        .apolo-vitrine {
+          position: relative;
+          margin-top: 56px;
+          padding: 16px;
+          background: var(--bg-surface);
+          border: 1px solid var(--border-subtle);
+          box-shadow: 0 24px 80px rgba(0, 0, 0, 0.9);
         }
 
-        .stat-sub {
-            font-size: 0.72rem;
-            color: var(--text-muted);
+        @media (min-width: 768px) {
+          .apolo-vitrine {
+            padding: 24px;
+          }
         }
 
-        /* 3 PROOF-OF-CAPABILITY INTERACTIVE WIDGETS */
-        .widgets-showcase-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin-top: 3rem;
+        .apolo-crosshair {
+          position: absolute;
+          font-family: monospace;
+          color: var(--border-gold);
+          font-size: 14px;
+          line-height: 1;
+          user-select: none;
         }
 
-        .showcase-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-carbon);
-            border-radius: 18px;
-            padding: 1.8rem;
-            display: flex;
-            flex-direction: column;
+        .apolo-crosshair.tl { top: 8px; left: 8px; }
+        .apolo-crosshair.tr { top: 8px; right: 8px; }
+        .apolo-crosshair.bl { bottom: 8px; left: 8px; }
+        .apolo-crosshair.br { bottom: 8px; right: 8px; }
+
+        .apolo-vitrine-inner {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 16 / 9;
+          overflow: hidden;
+          background: #050507;
+          border: 1px solid var(--border-subtle);
+        }
+
+        .apolo-vitrine-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .apolo-vitrine:hover .apolo-vitrine-img {
+          transform: scale(1.015);
+        }
+
+        .apolo-vitrine-badge {
+          position: absolute;
+          top: 16px;
+          left: 16px;
+          padding: 6px 14px;
+          background: rgba(11, 11, 13, 0.9);
+          border: 1px solid var(--border-subtle);
+          backdrop-filter: blur(8px);
+          font-size: 9px;
+          letter-spacing: 0.25em;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+        }
+
+        .apolo-vitrine-meta {
+          margin-top: 18px;
+          padding-top: 14px;
+          border-top: 1px solid var(--border-subtle);
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          font-size: 10px;
+          color: var(--text-muted);
+        }
+
+        @media (min-width: 768px) {
+          .apolo-vitrine-meta {
+            flex-direction: row;
+            align-items: center;
             justify-content: space-between;
-            transition: all 0.3s ease;
+          }
         }
 
-        .showcase-card:hover {
-            border-color: var(--amber-racing);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 184, 0, 0.12);
+        /* Tangible Widgets Section */
+        .apolo-widgets-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 32px;
+          margin-top: 48px;
         }
 
-        .showcase-header {
-            margin-bottom: 1.2rem;
+        @media (min-width: 1024px) {
+          .apolo-widgets-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+          }
         }
 
-        .showcase-badge {
-            font-size: 0.7rem;
-            font-family: var(--font-mono);
-            color: var(--amber-racing);
-            background: rgba(255, 184, 0, 0.1);
-            padding: 3px 8px;
-            border-radius: 4px;
-            display: inline-block;
-            margin-bottom: 0.4rem;
-            font-weight: 700;
+        .apolo-widget-card {
+          background: linear-gradient(180deg, rgba(255,255,255,0.035) 0%, rgba(255,255,255,0.01) 100%);
+          border: 1px solid var(--border-subtle);
+          border-radius: 2px;
+          padding: 28px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+          transition: border-color 0.3s ease;
         }
 
-        .showcase-title {
-            font-family: var(--font-display);
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: #fff;
+        .apolo-widget-card:hover {
+          border-color: rgba(213, 197, 169, 0.4);
         }
 
-        /* Chat Widget Demo */
-        .chat-stream-box {
-            background: #05070B;
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 12px;
-            padding: 1rem;
-            min-height: 220px;
-            max-height: 220px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-bottom: 1rem;
-            font-size: 0.82rem;
+        /* Widget 1: Before / After Slider */
+        .apolo-ba-wrapper {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 16 / 10;
+          overflow: hidden;
+          background: #000;
+          border: 1px solid var(--border-subtle);
+          margin-top: 18px;
+          user-select: none;
+          cursor: ew-resize;
         }
 
-        .c-bubble {
-            padding: 8px 12px;
-            border-radius: 10px;
-            max-width: 88%;
-            line-height: 1.4;
+        .apolo-ba-img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          pointer-events: none;
         }
 
-        .c-bot {
-            background: rgba(255, 184, 0, 0.12);
-            border: 1px solid rgba(255, 184, 0, 0.3);
-            color: #FFF;
-            align-self: flex-start;
+        .apolo-ba-divider {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          width: 2px;
+          background: #FFFFFF;
+          box-shadow: 0 0 12px rgba(255,255,255,0.8);
+          transform: translateX(-50%);
         }
 
-        .c-user {
-            background: rgba(0, 229, 255, 0.15);
-            border: 1px solid rgba(0, 229, 255, 0.4);
-            color: #00E5FF;
-            align-self: flex-end;
+        .apolo-ba-handle {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+          background: var(--bg-main);
+          border: 2px solid var(--accent-champagne);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 10px;
+          color: var(--accent-champagne);
         }
 
-        .chat-action-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            color: var(--text-steel);
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 0.78rem;
-            font-family: var(--font-mono);
-            cursor: pointer;
-            transition: all 0.2s;
-            text-align: left;
-            width: 100%;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .apolo-ba-chip {
+          position: absolute;
+          bottom: 8px;
+          padding: 3px 8px;
+          font-size: 8px;
+          background: rgba(11,11,13,0.88);
+          border: 1px solid var(--border-subtle);
+          color: #FFF;
+          pointer-events: none;
         }
 
-        .chat-action-btn:hover {
-            background: rgba(255, 184, 0, 0.15);
-            border-color: var(--amber-racing);
-            color: #fff;
+        /* Widget 2: Lead Simulator */
+        .apolo-lead-btn-group {
+          display: flex;
+          gap: 6px;
+          margin-top: 14px;
         }
 
-        /* Real Map Radar Box */
-        .radar-box {
-            background: #05070B;
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 12px;
-            height: 220px;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .apolo-lead-btn {
+          flex: 1;
+          padding: 8px 6px;
+          background: var(--bg-surface);
+          border: 1px solid var(--border-subtle);
+          color: var(--text-muted);
+          font-size: 9px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          text-align: center;
         }
 
-        .radar-map-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: contrast(1.1) brightness(0.85);
-            z-index: 0;
+        .apolo-lead-btn.active {
+          border-color: var(--accent-champagne);
+          color: var(--text-primary);
+          background: var(--bg-surface-high);
         }
 
-        .radar-ring {
-            position: absolute;
-            width: 110px;
-            height: 110px;
-            border: 2px dashed rgba(255, 184, 0, 0.7);
-            border-radius: 50%;
-            animation: radarPulse 2.8s infinite linear;
-            z-index: 2;
-            pointer-events: none;
+        .apolo-lead-card {
+          margin-top: 14px;
+          padding: 14px;
+          background: #0D0E12;
+          border: 1px solid rgba(213, 197, 169, 0.25);
+          font-size: 11px;
+        }
+
+        /* Widget 3: Radar HUD */
+        .apolo-radar-hud-box {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 16 / 10;
+          overflow: hidden;
+          margin-top: 18px;
+          border: 1px solid var(--border-subtle);
+          background: #050507;
+        }
+
+        .apolo-radar-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          opacity: 0.85;
+        }
+
+        .apolo-radar-overlay {
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(circle at 50% 50%, rgba(0, 229, 255, 0.08) 0%, transparent 70%);
+          pointer-events: none;
+        }
+
+        .apolo-radar-blip {
+          position: absolute;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: var(--accent-champagne);
+          box-shadow: 0 0 12px var(--accent-champagne);
+          animation: radarPulse 2s infinite ease-in-out;
         }
 
         @keyframes radarPulse {
-            0% { transform: scale(0.4); opacity: 1; }
-            100% { transform: scale(1.6); opacity: 0; }
+          0% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(2.2); opacity: 0.4; }
+          100% { transform: scale(1); opacity: 1; }
         }
 
-        .radar-center-pin {
-            width: 16px;
-            height: 16px;
-            background: var(--amber-racing);
-            border: 2px solid #fff;
-            border-radius: 50%;
-            box-shadow: 0 0 20px var(--amber-racing);
-            z-index: 3;
+        /* Funnel Section Styling (Propuesta 3: Del Anuncio al Piso de Venta) */
+        .apolo-funnel-selector {
+          display: flex;
+          gap: 12px;
+          flex-wrap: wrap;
+          margin-top: 24px;
         }
 
-        .radar-hud-tag {
-            position: absolute;
-            bottom: 8px;
-            left: 8px;
-            font-size: 0.68rem;
-            font-family: var(--font-mono);
-            color: var(--cyan-velocity);
-            background: rgba(0,0,0,0.85);
-            padding: 4px 8px;
-            border-radius: 4px;
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(0, 229, 255, 0.3);
-            z-index: 4;
+        .apolo-funnel-tab-btn {
+          background: var(--bg-surface-low);
+          border: 1px solid var(--border-subtle);
+          padding: 10px 18px;
+          font-size: 11px;
+          cursor: pointer;
+          color: var(--text-muted);
+          transition: all 0.25s ease;
+          display: flex;
+          align-items: center;
+          gap: 10px;
         }
 
-        /* Real Before After Image Slider */
-        .ba-container {
-            position: relative;
-            height: 220px;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.12);
-            cursor: ew-resize;
-            background: #000;
+        .apolo-funnel-tab-btn:hover {
+          border-color: rgba(213, 197, 169, 0.4);
+          color: var(--text-primary);
         }
 
-        .ba-slide-img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            pointer-events: none;
+        .apolo-funnel-tab-btn.active {
+          background: linear-gradient(135deg, rgba(255, 42, 68, 0.18) 0%, rgba(245, 197, 99, 0.14) 100%);
+          border-color: var(--accent-mopar-red);
+          color: #FFF;
+          box-shadow: 0 4px 20px rgba(255, 42, 68, 0.25);
         }
 
-        .ba-before-wrap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        .apolo-funnel-stage {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 20px;
+          margin-top: 32px;
         }
 
-        .ba-after-wrap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 50%;
-            height: 100%;
-            overflow: hidden;
-            border-right: 2px solid var(--amber-racing);
-            z-index: 2;
-            box-shadow: 0 0 15px var(--amber-glow);
-        }
-
-        .ba-after-wrap .ba-slide-img {
-            width: 100%;
-            min-width: 320px;
-        }
-
-        .ba-tag-badge {
-            position: absolute;
-            top: 10px;
-            font-size: 0.68rem;
-            font-family: var(--font-mono);
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-weight: 800;
-            z-index: 4;
-            backdrop-filter: blur(8px);
-        }
-
-        .ba-tag-before {
-            right: 10px;
-            background: rgba(239, 68, 68, 0.85);
-            color: #fff;
-        }
-
-        .ba-tag-after {
-            left: 10px;
-            background: rgba(255, 184, 0, 0.9);
-            color: #080B11;
-        }
-
-        .ba-affordance-hint {
-            position: absolute;
-            bottom: 8px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,0,0,0.75);
-            color: var(--amber-racing);
-            font-family: var(--font-mono);
-            font-size: 0.68rem;
-            padding: 3px 10px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 184, 0, 0.3);
-            pointer-events: none;
-            z-index: 5;
-            animation: pulseHint 2s infinite ease-in-out;
-        }
-
-        @keyframes pulseHint {
-            0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(0.98); }
-            50% { opacity: 1; transform: translateX(-50%) scale(1.02); }
-        }
-
-        /* PRICING TIERS SECTION */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .pricing-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-carbon);
-            border-radius: 20px;
-            padding: 2.6rem;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: all 0.3s ease;
-        }
-
-        .pricing-card.featured {
-            border-color: var(--amber-racing);
-            box-shadow: 0 15px 45px rgba(255, 184, 0, 0.15), inset 0 0 30px rgba(255, 184, 0, 0.04);
-            background: linear-gradient(145deg, rgba(20, 28, 42, 0.95), rgba(14, 19, 28, 0.98));
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-4px);
-        }
-
-        .pricing-badge {
-            position: absolute;
-            top: -13px;
-            right: 24px;
-            background: linear-gradient(135deg, var(--amber-racing), #E69D00);
-            color: #080B11;
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            font-weight: 900;
-            padding: 4px 14px;
-            border-radius: 20px;
-            letter-spacing: 0.8px;
-        }
-
-        .p-title {
-            font-family: var(--font-display);
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: #fff;
-            margin-bottom: 0.4rem;
-            text-transform: uppercase;
-        }
-
-        .p-price-block {
-            margin: 1.6rem 0;
-            padding: 1.25rem 0;
-            border-top: 1px solid rgba(255,255,255,0.08);
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .p-amount {
-            font-family: var(--font-mono);
-            font-size: 2.8rem;
-            font-weight: 900;
-            color: #fff;
-            line-height: 1;
-        }
-
-        .p-currency { font-size: 1.2rem; color: var(--amber-racing); }
-        .p-period { font-size: 0.9rem; color: var(--text-muted); }
-
-        .p-iva-tag {
-            font-size: 0.86rem;
-            color: #FCD34D;
-            font-family: var(--font-mono);
-            margin-top: 0.4rem;
-            font-weight: 600;
-        }
-
-        .p-features {
-            list-style: none;
-            margin: 1.6rem 0;
-            display: flex;
-            flex-direction: column;
-            gap: 0.9rem;
-        }
-
-        .p-features li {
-            font-size: 0.92rem;
-            color: var(--text-steel);
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            line-height: 1.45;
-        }
-
-        .p-features li i {
-            color: var(--amber-racing);
-            font-size: 1rem;
-            margin-top: 3px;
-            flex-shrink: 0;
-        }
-
-        /* TECH ADDONS (FASE 2 DE MADURACIÓN) */
-        .addons-section-header {
-            margin-top: 4.5rem;
-            border-top: 1px solid rgba(255,255,255,0.08);
-            padding-top: 3rem;
-            text-align: center;
-        }
-
-        .addons-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-top: 2.5rem;
-        }
-
-        .addon-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-carbon);
-            border-radius: 16px;
-            padding: 1.8rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: all 0.3s ease;
-        }
-
-        .addon-card:hover {
-            border-color: var(--amber-racing);
-            transform: translateY(-3px);
-        }
-
-        .addon-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 0.8rem;
-        }
-
-        .addon-title {
-            font-family: var(--font-display);
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: #fff;
-        }
-
-        .addon-price {
-            font-family: var(--font-mono);
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: var(--amber-racing);
-            text-align: right;
-            line-height: 1.1;
-        }
-
-        .addon-price-sub {
-            font-size: 0.72rem;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        /* CALCULATOR & SCOPE BUILDER */
-        .calc-container {
-            background: var(--bg-card);
-            border: 1px solid var(--border-carbon);
-            border-radius: 22px;
-            padding: 3rem;
-            margin-top: 3.5rem;
-        }
-
-        .calc-grid {
-            display: grid;
-            grid-template-columns: 1.3fr 1fr;
-            gap: 2.5rem;
-        }
-
-        .calc-options {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .calc-opt-group-title {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--text-steel);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 700;
-            margin-bottom: 0.2rem;
-        }
-
-        .calc-item {
-            background: rgba(255,255,255,0.025);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 12px;
-            padding: 1.1rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            transition: all 0.25s ease;
-        }
-
-        .calc-item:hover {
-            border-color: rgba(255, 184, 0, 0.4);
-            background: rgba(255, 184, 0, 0.04);
-        }
-
-        .calc-item.selected {
-            border-color: var(--amber-racing);
-            background: rgba(255, 184, 0, 0.09);
-            box-shadow: 0 4px 20px rgba(255, 184, 0, 0.12);
-        }
-
-        .calc-item-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .calc-check {
-            width: 22px;
-            height: 22px;
-            border-radius: 6px;
-            border: 2px solid var(--amber-racing);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #080B11;
-            background: transparent;
-            font-size: 0.75rem;
-            flex-shrink: 0;
-            font-weight: 900;
-        }
-
-        .calc-item.selected .calc-check {
-            background: var(--amber-racing);
-        }
-
-        .calc-item-title {
-            font-family: var(--font-display);
-            font-size: 1.05rem;
-            font-weight: 800;
-            color: #fff;
-        }
-
-        .calc-item-sub {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-        }
-
-        .calc-item-price {
-            font-family: var(--font-mono);
-            font-size: 1.05rem;
-            font-weight: 800;
-            color: #F8FAFC;
-            text-align: right;
-        }
-
-        .calc-summary-card {
-            background: linear-gradient(145deg, #101622, #0A0E17);
-            border: 1px solid var(--border-carbon);
-            border-radius: 18px;
-            padding: 2.2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .summary-title {
-            font-family: var(--font-display);
-            font-size: 1.4rem;
-            font-weight: 900;
-            color: #fff;
-            margin-bottom: 1.2rem;
-            padding-bottom: 0.8rem;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            text-transform: uppercase;
-        }
-
-        .summary-block {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 12px;
-            padding: 1.1rem;
-            margin-bottom: 1rem;
-        }
-
-        .summary-block-title {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--amber-racing);
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .summary-line {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.86rem;
-            color: var(--text-body);
-            margin-bottom: 0.35rem;
-        }
-
-        .summary-amt-big {
-            font-family: var(--font-mono);
-            font-size: 1.6rem;
-            font-weight: 900;
-            color: #fff;
-            margin-top: 0.4rem;
-        }
-
-        /* MODAL */
-        .meeting-modal-backdrop {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(4, 6, 10, 0.9);
-            backdrop-filter: blur(20px);
-            z-index: 3000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem;
-        }
-
-        .meeting-modal-card {
-            background: linear-gradient(145deg, #121824, #0A0E17);
-            border: 1px solid rgba(255, 184, 0, 0.4);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(255, 184, 0, 0.15);
-            border-radius: 20px;
-            width: 100%;
-            max-width: 640px;
-            padding: 2.4rem;
-            position: relative;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .meeting-modal-close {
-            position: absolute;
-            top: 18px;
-            right: 22px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #fff;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .meeting-modal-close:hover {
-            background: rgba(239, 68, 68, 0.2);
-            color: #EF4444;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-        }
-
-        .form-group label {
-            font-size: 0.78rem;
-            font-weight: 700;
-            color: #CBD5E1;
-            font-family: var(--font-display);
-        }
-
-        .m-input {
-            background: rgba(6, 9, 14, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 8px;
-            padding: 0.7rem 0.9rem;
-            color: #fff;
-            font-family: var(--font-body);
-            font-size: 0.88rem;
-            outline: none;
-            width: 100%;
-        }
-
-        .m-input:focus {
-            border-color: var(--amber-racing);
-        }
-
-        .time-slots-grid {
-            display: grid;
+        @media (min-width: 1024px) {
+          .apolo-funnel-stage {
             grid-template-columns: repeat(3, 1fr);
-            gap: 0.4rem;
+            align-items: stretch;
+          }
         }
 
-        .time-slot-btn {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 6px;
-            color: #CBD5E1;
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            font-weight: 700;
-            padding: 0.5rem 0.2rem;
-            cursor: pointer;
-            text-align: center;
+        .apolo-step-card {
+          background: var(--bg-surface);
+          border: 1px solid var(--border-subtle);
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          transition: border-color 0.25s ease;
         }
 
-        .time-slot-btn.active {
-            background: var(--amber-racing);
-            color: #080B11;
-            font-weight: 800;
+        .apolo-step-card:hover {
+          border-color: var(--border-gold);
         }
 
-        /* Footer (100% Apolograma) */
-        footer {
-            border-top: 1px solid var(--border-carbon);
-            padding: 3.5rem 0 2.5rem 0;
-            background: #05070B;
-            text-align: center;
-            width: 100%;
+        .apolo-step-header {
+          padding: 14px 18px;
+          background: var(--bg-surface-low);
+          border-bottom: 1px solid var(--border-subtle);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 8px;
+          font-size: 10px;
         }
 
-        .footer-brand {
-            display: flex;
-            justify-content: center;
+        .apolo-step-body {
+          padding: 20px;
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+        }
+
+        /* Mockup 1: Feed Master Art (1:1 / 4:5) */
+        .apolo-mockup-feed {
+          background: #000000;
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          overflow: hidden;
+          margin-bottom: 18px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .apolo-feed-header {
+          padding: 8px 12px;
+          background: #141519;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .apolo-feed-img-box {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 16 / 10;
+          background: #050507;
+          overflow: hidden;
+        }
+
+        .apolo-feed-copy-box {
+          padding: 12px;
+          background: #111216;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .apolo-feed-cta-bar {
+          padding: 10px 14px;
+          background: linear-gradient(90deg, #18191E 0%, #22242B 100%);
+          color: var(--accent-champagne);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-size: 10.5px;
+          font-weight: 600;
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Mockup 2: Vertical Story & Reel (9:16) */
+        .apolo-mockup-story {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 9 / 13;
+          background: #000000;
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          overflow: hidden;
+          margin-bottom: 18px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .apolo-story-bg-img {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          opacity: 0.95;
+        }
+
+        .apolo-story-vignette {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.9) 100%);
+        }
+
+        .apolo-story-top {
+          position: relative;
+          z-index: 2;
+          padding: 10px 12px;
+        }
+
+        .apolo-story-progress-strip {
+          display: flex;
+          gap: 4px;
+          margin-bottom: 8px;
+        }
+
+        .apolo-story-progress-bar {
+          flex: 1;
+          height: 2px;
+          background: rgba(255, 255, 255, 0.35);
+          border-radius: 1px;
+        }
+
+        .apolo-story-progress-bar.active {
+          background: #FFFFFF;
+        }
+
+        .apolo-story-bottom {
+          position: relative;
+          z-index: 2;
+          padding: 14px;
+        }
+
+        .apolo-story-sticker {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          background: var(--accent-mopar-red);
+          color: #FFF;
+          padding: 6px 12px;
+          border-radius: 20px;
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 0.05em;
+          box-shadow: 0 4px 15px rgba(255, 42, 68, 0.4);
+          margin-top: 10px;
+        }
+
+        /* Mockup 3: Meta Ads Ops -> Call Center */
+        .apolo-mockup-adops {
+          background: #101116;
+          border: 1px solid rgba(245, 197, 99, 0.3);
+          overflow: hidden;
+          margin-bottom: 18px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .apolo-adops-header {
+          padding: 9px 12px;
+          background: linear-gradient(90deg, rgba(255,42,68,0.22) 0%, rgba(245,197,99,0.12) 100%);
+          border-bottom: 1px solid rgba(245, 197, 99, 0.25);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-size: 9.5px;
+        }
+
+        .apolo-adops-body {
+          padding: 14px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .apolo-adops-row {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+          padding-bottom: 8px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Pillars Summary Strip */
+        .apolo-funnel-summary-strip {
+          margin-top: 32px;
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 16px;
+          padding: 24px;
+          background: var(--bg-surface-low);
+          border: 1px solid var(--border-subtle);
+        }
+
+        @media (min-width: 1024px) {
+          .apolo-funnel-summary-strip {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+          }
+        }
+
+        .apolo-pillar-item {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+
+        .apolo-pillar-num {
+          font-size: 10px;
+          color: var(--accent-champagne);
+        }
+
+        .apolo-pillar-title {
+          font-size: 16px;
+          color: var(--text-primary);
+          margin: 0;
+          font-weight: 500;
+        }
+
+        .apolo-pillar-desc {
+          font-size: 12px;
+          color: #A1A09A;
+          margin: 0;
+          line-height: 1.5;
+        }
+
+        /* Interactive Proposal Calculator */
+        .apolo-calc-container {
+          margin-top: 40px;
+          border: 1px solid var(--border-subtle);
+          background: var(--bg-surface);
+        }
+
+        .apolo-calc-header {
+          padding: 24px;
+          background: var(--bg-surface-low);
+          border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .apolo-plan-selector-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 16px;
+          margin-top: 16px;
+        }
+
+        @media (min-width: 768px) {
+          .apolo-plan-selector-grid {
+            grid-template-columns: 1fr 1fr;
+          }
+        }
+
+        .apolo-plan-card {
+          padding: 20px;
+          border: 1px solid var(--border-subtle);
+          background: var(--bg-main);
+          cursor: pointer;
+          transition: all 0.25s ease;
+          position: relative;
+        }
+
+        .apolo-plan-card.active {
+          border-color: var(--accent-champagne);
+          background: linear-gradient(180deg, rgba(213,197,169,0.08) 0%, rgba(213,197,169,0.01) 100%);
+        }
+
+        .apolo-addon-row {
+          display: grid;
+          grid-template-columns: auto 1fr auto;
+          gap: 16px;
+          padding: 18px 24px;
+          border-bottom: 1px solid var(--border-subtle);
+          align-items: center;
+          cursor: pointer;
+          transition: background 0.2s ease;
+        }
+
+        .apolo-addon-row:hover {
+          background: var(--bg-surface-low);
+        }
+
+        .apolo-checkbox-custom {
+          width: 18px;
+          height: 18px;
+          border: 1px solid var(--border-gold);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: transparent;
+        }
+
+        .apolo-checkbox-custom.checked {
+          background: var(--accent-champagne);
+          color: #121316;
+        }
+
+        .apolo-calc-summary-bar {
+          padding: 32px 24px;
+          background: var(--bg-surface-high);
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 24px;
+        }
+
+        @media (min-width: 860px) {
+          .apolo-calc-summary-bar {
+            grid-template-columns: 1fr 1fr;
             align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 1rem;
+            padding: 32px 36px;
+          }
         }
 
-        .footer-logo-img {
-            height: 20px;
-            width: auto;
+        /* Ratification Button */
+        .apolo-auth-btn {
+          background: var(--accent-champagne);
+          color: #121316;
+          border: none;
+          padding: 18px 40px;
+          font-size: 11px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          letter-spacing: 0.25em;
+          text-transform: uppercase;
+          font-weight: 700;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
         }
 
-        .footer-divider {
-            color: rgba(255,255,255,0.2);
+        .apolo-auth-btn:hover {
+          background: var(--accent-champagne-light);
+          transform: translateY(-1px);
         }
 
-        .footer-client {
-            color: var(--amber-racing);
-            font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1.05rem;
+        .apolo-vip-link {
+          color: var(--accent-champagne);
+          font-size: 11px;
+          text-decoration: none;
+          border-bottom: 1px solid var(--border-gold);
+          padding-bottom: 4px;
+          transition: color 0.2s ease, border-color 0.2s ease;
         }
 
-        .footer-copy {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            line-height: 1.6;
+        .apolo-vip-link:hover {
+          color: var(--text-primary);
+          border-color: var(--text-primary);
         }
+      `}} />
 
-        /* =========================================================
-           RESPONSIVE BREAKPOINTS (TABLET & MOBILE)
-           ========================================================= */
-        @media (max-width: 992px) {
-            .wrapper { padding: 0 1.5rem; }
-            .widgets-showcase-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-            .pricing-grid { grid-template-columns: 1fr; gap: 1.8rem; }
-            .addons-grid { grid-template-columns: 1fr; gap: 1.2rem; }
-            .calc-grid { grid-template-columns: 1fr; gap: 2rem; }
-        }
+      {/* 00. ATELIER CO-BRANDED HEADER */}
+      <header className="apolo-header">
+        <div className="apolo-container apolo-header-inner">
+          <div className="apolo-brand-lockup">
+            <img
+              src="/assets/apolograma-logo-v2.png"
+              alt="Apolograma Interactive Studio"
+              className="apolo-logo-img"
+            />
+            <div className="apolo-brand-divider"></div>
+            <img
+              src="/assets/touche-motors/logo-white.png"
+              alt="Touché Motors Stellantis"
+              className="apolo-client-logo-img"
+            />
+          </div>
 
-        @media (max-width: 768px) {
-            body { font-size: 15px; }
-            .wrapper { padding: 0 1rem; width: 100%; }
-            section { padding: 2.8rem 0; }
-            
-            .section-tag { font-size: 0.72rem; letter-spacing: 1.8px; margin-bottom: 0.5rem; }
-            .section-title { font-size: 1.85rem; line-height: 1.18; margin-bottom: 0.6rem; }
-            .section-subtitle { font-size: 0.88rem; line-height: 1.55; }
+          <div className="apolo-font-mono apolo-protocol-badge">
+            <span className="apolo-pulse-dot"></span>
+            <span>MANDATE PROTOCOL // DOSSIER NO. 084-TOUCHE</span>
+          </div>
 
-            /* 1. Header Mobile */
-            header { padding: 0.65rem 0; }
-            .brand-cluster { gap: 0; }
-            .brand-logo-img { height: 18px; }
-            .brand-divider { display: none !important; }
-            .client-header-logo { display: none !important; }
-            .target-badge { display: none !important; }
-            .nav-actions { flex-shrink: 0; }
-            .nav-actions .btn-action {
-                padding: 0.42rem 0.75rem;
-                font-size: 0.75rem;
-                border-radius: 6px;
-                white-space: nowrap;
-            }
-
-            /* 2. Hero Mobile */
-            .hero { padding: 1.2rem 0 2rem 0; }
-            .hero-banner-container { padding: 2.4rem 1.1rem 1.8rem 1.1rem; border-radius: 18px; }
-            .hero-pill { padding: 0.35rem 0.9rem; font-size: 0.72rem; margin-bottom: 1.2rem; }
-            .hero h1 { font-size: 1.95rem; line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 1.1rem; }
-            .hero-manifesto { font-size: 0.92rem; line-height: 1.65; margin-bottom: 1.6rem; }
-
-            /* Stats 2x2 Grid */
-            .hero-stats-container { border-radius: 14px; margin-top: 1.4rem; width: 100%; }
-            .stats-box-header { 
-                flex-direction: column; 
-                align-items: flex-start; 
-                gap: 4px; 
-                padding: 0.65rem 1rem; 
-                font-size: 0.68rem; 
-            }
-            .hero-stats-intro { padding: 0.8rem 1rem 0 1rem; }
-            .hero-stats-intro p { font-size: 0.82rem; line-height: 1.45; padding-bottom: 0.6rem; }
-            .hero-stats-grid {
-                grid-template-columns: 1fr 1fr !important;
-                gap: 0.8rem !important;
-                padding: 1rem 0.8rem !important;
-                width: 100%;
-            }
-            .stat-card {
-                background: rgba(255, 255, 255, 0.02);
-                border: 1px solid rgba(255, 255, 255, 0.05);
-                border-radius: 10px;
-                padding: 0.8rem 0.4rem;
-            }
-            .stat-card:not(:last-child)::after { display: none !important; }
-            .stat-number { font-size: 1.7rem !important; margin-bottom: 0.2rem; gap: 1px; }
-            .stat-number .unit { font-size: 1.05rem !important; }
-            .stat-label { font-size: 0.68rem !important; line-height: 1.2; margin-bottom: 0.2rem; letter-spacing: 0.3px; }
-            .stat-sub { font-size: 0.62rem !important; }
-
-            /* Widgets Showcase */
-            .showcase-card { padding: 1.3rem 1.1rem; border-radius: 15px; }
-            .showcase-title { font-size: 1.15rem; }
-            .chat-stream-box { min-height: 180px; max-height: 180px; padding: 0.8rem; font-size: 0.78rem; }
-            .chat-action-btn { padding: 8px 10px; font-size: 0.72rem; }
-            .radar-box { height: 185px; }
-            .ba-container { height: 185px; }
-
-            /* Pricing Cards */
-            .pricing-card { padding: 1.8rem 1.2rem; border-radius: 16px; }
-            .p-title { font-size: 1.5rem; }
-            .p-price-block { margin: 1.1rem 0; padding: 0.9rem 0; }
-            .p-amount { font-size: 2.3rem; }
-            .p-currency { font-size: 1rem; }
-            .p-period { font-size: 0.8rem; }
-            .p-iva-tag { font-size: 0.78rem; }
-            .p-features { gap: 0.75rem; margin: 1.2rem 0; }
-            .p-features li { font-size: 0.85rem; }
-
-            /* Addons */
-            .addon-card { padding: 1.3rem 1.1rem; border-radius: 14px; }
-            .addon-title { font-size: 1.1rem; }
-            .addon-price { font-size: 1.2rem; }
-
-            /* Calculator */
-            .calc-container { padding: 1.6rem 1rem; border-radius: 16px; margin-top: 2rem; width: 100%; }
-            .calc-item { padding: 0.85rem; border-radius: 10px; }
-            .calc-item-title { font-size: 0.92rem; }
-            .calc-item-sub { font-size: 0.72rem; }
-            .calc-item-price { font-size: 0.88rem; }
-            .calc-summary-card { padding: 1.4rem 1.1rem; border-radius: 14px; }
-            .summary-title { font-size: 1.2rem; }
-            .summary-amt-big { font-size: 1.4rem; }
-
-            /* Modal */
-            .meeting-modal-backdrop { padding: 0.8rem; }
-            .meeting-modal-card { padding: 1.6rem 1.1rem; border-radius: 16px; max-height: 94vh; }
-            .meeting-modal-close { top: 12px; right: 14px; width: 30px; height: 30px; font-size: 1.1rem; }
-            .form-grid { grid-template-columns: 1fr; gap: 0.75rem; }
-            .time-slots-grid { grid-template-columns: repeat(3, 1fr); gap: 0.35rem; }
-            .time-slot-btn { font-size: 0.68rem; padding: 0.45rem 0.1rem; }
-            
-            /* Footer Mobile Stack */
-            footer { padding: 2rem 0; width: 100%; }
-            .footer-brand {
-                display: flex !important;
-                flex-direction: column !important;
-                align-items: center !important;
-                justify-content: center !important;
-                gap: 0.5rem !important;
-                margin-bottom: 1.2rem !important;
-                text-align: center !important;
-                width: 100% !important;
-            }
-            .footer-divider { display: none !important; }
-            .footer-client {
-                color: var(--amber-racing) !important;
-                font-family: var(--font-display) !important;
-                font-weight: 800 !important;
-                font-size: 0.95rem !important;
-                letter-spacing: 0.3px !important;
-            }
-            .footer-copy {
-                font-size: 0.75rem !important;
-                line-height: 1.5 !important;
-                padding: 0 0.5rem !important;
-            }
-        }
-
-        @media (max-width: 380px) {
-            .hero h1 { font-size: 1.75rem; }
-            .stat-number { font-size: 1.55rem; }
-            .p-amount { font-size: 2rem; }
-        }
-    ` }} />
-      <div dangerouslySetInnerHTML={{ __html: `
-
-    <div id="ambient-glow"></div>
-    <div class="bg-carbon-mesh"></div>
-
-    <!-- Header Navigation -->
-    <header>
-        <div class="wrapper nav-container">
-            <div class="brand-cluster">
-                <a href="https://apolograma.com" target="_blank" style="display: flex; align-items: center; text-decoration: none;">
-                    <img src="/assets/apolograma-logo-v2.png" alt="Apolograma Studio" class="brand-logo-img">
-                </a>
-                <div class="brand-divider"></div>
-                <img src="/assets/touche-motors/logo-white.png" alt="Touché Motors" class="client-header-logo">
-                <div class="brand-divider"></div>
-                <span class="target-badge"><i class="fa fa-car"></i> CONCESIONARIA STELLANTIS</span>
-            </div>
-
-            <div class="nav-actions">
-                <button class="btn-action btn-primary" onclick="openMeetingModal()">
-                    <i class="fa fa-calendar-check"></i> Agendar Junta
-                </button>
-            </div>
+          <div className="apolo-status-indicator apolo-font-mono">
+            <span className="apolo-pulse-dot"></span>
+            <span>READY FOR REVIEW</span>
+          </div>
         </div>
-    </header>
+      </header>
 
-    <!-- HERO SECTION -->
-    <section class="hero" id="sec-hero">
-        <div class="wrapper">
-            <div class="hero-banner-container">
-                <img src="/assets/touche-motors/hero_backdrop.jpg" alt="" class="hero-bg-img">
-                <div class="hero-gradient-overlay"></div>
-                
-                <div class="hero-content">
-                    <div class="hero-pill">
-                        <span class="dot"></span>
-                        <span>ESTRATEGIA DE CRECIMIENTO | DISTRIBUIDOR STELLANTIS</span>
-                    </div>
-
-                    <h1>
-                        MÁS PRUEBAS DE MANEJO. <br>
-                        <span class="gradient-text">VENTAS CERRADAS.</span>
-                    </h1>
-
-                    <p class="hero-manifesto">
-                        Cada minuto que un prospecto de <strong>Jeep o RAM</strong> espera una respuesta en redes, es un cliente que se acerca a otra agencia sobre la Paseo Triunfo. Nuestra iguala mensual transforma el scroll de Facebook e Instagram en <strong>visitas físicas a su sala de ventas con compradores pre-calificados</strong> con enganche y presupuesto real.
-                    </p>
-
-                    <!-- APOLOGRAMA EFFICIENCY STATS BOX -->
-                    <div class="hero-stats-container">
-                        <div class="stats-box-header">
-                            <div class="stats-box-tag"><i class="fa fa-tachometer-alt"></i> INFRAESTRUCTURA DE CONVERSIÓN APOLOGRAMA</div>
-                            <div class="stats-box-source">MÉTRICAS AUDITADAS: <strong>SALA DE VENTAS TOUCHÉ MOTORS</strong></div>
-                        </div>
-
-                        <div class="hero-stats-intro">
-                            <p>
-                                Diseñada específicamente para la Dirección de Ventas de Touché Motors en <strong>Av. Paseo Triunfo de la República 6080</strong>, eliminando la fuga de prospectos nocturnos y de fin de semana para saturar la agenda de <em>Test Drives</em>:
-                            </p>
-                        </div>
-
-                        <div class="hero-stats-grid">
-                            <div class="stat-card">
-                                <div class="stat-number">&lt; 60<span class="unit">s</span></div>
-                                <div class="stat-label">TIEMPO DE RESPUESTA</div>
-                                <div class="stat-sub">Speed-to-Lead Inmediato</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">24<span class="unit">/7</span></div>
-                                <div class="stat-label">COBERTURA TOTAL</div>
-                                <div class="stat-sub">Guardia Nocturna y Fines de Semana</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">100<span class="unit">%</span></div>
-                                <div class="stat-label">PRE-CALIFICACIÓN</div>
-                                <div class="stat-sub">Filtro de Enganche y Buró</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">0<span class="unit">%</span></div>
-                                <div class="stat-label">FUGA DE PROSPECTOS</div>
-                                <div class="stat-sub">Seguimiento Centralizado</div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+      {/* 01. FRONTISPIECE & HERO MONOGRAPH */}
+      <section className="apolo-section" style={{ paddingTop: "120px" }}>
+        <div className="apolo-container">
+          <div className="apolo-hero-pre apolo-font-mono" style={{ fontSize: "11px" }}>
+            <div style={{ color: "var(--accent-champagne)", display: "flex", alignItems: "center", gap: "8px" }}>
+              <span className="apolo-pulse-dot"></span>
+              <span>01 / PROPUESTA ESTRATÉGICA // TOUCHÉ MOTORS PASEO TRIUNFO</span>
             </div>
+            <div style={{ color: "var(--text-muted)", display: "flex", gap: "12px" }}>
+              <span>MMXXVI PRIVATE CLIENT EDITION</span>
+              <span>/</span>
+              <span>DOCUMENTO PRIVADO // DIRECCIÓN GENERAL TOUCHÉ</span>
+            </div>
+          </div>
+
+          <div className="apolo-hero-grid">
+            <div>
+              <span className="apolo-font-mono" style={{ fontSize: "11px", color: "var(--accent-champagne)", display: "block", marginBottom: "14px" }}>
+                PROPUESTA ESTRATÉGICA DE PRODUCCIÓN COMERCIAL
+              </span>
+              <h1 className="apolo-hero-h1 apolo-font-serif">
+                Producción Visual de Agencia. <br />
+                <span className="apolo-italic">Captación de Alto Ticket.</span>
+              </h1>
+            </div>
+
+            <div>
+              <p className="apolo-hero-lead">
+                Desarrollamos la dirección de arte publicitaria, banners para feed, adaptaciones verticales para stories y pauta quirúrgica en Meta Ads para que Touché Motors posicione su inventario insignia en Ciudad Juárez y nutra de prospectos calificados a su Call Center.
+              </p>
+              <div className="apolo-font-mono" style={{ fontSize: "10px", color: "var(--text-muted)", marginTop: "20px", display: "flex", gap: "12px", flexWrap: "wrap" }}>
+                <span>ENFOQUE MULTIMARCA // RAM, JEEP &amp; DODGE</span>
+                <span style={{ color: "var(--accent-champagne)" }}>•</span>
+                <span>FORMATOS: FEED 1:1 • STORIES 9:16 • META ADS</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Hard Metrics Strip (Numbers in Crisp Mono Tabular) */}
+          <div className="apolo-stats-strip">
+            <div className="apolo-stat-item">
+              <div className="apolo-stat-val apolo-tabular-num" style={{ color: "var(--accent-mopar-red)" }}>3 MARCAS</div>
+              <span className="apolo-stat-lbl apolo-font-mono">HOMOLOGACIÓN // RAM, JEEP &amp; DODGE</span>
+            </div>
+            <div className="apolo-stat-item">
+              <div className="apolo-stat-val apolo-tabular-num" style={{ color: "var(--accent-champagne)" }}>9:16 + 1:1</div>
+              <span className="apolo-stat-lbl apolo-font-mono">MULTIFORMATO // FEED &amp; STORIES VERTICAL</span>
+            </div>
+            <div className="apolo-stat-item">
+              <div className="apolo-stat-val apolo-tabular-num" style={{ color: "#FFF" }}>5 ASESORES</div>
+              <span className="apolo-stat-lbl apolo-font-mono">CALL CENTER NUTRIDO // PROSPECTOS REALES</span>
+            </div>
+            <div className="apolo-stat-item">
+              <div className="apolo-stat-val apolo-tabular-num" style={{ color: "var(--accent-champagne)" }}>0%</div>
+              <span className="apolo-stat-lbl apolo-font-mono">DESPERDICIO // GEOCERCAS ALTO PATRIMONIO</span>
+            </div>
+          </div>
+
+          {/* Museum Vitrine: Perfectly Centered RAM 1500 TRX */}
+          <div className="apolo-vitrine">
+            <span className="apolo-crosshair tl">+</span>
+            <span className="apolo-crosshair tr">+</span>
+            <span className="apolo-crosshair bl">+</span>
+            <span className="apolo-crosshair br">+</span>
+
+            <div className="apolo-vitrine-inner">
+              <img
+                src="/assets/touche-motors/hero_ram_trx.jpg?v=20260918_center"
+                alt="RAM 1500 TRX Stellantis Touché Motors Paseo Triunfo"
+                className="apolo-vitrine-img"
+              />
+              <div className="apolo-vitrine-badge apolo-font-mono">
+                <span className="apolo-pulse-dot"></span>
+                <span style={{ color: "var(--text-primary)" }}>ATELIER MASTER PLATE // RAM 1500 TRX</span>
+              </div>
+            </div>
+
+            <div className="apolo-vitrine-meta apolo-font-mono">
+              <div style={{ display: "flex", gap: "12px", alignItems: "center", flexWrap: "wrap" }}>
+                <span style={{ color: "var(--accent-champagne)" }}>EXHIBIT 01:</span>
+                <span style={{ color: "var(--text-primary)" }}>RAM 1500 TRX SUPERCHARGED HEMI</span>
+                <span>//</span>
+                <span>HASSELBLAD H6D-100C • 80MM HC // ISO 64</span>
+              </div>
+              <div>
+                <span>16:9 RAW MASTER // D55 LIGHT STAGE PASEO TRIUNFO 6080</span>
+              </div>
+            </div>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <!-- 3 CAPACIDADES INTERACTIVAS EN VIVO -->
-    <section id="sec-widgets" style="padding-top: 1rem;">
-        <div class="wrapper">
-            <div style="text-align: center; max-width: 780px; margin: 0 auto 1rem auto;">
-                <div class="section-tag"><i class="fa fa-microchip"></i> DEMOSTRACIÓN EN VIVO</div>
-                <h2 class="section-title">3 CAPACIDADES QUE TRANSFORMAN SU SALA DE VENTAS</h2>
-                <p class="section-subtitle" style="margin: 0 auto;">
-                    Pruebe directamente en esta pantalla las herramientas que aceleran la toma de decisión del comprador automotriz en Ciudad Juárez:
-                </p>
-            </div>
-
-            <div class="widgets-showcase-grid">
-                <!-- Widget 1: WhatsApp Bot Demo -->
-                <div class="showcase-card">
-                    <div class="showcase-header">
-                        <span class="showcase-badge"><i class="fa fa-bolt"></i> PRUEBA INTERACTIVA</span>
-                        <h3 class="showcase-title">Recepción & Cotizador 24/7</h3>
-                        <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">
-                            Simule cómo un comprador califica su propio enganche en menos de 30 segundos.
-                        </p>
-                    </div>
-
-                    <div>
-                        <div class="chat-stream-box" id="chat-stream">
-                            <div class="c-bubble c-bot">
-                                ¡Hola! 👋 Bienvenido a <strong>Touché Motors Paseo Triunfo</strong> (Jeep, RAM, Seminuevos y Mopar). ¿En qué podemos apoyarte hoy?
-                            </div>
-                        </div>
-
-                        <div id="chat-action-buttons">
-                            <button class="chat-action-btn" onclick="sendChatOption('opt1', '🚙 Cotizar Enganche RAM 1500')">
-                                <i class="fa fa-truck-pickup" style="color: var(--amber-racing);"></i> Cotizar Enganche RAM 1500
-                            </button>
-                            <button class="chat-action-btn" onclick="sendChatOption('opt2', '📅 Agendar Prueba de Manejo Jeep')">
-                                <i class="fa fa-calendar-check" style="color: var(--cyan-velocity);"></i> Agendar Test Drive Jeep
-                            </button>
-                            <button class="chat-action-btn" onclick="sendChatOption('opt3', '🔄 Valuar Mi Auto a Cuenta')">
-                                <i class="fa fa-sync-alt" style="color: var(--emerald-online);"></i> Valuar Mi Auto a Cuenta
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Widget 2: Radar de Geocercas -->
-                <div class="showcase-card">
-                    <div class="showcase-header">
-                        <span class="showcase-badge"><i class="fa fa-crosshairs"></i> SEGMENTACIÓN QUIRÚRGICA</span>
-                        <h3 class="showcase-title">Radar de Geocercas Vial</h3>
-                        <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">
-                            Pauta publicitaria concentrada en zonas de alto poder adquisitivo en Cd. Juárez.
-                        </p>
-                    </div>
-
-                    <div class="radar-box">
-                        <img src="/assets/touche-motors/map_satellite.jpg" alt="Mapa Satelital Radar" class="radar-map-bg">
-                        <div class="radar-ring"></div>
-                        <div class="radar-center-pin"></div>
-                        <div class="radar-hud-tag">
-                            <i class="fa fa-satellite-dish"></i> GEO-RADAR ACTIVO // PASEO TRIUNFO & CAMPESTRE // STELLANTIS
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Widget 3: Before / After Slider -->
-                <div class="showcase-card">
-                    <div class="showcase-header">
-                        <span class="showcase-badge"><i class="fa fa-eye"></i> CALIDAD PALPABLE</span>
-                        <h3 class="showcase-title">Dirección Visual con IA (Paquete B)</h3>
-                        <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">
-                            Deslice el divisor para contrastar la foto típica de patio vs el arte editorial con IA.
-                        </p>
-                    </div>
-
-                    <div class="ba-container" id="ba-container">
-                        <div class="ba-before-wrap">
-                            <img src="/assets/touche-motors/ba_before.jpg" alt="Antes: Foto Celular en Patio" class="ba-slide-img">
-                            <span class="ba-tag-badge ba-tag-before">Antes: Celular en Patio</span>
-                        </div>
-                        <div class="ba-after-wrap" id="ba-after-wrap">
-                            <img src="/assets/touche-motors/ba_after.jpg" alt="Después: Arte Editorial con IA" class="ba-slide-img">
-                            <span class="ba-tag-badge ba-tag-after">Después: IA Apolograma</span>
-                        </div>
-                        <div class="ba-affordance-hint">⟵ Desliza para comparar ⟶</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PROPUESTA ECONÓMICA: PAQUETE B HERO VS PAQUETE A -->
-    <section id="sec-pricing">
-        <div class="wrapper">
-            <div style="text-align: center; max-width: 820px; margin: 0 auto 1.5rem auto;">
-                <div class="section-tag"><i class="fa fa-tags"></i> INVERSIÓN MENSUAL ESTRATÉGICA</div>
-                <h2 class="section-title">SU IGUALA MENSUAL DE CONTENIDO Y PERFORMANCE</h2>
-                <p class="section-subtitle" style="margin: 0 auto;">
-                    Diseñada para rotar inventario continuamente, generar volumen de citas y blindar la presencia de Touché Motors con la máxima eficiencia de costos:
-                </p>
-            </div>
-
-            <div class="pricing-grid">
-                <!-- PAQUETE B: HERO / MÁS ELEGIDO -->
-                <div class="pricing-card featured" id="card-pkg-b">
-                    <div class="pricing-badge">🌟 MÁS ELEGIDO POR CONCESIONARIAS</div>
-                    <div>
-                        <div class="p-title" style="color: var(--amber-racing);">Paquete B (Diseño con IA & Contenido Ágil)</div>
-                        <p style="font-size: 0.88rem; color: var(--text-steel);">
-                            La mejor relación valor-inversión para rotación acelerada de unidades nuevas y seminuevos garantizados.
-                        </p>
-
-                        <div class="p-price-block">
-                            <div class="p-amount">$10,000 <span class="p-currency">MXN</span> <span class="p-period">/ mes</span></div>
-                            <div class="p-iva-tag">+ IVA ($11,600 Total Facturado)</div>
-                        </div>
-
-                        <ul class="p-features">
-                            <li><i class="fa fa-check-circle"></i> <strong>18 gráficos publicitarios</strong> generados con IA bajo lineamientos y supervisión del equipo Senior.</li>
-                            <li><i class="fa fa-check-circle"></i> <strong>2 videoreels cinematográficos</strong> de producto real en sala y locación para Meta Ads.</li>
-                            <li><i class="fa fa-check-circle"></i> Rotación multimarca completa: <em>Jeep, RAM, Dodge, Fiat, Peugeot y Seminuevos</em>.</li>
-                            <li><i class="fa fa-check-circle"></i> Segmentación y calibración de audiencias locales en Ciudad Juárez.</li>
-                            <li><i class="fa fa-check-circle"></i> Entrega quincenal auditada y tablero de métricas de rendimiento.</li>
-                        </ul>
-                    </div>
-
-                    <button class="btn-action btn-primary" style="width: 100%; justify-content: center; margin-top: 1.5rem;" onclick="selectPackageInView('b')">
-                        <i class="fa fa-check"></i> Seleccionar Paquete B (Recomendado)
-                    </button>
-                </div>
-
-                <!-- PAQUETE A: ARTESANAL SENIOR -->
-                <div class="pricing-card" id="card-pkg-a">
-                    <div>
-                        <div class="p-title">Paquete A (Dirección de Arte Senior Tradicional)</div>
-                        <p style="font-size: 0.88rem; color: var(--text-muted);">
-                            Para campañas institucionales de alta exigencia artesanal sin uso de Inteligencia Artificial.
-                        </p>
-
-                        <div class="p-price-block">
-                            <div class="p-amount">$20,000 <span class="p-currency">MXN</span> <span class="p-period">/ mes</span></div>
-                            <div class="p-iva-tag">+ IVA ($23,200 Total Facturado)</div>
-                        </div>
-
-                        <ul class="p-features">
-                            <li><i class="fa fa-check-circle"></i> <strong>20 gráficos publicitarios</strong> elaborados a mano por el equipo Senior (<strong>CERO IA</strong>).</li>
-                            <li><i class="fa fa-check-circle"></i> <strong>2 videoreels cinematográficos</strong> de producto real para Meta Ads.</li>
-                            <li><i class="fa fa-check-circle"></i> Tratamiento tipográfico y retoque digital milimétrico para campañas insignia.</li>
-                            <li><i class="fa fa-check-circle"></i> Optimización publicitaria avanzada de conversión.</li>
-                            <li><i class="fa fa-check-circle"></i> Auditoría quincenal ejecutiva con la Gerencia de Ventas.</li>
-                        </ul>
-                    </div>
-
-                    <button class="btn-action btn-outline" style="width: 100%; justify-content: center; margin-top: 1.5rem;" onclick="selectPackageInView('a')">
-                        Seleccionar Paquete A
-                    </button>
-                </div>
-            </div>
-
-            <!-- Inversión de Pauta Clarificada -->
-            <div style="background: rgba(255, 184, 0, 0.05); border: 1px solid rgba(255, 184, 0, 0.25); border-radius: 14px; padding: 1.2rem 1.6rem; margin-top: 1.8rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
-                <div style="display: flex; align-items: center; gap: 1rem;">
-                    <i class="fa fa-bullhorn" style="color: var(--amber-racing); font-size: 1.5rem;"></i>
-                    <div>
-                        <div style="font-family: var(--font-display); font-weight: 800; color: #fff; font-size: 1rem;">Presupuesto de Pauta Publicitaria (Meta Ads)</div>
-                        <div style="font-size: 0.82rem; color: var(--text-steel);">Inversión directa a plataforma de Facebook e Instagram para amplificar las unidades clave.</div>
-                    </div>
-                </div>
-                <div style="font-family: var(--font-mono); font-weight: 800; font-size: 1.15rem; color: var(--amber-racing); white-space: nowrap;">
-                    $2,000 MXN / mes
-                </div>
-            </div>
-
-            <!-- MÓDULOS TECNOLÓGICOS OPCIONALES (FASE 2 DE MADURACIÓN) -->
-            <div class="addons-section-header">
-                <div class="section-tag"><i class="fa fa-cogs"></i> FASE 2 DE MADURACIÓN</div>
-                <h3 style="font-family: var(--font-display); font-size: 2rem; font-weight: 800; color: #fff;">
-                    INFRAESTRUCTURA TECNOLÓGICA OPCIONAL
-                </h3>
-                <p style="font-size: 0.95rem; color: var(--text-body); max-width: 750px; margin: 0.5rem auto 0 auto;">
-                    Módulos activables cuando su sala de ventas decida automatizar la atención y blindar el seguimiento de cada prospecto:
-                </p>
-            </div>
-
-            <div class="addons-grid">
-                <!-- Addon 1 -->
-                <div class="addon-card">
-                    <div>
-                        <div class="addon-header">
-                            <div class="addon-title"><i class="fab fa-whatsapp" style="color: #25D366;"></i> Bot WhatsApp Calificador 24/7</div>
-                            <div>
-                                <div class="addon-price">+$4,000</div>
-                                <div class="addon-price-sub">+ IVA / mes</div>
-                            </div>
-                        </div>
-                        <p style="font-size: 0.86rem; color: var(--text-steel); line-height: 1.55;">
-                            Menú multimarca (Ventas, Seminuevos y Mopar), simulador interactivo de enganches y agendado directo de Test Drives con transferencia caliente de la ficha al asesor en turno.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Addon 2 -->
-                <div class="addon-card">
-                    <div>
-                        <div class="addon-header">
-                            <div class="addon-title"><i class="fa fa-phone-volume" style="color: var(--cyan-velocity);"></i> Agente Telefónico de Voz con IA</div>
-                            <div>
-                                <div class="addon-price">+$4,500</div>
-                                <div class="addon-price-sub">+ IVA / mes</div>
-                            </div>
-                        </div>
-                        <p style="font-size: 0.86rem; color: var(--text-steel); line-height: 1.55;">
-                            Recepción telefónica 24/7 y llamadas Speed-to-Lead automáticas (&lt; 60s) en cuanto un prospecto deja sus datos en Meta Ads para apartar su prueba de manejo antes de que se enfríe.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Addon 3 -->
-                <div class="addon-card">
-                    <div>
-                        <div class="addon-header">
-                            <div class="addon-title"><i class="fa fa-chart-line" style="color: var(--amber-racing);"></i> CRM Automotriz & Anti-Ghosting</div>
-                            <div>
-                                <div class="addon-price">+$3,500</div>
-                                <div class="addon-price-sub">+ IVA / mes</div>
-                            </div>
-                        </div>
-                        <p style="font-size: 0.86rem; color: var(--text-steel); line-height: 1.55;">
-                            Pipeline visual en Kanban para sala de ventas con secuencias automatizadas de seguimiento por WhatsApp (Día 1, 3, 7 y 15) y alertas al gerente si un asesor deja un lead sin tocar.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Addon 4: Combo Suite -->
-                <div class="addon-card" style="border-color: rgba(255, 184, 0, 0.45); background: linear-gradient(145deg, rgba(255,184,0,0.06), rgba(14, 19, 28, 0.95));">
-                    <div>
-                        <div class="addon-header">
-                            <div class="addon-title" style="color: var(--amber-racing);">🔥 Combo Suite Comercial Completa</div>
-                            <div>
-                                <div class="addon-price" style="color: #34D399;">+$8,500</div>
-                                <div class="addon-price-sub">+ IVA / mes (Ahorras $3,500)</div>
-                            </div>
-                        </div>
-                        <p style="font-size: 0.86rem; color: var(--text-steel); line-height: 1.55;">
-                            Integración unificada: WhatsApp Calificador + Bot Telefónico de Voz + CRM Automotriz. La solución integral para blindar la conversión de su sala de ventas.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Addon 5: Landing Web -->
-                <div class="addon-card" style="grid-column: 1 / -1; border-color: rgba(0, 229, 255, 0.35);">
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-                        <div style="max-width: 680px;">
-                            <div class="addon-title" style="color: var(--cyan-velocity);"><i class="fa fa-laptop-code"></i> Plataforma Web de Alta Conversión Touché</div>
-                            <p style="font-size: 0.86rem; color: var(--text-steel); margin-top: 6px; line-height: 1.55;">
-                                Arquitectura web independiente de ultra-alta conversión para catálogo de inventario nuevo y seminuevos, cotizador de financiamiento y captación directa de pruebas de manejo.
-                            </p>
-                        </div>
-                        <div style="text-align: right;">
-                            <div class="addon-price" style="font-size: 1.8rem; color: #fff;">$40,000 <span style="font-size: 1rem; color: var(--cyan-velocity);">MXN</span></div>
-                            <div class="addon-price-sub">+ IVA (Inversión de Pago Único)</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CALCULADORA INTERACTIVA DE ALCANCE -->
-            <div class="calc-container" id="sec-calculator">
-                <div style="margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 1rem;">
-                    <span class="section-tag"><i class="fa fa-calculator"></i> CONFIGURADOR EN VIVO</span>
-                    <h3 style="font-family: var(--font-display); font-size: 1.8rem; font-weight: 900; color: #fff;">
-                        CONFIGURE SU ALCANCE PERSONALIZADO
-                    </h3>
-                    <p style="font-size: 0.88rem; color: var(--text-muted);">
-                        El <strong>Paquete B ($10,000/mes)</strong> se encuentra seleccionado por default. Puede activar o desactivar módulos tecnológicos adicionales según sus requerimientos:
-                    </p>
-                </div>
-
-                <div class="calc-grid">
-                    <!-- Opciones Seleccionables -->
-                    <div class="calc-options">
-                        <div class="calc-opt-group-title">1. Seleccione su Paquete Mensual de Marketing</div>
-                        
-                        <div class="calc-item selected" id="opt-pkg-b" onclick="togglePackage('b')">
-                            <div class="calc-item-left">
-                                <div class="calc-check"><i class="fa fa-check"></i></div>
-                                <div>
-                                    <div class="calc-item-title">Paquete B (Diseño con IA & Contenido Ágil) ⭐</div>
-                                    <div class="calc-item-sub">18 gráficos con IA + 2 reels + rotación ágil de inventario</div>
-                                </div>
-                            </div>
-                            <div class="calc-item-price">$10,000 <span style="font-size: 0.75rem; color: var(--amber-racing);">/ mes</span></div>
-                        </div>
-
-                        <div class="calc-item" id="opt-pkg-a" onclick="togglePackage('a')">
-                            <div class="calc-item-left">
-                                <div class="calc-check"><i class="fa fa-check"></i></div>
-                                <div>
-                                    <div class="calc-item-title">Paquete A (Dirección de Arte Senior Tradicional)</div>
-                                    <div class="calc-item-sub">20 gráficos hechos a mano (CERO IA) + 2 reels cinematográficos</div>
-                                </div>
-                            </div>
-                            <div class="calc-item-price">$20,000 <span style="font-size: 0.75rem; color: var(--amber-racing);">/ mes</span></div>
-                        </div>
-
-                        <div class="calc-opt-group-title" style="margin-top: 1rem;">2. Infraestructura Tecnológica Opcional (Fase 2)</div>
-
-                        <div class="calc-item" id="opt-addon-bot-wa" onclick="toggleAddon('bot_wa', 4000, 'monthly')">
-                            <div class="calc-item-left">
-                                <div class="calc-check" id="check-bot_wa"><i class="fa fa-check" style="display: none;"></i></div>
-                                <div>
-                                    <div class="calc-item-title">Bot WhatsApp Calificador & Cotizador 24/7</div>
-                                    <div class="calc-item-sub">Simulador de enganche + agendado de Test Drives en Paseo Triunfo</div>
-                                </div>
-                            </div>
-                            <div class="calc-item-price">+$4,000 <span style="font-size: 0.75rem; color: var(--text-muted);">/ mes</span></div>
-                        </div>
-
-                        <div class="calc-item" id="opt-addon-bot-call" onclick="toggleAddon('bot_call', 4500, 'monthly')">
-                            <div class="calc-item-left">
-                                <div class="calc-check" id="check-bot_call"><i class="fa fa-check" style="display: none;"></i></div>
-                                <div>
-                                    <div class="calc-item-title">Agente Telefónico de Voz con IA</div>
-                                    <div class="calc-item-sub">Recepción 24/7 y contacto Speed-to-Lead (&lt; 60s) en Meta Ads</div>
-                                </div>
-                            </div>
-                            <div class="calc-item-price">+$4,500 <span style="font-size: 0.75rem; color: var(--text-muted);">/ mes</span></div>
-                        </div>
-
-                        <div class="calc-item" id="opt-addon-suite-crm" onclick="toggleAddon('suite_crm', 3500, 'monthly')">
-                            <div class="calc-item-left">
-                                <div class="calc-check" id="check-suite_crm"><i class="fa fa-check" style="display: none;"></i></div>
-                                <div>
-                                    <div class="calc-item-title">CRM Automotriz Ligero & Secuencias Anti-Ghosting</div>
-                                    <div class="calc-item-sub">Pipeline Kanban para sala de ventas + nurturing automático</div>
-                                </div>
-                            </div>
-                            <div class="calc-item-price">+$3,500 <span style="font-size: 0.75rem; color: var(--text-muted);">/ mes</span></div>
-                        </div>
-
-                        <div class="calc-item" id="opt-addon-combo" onclick="toggleComboSuite()">
-                            <div class="calc-item-left">
-                                <div class="calc-check" id="check-combo"><i class="fa fa-check" style="display: none;"></i></div>
-                                <div>
-                                    <div class="calc-item-title" style="color: var(--amber-racing);">🔥 Combo Suite Comercial (WhatsApp + Voz + CRM)</div>
-                                    <div class="calc-item-sub">Las 3 herramientas unificadas con $3,500 de descuento</div>
-                                </div>
-                            </div>
-                            <div class="calc-item-price">+$8,500 <span style="font-size: 0.75rem; color: #34D399;">/ mes</span></div>
-                        </div>
-
-                        <div class="calc-item" id="opt-addon-landing" onclick="toggleAddon('landing', 40000, 'onetime')">
-                            <div class="calc-item-left">
-                                <div class="calc-check" id="check-landing"><i class="fa fa-check" style="display: none;"></i></div>
-                                <div>
-                                    <div class="calc-item-title">Plataforma Web de Alta Conversión Touché</div>
-                                    <div class="calc-item-sub">Sitio web independiente de captación de pruebas de manejo</div>
-                                </div>
-                            </div>
-                            <div class="calc-item-price">+$40,000 <span style="font-size: 0.75rem; color: var(--cyan-velocity);">único</span></div>
-                        </div>
-                    </div>
-
-                    <!-- Resumen en Vivo -->
-                    <div class="calc-summary-card">
-                        <div>
-                            <div class="summary-title">RESUMEN DE SU PROPUESTA</div>
-                            
-                            <!-- Bloque Mensual -->
-                            <div class="summary-block">
-                                <div class="summary-block-title"><i class="fa fa-calendar-alt"></i> INVERSIÓN MENSUAL RECURRENTE</div>
-                                <div class="summary-line">
-                                    <span>Plan Base Seleccionado:</span>
-                                    <span id="sum-pkg-name" style="color: #fff; font-weight: 700;">Paquete B ($10,000)</span>
-                                </div>
-                                <div class="summary-line">
-                                    <span>Add-ons Mensuales:</span>
-                                    <span id="sum-addons-monthly" style="color: var(--text-steel);">$0 MXN</span>
-                                </div>
-                                <div class="summary-line" style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 0.4rem; margin-top: 0.4rem;">
-                                    <span>Subtotal Mensual:</span>
-                                    <span id="sum-subtotal-monthly" style="color: #fff; font-weight: 800;">$10,000 MXN</span>
-                                </div>
-                                <div class="summary-amt-big" id="sum-total-monthly">$10,000 <span style="font-size: 0.9rem; color: var(--amber-racing);">MXN / mes</span></div>
-                                <div style="font-size: 0.75rem; color: #FCD34D;" id="sum-iva-monthly">+ IVA ($11,600 Total)</div>
-                            </div>
-
-                            <!-- Bloque Pago Único -->
-                            <div class="summary-block" id="block-onetime-summary" style="display: none;">
-                                <div class="summary-block-title" style="color: var(--cyan-velocity);"><i class="fa fa-laptop-code"></i> IMPLEMENTACIÓN PAGO ÚNICO</div>
-                                <div class="summary-line">
-                                    <span>Plataforma Web Touché:</span>
-                                    <span style="color: #fff; font-weight: 700;">$40,000 MXN</span>
-                                </div>
-                                <div class="summary-amt-big" id="sum-total-onetime">$40,000 <span style="font-size: 0.9rem; color: var(--cyan-velocity);">MXN (Pago único)</span></div>
-                                <div style="font-size: 0.75rem; color: #FCD34D;">+ IVA ($46,400 Total)</div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <button class="btn-action btn-primary" id="btn-cta-dynamic" style="width: 100%; justify-content: center; padding: 0.9rem 1.2rem; font-size: 0.95rem;" onclick="openMeetingModal()">
-                                <i class="fa fa-calendar-check"></i> Agendar Junta para Paquete B ($10,000 + IVA)
-                            </button>
-                            <div style="font-size: 0.72rem; color: var(--text-muted); text-align: center; margin-top: 0.6rem;">
-                                Sin plazos forzosos. Cancelación con 30 días de anticipación.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- MODAL DE AGENDADO EJECUTIVO (L-V 10:00 AM - 2:00 PM) -->
-    <div class="meeting-modal-backdrop" id="meeting-modal">
-        <div class="meeting-modal-card">
-            <button class="meeting-modal-close" onclick="closeMeetingModal()">&times;</button>
-            
-            <div id="meeting-form-state">
-                <div style="margin-bottom: 1.5rem;">
-                    <span class="target-badge" style="margin-bottom: 0.5rem; display: inline-flex;"><i class="fa fa-calendar-check"></i> AGENDAR JUNTA EJECUTIVA</span>
-                    <h3 style="font-family: var(--font-display); font-size: 1.7rem; font-weight: 900; color: #fff;">
-                        SESIÓN DE ALINEACIÓN COMERCIAL (20 MIN)
-                    </h3>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">
-                        Revisaremos el plan de contenido para Touché Motors y la coordinación de fechas para la primera entrega quincenal.
-                    </p>
-                </div>
-
-                <form id="meeting-form" onsubmit="handleMeetingSubmit(event)">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>Nombre y Cargo del Asistente</label>
-                            <input type="text" class="m-input" id="m-name" placeholder="Ej. Lic. Roberto Garza (Gerente de Ventas)" required>
-                        </div>
-                        <div class="form-group">
-                            <label>WhatsApp de Contacto Directo</label>
-                            <input type="tel" class="m-input" id="m-phone" placeholder="Ej. 656 123 4567" required>
-                        </div>
-                    </div>
-
-                    <div class="form-grid" style="margin-top: 1rem;">
-                        <div class="form-group">
-                            <label>Fecha Deseada (Lunes a Viernes)</label>
-                            <input type="date" class="m-input" id="m-date" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Horario Disponible (Zona Juárez)</label>
-                            <div class="time-slots-grid">
-                                <button type="button" class="time-slot-btn active" onclick="selectTimeSlot(this, '10:00 AM')">10:00 AM</button>
-                                <button type="button" class="time-slot-btn" onclick="selectTimeSlot(this, '11:00 AM')">11:00 AM</button>
-                                <button type="button" class="time-slot-btn" onclick="selectTimeSlot(this, '12:00 PM')">12:00 PM</button>
-                                <button type="button" class="time-slot-btn" onclick="selectTimeSlot(this, '01:00 PM')">01:00 PM</button>
-                                <button type="button" class="time-slot-btn" onclick="selectTimeSlot(this, '02:00 PM')">02:00 PM</button>
-                            </div>
-                            <input type="hidden" id="m-time" value="10:00 AM">
-                        </div>
-                    </div>
-
-                    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 0.9rem; margin-top: 1.2rem; font-size: 0.8rem; color: var(--text-steel);">
-                        <i class="fa fa-info-circle" style="color: var(--amber-racing);"></i> <strong>Modalidad:</strong> Presencial en sucursal Paseo Triunfo 6080 o por videollamada de Google Meet (le contactaremos previamente para confirmar).
-                    </div>
-
-                    <div style="margin-top: 1.6rem; display: flex; justify-content: flex-end; gap: 10px;">
-                        <button type="button" class="btn-action btn-outline" onclick="closeMeetingModal()">Cancelar</button>
-                        <button type="submit" class="btn-action btn-primary" id="btn-submit-meeting">Confirmar Solicitud de Junta</button>
-                    </div>
-                </form>
-            </div>
-
-            <div id="meeting-success-state" style="display: none; text-align: center; padding: 2rem 1rem;">
-                <div style="width: 60px; height: 60px; border-radius: 50%; background: rgba(16, 185, 129, 0.2); border: 2px solid var(--emerald-online); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem auto; color: var(--emerald-online); font-size: 1.8rem;">
-                    <i class="fa fa-check"></i>
-                </div>
-                <h3 style="font-family: var(--font-display); font-size: 1.8rem; font-weight: 900; color: #fff; margin-bottom: 0.5rem;">
-                    ¡SOLICITUD REGISTRADA CON ÉXITO!
-                </h3>
-                <p style="font-size: 0.9rem; color: var(--text-steel); max-width: 480px; margin: 0 auto 1.5rem auto; line-height: 1.6;">
-                    Hemos registrado su solicitud de junta para el <strong id="succ-date" style="color: #fff;"></strong> a las <strong id="succ-time" style="color: var(--amber-racing);"></strong>.
-                    <br><br>
-                    Nos pondremos en contacto al <strong id="succ-phone" style="color: #fff;"></strong> vía WhatsApp para coordinar los detalles.
-                </p>
-                <button type="button" class="btn-action btn-outline" onclick="closeMeetingModal()">Cerrar</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- FOOTER (100% APOLOGRAMA) -->
-    <footer>
-        <div class="wrapper">
-            <div class="footer-brand">
-                <a href="https://apolograma.com" target="_blank" style="display: inline-flex; align-items: center; text-decoration: none;">
-                    <img src="/assets/apolograma-logo-v2.png" alt="Apolograma" class="footer-logo-img">
-                </a>
-                <span class="footer-divider">|</span>
-                <span class="footer-client">TOUCHÉ MOTORS CD. JUÁREZ</span>
-            </div>
-            <p class="footer-copy">
-                Propuesta Comercial & Estrategia de Marketing preparada exclusivamente para la Dirección de Ventas de Touché Motors.
-                <br>
-                © 2026 Apolograma Interactive Studio. Todos los derechos reservados.
+      {/* 02. DOCTRINE & CAPABILITIES // 3 TANGIBLE INTERACTIVE WIDGETS (NO TEXT WALLS) */}
+      <section className="apolo-section" style={{ background: "var(--bg-surface-low)" }}>
+        <div className="apolo-container">
+          <div style={{ paddingBottom: "32px", borderBottom: "1px solid var(--border-subtle)" }}>
+            <span className="apolo-font-mono" style={{ fontSize: "11px", color: "var(--accent-champagne)", display: "block", marginBottom: "8px" }}>
+              METODOLOGÍA Y EVIDENCIA EN VIVO
+            </span>
+            <h2 className="apolo-font-serif" style={{ fontSize: "clamp(28px, 4vw, 42px)", margin: 0, fontWeight: 400, color: "var(--text-primary)" }}>
+              Los Tres Pilares de Ejecución Comercial
+            </h2>
+            <p style={{ color: "var(--text-muted)", fontSize: "15px", marginTop: "12px", maxWidth: "680px" }}>
+              Pruebas tangibles en lugar de promesas teóricas. Tres motores que ejecutan en perpetua sincronía para Touché Motors.
             </p>
-        </div>
-    </footer>
+          </div>
 
-    <!-- INTERACTIVITY JAVASCRIPT -->
-    
-` }} />
-    </>
+          <div className="apolo-widgets-grid">
+            {/* WIDGET 1: SLIDER INTERACTIVO BEFORE / AFTER */}
+            <div className="apolo-widget-card">
+              <div>
+                <div className="apolo-font-mono" style={{ display: "flex", justifyContent: "space-between", color: "var(--accent-champagne)", fontSize: "11px" }}>
+                  <span>PILAR I</span>
+                  <span style={{ color: "var(--text-muted)" }}>01 / MEDIA</span>
+                </div>
+                <h3 className="apolo-font-serif" style={{ fontSize: "22px", margin: "12px 0 8px 0", color: "var(--text-primary)" }}>
+                  Fotografía Editorial &amp; Retoque Grado Cine
+                </h3>
+                <p style={{ fontSize: "13px", color: "#A1A09A", margin: 0 }}>
+                  Compara la fotografía típica de lote contra el tratamiento editorial con IA y retoque de estudio de Apolograma:
+                </p>
+
+                {/* The Interactive Slider */}
+                <div
+                  ref={sliderRef}
+                  className="apolo-ba-wrapper"
+                  onMouseDown={() => setIsDragging(true)}
+                  onMouseUp={() => setIsDragging(false)}
+                  onMouseLeave={() => setIsDragging(false)}
+                  onMouseMove={(e) => isDragging && handleSliderMove(e.clientX)}
+                  onTouchMove={(e) => handleSliderMove(e.touches[0].clientX)}
+                  onClick={(e) => handleSliderMove(e.clientX)}
+                >
+                  {/* Image After (Full Background) */}
+                  <img
+                    src="/assets/touche-motors/ba_after.jpg"
+                    alt="Arte Editorial con IA Apolograma"
+                    className="apolo-ba-img"
+                  />
+                  {/* Image Before (Clipped by percentage) */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      bottom: 0,
+                      width: `${sliderPos}%`,
+                      overflow: "hidden",
+                    }}
+                  >
+                    <img
+                      src="/assets/touche-motors/ba_before.jpg"
+                      alt="Foto patio sin iluminación"
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: sliderRef.current ? `${sliderRef.current.clientWidth}px` : "100%",
+                        height: "100%",
+                        maxWidth: "none",
+                        objectFit: "cover",
+                      }}
+                    />
+                  </div>
+
+                  {/* Vertical Divider Line */}
+                  <div className="apolo-ba-divider" style={{ left: `${sliderPos}%` }}>
+                    <div className="apolo-ba-handle">⟷</div>
+                  </div>
+
+                  {/* Chips */}
+                  <span className="apolo-ba-chip apolo-font-mono" style={{ left: "8px" }}>
+                    ANTES: FOTO PATIO
+                  </span>
+                  <span className="apolo-ba-chip apolo-font-mono" style={{ right: "8px", background: "rgba(213,197,169,0.9)", color: "#121316", fontWeight: "bold" }}>
+                    DESPUÉS: APOLOGRAMA IA
+                  </span>
+                </div>
+              </div>
+
+              <div style={{ marginTop: "20px", paddingTop: "14px", borderTop: "1px solid var(--border-subtle)", fontSize: "9px", color: "var(--text-muted)" }} className="apolo-font-mono">
+                <span>INTERACCIÓN TÁCTIL: ARRASTRA PARA COMPARAR DETALLE</span>
+              </div>
+            </div>
+
+            {/* WIDGET 2: DIRECCIÓN DE ARTE & BANNERS MULTIFORMATO */}
+            <div className="apolo-widget-card">
+              <div>
+                <div className="apolo-font-mono" style={{ display: "flex", justifyContent: "space-between", color: "var(--accent-champagne)", fontSize: "11px" }}>
+                  <span>PILAR II</span>
+                  <span style={{ color: "var(--text-muted)" }}>02 / CREATIVE DIRECTION</span>
+                </div>
+                <h3 className="apolo-font-serif" style={{ fontSize: "22px", margin: "12px 0 8px 0", color: "var(--text-primary)" }}>
+                  Dirección de Arte &amp; Multiformato
+                </h3>
+                <p style={{ fontSize: "13px", color: "#A1A09A", margin: 0 }}>
+                  Adaptación simultánea para Feed (1:1/4:5) y Stories (9:16) con tipografía oficial Stellantis y supervisión de directores creativos senior:
+                </p>
+
+                {/* Model Selector Buttons */}
+                <div className="apolo-lead-btn-group apolo-font-mono">
+                  <button
+                    className={`apolo-lead-btn ${activeLeadKey === "ram" ? "active" : ""}`}
+                    onClick={() => setActiveLeadKey("ram")}
+                  >
+                    RAM TRX
+                  </button>
+                  <button
+                    className={`apolo-lead-btn ${activeLeadKey === "jeep" ? "active" : ""}`}
+                    onClick={() => setActiveLeadKey("jeep")}
+                  >
+                    JEEP SUMMIT
+                  </button>
+                  <button
+                    className={`apolo-lead-btn ${activeLeadKey === "dodge" ? "active" : ""}`}
+                    onClick={() => setActiveLeadKey("dodge")}
+                  >
+                    CHARGER SRT
+                  </button>
+                </div>
+
+                {/* Rendered Live Art Specification Box */}
+                <div className="apolo-lead-card">
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "6px", color: "var(--accent-champagne)", fontSize: "9px", marginBottom: "8px" }} className="apolo-font-mono">
+                    <span>{currentPillar2.badge}</span>
+                    <span style={{ background: "rgba(255,42,68,0.15)", color: "var(--accent-mopar-red)", padding: "2px 6px", border: "1px solid rgba(255,42,68,0.3)" }}>STELLANTIS</span>
+                  </div>
+                  <div style={{ color: "#FFF", fontWeight: 700, fontSize: "12.5px", marginBottom: "4px", lineHeight: 1.35 }}>
+                    {currentPillar2.headline}
+                  </div>
+                  <div style={{ color: "var(--accent-champagne)", fontSize: "11px", marginBottom: "6px" }}>
+                    🎯 <strong>Ángulo:</strong> {currentPillar2.tagline}
+                  </div>
+                  <div style={{ color: "#CCC", fontSize: "10.5px", marginBottom: "3px" }}>
+                    📐 <strong>Feed:</strong> {currentPillar2.feedSpecs}
+                  </div>
+                  <div style={{ color: "#CCC", fontSize: "10.5px", marginBottom: "6px" }}>
+                    📱 <strong>Story 9:16:</strong> &quot;{currentPillar2.storyHook}&quot;
+                  </div>
+                  <div style={{ color: "var(--text-muted)", fontSize: "9px", borderTop: "1px dashed rgba(255,255,255,0.08)", paddingTop: "6px" }} className="apolo-font-mono">
+                    {currentPillar2.creativeApproval}
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ marginTop: "20px", paddingTop: "14px", borderTop: "1px solid var(--border-subtle)", fontSize: "9px", color: "var(--text-muted)" }} className="apolo-font-mono">
+                <span>DIRECCIÓN DE ARTE // SUPERVISIÓN SENIOR &amp; ASISTENCIA IA</span>
+              </div>
+            </div>
+
+            {/* WIDGET 3: RADAR SATELITAL DE GEOCERCAS HUD */}
+            <div className="apolo-widget-card">
+              <div>
+                <div className="apolo-font-mono" style={{ display: "flex", justifyContent: "space-between", color: "var(--accent-champagne)", fontSize: "11px" }}>
+                  <span>PILAR III</span>
+                  <span style={{ color: "var(--text-muted)" }}>03 / DISTRIBUTION</span>
+                </div>
+                <h3 className="apolo-font-serif" style={{ fontSize: "22px", margin: "12px 0 8px 0", color: "var(--text-primary)" }}>
+                  Geocercas de Alto Poder Adquisitivo
+                </h3>
+                <p style={{ fontSize: "13px", color: "#A1A09A", margin: 0 }}>
+                  Geocercas de exclusividad en Paseo Triunfo 6080, Campestre, Campos Elíseos y corredores comerciales de El Paso:
+                </p>
+
+                {/* Radar Box */}
+                <div className="apolo-radar-hud-box">
+                  <img
+                    src="/assets/touche-motors/map_satellite.jpg"
+                    alt="Radar de Geocercas Satelital Touché Motors"
+                    className="apolo-radar-img"
+                  />
+                  <div className="apolo-radar-overlay"></div>
+                  {/* Blip 1: Paseo Triunfo */}
+                  <div className="apolo-radar-blip" style={{ top: "45%", left: "48%" }} title="Sala Paseo Triunfo 6080"></div>
+                  {/* Blip 2: Campestre */}
+                  <div className="apolo-radar-blip" style={{ top: "35%", left: "60%" }} title="Zona Campestre"></div>
+                  {/* HUD Info */}
+                  <div style={{ position: "absolute", bottom: "8px", left: "8px", right: "8px", background: "rgba(11,11,13,0.9)", padding: "4px 8px", border: "1px solid var(--border-subtle)", fontSize: "8px", display: "flex", justifyContent: "space-between" }} className="apolo-font-mono">
+                    <span style={{ color: "var(--accent-champagne)" }}>HUD ACTIVO: 31.6904° N</span>
+                    <span style={{ color: "#FFF" }}>PASEO TRIUNFO // CAMPESTRE</span>
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ marginTop: "20px", paddingTop: "14px", borderTop: "1px solid var(--border-subtle)", fontSize: "9px", color: "var(--text-muted)" }} className="apolo-font-mono">
+                <span>PROSPECCIÓN QUIRÚRGICA // CITAS EN SALA CON ENGANCHE</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 02. EL SISTEMA VISUAL DE CAMPAÑA // FEED, STORIES 9:16 Y PAUTA META ADS */}
+      <section className="apolo-section">
+        <div className="apolo-container">
+          <div style={{ paddingBottom: "24px", borderBottom: "1px solid var(--border-subtle)" }}>
+            <span className="apolo-font-mono" style={{ fontSize: "11px", color: "var(--accent-champagne)", display: "block", marginBottom: "8px" }}>
+              02 / EL SISTEMA VISUAL DE CAMPAÑA // FEED, STORIES 9:16 Y PAUTA META ADS
+            </span>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: "16px" }}>
+              <div>
+                <h2 className="apolo-font-serif" style={{ fontSize: "clamp(28px, 4vw, 42px)", margin: 0, fontWeight: 400, color: "var(--text-primary)" }}>
+                  El Sistema Visual de Campaña: Feed, Stories y Pauta
+                </h2>
+                <p style={{ margin: "8px 0 0 0", fontSize: "14px", color: "var(--text-muted)", maxWidth: "800px" }}>
+                  Diseñamos y pautamos los tres formatos visuales clave que detienen el scroll en Ciudad Juárez y El Paso, elevan la percepción de Touché Motors a nivel de agencia internacional y entregan prospectos calificados directamente a tu Call Center de 5 ejecutivos.
+                </p>
+              </div>
+
+              <div className="apolo-font-mono" style={{ padding: "6px 14px", background: "var(--bg-surface-low)", border: "1px solid var(--border-subtle)", fontSize: "10px", color: "var(--accent-champagne)", display: "flex", alignItems: "center", gap: "8px" }}>
+                <span className="apolo-pulse-dot"></span>
+                <span>ARTE MULTIFORMATO HOMOLOGADO // SUCURSAL PASEO TRIUNFO</span>
+              </div>
+            </div>
+
+            {/* Model Selector Tabs */}
+            <div className="apolo-funnel-selector apolo-font-mono">
+              <button
+                className={`apolo-funnel-tab-btn ${galleryTab === 1 ? "active" : ""}`}
+                onClick={() => setGalleryTab(1)}
+              >
+                <span>01.</span>
+                <span>RAM 1500 TRX</span>
+                <span style={{ fontSize: "9px", opacity: 0.8 }}>[PODER &amp; NEGOCIO]</span>
+              </button>
+              <button
+                className={`apolo-funnel-tab-btn ${galleryTab === 2 ? "active" : ""}`}
+                onClick={() => setGalleryTab(2)}
+              >
+                <span>02.</span>
+                <span>JEEP GRAND CHEROKEE</span>
+                <span style={{ fontSize: "9px", opacity: 0.8 }}>[LUJO FAMILIAR]</span>
+              </button>
+              <button
+                className={`apolo-funnel-tab-btn ${galleryTab === 3 ? "active" : ""}`}
+                onClick={() => setGalleryTab(3)}
+              >
+                <span>03.</span>
+                <span>DODGE CHARGER SRT</span>
+                <span style={{ fontSize: "9px", opacity: 0.8 }}>[DEPORTIVO HEMI]</span>
+              </button>
+            </div>
+          </div>
+
+          {/* 3-Column Campaign Grid */}
+          <div className="apolo-funnel-stage">
+            {/* COLUMN 1: FEED MASTER ART (1:1 / 4:5) */}
+            <div className="apolo-step-card">
+              <div className="apolo-step-header apolo-font-mono">
+                <span style={{ color: "var(--accent-champagne)", display: "flex", alignItems: "center", gap: "6px" }}>
+                  <span className="apolo-pulse-dot"></span>
+                  FORMATO 01 // FEED MAESTRO
+                </span>
+                <span style={{ color: "var(--text-muted)" }}>1:1 &amp; 4:5 RETINA</span>
+              </div>
+
+              <div className="apolo-step-body">
+                {/* Visual Mockup: Feed Post */}
+                <div className="apolo-mockup-feed">
+                  <div className="apolo-feed-header">
+                    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                      <div style={{ width: "22px", height: "22px", borderRadius: "50%", background: "#000", border: "1px solid var(--border-gold)", display: "flex", alignItems: "center", justifyContent: "center", padding: "2px" }}>
+                        <img src="/assets/touche-motors/logo-white.png" alt="Touché" style={{ width: "100%", height: "auto" }} />
+                      </div>
+                      <div>
+                        <div style={{ fontSize: "11px", fontWeight: 600, color: "#FFF", lineHeight: 1 }}>touchemotorsjuarez</div>
+                        <div style={{ fontSize: "9px", color: "var(--text-muted)", lineHeight: 1, marginTop: "2px" }}>Paseo Triunfo 6080 • Catálogo Oficial</div>
+                      </div>
+                    </div>
+                    <span className="apolo-font-mono" style={{ fontSize: "8px", color: "var(--accent-mopar-red)", background: "rgba(255,42,68,0.1)", padding: "2px 6px", border: "1px solid rgba(255,42,68,0.3)" }}>
+                      OFICIAL STELLANTIS
+                    </span>
+                  </div>
+
+                  <div className="apolo-feed-img-box">
+                    <img
+                      src={CAMPAIGN_SYSTEM_DATA[galleryTab].image}
+                      alt={CAMPAIGN_SYSTEM_DATA[galleryTab].vehicleName}
+                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    />
+                    <div style={{ position: "absolute", bottom: "8px", left: "8px", background: "rgba(0,0,0,0.8)", padding: "3px 8px", fontSize: "8.5px", color: "var(--accent-champagne)", border: "1px solid var(--border-subtle)" }} className="apolo-font-mono">
+                      {CAMPAIGN_SYSTEM_DATA[galleryTab].vehicleBadge}
+                    </div>
+                  </div>
+
+                  <div className="apolo-feed-copy-box">
+                    <p style={{ margin: "0 0 6px 0", fontSize: "11.5px", fontWeight: 700, color: "#FFFFFF", lineHeight: 1.35 }}>
+                      {CAMPAIGN_SYSTEM_DATA[galleryTab].feedHeadline}
+                    </p>
+                    <p style={{ margin: "0 0 6px 0", fontSize: "10.5px", color: "#B8B6AF", lineHeight: 1.45 }}>
+                      {CAMPAIGN_SYSTEM_DATA[galleryTab].feedCopy}
+                    </p>
+                    <div style={{ fontSize: "9.5px", color: "var(--accent-champagne)", marginTop: "4px" }} className="apolo-font-mono">
+                      {CAMPAIGN_SYSTEM_DATA[galleryTab].feedSpecs}
+                    </div>
+                  </div>
+
+                  <div className="apolo-feed-cta-bar apolo-font-mono">
+                    <span>SOLICITAR COTIZACIÓN EN SALA</span>
+                    <span>➔</span>
+                  </div>
+                </div>
+
+                {/* Explanation Block */}
+                <div>
+                  <h3 className="apolo-font-serif" style={{ fontSize: "19px", margin: "0 0 8px 0", color: "var(--text-primary)" }}>
+                    01. Banners de Presencia &amp; Posicionamiento
+                  </h3>
+                  <p style={{ fontSize: "12.5px", color: "#A1A09A", margin: "0 0 14px 0", lineHeight: 1.5 }}>
+                    Artes con iluminación de estudio, tipografía oficial y jerarquía editorial limpia que reemplazan por completo las publicaciones improvisadas.
+                  </p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "8px", fontSize: "11.5px", color: "var(--text-on-surface)" }}>
+                    <div style={{ display: "flex", gap: "8px" }}>
+                      <span style={{ color: "var(--accent-champagne)" }}>•</span>
+                      <span><strong>Composición 1:1 y 4:5:</strong> Retiene la vista en el feed de Instagram y Facebook con el doble de área visual que una foto horizontal.</span>
+                    </div>
+                    <div style={{ display: "flex", gap: "8px" }}>
+                      <span style={{ color: "var(--accent-champagne)" }}>•</span>
+                      <span><strong>Enfoque en negocio:</strong> Copys redactados para empresarios y compradores que buscan deducir impuestos o confort de alto nivel.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ padding: "12px 18px", background: "var(--bg-surface-low)", borderTop: "1px solid var(--border-subtle)", fontSize: "9px", color: "var(--text-muted)" }} className="apolo-font-mono">
+                <span>FORMATO: FEED 1:1 &amp; 4:5 // RETINA 1080x1350PX</span>
+              </div>
+            </div>
+
+            {/* COLUMN 2: VERTICAL STORIES & REELS (9:16) */}
+            <div className="apolo-step-card">
+              <div className="apolo-step-header apolo-font-mono">
+                <span style={{ color: "var(--accent-mopar-red)", display: "flex", alignItems: "center", gap: "6px" }}>
+                  <span className="apolo-pulse-dot" style={{ background: "var(--accent-mopar-red)" }}></span>
+                  FORMATO 02 // STORIES &amp; REELS
+                </span>
+                <span style={{ color: "var(--text-muted)" }}>9:16 VERTICAL MÓVIL</span>
+              </div>
+
+              <div className="apolo-step-body">
+                {/* Visual Mockup: Story 9:16 Smartphone Frame */}
+                <div className="apolo-mockup-story">
+                  <img
+                    src={CAMPAIGN_SYSTEM_DATA[galleryTab].image}
+                    alt={CAMPAIGN_SYSTEM_DATA[galleryTab].vehicleName}
+                    className="apolo-story-bg-img"
+                  />
+                  <div className="apolo-story-vignette"></div>
+
+                  <div className="apolo-story-top">
+                    <div className="apolo-story-progress-strip">
+                      <div className="apolo-story-progress-bar active"></div>
+                      <div className="apolo-story-progress-bar active"></div>
+                      <div className="apolo-story-progress-bar"></div>
+                    </div>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                        <div style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#000", border: "1px solid var(--border-gold)", display: "flex", alignItems: "center", justifyContent: "center", padding: "1px" }}>
+                          <img src="/assets/touche-motors/logo-white.png" alt="Touché" style={{ width: "100%", height: "auto" }} />
+                        </div>
+                        <span style={{ fontSize: "10px", fontWeight: 600, color: "#FFF" }}>touchemotorsjuarez</span>
+                        <span style={{ fontSize: "9px", color: "rgba(255,255,255,0.6)" }}>2h</span>
+                      </div>
+                      <span className="apolo-font-mono" style={{ fontSize: "8px", background: "rgba(0,0,0,0.6)", color: "var(--accent-champagne)", padding: "2px 6px", border: "1px solid rgba(255,255,255,0.15)" }}>
+                        HISTORIA VIP
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="apolo-story-bottom">
+                    <div style={{ display: "inline-block", background: "rgba(0,0,0,0.75)", padding: "3px 8px", fontSize: "8.5px", color: "var(--accent-champagne)", border: "1px solid rgba(245,197,99,0.3)", marginBottom: "8px" }} className="apolo-font-mono">
+                      {CAMPAIGN_SYSTEM_DATA[galleryTab].storyTag}
+                    </div>
+
+                    <h4 style={{ margin: "0 0 6px 0", fontSize: "14px", color: "#FFF", fontWeight: 800, lineHeight: 1.25, textShadow: "0 2px 10px rgba(0,0,0,0.8)" }}>
+                      {CAMPAIGN_SYSTEM_DATA[galleryTab].storyHook}
+                    </h4>
+
+                    <div className="apolo-story-sticker apolo-font-mono">
+                      <span>📲</span>
+                      <span>{CAMPAIGN_SYSTEM_DATA[galleryTab].storyCta}</span>
+                    </div>
+
+                    <div style={{ marginTop: "10px", fontSize: "8.5px", color: "rgba(255,255,255,0.7)", textAlign: "center" }} className="apolo-font-mono">
+                      100% ARTE VISUAL // CERO COPY EXTERNO DESPERDICIADO
+                    </div>
+                  </div>
+                </div>
+
+                {/* Explanation Block */}
+                <div>
+                  <h3 className="apolo-font-serif" style={{ fontSize: "19px", margin: "0 0 8px 0", color: "var(--text-primary)" }}>
+                    02. Variantes Verticales Inmersivas
+                  </h3>
+                  <p style={{ fontSize: "12.5px", color: "#A1A09A", margin: "0 0 14px 0", lineHeight: 1.5 }}>
+                    Más del 80% del tiempo en Instagram transcurre en Stories y Reels. Cada entrega incluye variantes 9:16 diseñadas para pantalla completa.
+                  </p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "8px", fontSize: "11.5px", color: "var(--text-on-surface)" }}>
+                    <div style={{ display: "flex", gap: "8px" }}>
+                      <span style={{ color: "var(--accent-champagne)" }}>•</span>
+                      <span><strong>Cero barras negras:</strong> Contenido vertical nativo adaptado a la relación de aspecto del teléfono inteligente.</span>
+                    </div>
+                    <div style={{ display: "flex", gap: "8px" }}>
+                      <span style={{ color: "var(--accent-champagne)" }}>•</span>
+                      <span><strong>Mensaje integrado al 100%:</strong> Toda la oferta, enganche y llamado a la acción se integran en el arte para que el usuario actúe en 1 toque.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ padding: "12px 18px", background: "var(--bg-surface-low)", borderTop: "1px solid var(--border-subtle)", fontSize: "9px", color: "var(--text-muted)" }} className="apolo-font-mono">
+                <span>FORMATO: 9:16 VERTICAL // OPTIMIZADO PARA STORIES &amp; REELS</span>
+              </div>
+            </div>
+
+            {/* COLUMN 3: META ADS DISTRIBUTION -> CALL CENTER */}
+            <div className="apolo-step-card">
+              <div className="apolo-step-header apolo-font-mono">
+                <span style={{ color: "var(--accent-champagne)", display: "flex", alignItems: "center", gap: "6px" }}>
+                  <span className="apolo-pulse-dot"></span>
+                  DISTRIBUCIÓN // META ADS
+                </span>
+                <span style={{ color: "#4ADE80" }}>➔ 5 EJECUTIVOS CALL CENTER</span>
+              </div>
+
+              <div className="apolo-step-body">
+                {/* Visual Mockup: Ad Ops Routing Panel */}
+                <div className="apolo-mockup-adops">
+                  <div className="apolo-adops-header apolo-font-mono">
+                    <span style={{ color: "#FFF", fontWeight: 700, display: "flex", alignItems: "center", gap: "6px" }}>
+                      <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#4ADE80", display: "inline-block" }}></span>
+                      CAMPAÑA ACTIVA: TRÁFICO A CALL CENTER
+                    </span>
+                    <span style={{ color: "var(--accent-champagne)" }}>PASEO TRIUNFO</span>
+                  </div>
+
+                  <div className="apolo-adops-body">
+                    <div className="apolo-adops-row">
+                      <span className="apolo-crm-lbl apolo-font-mono">SEGMENTACIÓN GEOGRÁFICA &amp; SOCIOECONÓMICA</span>
+                      <span className="apolo-crm-val" style={{ color: "#FFF", fontSize: "11.5px" }}>
+                        {CAMPAIGN_SYSTEM_DATA[galleryTab].adTargeting}
+                      </span>
+                      <span style={{ fontSize: "9.5px", color: "var(--text-muted)" }}>
+                        Geocercas activas: Paseo Triunfo, Campestre, Campos Elíseos &amp; El Paso
+                      </span>
+                    </div>
+
+                    <div className="apolo-adops-row">
+                      <span className="apolo-crm-lbl apolo-font-mono">ÁNGULO COMERCIAL DEL ANUNCIO</span>
+                      <span className="apolo-crm-val" style={{ color: "var(--accent-champagne)", fontSize: "11.5px" }}>
+                        {CAMPAIGN_SYSTEM_DATA[galleryTab].adAngle}
+                      </span>
+                    </div>
+
+                    <div className="apolo-adops-row">
+                      <span className="apolo-crm-lbl apolo-font-mono">DESTINO DE LOS PROSPECTOS</span>
+                      <span className="apolo-crm-val" style={{ color: "#4ADE80", fontSize: "11.5px", display: "flex", alignItems: "center", gap: "6px" }}>
+                        <span>📞</span>
+                        <span>Call Center Touché (5 Ejecutivos de Ventas)</span>
+                      </span>
+                      <span style={{ fontSize: "9.5px", color: "var(--text-muted)" }}>
+                        {CAMPAIGN_SYSTEM_DATA[galleryTab].adObjective}
+                      </span>
+                    </div>
+
+                    <div className="apolo-adops-row" style={{ borderBottom: "none", paddingBottom: 0 }}>
+                      <span className="apolo-crm-lbl apolo-font-mono">RESULTADO ESPERADO POR UNIDAD</span>
+                      <span className="apolo-crm-val" style={{ color: "#FFFFFF", fontSize: "11px" }}>
+                        {CAMPAIGN_SYSTEM_DATA[galleryTab].adDailyLeads}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div style={{ padding: "8px 12px", background: "rgba(245,197,99,0.12)", borderTop: "1px solid rgba(245,197,99,0.25)", fontSize: "9.5px", color: "var(--accent-champagne)", textAlign: "center" }} className="apolo-font-mono">
+                    ⚡ ALIMENTACIÓN CONTINUA AL CALL CENTER PARA AGENDAR CITAS EN PISO
+                  </div>
+                </div>
+
+                {/* Explanation Block */}
+                <div>
+                  <h3 className="apolo-font-serif" style={{ fontSize: "19px", margin: "0 0 8px 0", color: "var(--text-primary)" }}>
+                    03. Pauta Quirúrgica para tus 5 Ejecutivos
+                  </h3>
+                  <p style={{ fontSize: "12.5px", color: "#A1A09A", margin: "0 0 14px 0", lineHeight: 1.5 }}>
+                    Tu departamento de Call Center necesita contactos frescos de personas con capacidad de compra real. La pauta se configura para abastecerlos diariamente.
+                  </p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "8px", fontSize: "11.5px", color: "var(--text-on-surface)" }}>
+                    <div style={{ display: "flex", gap: "8px" }}>
+                      <span style={{ color: "var(--accent-champagne)" }}>•</span>
+                      <span><strong>Cero desperdicio de pauta:</strong> Excluimos perfiles curiosos sin dinero y concentramos la inversión en los corredores de mayor plusvalía.</span>
+                    </div>
+                    <div style={{ display: "flex", gap: "8px" }}>
+                      <span style={{ color: "var(--accent-champagne)" }}>•</span>
+                      <span><strong>Tus 5 asesores con trabajo real:</strong> En lugar de esperar a que alguien entre a la sala por casualidad, tienen prospectos calificados para llamar y agendar citas de manejo.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ padding: "12px 18px", background: "var(--bg-surface-low)", borderTop: "1px solid var(--border-subtle)", fontSize: "9px", color: "var(--text-muted)" }} className="apolo-font-mono">
+                <span>OBJETIVO: CITAS PRESENCIALES EN PASEO TRIUNFO 6080</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Pillars Summary Strip for Dealership Executives */}
+          <div className="apolo-funnel-summary-strip">
+            <div className="apolo-pillar-item">
+              <span className="apolo-font-mono apolo-pillar-num">01 // IDENTIDAD VISUAL HOMOLOGADA</span>
+              <h4 className="apolo-font-serif apolo-pillar-title">RAM, Jeep y Dodge al Nivel Internacional</h4>
+              <p className="apolo-pillar-desc">
+                Diseño publicitario que respeta las normas de Stellantis con acabados limpios, tipografía autorizada y contraste cinematográfico que transmite prestigio de sala.
+              </p>
+            </div>
+
+            <div className="apolo-pillar-item">
+              <span className="apolo-font-mono apolo-pillar-num">02 // COBERTURA MULTIFORMATO 100% MÓVIL</span>
+              <h4 className="apolo-font-serif apolo-pillar-title">Feed 1:1 y Stories 9:16 sin Distorsión</h4>
+              <p className="apolo-pillar-desc">
+                Aprovechamos al máximo el consumo en celulares con adaptaciones verticales completas. Tu marca se ve impecable tanto al scrollear el muro como al ver historias.
+              </p>
+            </div>
+
+            <div className="apolo-pillar-item">
+              <span className="apolo-font-mono apolo-pillar-num">03 // COMBUSTIBLE PARA TU CALL CENTER</span>
+              <h4 className="apolo-font-serif apolo-pillar-title">5 Ejecutivos Comerciales Nutridos</h4>
+              <p className="apolo-pillar-desc">
+                Tu infraestructura comercial interna no se desperdicia. Cada peso de pauta publicitaria en Meta Ads tiene como único fin generar compradores reales para que tus 5 ejecutivos cierren ventas en piso.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 04. THE INVESTMENT MANDATE // THE CAPITAL ALLOCATION ENGINE (INTERACTIVE PRICING CALCULATOR) */}
+      <section className="apolo-section" style={{ background: "var(--bg-surface-low)" }}>
+        <div className="apolo-container">
+          <div style={{ display: "flex", flexDirection: "column", gap: "16px", paddingBottom: "24px", borderBottom: "1px solid var(--border-subtle)" }}>
+            <span className="apolo-font-mono" style={{ fontSize: "11px", color: "var(--accent-champagne)" }}>
+              03 / CAPITAL ALLOCATION &amp; SCHEDULE
+            </span>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: "16px" }}>
+              <div>
+                <h2 className="apolo-font-serif" style={{ fontSize: "clamp(28px, 4vw, 42px)", margin: 0, fontWeight: 400, color: "var(--text-primary)" }}>
+                  The Investment Mandate
+                </h2>
+                <p style={{ margin: "8px 0 0 0", fontSize: "14px", color: "var(--text-muted)" }}>
+                  Cotizador interactivo en tiempo real. Configura los módulos y conoce tu inversión neta exacta.
+                </p>
+              </div>
+
+              <div className="apolo-font-mono" style={{ padding: "6px 14px", background: "var(--bg-surface-high)", border: "1px solid var(--border-subtle)", fontSize: "10px", color: "var(--accent-champagne)", display: "flex", alignItems: "center", gap: "8px" }}>
+                <span className="apolo-pulse-dot"></span>
+                <span>COTIZADOR DINÁMICO // TARIFARIO TOUCHÉ PASEO TRIUNFO</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Calculator Container */}
+          <div className="apolo-calc-container">
+            {/* Step 1: Base Package Selection */}
+            <div className="apolo-calc-header">
+              <span className="apolo-font-mono" style={{ fontSize: "10px", color: "var(--text-muted)", display: "block", marginBottom: "4px" }}>
+                PASO 1: SELECCIONA EL ALCANCE DE PRODUCCIÓN BASE
+              </span>
+              <div className="apolo-plan-selector-grid">
+                {/* Plan B */}
+                <div
+                  className={`apolo-plan-card ${basePlan === "b" ? "active" : ""}`}
+                  onClick={() => setBasePlan("b")}
+                >
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "8px" }}>
+                    <span className="apolo-font-mono" style={{ fontSize: "11px", color: "var(--accent-champagne)" }}>
+                      PAQUETE B // RECOMENDADO
+                    </span>
+                    <span className="apolo-font-mono apolo-tabular-num" style={{ fontSize: "18px", color: "#FFF", fontWeight: 700 }}>
+                      $10,000 MXN <span style={{ fontSize: "10px", color: "var(--text-muted)" }}>/ mes</span>
+                    </span>
+                  </div>
+                  <h4 className="apolo-font-serif" style={{ fontSize: "18px", color: "#FFF", margin: "0 0 6px 0", fontWeight: 400 }}>
+                    Producción Visual Ágil &amp; Contenido con IA
+                  </h4>
+                  <p style={{ margin: 0, fontSize: "12px", color: "#A1A09A", lineHeight: 1.6 }}>
+                    18 gráficos publicitarios multimarca (Jeep, RAM, Dodge) + 2 videoreels cinematográficos de producto real en sala Paseo Triunfo 6080 para Meta Ads.
+                  </p>
+                </div>
+
+                {/* Plan A */}
+                <div
+                  className={`apolo-plan-card ${basePlan === "a" ? "active" : ""}`}
+                  onClick={() => setBasePlan("a")}
+                >
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "8px" }}>
+                    <span className="apolo-font-mono" style={{ fontSize: "11px", color: "var(--text-muted)" }}>
+                      PAQUETE A // DIRECCIÓN ARTESANAL
+                    </span>
+                    <span className="apolo-font-mono apolo-tabular-num" style={{ fontSize: "18px", color: "#FFF", fontWeight: 700 }}>
+                      $20,000 MXN <span style={{ fontSize: "10px", color: "var(--text-muted)" }}>/ mes</span>
+                    </span>
+                  </div>
+                  <h4 className="apolo-font-serif" style={{ fontSize: "18px", color: "#FFF", margin: "0 0 6px 0", fontWeight: 400 }}>
+                    Dirección de Arte Senior Tradicional (CERO IA)
+                  </h4>
+                  <p style={{ margin: 0, fontSize: "12px", color: "#A1A09A", lineHeight: 1.6 }}>
+                    20 gráficos publicitarios de diseño editorial de alto detalle hechos a mano por Directores de Arte Senior + 2 videoreels cinematográficos RED 8K.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Step 2: Fixed Transparent Ad Spend Row */}
+            <div style={{ padding: "16px 24px", background: "#0F1014", borderBottom: "1px solid var(--border-subtle)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px" }}>
+              <div>
+                <span className="apolo-font-mono" style={{ fontSize: "9px", color: "var(--accent-champagne)", display: "block", marginBottom: "2px" }}>
+                  PASO 2: INVERSIÓN PUBLICITARIA EN MEDIOS (TRANSPARENTE)
+                </span>
+                <span style={{ fontSize: "14px", fontWeight: 600, color: "#FFF" }}>
+                  Presupuesto Publicitario Directo a Plataforma (Meta Ads)
+                </span>
+                <p style={{ margin: "2px 0 0 0", fontSize: "12px", color: "#8E8D88" }}>
+                  Facturado directamente por Meta a la tarjeta de Touché Motors. Cero comisiones de intermediación de agencia.
+                </p>
+              </div>
+              <div className="apolo-font-mono apolo-tabular-num" style={{ fontSize: "18px", color: "#FFF", fontWeight: 700, textAlign: "right" }}>
+                $2,000.00 MXN <span style={{ fontSize: "10px", color: "var(--text-muted)", display: "block" }}>DIRECTO A META / MES</span>
+              </div>
+            </div>
+
+            {/* Step 3: Optional Production & Reach Add-ons */}
+            <div>
+              <div style={{ padding: "16px 24px", background: "var(--bg-surface-low)", borderBottom: "1px solid var(--border-subtle)", fontSize: "10px", color: "var(--text-muted)" }} className="apolo-font-mono">
+                PASO 3: SELECCIONA MÓDULOS ADICIONALES DE PRODUCCIÓN &amp; ALCANCE (OPCIONAL)
+              </div>
+
+              {ADDONS_CATALOG.map((addon) => {
+                const isSelected = selectedAddons.includes(addon.id);
+
+                return (
+                  <div
+                    key={addon.id}
+                    className="apolo-addon-row"
+                    onClick={() => toggleAddon(addon.id)}
+                  >
+                    <div className={`apolo-checkbox-custom ${isSelected ? "checked" : ""}`}>
+                      {isSelected ? "✓" : ""}
+                    </div>
+
+                    <div>
+                      <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap" }}>
+                        <span className="apolo-font-mono" style={{ fontSize: "9px", color: "var(--text-muted)" }}>
+                          {addon.category}
+                        </span>
+                        {addon.badge && (
+                          <span className="apolo-font-mono" style={{ fontSize: "8px", padding: "2px 6px", background: "rgba(245,197,99,0.15)", color: "var(--accent-champagne)", border: "1px solid rgba(245,197,99,0.3)" }}>
+                            {addon.badge}
+                          </span>
+                        )}
+                      </div>
+                      <h4 style={{ margin: "4px 0 2px 0", fontSize: "15px", color: isSelected ? "#FFF" : "#CCC", fontWeight: 500 }}>
+                        {addon.name}
+                      </h4>
+                      <p style={{ margin: 0, fontSize: "12px", color: "#8E8D88", lineHeight: 1.5 }}>
+                        {addon.description}
+                      </p>
+                    </div>
+
+                    <div className="apolo-font-mono apolo-tabular-num" style={{ textAlign: "right", whiteSpace: "nowrap" }}>
+                      <div>
+                        <span style={{ fontSize: "16px", color: isSelected ? "var(--accent-champagne)" : "var(--text-muted)", fontWeight: 700 }}>
+                          +${addon.amount.toLocaleString("es-MX")} MXN
+                        </span>
+                        <span style={{ fontSize: "9px", color: "var(--text-muted)", display: "block" }}>
+                          {addon.type === "monthly" ? "+ IVA / MES" : "PAGO ÚNICO (50% ANTICIPO)"}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Step 4: Live Responsive Summary Bar (Ledger Protocol) */}
+            <div className="apolo-calc-summary-bar">
+              <div>
+                <span className="apolo-font-mono" style={{ fontSize: "10px", color: "var(--text-muted)", display: "block", marginBottom: "4px" }}>
+                  SETTLEMENT PROTOCOL // DESGLOSE MENSUAL Y ARRANQUE
+                </span>
+                <p className="apolo-font-mono" style={{ fontSize: "11px", color: "var(--accent-champagne)", margin: "0 0 10px 0" }}>
+                  RÉGIMEN: RETAINER MENSUAL POR ADELANTADO (MES 1) + PAUTA DIRECTA META
+                </p>
+                
+                {/* Ledger micro-table */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "6px", fontSize: "12px", borderTop: "1px solid var(--border-subtle)", paddingTop: "10px" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", color: "#CCC" }}>
+                    <span>Retainer Producción Agencia (Mes 1):</span>
+                    <span className="apolo-font-mono apolo-tabular-num" style={{ color: "#FFF", fontWeight: 600 }}>
+                      ${basePrice.toLocaleString("es-MX")}.00 MXN
+                    </span>
+                  </div>
+
+                  {monthlyAddonsCost > 0 && (
+                    <div style={{ display: "flex", justifyContent: "space-between", color: "#CCC" }}>
+                      <span>Módulos de Alcance Mensuales:</span>
+                      <span className="apolo-font-mono apolo-tabular-num" style={{ color: "#FFF", fontWeight: 600 }}>
+                        +${monthlyAddonsCost.toLocaleString("es-MX")}.00 MXN
+                      </span>
+                    </div>
+                  )}
+
+                  <div style={{ display: "flex", justifyContent: "space-between", color: "var(--text-muted)" }}>
+                    <span>IVA Trasladado de Agencia (16%):</span>
+                    <span className="apolo-font-mono apolo-tabular-num" style={{ color: "var(--accent-champagne)" }}>
+                      +${ivaMonthly.toLocaleString("es-MX")}.00 MXN
+                    </span>
+                  </div>
+
+                  <div style={{ display: "flex", justifyContent: "space-between", color: "#AAA", borderTop: "1px dashed rgba(255,255,255,0.1)", paddingTop: "6px" }}>
+                    <span>Pauta Directa a Meta Ads (Touché Card):</span>
+                    <span className="apolo-font-mono apolo-tabular-num" style={{ color: "#FFF", fontWeight: 600 }}>
+                      ${platformAdSpend.toLocaleString("es-MX")}.00 MXN
+                    </span>
+                  </div>
+
+                  {onetimeAddonsCost > 0 && (
+                    <div style={{ display: "flex", justifyContent: "space-between", color: "#E5E1E4", borderTop: "1px dashed rgba(255,255,255,0.1)", paddingTop: "6px" }}>
+                      <span>Anticipo 50% Desarrollo Web One-Time:</span>
+                      <span className="apolo-font-mono apolo-tabular-num" style={{ color: "var(--accent-champagne)", fontWeight: 600 }}>
+                        +${onetimeAnticipo.toLocaleString("es-MX")}.00 MXN
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div style={{ textAlign: "left" }}>
+                <span className="apolo-font-mono" style={{ fontSize: "10px", color: "var(--accent-champagne)", display: "block" }}>
+                  TOTAL DE ARRANQUE (MES 1 SIN IVA)
+                </span>
+                <div className="apolo-font-serif apolo-tabular-num" style={{ fontSize: "clamp(34px, 4vw, 46px)", color: "var(--text-primary)", fontWeight: 400, margin: "4px 0" }}>
+                  ${initialMonthSubtotal.toLocaleString("es-MX")}.00{" "}
+                  <span style={{ fontSize: "16px", color: "var(--accent-champagne)", fontFamily: "'JetBrains Mono', monospace" }}>MXN</span>
+                </div>
+                <div className="apolo-font-mono" style={{ fontSize: "11px", color: "#FFF", marginTop: "4px" }}>
+                  TOTAL NETO FACTURADO: <span style={{ color: "var(--accent-champagne)", fontWeight: 700 }}>${initialMonthTotalNeto.toLocaleString("es-MX")}.00 MXN</span>
+                </div>
+                <span className="apolo-font-mono" style={{ fontSize: "9px", color: "var(--text-muted)", display: "block", marginTop: "4px" }}>
+                  (INCLUYE RETAINER MES 1 AGENCIA CON IVA + $2,000 SALDO META ADS)
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 05. FORMAL RATIFICATION & SPRINT INITIALIZATION */}
+      <section className="apolo-section" style={{ textAlign: "center" }}>
+        <div className="apolo-container" style={{ maxWidth: "800px" }}>
+          {/* Atelier Emblem */}
+          <div style={{ width: "48px", height: "48px", border: "1px solid var(--border-gold)", display: "inline-flex", alignItems: "center", justifyContent: "center", marginBottom: "24px" }}>
+            <span className="apolo-font-serif" style={{ fontSize: "24px", color: "var(--accent-champagne)" }}>A</span>
+          </div>
+
+          <span className="apolo-font-mono" style={{ fontSize: "11px", color: "var(--accent-champagne)", display: "block", marginBottom: "12px" }}>
+            CALENDARIO DE ARRANQUE Y ACTIVACIÓN
+          </span>
+
+          <h2 className="apolo-font-serif" style={{ fontSize: "clamp(32px, 5vw, 48px)", margin: "0 0 20px 0", fontWeight: 400, color: "var(--text-primary)" }}>
+            Ratificar Propuesta. Inicio de Producción Touché.
+          </h2>
+
+          <p style={{ fontSize: "15px", color: "#B2B0A8", lineHeight: 1.8, marginBottom: "36px" }}>
+            Esta propuesta tiene una validez de quince (15) días naturales. El primer sprint de captura fotográfica y rodaje en sala Paseo Triunfo 6080 inicia dentro de las cuarenta y ocho (48) horas posteriores a la ratificación.
+          </p>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: "16px", alignItems: "center", justifyContent: "center" }}>
+            <button
+              className="apolo-auth-btn apolo-font-mono"
+              onClick={handleAuthorize}
+              disabled={isAuthorizing || isAuthorized}
+              style={{
+                background: isAuthorized ? "#4BB543" : isAuthorizing ? "#B0A288" : "var(--accent-champagne)",
+                color: isAuthorized ? "#FFFFFF" : "#121316",
+              }}
+            >
+              {isAuthorized ? "PROPUESTA RATIFICADA ✓" : isAuthorizing ? "RATIFICANDO PROTOCOLO..." : "RATIFICAR PROPUESTA TOUCHÉ CON ESTA CONFIGURACIÓN"}
+            </button>
+
+            <a
+              href={getDynamicWhatsAppUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="apolo-vip-link apolo-font-mono"
+            >
+              SOLICITAR SESIÓN PRIVADA DE INICIO VÍA WHATSAPP →
+            </a>
+          </div>
+
+          <div style={{ marginTop: "56px", paddingTop: "24px", borderTop: "1px solid var(--border-subtle)", display: "flex", flexDirection: "column", gap: "8px", fontSize: "10px", color: "var(--text-muted)" }} className="apolo-font-mono">
+            <div style={{ display: "flex", justifyContent: "center", gap: "12px", flexWrap: "wrap" }}>
+              <span style={{ color: "var(--accent-champagne)" }}>DOCUMENTO COMERCIAL OFICIAL</span>
+              <span>//</span>
+              <span>EXPEDIENTE: APO-2026-TOUCHE-084</span>
+              <span>//</span>
+              <span>DIRECCIÓN GENERAL APROBADA</span>
+            </div>
+            <div>
+              ATELIER COORDINATES: 31.6904° N, 106.4245° W (PASEO TRIUNFO 6080 / EL PASO BORDERPLEX)
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 06. ATELIER CO-BRANDED FOOTER */}
+      <footer style={{ background: "var(--bg-main)", borderTop: "1px solid var(--border-subtle)", padding: "32px 0" }}>
+        <div className="apolo-container" style={{ display: "flex", flexDirection: "column", gap: "16px", alignItems: "center", justifyContent: "space-between" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+            <img
+              src="/assets/apolograma-logo-v2.png"
+              alt="Apolograma"
+              style={{ height: "14px", width: "auto" }}
+            />
+            <div style={{ width: "1px", height: "14px", background: "rgba(255,255,255,0.2)" }}></div>
+            <img
+              src="/assets/touche-motors/logo-white.png"
+              alt="Touché Motors"
+              style={{ height: "13px", width: "auto" }}
+            />
+          </div>
+
+          <div className="apolo-font-mono" style={{ fontSize: "10px", color: "var(--text-muted)", display: "flex", gap: "12px", flexWrap: "wrap", justifyContent: "center" }}>
+            <span>APOLOGRAMA STUDIO © MMXXVI</span>
+            <span>//</span>
+            <span>PRODUCCIÓN AUDIOVISUAL &amp; DESARROLLO TECNOLÓGICO</span>
+          </div>
+
+          <div className="apolo-font-mono" style={{ fontSize: "10px", color: "var(--text-primary)", display: "flex", gap: "8px" }}>
+            <span>CIUDAD JUÁREZ</span>
+            <span style={{ color: "var(--accent-champagne)" }}>•</span>
+            <span>EL PASO BORDERPLEX</span>
+          </div>
+        </div>
+      </footer>
+    </div>
   );
 }
