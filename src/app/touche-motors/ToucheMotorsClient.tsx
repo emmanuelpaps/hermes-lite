@@ -2,60 +2,60 @@
 
 import React, { useState, useEffect } from "react";
 
-// Vehicle Data Definition for the Interactive Director's Viewfinder HUD
-interface VehicleData {
-  id: "ram" | "jeep" | "dodge";
+// Production Rig & Workflow Definition for the Interactive Director's Viewfinder HUD
+interface ProductionRig {
+  id: "fpv" | "gimbal" | "studio";
+  tabLabel: string;
   name: string;
   badge: string;
-  engine: string;
-  power: string;
-  accel: string;
+  gear: string;
   image: string;
   shutter: string;
-  exhaustAudioDb: string;
+  audioTelemetry: string;
   afTrack: string;
   clipName: string;
+  viewfinderMode: string;
 }
 
-const VEHICLES: Record<"ram" | "jeep" | "dodge", VehicleData> = {
-  ram: {
-    id: "ram",
-    name: "RAM 1500 TRX Flagship",
-    badge: "HELLCAT 6.2L SUPERCHARGED",
-    engine: "6.2L HEMI V8",
-    power: "702 HP",
-    accel: "4.5s (0-100)",
-    image: "/assets/touche-motors/hero_ram_trx.jpg",
-    shutter: "1/120s · ISO 400 · T1.4",
-    exhaustAudioDb: "-3.2 dB (32-Bit Float)",
-    afTrack: "AF-TRACK: TRX_FRONT_GRILL",
-    clipName: "CLIP_08_TRX_POWER_SLIDE",
+const PRODUCTION_RIGS: Record<"fpv" | "gimbal" | "studio", ProductionRig> = {
+  fpv: {
+    id: "fpv",
+    tabLabel: "01 // DRON CINE FPV (EXTERIORES Y PATIOS)",
+    name: "Vuelo FPV Cinewhoop",
+    badge: "PATIOS DE MANIOBRA & ACCESO PASEO TRIUNFO",
+    gear: "Drone Cinewhoop Ductado 4K 60FPS",
+    image: "/assets/touche-motors/bts_fpv_drone.jpg",
+    shutter: "Ultra-Wide FPV 4K · 1/120s · ISO 100 · 5600K",
+    audioTelemetry: "TELEMETRÍA DE VUELO: 24.2V (LiPo) · 18 SAT GPS",
+    afTrack: "AF-TRACK: FLIGHT_PATH_SHOWROOM",
+    clipName: "CLIP_01_FPV_RUNWAY_SWEEP",
+    viewfinderMode: "CINEWHOOP REC 4K 60FPS",
   },
-  jeep: {
-    id: "jeep",
-    name: "Jeep Grand Cherokee Summit",
-    badge: "LUJO EJECUTIVO & 4×4 STELLANTIS",
-    engine: "Quadra-Drive II V6",
-    power: "375 HP",
-    accel: "5.8s (0-100)",
-    image: "/assets/touche-motors/hero_jeep.jpg",
-    shutter: "1/120s · ISO 250 · T1.8",
-    exhaustAudioDb: "-6.4 dB (Palermo Interior)",
-    afTrack: "AF-TRACK: JEEP_SUMMIT_CABIN",
-    clipName: "CLIP_14_JEEP_LUXURY_WAROUND",
+  gimbal: {
+    id: "gimbal",
+    tabLabel: "02 // OSMO 3-AXIS & RUGIDO DE MOTORES",
+    name: "Estabilización Gimbal 3-Axis",
+    badge: "WALKAROUND CABINA & CAPTURA BINAURAL",
+    gear: "DJI 3-Axis + Micrófonos Duales 32-Bit Float",
+    image: "/assets/touche-motors/bts_gimbal_osmo.jpg",
+    shutter: "35mm Cine Prime f/1.8 · 1/120s · ISO 400 · T1.8",
+    audioTelemetry: "CAPTURA DE ESCAPES HEMI: -3.2 dB (32-Bit Float)",
+    afTrack: "AF-TRACK: GIMBAL_STABILIZED_GRILL",
+    clipName: "CLIP_07_WALKAROUND_HEMI_SOUND",
+    viewfinderMode: "GIMBAL CINE 4K 60FPS",
   },
-  dodge: {
-    id: "dodge",
-    name: "Dodge Charger SRT Hellcat",
-    badge: "MOTORSPORT WIDEBODY HERITAGE",
-    engine: "6.2L Supercharged HEMI",
-    power: "717 HP",
-    accel: "3.6s (0-100)",
-    image: "/assets/touche-motors/hero_dodge.jpg",
-    shutter: "1/200s · ISO 500 · T1.4",
-    exhaustAudioDb: "-1.8 dB (Cold-Start Redline)",
-    afTrack: "AF-TRACK: CHARGER_WIDEBODY_EXHAUST",
-    clipName: "CLIP_22_CHARGER_LAUNCH_BURNOUT",
+  studio: {
+    id: "studio",
+    tabLabel: "03 // SET FOTOGRÁFICO DE ESTUDIO",
+    name: "Estación de Fotografía Comercial",
+    badge: "LUZ CENITAL & RETOQUE STELLANTIS",
+    gear: "Softbox Overhead + C-Stands + Laptop Tethering",
+    image: "/assets/touche-motors/bts_studio_photo.jpg",
+    shutter: "50mm Macro Prime f/4.0 · 1/160s · ISO 100 · 5600K",
+    audioTelemetry: "CONTROL AMBIENTAL: -42.0 dB (Set Silencioso)",
+    afTrack: "AF-TRACK: TETHERED_CATALOG_STATION",
+    clipName: "STILL_24_CATALOG_DIFFUSE_STUDIO",
+    viewfinderMode: "STILL RAW CAPTURE",
   },
 };
 
@@ -79,10 +79,10 @@ const FORMATS: Record<"reels" | "feed" | "carousel", FormatSpec> = {
     tabLabel: "REELS & STORIES 9:16",
     badge: "FORMATO VERTICAL DINÁMICO // 9:16",
     title: "Reels de Alto Impacto con Hooks de Venta Directa",
-    description: "Cada pieza está concebida para atrapar al comprador en los primeros 1.5 segundos mediante un corte de aceleración, rugido de motor HEMI o encendido de luces LED en el showroom de Paseo Triunfo 6080.",
-    captionTitle: "RAM 1500 TRX 2026 // PASEO TRIUNFO 6080",
-    captionText: "¿Listo para domar 702 HP? Entrega inmediata en Touché Motors. Aprobación de crédito para directivos en menos de 24 hrs.",
-    whatsappCta: "Enviar WhatsApp a Asesor VIP",
+    description: "Cada pieza está concebida para atrapar al comprador en los primeros 1.5 segundos mediante un corte de aceleración, rugido de motor o encendido de luces LED en el showroom de Paseo Triunfo 6080.",
+    captionTitle: "TOUCHÉ MOTORS // PASEO TRIUNFO 6080",
+    captionText: "Entrega inmediata y planes de leasing empresarial en Ciudad Juárez. Conoce el catálogo y agenda tu cita por WhatsApp.",
+    whatsappCta: "Enviar WhatsApp a Asesor de Ventas",
     metricLabel: "Retención Algorítmica Promedio",
     metricValue: "+78% vs media automotriz",
   },
@@ -92,9 +92,9 @@ const FORMATS: Record<"reels" | "feed" | "carousel", FormatSpec> = {
     badge: "FORMATO 4:5 // PUBLICACIÓN EDITORIAL",
     title: "Carruseles Técnicos & Fotografía Editorial Oficial",
     description: "Publicaciones de alto valor estético para el feed oficial de Instagram y Facebook. Diseñadas para que el prospecto guarde la ficha técnica y compare equipamiento antes de acudir a la agencia.",
-    captionTitle: "FICHA TÉCNICA // ENTREGA INMEDIATA",
+    captionTitle: "CATÁLOGO OFICIAL // ENTREGA INMEDIATA",
     captionText: "Desliza para examinar acabados en piel nappa, consola táctil Uconnect y opciones de leasing deducible 100%.",
-    whatsappCta: "Solicitar Ficha Técnica por WhatsApp",
+    whatsappCta: "Solicitar Ficha de Inventario por WhatsApp",
     metricLabel: "Tasa de Guardados e Interacción",
     metricValue: "3.4x Mayor Frecuencia",
   },
@@ -113,7 +113,7 @@ const FORMATS: Record<"reels" | "feed" | "carousel", FormatSpec> = {
 };
 
 export default function ToucheMotorsClient() {
-  const [selectedVehicle, setSelectedVehicle] = useState<"ram" | "jeep" | "dodge">("ram");
+  const [selectedRig, setSelectedRig] = useState<"fpv" | "gimbal" | "studio">("fpv");
   const [selectedFormat, setSelectedFormat] = useState<"reels" | "feed" | "carousel">("reels");
   const [selectedPlan, setSelectedPlan] = useState<"B" | "A">("B");
   const [taxRate, setTaxRate] = useState<number>(0.16); // 16% General vs 8% Fronterizo
@@ -129,7 +129,7 @@ export default function ToucheMotorsClient() {
   const metaAdsBudget = selectedPlan === "B" ? 2000 : 4000;
   const totalCombinedMonthly = apologramaTotal + metaAdsBudget;
 
-  const currentVehicle = VEHICLES[selectedVehicle];
+  const currentRig = PRODUCTION_RIGS[selectedRig];
   const currentFormat = FORMATS[selectedFormat];
 
   // Telemetry on mount (with 3-layer exclusion)
@@ -1123,6 +1123,10 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
         @media (max-width: 480px) {
           .vehicle-btn { min-width: 95px; font-size: 9px; padding: 8px 6px; }
           .hero-headline { font-size: 26px; }
+          .spec-card { padding: 8px 10px !important; }
+          .spec-label { font-size: 8.5px !important; letter-spacing: 0.05em; }
+          .spec-value { font-size: 19px !important; }
+          .spec-sub { font-size: 8.5px !important; }
         }
       `}} />
 
@@ -1176,69 +1180,69 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
           </h1>
 
           <p className="hero-description">
-            Producción cinematográfica in-situ y pauta publicitaria ultra-segmentada para el inventario insignia (<strong style={{ color: "#0f172a" }}>RAM 1500 TRX, Jeep Grand Cherokee, Dodge SRT Hellcat</strong>) en la frontera binacional Ciudad Juárez — El Paso.
+            Producción cinematográfica in-situ y pauta publicitaria ultra-segmentada para captar compradores directivos y de alto poder adquisitivo en Ciudad Juárez y El Paso.
           </p>
 
-          {/* 4 Telemetry Spec Cards */}
+          {/* 4 Production Telemetry Cards */}
           <div className="spec-cards-grid">
             <div className="spec-card">
-              <span className="spec-label">Potencia In-Situ</span>
-              <span className="spec-value" style={{ color: "#e51a24" }}>702 HP</span>
-              <span className="spec-sub">Dodge SRT Tuned</span>
+              <span className="spec-label">Cadencia In-Situ</span>
+              <span className="spec-value" style={{ color: "#e51a24" }}>Bimestral</span>
+              <span className="spec-sub">1 Jornada cada 2 Meses</span>
             </div>
             <div className="spec-card">
-              <span className="spec-label">Motorización</span>
-              <span className="spec-value">6.2L</span>
-              <span className="spec-sub">Supercharged HEMI V8</span>
+              <span className="spec-label">Master Audiovisual</span>
+              <span className="spec-value" style={{ color: "#0051ff" }}>+24 Reels</span>
+              <span className="spec-sub">Formato 4K con Hooks</span>
             </div>
             <div className="spec-card">
-              <span className="spec-label">Aceleración Pista</span>
-              <span className="spec-value" style={{ color: "#0051ff" }}>4.5s</span>
-              <span className="spec-sub">0 a 100 km/h Launch</span>
+              <span className="spec-label">Catálogo Oficial</span>
+              <span className="spec-value" style={{ color: "#0f172a" }}>40 Stills</span>
+              <span className="spec-sub">Luz Difusa & Retoque</span>
             </div>
             <div className="spec-card">
-              <span className="spec-label">Master Bimestral</span>
-              <span className="spec-value" style={{ color: "#0f172a" }}>+24</span>
-              <span className="spec-sub">Reels 4K por Jornada</span>
+              <span className="spec-label">Pauta Activa</span>
+              <span className="spec-value" style={{ color: "#16a34a" }}>5 Días</span>
+              <span className="spec-sub">De Rodaje a Meta Ads</span>
             </div>
           </div>
 
-          {/* Vehicle Switcher Bar */}
+          {/* Production Workflow Switcher Bar */}
           <div className="vehicle-selector-bar">
             <button
               type="button"
-              onClick={() => setSelectedVehicle("ram")}
-              className={`vehicle-btn ${selectedVehicle === "ram" ? "active" : ""}`}
+              onClick={() => setSelectedRig("fpv")}
+              className={`vehicle-btn ${selectedRig === "fpv" ? "active" : ""}`}
             >
-              <span>RAM 1500 TRX</span>
-              {selectedVehicle === "ram" && <span>✦</span>}
+              <span>01 // Dron Cine FPV (Patios y Bahías)</span>
+              {selectedRig === "fpv" && <span>✦</span>}
             </button>
             <button
               type="button"
-              onClick={() => setSelectedVehicle("jeep")}
-              className={`vehicle-btn ${selectedVehicle === "jeep" ? "active" : ""}`}
+              onClick={() => setSelectedRig("gimbal")}
+              className={`vehicle-btn ${selectedRig === "gimbal" ? "active" : ""}`}
             >
-              <span>Jeep Grand Cherokee</span>
-              {selectedVehicle === "jeep" && <span>✦</span>}
+              <span>02 // DJI Osmo 3-Axis & Audio Binaural</span>
+              {selectedRig === "gimbal" && <span>✦</span>}
             </button>
             <button
               type="button"
-              onClick={() => setSelectedVehicle("dodge")}
-              className={`vehicle-btn ${selectedVehicle === "dodge" ? "active" : ""}`}
+              onClick={() => setSelectedRig("studio")}
+              className={`vehicle-btn ${selectedRig === "studio" ? "active" : ""}`}
             >
-              <span>Dodge Charger SRT</span>
-              {selectedVehicle === "dodge" && <span>✦</span>}
+              <span>03 // Set Fotografía de Estudio</span>
+              {selectedRig === "studio" && <span>✦</span>}
             </button>
           </div>
 
-          {/* Director's Monitor Viewfinder HUD (Live Rig Simulation) */}
+          {/* Director's Monitor Viewfinder HUD (Live Production Rig Simulation) */}
           <div className="viewfinder-box" id="viewfinder">
             {/* Top Viewfinder HUD */}
             <div className="viewfinder-header-hud">
               <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                 <div className="viewfinder-rec-chip">
                   <span className="rec-dot" style={{ width: "6px", height: "6px", background: "#ffffff" }}></span>
-                  <span>REC 4K 60FPS</span>
+                  <span>{currentRig.viewfinderMode}</span>
                 </div>
                 <span style={{ background: "rgba(0,0,0,0.6)", padding: "3px 8px", borderRadius: "3px" }}>
                   TC: 01:24:59:18
@@ -1271,8 +1275,8 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
             {/* Viewfinder Media Canvas */}
             <div className="viewfinder-media-frame">
               <img
-                src={currentVehicle.image}
-                alt={currentVehicle.name}
+                src={currentRig.image}
+                alt={currentRig.name}
                 className={`viewfinder-img ${isColorGraded ? "graded-mode" : "log-mode"}`}
               />
 
@@ -1291,7 +1295,7 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
                     <div className="center-dot"></div>
                   </div>
                   <span style={{ position: "absolute", top: "8px", right: "8px", fontSize: "9px", color: "#e51a24", fontWeight: 700 }}>
-                    {currentVehicle.afTrack}
+                    {currentRig.afTrack}
                   </span>
                 </div>
                 <div className="reticle-cell">+</div>
@@ -1308,17 +1312,17 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
               <div className="viewfinder-bottom-hud">
                 <div className="lens-badge-box">
                   <div style={{ textTransform: "uppercase", fontSize: "9px", color: "#94a3b8", fontWeight: 700 }}>
-                    CALIBRACIÓN ÓPTICA IN-SITU
+                    CALIBRACIÓN TÉCNICA EN SALA
                   </div>
                   <div style={{ color: "#ffffff", fontWeight: 600, marginTop: "2px" }}>
-                    35mm Cine Prime f/1.4 · {currentVehicle.shutter}
+                    {currentRig.shutter}
                   </div>
                 </div>
 
                 <div className="audio-vu-meter-box">
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: "10px" }}>
-                    <span style={{ color: "#e51a24", fontWeight: 700 }}>AUDIO ESCAPES HEMI</span>
-                    <span style={{ color: "#ffffff" }}>{currentVehicle.exhaustAudioDb}</span>
+                    <span style={{ color: "#e51a24", fontWeight: 700 }}>MONITOREO DE AUDIO & TELEMETRÍA</span>
+                    <span style={{ color: "#ffffff" }}>{currentRig.audioTelemetry}</span>
                   </div>
                   <div className="audio-bar-row">
                     <div className="audio-bar-seg seg-green"></div>
@@ -1348,7 +1352,7 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
             <div className="scrubber-bar">
               <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                 <span className="material-symbols-outlined" style={{ color: "#e51a24", fontSize: "16px" }}>play_circle</span>
-                <span style={{ color: "#ffffff", fontWeight: 700 }}>{currentVehicle.clipName}</span>
+                <span style={{ color: "#ffffff", fontWeight: 700 }}>{currentRig.clipName}</span>
                 <span>// PRORES 422HQ (3840×2160)</span>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
@@ -1465,7 +1469,7 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
                 <div className="phone-notch-pill"></div>
                 <div className="phone-screen-content">
                   <img
-                    src={currentVehicle.image}
+                    src="/assets/touche-motors/bts_gimbal_osmo.jpg"
                     alt="Mockup Phone Ad"
                     className="phone-bg-photo"
                   />
