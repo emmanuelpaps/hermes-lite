@@ -2,153 +2,122 @@
 
 import React, { useState, useEffect } from "react";
 
-// Vehicle Data Definition for the Interactive Flagship Showcase
-interface VehicleSpec {
+// Vehicle Data Definition for the Interactive Director's Viewfinder HUD
+interface VehicleData {
   id: "ram" | "jeep" | "dodge";
   name: string;
   badge: string;
   engine: string;
   power: string;
-  motorDesc: string;
   accel: string;
-  traction: string;
   image: string;
-  tagline: string;
-  description: string;
-  reticleTop: string;
-  reticleBottom: string;
+  shutter: string;
+  exhaustAudioDb: string;
+  afTrack: string;
+  clipName: string;
 }
 
-const VEHICLES: Record<"ram" | "jeep" | "dodge", VehicleSpec> = {
+const VEHICLES: Record<"ram" | "jeep" | "dodge", VehicleData> = {
   ram: {
     id: "ram",
     name: "RAM 1500 TRX Flagship",
     badge: "HELLCAT 6.2L SUPERCHARGED",
-    engine: "6.2L HEMI",
+    engine: "6.2L HEMI V8",
     power: "702 HP",
-    motorDesc: "V8 Supercharged",
-    accel: "4.5s",
-    traction: "4×4 Launch",
+    accel: "4.5s (0-100)",
     image: "/assets/touche-motors/hero_ram_trx.jpg",
-    tagline: "El Máximo Exponente del Poder Americano",
-    description: "Dominio visual inigualable en pauta y reels. La camioneta de producción más rápida y potente del mundo, filmada con drones y estabilizadores a ras de piso.",
-    reticleTop: "┌ PADDOCK.01 ┐",
-    reticleBottom: "└ 6080.PASEO ┘",
+    shutter: "1/120s · ISO 400 · T1.4",
+    exhaustAudioDb: "-3.2 dB (32-Bit Float)",
+    afTrack: "AF-TRACK: TRX_FRONT_GRILL",
+    clipName: "CLIP_08_TRX_POWER_SLIDE",
   },
   jeep: {
     id: "jeep",
     name: "Jeep Grand Cherokee Summit",
-    badge: "LUJO & CAPACIDAD 4×4 STELLANTIS",
-    engine: "Quadra-Drive II",
+    badge: "LUJO EJECUTIVO & 4×4 STELLANTIS",
+    engine: "Quadra-Drive II V6",
     power: "375 HP",
-    motorDesc: "Arquitectura Premium",
-    accel: "5.8s",
-    traction: "4×4 Selec-Terrain",
+    accel: "5.8s (0-100)",
     image: "/assets/touche-motors/hero_jeep.jpg",
-    tagline: "La Cumbre del Confort Ejecutivo Familiar",
-    description: "Interiores en piel Palermo, sonido McIntosh y estética refinada. Campañas dirigidas a directivos y familias de alto poder adquisitivo de Juárez y El Paso.",
-    reticleTop: "┌ PADDOCK.02 ┐",
-    reticleBottom: "└ SUMMIT.6080 ┘",
+    shutter: "1/120s · ISO 250 · T1.8",
+    exhaustAudioDb: "-6.4 dB (Palermo Interior)",
+    afTrack: "AF-TRACK: JEEP_SUMMIT_CABIN",
+    clipName: "CLIP_14_JEEP_LUXURY_WAROUND",
   },
   dodge: {
     id: "dodge",
     name: "Dodge Charger SRT Hellcat",
     badge: "MOTORSPORT WIDEBODY HERITAGE",
-    engine: "6.2L Supercharged",
+    engine: "6.2L Supercharged HEMI",
     power: "717 HP",
-    motorDesc: "HEMI Puro Músculo",
-    accel: "3.6s",
-    traction: "SRT Drive Modes",
+    accel: "3.6s (0-100)",
     image: "/assets/touche-motors/hero_dodge.jpg",
-    tagline: "Adrenalina y Sonido Inconfundible en Pista",
-    description: "Grabación con microfonía direccional en escapes y tomas cinemáticas de aceleración para cautivar a los entusiastas de alto desempeño en la región.",
-    reticleTop: "┌ PADDOCK.03 ┐",
-    reticleBottom: "└ SRT.HELLCAT ┘",
+    shutter: "1/200s · ISO 500 · T1.4",
+    exhaustAudioDb: "-1.8 dB (Cold-Start Redline)",
+    afTrack: "AF-TRACK: CHARGER_WIDEBODY_EXHAUST",
+    clipName: "CLIP_22_CHARGER_LAUNCH_BURNOUT",
   },
 };
 
 // Formats Showcase Data
 interface FormatSpec {
-  id: "reels" | "feed" | "ads";
+  id: "reels" | "feed" | "carousel";
   tabLabel: string;
-  icon: string;
   badge: string;
   title: string;
   description: string;
-  mockupBadge: string;
-  mockupHookTitle: string;
-  mockupHookDesc: string;
-  mockupCta: string;
+  captionTitle: string;
+  captionText: string;
+  whatsappCta: string;
   metricLabel: string;
   metricValue: string;
-  bullet1Title: string;
-  bullet1Desc: string;
-  bullet2Title: string;
-  bullet2Desc: string;
 }
 
-const FORMATS: Record<"reels" | "feed" | "ads", FormatSpec> = {
+const FORMATS: Record<"reels" | "feed" | "carousel", FormatSpec> = {
   reels: {
     id: "reels",
-    tabLabel: "Stories & Reels 9:16",
-    icon: "smart_display",
-    badge: "Formato 9:16 Vertical Dinámico",
+    tabLabel: "REELS & STORIES 9:16",
+    badge: "FORMATO VERTICAL DINÁMICO // 9:16",
     title: "Reels de Alto Impacto con Hooks de Venta Directa",
-    description: "Cada pieza está concebida para atrapar al comprador en los primeros 1.5 segundos mediante un corte de aceleración, rugido de motor HEMI o encendido de luces diurnas LED en el showroom de Paseo Triunfo 6080.",
-    mockupBadge: "REEL 9:16",
-    mockupHookTitle: "¿Listo para domar 702 caballos de fuerza?",
-    mockupHookDesc: "Unidad disponible para entrega inmediata en Paseo Triunfo 6080. Agenda tu prueba de manejo privada hoy.",
-    mockupCta: "Contactar a Ventas Touché",
-    metricLabel: "Índice de Retención Algorítmica Estimado",
-    metricValue: "+78% vs fotos estáticas",
-    bullet1Title: "CALL TO ACTION CLARO",
-    bullet1Desc: "Dirección directa a WhatsApp de Gerencia Comercial sin fricciones.",
-    bullet2Title: "AUDIO INMERSIVO DE MOTOR",
-    bullet2Desc: "Tomas con micrófonos dedicados capturando el sonido real de los escapes.",
+    description: "Cada pieza está concebida para atrapar al comprador en los primeros 1.5 segundos mediante un corte de aceleración, rugido de motor HEMI o encendido de luces LED en el showroom de Paseo Triunfo 6080.",
+    captionTitle: "RAM 1500 TRX 2026 // PASEO TRIUNFO 6080",
+    captionText: "¿Listo para domar 702 HP? Entrega inmediata en Touché Motors. Aprobación de crédito para directivos en menos de 24 hrs.",
+    whatsappCta: "Enviar WhatsApp a Asesor VIP",
+    metricLabel: "Retención Algorítmica Promedio",
+    metricValue: "+78% vs media automotriz",
   },
   feed: {
     id: "feed",
-    tabLabel: "Feed 4:5 / 1:1 Catálogo",
-    icon: "grid_view",
-    badge: "Formato 4:5 / 1:1 Catálogo Oficial",
-    title: "Carruseles de Especificación & Fotos Editoriales",
-    description: "Publicaciones de alto valor estético para el feed oficial de Instagram y Facebook. Diseñadas para que el prospecto guarde la ficha técnica y compare equipamiento antes de visitar la agencia.",
-    mockupBadge: "CATÁLOGO FEED",
-    mockupHookTitle: "RAM 1500 TRX 2026 • Ficha Técnica Oficial",
-    mockupHookDesc: "Desliza para ver interiores en piel nappa, cluster digital configurado y disponibilidad en inventario físico.",
-    mockupCta: "Solicitar Ficha Técnica",
-    metricLabel: "Tasa de Guardados e Interacción Cualificada",
+    tabLabel: "FEED 4:5 CATÁLOGO",
+    badge: "FORMATO 4:5 // PUBLICACIÓN EDITORIAL",
+    title: "Carruseles Técnicos & Fotografía Editorial Oficial",
+    description: "Publicaciones de alto valor estético para el feed oficial de Instagram y Facebook. Diseñadas para que el prospecto guarde la ficha técnica y compare equipamiento antes de acudir a la agencia.",
+    captionTitle: "FICHA TÉCNICA // ENTREGA INMEDIATA",
+    captionText: "Desliza para examinar acabados en piel nappa, consola táctil Uconnect y opciones de leasing deducible 100%.",
+    whatsappCta: "Solicitar Ficha Técnica por WhatsApp",
+    metricLabel: "Tasa de Guardados e Interacción",
     metricValue: "3.4x Mayor Frecuencia",
-    bullet1Title: "LOOK EDITORIAL STELLANTIS",
-    bullet1Desc: "Color grading cinematográfico respetando los lineamientos de marca.",
-    bullet2Title: "CONVERSIÓN DE FEED A SALA",
-    bullet2Desc: "Copywriting enfocado en disponibilidad inmediata y opciones de arrendamiento.",
   },
-  ads: {
-    id: "ads",
-    tabLabel: "Meta Sponsored Ads",
-    icon: "campaign",
-    badge: "Meta Ads (Click-to-WhatsApp)",
+  carousel: {
+    id: "carousel",
+    tabLabel: "CAROUSELS HQ (ADS)",
+    badge: "META SPONSORED ADS // TRÁFICO DIRECTO",
     title: "Pauta Segmentada C-Suite Juárez & El Paso",
     description: "Creativos optimizados con botón directo de conversión a WhatsApp Business de Touché. Exclusión de tráfico irrelevante para asegurar prospectos con solvencia comprobada.",
-    mockupBadge: "PATROCINADO DIRECTO",
-    mockupHookTitle: "Oportunidad de Leasing Empresarial Touché",
-    mockupHookDesc: "Adquiere tu RAM TRX con 100% de deducibilidad fiscal. Contacta directamente a Dirección de Ventas.",
-    mockupCta: "Enviar WhatsApp a Ventas",
-    metricLabel: "Costo por Conversión a Chat Comercial",
+    captionTitle: "LEASING EMPRESARIAL TOUCHÉ MOTORS",
+    captionText: "Adquiere tu unidad con deducibilidad fiscal inmediata. Atención directa y confidencial con Gerencia Comercial.",
+    whatsappCta: "Contactar a Gerencia por WhatsApp",
+    metricLabel: "Costo por Conversión a Conversación",
     metricValue: "Leads Filtrados Directos",
-    bullet1Title: "GEO-SEGMENTACIÓN QUIRÚRGICA",
-    bullet1Desc: "Focalización en zonas residenciales premium y directores de empresa.",
-    bullet2Title: "PAGO DIRECTO A META",
-    bullet2Desc: "Touché fondea directo su cuenta publicitaria sin sobrecostos de agencia.",
   },
 };
 
 export default function ToucheMotorsClient() {
   const [selectedVehicle, setSelectedVehicle] = useState<"ram" | "jeep" | "dodge">("ram");
-  const [selectedFormat, setSelectedFormat] = useState<"reels" | "feed" | "ads">("reels");
+  const [selectedFormat, setSelectedFormat] = useState<"reels" | "feed" | "carousel">("reels");
   const [selectedPlan, setSelectedPlan] = useState<"B" | "A">("B");
-  const [taxRate, setTaxRate] = useState<number>(0.16);
+  const [taxRate, setTaxRate] = useState<number>(0.16); // 16% General vs 8% Fronterizo
+  const [isColorGraded, setIsColorGraded] = useState<boolean>(true);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [copiedToast, setCopiedToast] = useState<string | null>(null);
 
@@ -160,8 +129,8 @@ export default function ToucheMotorsClient() {
   const metaAdsBudget = selectedPlan === "B" ? 2000 : 4000;
   const totalCombinedMonthly = apologramaTotal + metaAdsBudget;
 
-  const currentVehicleData = VEHICLES[selectedVehicle];
-  const currentFormatData = FORMATS[selectedFormat];
+  const currentVehicle = VEHICLES[selectedVehicle];
+  const currentFormat = FORMATS[selectedFormat];
 
   // Telemetry on mount (with 3-layer exclusion)
   useEffect(() => {
@@ -182,7 +151,7 @@ export default function ToucheMotorsClient() {
           toast = document.createElement("div");
           toast.id = "apolo-admin-toast";
           toast.style.cssText =
-            "position:fixed;top:20px;right:20px;z-index:99999;background:rgba(18,20,26,0.95);border:1px solid rgba(212,175,55,0.6);color:#f5f3ee;padding:10px 18px;border-radius:12px;font-family:sans-serif;font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,0.8);backdrop-filter:blur(10px);transition:all 0.3s ease;opacity:0;transform:translateY(-10px);pointer-events:none;display:flex;align-items:center;gap:8px;";
+            "position:fixed;top:20px;right:20px;z-index:99999;background:#0f172a;border:1px solid #e51a24;color:#ffffff;padding:10px 18px;border-radius:6px;font-family:monospace;font-size:12px;box-shadow:0 10px 30px rgba(0,0,0,0.25);transition:all 0.3s ease;opacity:0;transform:translateY(-10px);pointer-events:none;display:flex;align-items:center;gap:8px;";
           document.body.appendChild(toast);
         }
         toast.innerHTML = msg;
@@ -241,17 +210,17 @@ export default function ToucheMotorsClient() {
 
   // WhatsApp Message Generator
   const generateWhatsAppMessage = () => {
-    const planName = selectedPlan === "B" ? "Plan B: Impulso Táctico" : "Plan A: Dominio Total";
+    const planName = selectedPlan === "B" ? "PLAN B: IMPULSO TÁCTICO" : "PLAN A: DOMINIO TOTAL";
     const taxLabel = taxRate === 0.16 ? "IVA 16%" : "IVA 8% Fronterizo";
-    return `Hola Apolograma, hemos revisado la propuesta VIP Paddock Club para Touché Motors Paseo Triunfo 6080.
+    return `Hola Apolograma, hemos revisado la propuesta de producción cinematográfica para Touché Motors Paseo Triunfo 6080.
 
-Deseamos arrancar con:
+Deseamos validar:
 • ${planName}
-• Honorarios Apolograma: $${apologramaFee.toLocaleString("es-MX", { minimumFractionDigits: 2 })} MXN (+ ${taxLabel} = $${apologramaTotal.toLocaleString("es-MX", { minimumFractionDigits: 2 })} MXN)
-• Inversión Directa en Meta Ads: $${metaAdsBudget.toLocaleString("es-MX", { minimumFractionDigits: 2 })} MXN (fondeada por Touché)
-• Desembolso Mensual Total: $${totalCombinedMonthly.toLocaleString("es-MX", { minimumFractionDigits: 2 })} MXN
+• Honorarios Apolograma: $${apologramaFee.toLocaleString("es-MX", { minimumFractionDigits: 2 })} MXN (+ ${taxLabel} = $${apologramaTotal.toLocaleString("es-MX", { minimumFractionDigits: 2 })} MXN facturable)
+• Pauta Publicitaria Meta Ads: $${metaAdsBudget.toLocaleString("es-MX", { minimumFractionDigits: 2 })} MXN (fondeada directamente por Touché Motors)
+• Desembolso Mensual Consolidado: $${totalCombinedMonthly.toLocaleString("es-MX", { minimumFractionDigits: 2 })} MXN
 
-Agendemos la primera sesión de scouting presencial in-situ para coordinar la producción bimestral.`;
+Agendemos la sesión de scouting presencial in-situ para coordinar la primera jornada de rodaje bimestral.`;
   };
 
   const handleOpenWhatsApp = () => {
@@ -267,12 +236,12 @@ Agendemos la primera sesión de scouting presencial in-situ para coordinar la pr
   };
 
   return (
-    <div className="paddock-wrapper">
-      {/* External Typography & Icons for VIP Paddock Club */}
+    <div className="telemetry-app-wrapper">
+      {/* External Typography & Icons */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;600&family=Syne:wght@400;500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap"
         rel="stylesheet"
       />
       <link
@@ -280,441 +249,527 @@ Agendemos la primera sesión de scouting presencial in-situ para coordinar la pr
         rel="stylesheet"
       />
 
-      {/* Comprehensive, Bulletproof CSS Styles for VIP Paddock Club */}
+      {/* Comprehensive, Autonomous CSS Stylesheet (Light Telemetry / High-Energy Motorsport) */}
       <style dangerouslySetInnerHTML={{
         __html: `
-        /* === RESET & VARIABLES === */
-        .paddock-wrapper {
-          --obsidian-deep: #07080a;
-          --obsidian-bg: #0b0c10;
-          --obsidian-soft: #12141a;
-          --obsidian-glass: rgba(18, 20, 26, 0.78);
-          --champagne: #d4af37;
-          --champagne-light: #f3e5ab;
-          --champagne-dim: #8e7834;
-          --champagne-halo: rgba(212, 175, 55, 0.14);
-          --ivory: #f5f3ee;
-          --ivory-muted: #c6c2b8;
-          --ivory-subtle: #8e8a82;
+        /* === RESET & COLOR PALETTE: LIGHT TELEMETRY === */
+        .telemetry-app-wrapper {
+          --bg-canvas: #ffffff;
+          --bg-sub: #f8fafc;
+          --bg-card: #f1f5f9;
+          --text-primary: #0f172a;
+          --text-muted: #475569;
+          --text-subtle: #64748b;
+          --border-line: #e2e8f0;
+          --border-hard: #cbd5e1;
+          --flame-red: #e51a24;
+          --flame-red-dim: #fff1f2;
+          --mopar-blue: #0051ff;
+          --mopar-blue-dim: #eff4ff;
+          --status-green: #10b981;
 
-          background-color: #07080a;
-          background-image: 
-            radial-gradient(at 15% 10%, rgba(212, 175, 55, 0.08) 0px, transparent 45%),
-            radial-gradient(at 85% 35%, rgba(229, 26, 36, 0.06) 0px, transparent 50%),
-            radial-gradient(at 50% 85%, rgba(212, 175, 55, 0.07) 0px, transparent 60%);
-          color: var(--ivory);
-          font-family: 'Space Grotesk', -apple-system, sans-serif;
+          background-color: var(--bg-canvas);
+          color: var(--text-primary);
+          font-family: 'Hanken Grotesk', -apple-system, sans-serif;
           min-height: 100vh;
-          padding-bottom: 140px;
+          padding-bottom: 130px;
           box-sizing: border-box;
           -webkit-font-smoothing: antialiased;
         }
 
-        .paddock-wrapper * {
+        .telemetry-app-wrapper * {
           box-sizing: border-box;
         }
 
         /* Typography */
-        .font-serif { font-family: 'Cormorant Garamond', Georgia, serif; }
-        .font-display { font-family: 'Syne', sans-serif; }
-        .font-body { font-family: 'Space Grotesk', sans-serif; }
+        .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .font-body { font-family: 'Hanken Grotesk', sans-serif; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
 
         .material-symbols-outlined {
           font-family: 'Material Symbols Outlined';
-          font-weight: 300;
+          font-weight: 400;
           font-size: 20px;
           line-height: 1;
           display: inline-block;
           vertical-align: middle;
         }
 
-        /* Glassmorphism & Gold Styling */
-        .gold-hairline {
-          border: 1px solid rgba(212, 175, 55, 0.24);
-        }
-        .gold-hairline-subtle {
-          border: 1px solid rgba(212, 175, 55, 0.12);
-        }
-        .gold-glow {
-          box-shadow: 0 14px 45px -10px rgba(212, 175, 55, 0.2), inset 0 1px 0 0 rgba(243, 229, 171, 0.22);
-        }
-        .smoked-card {
-          background: linear-gradient(145deg, rgba(22, 24, 32, 0.85) 0%, rgba(13, 14, 18, 0.94) 100%);
-          backdrop-filter: blur(28px);
-          -webkit-backdrop-filter: blur(28px);
-        }
-        .smoked-card-elevated {
-          background: linear-gradient(135deg, rgba(28, 31, 42, 0.92) 0%, rgba(16, 18, 24, 0.97) 100%);
-          backdrop-filter: blur(36px);
-          -webkit-backdrop-filter: blur(36px);
-        }
-        .gold-gradient-text {
-          background: linear-gradient(135deg, #ffffff 10%, #f3e5ab 60%, #d4af37 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-
-        /* Header Navigation */
-        .paddock-header {
-          position: fixed;
+        /* Top Header */
+        .telemetry-header {
+          position: sticky;
           top: 0;
           left: 0;
           width: 100%;
           z-index: 50;
-          padding: 14px 24px;
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border-bottom: 1px solid var(--border-line);
+          padding: 12px 24px;
           display: flex;
           justify-content: space-between;
           align-items: center;
-          border-bottom: 1px solid rgba(212, 175, 55, 0.14);
-          background: rgba(11, 12, 16, 0.88);
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
-        }
-        .header-brand-cluster {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-        }
-        .header-logo-icon {
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
-          border: 1px solid rgba(212, 175, 55, 0.4);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: rgba(212, 175, 55, 0.1);
-          color: var(--champagne);
-          font-size: 13px;
         }
         .header-brand-title {
-          font-family: 'Syne', sans-serif;
-          font-size: 13px;
-          font-weight: 700;
-          letter-spacing: 0.2em;
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 14px;
+          font-weight: 800;
+          letter-spacing: 0.08em;
           text-transform: uppercase;
-          color: var(--ivory);
-        }
-        .header-brand-sub {
-          font-family: 'JetBrains Mono', monospace;
-          font-size: 9px;
-          letter-spacing: 0.28em;
-          text-transform: uppercase;
-          color: rgba(243, 229, 171, 0.75);
-        }
-        .header-confidential-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          font-family: 'JetBrains Mono', monospace;
-          font-size: 10px;
-          letter-spacing: 0.18em;
-          padding: 5px 12px;
-          border-radius: 9999px;
-          background: rgba(212, 175, 55, 0.1);
-          border: 1px solid rgba(212, 175, 55, 0.3);
-          color: var(--champagne-light);
-          text-transform: uppercase;
-          font-weight: 600;
-        }
-        .pulse-dot {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: var(--champagne);
-          box-shadow: 0 0 8px var(--champagne);
-        }
-
-        /* Sub-Header Strip */
-        .paddock-substrip {
-          padding-top: 68px;
-          padding-bottom: 12px;
-          padding-left: 24px;
-          padding-right: 24px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-          background: rgba(7, 8, 10, 0.75);
+          color: var(--text-primary);
           display: flex;
-          justify-content: space-between;
           align-items: center;
+          gap: 6px;
+        }
+        .header-brand-loc {
           font-family: 'JetBrains Mono', monospace;
           font-size: 10px;
-          letter-spacing: 0.15em;
+          letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: var(--ivory-subtle);
-          flex-wrap: wrap;
-          gap: 8px;
+          color: var(--text-subtle);
+          margin-top: 2px;
+        }
+        .nav-links-desktop {
+          display: flex;
+          align-items: center;
+          gap: 24px;
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 11px;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+        }
+        .nav-link-item {
+          color: var(--text-muted);
+          text-decoration: none;
+          transition: color 0.2s;
+        }
+        .nav-link-item:hover {
+          color: var(--flame-red);
+        }
+        .header-right-badges {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+        .sys-badge {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          padding: 4px 10px;
+          border-radius: 4px;
+          background: var(--bg-sub);
+          border: 1px solid var(--border-line);
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 10px;
+          font-weight: 700;
+          color: var(--text-primary);
+        }
+        .rec-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: var(--flame-red);
+          animation: recPulse 1.2s infinite ease-in-out;
+        }
+        @keyframes recPulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.2; }
+        }
+        .confidential-tag {
+          padding: 4px 10px;
+          border-radius: 4px;
+          background: var(--mopar-blue-dim);
+          border: 1px solid rgba(0, 81, 255, 0.3);
+          color: var(--mopar-blue);
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 10px;
+          font-weight: 800;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
         }
 
         /* Main Container */
-        .paddock-main {
-          max-width: 1040px;
+        .telemetry-main {
+          max-width: 1200px;
           margin: 0 auto;
           padding: 32px 20px 60px 20px;
           display: flex;
           flex-direction: column;
-          gap: 56px;
+          gap: 48px;
         }
 
-        /* Section Headings */
-        .section-header-block {
-          border-left: 2px solid var(--champagne);
-          padding-left: 16px;
+        /* Hero Stage */
+        .hero-panel {
+          border: 1px solid var(--border-line);
+          background: var(--bg-canvas);
+          padding: 32px;
+          border-radius: 8px;
+          position: relative;
+        }
+        .hero-calibration-bar {
           display: flex;
-          flex-direction: column;
-          gap: 4px;
-          margin-bottom: 20px;
-        }
-        .section-tag-mono {
-          font-family: 'JetBrains Mono', monospace;
-          font-size: 10px;
-          letter-spacing: 0.25em;
-          text-transform: uppercase;
-          color: var(--champagne);
-        }
-        .section-headline {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: 32px;
-          font-weight: 400;
-          color: var(--ivory);
-          line-height: 1.15;
-          margin: 0;
-        }
-        .section-subtitle-mono {
+          justify-content: space-between;
+          align-items: center;
+          border-bottom: 1px solid var(--border-line);
+          padding-bottom: 12px;
+          margin-bottom: 24px;
+          flex-wrap: wrap;
+          gap: 8px;
           font-family: 'JetBrains Mono', monospace;
           font-size: 11px;
-          color: var(--ivory-subtle);
-          letter-spacing: 0.12em;
-          margin-top: 4px;
         }
-
-        /* Hero Status Pills */
-        .hero-status-row {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 10px;
-          align-items: center;
-          margin-bottom: 16px;
-        }
-        .hero-status-pill {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          padding: 4px 12px;
-          border-radius: 9999px;
-          font-family: 'JetBrains Mono', monospace;
-          font-size: 10px;
-          letter-spacing: 0.15em;
+        .hero-pretitle-pill {
+          background: var(--flame-red);
+          color: #ffffff;
+          padding: 3px 8px;
+          font-weight: 800;
+          letter-spacing: 0.08em;
           text-transform: uppercase;
+          border-radius: 2px;
         }
-
-        /* Hero Typography */
-        .hero-editorial-headline {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: 48px;
-          font-weight: 400;
+        .hero-headline {
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 46px;
+          font-weight: 800;
+          color: var(--text-primary);
           line-height: 1.1;
-          color: var(--ivory);
-          margin: 8px 0 16px 0;
+          letter-spacing: -0.02em;
+          margin: 0 0 16px 0;
+        }
+        .hero-headline .underline-red {
+          color: var(--flame-red);
+          text-decoration: underline;
+          text-underline-offset: 6px;
+          text-decoration-thickness: 4px;
         }
         .hero-description {
-          font-size: 15px;
+          font-size: 17px;
           line-height: 1.65;
-          color: var(--ivory-muted);
-          max-width: 680px;
-          font-weight: 300;
+          color: var(--text-muted);
+          max-width: 760px;
+          margin: 0 0 24px 0;
         }
 
-        /* Vehicle Selector Tabs */
-        .vehicle-tabs-row {
+        /* Metric Spec Cards */
+        .spec-cards-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 12px;
+          margin-bottom: 24px;
+        }
+        .spec-card {
+          border: 1px solid var(--border-line);
+          background: var(--bg-sub);
+          padding: 14px 16px;
+          border-radius: 6px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+        .spec-label {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 10px;
+          font-weight: 700;
+          text-transform: uppercase;
+          color: var(--text-subtle);
+          letter-spacing: 0.1em;
+        }
+        .spec-value {
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 28px;
+          font-weight: 800;
+          color: var(--text-primary);
+          margin: 4px 0;
+        }
+        .spec-sub {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 10px;
+          color: var(--text-muted);
+        }
+
+        /* Vehicle Selector Bar */
+        .vehicle-selector-bar {
           display: flex;
           gap: 8px;
+          border: 1px solid var(--border-line);
+          background: var(--bg-sub);
           padding: 6px;
-          border-radius: 14px;
-          background: rgba(22, 24, 32, 0.7);
-          border: 1px solid rgba(212, 175, 55, 0.15);
-          margin-bottom: 18px;
+          border-radius: 6px;
+          margin-bottom: 16px;
           flex-wrap: wrap;
         }
-        .vehicle-tab-btn {
+        .vehicle-btn {
           flex: 1;
           min-width: 140px;
           padding: 10px 14px;
-          border-radius: 10px;
+          border: 1px solid transparent;
+          border-radius: 4px;
+          background: transparent;
           font-family: 'JetBrains Mono', monospace;
           font-size: 11px;
-          letter-spacing: 0.12em;
+          font-weight: 700;
           text-transform: uppercase;
+          color: var(--text-muted);
           cursor: pointer;
-          border: none;
-          transition: all 0.25s ease;
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 8px;
-          background: transparent;
-          color: var(--ivory-muted);
+          gap: 6px;
+          transition: all 0.2s;
         }
-        .vehicle-tab-btn.active {
-          background: var(--champagne);
-          color: #07080a;
-          font-weight: 700;
-          box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
+        .vehicle-btn.active {
+          background: var(--text-primary);
+          color: #ffffff;
+          border-color: var(--text-primary);
         }
 
-        /* Showcase Flagship Card */
-        .showcase-card {
-          border-radius: 20px;
-          overflow: hidden;
+        /* Director's Monitor Viewfinder Rig */
+        .viewfinder-box {
+          border: 2px solid #334155;
+          border-radius: 8px;
+          background: #0f172a;
           position: relative;
-          background: linear-gradient(135deg, rgba(28, 31, 42, 0.92) 0%, rgba(16, 18, 24, 0.98) 100%);
-          border: 1px solid rgba(212, 175, 55, 0.26);
-          box-shadow: 0 18px 50px -10px rgba(0, 0, 0, 0.7), 0 0 40px rgba(212, 175, 55, 0.12);
+          overflow: hidden;
+          box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.25);
         }
-        .showcase-header-bar {
+        .viewfinder-header-hud {
           position: absolute;
           top: 0;
           left: 0;
           width: 100%;
           z-index: 10;
-          padding: 14px 20px;
+          padding: 16px 20px;
           display: flex;
           justify-content: space-between;
           align-items: center;
-          background: linear-gradient(to bottom, rgba(0,0,0,0.85), transparent);
+          background: linear-gradient(to bottom, rgba(15, 23, 42, 0.9), transparent);
+          color: #ffffff;
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 11px;
         }
-        .showcase-media-frame {
+        .viewfinder-rec-chip {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          background: var(--flame-red);
+          color: #ffffff;
+          padding: 4px 10px;
+          font-weight: 800;
+          letter-spacing: 0.1em;
+          border-radius: 3px;
+        }
+        .viewfinder-media-frame {
           position: relative;
           width: 100%;
           aspect-ratio: 16 / 9;
+          background: #000000;
           overflow: hidden;
-          background: #000;
         }
-        .showcase-img {
+        .viewfinder-img {
           width: 100%;
           height: 100%;
           object-fit: cover;
           object-position: center;
-          opacity: 0.92;
-          transition: transform 0.8s ease;
+          opacity: 0.95;
+          transition: filter 0.4s ease;
         }
-        .showcase-card:hover .showcase-img {
-          transform: scale(1.03);
+        .viewfinder-img.log-mode {
+          filter: contrast(0.7) saturate(0.6) brightness(1.1);
         }
-        .showcase-reticle-tl { position: absolute; top: 14px; left: 16px; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: rgba(212,175,55,0.6); }
-        .showcase-reticle-tr { position: absolute; top: 14px; right: 16px; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: rgba(212,175,55,0.6); }
-        .showcase-reticle-bl { position: absolute; bottom: 14px; left: 16px; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: rgba(243,229,171,0.8); letter-spacing: 0.15em; }
-        .showcase-reticle-br { position: absolute; bottom: 14px; right: 16px; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--ivory-subtle); letter-spacing: 0.15em; }
+        .viewfinder-img.graded-mode {
+          filter: contrast(1.15) saturate(1.2) brightness(0.98);
+        }
 
-        /* Telemetry Grid */
-        .telemetry-grid {
+        /* Reticle Rule of Thirds Overlay */
+        .viewfinder-reticle-grid {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          border-top: 1px solid rgba(212, 175, 55, 0.16);
-          background: rgba(0, 0, 0, 0.45);
+          grid-template-columns: 1fr 1fr 1fr;
+          grid-template-rows: 1fr 1fr 1fr;
+          border: 1px solid rgba(255, 255, 255, 0.12);
         }
-        .telemetry-cell {
-          padding: 16px 20px;
-          border-right: 1px solid rgba(255, 255, 255, 0.06);
-        }
-        .telemetry-cell:last-child {
-          border-right: none;
-        }
-        .telemetry-label {
-          font-family: 'JetBrains Mono', monospace;
-          font-size: 10px;
-          letter-spacing: 0.15em;
-          text-transform: uppercase;
-          color: rgba(212, 175, 55, 0.85);
-        }
-        .telemetry-val {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: 28px;
-          font-weight: 600;
-          color: var(--ivory);
-          margin-top: 2px;
-        }
-        .telemetry-sub {
-          font-family: 'JetBrains Mono', monospace;
-          font-size: 10px;
-          color: var(--ivory-subtle);
-          margin-top: 2px;
-        }
-
-        /* Rhythm Banner */
-        .rhythm-banner {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 20px 24px;
-          border-radius: 16px;
-          background: linear-gradient(145deg, rgba(22, 24, 32, 0.85) 0%, rgba(13, 14, 18, 0.94) 100%);
-          border: 1px solid rgba(212, 175, 55, 0.22);
-          gap: 16px;
-          flex-wrap: wrap;
-        }
-        .rhythm-badge-box {
-          padding: 10px 16px;
-          border-radius: 10px;
-          background: rgba(0, 0, 0, 0.5);
-          border: 1px solid rgba(212, 175, 55, 0.2);
-          text-align: right;
-        }
-
-        /* 4 Pillars Grid */
-        .pillars-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 16px;
-          margin-top: 16px;
-        }
-        .pillar-card-box {
-          border-radius: 16px;
-          padding: 24px;
-          background: linear-gradient(145deg, rgba(22, 24, 32, 0.8) 0%, rgba(13, 14, 18, 0.92) 100%);
-          border: 1px solid rgba(212, 175, 55, 0.14);
-          transition: all 0.3s ease;
-          display: flex;
-          flex-direction: column;
-          gap: 12px;
-        }
-        .pillar-card-box:hover {
-          border-color: rgba(212, 175, 55, 0.4);
-          transform: translateY(-2px);
-        }
-        .pillar-card-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-        .pillar-icon-box {
-          width: 38px;
-          height: 38px;
-          border-radius: 10px;
-          background: rgba(212, 175, 55, 0.1);
-          border: 1px solid rgba(212, 175, 55, 0.25);
+        .reticle-cell {
+          border-right: 1px solid rgba(255, 255, 255, 0.15);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+          position: relative;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: var(--champagne);
+          color: rgba(255, 255, 255, 0.35);
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 18px;
+          font-weight: 200;
         }
-        .pillar-title {
-          font-family: 'Syne', sans-serif;
-          font-size: 16px;
-          font-weight: 700;
-          letter-spacing: 0.05em;
+        .reticle-cell:nth-child(3), .reticle-cell:nth-child(6), .reticle-cell:nth-child(9) {
+          border-right: none;
+        }
+        .reticle-cell:nth-child(7), .reticle-cell:nth-child(8), .reticle-cell:nth-child(9) {
+          border-bottom: none;
+        }
+        .center-crosshair {
+          width: 60px;
+          height: 60px;
+          border: 1px solid rgba(255, 255, 255, 0.5);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .center-dot {
+          width: 4px;
+          height: 4px;
+          background: var(--flame-red);
+          border-radius: 50%;
+        }
+
+        /* Bottom Viewfinder HUD Strip */
+        .viewfinder-bottom-hud {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          z-index: 10;
+          padding: 16px 20px;
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+          background: linear-gradient(to top, rgba(15, 23, 42, 0.95), transparent);
+          color: #ffffff;
+          gap: 16px;
+          flex-wrap: wrap;
+        }
+        .lens-badge-box {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 11px;
+          background: rgba(0, 0, 0, 0.7);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          padding: 8px 12px;
+          border-radius: 4px;
+        }
+        .audio-vu-meter-box {
+          background: rgba(0, 0, 0, 0.75);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          padding: 8px 12px;
+          border-radius: 4px;
+          min-width: 240px;
+        }
+        .audio-bar-row {
+          display: grid;
+          grid-template-columns: repeat(12, 1fr);
+          gap: 3px;
+          height: 8px;
+          background: #1e293b;
+          padding: 2px;
+          margin: 4px 0;
+        }
+        .audio-bar-seg { height: 100%; }
+        .seg-green { background: #10b981; }
+        .seg-yellow { background: #f59e0b; }
+        .seg-red { background: #e51a24; }
+        .seg-off { background: #334155; }
+
+        /* Scrubber Bar */
+        .scrubber-bar {
+          border-top: 1px solid #334155;
+          background: #1e293b;
+          padding: 10px 16px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 11px;
+          color: #94a3b8;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+
+        /* Production Rhythm Section */
+        .section-tag-box {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin-bottom: 8px;
+        }
+        .tag-pill-red {
+          background: var(--flame-red);
+          color: #ffffff;
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 10px;
+          font-weight: 800;
+          padding: 3px 8px;
+          border-radius: 2px;
           text-transform: uppercase;
-          color: var(--ivory);
+        }
+        .tag-pill-blue {
+          background: var(--mopar-blue);
+          color: #ffffff;
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 10px;
+          font-weight: 800;
+          padding: 3px 8px;
+          border-radius: 2px;
+          text-transform: uppercase;
+        }
+        .section-title-large {
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 32px;
+          font-weight: 800;
+          color: var(--text-primary);
           margin: 0;
         }
-        .pillar-desc {
-          font-size: 13px;
+        .rhythm-callout-banner {
+          background: var(--mopar-blue-dim);
+          border-left: 4px solid var(--mopar-blue);
+          padding: 16px 20px;
+          border-radius: 0 6px 6px 0;
+          margin: 16px 0 24px 0;
+          font-size: 15px;
           line-height: 1.6;
-          color: var(--ivory-muted);
-          font-weight: 300;
+          color: var(--text-primary);
+        }
+
+        /* 3 Rig Modules Grid */
+        .modules-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
+        }
+        .module-card {
+          border: 1px solid var(--border-line);
+          background: var(--bg-sub);
+          border-radius: 6px;
+          padding: 24px;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          transition: border-color 0.2s;
+        }
+        .module-card:hover {
+          border-color: var(--text-primary);
+        }
+        .module-card-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .module-title {
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 18px;
+          font-weight: 700;
+          color: var(--text-primary);
           margin: 0;
         }
-        .pillar-bullets {
+        .module-desc {
+          font-size: 14px;
+          line-height: 1.6;
+          color: var(--text-muted);
+          margin: 0;
+        }
+        .module-bullets {
           list-style: none;
           padding: 0;
           margin: 0;
@@ -723,102 +778,100 @@ Agendemos la primera sesión de scouting presencial in-situ para coordinar la pr
           gap: 6px;
           font-family: 'JetBrains Mono', monospace;
           font-size: 11px;
-          color: var(--ivory-subtle);
-          padding-top: 10px;
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          color: var(--text-primary);
+          border-top: 1px solid var(--border-line);
+          padding-top: 12px;
         }
 
         /* Formats Showcase Container */
-        .formats-box {
-          border-radius: 20px;
-          padding: 28px;
-          background: linear-gradient(145deg, rgba(22, 24, 32, 0.85) 0%, rgba(13, 14, 18, 0.95) 100%);
-          border: 1px solid rgba(212, 175, 55, 0.22);
+        .formats-container {
+          border: 1px solid var(--border-line);
+          background: var(--bg-canvas);
+          padding: 32px;
+          border-radius: 8px;
         }
-        .formats-grid {
+        .formats-layout {
           display: grid;
           grid-template-columns: 320px 1fr;
-          gap: 36px;
+          gap: 40px;
           align-items: center;
+          margin-top: 24px;
         }
 
-        /* Phone Simulator 9:16 */
-        .phone-shell {
-          width: 290px;
-          border-radius: 40px;
-          padding: 12px;
-          background: linear-gradient(135deg, rgba(28, 31, 42, 0.95) 0%, rgba(16, 18, 24, 0.98) 100%);
-          border: 1px solid rgba(212, 175, 55, 0.3);
-          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(212, 175, 55, 0.12);
+        /* Real Phone Mockup */
+        .phone-mockup-frame {
+          width: 300px;
+          background: #000000;
+          border: 4px solid #1e293b;
+          border-radius: 36px;
+          padding: 10px;
+          box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.35);
           margin: 0 auto;
         }
-        .phone-notch {
-          width: 90px;
+        .phone-notch-pill {
+          width: 80px;
           height: 14px;
-          background: #000;
+          background: #0f172a;
           border-radius: 9999px;
           margin: 0 auto 8px auto;
-          border: 1px solid rgba(255, 255, 255, 0.06);
         }
-        .phone-screen {
-          border-radius: 28px;
+        .phone-screen-content {
+          border-radius: 24px;
           aspect-ratio: 9 / 16;
-          overflow: hidden;
-          background: #000;
           position: relative;
+          overflow: hidden;
+          background: #0f172a;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
           padding: 14px;
-          border: 1px solid rgba(255, 255, 255, 0.08);
         }
-        .phone-header-overlay {
-          position: relative;
-          z-index: 5;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          font-family: 'JetBrains Mono', monospace;
-          font-size: 10px;
-        }
-        .phone-bg-img {
+        .phone-bg-photo {
           position: absolute;
           inset: 0;
           width: 100%;
           height: 100%;
           object-fit: cover;
-          opacity: 0.85;
+          opacity: 0.9;
         }
-        .phone-gradient-overlay {
+        .phone-shadow-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.6) 100%);
+          background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.5) 100%);
         }
-        .phone-bottom-content {
+        .phone-meta-header {
+          position: relative;
+          z-index: 5;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          color: #ffffff;
+          font-size: 11px;
+        }
+        .phone-bottom-ad-card {
           position: relative;
           z-index: 5;
           display: flex;
           flex-direction: column;
           gap: 8px;
         }
-        .phone-hook-card {
-          padding: 12px;
-          border-radius: 12px;
-          background: rgba(0, 0, 0, 0.8);
-          backdrop-filter: blur(12px);
-          border: 1px solid rgba(255, 255, 255, 0.12);
-        }
-        .phone-cta-btn {
-          width: 100%;
-          padding: 10px 12px;
+        .phone-caption-box {
+          background: rgba(0, 0, 0, 0.85);
+          backdrop-filter: blur(8px);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          padding: 10px;
           border-radius: 8px;
-          background: var(--champagne);
-          color: #07080a;
-          font-family: 'Syne', sans-serif;
-          font-size: 11px;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
+          color: #ffffff;
+        }
+        .whatsapp-lead-btn {
+          width: 100%;
+          background: #25d366;
+          color: #064e3b;
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 12px;
+          font-weight: 800;
+          padding: 10px;
+          border-radius: 6px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -829,113 +882,119 @@ Agendemos la primera sesión de scouting presencial in-situ para coordinar la pr
         }
 
         /* Financial Ledger Section */
-        .plans-comparison-grid {
+        .plans-toggle-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 16px;
           margin-bottom: 24px;
         }
-        .plan-card {
-          border-radius: 18px;
+        .plan-box {
+          border: 1px solid var(--border-line);
+          background: var(--bg-sub);
+          border-radius: 8px;
           padding: 24px;
           cursor: pointer;
           position: relative;
-          transition: all 0.3s ease;
-          background: linear-gradient(145deg, rgba(22, 24, 32, 0.85) 0%, rgba(13, 14, 18, 0.94) 100%);
-          border: 1px solid rgba(212, 175, 55, 0.16);
+          transition: all 0.2s;
         }
-        .plan-card.active {
-          border-color: var(--champagne);
-          box-shadow: 0 14px 45px -10px rgba(212, 175, 55, 0.22);
-          background: linear-gradient(135deg, rgba(28, 31, 42, 0.94) 0%, rgba(16, 18, 24, 0.98) 100%);
+        .plan-box.selected {
+          border: 2px solid var(--flame-red);
+          background: #ffffff;
+          box-shadow: 0 10px 25px -5px rgba(229, 26, 36, 0.15);
         }
-        .plan-header-row {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-          margin-bottom: 12px;
+        .plan-badge-selected {
+          position: absolute;
+          top: -10px;
+          right: 16px;
+          background: var(--flame-red);
+          color: #ffffff;
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 9px;
+          font-weight: 800;
+          letter-spacing: 0.1em;
+          padding: 3px 8px;
+          border-radius: 2px;
+          text-transform: uppercase;
         }
-        .plan-price-num {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: 32px;
-          font-weight: 600;
-          color: var(--champagne-light);
+        .plan-price-large {
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 38px;
+          font-weight: 800;
+          color: var(--text-primary);
+          line-height: 1;
         }
 
-        /* Fiscal Ledger Table */
-        .ledger-table-box {
-          border-radius: 18px;
+        /* Ledger Table */
+        .financial-table-box {
+          border: 1px solid var(--border-line);
+          background: #ffffff;
+          border-radius: 8px;
           overflow: hidden;
-          background: linear-gradient(135deg, rgba(28, 31, 42, 0.92) 0%, rgba(16, 18, 24, 0.98) 100%);
-          border: 1px solid rgba(212, 175, 55, 0.24);
         }
-        .ledger-toolbar {
-          padding: 16px 20px;
-          border-bottom: 1px solid rgba(212, 175, 55, 0.16);
-          background: rgba(0, 0, 0, 0.5);
+        .table-toolbar-header {
+          background: var(--bg-sub);
+          border-bottom: 1px solid var(--border-line);
+          padding: 12px 20px;
           display: flex;
           justify-content: space-between;
           align-items: center;
           flex-wrap: wrap;
-          gap: 12px;
+          gap: 10px;
         }
-        .tax-btn {
-          padding: 5px 12px;
-          border-radius: 6px;
+        .tax-toggle-btn {
+          padding: 4px 10px;
+          border-radius: 4px;
+          border: 1px solid var(--border-line);
+          background: #ffffff;
           font-family: 'JetBrains Mono', monospace;
           font-size: 11px;
+          font-weight: 600;
           cursor: pointer;
-          border: none;
-          transition: all 0.2s;
         }
-        .tax-btn.active {
-          background: var(--champagne);
-          color: #07080a;
-          font-weight: 700;
+        .tax-toggle-btn.active {
+          background: var(--text-primary);
+          color: #ffffff;
+          border-color: var(--text-primary);
         }
-        .tax-btn.inactive {
-          background: rgba(255, 255, 255, 0.05);
-          color: var(--ivory-muted);
-          border: 1px solid rgba(212, 175, 55, 0.15);
-        }
-        .ledger-row {
-          padding: 18px 20px;
+        .ledger-line-row {
+          padding: 16px 20px;
+          border-bottom: 1px solid var(--border-line);
           display: flex;
           justify-content: space-between;
           align-items: center;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
           gap: 16px;
         }
-        .ledger-total-row {
-          padding: 24px 20px;
+        .ledger-total-highlight {
+          padding: 20px;
+          background: var(--flame-red-dim);
+          border-top: 2px solid var(--flame-red);
           display: flex;
           justify-content: space-between;
           align-items: center;
-          background: linear-gradient(to right, rgba(212, 175, 55, 0.12), transparent);
-          border-top: 1px solid rgba(212, 175, 55, 0.3);
           gap: 16px;
         }
 
-        /* Roadmap Grid */
-        .roadmap-grid {
+        /* 3-Step Roadmap */
+        .roadmap-3col {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 16px;
+          margin-top: 16px;
         }
-        .roadmap-card {
-          border-radius: 14px;
-          padding: 18px;
-          background: rgba(22, 24, 32, 0.7);
-          border: 1px solid rgba(212, 175, 55, 0.14);
+        .roadmap-card-item {
+          border: 1px solid var(--border-line);
+          background: var(--bg-sub);
+          border-radius: 6px;
+          padding: 20px;
           display: flex;
           flex-direction: column;
-          gap: 6px;
+          gap: 8px;
         }
 
-        /* Floating Concierge Dock */
-        .floating-dock-container {
+        /* Sticky Bottom Concierge Dock */
+        .sticky-dock-bar {
           position: fixed;
-          bottom: 64px;
+          bottom: 56px;
           left: 0;
           width: 100%;
           z-index: 40;
@@ -944,214 +1003,212 @@ Agendemos la primera sesión de scouting presencial in-situ para coordinar la pr
           padding: 0 16px;
           pointer-events: none;
         }
-        .floating-dock-card {
+        .dock-inner-card {
           pointer-events: auto;
-          max-width: 580px;
+          max-width: 640px;
           width: 100%;
-          border-radius: 18px;
-          padding: 12px 18px;
-          background: linear-gradient(135deg, rgba(28, 31, 42, 0.95) 0%, rgba(16, 18, 24, 0.98) 100%);
-          border: 1px solid rgba(212, 175, 55, 0.35);
-          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.15);
+          background: rgba(255, 255, 255, 0.96);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 2px solid var(--text-primary);
+          border-radius: 6px;
+          padding: 10px 18px;
           display: flex;
           justify-content: space-between;
           align-items: center;
-          gap: 14px;
+          box-shadow: 0 15px 35px -5px rgba(15, 23, 42, 0.25);
+          gap: 12px;
         }
-        .dock-cta-btn {
-          padding: 10px 18px;
-          border-radius: 12px;
-          background: var(--champagne);
-          color: #07080a;
-          font-family: 'Syne', sans-serif;
-          font-size: 12px;
-          font-weight: 700;
-          text-transform: uppercase;
+        .dock-cta-button {
+          background: var(--flame-red);
+          color: #ffffff;
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 13px;
+          font-weight: 800;
           letter-spacing: 0.05em;
+          text-transform: uppercase;
+          padding: 10px 20px;
+          border-radius: 4px;
+          border: none;
+          cursor: pointer;
           display: flex;
           align-items: center;
           gap: 8px;
-          border: none;
-          cursor: pointer;
-          box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
-          transition: all 0.2s ease;
+          transition: background 0.2s;
           white-space: nowrap;
         }
-        .dock-cta-btn:hover {
-          background: var(--champagne-light);
-          transform: translateY(-1px);
+        .dock-cta-button:hover {
+          background: #c8151e;
         }
 
-        /* Bottom Nav Bar */
-        .paddock-bottom-nav {
+        /* Mobile Bottom Nav */
+        .mobile-bottom-nav {
+          display: none;
           position: fixed;
           bottom: 0;
           left: 0;
           width: 100%;
           z-index: 50;
-          background: rgba(11, 12, 16, 0.95);
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
-          border-top: 1px solid rgba(212, 175, 55, 0.16);
-          display: flex;
+          background: #ffffff;
+          border-top: 1px solid var(--border-line);
           justify-content: space-around;
           align-items: center;
-          padding: 8px 16px;
+          padding: 8px 12px;
         }
-        .bottom-nav-item {
+        .nav-tab-btn {
           display: flex;
           flex-direction: column;
           align-items: center;
+          color: var(--text-subtle);
           text-decoration: none;
-          color: var(--ivory-subtle);
           font-family: 'JetBrains Mono', monospace;
           font-size: 9px;
-          letter-spacing: 0.12em;
+          font-weight: 700;
           text-transform: uppercase;
           gap: 2px;
-          transition: color 0.2s;
         }
-        .bottom-nav-item:hover, .bottom-nav-item.active {
-          color: var(--champagne);
+        .nav-tab-btn.active {
+          color: var(--flame-red);
         }
 
-        /* Modal Backdrop & Dialog */
-        .modal-backdrop {
+        /* Modal Backdrop */
+        .modal-overlay {
           position: fixed;
           inset: 0;
           z-index: 100;
-          background: rgba(0, 0, 0, 0.88);
-          backdrop-filter: blur(16px);
+          background: rgba(15, 23, 42, 0.7);
+          backdrop-filter: blur(8px);
           display: flex;
           align-items: center;
           justify-content: center;
           padding: 16px;
         }
-        .modal-dialog {
-          max-width: 540px;
+        .modal-window {
+          max-width: 560px;
           width: 100%;
-          border-radius: 20px;
+          background: #ffffff;
+          border: 2px solid var(--text-primary);
+          border-radius: 8px;
           padding: 24px;
-          background: linear-gradient(135deg, rgba(28, 31, 42, 0.98) 0%, rgba(16, 18, 24, 0.99) 100%);
-          border: 1px solid rgba(212, 175, 55, 0.35);
-          box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(212, 175, 55, 0.15);
+          box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.35);
           display: flex;
           flex-direction: column;
           gap: 16px;
         }
-        .modal-textarea {
-          width: 100%;
-          height: 140px;
-          padding: 12px;
-          border-radius: 12px;
-          background: rgba(0, 0, 0, 0.6);
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          color: var(--ivory);
-          font-family: 'JetBrains Mono', monospace;
-          font-size: 12px;
-          line-height: 1.5;
-          resize: none;
-          outline: none;
+
+        /* === RESPONSIVE BREAKPOINTS === */
+        @media (max-width: 1024px) {
+          .nav-links-desktop { display: none; }
+          .spec-cards-grid { grid-template-columns: repeat(2, 1fr); }
+          .modules-grid { grid-template-columns: 1fr; }
+          .formats-layout { grid-template-columns: 1fr; }
+          .roadmap-3col { grid-template-columns: 1fr; }
         }
 
-        /* === RESPONSIVE MEDIA QUERIES === */
         @media (max-width: 768px) {
-          .paddock-header { padding: 12px 16px; }
-          .paddock-substrip { padding-top: 62px; padding-left: 16px; padding-right: 16px; }
-          .paddock-main { padding: 24px 14px 60px 14px; gap: 40px; }
-          .hero-editorial-headline { font-size: 32px; }
-          .section-headline { font-size: 26px; }
-          .telemetry-grid { grid-template-columns: 1fr 1fr; }
-          .telemetry-cell:nth-child(2) { border-right: none; }
-          .pillars-grid { grid-template-columns: 1fr; }
-          .formats-grid { grid-template-columns: 1fr; }
-          .plans-comparison-grid { grid-template-columns: 1fr; }
-          .roadmap-grid { grid-template-columns: 1fr; }
-          .ledger-row { flex-direction: column; align-items: flex-start; gap: 6px; }
-          .ledger-total-row { flex-direction: column; align-items: flex-start; gap: 8px; }
-          .format-metric-box { flex-direction: column; align-items: flex-start !important; gap: 6px; }
+          .mobile-bottom-nav { display: flex; }
+          .telemetry-main { padding: 20px 14px 70px 14px; gap: 36px; }
+          .hero-panel { padding: 20px 16px; }
+          .hero-headline { font-size: 30px; }
+          .hero-description { font-size: 15px; }
+          .spec-cards-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+          .plans-toggle-grid { grid-template-columns: 1fr; }
+          .ledger-line-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+          .ledger-total-highlight { flex-direction: column; align-items: flex-start; gap: 8px; }
+          .sticky-dock-bar { bottom: 58px; }
+          .dock-inner-card { padding: 8px 12px; }
+          .dock-inner-card .dock-cta-button { padding: 8px 12px; font-size: 11px; }
         }
 
         @media (max-width: 480px) {
-          .vehicle-tab-btn { min-width: 95px; padding: 8px 8px; font-size: 9px; }
-          .plan-header-row { flex-direction: column; align-items: flex-start; gap: 8px; }
-          .plan-header-row > div:last-child { text-align: left !important; }
-          .plan-price-num { font-size: 28px; }
-          .floating-dock-card { padding: 10px 14px; }
-          .floating-dock-card .dock-cta-btn { padding: 8px 12px; font-size: 11px; }
+          .vehicle-btn { min-width: 95px; font-size: 9px; padding: 8px 6px; }
+          .hero-headline { font-size: 26px; }
         }
       `}} />
 
-      {/* TOP CONCIERGE BAR */}
-      <header className="paddock-header">
-        <div className="header-brand-cluster">
-          <div className="header-logo-icon">✦</div>
-          <div>
-            <div className="header-brand-title">
-              Apolograma <span style={{ color: "#d4af37", fontWeight: 300 }}>×</span> Touché Motors
-            </div>
-            <div className="header-brand-sub">
-              Private Memorandum • Stellantis Luxury Division
-            </div>
+      {/* TOP TECHNICAL STATUS BAR */}
+      <header className="telemetry-header">
+        <div>
+          <div className="header-brand-title">
+            <span className="material-symbols-outlined" style={{ color: "#e51a24" }}>speed</span>
+            <span>APOLOGRAMA // TOUCHÉ MOTORS</span>
+          </div>
+          <div className="header-brand-loc">
+            PASEO TRIUNFO 6080 // CD. JUÁREZ - EL PASO
           </div>
         </div>
-        <div className="header-confidential-badge">
-          <span className="pulse-dot"></span>
-          <span>2026 Confidencial</span>
+
+        <nav className="nav-links-desktop">
+          <a href="#hero" className="nav-link-item">HUD Telemetry</a>
+          <a href="#workflow" className="nav-link-item">Production</a>
+          <a href="#ad-formats" className="nav-link-item">Ad Formats</a>
+          <a href="#investment" className="nav-link-item">Investment</a>
+        </nav>
+
+        <div className="header-right-badges">
+          <div className="sys-badge">
+            <span className="rec-dot"></span>
+            <span>SYS.ACTIVE // 60FPS</span>
+          </div>
+          <div className="confidential-tag">
+            CONFIDENCIAL 2026
+          </div>
         </div>
       </header>
 
-      {/* SUB-HEADER AMBIENT STRIP */}
-      <div className="paddock-substrip">
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <span style={{ color: "#d4af37" }}>Paseo Triunfo 6080</span>
-          <span style={{ opacity: 0.4 }}>•</span>
-          <span>Concesionario Oficial Stellantis</span>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <span style={{ color: "#c6c2b8" }}>Dir. General & Ventas</span>
-          <span style={{ opacity: 0.4 }}>•</span>
-          <span style={{ color: "#f3e5ab" }}>Cd. Juárez / El Paso</span>
-        </div>
-      </div>
+      {/* MAIN CONTENT CANVAS */}
+      <main className="telemetry-main">
 
-      {/* MAIN VIP SALON CANVAS */}
-      <main className="paddock-main">
-
-        {/* SECTION 1: HERO DISPLAY (FLAGSHIP ART PIECE & DYNAMIC HUD) */}
-        <section id="hud">
-          {/* Status Tags */}
-          <div className="hero-status-row">
-            <span
-              className="hero-status-pill smoked-card gold-hairline"
-              style={{ color: "#d4af37", fontWeight: 500 }}
-            >
-              <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#dc2626" }}></span>
-              Propuesta Privada 2026
-            </span>
-            <span
-              className="hero-status-pill"
-              style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", color: "#c6c2b8" }}
-            >
-              Contrato Bimestral Exclusivo
-            </span>
+        {/* HERO SECTION WITH INTEGRATED RIG TELEMETRY */}
+        <section className="hero-panel" id="hero">
+          <div className="hero-calibration-bar">
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <span className="hero-pretitle-pill">[PROPUESTA AUDIOVISUAL EJECUTIVA 2026]</span>
+              <span style={{ color: "#0051ff", fontWeight: 700 }}>// MOPAR & STELLANTIS DEDICATED RIG</span>
+            </div>
+            <div style={{ color: "#64748b" }}>
+              COORDENADAS: <strong>31.7371° N, 106.4357° W</strong>
+            </div>
           </div>
 
-          {/* Editorial Headline */}
-          <p className="section-tag-mono">Curaduría Audiovisual & Pauta Digital</p>
-          <h1 className="hero-editorial-headline">
-            Producción de Alto Impacto <span className="gold-gradient-text" style={{ fontStyle: "italic" }}>para el Élite</span> Automotriz
+          <h1 className="hero-headline">
+            Contenido Audiovisual de <span className="underline-red">Alta Calidad</span> para Cautivar al Comprador Automotriz.
           </h1>
+
           <p className="hero-description">
-            Dominio cinematográfico de inventario flagship (<strong style={{ color: "#f5f3ee", fontWeight: 500 }}>RAM TRX, Jeep Grand Cherokee, Dodge SRT</strong>) en la frontera Ciudad Juárez — El Paso. Diseñado con la distinción y precisión de un club privado automotriz.
+            Producción cinematográfica in-situ y pauta publicitaria ultra-segmentada para el inventario insignia (<strong style={{ color: "#0f172a" }}>RAM 1500 TRX, Jeep Grand Cherokee, Dodge SRT Hellcat</strong>) en la frontera binacional Ciudad Juárez — El Paso.
           </p>
 
-          {/* Vehicle Selector Tabs */}
-          <div className="vehicle-tabs-row" style={{ marginTop: "24px" }}>
+          {/* 4 Telemetry Spec Cards */}
+          <div className="spec-cards-grid">
+            <div className="spec-card">
+              <span className="spec-label">Potencia In-Situ</span>
+              <span className="spec-value" style={{ color: "#e51a24" }}>702 HP</span>
+              <span className="spec-sub">Dodge SRT Tuned</span>
+            </div>
+            <div className="spec-card">
+              <span className="spec-label">Motorización</span>
+              <span className="spec-value">6.2L</span>
+              <span className="spec-sub">Supercharged HEMI V8</span>
+            </div>
+            <div className="spec-card">
+              <span className="spec-label">Aceleración Pista</span>
+              <span className="spec-value" style={{ color: "#0051ff" }}>4.5s</span>
+              <span className="spec-sub">0 a 100 km/h Launch</span>
+            </div>
+            <div className="spec-card">
+              <span className="spec-label">Master Bimestral</span>
+              <span className="spec-value" style={{ color: "#0f172a" }}>+24</span>
+              <span className="spec-sub">Reels 4K por Jornada</span>
+            </div>
+          </div>
+
+          {/* Vehicle Switcher Bar */}
+          <div className="vehicle-selector-bar">
             <button
               type="button"
               onClick={() => setSelectedVehicle("ram")}
-              className={`vehicle-tab-btn ${selectedVehicle === "ram" ? "active" : ""}`}
+              className={`vehicle-btn ${selectedVehicle === "ram" ? "active" : ""}`}
             >
               <span>RAM 1500 TRX</span>
               {selectedVehicle === "ram" && <span>✦</span>}
@@ -1159,7 +1216,7 @@ Agendemos la primera sesión de scouting presencial in-situ para coordinar la pr
             <button
               type="button"
               onClick={() => setSelectedVehicle("jeep")}
-              className={`vehicle-tab-btn ${selectedVehicle === "jeep" ? "active" : ""}`}
+              className={`vehicle-btn ${selectedVehicle === "jeep" ? "active" : ""}`}
             >
               <span>Jeep Grand Cherokee</span>
               {selectedVehicle === "jeep" && <span>✦</span>}
@@ -1167,657 +1224,645 @@ Agendemos la primera sesión de scouting presencial in-situ para coordinar la pr
             <button
               type="button"
               onClick={() => setSelectedVehicle("dodge")}
-              className={`vehicle-tab-btn ${selectedVehicle === "dodge" ? "active" : ""}`}
+              className={`vehicle-btn ${selectedVehicle === "dodge" ? "active" : ""}`}
             >
               <span>Dodge Charger SRT</span>
               {selectedVehicle === "dodge" && <span>✦</span>}
             </button>
           </div>
 
-          {/* Gallery Showcase Card with Dynamic Vehicle Media */}
-          <div className="showcase-card">
-            {/* Top Specs Bar */}
-            <div className="showcase-header-bar">
+          {/* Director's Monitor Viewfinder HUD (Live Rig Simulation) */}
+          <div className="viewfinder-box" id="viewfinder">
+            {/* Top Viewfinder HUD */}
+            <div className="viewfinder-header-hud">
+              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <div className="viewfinder-rec-chip">
+                  <span className="rec-dot" style={{ width: "6px", height: "6px", background: "#ffffff" }}></span>
+                  <span>REC 4K 60FPS</span>
+                </div>
+                <span style={{ background: "rgba(0,0,0,0.6)", padding: "3px 8px", borderRadius: "3px" }}>
+                  TC: 01:24:59:18
+                </span>
+                <span style={{ background: "rgba(0,0,0,0.6)", color: "#4ade80", padding: "3px 8px", borderRadius: "3px" }}>
+                  BAT 98% (6.2h)
+                </span>
+              </div>
               <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#dc2626", boxShadow: "0 0 8px #dc2626" }}></span>
-                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#d4af37", fontWeight: 600 }}>
-                  Flagship Asset: {currentVehicleData.name}
-                </span>
-              </div>
-              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", letterSpacing: "0.15em", color: "#8e8a82" }}>
-                [{currentVehicleData.badge}]
+                <button
+                  type="button"
+                  onClick={() => setIsColorGraded(!isColorGraded)}
+                  style={{
+                    background: isColorGraded ? "#0051ff" : "#475569",
+                    color: "#ffffff",
+                    border: "none",
+                    padding: "4px 10px",
+                    borderRadius: "3px",
+                    fontFamily: "'JetBrains Mono', monospace",
+                    fontSize: "10px",
+                    fontWeight: 800,
+                    cursor: "pointer",
+                  }}
+                >
+                  {isColorGraded ? "LUT: REC.709 AUTOMOTRIZ [ON]" : "LOG PROFILE [RAW]"}
+                </button>
               </div>
             </div>
 
-            {/* Vehicle Image Frame */}
-            <div className="showcase-media-frame">
+            {/* Viewfinder Media Canvas */}
+            <div className="viewfinder-media-frame">
               <img
-                src={currentVehicleData.image}
-                alt={currentVehicleData.name}
-                className="showcase-img"
+                src={currentVehicle.image}
+                alt={currentVehicle.name}
+                className={`viewfinder-img ${isColorGraded ? "graded-mode" : "log-mode"}`}
               />
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, #07080a 0%, transparent 60%, rgba(0,0,0,0.4) 100%)" }}></div>
-              
-              {/* Luminous Reticle Crosshairs */}
-              <span className="showcase-reticle-tl">{currentVehicleData.reticleTop}</span>
-              <span className="showcase-reticle-tr">{currentVehicleData.reticleBottom}</span>
-              <span className="showcase-reticle-bl">✦ STELLANTIS DYNAMICS</span>
-              <span className="showcase-reticle-br">[4K UHD CINEMA]</span>
+
+              {/* Rule of Thirds & Crosshair Overlay */}
+              <div className="viewfinder-reticle-grid">
+                <div className="reticle-cell">
+                  <span style={{ position: "absolute", top: "8px", left: "10px", fontSize: "9px" }}>CH_01 [NW]</span>
+                </div>
+                <div className="reticle-cell">+</div>
+                <div className="reticle-cell">
+                  <span style={{ position: "absolute", top: "8px", right: "10px", fontSize: "9px" }}>CH_02 [NE]</span>
+                </div>
+                <div className="reticle-cell">+</div>
+                <div className="reticle-cell">
+                  <div className="center-crosshair">
+                    <div className="center-dot"></div>
+                  </div>
+                  <span style={{ position: "absolute", top: "8px", right: "8px", fontSize: "9px", color: "#e51a24", fontWeight: 700 }}>
+                    {currentVehicle.afTrack}
+                  </span>
+                </div>
+                <div className="reticle-cell">+</div>
+                <div className="reticle-cell">
+                  <span style={{ position: "absolute", bottom: "8px", left: "10px", fontSize: "9px" }}>FPV DRONE LOCK</span>
+                </div>
+                <div className="reticle-cell">+</div>
+                <div className="reticle-cell">
+                  <span style={{ position: "absolute", bottom: "8px", right: "10px", fontSize: "9px" }}>OSMO GYRO: CALIBRADO</span>
+                </div>
+              </div>
+
+              {/* Bottom Viewfinder HUD */}
+              <div className="viewfinder-bottom-hud">
+                <div className="lens-badge-box">
+                  <div style={{ textTransform: "uppercase", fontSize: "9px", color: "#94a3b8", fontWeight: 700 }}>
+                    CALIBRACIÓN ÓPTICA IN-SITU
+                  </div>
+                  <div style={{ color: "#ffffff", fontWeight: 600, marginTop: "2px" }}>
+                    35mm Cine Prime f/1.4 · {currentVehicle.shutter}
+                  </div>
+                </div>
+
+                <div className="audio-vu-meter-box">
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: "10px" }}>
+                    <span style={{ color: "#e51a24", fontWeight: 700 }}>AUDIO ESCAPES HEMI</span>
+                    <span style={{ color: "#ffffff" }}>{currentVehicle.exhaustAudioDb}</span>
+                  </div>
+                  <div className="audio-bar-row">
+                    <div className="audio-bar-seg seg-green"></div>
+                    <div className="audio-bar-seg seg-green"></div>
+                    <div className="audio-bar-seg seg-green"></div>
+                    <div className="audio-bar-seg seg-green"></div>
+                    <div className="audio-bar-seg seg-yellow"></div>
+                    <div className="audio-bar-seg seg-yellow"></div>
+                    <div className="audio-bar-seg seg-yellow"></div>
+                    <div className="audio-bar-seg seg-yellow"></div>
+                    <div className="audio-bar-seg seg-red"></div>
+                    <div className="audio-bar-seg seg-red"></div>
+                    <div className="audio-bar-seg seg-off"></div>
+                    <div className="audio-bar-seg seg-off"></div>
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: "8px", color: "#94a3b8" }}>
+                    <span>-40dB</span>
+                    <span>-18dB</span>
+                    <span>-6dB</span>
+                    <span style={{ color: "#e51a24" }}>0dB [LIMIT]</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {/* Bespoke Telemetry Grid */}
-            <div className="telemetry-grid">
-              <div className="telemetry-cell">
-                <div className="telemetry-label">Potencia</div>
-                <div className="telemetry-val">
-                  {currentVehicleData.power.split(" ")[0]} <span style={{ fontSize: "14px", fontFamily: "sans-serif", fontWeight: 300, color: "#8e8a82" }}>HP</span>
-                </div>
-                <div className="telemetry-sub">Dinamismo Puro</div>
+            {/* Scrubber Ribbon */}
+            <div className="scrubber-bar">
+              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                <span className="material-symbols-outlined" style={{ color: "#e51a24", fontSize: "16px" }}>play_circle</span>
+                <span style={{ color: "#ffffff", fontWeight: 700 }}>{currentVehicle.clipName}</span>
+                <span>// PRORES 422HQ (3840×2160)</span>
               </div>
-              <div className="telemetry-cell">
-                <div className="telemetry-label">Motorización</div>
-                <div className="telemetry-val">{currentVehicleData.engine}</div>
-                <div className="telemetry-sub">{currentVehicleData.motorDesc}</div>
-              </div>
-              <div className="telemetry-cell">
-                <div className="telemetry-label">Aceleración</div>
-                <div className="telemetry-val">{currentVehicleData.accel}</div>
-                <div className="telemetry-sub">0 a 100 km/h</div>
-              </div>
-              <div className="telemetry-cell">
-                <div className="telemetry-label">Tracción</div>
-                <div className="telemetry-val">{currentVehicleData.traction}</div>
-                <div className="telemetry-sub">Control Inteligente</div>
+              <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                <span>EXPORT MASTER:</span>
+                <span style={{ background: "#ffffff", color: "#0f172a", padding: "2px 6px", fontWeight: 800, borderRadius: "2px" }}>
+                  META REELS (9:16)
+                </span>
               </div>
             </div>
           </div>
         </section>
 
-        {/* SECTION 2: BI-MONTHLY PRODUCTION PROTOCOL */}
-        <section id="ritmo">
-          <div className="section-header-block">
-            <span className="section-tag-mono">Protocolo de Operación Frecuencial</span>
-            <h2 className="section-headline">Ritmo de Producción Bimestral</h2>
-            <div className="section-subtitle-mono">DESPLIEGUE TÉCNICO IN-SITU • PASEO TRIUNFO 6080</div>
+        {/* SECTION 2: BI-MONTHLY PRODUCTION RHYTHM */}
+        <section id="workflow">
+          <div className="section-tag-box">
+            <span className="tag-pill-blue">// SEC_02: OPERATIONAL CADENCE</span>
+          </div>
+          <h2 className="section-title-large">Ritmo de Producción Bimestral</h2>
+
+          <div className="rhythm-callout-banner">
+            <strong>Protocolo Cero Fricción Touché Motors:</strong> Cada sesión de rodaje bimestral genera <strong style={{ color: "#e51a24" }}>+24 Videos Verticales 4K</strong> y <strong style={{ color: "#0051ff" }}>40 Fotografías de Catálogo</strong> con un despliegue técnico quirúrgico planificado milimétricamente para <strong>no obstaculizar el flujo de ventas ni el acceso a taller</strong> en Paseo Triunfo 6080.
           </div>
 
-          {/* Banner Feature */}
-          <div className="rhythm-banner">
-            <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-              <div style={{ width: "48px", height: "48px", borderRadius: "50%", border: "1px solid rgba(212, 175, 55, 0.35)", background: "rgba(212, 175, 55, 0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#d4af37", flexShrink: 0 }}>
-                <span className="material-symbols-outlined" style={{ fontSize: "24px" }}>autorenew</span>
+          <div className="modules-grid">
+            {/* Module 01 */}
+            <div className="module-card">
+              <div className="module-card-header">
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", fontWeight: 800, color: "#e51a24" }}>MODULE_01</span>
+                <span className="material-symbols-outlined" style={{ color: "#0f172a" }}>flight</span>
               </div>
-              <div>
-                <h4 style={{ fontFamily: "'Syne', sans-serif", fontSize: "16px", fontWeight: 700, margin: 0, color: "#f5f3ee" }}>
-                  Visitas Intensivas In-Situ Cada 60 Días
-                </h4>
-                <p style={{ fontSize: "13px", color: "#c6c2b8", margin: "4px 0 0 0", fontWeight: 300 }}>
-                  Producción cinematográfica sin interrumpir la operación comercial ni la entrega a clientes en piso.
-                </p>
-              </div>
-            </div>
-            <div className="rhythm-badge-box">
-              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "9px", letterSpacing: "0.15em", color: "#d4af37", textTransform: "uppercase" }}>
-                Stock Garantizado por Ciclo
-              </div>
-              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "12px", fontWeight: 700, color: "#f3e5ab", marginTop: "2px" }}>
-                +24 PIEZAS VIDEO + 40 STILLS HD
-              </div>
-            </div>
-          </div>
-
-          {/* Curated 4-Pillar Grid */}
-          <div className="pillars-grid">
-            {/* Pillar 1 */}
-            <div className="pillar-card-box">
-              <div className="pillar-card-header">
-                <div className="pillar-icon-box">
-                  <span className="material-symbols-outlined">flight</span>
-                </div>
-                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", color: "rgba(243,229,171,0.85)" }}>
-                  [FPV CINEMA 4K]
-                </span>
-              </div>
-              <h3 className="pillar-title">Vuelos FPV & Tomas Dinámicas</h3>
-              <p className="pillar-desc">
-                Incursiones aéreas cinemáticas en los patios de maniobra y pasillo central de exhibición. Perspectivas agresivas que transmiten la escala masiva del inventario RAM y Jeep.
+              <h3 className="module-title">Vuelos FPV & Persecución Cinematográfica</h3>
+              <p className="module-desc">
+                Drones cinewhoop ultra-compactos con hélices ductadas y protegidas para vuelo seguro en patios de maniobra, bahías de exhibición exterior y tracking dinámico de aceleración.
               </p>
-              <ul className="pillar-bullets">
-                <li><span style={{ color: "#d4af37" }}>✦</span> Pases a ras de asfalto y rampa de entregas</li>
-                <li><span style={{ color: "#d4af37" }}>✦</span> Drones cinewhoop con protectores certificados</li>
+              <ul className="module-bullets">
+                <li>✦ Tomas rasantes a rampa y suspensiones</li>
+                <li>✦ Trayectoria exterior continua hacia showroom</li>
+                <li>✦ Cero riesgo de impacto en unidades en piso</li>
               </ul>
             </div>
 
-            {/* Pillar 2 */}
-            <div className="pillar-card-box">
-              <div className="pillar-card-header">
-                <div className="pillar-icon-box">
-                  <span className="material-symbols-outlined">photo_camera</span>
-                </div>
-                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", color: "rgba(243,229,171,0.85)" }}>
-                  [OSMO 3-AXIS]
-                </span>
+            {/* Module 02 */}
+            <div className="module-card">
+              <div className="module-card-header">
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", fontWeight: 800, color: "#0051ff" }}>MODULE_02</span>
+                <span className="material-symbols-outlined" style={{ color: "#0f172a" }}>graphic_eq</span>
               </div>
-              <h3 className="pillar-title">DJI Osmo & Gimbal Walkarounds</h3>
-              <p className="pillar-desc">
-                Reels verticales ultra-estabilizados con audio binaural: rugido real de escapes HEMI, texturas en piel nappa, costuras rojas TRX y cluster digital SRT en funcionamiento.
+              <h3 className="module-title">DJI Osmo 3-Axis & Audio Binaural</h3>
+              <p className="module-desc">
+                Walkarounds estabilizados con microfonía omnidireccional pegada a tubos de escape dobles para capturar con fidelidad pura el rugido supercargado del HEMI y detalles interiores.
               </p>
-              <ul className="pillar-bullets">
-                <li><span style={{ color: "#d4af37" }}>✦</span> Microfonía dedicada a escape y sonido de motor</li>
-                <li><span style={{ color: "#d4af37" }}>✦</span> Detalle macro de interiores e ingeniería de consola</li>
+              <ul className="module-bullets">
+                <li>✦ Telemetría visual en tablero digital SRT</li>
+                <li>✦ Cold-start exhaust audio sin distorsión</li>
+                <li>✦ Detalle minucioso de costuras nappa y fibra</li>
               </ul>
             </div>
 
-            {/* Pillar 3 */}
-            <div className="pillar-card-box">
-              <div className="pillar-card-header">
-                <div className="pillar-icon-box">
-                  <span className="material-symbols-outlined">flare</span>
-                </div>
-                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", color: "rgba(243,229,171,0.85)" }}>
-                  [MASTER CATALOG]
-                </span>
+            {/* Module 03 */}
+            <div className="module-card">
+              <div className="module-card-header">
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", fontWeight: 800, color: "#0f172a" }}>MODULE_03</span>
+                <span className="material-symbols-outlined" style={{ color: "#0f172a" }}>photo_camera</span>
               </div>
-              <h3 className="pillar-title">Fotografía de Catálogo Oficial</h3>
-              <p className="pillar-desc">
-                Esquemas de iluminación continua y flashes en taller y entrega. Look publicitario editorial alineado a los estándares globales de Stellantis North America.
+              <h3 className="module-title">Fotografía Oficial de Catálogo Stellantis</h3>
+              <p className="module-desc">
+                Esquemas de luz de estudio en bahías de entrega de Touché. 40 fotografías en alta resolución para fichas técnicas, portal web de inventario y portadas de alta tasa de clics (CTR).
               </p>
-              <ul className="pillar-bullets">
-                <li><span style={{ color: "#d4af37" }}>✦</span> Portadas de pauta con alto CTR calificado</li>
-                <li><span style={{ color: "#d4af37" }}>✦</span> Color grading automotriz con calidad cine</li>
-              </ul>
-            </div>
-
-            {/* Pillar 4 */}
-            <div className="pillar-card-box">
-              <div className="pillar-card-header">
-                <div className="pillar-icon-box">
-                  <span className="material-symbols-outlined">trending_up</span>
-                </div>
-                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", color: "rgba(243,229,171,0.85)" }}>
-                  [RETENTION ENGINE]
-                </span>
-              </div>
-              <h3 className="pillar-title">Meta High-Retention & Pauta</h3>
-              <p className="pillar-desc">
-                Estructuras con hook inmediato de 1.5 segundos dirigidas exclusivamente a empresarios de Ciudad Juárez y compradores binacionales de El Paso, Texas.
-              </p>
-              <ul className="pillar-bullets">
-                <li><span style={{ color: "#d4af37" }}>✦</span> Segmentación C-Suite de alto poder adquisitivo</li>
-                <li><span style={{ color: "#d4af37" }}>✦</span> Embudo directo a atención comercial WhatsApp</li>
+              <ul className="module-bullets">
+                <li>✦ Iluminación difusa automotriz</li>
+                <li>✦ Retoque cromático oficial de pintura</li>
+                <li>✦ Asset bancarizado para CRM Touché</li>
               </ul>
             </div>
           </div>
         </section>
 
-        {/* SECTION 3: CREATIVE FORMATS SHOWCASE */}
-        <section id="formatos">
-          <div className="section-header-block">
-            <span className="section-tag-mono">Colección de Anuncios</span>
-            <h2 className="section-headline">Formatos & Creativos de Alto Rendimiento</h2>
-            <div className="section-subtitle-mono">OPTIMIZADOS PARA ALGORITMO META 2026</div>
+        {/* SECTION 3: HIGH-RETENTION AD FORMATS */}
+        <section className="formats-container" id="ad-formats">
+          <div className="section-tag-box">
+            <span className="tag-pill-red">// SEC_03: REVENUE ENGINE</span>
           </div>
+          <h2 className="section-title-large">Formatos de Alto Rendimiento (Meta Ads)</h2>
 
-          {/* Segment Selector Pills */}
-          <div className="vehicle-tabs-row">
+          {/* Format Selector Pills */}
+          <div className="vehicle-selector-bar" style={{ marginTop: "16px" }}>
             <button
               type="button"
               onClick={() => setSelectedFormat("reels")}
-              className={`vehicle-tab-btn ${selectedFormat === "reels" ? "active" : ""}`}
+              className={`vehicle-btn ${selectedFormat === "reels" ? "active" : ""}`}
             >
-              <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>smart_display</span>
-              Stories & Reels 9:16
+              <span>REELS & STORIES 9:16</span>
             </button>
             <button
               type="button"
               onClick={() => setSelectedFormat("feed")}
-              className={`vehicle-tab-btn ${selectedFormat === "feed" ? "active" : ""}`}
+              className={`vehicle-btn ${selectedFormat === "feed" ? "active" : ""}`}
             >
-              <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>grid_view</span>
-              Feed 4:5 / 1:1
+              <span>FEED 4:5 CATÁLOGO</span>
             </button>
             <button
               type="button"
-              onClick={() => setSelectedFormat("ads")}
-              className={`vehicle-tab-btn ${selectedFormat === "ads" ? "active" : ""}`}
+              onClick={() => setSelectedFormat("carousel")}
+              className={`vehicle-btn ${selectedFormat === "carousel" ? "active" : ""}`}
             >
-              <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>campaign</span>
-              Meta Sponsored Ads
+              <span>CAROUSELS HQ (ADS)</span>
             </button>
           </div>
 
-          {/* Formats Container with Phone Mockup */}
-          <div className="formats-box">
-            <div className="formats-grid">
-              
-              {/* Phone Simulator */}
-              <div>
-                <div className="phone-shell">
-                  <div className="phone-notch"></div>
-                  <div className="phone-screen">
-                    <img
-                      src={currentVehicleData.image}
-                      alt="Mockup Visual"
-                      className="phone-bg-img"
-                    />
-                    <div className="phone-gradient-overlay"></div>
+          <div className="formats-layout">
+            {/* Phone Mockup Frame */}
+            <div>
+              <div className="phone-mockup-frame">
+                <div className="phone-notch-pill"></div>
+                <div className="phone-screen-content">
+                  <img
+                    src={currentVehicle.image}
+                    alt="Mockup Phone Ad"
+                    className="phone-bg-photo"
+                  />
+                  <div className="phone-shadow-overlay"></div>
 
-                    {/* Top Overlay */}
-                    <div className="phone-header-overlay">
-                      <div style={{ display: "flex", alignItems: "center", gap: "6px", color: "#f3e5ab", fontWeight: 700 }}>
-                        <span>TOUCHÉ MOTORS</span>
-                        <span style={{ color: "#d4af37" }}>✦</span>
+                  {/* Header */}
+                  <div className="phone-meta-header">
+                    <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                      <div style={{ width: "22px", height: "22px", borderRadius: "50%", background: "#e51a24", color: "#ffffff", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: "9px" }}>
+                        TM
                       </div>
-                      <span style={{ background: "rgba(212,175,55,0.25)", color: "#f3e5ab", border: "1px solid rgba(212,175,55,0.4)", padding: "2px 6px", borderRadius: "4px", fontSize: "8px", textTransform: "uppercase" }}>
-                        {currentFormatData.mockupBadge}
-                      </span>
+                      <div>
+                        <div style={{ fontWeight: 700, lineHeight: 1 }}>touche.motors</div>
+                        <span style={{ fontSize: "9px", color: "#cbd5e1" }}>Publicidad Oficial · Paseo Triunfo</span>
+                      </div>
                     </div>
+                    <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>more_vert</span>
+                  </div>
 
-                    {/* Bottom Captions Card & CTA */}
-                    <div className="phone-bottom-content">
-                      <div className="phone-hook-card">
-                        <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "14px", fontWeight: 600, color: "#f3e5ab", margin: 0, lineHeight: 1.3 }}>
-                          {currentFormatData.mockupHookTitle}
-                        </p>
-                        <p style={{ fontSize: "11px", color: "#c6c2b8", margin: "4px 0 0 0", lineHeight: 1.3, fontWeight: 300 }}>
-                          {currentFormatData.mockupHookDesc}
-                        </p>
+                  {/* Caption Card & CTA */}
+                  <div className="phone-bottom-ad-card">
+                    <div className="phone-caption-box">
+                      <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "9px", color: "#f87171", fontWeight: 800 }}>
+                        {currentFormat.captionTitle}
                       </div>
-                      <a href="#inversion" className="phone-cta-btn">
-                        <span className="material-symbols-outlined" style={{ fontSize: "15px" }}>chat</span>
-                        <span>{currentFormatData.mockupCta}</span>
-                      </a>
+                      <div style={{ fontSize: "11px", marginTop: "3px", lineHeight: 1.35 }}>
+                        {currentFormat.captionText}
+                      </div>
                     </div>
+                    <a
+                      href="#investment"
+                      className="whatsapp-lead-btn"
+                    >
+                      <span className="material-symbols-outlined" style={{ fontSize: "15px" }}>chat</span>
+                      <span>{currentFormat.whatsappCta}</span>
+                    </a>
                   </div>
                 </div>
               </div>
-
-              {/* Format Specifications Details */}
-              <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                  <span style={{ padding: "4px 12px", borderRadius: "9999px", background: "rgba(212,175,55,0.15)", border: "1px solid rgba(212,175,55,0.3)", fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", letterSpacing: "0.15em", color: "#d4af37", textTransform: "uppercase" }}>
-                    {currentFormatData.badge}
-                  </span>
-                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", letterSpacing: "0.15em", color: "#8e8a82", textTransform: "uppercase" }}>
-                    100% Retención Visual
-                  </span>
-                </div>
-
-                <h3 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "28px", fontWeight: 400, color: "#f5f3ee", margin: 0, lineHeight: 1.25 }}>
-                  {currentFormatData.title}
-                </h3>
-
-                <p style={{ fontSize: "14px", color: "#c6c2b8", lineHeight: 1.65, fontWeight: 300, margin: 0 }}>
-                  {currentFormatData.description}
-                </p>
-
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginTop: "8px" }}>
-                  <div style={{ padding: "14px", borderRadius: "12px", background: "rgba(22,24,32,0.7)", border: "1px solid rgba(212,175,55,0.12)" }}>
-                    <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: "#d4af37", display: "flex", alignItems: "center", gap: "6px" }}>
-                      <span className="material-symbols-outlined" style={{ fontSize: "14px" }}>touch_app</span>
-                      <span>{currentFormatData.bullet1Title}</span>
-                    </div>
-                    <div style={{ fontSize: "12px", color: "#c6c2b8", marginTop: "4px", fontWeight: 300 }}>
-                      {currentFormatData.bullet1Desc}
-                    </div>
-                  </div>
-                  <div style={{ padding: "14px", borderRadius: "12px", background: "rgba(22,24,32,0.7)", border: "1px solid rgba(212,175,55,0.12)" }}>
-                    <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: "#d4af37", display: "flex", alignItems: "center", gap: "6px" }}>
-                      <span className="material-symbols-outlined" style={{ fontSize: "14px" }}>gps_fixed</span>
-                      <span>{currentFormatData.bullet2Title}</span>
-                    </div>
-                    <div style={{ fontSize: "12px", color: "#c6c2b8", marginTop: "4px", fontWeight: 300 }}>
-                      {currentFormatData.bullet2Desc}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="format-metric-box" style={{ padding: "16px 20px", borderRadius: "12px", background: "rgba(212,175,55,0.06)", border: "1px solid rgba(212,175,55,0.24)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "12px", color: "#c6c2b8" }}>
-                    {currentFormatData.metricLabel}
-                  </span>
-                  <span style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "20px", fontWeight: 700, color: "#f3e5ab" }}>
-                    {currentFormatData.metricValue}
-                  </span>
-                </div>
-              </div>
-
             </div>
+
+            {/* Description & Technical Selling Points */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", fontWeight: 800, color: "#0051ff" }}>
+                {currentFormat.badge}
+              </span>
+
+              <h3 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "28px", fontWeight: 800, color: "#0f172a", margin: 0 }}>
+                {currentFormat.title}
+              </h3>
+
+              <p style={{ fontSize: "15px", lineHeight: 1.65, color: "#475569", margin: 0 }}>
+                {currentFormat.description}
+              </p>
+
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginTop: "8px" }}>
+                <div style={{ padding: "14px", background: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: "6px" }}>
+                  <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", fontWeight: 800, color: "#0051ff", display: "flex", alignItems: "center", gap: "6px" }}>
+                    <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>radar</span>
+                    <span>GEOFENCING BINACIONAL</span>
+                  </div>
+                  <p style={{ fontSize: "13px", color: "#475569", margin: "4px 0 0 0" }}>
+                    Impacto en códigos postales de alto poder adquisitivo en Ciudad Juárez y El Paso, TX.
+                  </p>
+                </div>
+                <div style={{ padding: "14px", background: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: "6px" }}>
+                  <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", fontWeight: 800, color: "#e51a24", display: "flex", alignItems: "center", gap: "6px" }}>
+                    <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>trending_up</span>
+                    <span>RETENCIÓN ALGORÍTMICA</span>
+                  </div>
+                  <p style={{ fontSize: "13px", color: "#475569", margin: "4px 0 0 0" }}>
+                    Edición de alta retención que maximiza el tiempo de visualización (+78% vs fotos de stock).
+                  </p>
+                </div>
+              </div>
+
+              <div style={{ padding: "14px 20px", background: "#f1f5f9", border: "1px solid #cbd5e1", borderRadius: "6px", display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "8px" }}>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "12px", color: "#475569", fontWeight: 700 }}>
+                  {currentFormat.metricLabel}
+                </span>
+                <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "20px", fontWeight: 800, color: "#e51a24" }}>
+                  {currentFormat.metricValue}
+                </span>
+              </div>
+            </div>
+
           </div>
         </section>
 
-        {/* SECTION 4: EXECUTIVE FINANCIAL LEDGER & TRANSPARENCY */}
-        <section id="inversion">
-          <div className="section-header-block">
-            <span className="section-tag-mono">Ingeniería Financiera Transparente</span>
-            <h2 className="section-headline">Inversión Mensual & Desglose Fiscal</h2>
-            <div className="section-subtitle-mono">COTIZACIÓN MENSUAL EN MONEDA NACIONAL (MXN)</div>
+        {/* SECTION 4: FINANCIAL ARCHITECTURE & TRANSPARENCY */}
+        <section id="investment">
+          <div className="section-tag-box">
+            <span className="tag-pill-red">// SEC_04: FINANCIAL ARCHITECTURE</span>
           </div>
+          <h2 className="section-title-large">Ingeniería Financiera Transparente</h2>
 
-          {/* Plan Comparison Cards */}
-          <div className="plans-comparison-grid">
-            {/* Plan B */}
+          {/* Plan Selection Cards */}
+          <div className="plans-toggle-grid" style={{ marginTop: "16px" }}>
+            
+            {/* PLAN B: IMPULSO TÁCTICO */}
             <div
               onClick={() => setSelectedPlan("B")}
-              className={`plan-card ${selectedPlan === "B" ? "active" : ""}`}
+              className={`plan-box ${selectedPlan === "B" ? "selected" : ""}`}
             >
-              <div className="plan-header-row">
-                <div>
-                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", letterSpacing: "0.15em", color: "#d4af37", textTransform: "uppercase", fontWeight: 700 }}>
-                    PLAN BASE RECOMENDADO
-                  </span>
-                  <h3 style={{ fontFamily: "'Syne', sans-serif", fontSize: "20px", color: "#f5f3ee", margin: "4px 0 0 0", fontWeight: 700 }}>
-                    Plan B: Impulso Táctico
-                  </h3>
-                </div>
-                <div style={{ textAlign: "right" }}>
-                  <div className="plan-price-num">$10,000</div>
-                  <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", color: "#8e8a82" }}>
-                    MXN + IVA / MES
-                  </div>
-                </div>
+              {selectedPlan === "B" && (
+                <div className="plan-badge-selected">RECOMENDADO // ACTIVO</div>
+              )}
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", fontWeight: 800, color: "#e51a24", textTransform: "uppercase" }}>
+                PROPUESTA BASE DIRECTIVA
               </div>
-              <p style={{ fontSize: "13px", color: "#c6c2b8", fontWeight: 300, lineHeight: 1.55, margin: "0 0 16px 0" }}>
-                Producción bimestral in-situ con dron 4K y gimbal para posicionamiento continuo del inventario insignia y captura sistemática de leads ejecutivos.
+              <h3 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "22px", fontWeight: 800, color: "#0f172a", margin: "4px 0" }}>
+                PLAN B: Impulso Táctico
+              </h3>
+              <p style={{ fontSize: "14px", color: "#475569", margin: "0 0 16px 0" }}>
+                Cadencia bimestral in-situ con alto impacto en catálogo e inventario clave de Paseo Triunfo 6080.
               </p>
-              <div style={{ display: "flex", alignItems: "center", gap: "8px", fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: "#f3e5ab", paddingTop: "10px", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-                <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: selectedPlan === "B" ? "#d4af37" : "transparent", border: selectedPlan === "B" ? "none" : "1px solid #8e8a82" }}></span>
-                <span>{selectedPlan === "B" ? "Seleccionado actualmente" : "Hacer clic para activar Plan B"}</span>
+              <div style={{ borderTop: "1px solid #e2e8f0", borderBottom: "1px solid #e2e8f0", padding: "12px 0", margin: "12px 0" }}>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", color: "#64748b", display: "block" }}>HONORARIOS BASE</span>
+                <div className="plan-price-large">$10,000 <span style={{ fontSize: "14px", fontFamily: "'JetBrains Mono', monospace", color: "#64748b", fontWeight: 500 }}>MXN / mes + IVA</span></div>
+                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "12px", color: "#e51a24", fontWeight: 700, marginTop: "4px" }}>
+                  Factura Apolograma: $11,600 MXN mensuales
+                </div>
               </div>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, fontSize: "13px", color: "#0f172a", display: "flex", flexDirection: "column", gap: "6px" }}>
+                <li>✓ <strong>1 Jornada de Filmación Bimestral In-Situ</strong> en agencia</li>
+                <li>✓ <strong>+24 Videos Verticales 4K</strong> (Reels/Shorts) por ciclo</li>
+                <li>✓ <strong>40 Fotografías de Catálogo Stellantis</strong> retocadas</li>
+                <li>✓ <strong>Pauta Sugerida:</strong> $2,000 MXN / mes (Directo a Meta)</li>
+              </ul>
             </div>
 
-            {/* Plan A */}
+            {/* PLAN A: DOMINIO TOTAL */}
             <div
               onClick={() => setSelectedPlan("A")}
-              className={`plan-card ${selectedPlan === "A" ? "active" : ""}`}
+              className={`plan-box ${selectedPlan === "A" ? "selected" : ""}`}
             >
-              <div style={{ position: "absolute", top: "-10px", right: "20px", padding: "3px 10px", borderRadius: "9999px", background: "#d4af37", color: "#07080a", fontFamily: "'JetBrains Mono', monospace", fontSize: "9px", fontWeight: 800, letterSpacing: "0.15em", textTransform: "uppercase" }}>
-                MÁXIMA COBERTURA
+              {selectedPlan === "A" && (
+                <div className="plan-badge-selected">ESCALA COMPLETA</div>
+              )}
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", fontWeight: 800, color: "#0051ff", textTransform: "uppercase" }}>
+                ESCALABILIDAD COMPLETA
               </div>
-              <div className="plan-header-row">
-                <div>
-                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", letterSpacing: "0.15em", color: "rgba(212,175,55,0.8)", textTransform: "uppercase", fontWeight: 700 }}>
-                    ESCALA COMPLETA
-                  </span>
-                  <h3 style={{ fontFamily: "'Syne', sans-serif", fontSize: "20px", color: "#f5f3ee", margin: "4px 0 0 0", fontWeight: 700 }}>
-                    Plan A: Dominio Total
-                  </h3>
-                </div>
-                <div style={{ textAlign: "right" }}>
-                  <div className="plan-price-num">$20,000</div>
-                  <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", color: "#8e8a82" }}>
-                    MXN + IVA / MES
-                  </div>
-                </div>
-              </div>
-              <p style={{ fontSize: "13px", color: "#c6c2b8", fontWeight: 300, lineHeight: 1.55, margin: "0 0 16px 0" }}>
-                Doble volumen de cobertura: Showroom Paseo Triunfo 6080 + pruebas dinámicas en carretera, mayor aceleración de pauta y cobertura completa de toda la gama.
+              <h3 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "22px", fontWeight: 800, color: "#0f172a", margin: "4px 0" }}>
+                PLAN A: Dominio Total
+              </h3>
+              <p style={{ fontSize: "14px", color: "#475569", margin: "0 0 16px 0" }}>
+                Despliegue mensual continuo para cubrir el 100% de altas de inventario y eventos especiales en Juárez.
               </p>
-              <div style={{ display: "flex", alignItems: "center", gap: "8px", fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: "#8e8a82", paddingTop: "10px", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-                <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: selectedPlan === "A" ? "#d4af37" : "transparent", border: selectedPlan === "A" ? "none" : "1px solid #8e8a82" }}></span>
-                <span>{selectedPlan === "A" ? "Seleccionado actualmente" : "Hacer clic para activar Plan A"}</span>
+              <div style={{ borderTop: "1px solid #e2e8f0", borderBottom: "1px solid #e2e8f0", padding: "12px 0", margin: "12px 0" }}>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", color: "#64748b", display: "block" }}>HONORARIOS BASE</span>
+                <div className="plan-price-large">$20,000 <span style={{ fontSize: "14px", fontFamily: "'JetBrains Mono', monospace", color: "#64748b", fontWeight: 500 }}>MXN / mes + IVA</span></div>
+                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "12px", color: "#0051ff", fontWeight: 700, marginTop: "4px" }}>
+                  Factura Apolograma: $23,200 MXN mensuales
+                </div>
               </div>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, fontSize: "13px", color: "#0f172a", display: "flex", flexDirection: "column", gap: "6px" }}>
+                <li>✓ <strong>1 Jornada de Filmación Mensual</strong> fija</li>
+                <li>✓ <strong>+48 Videos Verticales 4K</strong> mensuales</li>
+                <li>✓ <strong>80 Fotografías de Catálogo</strong> y lanzamientos VIP</li>
+                <li>✓ <strong>Pauta Sugerida:</strong> $4,000 MXN / mes (Directo a Meta)</li>
+              </ul>
             </div>
+
           </div>
 
-          {/* Fiscal Ledger Breakdown Table */}
-          <div className="ledger-table-box">
-            {/* Toolbar */}
-            <div className="ledger-toolbar">
-              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                <span className="material-symbols-outlined" style={{ color: "#d4af37" }}>receipt_long</span>
-                <span style={{ fontFamily: "'Syne', sans-serif", fontSize: "13px", letterSpacing: "0.08em", textTransform: "uppercase", color: "#f5f3ee", fontWeight: 700 }}>
-                  Desglose Fiscal & Estructura de Pagos
-                </span>
+          {/* Ledger Table */}
+          <div className="financial-table-box">
+            <div className="table-toolbar-header">
+              <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "14px", fontWeight: 800, color: "#0f172a" }}>
+                DESGLOSE FISCAL DETALLADO (CFDI 4.0 // {selectedPlan === "B" ? "PLAN B RECOMENDADO" : "PLAN A"})
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: "#8e8a82" }}>Régimen IVA:</span>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: "#64748b" }}>Régimen IVA:</span>
                 <button
                   type="button"
                   onClick={() => setTaxRate(0.16)}
-                  className={`tax-btn ${taxRate === 0.16 ? "active" : "inactive"}`}
+                  className={`tax-toggle-btn ${taxRate === 0.16 ? "active" : ""}`}
                 >
                   16% General
                 </button>
                 <button
                   type="button"
                   onClick={() => setTaxRate(0.08)}
-                  className={`tax-btn ${taxRate === 0.08 ? "active" : "inactive"}`}
+                  className={`tax-toggle-btn ${taxRate === 0.08 ? "active" : ""}`}
                 >
                   8% Estímulo Fronterizo
                 </button>
               </div>
             </div>
 
-            {/* Line Items */}
             <div>
               {/* Row 1: Apolograma Fee */}
-              <div className="ledger-row">
+              <div className="ledger-line-row">
                 <div>
-                  <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "14px", fontWeight: 500, color: "#f5f3ee" }}>
-                    <span>Honorarios de Producción Bimestral & Curaduría de Pauta</span>
-                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", padding: "2px 8px", borderRadius: "4px", background: "rgba(212,175,55,0.15)", color: "#f3e5ab", border: "1px solid rgba(212,175,55,0.3)" }}>
-                      Factura Apolograma
-                    </span>
+                  <div style={{ fontWeight: 700, fontSize: "14px", color: "#0f172a" }}>
+                    Honorarios de Producción & Post-Producción Cinematográfica Apolograma
                   </div>
-                  <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: "#8e8a82", marginTop: "3px" }}>
-                    Dron 4K, DJI Osmo estabilizado, fotografía de catálogo, guiones técnicos, edición y optimización semanal
+                  <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: "#64748b", marginTop: "2px" }}>
+                    Dron 4K, DJI Osmo estabilizado, fotografía de catálogo, guiones técnicos, edición y optimización
                   </div>
                 </div>
-                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "15px", fontWeight: 600, color: "#f5f3ee", whiteSpace: "nowrap" }}>
+                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "15px", fontWeight: 700, color: "#0f172a", whiteSpace: "nowrap" }}>
                   ${apologramaFee.toLocaleString("es-MX", { minimumFractionDigits: 2 })} MXN
                 </div>
               </div>
 
               {/* Row 2: IVA */}
-              <div className="ledger-row">
-                <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                  <span style={{ fontSize: "14px", color: "#c6c2b8" }}>Impuesto al Valor Agregado (IVA sobre honorarios)</span>
-                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", padding: "2px 6px", borderRadius: "4px", background: "rgba(212,175,55,0.1)", color: "#d4af37", border: "1px solid rgba(212,175,55,0.2)" }}>
-                    {taxRate === 0.16 ? "16% Ley" : "8% Decreto Fronterizo"}
-                  </span>
+              <div className="ledger-line-row">
+                <div>
+                  <div style={{ fontSize: "14px", color: "#475569" }}>
+                    IVA Trasladado ({taxRate === 0.16 ? "16% General de Ley" : "8% Decreto Fronterizo"})
+                  </div>
+                  <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: "#64748b", marginTop: "2px" }}>
+                    IVA Acreditable para Touché Motors (SAT)
+                  </div>
                 </div>
-                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "14px", color: "#8e8a82", whiteSpace: "nowrap" }}>
+                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "14px", color: "#64748b", whiteSpace: "nowrap" }}>
                   ${apologramaTax.toLocaleString("es-MX", { minimumFractionDigits: 2 })} MXN
                 </div>
               </div>
 
-              {/* Row 3: Subtotal Apolograma */}
-              <div className="ledger-row" style={{ background: "rgba(255, 255, 255, 0.02)" }}>
+              {/* Row 3: Subtotal Facturado */}
+              <div className="ledger-line-row" style={{ background: "#f8fafc" }}>
                 <div>
-                  <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "12px", textTransform: "uppercase", color: "#c6c2b8", fontWeight: 600 }}>
-                    Subtotal Facturable por Apolograma (CFDI 4.0)
+                  <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "14px", fontWeight: 800, color: "#e51a24" }}>
+                    TOTAL FACTURA APOLOGRAMA (100% Deducible CFDI 4.0)
                   </div>
-                  <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", color: "#8e8a82" }}>
-                    100% Deducible de impuestos para Touché Motors
+                  <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: "#64748b" }}>
+                    Gasto de Producción Publicitaria Estricto
                   </div>
                 </div>
-                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "16px", fontWeight: 700, color: "#f3e5ab", whiteSpace: "nowrap" }}>
+                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "16px", fontWeight: 800, color: "#e51a24", whiteSpace: "nowrap" }}>
                   ${apologramaTotal.toLocaleString("es-MX", { minimumFractionDigits: 2 })} MXN
                 </div>
               </div>
 
-              {/* Row 4: Meta Ads Budget */}
-              <div className="ledger-row" style={{ background: "rgba(212, 175, 55, 0.03)" }}>
+              {/* Row 4: Direct Meta Ads */}
+              <div className="ledger-line-row" style={{ background: "#eff4ff" }}>
                 <div>
-                  <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "14px", fontWeight: 500, color: "#d4af37" }}>
-                    <span>Presupuesto Publicitario Meta Ads (Tráfico Directo)</span>
-                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", padding: "2px 8px", borderRadius: "4px", background: "rgba(255,255,255,0.06)", color: "#c6c2b8", border: "1px solid rgba(255,255,255,0.1)" }}>
-                      Pago Directo a Meta
-                    </span>
+                  <div style={{ fontWeight: 700, fontSize: "14px", color: "#0051ff" }}>
+                    Pauta Publicitaria Meta Ads (Inyección Directa de Tráfico)
                   </div>
-                  <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: "#8e8a82", marginTop: "3px" }}>
-                    Ingresado directamente por Touché Motors en su administrador con tarjeta corporativa (Factura expedida por Meta con RFC de Touché)
+                  <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: "#64748b", marginTop: "2px" }}>
+                    Pagado directo por Touché a Meta Platforms con tarjeta corporativa sin comisiones intermediarias de agencia
                   </div>
                 </div>
-                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "15px", fontWeight: 600, color: "#d4af37", whiteSpace: "nowrap" }}>
+                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "15px", fontWeight: 800, color: "#0051ff", whiteSpace: "nowrap" }}>
                   ${metaAdsBudget.toLocaleString("es-MX", { minimumFractionDigits: 2 })} MXN
                 </div>
               </div>
 
-              {/* Row 5: Total Combined Monthly */}
-              <div className="ledger-total-row">
+              {/* Row 5: Total Combined Outflow */}
+              <div className="ledger-total-highlight">
                 <div>
-                  <div style={{ fontFamily: "'Syne', sans-serif", fontSize: "15px", textTransform: "uppercase", letterSpacing: "0.08em", color: "#f5f3ee", fontWeight: 800 }}>
+                  <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "16px", fontWeight: 800, color: "#0f172a", textTransform: "uppercase" }}>
                     Desembolso Total Mensual Consolidado
                   </div>
-                  <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", letterSpacing: "0.12em", color: "#d4af37", marginTop: "4px" }}>
-                    HONORARIOS AGENCIA CON IVA ($ {apologramaTotal.toLocaleString("es-MX")}) + PAUTA DIRECTA META ($ {metaAdsBudget.toLocaleString("es-MX")})
+                  <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: "#e51a24", fontWeight: 700, marginTop: "2px" }}>
+                    HONORARIOS APOLOGRAMA CON IVA ($ {apologramaTotal.toLocaleString("es-MX")}) + PAUTA DIRECTA META ($ {metaAdsBudget.toLocaleString("es-MX")})
                   </div>
                 </div>
-                <div style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "36px", fontWeight: 600, color: "#f3e5ab", whiteSpace: "nowrap" }}>
+                <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "32px", fontWeight: 800, color: "#e51a24", whiteSpace: "nowrap" }}>
                   ${totalCombinedMonthly.toLocaleString("es-MX", { minimumFractionDigits: 2 })} MXN
                 </div>
               </div>
             </div>
           </div>
-
-          {/* Deliverables Badges */}
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginTop: "16px" }}>
-            <span style={{ padding: "6px 14px", borderRadius: "9999px", background: "rgba(22,24,32,0.8)", border: "1px solid rgba(212,175,55,0.16)", fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: "#c6c2b8" }}>
-              <span style={{ color: "#d4af37" }}>✦</span> Guión Técnico Aprobado
-            </span>
-            <span style={{ padding: "6px 14px", borderRadius: "9999px", background: "rgba(22,24,32,0.8)", border: "1px solid rgba(212,175,55,0.16)", fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: "#c6c2b8" }}>
-              <span style={{ color: "#d4af37" }}>✦</span> Color Grading Cine Davinci Resolve
-            </span>
-            <span style={{ padding: "6px 14px", borderRadius: "9999px", background: "rgba(22,24,32,0.8)", border: "1px solid rgba(212,175,55,0.16)", fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: "#c6c2b8" }}>
-              <span style={{ color: "#d4af37" }}>✦</span> Copywriting Directo a WhatsApp
-            </span>
-            <span style={{ padding: "6px 14px", borderRadius: "9999px", background: "rgba(22,24,32,0.8)", border: "1px solid rgba(212,175,55,0.16)", fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: "#c6c2b8" }}>
-              <span style={{ color: "#d4af37" }}>✦</span> Optimización Semanal de Pauta
-            </span>
-          </div>
         </section>
 
-        {/* SECTION 5: EXECUTIVE ROADMAP */}
-        <section style={{ padding: "28px", borderRadius: "20px", background: "linear-gradient(135deg, rgba(28, 31, 42, 0.92) 0%, rgba(16, 18, 24, 0.98) 100%)", border: "1px solid rgba(212, 175, 55, 0.22)" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid rgba(255,255,255,0.06)", paddingBottom: "16px", marginBottom: "20px", flexWrap: "wrap", gap: "12px" }}>
-            <div>
-              <span className="section-tag-mono">Cronograma de Arranque Inmediato</span>
-              <h3 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "28px", color: "#f5f3ee", margin: "4px 0 0 0" }}>
-                Activación en 5 Días Hábiles
-              </h3>
-            </div>
-            <div style={{ padding: "4px 12px", borderRadius: "9999px", background: "rgba(212,175,55,0.1)", border: "1px solid rgba(212,175,55,0.3)", fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", letterSpacing: "0.15em", color: "#d4af37", textTransform: "uppercase" }}>
-              Disponibilidad Confirmada
-            </div>
+        {/* SECTION 5: 5-DAY ACTIVATION ROADMAP */}
+        <section style={{ border: "1px solid var(--border-line)", background: "#ffffff", padding: "28px", borderRadius: "8px" }}>
+          <div className="section-tag-box">
+            <span className="tag-pill-blue">// SEC_05: DEPLOYMENT SPRINT</span>
           </div>
+          <h2 className="section-title-large">Cronograma de Activación en 5 Días Hábiles</h2>
 
-          <div className="roadmap-grid">
-            <div className="roadmap-card">
-              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", color: "#d4af37", letterSpacing: "0.15em", textTransform: "uppercase" }}>
-                Paso 01 • Día 1-2
+          <div className="roadmap-3col">
+            <div className="roadmap-card-item">
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "24px", fontWeight: 800, color: "#e51a24" }}>01</span>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", background: "#e2e8f0", padding: "2px 6px", borderRadius: "2px", fontWeight: 700 }}>DÍA 1 - 2</span>
               </div>
-              <div style={{ fontFamily: "'Syne', sans-serif", fontSize: "14px", fontWeight: 700, color: "#f5f3ee" }}>
+              <h4 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "16px", fontWeight: 800, color: "#0f172a", margin: 0 }}>
                 Firma & Scouting Showroom
-              </div>
-              <div style={{ fontSize: "12px", color: "#c6c2b8", lineHeight: 1.5, fontWeight: 300 }}>
-                Selección de unidades clave en Paseo Triunfo 6080 (RAM TRX, Rubicon, Hellcat) y definición de fechas de rodaje.
-              </div>
+              </h4>
+              <p style={{ fontSize: "13px", color: "#475569", margin: 0, lineHeight: 1.5 }}>
+                Validación de propuesta, alineación de unidades insignia disponibles en patio/piso de venta y calendario de escaleta técnica.
+              </p>
             </div>
 
-            <div className="roadmap-card">
-              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", color: "#d4af37", letterSpacing: "0.15em", textTransform: "uppercase" }}>
-                Paso 02 • Día 3
+            <div className="roadmap-card-item">
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "24px", fontWeight: 800, color: "#0051ff" }}>02</span>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", background: "#dbeafe", color: "#1e40af", padding: "2px 6px", borderRadius: "2px", fontWeight: 700 }}>DÍA 3</span>
               </div>
-              <div style={{ fontFamily: "'Syne', sans-serif", fontSize: "14px", fontWeight: 700, color: "#f5f3ee" }}>
+              <h4 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "16px", fontWeight: 800, color: "#0f172a", margin: 0 }}>
                 Jornada de Rodaje In-Situ
-              </div>
-              <div style={{ fontSize: "12px", color: "#c6c2b8", lineHeight: 1.5, fontWeight: 300 }}>
-                Despliegue de drones, cámaras estabilizadas y grabación de audio de motor sin interferir con ventas en sala.
-              </div>
+              </h4>
+              <p style={{ fontSize: "13px", color: "#475569", margin: 0, lineHeight: 1.5 }}>
+                Incursión cinematográfica sin afectar operación comercial en Touché. Captura de audio HEMI, drone FPV y material para +24 clips.
+              </p>
             </div>
 
-            <div className="roadmap-card">
-              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", color: "#d4af37", letterSpacing: "0.15em", textTransform: "uppercase" }}>
-                Paso 03 • Día 5
+            <div className="roadmap-card-item">
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "24px", fontWeight: 800, color: "#10b981" }}>03</span>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", background: "#dcfce7", color: "#166534", padding: "2px 6px", borderRadius: "2px", fontWeight: 700 }}>DÍA 5</span>
               </div>
-              <div style={{ fontFamily: "'Syne', sans-serif", fontSize: "14px", fontWeight: 700, color: "#f5f3ee" }}>
-                Entrega & Lanzamiento Meta
-              </div>
-              <div style={{ fontSize: "12px", color: "#c6c2b8", lineHeight: 1.5, fontWeight: 300 }}>
-                Primer paquete de piezas entregado y campañas de tráfico patrocinadas activas generando prospectos hacia WhatsApp.
-              </div>
+              <h4 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "16px", fontWeight: 800, color: "#0f172a", margin: 0 }}>
+                Primer Master & Ads Live
+              </h4>
+              <p style={{ fontSize: "13px", color: "#475569", margin: 0, lineHeight: 1.5 }}>
+                Entrega del primer lote de reels y fotos de catálogo en alta resolución. Activación de campañas de pauta publicitaria en Meta Ads.
+              </p>
             </div>
           </div>
 
-          {/* Endorsement Footer */}
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: "18px", marginTop: "20px", borderTop: "1px solid rgba(255,255,255,0.06)", fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: "#8e8a82", flexWrap: "wrap", gap: "10px" }}>
+          <div style={{ borderTop: "1px solid #e2e8f0", paddingTop: "16px", marginTop: "24px", display: "flex", justifyContent: "space-between", alignItems: "center", fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: "#64748b", flexWrap: "wrap", gap: "8px" }}>
             <div>
-              <span style={{ color: "#f3e5ab", fontWeight: 600 }}>APOLOGRAMA STUDIO</span> • Dirección Creativa Audiovisual
+              <strong style={{ color: "#0f172a" }}>APOLOGRAMA STUDIO</strong> // Dirección Creativa Audiovisual
             </div>
             <div>
-              <span style={{ color: "#f3e5ab", fontWeight: 600 }}>TOUCHÉ MOTORS</span> • Dirección General & Ventas
+              <strong style={{ color: "#0f172a" }}>TOUCHÉ MOTORS</strong> // Dirección General & Ventas
             </div>
           </div>
         </section>
 
       </main>
 
-      {/* BOTTOM AMBIENT NAVIGATION BAR */}
-      <nav className="paddock-bottom-nav">
-        <a href="#hud" className="bottom-nav-item active">
-          <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>speed</span>
-          <span>TRX HUD</span>
-        </a>
-        <a href="#ritmo" className="bottom-nav-item">
-          <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>schedule</span>
-          <span>Ritmo</span>
-        </a>
-        <a href="#formatos" className="bottom-nav-item">
-          <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>perm_media</span>
-          <span>Formatos</span>
-        </a>
-        <a href="#inversion" className="bottom-nav-item">
-          <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>receipt_long</span>
-          <span>Inversión</span>
-        </a>
-      </nav>
-
-      {/* FLOATING VIP CONCIERGE DOCK */}
-      <div className="floating-dock-container">
-        <div className="floating-dock-card">
-          <div>
-            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "9px", letterSpacing: "0.15em", color: "#d4af37", textTransform: "uppercase", fontWeight: 700 }}>
-              Propuesta Ejecutiva
-            </div>
-            <div style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "16px", fontWeight: 700, color: "#f5f3ee" }}>
-              Plan {selectedPlan}: ${totalCombinedMonthly.toLocaleString("es-MX", { minimumFractionDigits: 2 })} MXN neto/mes
+      {/* STICKY BOTTOM CONCIERGE DOCK */}
+      <div className="sticky-dock-bar">
+        <div className="dock-inner-card">
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <span className="rec-dot"></span>
+            <div>
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", color: "#64748b", fontWeight: 700, textTransform: "uppercase" }}>
+                PLAN {selectedPlan} // TOUCHÉ MOTORS
+              </div>
+              <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "16px", fontWeight: 800, color: "#0f172a" }}>
+                ${totalCombinedMonthly.toLocaleString("es-MX", { minimumFractionDigits: 2 })} MXN <span style={{ fontSize: "11px", fontFamily: "'JetBrains Mono', monospace", color: "#64748b", fontWeight: 500 }}>mensual total</span>
+              </div>
             </div>
           </div>
+
           <button
             type="button"
             onClick={() => setIsModalOpen(true)}
-            className="dock-cta-btn"
+            className="dock-cta-button"
           >
-            <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>chat</span>
-            <span>Concierge WhatsApp</span>
+            <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>chat</span>
+            <span>VALIDAR PROPUESTA VÍA WHATSAPP</span>
           </button>
         </div>
       </div>
 
-      {/* WHATSAPP VIP CONCIERGE MODAL */}
+      {/* MOBILE BOTTOM NAVIGATION */}
+      <nav className="mobile-bottom-nav">
+        <a href="#hero" className="nav-tab-btn active">
+          <span className="material-symbols-outlined">speed</span>
+          <span>HUD Telemetry</span>
+        </a>
+        <a href="#workflow" className="nav-tab-btn">
+          <span className="material-symbols-outlined">schedule</span>
+          <span>Production</span>
+        </a>
+        <a href="#ad-formats" className="nav-tab-btn">
+          <span className="material-symbols-outlined">smart_display</span>
+          <span>Ad Formats</span>
+        </a>
+        <a href="#investment" className="nav-tab-btn">
+          <span className="material-symbols-outlined">receipt_long</span>
+          <span>Investment</span>
+        </a>
+      </nav>
+
+      {/* WHATSAPP MODAL */}
       {isModalOpen && (
-        <div className="modal-backdrop">
-          <div className="modal-dialog">
+        <div className="modal-overlay">
+          <div className="modal-window">
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                <div style={{ width: "40px", height: "40px", borderRadius: "50%", background: "rgba(212,175,55,0.12)", border: "1px solid rgba(212,175,55,0.3)", display: "flex", alignItems: "center", justifyContent: "center", color: "#d4af37" }}>
-                  <span className="material-symbols-outlined" style={{ fontSize: "20px" }}>verified_user</span>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <div style={{ width: "36px", height: "36px", borderRadius: "4px", background: "#e51a24", color: "#ffffff", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <span className="material-symbols-outlined" style={{ fontSize: "20px" }}>verified</span>
                 </div>
                 <div>
-                  <h4 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "20px", color: "#f5f3ee", margin: 0, fontWeight: 500 }}>
-                    Concierge Touché Motors 2026
+                  <h4 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "18px", fontWeight: 800, color: "#0f172a", margin: 0 }}>
+                    Validación Directa con Dirección Apolograma
                   </h4>
-                  <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: "#8e8a82", margin: "2px 0 0 0" }}>
-                    Línea Directa con Dirección Creativa Apolograma
+                  <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: "#64748b", margin: "2px 0 0 0" }}>
+                    TOUCHÉ MOTORS // PASEO TRIUNFO 6080
                   </p>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
-                style={{ background: "transparent", border: "none", color: "#8e8a82", cursor: "pointer", padding: "4px" }}
+                style={{ background: "transparent", border: "none", color: "#64748b", cursor: "pointer", padding: "4px" }}
               >
                 <span className="material-symbols-outlined">close</span>
               </button>
@@ -1825,13 +1870,13 @@ Agendemos la primera sesión de scouting presencial in-situ para coordinar la pr
 
             <div>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "6px" }}>
-                <label style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", letterSpacing: "0.15em", color: "#d4af37", textTransform: "uppercase" }}>
-                  Mensaje Pre-configurado para Validación:
+                <label style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", fontWeight: 700, color: "#0f172a", textTransform: "uppercase" }}>
+                  Mensaje Pre-configurado para Envío:
                 </label>
                 <button
                   type="button"
                   onClick={handleCopyMessage}
-                  style={{ background: "transparent", border: "none", color: "#f3e5ab", fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", cursor: "pointer", display: "flex", alignItems: "center", gap: "4px" }}
+                  style={{ background: "transparent", border: "none", color: "#0051ff", fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: "4px" }}
                 >
                   <span className="material-symbols-outlined" style={{ fontSize: "13px" }}>content_copy</span>
                   <span>Copiar texto</span>
@@ -1840,35 +1885,35 @@ Agendemos la primera sesión de scouting presencial in-situ para coordinar la pr
               <textarea
                 readOnly
                 value={generateWhatsAppMessage()}
-                className="modal-textarea"
+                style={{ width: "100%", height: "140px", padding: "12px", borderRadius: "6px", background: "#f8fafc", border: "1px solid #cbd5e1", color: "#0f172a", fontFamily: "'JetBrains Mono', monospace", fontSize: "12px", lineHeight: 1.5, resize: "none", outline: "none" }}
               />
               {copiedToast && (
-                <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: "#d4af37", textAlign: "right", margin: "4px 0 0 0" }}>
+                <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: "#e51a24", textAlign: "right", margin: "4px 0 0 0" }}>
                   {copiedToast}
                 </p>
               )}
             </div>
 
-            <div style={{ padding: "12px 14px", borderRadius: "10px", background: "rgba(22,24,32,0.8)", border: "1px solid rgba(212,175,55,0.15)", fontSize: "12px", color: "#c6c2b8", display: "flex", alignItems: "center", gap: "10px" }}>
-              <span className="material-symbols-outlined" style={{ color: "#d4af37", fontSize: "18px" }}>lock</span>
-              <span>Enlace directo para confirmación de agenda y scouting presencial con Dirección General.</span>
+            <div style={{ padding: "10px 14px", borderRadius: "6px", background: "#eff4ff", border: "1px solid #bfdbfe", fontSize: "12px", color: "#1e3a8a", display: "flex", alignItems: "center", gap: "8px" }}>
+              <span className="material-symbols-outlined" style={{ color: "#0051ff", fontSize: "18px" }}>lock</span>
+              <span>Línea privada cifrada con Dirección Creativa para confirmar scouting y rodaje.</span>
             </div>
 
-            <div style={{ display: "flex", justifyContent: "flex-end", gap: "10px", paddingTop: "6px" }}>
+            <div style={{ display: "flex", justifyContent: "flex-end", gap: "10px", paddingTop: "4px" }}>
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
-                style={{ padding: "8px 16px", borderRadius: "8px", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", color: "#c6c2b8", fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", textTransform: "uppercase", cursor: "pointer" }}
+                style={{ padding: "8px 16px", borderRadius: "4px", background: "#f1f5f9", border: "1px solid #cbd5e1", color: "#475569", fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", fontWeight: 700, textTransform: "uppercase", cursor: "pointer" }}
               >
                 Cancelar
               </button>
               <button
                 type="button"
                 onClick={handleOpenWhatsApp}
-                style={{ padding: "10px 20px", borderRadius: "10px", background: "#d4af37", color: "#07080a", fontFamily: "'Syne', sans-serif", fontSize: "12px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "8px", boxShadow: "0 4px 15px rgba(212,175,55,0.3)" }}
+                style={{ padding: "10px 20px", borderRadius: "4px", background: "#e51a24", color: "#ffffff", fontFamily: "'Space Grotesk', sans-serif", fontSize: "13px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.05em", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "8px" }}
               >
                 <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>send</span>
-                <span>Abrir WhatsApp Concierge</span>
+                <span>Abrir WhatsApp</span>
               </button>
             </div>
           </div>
