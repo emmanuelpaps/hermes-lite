@@ -22,12 +22,12 @@ const PRODUCTION_RIGS: Record<"drone" | "gimbal" | "studio", ProductionRig> = {
     id: "drone",
     tabLabel: "01 // TOMAS AÉREAS DJI MAVIC AIR 2",
     name: "Tomas Aéreas DJI Mavic Air 2",
-    badge: "FACHADA PASEO TRIUNFO & PATIO DE EXHIBICIÓN",
+    badge: "SHOWROOM & PATIO DE EXHIBICIÓN",
     gear: "Dron DJI Mavic Air 2 (4K HDR)",
     image: "/assets/touche-motors/bts_fpv_drone.jpg",
     shutter: "4K 60fps · Sensor 1/2\" · Apertura f/2.8 · Gimbal 3-Axis",
     audioTelemetry: "SISTEMA DE VUELO: Estabilización GPS · Sensores Anticolisión",
-    afTrack: "AF-TRACK: FACHADA_PASEO_TRIUNFO",
+    afTrack: "AF-TRACK: SHOWROOM_PRINCIPAL",
     clipName: "CLIP_01_AERIAL_PANORAMA_4K",
     viewfinderMode: "DJI MAVIC AIR 2 // 4K 60FPS",
   },
@@ -79,8 +79,8 @@ const FORMATS: Record<"reels" | "feed" | "carousel", FormatSpec> = {
     tabLabel: "REELS & STORIES 9:16",
     badge: "FORMATO VERTICAL DINÁMICO // 9:16",
     title: "Reels de Alto Impacto con Hooks de Venta Directa",
-    description: "Cada pieza está concebida para atrapar al comprador en los primeros 1.5 segundos mediante un encuadre aéreo del showroom, recorrido de acabados o sonido de motor en Paseo Triunfo 6080.",
-    captionTitle: "TOUCHÉ MOTORS // PASEO TRIUNFO 6080",
+    description: "Cada pieza está concebida para atrapar al comprador en los primeros 1.5 segundos mediante un encuadre aéreo de la agencia, recorrido de acabados o sonido de motor en showroom.",
+    captionTitle: "TOUCHÉ MOTORS // INVENTARIO EXCLUSIVO",
     captionText: "Entrega inmediata y planes de leasing empresarial en Ciudad Juárez. Conoce el catálogo y agenda tu cita por WhatsApp.",
     whatsappCta: "Enviar WhatsApp a Asesor de Ventas",
     metricLabel: "Enfoque Algorítmico",
@@ -102,13 +102,13 @@ const FORMATS: Record<"reels" | "feed" | "carousel", FormatSpec> = {
     id: "carousel",
     tabLabel: "CAROUSELS HQ (ADS)",
     badge: "META SPONSORED ADS // TRÁFICO DIRECTO",
-    title: "Pauta Segmentada C-Suite Juárez & El Paso",
-    description: "Creativos optimizados con botón directo de conversión a WhatsApp Business de Touché. Exclusión de tráfico irrelevante para asegurar prospectos con solvencia comprobada.",
+    title: "Pauta Segmentada C-Suite & Empresarial Juárez",
+    description: "Creativos optimizados con botón directo de conversión a WhatsApp Business de Touché. Exclusión de tráfico irrelevante para asegurar prospectos calificados con solvencia comprobada.",
     captionTitle: "LEASING EMPRESARIAL TOUCHÉ MOTORS",
     captionText: "Adquiere tu unidad con deducibilidad fiscal inmediata. Atención directa y confidencial con Gerencia Comercial.",
     whatsappCta: "Contactar a Gerencia por WhatsApp",
     metricLabel: "Segmentación de Pauta",
-    metricValue: "Juárez y El Paso",
+    metricValue: "Ciudad Juárez (B2B)",
   },
 };
 
@@ -212,7 +212,7 @@ export default function ToucheMotorsClient() {
   const generateWhatsAppMessage = () => {
     const planName = selectedPlan === "B" ? "PLAN B: IMPULSO TÁCTICO" : "PLAN A: DOMINIO TOTAL";
     const taxLabel = taxRate === 0.16 ? "IVA 16%" : "IVA 8% Fronterizo";
-    return `Hola Apolograma, hemos revisado la propuesta de producción cinematográfica para Touché Motors Paseo Triunfo 6080.
+    return `Hola Apolograma, hemos revisado la propuesta de producción cinematográfica para Touché Motors.
 
 Deseamos validar:
 • ${planName}
@@ -1138,7 +1138,7 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
             <span>APOLOGRAMA // TOUCHÉ MOTORS</span>
           </div>
           <div className="header-brand-loc">
-            PASEO TRIUNFO 6080 // CD. JUÁREZ - EL PASO
+            CONCESIONARIA AUTOMOTRIZ // CIUDAD JUÁREZ, CHIH.
           </div>
         </div>
 
@@ -1180,7 +1180,7 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
           </h1>
 
           <p className="hero-description">
-            Producción cinematográfica in-situ y pauta publicitaria ultra-segmentada para captar compradores directivos y de alto poder adquisitivo en Ciudad Juárez y El Paso.
+            Producción cinematográfica in-situ y pauta publicitaria ultra-segmentada para captar compradores directivos, perfiles corporativos y empresarios en Ciudad Juárez y zona industrial.
           </p>
 
           {/* 4 Production Telemetry Cards */}
@@ -1373,7 +1373,7 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
           <h2 className="section-title-large">Ritmo de Producción Bimestral</h2>
 
           <div className="rhythm-callout-banner">
-            <strong>Protocolo Cero Fricción Touché Motors:</strong> Cada sesión de rodaje bimestral genera <strong>4 Reels Cinematográficos 4K (2 por mes)</strong> y <strong>Fotografía Comercial de Catálogo</strong> para alimentar las campañas de pauta y presencia digital de Touché, con un despliegue técnico planificado milimétricamente para <strong>no obstaculizar el flujo de ventas ni el acceso a taller</strong> en Paseo Triunfo 6080.
+            <strong>Protocolo Cero Fricción Touché Motors:</strong> Cada sesión de rodaje bimestral genera <strong>4 Reels Cinematográficos 4K (2 por mes)</strong> y <strong>Fotografía Comercial de Catálogo</strong> para alimentar las campañas de pauta y presencia digital de Touché, con un despliegue técnico planificado milimétricamente para <strong>no obstaculizar el flujo de ventas ni el acceso a taller</strong> en las instalaciones de la agencia.
           </div>
 
           <div className="modules-grid">
@@ -1385,7 +1385,7 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
               </div>
               <h3 className="module-title">Tomas Aéreas con Dron DJI Mavic Air 2</h3>
               <p className="module-desc">
-                Tomas panorámicas en 4K para dimensionar la presencia de la agencia en Paseo Triunfo 6080, vista aérea del patio de inventario alineado y encuadres cenitales para apertura de reels.
+                Tomas panorámicas en 4K para dimensionar la presencia e infraestructura de la agencia, vista aérea del patio de inventario alineado y encuadres cenitales para apertura de reels.
               </p>
               <ul className="module-bullets">
                 <li>✦ Vuelo exterior estable y seguro</li>
@@ -1483,7 +1483,7 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
                       </div>
                       <div>
                         <div style={{ fontWeight: 700, lineHeight: 1 }}>touche.motors</div>
-                        <span style={{ fontSize: "9px", color: "#cbd5e1" }}>Publicidad Oficial · Paseo Triunfo</span>
+                        <span style={{ fontSize: "9px", color: "#cbd5e1" }}>Publicidad Oficial · Touché Motors</span>
                       </div>
                     </div>
                     <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>more_vert</span>
@@ -1529,10 +1529,10 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
                 <div style={{ padding: "14px", background: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: "6px" }}>
                   <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", fontWeight: 800, color: "#0051ff", display: "flex", alignItems: "center", gap: "6px" }}>
                     <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>radar</span>
-                    <span>GEOFENCING BINACIONAL</span>
+                    <span>SEGMENTACIÓN DIRECTIVA B2B</span>
                   </div>
                   <p style={{ fontSize: "13px", color: "#475569", margin: "4px 0 0 0" }}>
-                    Impacto en códigos postales de alto poder adquisitivo en Ciudad Juárez y El Paso, TX.
+                    Impacto en corredores industriales, parques corporativos y zonas residenciales de alto poder adquisitivo en Ciudad Juárez.
                   </p>
                 </div>
                 <div style={{ padding: "14px", background: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: "6px" }}>
@@ -1584,7 +1584,7 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
                 PLAN B: Impulso Táctico
               </h3>
               <p style={{ fontSize: "14px", color: "#475569", margin: "0 0 16px 0" }}>
-                Cadencia bimestral in-situ con alto impacto en catálogo e inventario clave de Paseo Triunfo 6080.
+                Cadencia bimestral in-situ con alto impacto en catálogo e inventario clave de la agencia.
               </p>
               <div style={{ borderTop: "1px solid #e2e8f0", borderBottom: "1px solid #e2e8f0", padding: "12px 0", margin: "12px 0" }}>
                 <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", color: "#64748b", display: "block" }}>HONORARIOS BASE</span>
@@ -1861,7 +1861,7 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
                     Validación Directa con Dirección Apolograma
                   </h4>
                   <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: "#64748b", margin: "2px 0 0 0" }}>
-                    TOUCHÉ MOTORS // PASEO TRIUNFO 6080
+                    TOUCHÉ MOTORS // PROPUESTA COMERCIAL EXCLUSIVA
                   </p>
                 </div>
               </div>
