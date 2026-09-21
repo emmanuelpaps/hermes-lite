@@ -1192,8 +1192,8 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
             </div>
             <div className="spec-card">
               <span className="spec-label">Producción de Video</span>
-              <span className="spec-value" style={{ color: "#0051ff" }}>Reels & Ads</span>
-              <span className="spec-sub">Tomas 4K de Inventario</span>
+              <span className="spec-value" style={{ color: "#0051ff" }}>4 Reels</span>
+              <span className="spec-sub">Bimestrales (2 al mes)</span>
             </div>
             <div className="spec-card">
               <span className="spec-label">Fotografía Fija</span>
@@ -1373,7 +1373,7 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
           <h2 className="section-title-large">Ritmo de Producción Bimestral</h2>
 
           <div className="rhythm-callout-banner">
-            <strong>Protocolo Cero Fricción Touché Motors:</strong> Cada sesión de rodaje bimestral genera el material audiovisual y fotográfico necesario para alimentar las campañas de pauta y presencia digital de Touché, con un despliegue técnico planificado milimétricamente para <strong>no obstaculizar el flujo de ventas ni el acceso a taller</strong> en Paseo Triunfo 6080.
+            <strong>Protocolo Cero Fricción Touché Motors:</strong> Cada sesión de rodaje bimestral genera <strong>4 Reels Cinematográficos 4K (2 por mes)</strong> y <strong>Fotografía Comercial de Catálogo</strong> para alimentar las campañas de pauta y presencia digital de Touché, con un despliegue técnico planificado milimétricamente para <strong>no obstaculizar el flujo de ventas ni el acceso a taller</strong> en Paseo Triunfo 6080.
           </div>
 
           <div className="modules-grid">
@@ -1595,8 +1595,8 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
               </div>
               <ul style={{ listStyle: "none", padding: 0, margin: 0, fontSize: "13px", color: "#0f172a", display: "flex", flexDirection: "column", gap: "6px" }}>
                 <li>✓ <strong>1 Jornada de Filmación Bimestral In-Situ</strong> en agencia</li>
-                <li>✓ <strong>Lote de Videos Verticales 4K</strong> (Reels) para pauta y redes</li>
-                <li>✓ <strong>Fotografías de Catálogo</strong> de unidades clave retocadas</li>
+                <li>✓ <strong>2 Videos Reel 4K al mes</strong> (4 reels por ciclo bimestral)</li>
+                <li>✓ <strong>Fotografía Comercial de Catálogo</strong> de unidades clave retocadas</li>
                 <li>✓ <strong>Pauta Sugerida:</strong> $2,000 MXN / mes (Directo a Meta)</li>
               </ul>
             </div>
@@ -1627,7 +1627,7 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
               </div>
               <ul style={{ listStyle: "none", padding: 0, margin: 0, fontSize: "13px", color: "#0f172a", display: "flex", flexDirection: "column", gap: "6px" }}>
                 <li>✓ <strong>1 Jornada de Filmación Mensual</strong> fija en agencia</li>
-                <li>✓ <strong>Cobertura Continua</strong> de altas de inventario y lanzamientos</li>
+                <li>✓ <strong>4 Videos Reel 4K al mes</strong> para alta rotación de inventario</li>
                 <li>✓ <strong>Fotografías de Catálogo Mensuales</strong> para pauta y redes</li>
                 <li>✓ <strong>Pauta Sugerida:</strong> $4,000 MXN / mes (Directo a Meta)</li>
               </ul>
@@ -1668,7 +1668,9 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
                     Honorarios de Producción & Post-Producción Cinematográfica Apolograma
                   </div>
                   <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: "#64748b", marginTop: "2px" }}>
-                    Dron DJI Mavic Air 2, estabilizador DJI Osmo, fotografía de catálogo, guiones y optimización publicitaria
+                    {selectedPlan === "B"
+                      ? "2 reels al mes (4 bimestrales), fotografía de catálogo, Dron DJI Mavic Air 2, DJI Osmo y gestión de Meta Ads"
+                      : "4 reels al mes, fotografía de catálogo continua, Dron DJI Mavic Air 2, DJI Osmo y gestión de Meta Ads"}
                   </div>
                 </div>
                 <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "15px", fontWeight: 700, color: "#0f172a", whiteSpace: "nowrap" }}>
@@ -1769,7 +1771,7 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
                 Jornada de Rodaje In-Situ
               </h4>
               <p style={{ fontSize: "13px", color: "#475569", margin: 0, lineHeight: 1.5 }}>
-                Jornada de producción in-situ sin afectar el flujo de la sala de ventas. Tomas aéreas con DJI Mavic Air 2, recorridos con DJI Osmo y fotografía comercial de inventario.
+                Jornada de producción in-situ sin afectar el flujo de la sala de ventas. Tomas aéreas con DJI Mavic Air 2, recorridos con DJI Osmo y fotografía comercial para los 4 reels del ciclo bimestral.
               </p>
             </div>
 
@@ -1782,7 +1784,7 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
                 Primer Master & Ads Live
               </h4>
               <p style={{ fontSize: "13px", color: "#475569", margin: 0, lineHeight: 1.5 }}>
-                Entrega del primer paquete de reels y fotografías de catálogo. Activación y optimización de campañas de pauta publicitaria en Meta Ads.
+                Entrega del primer lote de reels (2 videos al mes) y fotografías de catálogo. Activación y optimización de campañas en Meta Ads.
               </p>
             </div>
           </div>
