@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 
 // Production Rig & Workflow Definition for the Interactive Director's Viewfinder HUD
 interface ProductionRig {
-  id: "fpv" | "gimbal" | "studio";
+  id: "drone" | "gimbal" | "studio";
   tabLabel: string;
   name: string;
   badge: string;
@@ -17,45 +17,45 @@ interface ProductionRig {
   viewfinderMode: string;
 }
 
-const PRODUCTION_RIGS: Record<"fpv" | "gimbal" | "studio", ProductionRig> = {
-  fpv: {
-    id: "fpv",
-    tabLabel: "01 // DRON CINE FPV (EXTERIORES Y PATIOS)",
-    name: "Vuelo FPV Cinewhoop",
-    badge: "PATIOS DE MANIOBRA & ACCESO PASEO TRIUNFO",
-    gear: "Drone Cinewhoop Ductado 4K 60FPS",
+const PRODUCTION_RIGS: Record<"drone" | "gimbal" | "studio", ProductionRig> = {
+  drone: {
+    id: "drone",
+    tabLabel: "01 // TOMAS AÉREAS DJI MAVIC AIR 2",
+    name: "Tomas Aéreas DJI Mavic Air 2",
+    badge: "FACHADA PASEO TRIUNFO & PATIO DE EXHIBICIÓN",
+    gear: "Dron DJI Mavic Air 2 (4K HDR)",
     image: "/assets/touche-motors/bts_fpv_drone.jpg",
-    shutter: "Ultra-Wide FPV 4K · 1/120s · ISO 100 · 5600K",
-    audioTelemetry: "TELEMETRÍA DE VUELO: 24.2V (LiPo) · 18 SAT GPS",
-    afTrack: "AF-TRACK: FLIGHT_PATH_SHOWROOM",
-    clipName: "CLIP_01_FPV_RUNWAY_SWEEP",
-    viewfinderMode: "CINEWHOOP REC 4K 60FPS",
+    shutter: "4K 60fps · Sensor 1/2\" · Apertura f/2.8 · Gimbal 3-Axis",
+    audioTelemetry: "SISTEMA DE VUELO: Estabilización GPS · Sensores Anticolisión",
+    afTrack: "AF-TRACK: FACHADA_PASEO_TRIUNFO",
+    clipName: "CLIP_01_AERIAL_PANORAMA_4K",
+    viewfinderMode: "DJI MAVIC AIR 2 // 4K 60FPS",
   },
   gimbal: {
     id: "gimbal",
-    tabLabel: "02 // OSMO 3-AXIS & RUGIDO DE MOTORES",
-    name: "Estabilización Gimbal 3-Axis",
-    badge: "WALKAROUND CABINA & CAPTURA BINAURAL",
-    gear: "DJI 3-Axis + Micrófonos Duales 32-Bit Float",
+    tabLabel: "02 // RECORRIDOS DJI OSMO & CABINA",
+    name: "Recorridos Estabilizados DJI Osmo",
+    badge: "SHOWROOM, CABINA & SONIDO DE MOTOR",
+    gear: "Cámara & Estabilizador DJI Osmo 4K",
     image: "/assets/touche-motors/bts_gimbal_osmo.jpg",
-    shutter: "35mm Cine Prime f/1.8 · 1/120s · ISO 400 · T1.8",
-    audioTelemetry: "CAPTURA DE ESCAPES HEMI: -3.2 dB (32-Bit Float)",
-    afTrack: "AF-TRACK: GIMBAL_STABILIZED_GRILL",
-    clipName: "CLIP_07_WALKAROUND_HEMI_SOUND",
-    viewfinderMode: "GIMBAL CINE 4K 60FPS",
+    shutter: "4K 60fps · Estabilización 3-Ejes · Captura de Interiores",
+    audioTelemetry: "CAPTURA DE AUDIO: Sonido de Encendido & Motor",
+    afTrack: "AF-TRACK: SHOWROOM_WALKAROUND",
+    clipName: "CLIP_04_CABINA_DETALLE_4K",
+    viewfinderMode: "DJI OSMO // 4K 60FPS",
   },
   studio: {
     id: "studio",
-    tabLabel: "03 // SET FOTOGRÁFICO DE ESTUDIO",
-    name: "Estación de Fotografía Comercial",
-    badge: "LUZ CENITAL & RETOQUE STELLANTIS",
-    gear: "Softbox Overhead + C-Stands + Laptop Tethering",
+    tabLabel: "03 // FOTOGRAFÍA COMERCIAL DE CATÁLOGO",
+    name: "Fotografía de Inventario y Catálogo",
+    badge: "BAHÍA DE ENTREGA // PUSH COMERCIAL",
+    gear: "Fotografía Profesional de Alta Resolución",
     image: "/assets/touche-motors/bts_studio_photo.jpg",
-    shutter: "50mm Macro Prime f/4.0 · 1/160s · ISO 100 · 5600K",
-    audioTelemetry: "CONTROL AMBIENTAL: -42.0 dB (Set Silencioso)",
-    afTrack: "AF-TRACK: TETHERED_CATALOG_STATION",
-    clipName: "STILL_24_CATALOG_DIFFUSE_STUDIO",
-    viewfinderMode: "STILL RAW CAPTURE",
+    shutter: "Alta Resolución · Luz Difusa · Retoque Cromático",
+    audioTelemetry: "ILUMINACIÓN: Set en Bahía de Entrega",
+    afTrack: "AF-TRACK: INVENTARIO_CATALOGO",
+    clipName: "STILL_CATALOG_INVENTARIO",
+    viewfinderMode: "FOTOGRAFÍA RAW // HI-RES",
   },
 };
 
@@ -79,24 +79,24 @@ const FORMATS: Record<"reels" | "feed" | "carousel", FormatSpec> = {
     tabLabel: "REELS & STORIES 9:16",
     badge: "FORMATO VERTICAL DINÁMICO // 9:16",
     title: "Reels de Alto Impacto con Hooks de Venta Directa",
-    description: "Cada pieza está concebida para atrapar al comprador en los primeros 1.5 segundos mediante un corte de aceleración, rugido de motor o encendido de luces LED en el showroom de Paseo Triunfo 6080.",
+    description: "Cada pieza está concebida para atrapar al comprador en los primeros 1.5 segundos mediante un encuadre aéreo del showroom, recorrido de acabados o sonido de motor en Paseo Triunfo 6080.",
     captionTitle: "TOUCHÉ MOTORS // PASEO TRIUNFO 6080",
     captionText: "Entrega inmediata y planes de leasing empresarial en Ciudad Juárez. Conoce el catálogo y agenda tu cita por WhatsApp.",
     whatsappCta: "Enviar WhatsApp a Asesor de Ventas",
-    metricLabel: "Retención Algorítmica Promedio",
-    metricValue: "+78% vs media automotriz",
+    metricLabel: "Enfoque Algorítmico",
+    metricValue: "Hooks en 1.5s",
   },
   feed: {
     id: "feed",
     tabLabel: "FEED 4:5 CATÁLOGO",
     badge: "FORMATO 4:5 // PUBLICACIÓN EDITORIAL",
     title: "Carruseles Técnicos & Fotografía Editorial Oficial",
-    description: "Publicaciones de alto valor estético para el feed oficial de Instagram y Facebook. Diseñadas para que el prospecto guarde la ficha técnica y compare equipamiento antes de acudir a la agencia.",
+    description: "Publicaciones de alto valor estético para el feed oficial de Instagram y Facebook. Diseñadas para que el prospecto examine acabados, equipamiento y opciones de financiamiento antes de acudir a la agencia.",
     captionTitle: "CATÁLOGO OFICIAL // ENTREGA INMEDIATA",
-    captionText: "Desliza para examinar acabados en piel nappa, consola táctil Uconnect y opciones de leasing deducible 100%.",
+    captionText: "Desliza para examinar acabados en piel nappa, consola táctil y equipamiento de inventario disponible.",
     whatsappCta: "Solicitar Ficha de Inventario por WhatsApp",
-    metricLabel: "Tasa de Guardados e Interacción",
-    metricValue: "3.4x Mayor Frecuencia",
+    metricLabel: "Calidad de Contenido",
+    metricValue: "100% In-Situ",
   },
   carousel: {
     id: "carousel",
@@ -107,13 +107,13 @@ const FORMATS: Record<"reels" | "feed" | "carousel", FormatSpec> = {
     captionTitle: "LEASING EMPRESARIAL TOUCHÉ MOTORS",
     captionText: "Adquiere tu unidad con deducibilidad fiscal inmediata. Atención directa y confidencial con Gerencia Comercial.",
     whatsappCta: "Contactar a Gerencia por WhatsApp",
-    metricLabel: "Costo por Conversión a Conversación",
-    metricValue: "Leads Filtrados Directos",
+    metricLabel: "Segmentación de Pauta",
+    metricValue: "Juárez y El Paso",
   },
 };
 
 export default function ToucheMotorsClient() {
-  const [selectedRig, setSelectedRig] = useState<"fpv" | "gimbal" | "studio">("fpv");
+  const [selectedRig, setSelectedRig] = useState<"drone" | "gimbal" | "studio">("drone");
   const [selectedFormat, setSelectedFormat] = useState<"reels" | "feed" | "carousel">("reels");
   const [selectedPlan, setSelectedPlan] = useState<"B" | "A">("B");
   const [taxRate, setTaxRate] = useState<number>(0.16); // 16% General vs 8% Fronterizo
@@ -1191,13 +1191,13 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
               <span className="spec-sub">1 Jornada cada 2 Meses</span>
             </div>
             <div className="spec-card">
-              <span className="spec-label">Master Audiovisual</span>
-              <span className="spec-value" style={{ color: "#0051ff" }}>+24 Reels</span>
-              <span className="spec-sub">Formato 4K con Hooks</span>
+              <span className="spec-label">Producción de Video</span>
+              <span className="spec-value" style={{ color: "#0051ff" }}>Reels & Ads</span>
+              <span className="spec-sub">Tomas 4K de Inventario</span>
             </div>
             <div className="spec-card">
-              <span className="spec-label">Catálogo Oficial</span>
-              <span className="spec-value" style={{ color: "#0f172a" }}>40 Stills</span>
+              <span className="spec-label">Fotografía Fija</span>
+              <span className="spec-value" style={{ color: "#0f172a" }}>Catálogo HQ</span>
               <span className="spec-sub">Luz Difusa & Retoque</span>
             </div>
             <div className="spec-card">
@@ -1211,18 +1211,18 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
           <div className="vehicle-selector-bar">
             <button
               type="button"
-              onClick={() => setSelectedRig("fpv")}
-              className={`vehicle-btn ${selectedRig === "fpv" ? "active" : ""}`}
+              onClick={() => setSelectedRig("drone")}
+              className={`vehicle-btn ${selectedRig === "drone" ? "active" : ""}`}
             >
-              <span>01 // Dron Cine FPV (Patios y Bahías)</span>
-              {selectedRig === "fpv" && <span>✦</span>}
+              <span>01 // Dron Aéreo DJI Mavic Air 2</span>
+              {selectedRig === "drone" && <span>✦</span>}
             </button>
             <button
               type="button"
               onClick={() => setSelectedRig("gimbal")}
               className={`vehicle-btn ${selectedRig === "gimbal" ? "active" : ""}`}
             >
-              <span>02 // DJI Osmo 3-Axis & Audio Binaural</span>
+              <span>02 // Recorridos DJI Osmo 3-Axis</span>
               {selectedRig === "gimbal" && <span>✦</span>}
             </button>
             <button
@@ -1230,7 +1230,7 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
               onClick={() => setSelectedRig("studio")}
               className={`vehicle-btn ${selectedRig === "studio" ? "active" : ""}`}
             >
-              <span>03 // Set Fotografía de Estudio</span>
+              <span>03 // Set Fotografía de Catálogo</span>
               {selectedRig === "studio" && <span>✦</span>}
             </button>
           </div>
@@ -1300,7 +1300,7 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
                 </div>
                 <div className="reticle-cell">+</div>
                 <div className="reticle-cell">
-                  <span style={{ position: "absolute", bottom: "8px", left: "10px", fontSize: "9px" }}>FPV DRONE LOCK</span>
+                  <span style={{ position: "absolute", bottom: "8px", left: "10px", fontSize: "9px" }}>DJI AIR 2 GPS LOCK</span>
                 </div>
                 <div className="reticle-cell">+</div>
                 <div className="reticle-cell">
@@ -1373,7 +1373,7 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
           <h2 className="section-title-large">Ritmo de Producción Bimestral</h2>
 
           <div className="rhythm-callout-banner">
-            <strong>Protocolo Cero Fricción Touché Motors:</strong> Cada sesión de rodaje bimestral genera <strong style={{ color: "#e51a24" }}>+24 Videos Verticales 4K</strong> y <strong style={{ color: "#0051ff" }}>40 Fotografías de Catálogo</strong> con un despliegue técnico quirúrgico planificado milimétricamente para <strong>no obstaculizar el flujo de ventas ni el acceso a taller</strong> en Paseo Triunfo 6080.
+            <strong>Protocolo Cero Fricción Touché Motors:</strong> Cada sesión de rodaje bimestral genera el material audiovisual y fotográfico necesario para alimentar las campañas de pauta y presencia digital de Touché, con un despliegue técnico planificado milimétricamente para <strong>no obstaculizar el flujo de ventas ni el acceso a taller</strong> en Paseo Triunfo 6080.
           </div>
 
           <div className="modules-grid">
@@ -1383,14 +1383,14 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
                 <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", fontWeight: 800, color: "#e51a24" }}>MODULE_01</span>
                 <span className="material-symbols-outlined" style={{ color: "#0f172a" }}>flight</span>
               </div>
-              <h3 className="module-title">Vuelos FPV & Persecución Cinematográfica</h3>
+              <h3 className="module-title">Tomas Aéreas con Dron DJI Mavic Air 2</h3>
               <p className="module-desc">
-                Drones cinewhoop ultra-compactos con hélices ductadas y protegidas para vuelo seguro en patios de maniobra, bahías de exhibición exterior y tracking dinámico de aceleración.
+                Tomas panorámicas en 4K para dimensionar la presencia de la agencia en Paseo Triunfo 6080, vista aérea del patio de inventario alineado y encuadres cenitales para apertura de reels.
               </p>
               <ul className="module-bullets">
-                <li>✦ Tomas rasantes a rampa y suspensiones</li>
-                <li>✦ Trayectoria exterior continua hacia showroom</li>
-                <li>✦ Cero riesgo de impacto en unidades en piso</li>
+                <li>✦ Vuelo exterior estable y seguro</li>
+                <li>✦ Vista panorámica de instalaciones y patio</li>
+                <li>✦ Tomas cenitales de inventario alineado</li>
               </ul>
             </div>
 
@@ -1400,14 +1400,14 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
                 <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", fontWeight: 800, color: "#0051ff" }}>MODULE_02</span>
                 <span className="material-symbols-outlined" style={{ color: "#0f172a" }}>graphic_eq</span>
               </div>
-              <h3 className="module-title">DJI Osmo 3-Axis & Audio Binaural</h3>
+              <h3 className="module-title">Recorridos Dinámicos con DJI Osmo</h3>
               <p className="module-desc">
-                Walkarounds estabilizados con microfonía omnidireccional pegada a tubos de escape dobles para capturar con fidelidad pura el rugido supercargado del HEMI y detalles interiores.
+                Recorridos fluidos y estabilizados por el showroom y bahías de exhibición. Tomas de detalle en cabina (volante, consola central, tapicería) y encendido de motor para capturar la experiencia sonora.
               </p>
               <ul className="module-bullets">
-                <li>✦ Telemetría visual en tablero digital SRT</li>
-                <li>✦ Cold-start exhaust audio sin distorsión</li>
-                <li>✦ Detalle minucioso de costuras nappa y fibra</li>
+                <li>✦ Walkarounds estabilizados 4K en 3 ejes</li>
+                <li>✦ Detalles de cabina, asientos y consola</li>
+                <li>✦ Captura sonora de encendido y motor</li>
               </ul>
             </div>
 
@@ -1417,14 +1417,14 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
                 <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", fontWeight: 800, color: "#0f172a" }}>MODULE_03</span>
                 <span className="material-symbols-outlined" style={{ color: "#0f172a" }}>photo_camera</span>
               </div>
-              <h3 className="module-title">Fotografía Oficial de Catálogo Stellantis</h3>
+              <h3 className="module-title">Fotografía Comercial de Catálogo</h3>
               <p className="module-desc">
-                Esquemas de luz de estudio en bahías de entrega de Touché. 40 fotografías en alta resolución para fichas técnicas, portal web de inventario y portadas de alta tasa de clics (CTR).
+                Fotografía fija de alta resolución con iluminación difusa en bahía de entrega. Stills de producto listos para anuncios en Meta Ads, carruseles de catálogo en redes sociales y atención comercial en WhatsApp.
               </p>
               <ul className="module-bullets">
-                <li>✦ Iluminación difusa automotriz</li>
-                <li>✦ Retoque cromático oficial de pintura</li>
-                <li>✦ Asset bancarizado para CRM Touché</li>
+                <li>✦ Iluminación automotriz en bahía de entrega</li>
+                <li>✦ Retoque cromático de pintura y carrocería</li>
+                <li>✦ Material listo para pauta y WhatsApp</li>
               </ul>
             </div>
           </div>
@@ -1595,8 +1595,8 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
               </div>
               <ul style={{ listStyle: "none", padding: 0, margin: 0, fontSize: "13px", color: "#0f172a", display: "flex", flexDirection: "column", gap: "6px" }}>
                 <li>✓ <strong>1 Jornada de Filmación Bimestral In-Situ</strong> en agencia</li>
-                <li>✓ <strong>+24 Videos Verticales 4K</strong> (Reels/Shorts) por ciclo</li>
-                <li>✓ <strong>40 Fotografías de Catálogo Stellantis</strong> retocadas</li>
+                <li>✓ <strong>Lote de Videos Verticales 4K</strong> (Reels) para pauta y redes</li>
+                <li>✓ <strong>Fotografías de Catálogo</strong> de unidades clave retocadas</li>
                 <li>✓ <strong>Pauta Sugerida:</strong> $2,000 MXN / mes (Directo a Meta)</li>
               </ul>
             </div>
@@ -1626,9 +1626,9 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
                 </div>
               </div>
               <ul style={{ listStyle: "none", padding: 0, margin: 0, fontSize: "13px", color: "#0f172a", display: "flex", flexDirection: "column", gap: "6px" }}>
-                <li>✓ <strong>1 Jornada de Filmación Mensual</strong> fija</li>
-                <li>✓ <strong>+48 Videos Verticales 4K</strong> mensuales</li>
-                <li>✓ <strong>80 Fotografías de Catálogo</strong> y lanzamientos VIP</li>
+                <li>✓ <strong>1 Jornada de Filmación Mensual</strong> fija en agencia</li>
+                <li>✓ <strong>Cobertura Continua</strong> de altas de inventario y lanzamientos</li>
+                <li>✓ <strong>Fotografías de Catálogo Mensuales</strong> para pauta y redes</li>
                 <li>✓ <strong>Pauta Sugerida:</strong> $4,000 MXN / mes (Directo a Meta)</li>
               </ul>
             </div>
@@ -1668,7 +1668,7 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
                     Honorarios de Producción & Post-Producción Cinematográfica Apolograma
                   </div>
                   <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: "#64748b", marginTop: "2px" }}>
-                    Dron 4K, DJI Osmo estabilizado, fotografía de catálogo, guiones técnicos, edición y optimización
+                    Dron DJI Mavic Air 2, estabilizador DJI Osmo, fotografía de catálogo, guiones y optimización publicitaria
                   </div>
                 </div>
                 <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "15px", fontWeight: 700, color: "#0f172a", whiteSpace: "nowrap" }}>
@@ -1769,7 +1769,7 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
                 Jornada de Rodaje In-Situ
               </h4>
               <p style={{ fontSize: "13px", color: "#475569", margin: 0, lineHeight: 1.5 }}>
-                Incursión cinematográfica sin afectar operación comercial en Touché. Captura de audio HEMI, drone FPV y material para +24 clips.
+                Jornada de producción in-situ sin afectar el flujo de la sala de ventas. Tomas aéreas con DJI Mavic Air 2, recorridos con DJI Osmo y fotografía comercial de inventario.
               </p>
             </div>
 
@@ -1782,7 +1782,7 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
                 Primer Master & Ads Live
               </h4>
               <p style={{ fontSize: "13px", color: "#475569", margin: 0, lineHeight: 1.5 }}>
-                Entrega del primer lote de reels y fotos de catálogo en alta resolución. Activación de campañas de pauta publicitaria en Meta Ads.
+                Entrega del primer paquete de reels y fotografías de catálogo. Activación y optimización de campañas de pauta publicitaria en Meta Ads.
               </p>
             </div>
           </div>
