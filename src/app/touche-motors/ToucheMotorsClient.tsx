@@ -1469,7 +1469,7 @@ Agendemos la sesión de scouting presencial in-situ para coordinar la primera jo
                 <div className="phone-notch-pill"></div>
                 <div className="phone-screen-content">
                   <img
-                    src="/assets/touche-motors/bts_gimbal_osmo.jpg"
+                    src="/assets/touche-motors/ad_reel_ram.jpg"
                     alt="Mockup Phone Ad"
                     className="phone-bg-photo"
                   />
