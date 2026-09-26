@@ -5,23 +5,27 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizeCss: true
   },
-  async rewrites() {
+  async redirects() {
     return [
       {
         source: '/hoteles-aniversario-2026',
         destination: '/hoteles-aniversario-2026/index.html',
+        permanent: false,
       },
       {
         source: '/hoteles-aniversario-2026/',
         destination: '/hoteles-aniversario-2026/index.html',
+        permanent: false,
       },
       {
         source: '/ai-grupo-constructor',
         destination: '/ai-grupo-constructor/index.html',
+        permanent: false,
       },
       {
         source: '/ai-grupo-constructor/',
         destination: '/ai-grupo-constructor/index.html',
+        permanent: false,
       },
     ];
   },
