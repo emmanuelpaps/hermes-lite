@@ -679,7 +679,6 @@
   <!-- ========================================================================= -->
   <!-- ========================================================================= -->
   <!-- 5. DEMO INTERACTIVA: MOCKUP DE CATÁLOGO & PORTAL DE OBRAS (FACTOR WOW)    -->
-  <!-- ========================================================================= -->
   <section class="py-16 sm:py-24 bg-slate-900 text-white relative overflow-hidden" id="demo-interactiva">
     
     <!-- Background Technical Grid -->
@@ -695,10 +694,10 @@
             <span class="font-mono text-xs font-bold text-emerald-400 uppercase tracking-widest">CAPÍTULO 03 · SIMULADOR EN VIVO · MAQUETA INTERACTIVA AAA</span>
           </div>
           <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight">
-            Experimente en Vivo: Así Navegarán Licitadores y Clientes sus Proyectos
+            Simulador de Portafolio: La Herramienta para Presentar AI Grupo
           </h2>
           <p class="text-slate-400 text-xs sm:text-sm mt-1 max-w-2xl leading-relaxed">
-            Interactúe con los <strong>3 módulos funcionales</strong> diseñados para convencer a dos audiencias clave: comités de licitación pública (JMAS, Puentes, CONAVI) que exigen solvencia técnica, y compradores residenciales con canal directo a WhatsApp.
+            Diseñada para cuando el <strong>Lic. Mario Suárez y su equipo presenten la constructora</strong> ante inversionistas, socios y clientes: visualice las obras ejecutadas, el <strong>desafío técnico superado</strong> en cada frente, material fotográfico de alta resolución, inspección aérea con dron y fichas ejecutivas descargables.
           </p>
         </div>
 
@@ -715,8 +714,13 @@
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4 mb-6 reveal-on-scroll stagger-1">
         <div class="bg-slate-800/90 border border-slate-700/80 rounded-xl p-3 sm:p-4">
           <span class="text-[10px] font-mono text-slate-400 uppercase block">Frentes en Cd. Juárez</span>
-          <strong class="text-base sm:text-xl font-extrabold text-white block mt-0.5">6 Obras Auditadas</strong>
+          <strong class="text-base sm:text-xl font-extrabold text-white block mt-0.5">6 Obras Clave</strong>
           <span class="text-[10px] text-emerald-400 flex items-center gap-1 mt-0.5 font-mono">● 2 en ejecución · 4 concluidas</span>
+        </div>
+        <div class="bg-slate-800/90 border border-slate-700/80 rounded-xl p-3 sm:p-4">
+          <span class="text-[10px] font-mono text-slate-400 uppercase block">Desafíos Superados</span>
+          <strong class="text-base sm:text-xl font-extrabold text-amber-400 block mt-0.5">100% en Plazo</strong>
+          <span class="text-[10px] text-slate-300 font-mono block mt-0.5">Suelos expansivos, rocas y 42°C</span>
         </div>
         <div class="bg-slate-800/90 border border-slate-700/80 rounded-xl p-3 sm:p-4">
           <span class="text-[10px] font-mono text-slate-400 uppercase block">Superficie Total</span>
@@ -725,13 +729,8 @@
         </div>
         <div class="bg-slate-800/90 border border-slate-700/80 rounded-xl p-3 sm:p-4">
           <span class="text-[10px] font-mono text-slate-400 uppercase block">Parque de Maquinaria</span>
-          <strong class="text-base sm:text-xl font-extrabold text-white block mt-0.5">100% Propia CAT®</strong>
-          <span class="text-[10px] text-amber-400 font-mono block mt-0.5">Cero riesgo de arrendamiento</span>
-        </div>
-        <div class="bg-slate-800/90 border border-slate-700/80 rounded-xl p-3 sm:p-4">
-          <span class="text-[10px] font-mono text-slate-400 uppercase block">Cumplimiento Técnico</span>
-          <strong class="text-base sm:text-xl font-extrabold text-emerald-400 block mt-0.5">100% en Plazo</strong>
-          <span class="text-[10px] text-slate-400 font-mono block mt-0.5">0 días de atraso en entrega</span>
+          <strong class="text-base sm:text-xl font-extrabold text-emerald-400 block mt-0.5">100% Propia CAT®</strong>
+          <span class="text-[10px] text-slate-300 font-mono block mt-0.5">Cero intermediarios ni rentas</span>
         </div>
       </div>
 
@@ -745,9 +744,9 @@
             <div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
             <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
           </div>
-          <div class="flex-1 max-w-md bg-slate-950/80 border border-slate-800 rounded-lg px-3 py-1 text-center font-mono text-[11px] text-slate-400 truncate flex items-center justify-center gap-1.5">
-            <span class="material-symbols-outlined text-[13px] text-emerald-400">lock</span>
-            <span id="simulator-url-bar">https://aigrupoconstructor.mx/portafolio-obras</span>
+          <div class="flex-1 max-w-md bg-slate-950/80 border border-slate-800 rounded-lg px-2 sm:px-3 py-1 text-center font-mono text-[10px] sm:text-[11px] text-slate-400 truncate flex items-center justify-center gap-1 sm:gap-1.5">
+            <span class="material-symbols-outlined text-[12px] sm:text-[13px] text-emerald-400 shrink-0">lock</span>
+            <span id="simulator-url-bar" class="truncate">https://aigrupoconstructor.mx/portafolio-obras-ejecutivas</span>
           </div>
           <div class="flex items-center gap-2 text-slate-400 shrink-0">
             <span class="text-[10px] font-mono font-bold text-emerald-400 hidden sm:inline">SSL A+ BLINDADO</span>
@@ -758,35 +757,231 @@
           </div>
         </div>
 
-        <!-- Mode Switcher Navigation (3 Interactive Modes) -->
+        <!-- Mode Switcher Navigation (3 Executive Modes) -->
         <div class="bg-slate-900 border-b border-slate-800 px-3 sm:px-6 py-2.5 flex items-center justify-between gap-2 overflow-x-auto no-scrollbar">
           <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
-            <button onclick="setDemoMode('portfolio')" id="mode-btn-portfolio" class="mode-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-sky-500 text-slate-950 flex items-center gap-1.5 transition-all shadow-xs cursor-pointer">
-              <span class="material-symbols-outlined text-[16px]">domain</span>
-              <span>1. Portafolio Visual (6)</span>
+            <button onclick="setDemoMode('showcase')" id="mode-btn-showcase" class="mode-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-sky-500 text-slate-950 flex items-center gap-1.5 transition-all shadow-xs cursor-pointer">
+              <span class="material-symbols-outlined text-[16px]">co_present</span>
+              <span>1. Showcase Ejecutivo (Presentación)</span>
             </button>
-            <button onclick="setDemoMode('matrix')" id="mode-btn-matrix" class="mode-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center gap-1.5 transition-all cursor-pointer">
-              <span class="material-symbols-outlined text-[16px]">table_chart</span>
-              <span>2. Matriz de Licitación (Auditor)</span>
+            <button onclick="setDemoMode('grid')" id="mode-btn-grid" class="mode-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center gap-1.5 transition-all cursor-pointer">
+              <span class="material-symbols-outlined text-[16px]">grid_view</span>
+              <span>2. Catálogo & Filtros por Desafío (6)</span>
             </button>
-            <button onclick="setDemoMode('calculator')" id="mode-btn-calculator" class="mode-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center gap-1.5 transition-all cursor-pointer">
-              <span class="material-symbols-outlined text-[16px]">precision_manufacturing</span>
-              <span>3. Calculadora de Maquinaria CAT®</span>
+            <button onclick="setDemoMode('compare')" id="mode-btn-compare" class="mode-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center gap-1.5 transition-all cursor-pointer">
+              <span class="material-symbols-outlined text-[16px]">compare</span>
+              <span>3. Comparativa Antes / Después (Reto vs Obra)</span>
             </button>
           </div>
           <div class="hidden lg:flex items-center gap-2 text-[11px] font-mono text-slate-400 shrink-0">
-            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-            <span>Simulación en vivo para Lic. Mario Suárez</span>
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>Modo Presentación para Lic. Mario Suárez</span>
           </div>
         </div>
 
         <!-- Inside Browser Canvas -->
         <div class="p-3 sm:p-6 bg-slate-900 text-slate-900">
           
-          <!-- ========================================== -->
-          <!-- PANEL 1: PORTAFOLIO VISUAL CON TARJETAS   -->
-          <!-- ========================================== -->
-          <div id="panel-portfolio" class="bg-white rounded-xl sm:rounded-2xl p-3.5 sm:p-6 shadow-lg border border-slate-200">
+          <!-- ======================================================== -->
+          <!-- PANEL 1: SHOWCASE EJECUTIVO (VISTA PRINCIPAL PRESENTADOR) -->
+          <!-- ======================================================== -->
+          <div id="panel-showcase" class="bg-slate-950 text-white rounded-xl sm:rounded-2xl p-3.5 sm:p-6 shadow-2xl border border-slate-800">
+            
+            <!-- Quick Project Selector Pills -->
+            <div class="pb-4 mb-5 border-b border-slate-800 flex items-center justify-between gap-3">
+              <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1" id="showcase-selector-pills">
+                <!-- Injected by JS: 6 project selector buttons -->
+              </div>
+              <span class="text-[11px] font-mono text-slate-400 shrink-0 hidden md:inline">Seleccione para proyectar</span>
+            </div>
+
+            <!-- Main Stage (Split View) -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+              
+              <!-- Left: Media Center & Gallery (7 cols) -->
+              <div class="lg:col-span-7 space-y-3.5">
+                
+                <!-- Media Stage (16:9 Screen) -->
+                <div class="relative rounded-2xl overflow-hidden border border-slate-800 bg-slate-900 shadow-2xl aspect-video group" id="showcase-media-stage">
+                  
+                  <!-- Main Image View -->
+                  <div id="showcase-view-photo" class="w-full h-full relative">
+                    <img id="showcase-main-img" src="assets/solis_barraza_movimiento_tierra.jpg" alt="Obra" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-slate-950/30"></div>
+                  </div>
+
+                  <!-- Drone / Video Aerial Inspection View -->
+                  <div id="showcase-view-drone" class="w-full h-full relative hidden">
+                    <video id="showcase-drone-video" src="assets/drone_preview_loop.mp4" autoplay loop muted playsinline class="w-full h-full object-cover"></video>
+                    
+                    <!-- Futuristic Drone HUD Overlay -->
+                    <div class="absolute inset-0 pointer-events-none p-3.5 flex flex-col justify-between font-mono text-[10px] text-emerald-400 select-none bg-emerald-950/10">
+                      <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2 bg-slate-950/80 px-2 py-1 rounded border border-emerald-500/40">
+                          <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+                          <span class="text-white font-bold tracking-wider">● VISTA AÉREA EN VIVO DRON 4K</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-slate-950/80 px-2 py-1 rounded border border-emerald-500/40">
+                          <span>ALT: 85.4M</span>
+                          <span>·</span>
+                          <span>BATT: 92%</span>
+                          <span>·</span>
+                          <span>GPS SAT: 19</span>
+                        </div>
+                      </div>
+                      
+                      <!-- Center Target Reticle -->
+                      <div class="self-center flex items-center justify-center opacity-70">
+                        <div class="w-16 h-16 border border-emerald-400/50 rounded-full flex items-center justify-center">
+                          <div class="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                        </div>
+                      </div>
+
+                      <div class="flex items-center justify-between text-slate-300">
+                        <span id="drone-hud-coords" class="bg-slate-950/80 px-2 py-0.5 rounded border border-slate-700 text-emerald-400">
+                          📍 31°35'44"N 106°22'18"W · Suroriente Juárez
+                        </span>
+                        <span class="bg-slate-950/80 px-2 py-0.5 rounded border border-slate-700 text-amber-400">
+                          VEL: 14 KM/H · VIENTO: 8 KTS
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Overlay Chips (Wrapped for clean drone toggle) -->
+                  <div id="showcase-overlays-container" class="transition-opacity duration-300 pointer-events-none">
+                    <div class="absolute top-2.5 sm:top-3 left-2.5 sm:left-3 flex items-center gap-1 sm:gap-1.5 z-10 pointer-events-auto">
+                      <span id="showcase-badge-id" class="text-[10px] font-mono font-black px-2 py-0.5 rounded bg-sky-500 text-slate-950 shadow-xs">
+                        OB-01
+                      </span>
+                      <span id="showcase-badge-type" class="text-[9px] sm:text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-slate-900/90 text-slate-200 border border-slate-700 backdrop-blur-xs hidden sm:inline-block truncate max-w-[170px]">
+                        Vivienda Social & Terracerías Masivas
+                      </span>
+                    </div>
+
+                    <div class="absolute top-2.5 sm:top-3 right-2.5 sm:right-3 z-10 pointer-events-auto">
+                      <span id="showcase-badge-progress" class="text-[9px] sm:text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-amber-400 text-slate-950 flex items-center gap-1 shadow-xs">
+                        <span class="w-1.5 h-1.5 rounded-full bg-slate-950 animate-ping"></span>
+                        <span>42% Avance Físico</span>
+                      </span>
+                    </div>
+
+                    <div class="absolute bottom-2.5 sm:bottom-3 left-2.5 sm:left-3 right-2.5 sm:right-3 flex items-center justify-between text-[10px] sm:text-[11px] font-mono text-slate-300 z-10 pointer-events-auto">
+                      <span id="showcase-badge-coords" class="flex items-center gap-1 text-slate-300 bg-slate-950/85 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md border border-slate-800 truncate max-w-[260px] sm:max-w-none">
+                        <span class="material-symbols-outlined text-[13px] text-emerald-400 shrink-0">my_location</span>
+                        <span class="truncate">Av. Leonardo Solís Barraza & Fundadores</span>
+                      </span>
+                      <span class="hidden md:inline-block bg-slate-950/85 px-2 py-0.5 rounded text-slate-400 text-[10px] border border-slate-800">
+                        Ciudad Juárez, Chihuahua
+                      </span>
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- Media Mode Selector Buttons -->
+                <div class="flex items-center justify-between gap-2 pt-1">
+                  <div class="flex items-center gap-1.5">
+                    <button onclick="setShowcaseMedia('photos')" id="btn-media-photos" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-sky-500 text-slate-950 flex items-center gap-1 transition-all cursor-pointer">
+                      <span class="material-symbols-outlined text-[15px]">photo_library</span>
+                      <span>Fotos de Frente (3)</span>
+                    </button>
+                    <button onclick="setShowcaseMedia('drone')" id="btn-media-drone" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center gap-1 transition-all cursor-pointer">
+                      <span class="material-symbols-outlined text-[15px] text-emerald-400">videocam</span>
+                      <span>Inspección Dron 4K</span>
+                    </button>
+                  </div>
+                  <span class="text-[10px] font-mono text-slate-400 hidden sm:inline">Haz clic en las miniaturas para alternar toma</span>
+                </div>
+
+                <!-- Photo Thumbnails Strip (3 Photos for active project) -->
+                <div class="grid grid-cols-3 gap-2.5 pt-1" id="showcase-thumbs-container">
+                  <!-- Injected by JS: 3 clickable thumbnails -->
+                </div>
+
+              </div>
+
+              <!-- Right: Engineering Dossier & The Challenge (5 cols) -->
+              <div class="lg:col-span-5 space-y-3.5 flex flex-col justify-between">
+                
+                <div>
+                  <!-- Project Title & Subtitle -->
+                  <div class="pb-3 border-b border-slate-800">
+                    <span id="showcase-client" class="text-[11px] font-mono text-sky-400 uppercase tracking-wider block font-bold">
+                      CONAVI / SEDATU · No. LPF-SEDATU-DGDRU-2025-048
+                    </span>
+                    <h3 id="showcase-title" class="text-base sm:text-xl font-extrabold text-white mt-1 leading-snug">
+                      Megaproyecto Habitacional y Urbanización "Casas del Bienestar"
+                    </h3>
+                  </div>
+
+                  <!-- Golden Box: EL DESAFÍO TÉCNICO Y OPERATIVO -->
+                  <div class="mt-3.5 bg-gradient-to-br from-amber-950/40 via-slate-900 to-slate-900 p-3.5 sm:p-4 rounded-xl border border-amber-500/50 shadow-lg">
+                    <div class="flex items-center gap-2 mb-1.5 text-amber-400">
+                      <span class="material-symbols-outlined text-[18px]">warning</span>
+                      <strong class="font-mono text-xs uppercase tracking-wider">El Desafío de Ingeniería:</strong>
+                    </div>
+                    <p id="showcase-challenge" class="text-xs text-slate-200 leading-relaxed font-normal">
+                      Consolidación y nivelación de 120,000 m² sobre arcillas expansivas del desierto juarense bajo condiciones severas de tolvaneras y calor extremo. El reto crítico fue habilitar plataformas estructurales para 728 departamentos en un plazo estricto de 90 días naturales, eliminando cualquier riesgo de asentamiento diferencial futuro.
+                    </p>
+                  </div>
+
+                  <!-- Green Box: LA SOLUCIÓN EJECUTADA POR AI GRUPO -->
+                  <div class="mt-3 bg-gradient-to-br from-emerald-950/40 via-slate-900 to-slate-900 p-3.5 sm:p-4 rounded-xl border border-emerald-500/50 shadow-lg">
+                    <div class="flex items-center gap-2 mb-1.5 text-emerald-400">
+                      <span class="material-symbols-outlined text-[18px]">verified</span>
+                      <strong class="font-mono text-xs uppercase tracking-wider">Solución de AI Grupo & Despliegue CAT®:</strong>
+                    </div>
+                    <p id="showcase-solution" class="text-xs text-slate-200 leading-relaxed font-normal">
+                      Despliegue ininterrumpido de tren de terracerías pesado (3 excavadoras CAT 320D, motoconformadora 140M y compactadores pata de cabra), sustitución de estrato arcilloso por material granular de banco y estabilización certificada al 95% Proctor Modificado.
+                    </p>
+                  </div>
+
+                  <!-- Key Technical Specs Grid -->
+                  <div class="grid grid-cols-2 gap-2 mt-3 text-xs">
+                    <div class="bg-slate-900/90 p-2.5 rounded-lg border border-slate-800">
+                      <span class="text-[9px] font-mono uppercase text-slate-400 block">Volumen / Movimiento</span>
+                      <strong id="showcase-vol" class="text-white font-mono font-bold text-xs block mt-0.5">85,000 m³</strong>
+                    </div>
+                    <div class="bg-slate-900/90 p-2.5 rounded-lg border border-slate-800">
+                      <span class="text-[9px] font-mono uppercase text-slate-400 block">Superficie Total</span>
+                      <strong id="showcase-specs" class="text-emerald-400 font-mono font-bold text-xs block mt-0.5">120,000 m²</strong>
+                    </div>
+                    <div class="bg-slate-900/90 p-2.5 rounded-lg border border-slate-800 col-span-2">
+                      <span class="text-[9px] font-mono uppercase text-slate-400 block">Flota CAT® Asignada</span>
+                      <strong id="showcase-machinery" class="text-amber-400 font-mono text-[11px] block mt-0.5 truncate">3x Excavadoras CAT 320D, 1x Motoconformadora 140M, 6x Volteos</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Executive CTA Buttons -->
+                <div class="pt-3 border-t border-slate-800 space-y-2">
+                  <div class="flex items-center gap-2">
+                    <button onclick="openCurrentShowcaseDossier()" class="btn-sheen flex-1 bg-sky-500 hover:bg-sky-400 text-slate-950 font-extrabold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 shadow-lg transition-all cursor-pointer">
+                      <span class="material-symbols-outlined text-[17px]">visibility</span>
+                      <span>Ver Ficha Técnica 360°</span>
+                    </button>
+                    <button onclick="downloadDossierDemo()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs py-2.5 px-3 rounded-xl border border-slate-700 flex items-center justify-center gap-1.5 transition-all cursor-pointer" title="Descargar Expediente en PDF">
+                      <span class="material-symbols-outlined text-[17px] text-amber-400">picture_as_pdf</span>
+                      <span class="hidden sm:inline">Dossier PDF</span>
+                    </button>
+                  </div>
+                  <a id="showcase-wa-btn" href="https://wa.me/526563604085" target="_blank" rel="noopener noreferrer" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 transition-all shadow-xs cursor-pointer">
+                    <span class="material-symbols-outlined text-[16px]">share</span>
+                    <span>Compartir Esta Ficha por WhatsApp a un Cliente</span>
+                  </a>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- ======================================================== -->
+          <!-- PANEL 2: CATÁLOGO EN CUADRÍCULA & FILTROS POR DESAFÍO    -->
+          <!-- ======================================================== -->
+          <div id="panel-grid" class="bg-white rounded-xl sm:rounded-2xl p-3.5 sm:p-6 shadow-lg border border-slate-200 hidden text-slate-900">
             
             <!-- Filter Bar & Search -->
             <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3.5 sm:gap-4 pb-4 sm:pb-5 border-b border-slate-200">
@@ -832,7 +1027,7 @@
               <!-- Cards rendered by JS -->
             </div>
 
-            <!-- Footer of Demo -->
+            <!-- Footer of Catalog -->
             <div class="mt-6 pt-4 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
               <span id="demo-counter" class="font-medium text-slate-600">Mostrando 6 proyectos auditados</span>
               <div class="flex items-center gap-2">
@@ -848,209 +1043,87 @@
 
           </div>
 
-          <!-- ========================================== -->
-          <!-- PANEL 2: MATRIZ DE LICITACIÓN (AUDITOR)    -->
-          <!-- ========================================== -->
-          <div id="panel-matrix" class="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg border border-slate-200 hidden">
+          <!-- ======================================================== -->
+          <!-- PANEL 3: COMPARATIVA ANTES / DESPUÉS (RETO VS OBRA)      -->
+          <!-- ======================================================== -->
+          <div id="panel-compare" class="bg-slate-950 text-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-2xl border border-slate-800 hidden">
             
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200 mb-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-800 mb-5">
               <div>
                 <div class="flex items-center gap-2 mb-1">
-                  <span class="px-2 py-0.5 rounded bg-sky-100 text-sky-800 font-mono text-[10px] font-extrabold uppercase">MODO AUDITOR TÉCNICO</span>
-                  <span class="text-xs text-slate-500 font-mono">Compatible Compranet & JMAS</span>
+                  <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 font-mono text-[10px] font-extrabold uppercase border border-amber-500/30">VISOR DE TRANSFORMACIÓN REAL</span>
+                  <span class="text-xs text-slate-400 font-mono">El Reto de Suelo vs. La Obra Concluida</span>
                 </div>
-                <h3 class="text-base sm:text-lg font-extrabold text-slate-900">
-                  Matriz Oficial de Contratos y Solvencia Mecánica
+                <h3 class="text-base sm:text-xl font-extrabold text-white">
+                  Comparador Interactivo: Del Terreno en Breña a la Plataforma Nivelada
                 </h3>
               </div>
-              <button onclick="downloadDossierDemo()" class="btn-sheen inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-3.5 py-2 rounded-xl transition-all self-start sm:self-auto cursor-pointer">
-                <span class="material-symbols-outlined text-[16px] text-amber-400">download</span>
-                <span>Exportar Padrón Técnico (PDF/Excel)</span>
-              </button>
-            </div>
 
-            <!-- Table Container -->
-            <div class="overflow-x-auto border border-slate-200 rounded-xl">
-              <table class="w-full text-left text-xs text-slate-700">
-                <thead>
-                  <tr class="bg-slate-900 text-white font-mono text-[10px] sm:text-[11px] uppercase tracking-wider">
-                    <th class="py-3 px-3 sm:px-4">Clave / Obra</th>
-                    <th class="py-3 px-3 sm:px-4">Dependencia / Contratante</th>
-                    <th class="py-3 px-3 sm:px-4 hidden md:table-cell">No. Concurso</th>
-                    <th class="py-3 px-3 sm:px-4">Metraje / Volumen</th>
-                    <th class="py-3 px-3 sm:px-4 hidden lg:table-cell">Flota CAT® Asignada</th>
-                    <th class="py-3 px-3 sm:px-4">Avance Físico</th>
-                    <th class="py-3 px-3 sm:px-4 text-center">Expediente</th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-100 text-[11px] sm:text-xs" id="matrix-table-body">
-                  <!-- Populated by JS -->
-                </tbody>
-              </table>
-            </div>
-
-            <div class="mt-4 pt-3 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500">
-              <span class="font-mono text-[11px]">✓ 6 de 6 contratos con póliza de fianza y cumplimiento auditado sin observaciones.</span>
-              <span class="text-emerald-600 font-bold flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                Registro de Contratista Estatal Vigente 2026
-              </span>
-            </div>
-
-          </div>
-
-          <!-- ========================================== -->
-          <!-- PANEL 3: CALCULADORA DE FLOTA CAT®        -->
-          <!-- ========================================== -->
-          <div id="panel-calculator" class="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg border border-slate-200 hidden">
-            
-            <div class="max-w-2xl mb-6">
-              <div class="flex items-center gap-2 mb-1">
-                <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-mono text-[10px] font-extrabold uppercase">SIMULADOR EN TIEMPO REAL</span>
-                <span class="text-xs text-slate-500 font-mono">Fórmula de Rendimiento Horario CMIC</span>
+              <!-- Selector of comparison projects -->
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-slate-400 font-mono hidden sm:inline">Seleccione Frente:</span>
+                <select id="compare-project-select" onchange="setCompareProject(this.value)" class="bg-slate-900 border border-slate-700 text-white text-xs font-bold rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-sky-500 cursor-pointer">
+                  <option value="OB-01">Casas del Bienestar (Solís Barraza)</option>
+                  <option value="OB-03">Fraccionamiento Residencial (Teófilo Borunda)</option>
+                  <option value="OB-04">Vialidad Troncal Solís Barraza (Tramo 2)</option>
+                  <option value="OB-02">Canal Pluvial Puentes Zaragoza</option>
+                </select>
               </div>
-              <h3 class="text-base sm:text-xl font-extrabold text-slate-900">
-                Calculadora de Despliegue de Maquinaria y Tiempos de Obra
-              </h3>
-              <p class="text-xs sm:text-sm text-slate-600 mt-1">
-                Ajuste el metraje y el tipo de intervención para simular cuántas excavadoras CAT, motoconformadoras y días de trabajo requiere un frente específico.
-              </p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            <!-- Split Slider Container (Touch & Mouse Drag) -->
+            <div class="relative rounded-2xl overflow-hidden aspect-video max-h-[520px] bg-slate-900 border border-slate-800 shadow-2xl select-none" id="compare-slider-box">
               
-              <!-- Left: Controls (7 cols) -->
-              <div class="lg:col-span-7 space-y-4 bg-slate-50 p-4 sm:p-5 rounded-xl border border-slate-200">
-                
-                <!-- Type Selector -->
-                <div>
-                  <label class="block text-xs font-mono font-bold text-slate-700 uppercase mb-1.5">
-                    1. Tipo de Intervención / Obra Civil:
-                  </label>
-                  <select id="calc-type" onchange="calculateMachinery()" class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-sky-500 cursor-pointer">
-                    <option value="terracerias">Terracerías Masivas & Plataformas Industriales</option>
-                    <option value="fraccionamiento">Urbanización Integral de Fraccionamiento Residencial</option>
-                    <option value="pavimentacion">Pavimentación con Concreto Hidráulico / Asfalto</option>
-                    <option value="pluvial">Colectores Pluviales y Zanjas Profundas JMAS</option>
-                  </select>
-                </div>
-
-                <!-- Area Slider -->
-                <div>
-                  <div class="flex items-center justify-between mb-1.5">
-                    <label class="text-xs font-mono font-bold text-slate-700 uppercase">
-                      2. Superficie a Intervenir:
-                    </label>
-                    <span class="text-sm font-extrabold text-sky-700 font-mono bg-sky-50 px-2.5 py-0.5 rounded-md border border-sky-200" id="calc-area-val">
-                      35,000 m²
-                    </span>
-                  </div>
-                  <input 
-                    type="range" 
-                    id="calc-area-slider" 
-                    min="5000" 
-                    max="150000" 
-                    step="5000" 
-                    value="35000" 
-                    oninput="calculateMachinery()"
-                    class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-sky-600"
-                  >
-                  <div class="flex justify-between text-[10px] font-mono text-slate-400 mt-1">
-                    <span>5,000 m²</span>
-                    <span>75,000 m²</span>
-                    <span>150,000 m²</span>
-                  </div>
-                </div>
-
-                <!-- Time Deadline -->
-                <div>
-                  <label class="block text-xs font-mono font-bold text-slate-700 uppercase mb-1.5">
-                    3. Plazo Contractual Deseado:
-                  </label>
-                  <div class="grid grid-cols-4 gap-2" id="calc-deadline-group">
-                    <button type="button" onclick="setCalcDeadline(30)" class="calc-deadline-btn px-2.5 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:border-sky-400 transition-all cursor-pointer" data-days="30">
-                      30 Días
-                    </button>
-                    <button type="button" onclick="setCalcDeadline(60)" class="calc-deadline-btn px-2.5 py-1.5 rounded-lg text-xs font-bold bg-slate-900 text-white border border-slate-900 transition-all cursor-pointer shadow-xs" data-days="60">
-                      60 Días
-                    </button>
-                    <button type="button" onclick="setCalcDeadline(90)" class="calc-deadline-btn px-2.5 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:border-sky-400 transition-all cursor-pointer" data-days="90">
-                      90 Días
-                    </button>
-                    <button type="button" onclick="setCalcDeadline(120)" class="calc-deadline-btn px-2.5 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:border-sky-400 transition-all cursor-pointer" data-days="120">
-                      120 Días
-                    </button>
-                  </div>
-                </div>
-
+              <!-- After Image (Background: Obra Terminada) -->
+              <img id="compare-img-after" src="assets/obra_aerea_dron.jpg" alt="Obra Ejecutada" class="w-full h-full object-cover">
+              
+              <div class="absolute bottom-3 right-3 bg-emerald-600/90 text-white font-mono text-[10px] font-bold px-3 py-1 rounded-md backdrop-blur-xs border border-emerald-400/40 z-10">
+                OBRA EJECUTADA & COMPACTADA (DESPUÉS)
               </div>
 
-              <!-- Right: Results Dashboard (5 cols) -->
-              <div class="lg:col-span-5 bg-slate-900 text-white rounded-xl p-4 sm:p-5 border border-slate-800 flex flex-col justify-between">
-                
-                <div>
-                  <div class="flex items-center justify-between pb-3 border-b border-slate-800">
-                    <span class="text-[10px] font-mono text-emerald-400 font-bold uppercase tracking-wider">
-                      ● Estimación Técnica en Vivo
-                    </span>
-                    <span class="text-[10px] font-mono text-slate-400">Norma SCT / CMIC</span>
-                  </div>
-
-                  <!-- Key Metric Output -->
-                  <div class="grid grid-cols-2 gap-2 my-3">
-                    <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
-                      <span class="text-[10px] text-slate-400 font-mono uppercase block">Volumen Calculado</span>
-                      <strong class="text-base sm:text-lg font-black text-white block mt-0.5" id="calc-volume-out">
-                        29,750 m³
-                      </strong>
-                    </div>
-                    <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
-                      <span class="text-[10px] text-slate-400 font-mono uppercase block">Rendimiento Diario</span>
-                      <strong class="text-base sm:text-lg font-black text-sky-400 block mt-0.5" id="calc-daily-out">
-                        496 m³/día
-                      </strong>
-                    </div>
-                  </div>
-
-                  <!-- Equipment Deployment List -->
-                  <div class="space-y-1.5 text-xs">
-                    <span class="text-[10px] font-mono uppercase font-bold text-amber-400 tracking-wider block">
-                      Flota Pesada CAT® Requerida:
-                    </span>
-                    <div class="flex items-center justify-between bg-slate-800/80 px-2.5 py-1.5 rounded-md text-[11px]">
-                      <span class="text-slate-300">Excavadoras CAT 320D / 329E</span>
-                      <strong class="text-white font-mono" id="calc-excavators-out">2 Unidades</strong>
-                    </div>
-                    <div class="flex items-center justify-between bg-slate-800/80 px-2.5 py-1.5 rounded-md text-[11px]">
-                      <span class="text-slate-300">Motoconformadoras CAT 140M</span>
-                      <strong class="text-white font-mono" id="calc-graders-out">1 Unidad</strong>
-                    </div>
-                    <div class="flex items-center justify-between bg-slate-800/80 px-2.5 py-1.5 rounded-md text-[11px]">
-                      <span class="text-slate-300">Compactadores Vibratorios 12T</span>
-                      <strong class="text-white font-mono" id="calc-rollers-out">1 Unidad</strong>
-                    </div>
-                    <div class="flex items-center justify-between bg-slate-800/80 px-2.5 py-1.5 rounded-md text-[11px]">
-                      <span class="text-slate-300">Camiones Volteo 14m³</span>
-                      <strong class="text-white font-mono" id="calc-trucks-out">4 Unidades</strong>
-                    </div>
-                  </div>
-
-                  <!-- Capacity Guarantee Badge -->
-                  <div class="mt-3 p-2.5 rounded-lg bg-emerald-950/40 border border-emerald-800/60 text-[11px] text-emerald-300 leading-snug">
-                    <strong class="block font-bold mb-0.5">✓ Capacidad 100% Cubierta por AI Grupo</strong>
-                    Parque de maquinaria disponible de inmediato en Cd. Juárez (Teófilo Borunda 8349). Sin riesgo por terceros.
-                  </div>
+              <!-- Before Image (Clipped Overlay: Reto Inicial) -->
+              <div id="compare-before-wrapper" class="absolute top-0 left-0 bottom-0 overflow-hidden w-1/2 border-r-2 border-amber-400 shadow-2xl">
+                <img id="compare-img-before" src="assets/terreno_brena_antes.jpg" alt="Terreno en Breña" class="w-full h-full object-cover max-w-none" style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="absolute bottom-3 left-3 bg-amber-500/90 text-slate-950 font-mono text-[10px] font-black px-3 py-1 rounded-md backdrop-blur-xs border border-amber-300">
+                  EL RETO INICIAL: TERRENO NATURAL EN BREÑA (ANTES)
                 </div>
-
-                <div class="mt-4 pt-3 border-t border-slate-800">
-                  <a href="https://wa.me/526563604085?text=Hola%2C%20quisiera%20cotizar%20despliegue%20de%20maquinaria%20pesada%20CAT%20con%20AI%20Grupo%20Constructor" target="_blank" rel="noopener noreferrer" class="btn-sheen w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer">
-                    <span class="material-symbols-outlined text-[16px]">chat</span>
-                    <span>Consultar Asignación para este Volumen</span>
-                  </a>
-                </div>
-
               </div>
 
+              <!-- Interactive Handle -->
+              <div id="compare-handle" class="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-none z-10">
+                <div class="w-9 h-9 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center shadow-2xl border-2 border-white ring-4 ring-slate-950/40">
+                  <span class="material-symbols-outlined text-[18px] font-black">drag_indicator</span>
+                </div>
+              </div>
+
+              <!-- Native Range Slider on top for 100% native mobile & desktop responsiveness -->
+              <input 
+                type="range" 
+                min="0" 
+                max="100" 
+                value="50" 
+                id="compare-range-input"
+                oninput="updateCompareSlider(this.value)" 
+                class="absolute inset-0 opacity-0 cursor-ew-resize w-full h-full z-20"
+                aria-label="Arrastra para comparar el antes y después de la obra"
+              >
+            </div>
+
+            <!-- Bottom Descriptive Card for the Active Comparison -->
+            <div class="mt-4 p-4 rounded-xl bg-slate-900 border border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+              <div>
+                <strong id="compare-desc-title" class="text-white font-extrabold text-sm block">
+                  Transformación de 120,000 m² de Breña Desértica en Plataformas Estructurales
+                </strong>
+                <p id="compare-desc-text" class="text-slate-400 text-xs mt-0.5">
+                  Desmonte, corte, terraplén y compactación al 95% Proctor Modificado. Se eliminó la irregularidad topográfica para edificar 728 departamentos.
+                </p>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="font-mono text-[11px] text-amber-400 bg-amber-950/60 border border-amber-500/40 px-2.5 py-1 rounded">
+                  Arrastre el divisor horizontalmente
+                </span>
+              </div>
             </div>
 
           </div>
@@ -1062,7 +1135,6 @@
     </div>
   </section>
 
-  <!-- ========================================================================= -->
   <!-- 6. TABLA COMPARATIVA: SITIO GENÉRICO VS DESARROLLO APOLOGRAMA              -->
   <!-- ========================================================================= -->
   <section class="py-16 sm:py-24 bg-white border-b border-slate-100">
@@ -1587,113 +1659,181 @@
         </button>
       </div>
 
+      <!-- Modal Tabs Navigation -->
+      <div class="bg-slate-950/90 border-b border-slate-800 px-4 sm:px-6 flex items-center gap-2 overflow-x-auto no-scrollbar text-xs">
+        <button onclick="setModalTab('summary')" id="modal-tab-summary" class="py-2.5 px-3 font-bold border-b-2 border-sky-500 text-sky-400 flex items-center gap-1.5 transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-[15px]">description</span>
+          <span>1. Resumen & Desafío</span>
+        </button>
+        <button onclick="setModalTab('gallery')" id="modal-tab-gallery" class="py-2.5 px-3 font-bold border-b-2 border-transparent text-slate-400 hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-[15px]">photo_library</span>
+          <span>2. Galería de Evidencias (3 Fotos)</span>
+        </button>
+        <button onclick="setModalTab('equipment')" id="modal-tab-equipment" class="py-2.5 px-3 font-bold border-b-2 border-transparent text-slate-400 hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-[15px]">precision_manufacturing</span>
+          <span>3. Flota CAT® Desplegada</span>
+        </button>
+        <button onclick="setModalTab('lab')" id="modal-tab-lab" class="py-2.5 px-3 font-bold border-b-2 border-transparent text-slate-400 hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-[15px]">verified</span>
+          <span>4. Ensayes & Calidad (EMA)</span>
+        </button>
+      </div>
+
       <!-- Modal Body (Scrollable) -->
       <div class="p-4 sm:p-6 overflow-y-auto space-y-6">
         
-        <!-- Top Split: Image & Highlights -->
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-5 items-start">
-          
-          <!-- Image (7 cols) -->
-          <div class="md:col-span-7 rounded-xl overflow-hidden border border-slate-800 bg-slate-950 relative group">
-            <img id="modal-project-img" src="assets/solis_barraza_movimiento_tierra.jpg" alt="Obra" class="w-full h-56 sm:h-72 object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent"></div>
+        <!-- ======================= -->
+        <!-- TAB 1: RESUMEN & DESAFÍO -->
+        <!-- ======================= -->
+        <div id="modal-content-summary" class="space-y-5">
+          <!-- Top Split: Image & Highlights -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-5 items-start">
             
-            <!-- GPS & Status Chips -->
-            <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
-              <span id="modal-project-type" class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-sky-500 text-slate-950">
-                Licitación Pública Federal
-              </span>
-              <span id="modal-project-status" class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-amber-400 text-slate-950 flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-slate-950 animate-ping"></span>
-                <span>Fase I en Ejecución</span>
-              </span>
+            <!-- Image (7 cols) -->
+            <div class="md:col-span-7 rounded-xl overflow-hidden border border-slate-800 bg-slate-950 relative group">
+              <img id="modal-project-img" src="assets/solis_barraza_movimiento_tierra.jpg" alt="Obra" class="w-full h-56 sm:h-72 object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent"></div>
+              
+              <!-- GPS & Status Chips -->
+              <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+                <span id="modal-project-type" class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-sky-500 text-slate-950">
+                  Licitación Pública Federal
+                </span>
+                <span id="modal-project-status" class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-amber-400 text-slate-950 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-slate-950 animate-ping"></span>
+                  <span>Fase I en Ejecución</span>
+                </span>
+              </div>
+
+              <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] font-mono text-slate-300">
+                <span id="modal-project-coords" class="flex items-center gap-1 text-slate-300">
+                  <span class="material-symbols-outlined text-[14px] text-emerald-400">my_location</span>
+                  <span>31°35'44"N 106°22'18"W</span>
+                </span>
+                <span class="text-emerald-400 font-bold">Frente Activo Cd. Juárez</span>
+              </div>
             </div>
 
-            <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] font-mono text-slate-300">
-              <span id="modal-project-coords" class="flex items-center gap-1 text-slate-300">
-                <span class="material-symbols-outlined text-[14px] text-emerald-400">my_location</span>
-                <span>31°35'44"N 106°22'18"W</span>
-              </span>
-              <span class="text-emerald-400 font-bold">Frente Activo Cd. Juárez</span>
+            <!-- Quick Metrics & Audit Badges (5 cols) -->
+            <div class="md:col-span-5 space-y-3">
+              <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
+                <span class="text-[10px] font-mono uppercase text-slate-400 block">Dependencia / Contratante</span>
+                <strong id="modal-project-dep" class="text-xs sm:text-sm font-bold text-white block mt-0.5">
+                  CONAVI / SEDATU / Gobierno Federal
+                </strong>
+                <span id="modal-project-concurso" class="text-[10px] font-mono text-sky-400 block mt-1">
+                  Concurso: LPF-SEDATU-DGDRU-2025-048
+                </span>
+              </div>
+
+              <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
+                <span class="text-[10px] font-mono uppercase text-slate-400 block">Volumen & Metraje Oficial</span>
+                <strong id="modal-project-volume" class="text-xs sm:text-sm font-bold text-emerald-400 block mt-0.5">
+                  85,000 m³ Movimiento de Tierra
+                </strong>
+                <span id="modal-project-specs" class="text-[10px] font-mono text-slate-300 block mt-1">
+                  728 Viviendas en Edificios 2-4 Niveles
+                </span>
+              </div>
+
+              <!-- Progress Bar -->
+              <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
+                <div class="flex items-center justify-between text-xs mb-1.5">
+                  <span class="text-[10px] font-mono uppercase text-slate-400">Avance Físico Contractual</span>
+                  <strong id="modal-project-percent" class="font-mono text-amber-400 font-bold">42%</strong>
+                </div>
+                <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                  <div id="modal-project-bar" class="h-full bg-gradient-to-r from-sky-500 to-emerald-400 rounded-full transition-all duration-700" style="width: 42%;"></div>
+                </div>
+                <span class="text-[9px] font-mono text-slate-400 mt-1 block">Cumplimiento en tiempo y forma según bitácora digital</span>
+              </div>
             </div>
+
           </div>
 
-          <!-- Quick Metrics & Audit Badges (5 cols) -->
-          <div class="md:col-span-5 space-y-3">
-            
-            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
-              <span class="text-[10px] font-mono uppercase text-slate-400 block">Dependencia / Contratante</span>
-              <strong id="modal-project-dep" class="text-xs sm:text-sm font-bold text-white block mt-0.5">
-                CONAVI / SEDATU / Gobierno Federal
-              </strong>
-              <span id="modal-project-concurso" class="text-[10px] font-mono text-sky-400 block mt-1">
-                Concurso: LPF-SEDATU-DGDRU-2025-048
-              </span>
+          <!-- Highlight Box: El Desafío de Ingeniería -->
+          <div class="bg-gradient-to-r from-amber-950/40 via-slate-950 to-slate-950 p-4 rounded-xl border border-amber-500/40">
+            <div class="flex items-center gap-2 mb-1.5 text-amber-400">
+              <span class="material-symbols-outlined text-[18px]">warning</span>
+              <h5 class="text-xs font-mono uppercase font-bold tracking-wider">El Desafío Técnico de la Obra:</h5>
             </div>
-
-            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
-              <span class="text-[10px] font-mono uppercase text-slate-400 block">Volumen & Metraje Oficial</span>
-              <strong id="modal-project-volume" class="text-xs sm:text-sm font-bold text-emerald-400 block mt-0.5">
-                85,000 m³ Movimiento de Tierra
-              </strong>
-              <span id="modal-project-specs" class="text-[10px] font-mono text-slate-300 block mt-1">
-                728 Viviendas en Edificios 2-4 Niveles
-              </span>
-            </div>
-
-            <!-- Progress Bar -->
-            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
-              <div class="flex items-center justify-between text-xs mb-1.5">
-                <span class="text-[10px] font-mono uppercase text-slate-400">Avance Físico Contractual</span>
-                <strong id="modal-project-percent" class="font-mono text-amber-400 font-bold">42%</strong>
-              </div>
-              <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
-                <div id="modal-project-bar" class="h-full bg-gradient-to-r from-sky-500 to-emerald-400 rounded-full transition-all duration-700" style="width: 42%;"></div>
-              </div>
-              <span class="text-[9px] font-mono text-slate-400 mt-1 block">Cumplimiento en tiempo y forma según bitácora digital</span>
-            </div>
-
+            <p id="modal-project-challenge" class="text-xs sm:text-sm text-slate-200 leading-relaxed">
+              Consolidación y nivelación de 120,000 m² sobre arcillas expansivas del desierto juarense bajo condiciones severas de tolvaneras y calor extremo. El reto crítico fue habilitar plataformas estructurales para 728 departamentos en un plazo estricto de 90 días naturales, eliminando cualquier riesgo de asentamiento diferencial futuro.
+            </p>
           </div>
 
+          <!-- Highlight Box: Solución de Ingeniería -->
+          <div class="bg-gradient-to-r from-emerald-950/40 via-slate-950 to-slate-950 p-4 rounded-xl border border-emerald-500/40">
+            <div class="flex items-center gap-2 mb-1.5 text-emerald-400">
+              <span class="material-symbols-outlined text-[18px]">engineering</span>
+              <h5 class="text-xs font-mono uppercase font-bold tracking-wider">Solución de Ingeniería Aplicada:</h5>
+            </div>
+            <p id="modal-project-solution" class="text-xs sm:text-sm text-slate-200 leading-relaxed">
+              Despliegue ininterrumpido de tren de terracerías pesado (3 excavadoras CAT 320D, motoconformadora 140M y compactadores pata de cabra), sustitución de estrato arcilloso por material granular de banco y estabilización certificada al 95% Proctor Modificado.
+            </p>
+          </div>
         </div>
 
-        <!-- Description Narrative -->
-        <div>
-          <h5 class="text-xs font-mono uppercase font-bold text-slate-400 tracking-wider mb-1.5">
-            Alcance Técnico del Proyecto:
-          </h5>
-          <p id="modal-project-desc" class="text-xs sm:text-sm text-slate-300 leading-relaxed bg-slate-950/60 p-3.5 rounded-xl border border-slate-800">
-            Adjudicación de obra para edificación de 728 departamentos (60 m² c/u), preparación masiva de plataformas con maquinaria pesada CAT, nivelaciones topográficas y trazo de infraestructura hidrosanitaria.
-          </p>
+        <!-- ===================================== -->
+        <!-- TAB 2: GALERÍA DE EVIDENCIAS (3 FOTOS) -->
+        <!-- ===================================== -->
+        <div id="modal-content-gallery" class="space-y-4 hidden">
+          <div class="rounded-xl overflow-hidden border border-slate-800 bg-slate-950 aspect-video relative">
+            <img id="modal-gallery-preview" src="assets/solis_barraza_movimiento_tierra.jpg" alt="Vista Ampliada" class="w-full h-full object-cover">
+            <div class="absolute bottom-3 left-3 bg-slate-950/80 px-3 py-1 rounded-md text-xs font-mono text-white border border-slate-700" id="modal-gallery-caption">
+              Toma 1: Frente de Obra General
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-3" id="modal-gallery-thumbs">
+            <!-- Populated by JS -->
+          </div>
         </div>
 
-        <!-- Technical Tabs: Equipment & Laboratory -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          
-          <!-- Equipment -->
+        <!-- =============================== -->
+        <!-- TAB 3: FLOTA CAT® DESPLEGADA    -->
+        <!-- =============================== -->
+        <div id="modal-content-equipment" class="space-y-4 hidden">
           <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="material-symbols-outlined text-[18px] text-amber-400">construction</span>
-              <h6 class="text-xs font-mono uppercase font-bold text-white">Flota CAT® Asignada</h6>
+            <div class="flex items-center gap-2 mb-2 text-amber-400">
+              <span class="material-symbols-outlined text-[20px]">construction</span>
+              <h6 class="text-xs font-mono uppercase font-bold text-white">Parque de Maquinaria Propia Asignado al Frente</h6>
             </div>
-            <p id="modal-project-equipment" class="text-xs text-slate-300 font-mono leading-relaxed">
+            <p id="modal-project-equipment" class="text-xs sm:text-sm text-slate-300 font-mono leading-relaxed">
               3x Excavadoras CAT 320D, 1x Motoconformadora CAT 140M, 2x Rodillos CS533E, 6x Camiones Volteo 14m³
             </p>
-            <span class="text-[10px] font-mono text-emerald-400 mt-2 block">✓ 100% Maquinaria propia acreditada sin intermediarios</span>
-          </div>
-
-          <!-- Quality / Laboratory -->
-          <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="material-symbols-outlined text-[18px] text-sky-400">verified</span>
-              <h6 class="text-xs font-mono uppercase font-bold text-white">Ensayes & Laboratorio Acreditado</h6>
+            <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 border-t border-slate-800 text-xs">
+              <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800">
+                <span class="text-[10px] text-slate-400 font-mono uppercase block">Propiedad</span>
+                <strong class="text-emerald-400 font-bold mt-0.5 block">100% Propia AI Grupo</strong>
+              </div>
+              <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800">
+                <span class="text-[10px] text-slate-400 font-mono uppercase block">Operadores</span>
+                <strong class="text-white font-bold mt-0.5 block">Certificados DC-3 STPS</strong>
+              </div>
+              <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800">
+                <span class="text-[10px] text-slate-400 font-mono uppercase block">Telemetría</span>
+                <strong class="text-sky-400 font-bold mt-0.5 block">Monitoreo GPS Activo</strong>
+              </div>
             </div>
-            <p id="modal-project-lab" class="text-xs text-slate-300 font-mono leading-relaxed">
+          </div>
+        </div>
+
+        <!-- =============================== -->
+        <!-- TAB 4: LABORATORIO & CALIDAD    -->
+        <!-- =============================== -->
+        <div id="modal-content-lab" class="space-y-4 hidden">
+          <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+            <div class="flex items-center gap-2 mb-2 text-sky-400">
+              <span class="material-symbols-outlined text-[20px]">verified</span>
+              <h6 class="text-xs font-mono uppercase font-bold text-white">Ensayes & Laboratorio de Calidad Acreditado</h6>
+            </div>
+            <p id="modal-project-lab" class="text-xs sm:text-sm text-slate-300 font-mono leading-relaxed">
               Compactación al 95% Proctor Modificado acreditada por laboratorio de mecánica de suelos EMA.
             </p>
-            <span class="text-[10px] font-mono text-sky-400 mt-2 block">✓ Dictamen técnico favorable sin observaciones</span>
+            <div class="mt-4 p-3 rounded-lg bg-emerald-950/40 border border-emerald-500/40 text-xs text-emerald-300 font-mono">
+              ✓ Dictamen de calidad favorable sin observaciones para entrega en comités de obra.
+            </div>
           </div>
-
         </div>
 
       </div>
@@ -1701,16 +1841,16 @@
       <!-- Modal Footer -->
       <div class="bg-slate-950 px-4 sm:px-6 py-3.5 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3">
         <span class="text-[11px] font-mono text-slate-400 text-center sm:text-left">
-          Expediente digital certificado para licitaciones oficiales (JMAS, Puentes, CONAVI).
+          Expediente digital certificado para licitaciones oficiales y presentación ejecutiva.
         </span>
         <div class="flex items-center gap-2 w-full sm:w-auto">
           <button onclick="downloadDossierDemo()" class="btn-sheen flex-1 sm:flex-none inline-flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold px-3.5 py-2 rounded-xl transition-all cursor-pointer">
             <span class="material-symbols-outlined text-[16px] text-sky-400">download</span>
             <span>Descargar Ficha PDF</span>
           </button>
-          <a id="modal-project-wa" href="https://wa.me/526563604085?text=Hola%2C%20quisiera%20información%20sobre%20el%20proyecto" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-extrabold px-3.5 py-2 rounded-xl transition-all shadow-md cursor-pointer">
+          <a id="modal-project-wa" href="https://wa.me/526563604085" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-extrabold px-3.5 py-2 rounded-xl transition-all shadow-md cursor-pointer">
             <span class="material-symbols-outlined text-[16px]">chat</span>
-            <span>Contactar Residente</span>
+            <span>Contactar a Mario Suárez</span>
           </a>
         </div>
       </div>
@@ -1773,11 +1913,12 @@ Favor de enviarnos los datos de facturación para transferir el anticipo y comen
   <!-- 11. JAVASCRIPT: SIMULADOR DE CATÁLOGO & INTERACCIÓN (FACTOR WOW)          -->
   <!-- ========================================================================= -->
   <script>
-    // Complete Audited Projects Data for AI Grupo Constructor
+    // Complete Audited Projects Data for AI Grupo Constructor (Showcase, Challenges & Media)
     const mockProjects = [
       {
         id: 'OB-01',
         title: 'Megaproyecto Habitacional y Urbanización "Casas del Bienestar"',
+        shortTitle: 'Casas del Bienestar',
         type: 'bienestar',
         typeLabel: 'Licitación Pública Federal / CONAVI',
         typeColor: 'bg-sky-100 text-sky-800 border-sky-200',
@@ -1791,13 +1932,23 @@ Favor de enviarnos los datos de facturación para transferir el anticipo y comen
         statusColor: 'text-amber-600',
         progress: 42,
         image: 'assets/solis_barraza_movimiento_tierra.jpg',
+        gallery: [
+          { src: 'assets/solis_barraza_movimiento_tierra.jpg', caption: '1. Frente de Terracerías Masivas y Nivelación' },
+          { src: 'assets/obra_aerea_dron.jpg', caption: '2. Vista Aérea de Despliegue de Maquinaria CAT' },
+          { src: 'assets/solis_barraza_pipa_motoconformadora.jpg', caption: '3. Conformación de Base y Humectación Controlada' }
+        ],
+        beforeImg: 'assets/terreno_brena_antes.jpg',
+        afterImg: 'assets/obra_aerea_dron.jpg',
         coords: "31°35'44\"N 106°22'18\"W",
+        challenge: 'Consolidación y nivelación de 120,000 m² de terreno natural sobre arcillas expansivas del desierto juarense bajo condiciones severas de tolvaneras y calor extremo. El reto crítico fue habilitar plataformas estructurales para 728 departamentos en un plazo estricto de 90 días naturales, eliminando cualquier riesgo de asentamiento diferencial futuro.',
+        solution: 'Despliegue ininterrumpido de tren de terracerías pesado (3 excavadoras CAT 320D, motoconformadora 140M y compactadores pata de cabra), sustitución de estrato arcilloso por material granular de banco y estabilización certificada al 95% Proctor Modificado.',
         labTest: 'Compactación al 95% Proctor Modificado acreditada por laboratorio de mecánica de suelos EMA.',
         desc: 'Adjudicación de obra para edificación de 728 departamentos (60 m² c/u), preparación masiva de plataformas con maquinaria pesada CAT, nivelaciones topográficas y trazo de infraestructura hidrosanitaria.'
       },
       {
         id: 'OB-02',
         title: 'Obras de Drenaje Pluvial y Vaso Regulador en Cruces Internacionales',
+        shortTitle: 'Canal Pluvial Zaragoza',
         type: 'puentes',
         typeLabel: 'Fideicomiso de Puentes Fronterizos de Chihuahua',
         typeColor: 'bg-blue-100 text-blue-800 border-blue-200',
@@ -1806,18 +1957,28 @@ Favor de enviarnos los datos de facturación para transferir el anticipo y comen
         dependencia: 'Fideicomiso de Puentes Fronterizos de Chihuahua',
         concurso: 'FPFCH-OP-LIC-2024-019',
         volume: '34,000 m³ Excavación en Roca y Sedimento',
-        equipment: '2x Excavadoras CAT 329E, 2x Retroexcavadoras CAT 420F, Bombas sumergibles 6"',
+        equipment: '2x Excavadoras CAT 329E con martillo, 2x Retroexcavadoras CAT 420F, Bombas sumergibles 6"',
         status: 'Concluida y Auditada (100% Entregada ✓)',
         statusColor: 'text-emerald-600',
         progress: 100,
         image: 'assets/solis_barraza_topografia.jpg',
+        gallery: [
+          { src: 'assets/solis_barraza_topografia.jpg', caption: '1. Trazo y Nivelación Topográfica de Precisión' },
+          { src: 'assets/obra_publica_civil.jpg', caption: '2. Excavación en Roca y Colocación de Concreto Hidráulico' },
+          { src: 'assets/maquinaria_pesada_fleet.jpg', caption: '3. Flota de Excavación en Frente Operativo' }
+        ],
+        beforeImg: 'assets/terreno_brena_antes.jpg',
+        afterImg: 'assets/obra_publica_civil.jpg',
         coords: "31°40'11\"N 106°19'55\"W",
+        challenge: 'Excavación profunda en roca y estratos de alta dureza a escasos metros de los carriles fiscales del Puente Zaragoza, con la restricción contractual de CERO INTERRUPCIONES en el aforo diario de 8,000 vehículos de carga pesada hacia El Paso, Texas, además de prevenir desbordamientos por avenidas torrenciales.',
+        solution: 'Excavación controlada con retroexcavadoras CAT y martillos de impacto amortiguado, canalización de estiaje con concreto hidráulico MR-45 de fraguado rápido y colocación de gaviones de contención perimetral sin invadir derechos de vía fronterizos.',
         labTest: "Concreto hidráulico MR-45 con certificación de resistencia f'c=300 kg/cm².",
         desc: 'Participación y ejecución técnica en licitaciones de infraestructura pluvial, terracerías especializadas y pavimentación para pasos de tráfico pesado e instalaciones fronterizas en Ciudad Juárez.'
       },
       {
         id: 'OB-03',
         title: 'Desarrollo y Urbanización Integral Residencial de Alta Densidad',
+        shortTitle: 'Fracc. Residencial Borunda',
         type: 'residencial',
         typeLabel: 'Desarrollo Habitacional Privado',
         typeColor: 'bg-amber-100 text-amber-800 border-amber-200',
@@ -1831,13 +1992,23 @@ Favor de enviarnos los datos de facturación para transferir el anticipo y comen
         statusColor: 'text-emerald-600',
         progress: 100,
         image: 'assets/fraccionamiento_residencial.jpg',
+        gallery: [
+          { src: 'assets/fraccionamiento_residencial.jpg', caption: '1. Urbanización y Pavimento Hidráulico Terminado' },
+          { src: 'assets/obra_publica_civil.jpg', caption: '2. Tendido Subterráneo de Cuatro Redes de Servicios' },
+          { src: 'assets/solis_barraza_topografia.jpg', caption: '3. Control Topográfico de Rasantes y Drenaje' }
+        ],
+        beforeImg: 'assets/terreno_brena_antes.jpg',
+        afterImg: 'assets/fraccionamiento_residencial.jpg',
         coords: "31°41'52\"N 106°24'12\"W",
+        challenge: 'Sincronizar el tendido subterráneo simultáneo de cuatro redes críticas (agua potable, drenaje sanitario, electrificación de media tensión oculta y fibra óptica) en 340 lotes, garantizando pendientes milimétricas de escurrimiento para erradicar cualquier inundación superficial en temporada de lluvias.',
+        solution: 'Tendido de 45,000 m² de losas de concreto hidráulico MR-42 con extendedora automatizada, guarniciones trapezoidales monolíticas, pruebas hidrostáticas de hermeticidad con cero fugas y entrega de servicios 100% subterráneos lista para escrituración.',
         labTest: 'Prueba hidrostática de hermeticidad en redes de agua potable y drenaje 100% aprobada.',
         desc: 'Construcción integral de fraccionamientos residenciales, pavimentación con concreto hidráulico y asfalto de alta especificación, banquetas, guarniciones, alumbrado público y áreas recreativas.'
       },
       {
         id: 'OB-04',
         title: 'Estabilización de Terracerías y Tramo Troncal Solís Barraza',
+        shortTitle: 'Troncal Solís Barraza II',
         type: 'terracerias',
         typeLabel: 'Infraestructura Vial Urbana / Municipio de Juárez',
         typeColor: 'bg-orange-100 text-orange-800 border-orange-200',
@@ -1851,13 +2022,23 @@ Favor de enviarnos los datos de facturación para transferir el anticipo y comen
         statusColor: 'text-amber-600',
         progress: 68,
         image: 'assets/solis_barraza_pipa_motoconformadora.jpg',
+        gallery: [
+          { src: 'assets/solis_barraza_pipa_motoconformadora.jpg', caption: '1. Riego de Impregnación y Mezclado de Suelo-Cemento' },
+          { src: 'assets/solis_barraza_movimiento_tierra.jpg', caption: '2. Corte Masivo y Nivelación de Sub-Rasante' },
+          { src: 'assets/obra_aerea_dron.jpg', caption: '3. Trazado y Geometría Vial de 4 Carriles' }
+        ],
+        beforeImg: 'assets/terreno_brena_antes.jpg',
+        afterImg: 'assets/solis_barraza_pipa_motoconformadora.jpg',
         coords: "31°36'05\"N 106°21'40\"W",
+        challenge: 'Tendido y conformación de capas de sub-base estabilizada con suelo-cemento bajo temperaturas estivales de 42°C en el desierto, donde la evaporación violenta de agua ponía en riesgo el fraguado uniforme del material y amenazaba con causar agrietamientos térmicos en la futura carpeta.',
+        solution: 'Esquema de dosificación y humectación controlada con flotilla de pipas de 10,000L en turnos matutinos tempranos, mezclado in-situ con rotocultivadores pesados y compactación inmediata en capas de 20 cm hasta superar el 98% del grado de compactación de diseño.',
         labTest: 'Estabilización de suelo-cemento con módulo de ruptura verificado en laboratorio central.',
         desc: 'Movimiento masivo de tierras para apertura de vialidad primaria de cuatro carriles, colocación de base hidráulica y tendido de asfalto de 10 cm compactado para tráfico pesado.'
       },
       {
         id: 'OB-05',
         title: 'Parque de Maquinaria Pesada CAT® & Respaldo Mecánico CMIC',
+        shortTitle: 'Flota Pesada CAT® Propia',
         type: 'maquinaria',
         typeLabel: 'Capacidad Instalada & Solvencia Operativa CMIC',
         typeColor: 'bg-emerald-100 text-emerald-800 border-emerald-200',
@@ -1871,13 +2052,23 @@ Favor de enviarnos los datos de facturación para transferir el anticipo y comen
         statusColor: 'text-emerald-600',
         progress: 100,
         image: 'assets/maquinaria_pesada_fleet.jpg',
+        gallery: [
+          { src: 'assets/maquinaria_pesada_fleet.jpg', caption: '1. Parque de Excavadoras y Equipo Amarillo en Patio Central' },
+          { src: 'assets/solis_barraza_movimiento_tierra.jpg', caption: '2. Operación de Excavadoras CAT 320D en Banco de Material' },
+          { src: 'assets/solis_barraza_pipa_motoconformadora.jpg', caption: '3. Equipo de Compactación Pesada en Despliegue' }
+        ],
+        beforeImg: 'assets/terreno_brena_antes.jpg',
+        afterImg: 'assets/maquinaria_pesada_fleet.jpg',
         coords: "31°42'10\"N 106°24'05\"W",
+        challenge: 'Garantizar que cualquier proyecto ganado en licitación o desarrollo privado inicie trabajos preliminares en menos de 24 horas, erradicando los sobrecostos de hasta 40% y las pérdidas de tiempo asociadas a depender de arrendadoras foráneas de equipo pesado.',
+        solution: 'Parque de maquinaria 100% propio y libre de gravamen (CAT 320D, 329E, 140M, D6T, volteos 14m³), respaldado con unidad móvil de lubricación diésel, inventario de consumibles de desgaste crítico y operadores con certificación federal DC-3 de la STPS.',
         labTest: 'Pólizas de seguro vigentes, operadores certificados DC-3 y mantenimiento preventivo al día.',
         desc: 'Demostración de fuerza motriz propia para garantizar solvencia técnica en licitaciones públicas de gran escala, eliminando riesgos de atraso por arrendamiento de equipo externo.'
       },
       {
         id: 'OB-06',
         title: 'Colector Sanitario de Gran Diámetro & Red Hidrosanitaria JMAS',
+        shortTitle: 'Colector Sanitario 60" JMAS',
         type: 'puentes',
         typeLabel: 'JMAS Cd. Juárez · Licitación Pública Estatal',
         typeColor: 'bg-cyan-100 text-cyan-800 border-cyan-200',
@@ -1891,58 +2082,240 @@ Favor de enviarnos los datos de facturación para transferir el anticipo y comen
         statusColor: 'text-emerald-600',
         progress: 100,
         image: 'assets/obra_publica_civil.jpg',
+        gallery: [
+          { src: 'assets/obra_publica_civil.jpg', caption: '1. Tendido de Tubería de Alta Densidad en Zanja Profunda' },
+          { src: 'assets/solis_barraza_topografia.jpg', caption: '2. Nivelación Láser de Pendiente Hidráulica' },
+          { src: 'assets/maquinaria_pesada_fleet.jpg', caption: '3. Excavadoras de Alto Tonelaje con Martillo' }
+        ],
+        beforeImg: 'assets/terreno_brena_antes.jpg',
+        afterImg: 'assets/obra_publica_civil.jpg',
         coords: "31°43'20\"N 106°23'15\"W",
+        challenge: 'Apertura de zanja confinada a más de 6 metros de profundidad en zona comercial de alta afluencia vehicular, enfrentando manto freático superficial e inestabilidad de taludes arenosos con peligro inminente de asentamiento o socavón en carriles colindantes en servicio.',
+        solution: 'Instalación de sistema de entibado con cajas de ademe metálico telescópico de seguridad, bombeo continuo de abatimiento freático las 24 horas y montaje milimétrico de tubos de polietileno de alta densidad (PEAD) de 60 pulgadas con atraques de concreto hidráulico.',
         labTest: 'Prueba de estanqueidad y video-inspección con robot cctv 100% acreditada por JMAS.',
         desc: 'Instalación de colector sanitario de alta capacidad para desalojo de aguas residuales en zona residencial e industrial de Cd. Juárez, con reposición de carpeta asfáltica y pruebas de laboratorio.'
       }
     ];
 
     let currentFilter = 'all';
-    let currentDemoMode = 'portfolio';
-    let currentCalcDeadline = 60;
+    let currentDemoMode = 'showcase';
+    let currentShowcaseId = 'OB-01';
+    let currentShowcaseMediaMode = 'photos';
+    let currentModalTab = 'summary';
 
-    // View Mode Switcher (Portafolio vs Matriz vs Calculadora)
+    // 1. Navigation Between 3 Modes
     function setDemoMode(mode) {
       currentDemoMode = mode;
       
-      const panelPortfolio = document.getElementById('panel-portfolio');
-      const panelMatrix = document.getElementById('panel-matrix');
-      const panelCalc = document.getElementById('panel-calculator');
+      const panelShowcase = document.getElementById('panel-showcase');
+      const panelGrid = document.getElementById('panel-grid');
+      const panelCompare = document.getElementById('panel-compare');
       const urlBar = document.getElementById('simulator-url-bar');
 
-      const btnPort = document.getElementById('mode-btn-portfolio');
-      const btnMat = document.getElementById('mode-btn-matrix');
-      const btnCalc = document.getElementById('mode-btn-calculator');
+      const btnShow = document.getElementById('mode-btn-showcase');
+      const btnGrid = document.getElementById('mode-btn-grid');
+      const btnComp = document.getElementById('mode-btn-compare');
 
       // Reset tabs
-      [btnPort, btnMat, btnCalc].forEach(b => {
+      [btnShow, btnGrid, btnComp].forEach(b => {
         if (b) b.className = 'mode-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center gap-1.5 transition-all cursor-pointer';
       });
 
       // Hide all panels
-      if (panelPortfolio) panelPortfolio.classList.add('hidden');
-      if (panelMatrix) panelMatrix.classList.add('hidden');
-      if (panelCalc) panelCalc.classList.add('hidden');
+      if (panelShowcase) panelShowcase.classList.add('hidden');
+      if (panelGrid) panelGrid.classList.add('hidden');
+      if (panelCompare) panelCompare.classList.add('hidden');
 
-      if (mode === 'portfolio') {
-        if (panelPortfolio) panelPortfolio.classList.remove('hidden');
-        if (btnPort) btnPort.className = 'mode-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-sky-500 text-slate-950 flex items-center gap-1.5 transition-all shadow-xs cursor-pointer';
-        if (urlBar) urlBar.innerText = 'https://aigrupoconstructor.mx/portafolio-obras';
+      if (mode === 'showcase') {
+        if (panelShowcase) panelShowcase.classList.remove('hidden');
+        if (btnShow) btnShow.className = 'mode-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-sky-500 text-slate-950 flex items-center gap-1.5 transition-all shadow-xs cursor-pointer';
+        if (urlBar) urlBar.innerText = 'https://aigrupoconstructor.mx/portafolio-obras-ejecutivas';
+        renderShowcaseProject(currentShowcaseId);
+      } else if (mode === 'grid') {
+        if (panelGrid) panelGrid.classList.remove('hidden');
+        if (btnGrid) btnGrid.className = 'mode-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-sky-500 text-slate-950 flex items-center gap-1.5 transition-all shadow-xs cursor-pointer';
+        if (urlBar) urlBar.innerText = 'https://aigrupoconstructor.mx/catalogo-de-frentes';
         applyFilters();
-      } else if (mode === 'matrix') {
-        if (panelMatrix) panelMatrix.classList.remove('hidden');
-        if (btnMat) btnMat.className = 'mode-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-sky-500 text-slate-950 flex items-center gap-1.5 transition-all shadow-xs cursor-pointer';
-        if (urlBar) urlBar.innerText = 'https://aigrupoconstructor.mx/licitaciones-y-solvencia';
-        renderMatrix(mockProjects);
-      } else if (mode === 'calculator') {
-        if (panelCalc) panelCalc.classList.remove('hidden');
-        if (btnCalc) btnCalc.className = 'mode-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-sky-500 text-slate-950 flex items-center gap-1.5 transition-all shadow-xs cursor-pointer';
-        if (urlBar) urlBar.innerText = 'https://aigrupoconstructor.mx/calculadora-maquinaria';
-        calculateMachinery();
+      } else if (mode === 'compare') {
+        if (panelCompare) panelCompare.classList.remove('hidden');
+        if (btnComp) btnComp.className = 'mode-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-sky-500 text-slate-950 flex items-center gap-1.5 transition-all shadow-xs cursor-pointer';
+        if (urlBar) urlBar.innerText = 'https://aigrupoconstructor.mx/transformacion-antes-y-despues';
+        setCompareProject(document.getElementById('compare-project-select')?.value || 'OB-01');
       }
     }
 
-    // Render Cards in Portfolio Mode
+    // 2. Showcase Mode Functions
+    function renderShowcaseSelector() {
+      const container = document.getElementById('showcase-selector-pills');
+      if (!container) return;
+      container.innerHTML = '';
+
+      mockProjects.forEach(p => {
+        const btn = document.createElement('button');
+        const isActive = p.id === currentShowcaseId;
+        btn.id = `showcase-pill-${p.id}`;
+        btn.onclick = () => selectShowcaseProject(p.id);
+        btn.className = `px-3 py-1 rounded-lg text-xs font-bold transition-all shrink-0 flex items-center gap-1.5 cursor-pointer ${
+          isActive ? 'bg-sky-500 text-slate-950 shadow-xs' : 'bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800'
+        }`;
+        btn.innerHTML = `
+          <span class="font-mono text-[10px] ${isActive ? 'text-slate-950 font-black' : 'text-sky-400'}">${p.id}</span>
+          <span class="truncate max-w-[140px]">${p.shortTitle}</span>
+        `;
+        container.appendChild(btn);
+      });
+    }
+
+    function selectShowcaseProject(id) {
+      currentShowcaseId = id;
+      renderShowcaseSelector();
+      renderShowcaseProject(id);
+    }
+
+    function renderShowcaseProject(id) {
+      const p = mockProjects.find(item => item.id === id) || mockProjects[0];
+      if (!p) return;
+
+      // Update Badges & Titles
+      const badgeId = document.getElementById('showcase-badge-id');
+      const badgeType = document.getElementById('showcase-badge-type');
+      const badgeProgress = document.getElementById('showcase-badge-progress');
+      const badgeCoords = document.getElementById('showcase-badge-coords');
+      const client = document.getElementById('showcase-client');
+      const title = document.getElementById('showcase-title');
+      const challenge = document.getElementById('showcase-challenge');
+      const solution = document.getElementById('showcase-solution');
+      const vol = document.getElementById('showcase-vol');
+      const specs = document.getElementById('showcase-specs');
+      const machinery = document.getElementById('showcase-machinery');
+      const mainImg = document.getElementById('showcase-main-img');
+      const hudCoords = document.getElementById('drone-hud-coords');
+      const waBtn = document.getElementById('showcase-wa-btn');
+
+      if (badgeId) badgeId.innerText = p.id;
+      if (badgeType) badgeType.innerText = p.typeLabel;
+      if (badgeProgress) {
+        badgeProgress.innerHTML = `
+          <span class="w-1.5 h-1.5 rounded-full ${p.progress === 100 ? 'bg-slate-950' : 'bg-slate-950 animate-ping'}"></span>
+          <span>${p.progress}% Avance Físico</span>
+        `;
+        badgeProgress.className = `text-[10px] font-mono font-bold px-2 py-0.5 rounded ${p.progress === 100 ? 'bg-emerald-400' : 'bg-amber-400'} text-slate-950 flex items-center gap-1 shadow-xs`;
+      }
+      if (badgeCoords) {
+        badgeCoords.innerHTML = `
+          <span class="material-symbols-outlined text-[13px] text-emerald-400">my_location</span>
+          <span>${p.client}</span>
+        `;
+      }
+      if (client) client.innerText = `${p.dependencia} · Concurso: ${p.concurso}`;
+      if (title) title.innerText = p.title;
+      if (challenge) challenge.innerText = p.challenge;
+      if (solution) solution.innerText = p.solution;
+      if (vol) vol.innerText = p.volume;
+      if (specs) specs.innerText = p.specs;
+      if (machinery) machinery.innerText = p.equipment;
+      if (mainImg) {
+        mainImg.src = p.image;
+        mainImg.alt = p.title;
+      }
+      if (hudCoords) hudCoords.innerText = `📍 ${p.coords} · ${p.client}`;
+      if (waBtn) {
+        const msg = `Hola Lic. Mario Suárez, estuve revisando la ficha técnica de la obra ${p.id} (${p.title}) de AI Grupo Constructor y me interesa conocer más detalles.`;
+        waBtn.href = `https://wa.me/526563604085?text=${encodeURIComponent(msg)}`;
+      }
+
+      // Render Thumbnails
+      const thumbsContainer = document.getElementById('showcase-thumbs-container');
+      if (thumbsContainer) {
+        thumbsContainer.innerHTML = '';
+        p.gallery.forEach((g, idx) => {
+          const t = document.createElement('div');
+          t.className = 'group/thumb rounded-xl overflow-hidden border border-slate-800 bg-slate-900 aspect-video relative cursor-pointer hover:border-sky-400 transition-all';
+          t.onclick = () => setShowcasePhoto(g.src);
+          t.innerHTML = `
+            <img src="${g.src}" alt="${g.caption}" class="w-full h-full object-cover group-hover/thumb:scale-105 transition-transform duration-300">
+            <div class="absolute inset-0 bg-slate-950/40 group-hover/thumb:bg-transparent transition-colors"></div>
+            <div class="absolute bottom-1 left-1 right-1 bg-slate-950/85 px-1.5 py-0.5 rounded text-[9px] font-mono text-slate-300 truncate">
+              ${g.caption}
+            </div>
+          `;
+          thumbsContainer.appendChild(t);
+        });
+      }
+
+      // Reset to photo mode
+      setShowcaseMedia(currentShowcaseMediaMode);
+    }
+
+    function setShowcaseMedia(type) {
+      currentShowcaseMediaMode = type;
+      const viewPhoto = document.getElementById('showcase-view-photo');
+      const viewDrone = document.getElementById('showcase-view-drone');
+      const btnPhotos = document.getElementById('btn-media-photos');
+      const btnDrone = document.getElementById('btn-media-drone');
+      const video = document.getElementById('showcase-drone-video');
+
+      // Badges that should only show in photo mode to prevent HUD collision
+      const badgesContainer = document.getElementById('showcase-overlays-container');
+
+      if (type === 'photos') {
+        if (viewPhoto) viewPhoto.classList.remove('hidden');
+        if (viewDrone) viewDrone.classList.add('hidden');
+        if (badgesContainer) badgesContainer.classList.remove('opacity-0', 'pointer-events-none');
+        if (btnPhotos) btnPhotos.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-sky-500 text-slate-950 flex items-center gap-1 transition-all cursor-pointer';
+        if (btnDrone) btnDrone.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center gap-1 transition-all cursor-pointer';
+        if (video) video.pause();
+      } else if (type === 'drone') {
+        if (viewPhoto) viewPhoto.classList.add('hidden');
+        if (viewDrone) viewDrone.classList.remove('hidden');
+        if (badgesContainer) badgesContainer.classList.add('opacity-0', 'pointer-events-none');
+        if (btnPhotos) btnPhotos.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center gap-1 transition-all cursor-pointer';
+        if (btnDrone) btnDrone.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-500 text-slate-950 flex items-center gap-1 transition-all cursor-pointer';
+        if (video) video.play();
+      }
+    }
+
+    function setShowcasePhoto(src) {
+      setShowcaseMedia('photos');
+      const mainImg = document.getElementById('showcase-main-img');
+      if (mainImg) {
+        mainImg.style.opacity = '0.5';
+        mainImg.src = src;
+        setTimeout(() => { mainImg.style.opacity = '1'; }, 100);
+      }
+    }
+
+    function openCurrentShowcaseDossier() {
+      openProjectDossier(currentShowcaseId);
+    }
+
+    // 3. Compare Slider Before / After Functions
+    function updateCompareSlider(val) {
+      const beforeWrapper = document.getElementById('compare-before-wrapper');
+      const handle = document.getElementById('compare-handle');
+      if (beforeWrapper) beforeWrapper.style.width = `${val}%`;
+      if (handle) handle.style.left = `${val}%`;
+    }
+
+    function setCompareProject(id) {
+      const p = mockProjects.find(item => item.id === id) || mockProjects[0];
+      const imgBefore = document.getElementById('compare-img-before');
+      const imgAfter = document.getElementById('compare-img-after');
+      const descTitle = document.getElementById('compare-desc-title');
+      const descText = document.getElementById('compare-desc-text');
+      const range = document.getElementById('compare-range-input');
+
+      if (imgBefore) imgBefore.src = p.beforeImg;
+      if (imgAfter) imgAfter.src = p.afterImg;
+      if (descTitle) descTitle.innerText = `${p.id}: ${p.title}`;
+      if (descText) descText.innerText = p.challenge;
+      if (range) {
+        range.value = 50;
+        updateCompareSlider(50);
+      }
+    }
+
+    // 4. Grid Mode Functions
     function renderProjects(list) {
       const container = document.getElementById('projects-container');
       if (!container) return;
@@ -1992,9 +2365,12 @@ Favor de enviarnos los datos de facturación para transferir el anticipo y comen
               <h4 class="font-extrabold text-slate-900 text-xs sm:text-sm leading-snug mb-1 group-hover:text-sky-700 transition-colors line-clamp-2">
                 ${item.title}
               </h4>
-              <p class="text-[11px] text-slate-600 line-clamp-2 leading-relaxed mb-3">
-                ${item.desc}
-              </p>
+              
+              <!-- Highlighted Challenge Box -->
+              <div class="mt-2 mb-3 bg-amber-50 border border-amber-200/80 p-2.5 rounded-lg text-[11px] leading-relaxed">
+                <span class="font-mono text-[9px] font-extrabold text-amber-800 uppercase block mb-0.5">⚠️ Desafío Superado:</span>
+                <p class="text-slate-700 line-clamp-2">${item.challenge}</p>
+              </div>
             </div>
 
             <div class="space-y-2 pt-2 border-t border-slate-200/80">
@@ -2031,104 +2407,6 @@ Favor de enviarnos los datos de facturación para transferir el anticipo y comen
       }
     }
 
-    // Render Matrix in Audit Mode
-    function renderMatrix(list) {
-      const tbody = document.getElementById('matrix-table-body');
-      if (!tbody) return;
-      tbody.innerHTML = '';
-
-      list.forEach((item) => {
-        const tr = document.createElement('tr');
-        tr.className = 'hover:bg-slate-50 transition-colors cursor-pointer';
-        tr.onclick = () => openProjectDossier(item.id);
-
-        tr.innerHTML = `
-          <td class="py-3 px-3 sm:px-4">
-            <span class="font-mono font-bold text-sky-700 block">${item.id}</span>
-            <strong class="font-extrabold text-slate-900 block truncate max-w-[180px] sm:max-w-xs">${item.title}</strong>
-          </td>
-          <td class="py-3 px-3 sm:px-4 text-slate-700">
-            <span class="font-bold block">${item.dependencia}</span>
-            <span class="text-[10px] text-slate-500 block truncate max-w-[160px]">${item.client}</span>
-          </td>
-          <td class="py-3 px-3 sm:px-4 font-mono text-slate-500 hidden md:table-cell">
-            ${item.concurso}
-          </td>
-          <td class="py-3 px-3 sm:px-4 font-mono text-slate-800">
-            <strong class="block">${item.volume}</strong>
-            <span class="text-[10px] text-slate-500 truncate max-w-[140px] block">${item.specs}</span>
-          </td>
-          <td class="py-3 px-3 sm:px-4 hidden lg:table-cell text-[10px] font-mono text-slate-600 max-w-[180px] truncate">
-            ${item.equipment}
-          </td>
-          <td class="py-3 px-3 sm:px-4">
-            <div class="flex items-center gap-1.5">
-              <span class="font-mono font-bold text-xs ${item.statusColor}">${item.progress}%</span>
-              <div class="w-12 h-1.5 bg-slate-200 rounded-full overflow-hidden hidden sm:block">
-                <div class="h-full bg-emerald-500 rounded-full" style="width: ${item.progress}%;"></div>
-              </div>
-            </div>
-            <span class="text-[10px] ${item.statusColor} font-medium block">${item.status}</span>
-          </td>
-          <td class="py-3 px-3 sm:px-4 text-center">
-            <button class="bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-200 px-2.5 py-1 rounded-md text-[10px] font-bold font-mono transition-colors">
-              Ver Ficha
-            </button>
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
-
-    // Modal Dossier 360° Open / Close
-    function openProjectDossier(id) {
-      const item = mockProjects.find(p => p.id === id);
-      if (!item) return;
-
-      document.getElementById('modal-project-id').innerText = item.id;
-      document.getElementById('modal-project-title').innerText = item.title;
-      document.getElementById('modal-project-client').innerText = item.client;
-      document.getElementById('modal-project-img').src = item.image;
-      document.getElementById('modal-project-img').alt = item.title;
-      document.getElementById('modal-project-type').innerText = item.typeLabel;
-      document.getElementById('modal-project-status').innerHTML = `
-        <span class="w-1.5 h-1.5 rounded-full ${item.progress === 100 ? 'bg-emerald-950' : 'bg-slate-950 animate-ping'}"></span>
-        <span>${item.status}</span>
-      `;
-      document.getElementById('modal-project-coords').innerHTML = `
-        <span class="material-symbols-outlined text-[14px] text-emerald-400">my_location</span>
-        <span>${item.coords}</span>
-      `;
-      document.getElementById('modal-project-dep').innerText = item.dependencia;
-      document.getElementById('modal-project-concurso').innerText = `Concurso: ${item.concurso}`;
-      document.getElementById('modal-project-volume').innerText = item.volume;
-      document.getElementById('modal-project-specs').innerText = item.specs;
-      document.getElementById('modal-project-percent').innerText = `${item.progress}%`;
-      document.getElementById('modal-project-bar').style.width = `${item.progress}%`;
-      document.getElementById('modal-project-desc').innerText = item.desc;
-      document.getElementById('modal-project-equipment').innerText = item.equipment;
-      document.getElementById('modal-project-lab').innerText = item.labTest;
-
-      const waMsg = `Hola Lic. Mario Suárez, vi la ficha técnica oficial del proyecto ${item.id} (${item.title}) en su plataforma web y quisiera consultar más detalles.`;
-      document.getElementById('modal-project-wa').href = `https://wa.me/526563604085?text=${encodeURIComponent(waMsg)}`;
-
-      document.getElementById('project-modal').classList.remove('hidden');
-      document.body.classList.add('overflow-hidden');
-    }
-
-    function closeProjectDossier() {
-      const modal = document.getElementById('project-modal');
-      if (modal) modal.classList.add('hidden');
-      document.body.classList.remove('overflow-hidden');
-    }
-
-    function handleProjectModalBackdrop(e) {
-      if (e.target === document.getElementById('project-modal')) {
-        closeProjectDossier();
-      }
-    }
-
-    // Filter Logic
     function setFilter(filter) {
       currentFilter = filter;
       document.querySelectorAll('.filter-btn').forEach(b => {
@@ -2160,78 +2438,106 @@ Favor de enviarnos los datos de facturación para transferir el anticipo y comen
           p.client.toLowerCase().includes(query) ||
           p.specs.toLowerCase().includes(query) ||
           p.dependencia.toLowerCase().includes(query) ||
-          p.concurso.toLowerCase().includes(query)
+          p.concurso.toLowerCase().includes(query) ||
+          p.challenge.toLowerCase().includes(query)
         );
       }
 
       renderProjects(filtered);
     }
 
-    // Machinery Estimator Calculator
-    function setCalcDeadline(days) {
-      currentCalcDeadline = days;
-      document.querySelectorAll('.calc-deadline-btn').forEach(b => {
-        const bDays = parseInt(b.getAttribute('data-days'));
-        if (bDays === days) {
-          b.className = 'calc-deadline-btn px-2.5 py-1.5 rounded-lg text-xs font-bold bg-slate-900 text-white border border-slate-900 transition-all cursor-pointer shadow-xs';
+    // 5. Modal 360° Functions & Tabs
+    function setModalTab(tab) {
+      currentModalTab = tab;
+      const tabs = ['summary', 'gallery', 'equipment', 'lab'];
+      
+      tabs.forEach(t => {
+        const btn = document.getElementById(`modal-tab-${t}`);
+        const content = document.getElementById(`modal-content-${t}`);
+        if (t === tab) {
+          if (btn) btn.className = 'py-2.5 px-3 font-bold border-b-2 border-sky-500 text-sky-400 flex items-center gap-1.5 transition-colors cursor-pointer';
+          if (content) content.classList.remove('hidden');
         } else {
-          b.className = 'calc-deadline-btn px-2.5 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:border-sky-400 transition-all cursor-pointer';
+          if (btn) btn.className = 'py-2.5 px-3 font-bold border-b-2 border-transparent text-slate-400 hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer';
+          if (content) content.classList.add('hidden');
         }
       });
-      calculateMachinery();
     }
 
-    function calculateMachinery() {
-      const type = document.getElementById('calc-type')?.value || 'terracerias';
-      const area = parseInt(document.getElementById('calc-area-slider')?.value || 35000);
-      const days = currentCalcDeadline || 60;
+    function openProjectDossier(id) {
+      const item = mockProjects.find(p => p.id === id);
+      if (!item) return;
 
-      // Update area label
-      const areaVal = document.getElementById('calc-area-val');
-      if (areaVal) areaVal.innerText = `${area.toLocaleString('es-MX')} m²`;
+      document.getElementById('modal-project-id').innerText = item.id;
+      document.getElementById('modal-project-title').innerText = item.title;
+      document.getElementById('modal-project-client').innerText = item.client;
+      document.getElementById('modal-project-img').src = item.image;
+      document.getElementById('modal-project-img').alt = item.title;
+      document.getElementById('modal-project-type').innerText = item.typeLabel;
+      document.getElementById('modal-project-status').innerHTML = `
+        <span class="w-1.5 h-1.5 rounded-full ${item.progress === 100 ? 'bg-slate-950' : 'bg-slate-950 animate-ping'}"></span>
+        <span>${item.status}</span>
+      `;
+      document.getElementById('modal-project-coords').innerHTML = `
+        <span class="material-symbols-outlined text-[14px] text-emerald-400">my_location</span>
+        <span>${item.coords}</span>
+      `;
+      document.getElementById('modal-project-dep').innerText = item.dependencia;
+      document.getElementById('modal-project-concurso').innerText = `Concurso: ${item.concurso}`;
+      document.getElementById('modal-project-volume').innerText = item.volume;
+      document.getElementById('modal-project-specs').innerText = item.specs;
+      document.getElementById('modal-project-percent').innerText = `${item.progress}%`;
+      document.getElementById('modal-project-bar').style.width = `${item.progress}%`;
+      document.getElementById('modal-project-challenge').innerText = item.challenge;
+      document.getElementById('modal-project-solution').innerText = item.solution;
+      document.getElementById('modal-project-equipment').innerText = item.equipment;
+      document.getElementById('modal-project-lab').innerText = item.labTest;
 
-      // Rates by type
-      let factor = 0.85; // m3 per m2
-      let baseRate = 500; // m3 per day per excavator
+      // Populate Gallery Tab
+      const galleryPreview = document.getElementById('modal-gallery-preview');
+      const galleryCaption = document.getElementById('modal-gallery-caption');
+      const thumbsContainer = document.getElementById('modal-gallery-thumbs');
 
-      if (type === 'terracerias') {
-        factor = 0.85;
-        baseRate = 520;
-      } else if (type === 'fraccionamiento') {
-        factor = 0.55;
-        baseRate = 420;
-      } else if (type === 'pavimentacion') {
-        factor = 0.38;
-        baseRate = 380;
-      } else if (type === 'pluvial') {
-        factor = 0.92;
-        baseRate = 320;
+      if (galleryPreview && item.gallery.length > 0) {
+        galleryPreview.src = item.gallery[0].src;
+        if (galleryCaption) galleryCaption.innerText = item.gallery[0].caption;
       }
 
-      const totalVolume = Math.round(area * factor);
-      const dailyNeeded = Math.round(totalVolume / days);
-      const excavators = Math.max(1, Math.ceil(dailyNeeded / baseRate));
-      const graders = Math.max(1, Math.ceil(excavators / 2));
-      const rollers = Math.max(1, Math.ceil(excavators / 2));
-      const trucks = Math.max(2, excavators * 2);
+      if (thumbsContainer) {
+        thumbsContainer.innerHTML = '';
+        item.gallery.forEach(g => {
+          const t = document.createElement('div');
+          t.className = 'rounded-lg overflow-hidden border border-slate-800 aspect-video cursor-pointer hover:border-sky-400 transition-all';
+          t.onclick = () => {
+            if (galleryPreview) galleryPreview.src = g.src;
+            if (galleryCaption) galleryCaption.innerText = g.caption;
+          };
+          t.innerHTML = `<img src="${g.src}" alt="${g.caption}" class="w-full h-full object-cover">`;
+          thumbsContainer.appendChild(t);
+        });
+      }
 
-      // Update DOM
-      const volOut = document.getElementById('calc-volume-out');
-      const dailyOut = document.getElementById('calc-daily-out');
-      const excOut = document.getElementById('calc-excavators-out');
-      const gradOut = document.getElementById('calc-graders-out');
-      const rollOut = document.getElementById('calc-rollers-out');
-      const truckOut = document.getElementById('calc-trucks-out');
+      const waMsg = `Hola Lic. Mario Suárez, vi la ficha técnica oficial del proyecto ${item.id} (${item.title}) en su plataforma web y quisiera consultar más detalles.`;
+      document.getElementById('modal-project-wa').href = `https://wa.me/526563604085?text=${encodeURIComponent(waMsg)}`;
 
-      if (volOut) volOut.innerText = `${totalVolume.toLocaleString('es-MX')} m³`;
-      if (dailyOut) dailyOut.innerText = `${dailyNeeded.toLocaleString('es-MX')} m³/día`;
-      if (excOut) excOut.innerText = `${excavators} ${excavators === 1 ? 'Unidad' : 'Unidades'}`;
-      if (gradOut) gradOut.innerText = `${graders} ${graders === 1 ? 'Unidad' : 'Unidades'}`;
-      if (rollOut) rollOut.innerText = `${rollers} ${rollers === 1 ? 'Unidad' : 'Unidades'}`;
-      if (truckOut) truckOut.innerText = `${trucks} ${trucks === 1 ? 'Unidades' : 'Unidades'}`;
+      setModalTab('summary');
+      document.getElementById('project-modal').classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
     }
 
-    // Dossier Download Simulation
+    function closeProjectDossier() {
+      const modal = document.getElementById('project-modal');
+      if (modal) modal.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+    }
+
+    function handleProjectModalBackdrop(e) {
+      if (e.target === document.getElementById('project-modal')) {
+        closeProjectDossier();
+      }
+    }
+
+    // 6. Dossier Download Simulation
     let toastTimeout;
     function downloadDossierDemo() {
       const toast = document.getElementById('dossier-toast');
@@ -2250,8 +2556,8 @@ Favor de enviarnos los datos de facturación para transferir el anticipo y comen
       icon.className = 'w-9 h-9 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center shrink-0';
       spinner.className = 'material-symbols-outlined text-[20px] animate-spin';
       spinner.innerText = 'progress_activity';
-      title.innerText = 'Compilando Dossier de Licitación en PDF...';
-      desc.innerText = 'Extrayendo bitácoras de obra, currículum de 6 proyectos y parque de maquinaria CAT de AI Grupo Constructor.';
+      title.innerText = 'Compilando Dossier Ejecutivo de Obras en PDF...';
+      desc.innerText = 'Extrayendo fotografías de alta resolución, bitácoras y fichas de desafíos de AI Grupo Constructor.';
 
       // Phase 2: Validating
       setTimeout(() => {
@@ -2264,8 +2570,8 @@ Favor de enviarnos los datos de facturación para transferir el anticipo y comen
         icon.className = 'w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0';
         spinner.className = 'material-symbols-outlined text-[20px]';
         spinner.innerText = 'check_circle';
-        title.innerText = '✓ Dossier Oficial Listo (PDF 3.8 MB)';
-        desc.innerText = 'Documento membretado oficial listo para anexar a expedientes de licitación pública.';
+        title.innerText = '✓ Dossier Ejecutivo Oficial Listo (PDF 3.8 MB)';
+        desc.innerText = 'Documento membretado oficial listo para presentar a inversionistas y clientes.';
         
         toastTimeout = setTimeout(() => {
           closeDossierToast();
@@ -2371,9 +2677,10 @@ Favor de enviarnos los datos de facturación para transferir el anticipo y comen
     });
 
     // Initial Execution
+    renderShowcaseSelector();
+    renderShowcaseProject('OB-01');
     renderProjects(mockProjects);
     updateReadingProgress();
-    calculateMachinery();
   </script>
 
 </body>
