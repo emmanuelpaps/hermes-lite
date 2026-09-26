@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="/ai-grupo-constructor/">
+  <title>Propuesta Ejecutiva · Sitio Web Corporativo & Licitaciones | Apolograma × AI Grupo Constructor</title>
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Propuesta Ejecutiva · AI Grupo Desarrollador y Constructor × Apolograma Studio">
+  <meta name="description" content="Desarrollo de Sitio Web Corporativo de Nivel Enterprise & Ficha Técnica Blindada para Licitaciones Públicas y Fraccionamientos. Preparado para Lic. Mario Suárez.">
+
+  <!-- Open Graph / WhatsApp / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://propuestas.tecza.com.mx/ai-grupo-constructor">
+  <meta property="og:title" content="Propuesta Ejecutiva · AI Grupo Constructor × Apolograma Studio">
+  <meta property="og:description" content="Plataforma Web Corporativa & Ficha Blindada para Licitaciones de Gobierno y Fraccionamientos. Desarrollo enterprise llave en mano en Sprint de 7 días.">
+  <meta property="og:image" content="https://propuestas.tecza.com.mx/ai-grupo-constructor/assets/solis_barraza_movimiento_tierra.jpg">
+  <meta property="og:site_name" content="Apolograma · Propuestas TECZA">
+
+  <!-- Fonts: Plus Jakarta Sans, Inter, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Material Symbols & Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              navy: '#0B192C',
+              dark: '#0F172A',
+              steel: '#1E293B',
+              blue: '#0284C7',
+              blueDark: '#0369A1',
+              blueLight: '#E0F2FE',
+              amber: '#D97706',
+              amberLight: '#FEF3C7',
+              emerald: '#10B981',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    html, body {
+      overflow-x: hidden;
+      max-width: 100vw;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #FFFFFF;
+      color: #0F172A;
+      -webkit-font-smoothing: antialiased;
+    }
+    .badge-amber {
+      background: #FFFBEB;
+      color: #B45309;
+      border: 1px solid #FDE68A;
+    }
+    .badge-blue {
+      background: #F0F9FF;
+      color: #0369A1;
+      border: 1px solid #BAE6FD;
+    }
+    .subtle-grid {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(226, 232, 240, 0.45) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(226, 232, 240, 0.45) 1px, transparent 1px);
+    }
+    .technical-dots {
+      background-image: radial-gradient(rgba(148, 163, 184, 0.25) 1px, transparent 1px);
+      background-size: 16px 16px;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white !important; }
+      .print-break { page-break-before: always; }
+    }
+  </style>
+</head>
+<body class="bg-white text-slate-900 selection:bg-sky-100 selection:text-sky-900">
+
+  <!-- ========================================================================= -->
+  <!-- 1. TOP NAVBAR / HEADER INSTITUCIONAL                                      -->
+  <!-- ========================================================================= -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-xs">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 sm:h-18 flex items-center justify-between gap-2">
+      
+      <!-- Logos Co-Branding -->
+      <div class="flex items-center gap-2 sm:gap-4 shrink-0">
+        <div class="flex items-center gap-1.5 sm:gap-2">
+          <span class="font-extrabold text-sm sm:text-xl tracking-tight text-slate-900">APOLOGRAMA</span>
+          <span class="text-xs uppercase font-semibold tracking-widest text-slate-400 border-l border-slate-200 pl-2 hidden sm:inline">Studio</span>
+        </div>
+        <span class="text-slate-300 font-light text-xs sm:text-base">×</span>
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 sm:w-8 sm:h-8 rounded bg-slate-900 text-amber-400 font-black flex items-center justify-center text-xs tracking-tighter shadow-xs">
+            AI
+          </div>
+          <div>
+            <span class="text-xs sm:text-sm font-bold text-slate-900 leading-none block">AI GRUPO CONSTRUCTOR</span>
+            <span class="text-[9px] font-mono uppercase text-slate-400 font-semibold hidden md:inline">Teófilo Borunda 8349 · Cd. Juárez, Chih.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+        <button onclick="window.print()" class="no-print hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 px-3 py-2 rounded-lg transition-colors">
+          <span class="material-symbols-outlined text-[16px]">print</span>
+          Guardar PDF
+        </button>
+        <a href="#inversion" class="inline-flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-bold text-white bg-slate-900 hover:bg-slate-800 px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg shadow-sm transition-all hover:scale-[1.02]">
+          <span class="hidden sm:inline">Ver Propuesta Económica</span>
+          <span class="sm:hidden">Inversión</span>
+          <span class="material-symbols-outlined text-[15px] sm:text-[16px]">arrow_forward</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- 2. HERO SECTION: TITULAR EJECUTIVO & TELEMETRÍA                           -->
+  <!-- ========================================================================= -->
+  <section class="relative pt-8 pb-12 sm:pt-16 sm:pb-20 overflow-hidden subtle-grid border-b border-slate-100">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      
+      <!-- Top Badge / Target Directivo -->
+      <div class="flex flex-wrap items-center gap-2 mb-4 sm:mb-6">
+        <div class="inline-flex items-center gap-1.5 badge-blue px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wide">
+          <span class="w-2 h-2 rounded-full bg-sky-500 animate-pulse shrink-0"></span>
+          <span>Propuesta Ejecutiva 2026 · Arquitectura Web</span>
+        </div>
+        <div class="inline-flex items-center gap-1.5 badge-amber px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wide">
+          <span class="material-symbols-outlined text-[14px]">person</span>
+          <span>Preparada para: Lic. Mario Suárez · Dirección General</span>
+        </div>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="text-2xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.2] sm:leading-[1.15] max-w-4xl">
+        Infraestructura Web de <span class="text-sky-600 underline decoration-sky-300 decoration-4 underline-offset-4">Nivel Enterprise</span> para Ganar Licitaciones de Gobierno y Posicionar Fraccionamientos.
+      </h1>
+
+      <p class="mt-4 sm:mt-6 text-sm sm:text-lg text-slate-600 font-normal max-w-3xl leading-relaxed">
+        Solución integral diseñada por <strong class="text-slate-900 font-semibold">Apolograma</strong> para dotar a <strong class="text-slate-900 font-semibold">AI Grupo Desarrollador y Constructor</strong> de una plataforma digital corporativa con estándar de $100,000 pesos: una herramienta técnica blindada que acredita ante dependencias públicas (Fideicomiso de Puentes Fronterizos, JMAS, SOP, CONAVI) y desarrolladores privados la capacidad operativa, el parque de maquinaria pesada y el historial de obras de gran escala en Ciudad Juárez (como la reciente adjudicación de las 728 viviendas en Av. Leonardo Solís Barraza).
+      </p>
+
+      <!-- 4 Key Telemetry Cards -->
+      <div class="mt-8 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        
+        <div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200/90 shadow-xs flex items-center gap-3.5">
+          <div class="w-10 h-10 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-[22px]">gavel</span>
+          </div>
+          <div>
+            <span class="text-[10px] sm:text-xs uppercase font-mono font-bold text-slate-400 tracking-wider block">Propósito Central</span>
+            <span class="text-xs sm:text-sm font-bold text-slate-900 block">Licitaciones Blindadas</span>
+            <span class="text-[11px] text-slate-500 block">Gobierno & Obra Pública</span>
+          </div>
+        </div>
+
+        <div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200/90 shadow-xs flex items-center gap-3.5">
+          <div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-[22px]">speed</span>
+          </div>
+          <div>
+            <span class="text-[10px] sm:text-xs uppercase font-mono font-bold text-slate-400 tracking-wider block">Tiempo de Entrega</span>
+            <span class="text-xs sm:text-sm font-bold text-slate-900 block">Sprint 7 Días Naturales</span>
+            <span class="text-[11px] text-slate-500 block">Despliegue Llave en Mano</span>
+          </div>
+        </div>
+
+        <div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200/90 shadow-xs flex items-center gap-3.5">
+          <div class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-[22px]">developer_mode</span>
+          </div>
+          <div>
+            <span class="text-[10px] sm:text-xs uppercase font-mono font-bold text-slate-400 tracking-wider block">Ingeniería Web</span>
+            <span class="text-xs sm:text-sm font-bold text-slate-900 block">Next.js / Edge Static</span>
+            <span class="text-[11px] text-slate-500 block">Google PageSpeed 100/100</span>
+          </div>
+        </div>
+
+        <div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200/90 shadow-xs flex items-center gap-3.5">
+          <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-900 flex items-center justify-center shrink-0 font-bold font-mono">
+            $
+          </div>
+          <div>
+            <span class="text-[10px] sm:text-xs uppercase font-mono font-bold text-slate-400 tracking-wider block">Inversión Neta</span>
+            <span class="text-xs sm:text-sm font-extrabold text-sky-700 block">$12,000 MXN + IVA</span>
+            <span class="text-[11px] text-slate-500 block">50% Anticipo · 50% Entrega</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 3. EL RETO EN LICITACIONES PÚBLICAS VS LA SOLUCIÓN APOLOGRAMA             -->
+  <!-- ========================================================================= -->
+  <section class="py-12 sm:py-16 bg-slate-50/70 border-b border-slate-200/70">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      
+      <div class="max-w-3xl mb-8 sm:mb-12">
+        <span class="text-xs font-mono font-extrabold uppercase tracking-widest text-sky-600 block mb-1">
+          // DIAGNÓSTICO ESTRATÉGICO
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+          La Realidad de las Licitaciones de Gobierno y el Filtro Técnico
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
+          En los concursos de obra pública convocados por el <strong>Fideicomiso de Puentes Fronterizos, la JMAS Juárez, Obras Públicas Municipales y dependencias estatales o federales</strong>, los comités dictaminadores auditan minuciosamente la propuesta técnica, el padrón de contratistas, la maquinaria y los antecedentes. Un sitio web desactualizado o inexistente pone en duda la infraestructura real de la constructora.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Tarjeta Problema -->
+        <div class="bg-white p-6 rounded-2xl border border-red-200/80 shadow-xs relative overflow-hidden">
+          <div class="w-1.5 h-full bg-red-500 absolute left-0 top-0"></div>
+          <div class="flex items-center gap-2 text-red-600 font-bold text-xs uppercase tracking-wider mb-3">
+            <span class="material-symbols-outlined text-[18px]">warning</span>
+            <span>El Riesgo del Sitio Web Común de Constructora</span>
+          </div>
+          <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-2">
+            La Percepción de "Improvisación" ante Comités Dictaminadores
+          </h3>
+          <ul class="space-y-2 text-xs text-slate-600 leading-relaxed">
+            <li class="flex items-start gap-2">
+              <span class="material-symbols-outlined text-red-500 text-[16px] shrink-0 mt-0.5">close</span>
+              <span><strong>Sitios lentos en WordPress:</strong> Tardan 5 a 8 segundos en abrir y se caen en auditorías, proyectando descuido administrativo.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="material-symbols-outlined text-red-500 text-[16px] shrink-0 mt-0.5">close</span>
+              <span><strong>Falta de evidencia fotográfica local:</strong> Usan fotos genéricas de bancos de imágenes en lugar de mostrar los frentes reales en Juárez (Solís Barraza, Puentes Fronterizos).</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="material-symbols-outlined text-red-500 text-[16px] shrink-0 mt-0.5">close</span>
+              <span><strong>Currículum desarticulado:</strong> Los auditores de licitación no encuentran en 1-clic el historial de obras por metros cuadrados, diámetros de colectores o fraccionamientos urbanizados.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Tarjeta Solución Apolograma -->
+        <div class="bg-white p-6 rounded-2xl border border-sky-200/80 shadow-xs relative overflow-hidden">
+          <div class="w-1.5 h-full bg-sky-600 absolute left-0 top-0"></div>
+          <div class="flex items-center gap-2 text-sky-600 font-bold text-xs uppercase tracking-wider mb-3">
+            <span class="material-symbols-outlined text-[18px]">verified</span>
+            <span>La Ventaja Blindada Apolograma ($100k Market-Tier)</span>
+          </div>
+          <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-2">
+            Credencial Técnica Digital de Solidez Absoluta
+          </h3>
+          <ul class="space-y-2 text-xs text-slate-600 leading-relaxed">
+            <li class="flex items-start gap-2">
+              <span class="material-symbols-outlined text-sky-600 text-[16px] shrink-0 mt-0.5">check</span>
+              <span><strong>Velocidad Sub-segundo (PageSpeed 100/100):</strong> Carga instantánea sin latencia desde cualquier computadora o teléfono de dependencias oficiales.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="material-symbols-outlined text-sky-600 text-[16px] shrink-0 mt-0.5">check</span>
+              <span><strong>Acreditación de Maquinaria Propia:</strong> Galería técnica de flota pesada (CAT, Volvo) demostrando capacidad inmediata sin depender de rentas externas.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="material-symbols-outlined text-sky-600 text-[16px] shrink-0 mt-0.5">check</span>
+              <span><strong>Dossier Descargable en 1-Clic:</strong> Botón directo para descargar el Currículum Empresarial en PDF membretado oficial para anexar a propuestas técnicas.</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 4. ARQUITECTURA TÉCNICA: LOS 4 MÓDULOS DEL SITIO WEB                       -->
+  <!-- ========================================================================= -->
+  <section class="py-16 sm:py-24 bg-white border-b border-slate-100" id="modulos">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      
+      <div class="max-w-3xl mb-12">
+        <span class="text-xs font-mono font-extrabold uppercase tracking-widest text-sky-600 block mb-1">
+          // PILARES DE INGENIERÍA
+        </span>
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          Los 4 Módulos que Construyen el Valor Enterprise de $100,000 MXN
+        </h2>
+        <p class="text-slate-600 text-sm sm:text-base mt-2">
+          Diseñado a la medida con la sobriedad y peso corporativo que exige el sector constructor e inmobiliario en el norte del país.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+        
+        <!-- Módulo 01 -->
+        <div class="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-200 flex flex-col justify-between hover:border-sky-400 transition-all shadow-xs">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="font-mono text-xs font-bold text-sky-700 bg-sky-100/70 px-2.5 py-1 rounded">MÓDULO 01</span>
+              <span class="material-symbols-outlined text-sky-600 text-[26px]">policy</span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-extrabold text-slate-900 mb-2">
+              Ficha Corporativa Blindada para Licitaciones
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+              Área institucional de alta fidelidad que resume el estatus legal y técnico de AI Grupo Constructor: constitución formal desde 2014, padrón de contratistas del Estado de Chihuahua y Municipio de Juárez, cuadro de especialidades en obra civil pesada, hidráulica y urbanización, y respaldo gremial CMIC.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-200/80 space-y-1.5 text-xs text-slate-700 font-medium">
+            <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-sky-600">file_download</span> Descarga de Currículum Empresarial Oficial (PDF HD)</div>
+            <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-sky-600">verified_user</span> Registro de Padrón de Contratistas & Especialidades</div>
+          </div>
+        </div>
+
+        <!-- Módulo 02 -->
+        <div class="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-200 flex flex-col justify-between hover:border-sky-400 transition-all shadow-xs">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="font-mono text-xs font-bold text-amber-700 bg-amber-100/70 px-2.5 py-1 rounded">MÓDULO 02</span>
+              <span class="material-symbols-outlined text-amber-600 text-[26px]">apartment</span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-extrabold text-slate-900 mb-2">
+              Catálogo Dual: Obras Públicas & Fraccionamientos
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+              Sistema de visualización interactivo con filtro dinámico por tipología. Separa con claridad la infraestructura gubernamental (vivienda social vertical, pavimentaciones, colectores) del desarrollo habitacional privado (fraccionamientos residenciales urbanizados).
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-200/80 space-y-1.5 text-xs text-slate-700 font-medium">
+            <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-amber-600">filter_list</span> Filtros instantáneos en vivo (sin recargar pantalla)</div>
+            <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-amber-600">photo_library</span> Ficha por obra con metraje, dependencia, ubicación y fotos reales</div>
+          </div>
+        </div>
+
+        <!-- Módulo 03 -->
+        <div class="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-200 flex flex-col justify-between hover:border-sky-400 transition-all shadow-xs">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="font-mono text-xs font-bold text-emerald-700 bg-emerald-100/70 px-2.5 py-1 rounded">MÓDULO 03</span>
+              <span class="material-symbols-outlined text-emerald-600 text-[26px]">precision_manufacturing</span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-extrabold text-slate-900 mb-2">
+              Parque de Maquinaria Pesada & Capacidad Instalada
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+              Galería técnica del parque de maquinaria propio (excavadoras sobre orugas Caterpillar, motoconformadoras, vibrocompactadores y camiones de volteo). Demuestra músculo operativo inmediato para cumplir tiempos de entrega sin depender de terceros.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-200/80 space-y-1.5 text-xs text-slate-700 font-medium">
+            <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-emerald-600">build_circle</span> Inventario clasificado de equipo pesado activo</div>
+            <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-emerald-600">engineering</span> Credencial visual de respaldo operativo en campo</div>
+          </div>
+        </div>
+
+        <!-- Módulo 04 -->
+        <div class="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-200 flex flex-col justify-between hover:border-sky-400 transition-all shadow-xs">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="font-mono text-xs font-bold text-purple-700 bg-purple-100/70 px-2.5 py-1 rounded">MÓDULO 04</span>
+              <span class="material-symbols-outlined text-purple-600 text-[26px]">hub</span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-extrabold text-slate-900 mb-2">
+              Centro de Contacto Institucional & Licitaciones
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+              Canal de comunicación directa con botón 1-clic a WhatsApp de la Dirección General (Lic. Mario Suárez) y Gerencia de Obra, más formulario institucional seguro para recepción de convocatorias, solicitud de presupuestos y alianzas comerciales.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-200/80 space-y-1.5 text-xs text-slate-700 font-medium">
+            <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-purple-600">chat</span> Enlace directo 1-clic a WhatsApp de Dirección</div>
+            <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-purple-600">encrypted</span> Formulario B2B protegido contra spam</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 5. DEMO INTERACTIVA: MOCKUP DE CATÁLOGO & PORTAL DE OBRAS                 -->
+  <!-- ========================================================================= -->
+  <section class="py-16 sm:py-24 bg-slate-900 text-white relative overflow-hidden" id="demo-interactiva">
+    
+    <!-- Background Technical Grid -->
+    <div class="absolute inset-0 technical-dots opacity-20 pointer-events-none"></div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-12">
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="font-mono text-xs font-bold text-emerald-400 uppercase tracking-widest">SIMULADOR EN VIVO · MAQUETA INTERACTIVA DE AI GRUPO CONSTRUCTOR</span>
+          </div>
+          <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight">
+            Así Examinará un Auditor o Cliente el Catálogo de Obras
+          </h2>
+          <p class="text-slate-400 text-xs sm:text-sm mt-1 max-w-xl">
+            Prueba los filtros por categoría y el buscador instantáneo con las obras emblemáticas de la empresa en Ciudad Juárez.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
+          <span class="bg-slate-800 border border-slate-700 px-3 py-1.5 rounded-lg">Carga: 0.12s</span>
+          <span class="bg-slate-800 border border-slate-700 px-3 py-1.5 rounded-lg text-emerald-400 font-bold">100% Responsive</span>
+        </div>
+      </div>
+
+      <!-- Mockup Window Browser -->
+      <div class="bg-slate-950 rounded-2xl sm:rounded-3xl border border-slate-800 shadow-2xl overflow-hidden">
+        
+        <!-- Browser Top Bar -->
+        <div class="bg-slate-900/90 px-4 sm:px-6 py-3 border-b border-slate-800 flex items-center justify-between gap-3 text-xs">
+          <div class="flex items-center gap-2 shrink-0">
+            <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+            <div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
+            <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
+          </div>
+          <div class="flex-1 max-w-md bg-slate-950/80 border border-slate-800 rounded-lg px-3 py-1 text-center font-mono text-[11px] text-slate-400 truncate">
+            https://aigrupoconstructor.com/obras-y-licitaciones
+          </div>
+          <div class="flex items-center gap-2 text-slate-400 shrink-0">
+            <span class="material-symbols-outlined text-[16px]">lock</span>
+            <span class="text-[10px] font-mono font-bold text-emerald-400 hidden sm:inline">SSL A+ BLINDADO</span>
+          </div>
+        </div>
+
+        <!-- Inside Browser Canvas -->
+        <div class="p-4 sm:p-8 bg-slate-900 text-slate-900">
+          
+          <!-- Web Demo Container White Card -->
+          <div class="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg border border-slate-200">
+            
+            <!-- Filter Bar & Search -->
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-slate-200">
+              
+              <!-- Tab Pills -->
+              <div class="flex flex-wrap gap-1.5 sm:gap-2" id="filter-buttons">
+                <button onclick="setFilter('all')" id="btn-all" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-900 text-white transition-all">
+                  Todas las Obras (4)
+                </button>
+                <button onclick="setFilter('bienestar')" id="btn-bienestar" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">
+                  Casas del Bienestar (1)
+                </button>
+                <button onclick="setFilter('puentes')" id="btn-puentes" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">
+                  Infraestructura & Puentes (1)
+                </button>
+                <button onclick="setFilter('residencial')" id="btn-residencial" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">
+                  Fraccionamientos (1)
+                </button>
+                <button onclick="setFilter('maquinaria')" id="btn-maquinaria" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">
+                  Flota Maquinaria (1)
+                </button>
+              </div>
+
+              <!-- Search Input -->
+              <div class="relative w-full lg:w-72">
+                <span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-[18px]">search</span>
+                <input 
+                  type="text" 
+                  id="project-search" 
+                  oninput="handleSearch()"
+                  placeholder="Buscar Solís Barraza, Puentes, JMAS..." 
+                  class="w-full bg-slate-50 border border-slate-300 rounded-lg pl-9 pr-3 py-2 text-xs font-medium text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500"
+                >
+              </div>
+
+            </div>
+
+            <!-- Projects Grid (Populated dynamically) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mt-6" id="projects-container">
+              <!-- Cards rendered by JS -->
+            </div>
+
+            <!-- Footer of Demo -->
+            <div class="mt-6 pt-4 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+              <span id="demo-counter" class="font-medium">Mostrando 4 proyectos auditados</span>
+              <button onclick="downloadDossierDemo()" class="inline-flex items-center gap-1.5 font-bold text-sky-700 hover:text-sky-900 transition-colors">
+                <span class="material-symbols-outlined text-[16px]">picture_as_pdf</span>
+                <span>Descargar Currículum Empresarial Membretado (Demo PDF)</span>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 6. TABLA COMPARATIVA: SITIO GENÉRICO VS DESARROLLO APOLOGRAMA              -->
+  <!-- ========================================================================= -->
+  <section class="py-16 sm:py-24 bg-white border-b border-slate-100">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      
+      <div class="max-w-3xl mb-12">
+        <span class="text-xs font-mono font-extrabold uppercase tracking-widest text-sky-600 block mb-1">
+          // ESTÁNDAR DE INGENIERÍA
+        </span>
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          Por Qué Este Desarrollo Compite con Sitios de $100,000 MXN
+        </h2>
+        <p class="text-slate-600 text-sm sm:text-base mt-2">
+          Comparativa transparente entre un sitio convencional de agencia tradicional y la arquitectura de software construida por Apolograma para AI Grupo Constructor.
+        </p>
+      </div>
+
+      <!-- Table Wrapper -->
+      <div class="overflow-x-auto border border-slate-200 rounded-2xl shadow-xs">
+        <table class="w-full text-left text-xs sm:text-sm">
+          <thead>
+            <tr class="bg-slate-900 text-white font-mono text-[11px] sm:text-xs">
+              <th class="py-4 px-4 sm:px-6">Parámetro Técnico / Institucional</th>
+              <th class="py-4 px-4 sm:px-6 text-slate-400">Sitio Convencional ($10k - $20k)</th>
+              <th class="py-4 px-4 sm:px-6 text-sky-400 font-bold bg-slate-950">Desarrollo Apolograma ($100k tier)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-slate-700">
+            
+            <tr class="hover:bg-slate-50/80">
+              <td class="py-3.5 px-4 sm:px-6 font-bold text-slate-900">Velocidad en Google PageSpeed</td>
+              <td class="py-3.5 px-4 sm:px-6 text-red-600">30 - 45 / 100 (Lento, penalizado)</td>
+              <td class="py-3.5 px-4 sm:px-6 font-bold text-emerald-600 bg-sky-50/30">98 - 100 / 100 (Carga instantánea)</td>
+            </tr>
+
+            <tr class="hover:bg-slate-50/80">
+              <td class="py-3.5 px-4 sm:px-6 font-bold text-slate-900">Enfoque en Licitaciones de Gobierno</td>
+              <td class="py-3.5 px-4 sm:px-6 text-slate-500">Inexistente (Plantilla de blog comercial)</td>
+              <td class="py-3.5 px-4 sm:px-6 font-bold text-slate-900 bg-sky-50/30">Diseñado para comités de obra pública</td>
+            </tr>
+
+            <tr class="hover:bg-slate-50/80">
+              <td class="py-3.5 px-4 sm:px-6 font-bold text-slate-900">Fichas de Proyectos Reales (Solís Barraza, JMAS)</td>
+              <td class="py-3.5 px-4 sm:px-6 text-slate-500">Fotos falsas de bancos de imágenes</td>
+              <td class="py-3.5 px-4 sm:px-6 font-bold text-slate-900 bg-sky-50/30">Fichas técnicas con metrajes y frentes reales</td>
+            </tr>
+
+            <tr class="hover:bg-slate-50/80">
+              <td class="py-3.5 px-4 sm:px-6 font-bold text-slate-900">Dossier / Currículum Descargable</td>
+              <td class="py-3.5 px-4 sm:px-6 text-slate-500">No incluye o archivo genérico</td>
+              <td class="py-3.5 px-4 sm:px-6 font-bold text-slate-900 bg-sky-50/30">Descarga directa en 1-clic en PDF HD</td>
+            </tr>
+
+            <tr class="hover:bg-slate-50/80">
+              <td class="py-3.5 px-4 sm:px-6 font-bold text-slate-900">Catálogo de Maquinaria Pesada</td>
+              <td class="py-3.5 px-4 sm:px-6 text-slate-500">Sin sección o fotos de catálogo ajeno</td>
+              <td class="py-3.5 px-4 sm:px-6 font-bold text-slate-900 bg-sky-50/30">Galería de flota propia acreditada</td>
+            </tr>
+
+            <tr class="hover:bg-slate-50/80">
+              <td class="py-3.5 px-4 sm:px-6 font-bold text-slate-900">Costos Mensuales Obligatorios</td>
+              <td class="py-3.5 px-4 sm:px-6 text-amber-700">$1,500 - $3,000/mes de mantenimiento</td>
+              <td class="py-3.5 px-4 sm:px-6 font-bold text-emerald-600 bg-sky-50/30">$0 MXN (Hosting Cloudflare/Vercel gratuito)</td>
+            </tr>
+
+            <tr class="hover:bg-slate-50/80">
+              <td class="py-3.5 px-4 sm:px-6 font-bold text-slate-900">Tiempo de Entrega</td>
+              <td class="py-3.5 px-4 sm:px-6 text-slate-500">4 a 8 semanas (Lento)</td>
+              <td class="py-3.5 px-4 sm:px-6 font-bold text-sky-700 bg-sky-50/30">Sprint Exprés de 7 Días Naturales</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 7. CRONOGRAMA: SPRINT EXPRÉS DE 7 DÍAS NATURALES                           -->
+  <!-- ========================================================================= -->
+  <section class="py-16 sm:py-24 bg-slate-50/60 border-b border-slate-200/70" id="cronograma">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      
+      <div class="max-w-3xl mb-12">
+        <span class="text-xs font-mono font-extrabold uppercase tracking-widest text-sky-600 block mb-1">
+          // EJECUCIÓN ÁGIL
+        </span>
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          Cronograma de Despliegue · Sprint de 7 Días
+        </h2>
+        <p class="text-slate-600 text-sm sm:text-base mt-2">
+          Metodología ágil sin fricción: el Lic. Mario Suárez solo nos proporciona el logotipo y la lista básica de obras concluidas. Nosotros nos encargamos de todo el desarrollo.
+        </p>
+      </div>
+
+      <div class="space-y-3">
+        
+        <!-- Day 1 -->
+        <div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div class="flex items-center gap-3.5">
+            <span class="w-10 h-10 rounded-lg bg-slate-900 text-white font-mono font-extrabold text-sm flex items-center justify-center shrink-0">D1</span>
+            <div>
+              <span class="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider">Día 01 · Arranque</span>
+              <h4 class="text-sm font-bold text-slate-900">Recepción de Material & Kickoff Técnico</h4>
+              <p class="text-xs text-slate-500">Recopilación de listado de obras públicas, fraccionamientos, logotipo y datos institucionales de AI Grupo Constructor.</p>
+            </div>
+          </div>
+          <span class="text-[11px] font-bold bg-sky-50 text-sky-700 px-3 py-1 rounded-full shrink-0">Fase 1: Recopilación</span>
+        </div>
+
+        <!-- Day 2-3 -->
+        <div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div class="flex items-center gap-3.5">
+            <span class="w-10 h-10 rounded-lg bg-slate-900 text-white font-mono font-extrabold text-sm flex items-center justify-center shrink-0">D2-3</span>
+            <div>
+              <span class="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider">Días 02 y 03 · Arquitectura</span>
+              <h4 class="text-sm font-bold text-slate-900">Diseño UI/UX de Nivel Enterprise & Redacción Técnica</h4>
+              <p class="text-xs text-slate-500">Maquetación de la interfaz corporativa, diseño de fichas de licitación y curaduría fotográfica de proyectos y maquinaria.</p>
+            </div>
+          </div>
+          <span class="text-[11px] font-bold bg-sky-50 text-sky-700 px-3 py-1 rounded-full shrink-0">Fase 2: UI/UX & Fichas</span>
+        </div>
+
+        <!-- Day 4-5 -->
+        <div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div class="flex items-center gap-3.5">
+            <span class="w-10 h-10 rounded-lg bg-slate-900 text-white font-mono font-extrabold text-sm flex items-center justify-center shrink-0">D4-5</span>
+            <div>
+              <span class="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider">Días 04 y 05 · Desarrollo</span>
+              <h4 class="text-sm font-bold text-slate-900">Programación Frontend & Ensamblado de Catálogo</h4>
+              <p class="text-xs text-slate-500">Codificación en Next.js estático, filtros interactivos de proyectos, optimización WebP y preparación del Dossier PDF.</p>
+            </div>
+          </div>
+          <span class="text-[11px] font-bold bg-amber-50 text-amber-700 px-3 py-1 rounded-full shrink-0">Fase 3: Código & Filtros</span>
+        </div>
+
+        <!-- Day 6 -->
+        <div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div class="flex items-center gap-3.5">
+            <span class="w-10 h-10 rounded-lg bg-slate-900 text-white font-mono font-extrabold text-sm flex items-center justify-center shrink-0">D6</span>
+            <div>
+              <span class="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider">Día 06 · Control de Calidad</span>
+              <h4 class="text-sm font-bold text-slate-900">Auditoría PageSpeed 100/100 & Vinculación de Dominio</h4>
+              <p class="text-xs text-slate-500">Pruebas en teléfonos y computadoras, certificación SSL de seguridad, configuración DNS y revisión preliminar con Lic. Mario Suárez.</p>
+            </div>
+          </div>
+          <span class="text-[11px] font-bold bg-purple-50 text-purple-700 px-3 py-1 rounded-full shrink-0">Fase 4: Auditoría QA</span>
+        </div>
+
+        <!-- Day 7 -->
+        <div class="bg-emerald-50/80 p-4 sm:p-5 rounded-xl border-2 border-emerald-500 shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div class="flex items-center gap-3.5">
+            <span class="w-10 h-10 rounded-lg bg-emerald-600 text-white font-mono font-black text-sm flex items-center justify-center shrink-0">D7</span>
+            <div>
+              <span class="text-[10px] font-mono font-extrabold text-emerald-800 uppercase tracking-wider">Día 07 · ¡PUBLICACIÓN EN VIVO!</span>
+              <h4 class="text-sm sm:text-base font-extrabold text-slate-900">Lanzamiento Oficial Llave en Mano</h4>
+              <p class="text-xs text-slate-600">Publicación en el dominio oficial de AI Grupo Constructor, entrega de accesos y puesta en marcha para licitaciones inmediatas.</p>
+            </div>
+          </div>
+          <span class="text-xs font-bold bg-emerald-600 text-white px-3.5 py-1.5 rounded-full shrink-0">Entrega Final</span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 8. PROPUESTA ECONÓMICA: CONTRASTE DE VALOR ($98k vs $12k)                 -->
+  <!-- ========================================================================= -->
+  <section class="py-16 sm:py-24 bg-white" id="inversion">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      
+      <!-- Compromiso de Arranque Express -->
+      <div class="mb-8 p-4 sm:p-5 rounded-2xl bg-sky-50 border border-sky-200 flex items-start gap-3.5">
+        <div class="w-8 h-8 rounded-lg bg-sky-600 text-white flex items-center justify-center shrink-0">
+          <span class="material-symbols-outlined text-[20px]">bolt</span>
+        </div>
+        <div>
+          <strong class="text-sky-950 text-sm font-bold block">Garantía de Arranque Inmediato:</strong>
+          <p class="text-xs text-sky-800 mt-0.5 leading-relaxed">
+            Al formalizar hoy el anticipo del 50%, en menos de 24 horas inicia el Sprint de 7 días con la estructuración del catálogo y las fichas de licitación para AI Grupo Constructor.
+          </p>
+        </div>
+      </div>
+
+      <!-- Main Pricing Card -->
+      <div class="bg-gradient-to-b from-slate-900 to-slate-950 text-white rounded-2xl sm:rounded-3xl p-5 sm:p-12 shadow-2xl relative overflow-hidden border border-slate-800">
+        
+        <!-- Subtle Glow -->
+        <div class="absolute -top-32 -right-32 w-80 h-80 bg-sky-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-5 sm:gap-6 pb-6 sm:pb-8 border-b border-slate-800">
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-[11px] sm:text-xs font-mono font-extrabold uppercase tracking-widest text-sky-400 block">
+                PROPUESTA ECONÓMICA · TARIFA PREFERENCIAL
+              </span>
+            </div>
+            <h3 class="text-2xl sm:text-4xl font-extrabold tracking-tight">
+              Desarrollo Web Enterprise Llave en Mano
+            </h3>
+            <p class="text-slate-400 text-xs sm:text-sm mt-1 max-w-lg leading-relaxed">
+              Sitio web corporativo de alta gama, módulo de licitaciones blindadas, catálogo interactivo de obras y fraccionamientos, y dossier descargable en PDF.
+            </p>
+          </div>
+
+          <!-- Price Display with Value Contrast -->
+          <div class="text-left md:text-right shrink-0 w-full sm:w-auto pt-2 sm:pt-0">
+            <div class="text-slate-400 text-xs line-through">
+              Valor de Mercado Enterprise: $98,000 MXN
+            </div>
+            <div class="text-xs font-mono text-emerald-400 font-semibold mb-1">
+              Bonificación Especial Directa: -$86,000 MXN
+            </div>
+            <span class="text-[10px] sm:text-xs text-slate-400 block uppercase font-semibold">Inversión Neta Final</span>
+            <div class="flex items-baseline gap-2">
+              <span class="text-3xl sm:text-5xl font-black text-white tracking-tight">$12,000</span>
+              <span class="text-sm text-slate-300 font-bold">MXN</span>
+            </div>
+            
+            <div class="mt-2 pt-2 border-t border-slate-800">
+              <span class="text-[11px] sm:text-xs text-sky-400 font-bold uppercase tracking-wider block">Total con I.V.A. (16%)</span>
+              <span class="text-xl sm:text-2xl font-extrabold text-sky-400 tracking-tight">$13,920 MXN</span>
+              <span class="text-[10px] sm:text-[11px] text-slate-400 block mt-0.5">($12,960 MXN con estímulo fiscal frontera 8%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Checklist of Inclusions -->
+        <div class="py-6 sm:py-8 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-xs sm:text-sm text-slate-300">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-emerald-400 text-[18px] shrink-0">check_circle</span>
+            <span>Diseño UI/UX exclusivo a la medida (Cero plantillas)</span>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-emerald-400 text-[18px] shrink-0">check_circle</span>
+            <span>Ficha Técnica Blindada para Licitaciones Públicas</span>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-emerald-400 text-[18px] shrink-0">check_circle</span>
+            <span>Catálogo Dual Interactivo (Obras Públicas vs Fraccionamientos)</span>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-emerald-400 text-[18px] shrink-0">check_circle</span>
+            <span>Sección de Parque de Maquinaria Pesada Acreditada</span>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-emerald-400 text-[18px] shrink-0">check_circle</span>
+            <span>Botón de Descarga de Currículum Empresarial (PDF)</span>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-emerald-400 text-[18px] shrink-0">check_circle</span>
+            <span>Enlace directo 1-clic a WhatsApp de Dirección (Lic. Mario Suárez)</span>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-emerald-400 text-[18px] shrink-0">check_circle</span>
+            <span>Rendimiento Google PageSpeed 100/100 optimizado</span>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-emerald-400 text-[18px] shrink-0">check_circle</span>
+            <span>Configuración de Dominio Oficial & Certificado SSL A+</span>
+          </div>
+        </div>
+
+        <!-- Bank Details Card (TECZA) -->
+        <div class="p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-slate-800/80 border border-slate-700/80 my-2">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-3 pb-3 border-b border-slate-700">
+            <div>
+              <span class="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-sky-400 block font-mono">Datos Oficiales para Formalización & Factura CFDI 4.0</span>
+              <strong class="text-xs sm:text-sm font-bold text-white block mt-0.5">TECNOLOGIES TECZA, S. DE R.L. DE C.V.</strong>
+            </div>
+            <span class="text-[11px] sm:text-xs bg-slate-700 text-slate-200 px-2.5 py-1 rounded font-mono font-semibold">RFC: TTE170614QI1</span>
+          </div>
+
+          <div class="mt-3.5 grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-4 text-xs">
+            <div class="bg-slate-900/60 p-2.5 rounded-lg sm:bg-transparent sm:p-0">
+              <span class="text-slate-400 block text-[11px]">Banco Receptor:</span>
+              <strong class="text-white text-sm">Banregio</strong>
+            </div>
+            <div class="bg-slate-900/60 p-2.5 rounded-lg sm:bg-transparent sm:p-0">
+              <span class="text-slate-400 block text-[11px]">Número de Cuenta:</span>
+              <strong class="text-white text-sm font-mono">065-74924-002-9</strong>
+            </div>
+            <div class="bg-slate-900/60 p-2.5 rounded-lg sm:bg-transparent sm:p-0">
+              <span class="text-slate-400 block text-[11px]">CLABE Interbancaria:</span>
+              <div class="flex items-center gap-2 mt-0.5">
+                <strong class="text-sky-300 text-sm font-mono tracking-tight">058164657492400290</strong>
+                <button onclick="copyClabe()" id="btn-copy-clabe" class="bg-slate-700 hover:bg-slate-600 text-slate-200 text-[10px] font-bold px-2 py-1 rounded transition-colors flex items-center gap-1 shrink-0">
+                  <span class="material-symbols-outlined text-[13px]">content_copy</span>
+                  <span id="text-copy">Copiar</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-3.5 pt-3 border-t border-slate-700/60 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 text-[10px] sm:text-[11px] text-slate-400 leading-relaxed">
+            <span><strong>Esquema de Pago:</strong> 50% anticipo al formalizar ($6,000 MXN + IVA) y 50% contra entrega final en dominio ($6,000 MXN + IVA).</span>
+            <span class="text-slate-300 font-medium">Emisión inmediata de factura fiscal CFDI 4.0.</span>
+          </div>
+        </div>
+
+        <!-- Action / CTA Buttons -->
+        <div class="pt-5 sm:pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-5 sm:gap-6">
+          <div class="text-xs text-slate-400 space-y-1 text-center sm:text-left">
+            <div><strong class="text-white">Modalidad:</strong> Sprint de 7 Días Llave en Mano.</div>
+            <div>Atención personalizada y validación directa con Dirección Apolograma.</div>
+          </div>
+
+          <!-- WhatsApp Approval Button -->
+          <button onclick="openWhatsAppModal()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-5 sm:px-6 py-3.5 rounded-xl shadow-lg transition-all hover:scale-[1.02] shrink-0 text-sm cursor-pointer">
+            <span class="material-symbols-outlined text-[20px]">chat</span>
+            <span>Aprobar Propuesta por WhatsApp</span>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 9. FOOTER LIMPIO                                                          -->
+  <!-- ========================================================================= -->
+  <footer class="py-8 bg-slate-50 border-t border-slate-200 text-center text-xs text-slate-500">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-center justify-center gap-2 mb-2">
+        <span class="font-extrabold text-slate-800">APOLOGRAMA</span>
+        <span class="text-slate-300">·</span>
+        <span>Arquitectura de Software & Estrategia Digital</span>
+      </div>
+      <p class="text-slate-500">
+        Propuesta técnica y económica elaborada con carácter confidencial exclusivamente para <strong class="text-slate-700">Lic. Mario Suárez · AI Grupo Desarrollador y Constructor, S.A. de C.V.</strong>
+      </p>
+      <p class="text-[11px] text-slate-400 mt-1">Av. Teófilo Borunda 8349 · Ciudad Juárez, Chihuahua · Septiembre 2026</p>
+    </div>
+  </footer>
+
+  <!-- ========================================================================= -->
+  <!-- 10. MODAL INTERACTIVO DE VALIDACIÓN VÍA WHATSAPP                          -->
+  <!-- ========================================================================= -->
+  <div id="whatsapp-modal" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-xs flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-5 sm:p-6 shadow-2xl border border-slate-200 relative animate-in fade-in zoom-in-95 duration-150">
+      
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-[18px]">verified</span>
+          </div>
+          <div>
+            <h4 class="text-sm font-bold text-slate-900">Validación Directa con Dirección Apolograma</h4>
+            <span class="text-[10px] font-mono text-slate-400 uppercase">AI Grupo Constructor · Lic. Mario Suárez</span>
+          </div>
+        </div>
+        <button onclick="closeWhatsAppModal()" class="text-slate-400 hover:text-slate-600 p-1">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <div class="my-4">
+        <label class="block text-[11px] font-mono font-bold text-slate-500 uppercase mb-1">
+          Mensaje Pre-configurado para Envío:
+        </label>
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-700 font-mono leading-relaxed whitespace-pre-line" id="modal-msg-preview">
+Hola Emmanuel, el Lic. Mario Suárez ha revisado la propuesta para el desarrollo del sitio web corporativo y ficha de licitaciones de AI Grupo Constructor.
+
+Confirmamos la aprobación:
+• Modalidad: Sprint Exprés de 7 Días Llave en Mano
+• Inversión Neta: $12,000.00 MXN + IVA
+• Esquema de Pago: 50% Anticipo ($6,000 MXN + IVA) / 50% Contra Entrega
+• Entregables: Portal Enterprise, Ficha Blindada para Licitaciones, Catálogo de Obras Públicas (Solís Barraza, Puentes Fronterizos, JMAS) y Fraccionamientos
+
+Coordinemos los datos de facturación para realizar el anticipo y arrancar de inmediato.
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center gap-2 pt-2 border-t border-slate-100">
+        <button onclick="sendApprovedWhatsApp()" class="w-full sm:flex-1 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2 shadow-sm transition-colors">
+          <span class="material-symbols-outlined text-[18px]">chat</span>
+          <span>Abrir WhatsApp y Enviar</span>
+        </button>
+        <button onclick="copyModalMsg()" id="btn-copy-modal" class="w-full sm:w-auto bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 px-4 rounded-xl text-xs transition-colors">
+          Copiar Mensaje
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 11. JAVASCRIPT: SIMULADOR DE CATÁLOGO & INTERACCIÓN                       -->
+  <!-- ========================================================================= -->
+  <script>
+    // Projects Data for Interactive Demo (Authentic to AI Grupo Constructor)
+    const mockProjects = [
+      {
+        id: 'OB-01',
+        title: 'Megaproyecto Habitacional y Urbanización "Casas del Bienestar"',
+        type: 'bienestar',
+        typeLabel: 'Licitación Pública Federal / CONAVI / Infonavit',
+        typeColor: 'bg-sky-100 text-sky-800 border-sky-200',
+        specs: '728 Viviendas en Edificios 2-4 Niveles · Movimientos de Tierra',
+        client: 'Av. Leonardo Solís Barraza & Fundadores · Suroriente Cd. Juárez',
+        status: 'Fase I en Ejecución (Topografía & Terracerías)',
+        statusColor: 'text-amber-600',
+        image: 'assets/solis_barraza_movimiento_tierra.jpg',
+        desc: 'Adjudicación de obra para edificación de 728 departamentos (60 m² c/u), preparación masiva de plataformas con maquinaria pesada CAT, nivelaciones topográficas y trazo de infraestructura hidrosanitaria.'
+      },
+      {
+        id: 'OB-02',
+        title: 'Obras de Drenaje Pluvial y Rehabilitación en Cruces Fronterizos',
+        type: 'puentes',
+        typeLabel: 'Fideicomiso de Puentes Fronterizos de Chihuahua',
+        typeColor: 'bg-blue-100 text-blue-800 border-blue-200',
+        specs: 'Canalizaciones, Vasos de Captación & Obras a Precios Unitarios',
+        client: 'Fideicomiso de Puentes Fronterizos · Gobierno de Chihuahua',
+        status: 'Concluida y Auditada ✓',
+        statusColor: 'text-emerald-600',
+        image: 'assets/solis_barraza_topografia.jpg',
+        desc: 'Participación y ejecución técnica en licitaciones de infraestructura pluvial, terracerías especializadas y pavimentación para pasos de tráfico pesado e instalaciones fronterizas en Ciudad Juárez.'
+      },
+      {
+        id: 'OB-03',
+        title: 'Desarrollo y Urbanización de Fraccionamientos Residenciales',
+        type: 'residencial',
+        typeLabel: 'Desarrollo Habitacional Privado',
+        typeColor: 'bg-amber-100 text-amber-800 border-amber-200',
+        specs: 'Urbanización Integral · Vialidades de Concreto & Redes Subterráneas',
+        client: 'Desarrollos Residenciales Privados en Ciudad Juárez',
+        status: 'Entregado Concluido ✓',
+        statusColor: 'text-emerald-600',
+        image: 'assets/fraccionamiento_residencial.jpg',
+        desc: 'Construcción integral de fraccionamientos residenciales, pavimentación con concreto hidráulico y asfalto de alta especificación, banquetas, guarniciones, alumbrado público y áreas recreativas.'
+      },
+      {
+        id: 'OB-04',
+        title: 'Parque de Maquinaria Pesada Propia & Capacidad Instalada',
+        type: 'maquinaria',
+        typeLabel: 'Capacidad Mecánica y Operativa Acreditada CMIC',
+        typeColor: 'bg-emerald-100 text-emerald-800 border-emerald-200',
+        specs: 'Excavadoras CAT, Motoconformadoras, Compactadores & Volteos',
+        client: 'Flota Propia Activa en Frentes de Obra',
+        status: 'Disponibilidad Operativa 100%',
+        statusColor: 'text-emerald-600',
+        image: 'assets/maquinaria_pesada_fleet.jpg',
+        desc: 'Demostración de fuerza motriz propia para garantizar solvencia técnica en licitaciones públicas de gran escala, eliminando riesgos de atraso por arrendamiento de equipo externo.'
+      }
+    ];
+
+    let currentFilter = 'all';
+
+    function renderProjects(list) {
+      const container = document.getElementById('projects-container');
+      container.innerHTML = '';
+
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-2 py-12 text-center text-slate-400">
+            <span class="material-symbols-outlined text-[36px] mb-2 text-slate-300">search_off</span>
+            <p class="font-bold text-sm">No se encontraron proyectos con ese criterio.</p>
+            <p class="text-xs text-slate-400 mt-1">Prueba buscando "Solís", "Bienestar", "Puentes", "Residencial" o "Maquinaria".</p>
+          </div>
+        `;
+        document.getElementById('demo-counter').innerText = '0 proyectos encontrados';
+        return;
+      }
+
+      list.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'bg-slate-50 rounded-xl overflow-hidden border border-slate-200 flex flex-col hover:border-sky-300 transition-all shadow-xs';
+        card.innerHTML = `
+          <div class="h-44 sm:h-52 bg-slate-800 relative overflow-hidden">
+            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-transparent"></div>
+            <span class="absolute top-3 left-3 text-[10px] font-mono font-bold px-2 py-0.5 rounded border ${item.typeColor}">
+              ${item.typeLabel}
+            </span>
+            <span class="absolute bottom-3 left-3 text-[11px] font-mono font-extrabold text-white">
+              ${item.id} · ${item.client}
+            </span>
+          </div>
+          <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h4 class="font-extrabold text-slate-900 text-sm sm:text-base leading-snug mb-1.5">
+                ${item.title}
+              </h4>
+              <p class="text-xs text-slate-600 line-clamp-2 leading-relaxed mb-3">
+                ${item.desc}
+              </p>
+            </div>
+            <div class="pt-3 border-t border-slate-200/80 flex items-center justify-between text-xs">
+              <span class="font-mono text-[11px] text-slate-700 font-semibold truncate max-w-[210px]">
+                ${item.specs}
+              </span>
+              <span class="font-bold text-[11px] ${item.statusColor} shrink-0">
+                ${item.status}
+              </span>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      document.getElementById('demo-counter').innerText = `Mostrando ${list.length} de ${mockProjects.length} proyectos auditados`;
+    }
+
+    function setFilter(filter) {
+      currentFilter = filter;
+      
+      // Update Button Styles
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.className = 'filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all';
+      });
+      const activeBtn = document.getElementById(`btn-${filter}`);
+      if (activeBtn) {
+        activeBtn.className = 'filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-900 text-white transition-all shadow-xs';
+      }
+
+      applyFilters();
+    }
+
+    function handleSearch() {
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const query = document.getElementById('project-search').value.toLowerCase().trim();
+      let filtered = mockProjects;
+
+      if (currentFilter !== 'all') {
+        filtered = filtered.filter(p => p.type === currentFilter);
+      }
+
+      if (query) {
+        filtered = filtered.filter(p => 
+          p.title.toLowerCase().includes(query) ||
+          p.desc.toLowerCase().includes(query) ||
+          p.client.toLowerCase().includes(query) ||
+          p.specs.toLowerCase().includes(query)
+        );
+      }
+
+      renderProjects(filtered);
+    }
+
+    function downloadDossierDemo() {
+      alert('Demostración de Descarga: En la versión final, este botón descargará de forma instantánea el Currículum Empresarial membretado en PDF de AI Grupo Constructor para anexar a expedientes de licitación.');
+    }
+
+    function copyClabe() {
+      const clabe = "058164657492400290";
+      navigator.clipboard.writeText(clabe).then(() => {
+        const textSpan = document.getElementById('text-copy');
+        textSpan.innerText = '¡Copiado!';
+        setTimeout(() => { textSpan.innerText = 'Copiar'; }, 2000);
+      });
+    }
+
+    function openWhatsAppModal() {
+      document.getElementById('whatsapp-modal').classList.remove('hidden');
+    }
+
+    function closeWhatsAppModal() {
+      document.getElementById('whatsapp-modal').classList.add('hidden');
+    }
+
+    function sendApprovedWhatsApp() {
+      const msg = document.getElementById('modal-msg-preview').innerText.trim();
+      const url = `https://wa.me/526563155799?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
+      closeWhatsAppModal();
+    }
+
+    function copyModalMsg() {
+      const msg = document.getElementById('modal-msg-preview').innerText.trim();
+      navigator.clipboard.writeText(msg).then(() => {
+        const btn = document.getElementById('btn-copy-modal');
+        btn.innerText = '¡Mensaje Copiado!';
+        setTimeout(() => { btn.innerText = 'Copiar Mensaje'; }, 2000);
+      });
+    }
+
+    // Close modal on escape
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeWhatsAppModal();
+    });
+
+    // Initial Render
+    renderProjects(mockProjects);
+  </script>
+
+</body>
+</html>

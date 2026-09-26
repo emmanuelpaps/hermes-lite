@@ -15,6 +15,14 @@ const nextConfig: NextConfig = {
         source: '/hoteles-aniversario-2026/',
         destination: '/hoteles-aniversario-2026/index.html',
       },
+      {
+        source: '/ai-grupo-constructor',
+        destination: '/ai-grupo-constructor/index.html',
+      },
+      {
+        source: '/ai-grupo-constructor/',
+        destination: '/ai-grupo-constructor/index.html',
+      },
     ];
   },
 };
