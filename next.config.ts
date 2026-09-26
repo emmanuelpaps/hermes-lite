@@ -27,6 +27,16 @@ const nextConfig: NextConfig = {
         destination: '/ai-grupo-constructor/index.html',
         permanent: false,
       },
+      {
+        source: '/constructores',
+        destination: '/constructores/index.html',
+        permanent: false,
+      },
+      {
+        source: '/constructores/',
+        destination: '/constructores/index.html',
+        permanent: false,
+      },
     ];
   },
 };
