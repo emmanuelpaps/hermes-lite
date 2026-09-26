@@ -64,6 +64,22 @@
       color: #0F172A;
       -webkit-font-smoothing: antialiased;
     }
+    
+    /* Top Reading Progress Bar */
+    #reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #0284C7 0%, #38BDF8 50%, #10B981 100%);
+      transform-origin: 0% 50%;
+      transform: scaleX(0);
+      z-index: 100;
+      transition: transform 0.08s ease-out;
+    }
+
+    /* Badges */
     .badge-amber {
       background: #FFFBEB;
       color: #B45309;
@@ -84,14 +100,126 @@
       background-image: radial-gradient(rgba(148, 163, 184, 0.25) 1px, transparent 1px);
       background-size: 16px 16px;
     }
+
+    /* High-Impact Sheen Button Effect */
+    .btn-sheen {
+      position: relative;
+      overflow: hidden;
+      transform: translateZ(0);
+    }
+    .btn-sheen::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -120%;
+      width: 50%;
+      height: 200%;
+      background: linear-gradient(
+        60deg,
+        rgba(255, 255, 255, 0) 20%,
+        rgba(255, 255, 255, 0.4) 50%,
+        rgba(255, 255, 255, 0) 80%
+      );
+      transform: rotate(25deg);
+      animation: sheen-sweep 4.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+    }
+    @keyframes sheen-sweep {
+      0% { left: -120%; }
+      30% { left: 160%; }
+      100% { left: 160%; }
+    }
+
+    /* Pulsing Ambient Glows */
+    @keyframes pulse-glow {
+      0%, 100% {
+        box-shadow: 0 0 20px -3px rgba(16, 185, 129, 0.3), 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+      50% {
+        box-shadow: 0 0 35px 2px rgba(16, 185, 129, 0.55), 0 8px 24px rgba(0, 0, 0, 0.25);
+      }
+    }
+    .glow-emerald-pulse {
+      animation: pulse-glow 3s infinite ease-in-out;
+    }
+
+    @keyframes pulse-sky-glow {
+      0%, 100% {
+        box-shadow: 0 0 20px -3px rgba(2, 132, 199, 0.3);
+      }
+      50% {
+        box-shadow: 0 0 35px 2px rgba(2, 132, 199, 0.6);
+      }
+    }
+    .glow-sky-pulse {
+      animation: pulse-sky-glow 3.2s infinite ease-in-out;
+    }
+
+    /* Hardware-Accelerated Scroll Reveals */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .reveal-on-scroll.is-revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .stagger-1 { transition-delay: 0.08s; }
+    .stagger-2 { transition-delay: 0.16s; }
+    .stagger-3 { transition-delay: 0.24s; }
+    .stagger-4 { transition-delay: 0.32s; }
+
+    /* Hide Scrollbar for Horizontal Touch Swiping on Mobile */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Safe bottom for mobile bar */
+    .safe-bottom-padding {
+      padding-bottom: 5.5rem;
+    }
+    @media (min-width: 640px) {
+      .safe-bottom-padding {
+        padding-bottom: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal-on-scroll {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      .btn-sheen::after {
+        animation: none !important;
+      }
+      .glow-emerald-pulse, .glow-sky-pulse {
+        animation: none !important;
+      }
+      #reading-progress {
+        display: none !important;
+      }
+    }
+
     @media print {
       .no-print { display: none !important; }
       body { background: white !important; }
       .print-break { page-break-before: always; }
+      #reading-progress { display: none !important; }
+      #mobile-bottom-bar { display: none !important; }
     }
   </style>
 </head>
-<body class="bg-white text-slate-900 selection:bg-sky-100 selection:text-sky-900">
+<body class="bg-white text-slate-900 selection:bg-sky-100 selection:text-sky-900 safe-bottom-padding relative">
+  
+  <!-- Top Reading Progress Indicator -->
+  <div id="reading-progress"></div>
 
   <!-- ========================================================================= -->
   <!-- 1. TOP NAVBAR / HEADER INSTITUCIONAL                                      -->
@@ -120,11 +248,11 @@
 
       <!-- Quick Actions -->
       <div class="flex items-center gap-1.5 sm:gap-3 shrink-0">
-        <button onclick="window.print()" class="no-print hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 px-3 py-2 rounded-lg transition-colors">
+        <button onclick="window.print()" class="no-print hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 px-3 py-2 rounded-lg transition-colors cursor-pointer">
           <span class="material-symbols-outlined text-[16px]">print</span>
           Guardar PDF
         </button>
-        <a href="#inversion" class="inline-flex items-center gap-1 sm:gap-2 text-[10px] sm:text-sm font-bold text-white bg-slate-900 hover:bg-slate-800 px-2 py-1.5 sm:px-4 sm:py-2.5 rounded-lg shadow-sm transition-all hover:scale-[1.02] shrink-0">
+        <a href="#inversion" class="btn-sheen inline-flex items-center gap-1 sm:gap-2 text-[10px] sm:text-sm font-bold text-white bg-slate-900 hover:bg-slate-800 px-2.5 py-1.5 sm:px-4 sm:py-2.5 rounded-lg shadow-sm transition-all hover:scale-[1.02] shrink-0">
           <span class="hidden sm:inline">Ver Propuesta Económica</span>
           <span class="sm:hidden font-mono">$15,000 MXN</span>
           <span class="material-symbols-outlined text-[13px] sm:text-[16px]">arrow_forward</span>
@@ -141,29 +269,48 @@
       
       <!-- Top Badge / Target Directivo -->
       <div class="flex flex-wrap items-center gap-2 mb-4 sm:mb-6">
-        <div class="inline-flex items-center gap-1.5 badge-blue px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wide">
+        <div class="inline-flex items-center gap-1.5 badge-blue px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wide">
           <span class="w-2 h-2 rounded-full bg-sky-500 animate-pulse shrink-0"></span>
-          <span>Propuesta Ejecutiva 2026 · Arquitectura Web</span>
+          <span class="hidden sm:inline">Propuesta Ejecutiva 2026 · Arquitectura Web</span>
+          <span class="sm:hidden">Propuesta 2026 · Arquitectura Web</span>
         </div>
-        <div class="inline-flex items-center gap-1.5 badge-amber px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wide">
-          <span class="material-symbols-outlined text-[14px]">person</span>
-          <span>Preparada para: Lic. Mario Suárez · Dirección General</span>
+        <div class="inline-flex items-center gap-1.5 badge-amber px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wide">
+          <span class="material-symbols-outlined text-[13px] sm:text-[14px]">person</span>
+          <span class="hidden sm:inline">Preparada para: Lic. Mario Suárez · Dirección General</span>
+          <span class="sm:hidden">Para: Lic. Mario Suárez · Dir. General</span>
         </div>
       </div>
 
       <!-- Main Headline -->
-      <h1 class="text-2xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15] max-w-4xl">
+      <h1 class="text-2xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15] max-w-4xl reveal-on-scroll">
         Su constructora ejecuta obras de gran escala. <span class="text-sky-600 underline decoration-sky-300 decoration-4 underline-offset-4">Su sitio web debe demostrarlo</span> al primer clic.
       </h1>
 
-      <p class="mt-4 sm:mt-6 text-sm sm:text-lg text-slate-600 font-normal max-w-3xl leading-relaxed">
+      <p class="mt-4 sm:mt-6 text-sm sm:text-lg text-slate-600 font-normal max-w-3xl leading-relaxed reveal-on-scroll stagger-1">
         Propuesta técnica y ejecutiva preparada por <strong class="text-slate-900 font-semibold">Apolograma</strong> para <strong class="text-slate-900 font-semibold">AI Grupo Desarrollador y Constructor</strong>: una plataforma web institucional con estándar de $100,000 pesos. Diseñada específicamente para dos objetivos de alto impacto: <strong class="text-slate-900">blindar sus propuestas técnicas ante comités de licitación pública</strong> (JMAS, Puentes Fronterizos, CONAVI) y <strong class="text-slate-900">comercializar sus fraccionamientos residenciales</strong> con enlace directo a WhatsApp de ventas, sin intermediarios.
       </p>
+
+      <!-- Hero Action CTAs (Mobile-First Ergonomics) -->
+      <div class="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 reveal-on-scroll stagger-2">
+        <a href="#inversion" class="btn-sheen inline-flex items-center justify-center gap-2.5 bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs sm:text-sm px-5 py-3.5 rounded-xl shadow-lg transition-all hover:scale-[1.02] cursor-pointer">
+          <span class="material-symbols-outlined text-[18px] text-amber-400">payments</span>
+          <span>Ver Inversión Neta ($15,000 MXN)</span>
+          <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+        </a>
+        <a href="#demo-interactiva" class="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-800 font-bold text-xs sm:text-sm px-5 py-3.5 rounded-xl border border-slate-200 shadow-xs transition-all hover:scale-[1.01] cursor-pointer">
+          <span class="material-symbols-outlined text-[18px] text-sky-600">visibility</span>
+          <span>Probar Simulador Interactivo</span>
+        </a>
+        <div class="hidden lg:flex items-center gap-2 text-xs text-slate-500 pl-2 border-l border-slate-200">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>Sprint 7 días · Cero carga para la constructora</span>
+        </div>
+      </div>
 
       <!-- 4 Key Telemetry Cards -->
       <div class="mt-8 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         
-        <div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200/90 shadow-xs flex items-center gap-3.5">
+        <div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200/90 shadow-xs flex items-center gap-3.5 reveal-on-scroll stagger-1 hover:border-sky-300 transition-all">
           <div class="w-10 h-10 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center shrink-0">
             <span class="material-symbols-outlined text-[22px]">gavel</span>
           </div>
@@ -174,7 +321,7 @@
           </div>
         </div>
 
-        <div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200/90 shadow-xs flex items-center gap-3.5">
+        <div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200/90 shadow-xs flex items-center gap-3.5 reveal-on-scroll stagger-2 hover:border-amber-300 transition-all">
           <div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
             <span class="material-symbols-outlined text-[22px]">home_work</span>
           </div>
@@ -185,7 +332,7 @@
           </div>
         </div>
 
-        <div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200/90 shadow-xs flex items-center gap-3.5">
+        <div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200/90 shadow-xs flex items-center gap-3.5 reveal-on-scroll stagger-3 hover:border-emerald-300 transition-all">
           <div class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
             <span class="material-symbols-outlined text-[22px]">bolt</span>
           </div>
@@ -196,7 +343,7 @@
           </div>
         </div>
 
-        <div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200/90 shadow-xs flex items-center gap-3.5">
+        <div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200/90 shadow-xs flex items-center gap-3.5 reveal-on-scroll stagger-4 hover:border-sky-300 transition-all">
           <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-900 flex items-center justify-center shrink-0 font-bold font-mono">
             $
           </div>
@@ -218,26 +365,32 @@
   <section class="py-12 sm:py-16 bg-slate-50/70 border-b border-slate-200/70">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       
-      <div class="max-w-3xl mb-8 sm:mb-12">
-        <span class="text-xs font-mono font-extrabold uppercase tracking-widest text-sky-600 block mb-1">
-          // DIAGNÓSTICO ESTRATÉGICO
-        </span>
+      <div class="max-w-3xl mb-8 sm:mb-12 reveal-on-scroll">
+        <div class="flex items-center gap-2 mb-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-sky-600"></span>
+          <span class="text-xs font-mono font-extrabold uppercase tracking-widest text-sky-600">
+            CAPÍTULO 01 · EL DIAGNÓSTICO ESTRATÉGICO
+          </span>
+        </div>
         <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
           ¿Qué ve un comité dictaminador o un cliente cuando busca a AI Grupo Constructor en internet?
         </h2>
         <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
-          En los concursos de obra pública convocados por el <strong>Fideicomiso de Puentes Fronterizos, la JMAS Juárez, Obras Públicas Municipales y dependencias estatales o federales</strong>, los auditores no solo revisan las carpetas impresas: <strong>abren la liga de la constructora desde su celular o computadora</strong>. Si el sitio web tarda en cargar, está desactualizado o muestra fotos genéricas de archivo, se genera una duda innecesaria sobre la solidez real de la empresa.
+          En los concursos de obra pública convocados por el <strong>Fideicomiso de Puentes Fronterizos, la JMAS Juárez, Obras Públicas Municipales y dependencias federales</strong>, los auditores no solo revisan las carpetas impresas: <strong>abren la liga de la constructora desde su celular oficial</strong>. Si el sitio web tarda en cargar, está desactualizado o muestra fotos genéricas de archivo, se genera una duda innecesaria sobre la solidez real de la empresa.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         
         <!-- Tarjeta Problema -->
-        <div class="bg-white p-6 rounded-2xl border border-red-200/80 shadow-xs relative overflow-hidden">
+        <div class="bg-white p-6 rounded-2xl border border-red-200/90 shadow-xs relative overflow-hidden reveal-on-scroll stagger-1 hover:-translate-y-1 hover:shadow-md transition-all duration-300">
           <div class="w-1.5 h-full bg-red-500 absolute left-0 top-0"></div>
-          <div class="flex items-center gap-2 text-red-600 font-bold text-xs uppercase tracking-wider mb-3">
-            <span class="material-symbols-outlined text-[18px]">warning</span>
-            <span>El Riesgo del Sitio Web Común de Constructora</span>
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <div class="flex items-center gap-2 text-red-600 font-bold text-xs uppercase tracking-wider">
+              <span class="material-symbols-outlined text-[18px]">warning</span>
+              <span>El Riesgo del Sitio Común de Constructora</span>
+            </div>
+            <span class="text-[10px] font-mono font-bold bg-red-50 text-red-700 px-2 py-0.5 rounded border border-red-200">Speed: 35/100</span>
           </div>
           <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-2">
             La Desconfianza Innecesaria ante Comités Dictaminadores
@@ -245,7 +398,7 @@
           <ul class="space-y-2.5 text-xs text-slate-600 leading-relaxed">
             <li class="flex items-start gap-2">
               <span class="material-symbols-outlined text-red-500 text-[16px] shrink-0 mt-0.5">close</span>
-              <span><strong>Sitios lentos en WordPress:</strong> Tardan de 5 a 8 segundos en abrir o mandan advertencias de "sitio no seguro", proyectando descuido administrativo.</span>
+              <span><strong>Sitios lentos en WordPress:</strong> Tardan de 5 a 8 segundos en abrir o mandan advertencias de "sitio no seguro", proyectando descuido administrativo en plena auditoría.</span>
             </li>
             <li class="flex items-start gap-2">
               <span class="material-symbols-outlined text-red-500 text-[16px] shrink-0 mt-0.5">close</span>
@@ -259,11 +412,14 @@
         </div>
 
         <!-- Tarjeta Solución Apolograma -->
-        <div class="bg-white p-6 rounded-2xl border border-sky-200/80 shadow-xs relative overflow-hidden">
+        <div class="bg-white p-6 rounded-2xl border border-sky-300 shadow-xs relative overflow-hidden reveal-on-scroll stagger-2 hover:-translate-y-1 hover:shadow-md transition-all duration-300">
           <div class="w-1.5 h-full bg-sky-600 absolute left-0 top-0"></div>
-          <div class="flex items-center gap-2 text-sky-600 font-bold text-xs uppercase tracking-wider mb-3">
-            <span class="material-symbols-outlined text-[18px]">verified</span>
-            <span>La Ficha Blindada Apolograma ($100k Market-Tier)</span>
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <div class="flex items-center gap-2 text-sky-600 font-bold text-xs uppercase tracking-wider">
+              <span class="material-symbols-outlined text-[18px]">verified</span>
+              <span>La Ficha Blindada Apolograma ($100k Tier)</span>
+            </div>
+            <span class="text-[10px] font-mono font-bold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded border border-emerald-200">Speed: 100/100 · 0.2s</span>
           </div>
           <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-2">
             Autoridad Técnica y Reputación Incontestable al Primer Segundo
@@ -271,7 +427,7 @@
           <ul class="space-y-2.5 text-xs text-slate-600 leading-relaxed">
             <li class="flex items-start gap-2">
               <span class="material-symbols-outlined text-sky-600 text-[16px] shrink-0 mt-0.5">check</span>
-              <span><strong>Carga Instantánea (0.2s):</strong> Tecnología de alto rendimiento que abre sin demoras en teléfonos y laptops de dependencias oficiales.</span>
+              <span><strong>Carga Instantánea (0.2s):</strong> Tecnología Edge Serverless de alto rendimiento que abre sin demoras en teléfonos y laptops oficiales de dependencias.</span>
             </li>
             <li class="flex items-start gap-2">
               <span class="material-symbols-outlined text-sky-600 text-[16px] shrink-0 mt-0.5">check</span>
@@ -295,10 +451,13 @@
   <section class="py-16 sm:py-24 bg-white border-b border-slate-100" id="modulos">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       
-      <div class="max-w-3xl mb-12">
-        <span class="text-xs font-mono font-extrabold uppercase tracking-widest text-sky-600 block mb-1">
-          // PILARES DE INGENIERÍA
-        </span>
+      <div class="max-w-3xl mb-12 reveal-on-scroll">
+        <div class="flex items-center gap-2 mb-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-sky-600"></span>
+          <span class="text-xs font-mono font-extrabold uppercase tracking-widest text-sky-600">
+            CAPÍTULO 02 · ARQUITECTURA DE SOFTWARE A LA MEDIDA
+          </span>
+        </div>
         <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
           Los 4 Módulos que Construyen el Valor Enterprise de $100,000 MXN
         </h2>
@@ -310,7 +469,7 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
         
         <!-- Módulo 01 -->
-        <div class="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-200 flex flex-col justify-between hover:border-sky-400 transition-all shadow-xs">
+        <div class="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-200 flex flex-col justify-between hover:border-sky-400 hover:-translate-y-1.5 hover:shadow-md transition-all duration-300 shadow-xs reveal-on-scroll stagger-1">
           <div>
             <div class="flex items-center justify-between mb-4">
               <span class="font-mono text-xs font-bold text-sky-700 bg-sky-100/70 px-2.5 py-1 rounded">MÓDULO 01</span>
@@ -330,7 +489,7 @@
         </div>
 
         <!-- Módulo 02 -->
-        <div class="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-200 flex flex-col justify-between hover:border-sky-400 transition-all shadow-xs">
+        <div class="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-200 flex flex-col justify-between hover:border-amber-400 hover:-translate-y-1.5 hover:shadow-md transition-all duration-300 shadow-xs reveal-on-scroll stagger-2">
           <div>
             <div class="flex items-center justify-between mb-4">
               <span class="font-mono text-xs font-bold text-amber-700 bg-amber-100/70 px-2.5 py-1 rounded">MÓDULO 02</span>
@@ -350,7 +509,7 @@
         </div>
 
         <!-- Módulo 03 -->
-        <div class="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-200 flex flex-col justify-between hover:border-sky-400 transition-all shadow-xs">
+        <div class="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-200 flex flex-col justify-between hover:border-emerald-400 hover:-translate-y-1.5 hover:shadow-md transition-all duration-300 shadow-xs reveal-on-scroll stagger-3">
           <div>
             <div class="flex items-center justify-between mb-4">
               <span class="font-mono text-xs font-bold text-emerald-700 bg-emerald-100/70 px-2.5 py-1 rounded">MÓDULO 03</span>
@@ -370,7 +529,7 @@
         </div>
 
         <!-- Módulo 04 -->
-        <div class="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-200 flex flex-col justify-between hover:border-sky-400 transition-all shadow-xs">
+        <div class="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-200 flex flex-col justify-between hover:border-purple-400 hover:-translate-y-1.5 hover:shadow-md transition-all duration-300 shadow-xs reveal-on-scroll stagger-4">
           <div>
             <div class="flex items-center justify-between mb-4">
               <span class="font-mono text-xs font-bold text-purple-700 bg-purple-100/70 px-2.5 py-1 rounded">MÓDULO 04</span>
@@ -405,11 +564,11 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
       
       <!-- Section Header -->
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-12">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-12 reveal-on-scroll">
         <div>
           <div class="flex items-center gap-2 mb-2">
             <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span class="font-mono text-xs font-bold text-emerald-400 uppercase tracking-widest">SIMULADOR EN VIVO · MAQUETA INTERACTIVA DE AI GRUPO CONSTRUCTOR</span>
+            <span class="font-mono text-xs font-bold text-emerald-400 uppercase tracking-widest">CAPÍTULO 03 · SIMULADOR EN VIVO · MAQUETA INTERACTIVA</span>
           </div>
           <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight">
             Experimente en Vivo: Así Navegará un Auditor o Comprador sus Proyectos
@@ -419,14 +578,17 @@
           </p>
         </div>
 
-        <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
-          <span class="bg-slate-800 border border-slate-700 px-3 py-1.5 rounded-lg">Carga: 0.12s</span>
-          <span class="bg-slate-800 border border-slate-700 px-3 py-1.5 rounded-lg text-emerald-400 font-bold">100% Responsive</span>
+        <div class="flex items-center gap-2 text-xs font-mono text-slate-400 shrink-0">
+          <span class="bg-slate-800 border border-slate-700 px-3 py-1.5 rounded-lg flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            <span>Carga: 0.12s</span>
+          </span>
+          <span class="bg-slate-800 border border-slate-700 px-3 py-1.5 rounded-lg text-emerald-400 font-bold">100% Mobile Ready</span>
         </div>
       </div>
 
       <!-- Mockup Window Browser -->
-      <div class="bg-slate-950 rounded-2xl sm:rounded-3xl border border-slate-800 shadow-2xl overflow-hidden">
+      <div class="bg-slate-950 rounded-2xl sm:rounded-3xl border border-slate-800 shadow-2xl overflow-hidden reveal-on-scroll stagger-1">
         
         <!-- Browser Top Bar -->
         <div class="bg-slate-900/90 px-4 sm:px-6 py-3 border-b border-slate-800 flex items-center justify-between gap-3 text-xs">
@@ -445,29 +607,29 @@
         </div>
 
         <!-- Inside Browser Canvas -->
-        <div class="p-4 sm:p-8 bg-slate-900 text-slate-900">
+        <div class="p-3 sm:p-8 bg-slate-900 text-slate-900">
           
           <!-- Web Demo Container White Card -->
-          <div class="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg border border-slate-200">
+          <div class="bg-white rounded-xl sm:rounded-2xl p-3.5 sm:p-6 shadow-lg border border-slate-200">
             
             <!-- Filter Bar & Search -->
-            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-slate-200">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3.5 sm:gap-4 pb-4 sm:pb-5 border-b border-slate-200">
               
-              <!-- Tab Pills -->
-              <div class="flex flex-wrap gap-1.5 sm:gap-2" id="filter-buttons">
-                <button onclick="setFilter('all')" id="btn-all" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-900 text-white transition-all">
+              <!-- Tab Pills (Touch Horizontal Scroll for Mobile) -->
+              <div class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar scroll-smooth py-1 -mx-1 px-1 shrink-0 max-w-full" id="filter-buttons">
+                <button onclick="setFilter('all')" id="btn-all" class="filter-btn px-3 py-2 sm:py-1.5 rounded-lg text-xs font-bold bg-slate-900 text-white transition-all shrink-0 cursor-pointer">
                   Todas las Obras (4)
                 </button>
-                <button onclick="setFilter('bienestar')" id="btn-bienestar" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">
+                <button onclick="setFilter('bienestar')" id="btn-bienestar" class="filter-btn px-3 py-2 sm:py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all shrink-0 cursor-pointer">
                   Casas del Bienestar (1)
                 </button>
-                <button onclick="setFilter('puentes')" id="btn-puentes" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">
+                <button onclick="setFilter('puentes')" id="btn-puentes" class="filter-btn px-3 py-2 sm:py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all shrink-0 cursor-pointer">
                   Infraestructura & Puentes (1)
                 </button>
-                <button onclick="setFilter('residencial')" id="btn-residencial" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">
+                <button onclick="setFilter('residencial')" id="btn-residencial" class="filter-btn px-3 py-2 sm:py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all shrink-0 cursor-pointer">
                   Fraccionamientos (1)
                 </button>
-                <button onclick="setFilter('maquinaria')" id="btn-maquinaria" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">
+                <button onclick="setFilter('maquinaria')" id="btn-maquinaria" class="filter-btn px-3 py-2 sm:py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all shrink-0 cursor-pointer">
                   Flota Maquinaria (1)
                 </button>
               </div>
@@ -487,15 +649,15 @@
             </div>
 
             <!-- Projects Grid (Populated dynamically) -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mt-6" id="projects-container">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mt-4 sm:mt-6" id="projects-container">
               <!-- Cards rendered by JS -->
             </div>
 
             <!-- Footer of Demo -->
             <div class="mt-6 pt-4 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
-              <span id="demo-counter" class="font-medium">Mostrando 4 proyectos auditados</span>
-              <button onclick="downloadDossierDemo()" class="inline-flex items-center gap-1.5 font-bold text-sky-700 hover:text-sky-900 transition-colors">
-                <span class="material-symbols-outlined text-[16px]">picture_as_pdf</span>
+              <span id="demo-counter" class="font-medium text-slate-600">Mostrando 4 proyectos auditados</span>
+              <button onclick="downloadDossierDemo()" class="btn-sheen inline-flex items-center gap-2 font-bold text-xs sm:text-sm bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-200 px-4 py-2.5 rounded-xl transition-all shadow-xs cursor-pointer">
+                <span class="material-symbols-outlined text-[18px] text-sky-600">picture_as_pdf</span>
                 <span>Descargar Currículum Empresarial Membretado (Demo PDF)</span>
               </button>
             </div>
@@ -515,10 +677,13 @@
   <section class="py-16 sm:py-24 bg-white border-b border-slate-100">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       
-      <div class="max-w-3xl mb-12">
-        <span class="text-xs font-mono font-extrabold uppercase tracking-widest text-sky-600 block mb-1">
-          // CONTRASTE DE INGENIERÍA
-        </span>
+      <div class="max-w-3xl mb-12 reveal-on-scroll">
+        <div class="flex items-center gap-2 mb-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-sky-600"></span>
+          <span class="text-xs font-mono font-extrabold uppercase tracking-widest text-sky-600">
+            CAPÍTULO 04 · CONTRASTE DE INGENIERÍA
+          </span>
+        </div>
         <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
           ¿Por qué esta propuesta equivale a un desarrollo de $100,000 pesos?
         </h2>
@@ -528,7 +693,7 @@
       </div>
 
       <!-- Table Wrapper -->
-      <div class="overflow-x-auto border border-slate-200 rounded-2xl shadow-xs">
+      <div class="overflow-x-auto border border-slate-200 rounded-2xl shadow-xs reveal-on-scroll stagger-1">
         <table class="w-full text-left text-xs sm:text-sm">
           <thead>
             <tr class="bg-slate-900 text-white font-mono text-[11px] sm:text-xs">
@@ -539,43 +704,43 @@
           </thead>
           <tbody class="divide-y divide-slate-100 text-slate-700">
             
-            <tr class="hover:bg-slate-50/80">
+            <tr class="hover:bg-slate-50/80 transition-colors">
               <td class="py-3.5 px-4 sm:px-6 font-bold text-slate-900">Velocidad en Celulares de Comités</td>
               <td class="py-3.5 px-4 sm:px-6 text-red-600">30 - 45 / 100 (Tarda 6s; evaluadores cierran la pestaña)</td>
               <td class="py-3.5 px-4 sm:px-6 font-bold text-emerald-600 bg-sky-50/30">98 - 100 / 100 (0.2s instantáneo sin latencia)</td>
             </tr>
 
-            <tr class="hover:bg-slate-50/80">
+            <tr class="hover:bg-slate-50/80 transition-colors">
               <td class="py-3.5 px-4 sm:px-6 font-bold text-slate-900">Enfoque en Concursos de Obra</td>
               <td class="py-3.5 px-4 sm:px-6 text-slate-500">Inexistente (Plantilla genérica de blog o e-commerce)</td>
               <td class="py-3.5 px-4 sm:px-6 font-bold text-slate-900 bg-sky-50/30">Estructurado para pasar el filtro técnico de licitación</td>
             </tr>
 
-            <tr class="hover:bg-slate-50/80">
+            <tr class="hover:bg-slate-50/80 transition-colors">
               <td class="py-3.5 px-4 sm:px-6 font-bold text-slate-900">Frentes Reales en Ciudad Juárez</td>
               <td class="py-3.5 px-4 sm:px-6 text-slate-500">Fotos falsas de bancos de imágenes que restan credibilidad</td>
               <td class="py-3.5 px-4 sm:px-6 font-bold text-slate-900 bg-sky-50/30">Fichas con frentes locales (Solís Barraza, Puentes, JMAS)</td>
             </tr>
 
-            <tr class="hover:bg-slate-50/80">
+            <tr class="hover:bg-slate-50/80 transition-colors">
               <td class="py-3.5 px-4 sm:px-6 font-bold text-slate-900">Dossier / Currículum de la Empresa</td>
               <td class="py-3.5 px-4 sm:px-6 text-slate-500">No incluye; le piden que usted mande archivos sueltos</td>
               <td class="py-3.5 px-4 sm:px-6 font-bold text-slate-900 bg-sky-50/30">Descarga oficial de Currículum en PDF listo en 1-clic</td>
             </tr>
 
-            <tr class="hover:bg-slate-50/80">
+            <tr class="hover:bg-slate-50/80 transition-colors">
               <td class="py-3.5 px-4 sm:px-6 font-bold text-slate-900">Acreditación de Maquinaria Propia</td>
               <td class="py-3.5 px-4 sm:px-6 text-slate-500">Ignorada; no entienden el peso de la solvencia motriz</td>
               <td class="py-3.5 px-4 sm:px-6 font-bold text-slate-900 bg-sky-50/30">Galería técnica de flota pesada propia (CAT, volteos)</td>
             </tr>
 
-            <tr class="hover:bg-slate-50/80">
+            <tr class="hover:bg-slate-50/80 transition-colors">
               <td class="py-3.5 px-4 sm:px-6 font-bold text-slate-900">Mantenimiento Mensual Forzoso</td>
               <td class="py-3.5 px-4 sm:px-6 text-amber-700">$2,000 - $4,000 MXN mensuales por "actualizaciones"</td>
               <td class="py-3.5 px-4 sm:px-6 font-bold text-emerald-600 bg-sky-50/30">$0 MXN (Alojamiento Edge seguro en la nube sin costo)</td>
             </tr>
 
-            <tr class="hover:bg-slate-50/80">
+            <tr class="hover:bg-slate-50/80 transition-colors">
               <td class="py-3.5 px-4 sm:px-6 font-bold text-slate-900">Carga de Trabajo para la Constructora</td>
               <td class="py-3.5 px-4 sm:px-6 text-slate-500">6 a 10 semanas y le piden que usted redacte todo</td>
               <td class="py-3.5 px-4 sm:px-6 font-bold text-sky-700 bg-sky-50/30">7 días llave en mano; nosotros estructuramos todo</td>
@@ -594,22 +759,23 @@
   <section class="py-16 sm:py-24 bg-slate-50/60 border-b border-slate-200/70" id="cronograma">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       
-      <div class="max-w-3xl mb-12">
-        <span class="text-xs font-mono font-extrabold uppercase tracking-widest text-sky-600 block mb-1">
-          // EJECUCIÓN ÁGIL LLAVE EN MANO
-        </span>
+      <div class="max-w-3xl mb-12 reveal-on-scroll">
+        <div class="flex items-center gap-2 mb-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-sky-600"></span>
+          <span class="text-xs font-mono font-extrabold uppercase tracking-widest text-sky-600">
+            CAPÍTULO 05 · CRONOGRAMA CERO FRICCIÓN
+          </span>
+        </div>
         <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
           Cronograma de 7 Días · Cero Carga de Trabajo para la Constructora
         </h2>
         <p class="text-slate-600 text-sm sm:text-base mt-2 leading-relaxed">
           Sabemos que la Dirección General y el equipo de ingenieros están enfocados en supervisar frentes de obra y licitaciones, no en diseñar sitios web. <strong>Solo requerimos su logotipo y la lista básica de sus obras concluidas; nosotros redactamos las fichas, curamos las fotografías y programamos la plataforma completa.</strong>
         </p>
-      </div>
-
       <div class="space-y-3">
         
         <!-- Day 1 -->
-        <div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 reveal-on-scroll stagger-1 hover:border-slate-300 transition-all">
           <div class="flex items-center gap-3.5">
             <span class="w-10 h-10 rounded-lg bg-slate-900 text-white font-mono font-extrabold text-sm flex items-center justify-center shrink-0">D1</span>
             <div>
@@ -622,7 +788,7 @@
         </div>
 
         <!-- Day 2-3 -->
-        <div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 reveal-on-scroll stagger-2 hover:border-slate-300 transition-all">
           <div class="flex items-center gap-3.5">
             <span class="w-10 h-10 rounded-lg bg-slate-900 text-white font-mono font-extrabold text-sm flex items-center justify-center shrink-0">D2-3</span>
             <div>
@@ -635,7 +801,7 @@
         </div>
 
         <!-- Day 4-5 -->
-        <div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 reveal-on-scroll stagger-3 hover:border-slate-300 transition-all">
           <div class="flex items-center gap-3.5">
             <span class="w-10 h-10 rounded-lg bg-slate-900 text-white font-mono font-extrabold text-sm flex items-center justify-center shrink-0">D4-5</span>
             <div>
@@ -648,7 +814,7 @@
         </div>
 
         <!-- Day 6 -->
-        <div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div class="bg-white p-4 sm:p-5 rounded-xl border border-slate-200 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 reveal-on-scroll stagger-4 hover:border-slate-300 transition-all">
           <div class="flex items-center gap-3.5">
             <span class="w-10 h-10 rounded-lg bg-slate-900 text-white font-mono font-extrabold text-sm flex items-center justify-center shrink-0">D6</span>
             <div>
@@ -661,11 +827,14 @@
         </div>
 
         <!-- Day 7 -->
-        <div class="bg-emerald-50/80 p-4 sm:p-5 rounded-xl border-2 border-emerald-500 shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div class="bg-emerald-50/90 p-4 sm:p-5 rounded-xl border-2 border-emerald-500 shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 reveal-on-scroll stagger-4 glow-emerald-pulse">
           <div class="flex items-center gap-3.5">
             <span class="w-10 h-10 rounded-lg bg-emerald-600 text-white font-mono font-black text-sm flex items-center justify-center shrink-0">D7</span>
             <div>
-              <span class="text-[10px] font-mono font-extrabold text-emerald-800 uppercase tracking-wider">Día 07 · ¡PUBLICACIÓN EN VIVO!</span>
+              <span class="text-[10px] font-mono font-extrabold text-emerald-800 uppercase tracking-wider flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-600 animate-ping"></span>
+                <span>Día 07 · ¡PUBLICACIÓN EN VIVO!</span>
+              </span>
               <h4 class="text-sm sm:text-base font-extrabold text-slate-900">Lanzamiento Oficial Llave en Mano</h4>
               <p class="text-xs text-slate-600">Publicación en el dominio oficial de AI Grupo Constructor, entrega de accesos y puesta en marcha para licitaciones inmediatas.</p>
             </div>
@@ -685,7 +854,7 @@
     <div class="max-w-4xl mx-auto px-4 sm:px-6">
       
       <!-- Compromiso de Arranque Express -->
-      <div class="mb-8 p-4 sm:p-5 rounded-2xl bg-sky-50 border border-sky-200 flex items-start gap-3.5">
+      <div class="mb-8 p-4 sm:p-5 rounded-2xl bg-sky-50 border border-sky-200 flex items-start gap-3.5 reveal-on-scroll">
         <div class="w-8 h-8 rounded-lg bg-sky-600 text-white flex items-center justify-center shrink-0">
           <span class="material-symbols-outlined text-[20px]">bolt</span>
         </div>
@@ -698,7 +867,7 @@
       </div>
 
       <!-- Main Pricing Card -->
-      <div class="bg-gradient-to-b from-slate-900 to-slate-950 text-white rounded-2xl sm:rounded-3xl p-5 sm:p-12 shadow-2xl relative overflow-hidden border border-slate-800">
+      <div class="bg-gradient-to-b from-slate-900 to-slate-950 text-white rounded-2xl sm:rounded-3xl p-5 sm:p-12 shadow-2xl relative overflow-hidden border border-slate-800 reveal-on-scroll stagger-1">
         
         <!-- Subtle Glow -->
         <div class="absolute -top-32 -right-32 w-80 h-80 bg-sky-500/15 rounded-full blur-3xl pointer-events-none"></div>
@@ -706,8 +875,9 @@
         <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-5 sm:gap-6 pb-6 sm:pb-8 border-b border-slate-800">
           <div>
             <div class="flex items-center gap-2 mb-2">
-              <span class="text-[11px] sm:text-xs font-mono font-extrabold uppercase tracking-widest text-sky-400 block">
-                PROPUESTA ECONÓMICA · TARIFA PREFERENCIAL
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              <span class="text-[11px] sm:text-xs font-mono font-extrabold uppercase tracking-widest text-emerald-400 block">
+                CAPÍTULO 06 · PROPUESTA ECONÓMICA · TARIFA PREFERENCIAL
               </span>
             </div>
             <h3 class="text-2xl sm:text-4xl font-extrabold tracking-tight">
@@ -799,7 +969,7 @@
               <span class="text-slate-400 block text-[11px]">CLABE Interbancaria:</span>
               <div class="flex items-center gap-2 mt-0.5">
                 <strong class="text-sky-300 text-sm font-mono tracking-tight">058164657492400290</strong>
-                <button onclick="copyClabe()" id="btn-copy-clabe" class="bg-slate-700 hover:bg-slate-600 text-slate-200 text-[10px] font-bold px-2 py-1 rounded transition-colors flex items-center gap-1 shrink-0">
+                <button onclick="copyClabe()" id="btn-copy-clabe" class="bg-slate-700 hover:bg-slate-600 text-slate-200 text-[10px] font-bold px-2 py-1 rounded transition-colors flex items-center gap-1 shrink-0 cursor-pointer">
                   <span class="material-symbols-outlined text-[13px]">content_copy</span>
                   <span id="text-copy">Copiar</span>
                 </button>
@@ -820,10 +990,11 @@
             <div>Atención personalizada y validación directa con Dirección Apolograma.</div>
           </div>
 
-          <!-- WhatsApp Approval Button -->
-          <button onclick="openWhatsAppModal()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-5 sm:px-6 py-3.5 rounded-xl shadow-lg transition-all hover:scale-[1.02] shrink-0 text-sm cursor-pointer">
-            <span class="material-symbols-outlined text-[20px]">chat</span>
+          <!-- WhatsApp Approval Button with Sheen and Glow -->
+          <button onclick="openWhatsAppModal()" class="btn-sheen glow-emerald-pulse w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-black px-6 py-4 rounded-xl shadow-2xl transition-all hover:scale-[1.02] shrink-0 text-sm sm:text-base cursor-pointer">
+            <span class="material-symbols-outlined text-[22px]">chat</span>
             <span>Aprobar Propuesta y Arrancar Sprint de 7 Días</span>
+            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
           </button>
         </div>
 
@@ -848,6 +1019,44 @@
       <p class="text-[11px] text-slate-400 mt-1">Av. Teófilo Borunda 8349 · Ciudad Juárez, Chihuahua · Septiembre 2026</p>
     </div>
   </footer>
+
+  <!-- ========================================================================= -->
+  <!-- 9.5 STICKY MOBILE CONVERSION BAR (MOBILE-FIRST ERGONOMICS)                -->
+  <!-- ========================================================================= -->
+  <div id="mobile-bottom-bar" class="block sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-slate-950/95 backdrop-blur-md border-t border-slate-800 px-3.5 py-2.5 shadow-2xl transition-all duration-300">
+    <div class="flex items-center justify-between gap-2 max-w-md mx-auto">
+      <div class="min-w-0">
+        <span class="text-[9px] font-mono uppercase text-slate-400 font-semibold block leading-tight">Inversión Neta</span>
+        <div class="flex items-baseline gap-1">
+          <span class="text-base font-extrabold text-white font-mono">$15,000</span>
+          <span class="text-[10px] text-slate-300 font-bold">MXN</span>
+        </div>
+      </div>
+      <button onclick="openWhatsAppModal()" class="btn-sheen bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-black text-xs px-3.5 py-2.5 rounded-xl flex items-center gap-1.5 shadow-lg shrink-0 cursor-pointer">
+        <span class="material-symbols-outlined text-[16px]">chat</span>
+        <span>Aprobar Propuesta</span>
+        <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Floating Toast Notification for Dossier Download Simulation -->
+  <div id="dossier-toast" class="fixed bottom-5 right-5 z-50 max-w-sm w-full bg-slate-900 text-white rounded-2xl p-4 shadow-2xl border border-slate-700/80 transition-all duration-300 transform translate-y-32 opacity-0 pointer-events-none">
+    <div class="flex items-start gap-3">
+      <div id="toast-icon-container" class="w-9 h-9 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center shrink-0">
+        <span class="material-symbols-outlined text-[20px] animate-spin" id="toast-spinner">progress_activity</span>
+      </div>
+      <div class="flex-1 min-w-0">
+        <h5 class="text-xs font-bold text-white" id="toast-title">Generando Dossier de Licitación...</h5>
+        <p class="text-[11px] text-slate-400 mt-0.5 leading-relaxed" id="toast-desc">
+          Compilando Ficha Técnica, catálogo de maquinaria CAT y padrón de contratistas de AI Grupo Constructor.
+        </p>
+      </div>
+      <button onclick="closeDossierToast()" class="text-slate-400 hover:text-slate-200 p-1 shrink-0 cursor-pointer">
+        <span class="material-symbols-outlined text-[16px]">close</span>
+      </button>
+    </div>
+  </div>
 
   <!-- ========================================================================= -->
   <!-- 10. MODAL INTERACTIVO DE VALIDACIÓN VÍA WHATSAPP                          -->
@@ -1056,8 +1265,47 @@ Favor de enviarnos los datos de facturación para transferir el anticipo y comen
       renderProjects(filtered);
     }
 
+    let toastTimeout;
     function downloadDossierDemo() {
-      alert('Demostración de Descarga: En la versión final, este botón descargará de forma instantánea el Currículum Empresarial membretado en PDF de AI Grupo Constructor para anexar a expedientes de licitación.');
+      const toast = document.getElementById('dossier-toast');
+      const icon = document.getElementById('toast-icon-container');
+      const spinner = document.getElementById('toast-spinner');
+      const title = document.getElementById('toast-title');
+      const desc = document.getElementById('toast-desc');
+
+      if (!toast) return;
+      if (toastTimeout) clearTimeout(toastTimeout);
+
+      // Phase 1: Generating
+      toast.classList.remove('translate-y-32', 'opacity-0', 'pointer-events-none');
+      toast.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+      
+      icon.className = 'w-9 h-9 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center shrink-0';
+      spinner.className = 'material-symbols-outlined text-[20px] animate-spin';
+      spinner.innerText = 'progress_activity';
+      title.innerText = 'Compilando Dossier en PDF...';
+      desc.innerText = 'Generando Ficha Técnica, Currículum Oficial y Catálogo de Maquinaria CAT de AI Grupo Constructor.';
+
+      // Phase 2: Completed ready to download
+      toastTimeout = setTimeout(() => {
+        icon.className = 'w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0';
+        spinner.className = 'material-symbols-outlined text-[20px]';
+        spinner.innerText = 'check_circle';
+        title.innerText = '✓ Dossier de Licitación Listo (PDF 3.4 MB)';
+        desc.innerText = 'Documento membretado oficial listo para anexar a expedientes técnicos de JMAS, Puentes y CONAVI.';
+        
+        toastTimeout = setTimeout(() => {
+          closeDossierToast();
+        }, 5500);
+      }, 1300);
+    }
+
+    function closeDossierToast() {
+      const toast = document.getElementById('dossier-toast');
+      if (toast) {
+        toast.classList.add('translate-y-32', 'opacity-0', 'pointer-events-none');
+        toast.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+      }
     }
 
     function copyClabe() {
@@ -1093,6 +1341,52 @@ Favor de enviarnos los datos de facturación para transferir el anticipo y comen
       });
     }
 
+    // Reading Progress Indicator
+    function updateReadingProgress() {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = height > 0 ? (winScroll / height) : 0;
+      const progressBar = document.getElementById('reading-progress');
+      if (progressBar) {
+        progressBar.style.transform = `scaleX(${scrolled})`;
+      }
+    }
+    window.addEventListener('scroll', updateReadingProgress, { passive: true });
+
+    // Scroll Reveal Intersection Observer
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+      revealObserver.observe(el);
+    });
+
+    // Mobile Bottom Bar Visibility Toggle (hides when pricing card is reached)
+    const inversionSection = document.getElementById('inversion');
+    const mobileBottomBar = document.getElementById('mobile-bottom-bar');
+    if (inversionSection && mobileBottomBar) {
+      const barObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            mobileBottomBar.classList.add('translate-y-full', 'opacity-0', 'pointer-events-none');
+          } else {
+            mobileBottomBar.classList.remove('translate-y-full', 'opacity-0', 'pointer-events-none');
+          }
+        });
+      }, { threshold: 0.12 });
+      barObserver.observe(inversionSection);
+    }
+
     // Close modal on escape
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeWhatsAppModal();
@@ -1100,6 +1394,7 @@ Favor de enviarnos los datos de facturación para transferir el anticipo y comen
 
     // Initial Render
     renderProjects(mockProjects);
+    updateReadingProgress();
   </script>
 
 </body>
