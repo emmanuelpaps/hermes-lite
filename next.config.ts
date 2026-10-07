@@ -8,6 +8,16 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/la-nueva-laguna',
+        destination: '/nueva-laguna',
+        permanent: true,
+      },
+      {
+        source: '/la-nueva-laguna/',
+        destination: '/nueva-laguna',
+        permanent: true,
+      },
+      {
         source: '/hoteles-aniversario-2026',
         destination: '/hoteles-aniversario-2026/index.html',
         permanent: false,
