@@ -77,8 +77,6 @@ const MENU_ITEMS: MenuItem[] = [
 ];
 
 export default function NuevaLagunaClient() {
-  const [selectedPlan, setSelectedPlan] = useState<"integral" | "esencial">("integral");
-  const [includePauta, setIncludePauta] = useState<boolean>(true);
   const [activeMenuCategory, setActiveMenuCategory] = useState<string>("todos");
   const [activeDishIndex, setActiveDishIndex] = useState<number>(0);
   const [cravings, setCravings] = useState<{ [key: string]: number }>({
@@ -159,11 +157,10 @@ export default function NuevaLagunaClient() {
     setActiveDishIndex((prev) => (prev - 1 + filteredDishes.length) % filteredDishes.length);
   };
 
-  const baseMonthly = selectedPlan === "integral" ? 20000 : 10000;
+  const baseMonthly = 6000;
   const iva = baseMonthly * 0.16;
   const agencyTotal = baseMonthly + iva;
-  const adSpend = includePauta ? 2000 : 0;
-  const grandTotal = agencyTotal + adSpend;
+  const grandTotal = agencyTotal;
 
   const handleScheduleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -177,14 +174,11 @@ export default function NuevaLagunaClient() {
       date: meetingDate,
       time: meetingTime,
       selectedModules: [
-        selectedPlan === "integral"
-          ? "Plan Integral ($20,000 MXN + IVA / mes)"
-          : "Plan Esencial ($10,000 MXN + IVA / mes)",
-        includePauta
-          ? "Inversión de Pauta en Meta Ads ($2,000 MXN/mes aportados directamente por el cliente)"
-          : "Sin Pauta en Meta Ads",
-        "Módulo Bonificado 1: Menú Digital Vertical Interactivo ($0 MXN meses 1 al 5 — Luego $1,000 MXN/mes)",
-        "Módulo Bonificado 2: Dinámica de Lealtad en Mesa con WhatsApp y QR ($0 MXN meses 1 al 5 — Luego $1,000 MXN/mes)",
+        "Paquete Tecnológico de Comedor & Lealtad ($6,000 MXN + IVA / mes)",
+        "Pilar 1: Menú Digital Vertical en Mesa (Código QR)",
+        "Pilar 2: Minijuego Interactivo en Mesa para Captación de WhatsApp",
+        "Pilar 3: Circuito Audiovisual para Pantallas de Comedor (16:9 Antojo + Cultura Lagunera)",
+        "Pilar 4: Sistema Integrado de Lealtad & Pasaporte de Visitas (CRM para el dueño)",
       ],
       url: window.location.href,
     };
@@ -202,9 +196,7 @@ export default function NuevaLagunaClient() {
   };
 
   const whatsappMessage = encodeURIComponent(
-    `Hola Emmanuel, revisé la propuesta de Apolograma para Tortería La Nueva Laguna. Me interesa el ${
-      selectedPlan === "integral" ? "Plan Integral ($20,000 MXN/mes)" : "Plan Esencial ($10,000 MXN/mes)"
-    }${includePauta ? " con los $2,000 MXN de pauta local" : ""}. Me gustaría agendar la fecha de arranque para la producción.`
+    `Hola Emmanuel, revisé la propuesta de Apolograma para Tortería La Nueva Laguna. Me interesa el Ecosistema Tecnológico de Comedor y Lealtad ($6,000 MXN/mes). Me gustaría agendar la fecha de arranque para la instalación en sucursal.`
   );
 
   return (
@@ -249,30 +241,11 @@ export default function NuevaLagunaClient() {
           background-color: var(--nl-french-bread-bg);
           color: var(--text-dark);
           font-family: var(--font-body);
-          line-height: 1.6;
           overflow-x: hidden;
-          position: relative;
-        }
-
-        /* TEXTURA SUTIL DE FONDO DE PAN FRANCÉS */
-        .nl-bg-texture {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-image: 
-            radial-gradient(rgba(24, 61, 47, 0.035) 1px, transparent 0),
-            radial-gradient(rgba(179, 57, 39, 0.02) 1px, transparent 0);
-          background-size: 28px 28px, 56px 56px;
-          background-position: 0 0, 14px 14px;
-          pointer-events: none;
-          z-index: 0;
+          line-height: 1.5;
         }
 
         .nl-wrapper {
-          position: relative;
-          z-index: 1;
           max-width: 1200px;
           margin: 0 auto;
           padding: 0 1.5rem;
@@ -284,121 +257,106 @@ export default function NuevaLagunaClient() {
           top: 0;
           z-index: 100;
           background: rgba(255, 253, 249, 0.94);
-          backdrop-filter: blur(16px);
-          border-bottom: 2px solid var(--nl-french-bread-border);
-          padding: 0.8rem 0;
+          backdrop-filter: blur(10px);
+          border-bottom: 1px solid var(--nl-french-bread-border);
+          padding: 0.9rem 0;
         }
 
-        .nl-nav {
+        .nl-header-inner {
           display: flex;
           justify-content: space-between;
           align-items: center;
         }
 
-        .nl-brand-cluster {
+        .nl-logo-group {
           display: flex;
           align-items: center;
-          gap: 1rem;
+          gap: 0.75rem;
         }
 
-        .nl-apolo-logo {
-          height: 20px;
-          width: auto;
-          object-fit: contain;
-          filter: brightness(0.15);
-        }
-
-        .nl-divider {
-          width: 1px;
-          height: 18px;
-          background: rgba(25, 83, 43, 0.25);
-        }
-
-        .nl-client-tag {
+        .nl-brand-agency {
           font-family: var(--font-body);
-          font-size: 0.78rem;
-          color: var(--nl-green);
-          background: var(--nl-french-bread);
-          border: 1px solid var(--nl-french-bread-border);
-          padding: 3px 10px;
-          border-radius: 6px;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
+          font-weight: 800;
+          font-size: 1.15rem;
+          color: var(--nl-green-deep);
+          letter-spacing: -0.3px;
         }
 
+        .nl-badge-client {
+          background: var(--nl-french-bread);
+          color: var(--nl-green-deep);
+          font-size: 0.8rem;
+          font-weight: 700;
+          padding: 4px 10px;
+          border-radius: 6px;
+          border: 1px solid var(--nl-french-bread-border);
+          display: flex;
+          align-items: center;
+          gap: 5px;
+        }
+
+        /* BUTTONS */
         .nl-btn {
           display: inline-flex;
           align-items: center;
-          justify-content: center;
-          gap: 0.5rem;
-          min-height: 44px;
-          min-width: 44px;
-          padding: 0.65rem 1.4rem;
-          border-radius: 8px;
+          gap: 8px;
+          font-family: var(--font-body);
           font-size: 0.9rem;
           font-weight: 700;
+          padding: 0.65rem 1.3rem;
+          border-radius: 9px;
           cursor: pointer;
           transition: all 0.2s ease;
-          text-decoration: none;
           border: none;
-          font-family: var(--font-body);
+          text-decoration: none;
+          min-height: 44px;
         }
 
         .nl-btn-green {
           background: var(--nl-green);
           color: #FFF;
-          box-shadow: 0 4px 14px rgba(24, 61, 47, 0.25);
         }
-
         .nl-btn-green:hover {
           background: var(--nl-green-deep);
-          transform: translateY(-2px);
-          box-shadow: 0 6px 20px rgba(24, 61, 47, 0.35);
+          transform: translateY(-1px);
         }
 
         .nl-btn-yolk {
           background: var(--nl-yolk);
-          color: #122116;
-          box-shadow: 0 4px 14px rgba(217, 130, 43, 0.35);
-          font-weight: 800;
+          color: #FFF;
         }
-
         .nl-btn-yolk:hover {
           background: var(--nl-yolk-dark);
-          transform: translateY(-2px);
+          transform: translateY(-1px);
         }
 
         .nl-btn-outline {
           background: transparent;
-          color: var(--nl-green);
-          border: 1.5px solid var(--nl-green);
+          color: var(--nl-green-deep);
+          border: 1.5px solid var(--nl-green-deep);
         }
-
         .nl-btn-outline:hover {
-          background: rgba(24, 61, 47, 0.08);
-          transform: translateY(-2px);
+          background: var(--nl-french-bread);
         }
 
-        /* HERO EDITORIAL */
+        /* HERO */
         .nl-hero {
-          padding: 2.8rem 0 2rem 0;
-          position: relative;
+          padding: 3rem 0 2rem 0;
         }
 
         .nl-hero-card {
           background: var(--nl-green);
           color: #FFF;
           border-radius: 28px;
-          padding: 3.8rem 3.2rem;
+          padding: 3.5rem 3rem;
+          display: grid;
+          grid-template-columns: 1.15fr 0.85fr;
+          gap: 3rem;
+          align-items: center;
+          box-shadow: 0 20px 50px rgba(24, 61, 47, 0.25);
           position: relative;
           overflow: hidden;
-          box-shadow: 0 25px 60px rgba(24, 61, 47, 0.28);
-          border: 2px solid rgba(217, 130, 43, 0.35);
-          display: grid;
-          grid-template-columns: 1.15fr 1fr;
-          gap: 3.5rem;
-          align-items: center;
+          border: 1px solid rgba(217, 130, 43, 0.3);
         }
 
         .nl-hero-left {
@@ -407,49 +365,38 @@ export default function NuevaLagunaClient() {
         }
 
         .nl-hero-logo-box {
-          background: #FFFDF9;
-          padding: 16px 28px;
-          border-radius: 20px;
+          background: #FFF;
           display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          margin-bottom: 2rem;
-          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+          padding: 1rem 1.6rem;
+          border-radius: 16px;
           border: 2px solid var(--nl-yolk);
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .nl-hero-logo-box:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+          margin-bottom: 1.4rem;
         }
 
         .nl-hero-logo-img {
           height: 105px;
           width: auto;
-          max-width: 200px;
-          object-fit: contain;
           display: block;
+          object-fit: contain;
         }
 
         .nl-script-accent {
           font-family: var(--font-script);
-          font-size: 2.35rem;
+          font-size: 2.1rem;
           color: var(--nl-yolk);
-          line-height: 1.1;
           display: block;
-          margin-bottom: 0.5rem;
+          margin-bottom: 0.2rem;
         }
 
         .nl-hero h1 {
           font-family: var(--font-display);
-          font-size: clamp(2rem, 3.6vw, 3.1rem);
+          font-size: clamp(1.8rem, 3.8vw, 2.7rem);
           font-weight: 900;
-          color: #FFF;
           line-height: 1.15;
-          letter-spacing: 0.5px;
+          margin-bottom: 1.2rem;
           text-transform: uppercase;
-          margin-bottom: 1.3rem;
+          letter-spacing: -0.5px;
           text-wrap: balance;
         }
 
@@ -458,83 +405,82 @@ export default function NuevaLagunaClient() {
         }
 
         .nl-hero-manifesto {
-          font-size: 1.02rem;
+          font-size: 1.05rem;
+          line-height: 1.6;
           color: var(--nl-french-bread);
-          line-height: 1.65;
-          margin-bottom: 1.8rem;
-          max-width: 620px;
+          margin-bottom: 2rem;
+          max-width: 600px;
+        }
+
+        .nl-hero-manifesto strong {
+          color: #FFF;
+          font-weight: 800;
         }
 
         .nl-hero-badges-row {
           display: flex;
-          gap: 1.2rem;
+          gap: 1.4rem;
+          margin-top: 2rem;
+          padding-top: 1.6rem;
+          border-top: 1px solid rgba(243, 232, 204, 0.2);
           flex-wrap: wrap;
-          margin-top: 1.6rem;
-          padding-top: 1.4rem;
-          border-top: 1px solid rgba(243, 232, 204, 0.22);
         }
 
         .nl-hero-badge-item {
-          display: inline-flex;
+          display: flex;
           align-items: center;
           gap: 7px;
-          font-size: 0.875rem;
+          font-size: 0.88rem;
           color: var(--nl-french-bread);
           font-weight: 700;
-          letter-spacing: 0.2px;
         }
 
         .nl-hero-badge-item i {
           color: var(--nl-yolk);
-          font-size: 0.9rem;
         }
 
         .nl-hero-right {
-          position: relative;
-          z-index: 2;
           display: flex;
           justify-content: center;
           align-items: center;
+          position: relative;
         }
 
         .nl-hero-img-frame {
           position: relative;
-          border-radius: 24px;
+          border-radius: 20px;
           overflow: hidden;
-          border: 4px solid var(--nl-french-bread);
-          box-shadow: 0 25px 55px rgba(0, 0, 0, 0.38);
+          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+          border: 3px solid var(--nl-yolk);
+          background: #000;
+          max-width: 440px;
           width: 100%;
-          max-width: 480px;
-          background: #FFF;
+        }
+
+        .nl-hero-food-img {
+          width: 100%;
+          height: auto;
+          display: block;
+          transition: transform 0.4s ease;
         }
 
         .nl-hero-top-badge {
           position: absolute;
           top: 14px;
           left: 14px;
-          background: rgba(25, 83, 43, 0.92);
+          background: rgba(14, 52, 27, 0.88);
           backdrop-filter: blur(8px);
           color: #FFF;
-          padding: 6px 14px;
-          border-radius: 20px;
-          font-size: 0.76rem;
-          font-family: var(--font-body);
+          font-size: 0.75rem;
           font-weight: 800;
-          letter-spacing: 0.5px;
-          text-transform: uppercase;
-          border: 1px solid rgba(255, 202, 38, 0.6);
-          display: inline-flex;
+          padding: 6px 12px;
+          border-radius: 20px;
+          border: 1px solid var(--nl-yolk);
+          display: flex;
           align-items: center;
           gap: 6px;
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
-          z-index: 3;
-        }
-
-        .nl-hero-food-img {
-          width: 100%;
-          height: 420px;
-          object-fit: cover;
-          display: block;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
         }
 
         .nl-hero-stamp {
@@ -543,409 +489,335 @@ export default function NuevaLagunaClient() {
           right: 14px;
           background: var(--nl-tomato);
           color: #FFF;
-          padding: 7px 16px;
-          border-radius: 30px;
+          font-family: var(--font-display);
+          font-weight: 900;
           font-size: 0.78rem;
-          font-family: var(--font-body);
-          font-weight: 800;
-          letter-spacing: 0.5px;
+          padding: 6px 14px;
+          border-radius: 6px;
           text-transform: uppercase;
-          box-shadow: 0 4px 14px rgba(213, 37, 24, 0.45);
-          border: 1px solid rgba(255, 255, 255, 0.3);
-          z-index: 3;
-        }
-
-        .nl-minigame-alert {
-          background: #FFF;
-          border: 2px dashed var(--nl-green);
-          border-radius: 16px;
-          padding: 1.2rem 1.6rem;
-          margin-bottom: 2.2rem;
-          display: flex;
-          align-items: center;
-          gap: 1.2rem;
-          box-shadow: 0 6px 20px rgba(25, 83, 43, 0.05);
-        }
-
-        .nl-minigame-alert-badge {
-          background: var(--nl-green);
-          color: var(--nl-yolk);
-          padding: 7px 14px;
-          border-radius: 8px;
-          font-size: 0.75rem;
-          font-weight: 800;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.3);
           letter-spacing: 0.5px;
-          white-space: nowrap;
-          text-transform: uppercase;
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          flex-shrink: 0;
         }
 
-        .nl-minigame-alert-text {
-          font-size: 0.88rem;
-          color: var(--text-dark);
-          line-height: 1.5;
-        }
-
-        /* 4 METRICS BAR */
+        /* 4 METRICS */
         .nl-metrics-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
           gap: 1.2rem;
-          margin-top: 2rem;
+          margin-top: 1.8rem;
         }
 
         .nl-metric-card {
           background: #FFF;
           border: 1.5px solid var(--nl-french-bread-border);
-          border-radius: 16px;
+          border-radius: 18px;
           padding: 1.4rem;
           text-align: center;
-          box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-          position: relative;
-          transition: transform 0.2s;
-        }
-
-        .nl-metric-card:hover {
-          transform: translateY(-3px);
-          border-color: var(--nl-green);
+          box-shadow: 0 6px 18px rgba(0, 0, 0, 0.03);
         }
 
         .nl-metric-val {
           font-family: var(--font-display);
-          font-size: 2.3rem;
+          font-size: 2.1rem;
           font-weight: 900;
           color: var(--nl-green);
           line-height: 1;
-          margin-bottom: 0.3rem;
+          margin-bottom: 0.4rem;
         }
 
         .nl-metric-val .unit {
+          font-size: 1.1rem;
           color: var(--nl-tomato);
-          font-size: 1.4rem;
         }
 
         .nl-metric-label {
-          font-size: 0.78rem;
-          text-transform: uppercase;
-          font-weight: 700;
+          font-size: 0.85rem;
           color: var(--text-muted);
-          letter-spacing: 0.5px;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.3px;
         }
 
-        /* SECCIONES GENERALES */
+        /* SECTIONS */
         .nl-section {
           padding: 4.5rem 0;
-          position: relative;
         }
 
         .nl-section-tag {
-          font-family: var(--font-body);
-          font-size: 0.78rem;
-          color: var(--nl-green);
-          background: var(--nl-french-bread);
-          border: 1px solid var(--nl-french-bread-border);
-          padding: 4px 12px;
-          border-radius: 30px;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-          font-weight: 800;
           display: inline-flex;
           align-items: center;
           gap: 6px;
+          background: var(--nl-french-bread);
+          color: var(--nl-green);
+          font-size: 0.78rem;
+          font-weight: 800;
+          padding: 5px 12px;
+          border-radius: 20px;
+          text-transform: uppercase;
+          letter-spacing: 0.6px;
           margin-bottom: 0.8rem;
+          border: 1px solid var(--nl-french-bread-border);
         }
 
         .nl-section-title {
           font-family: var(--font-display);
-          font-size: clamp(2rem, 3.2vw, 2.7rem);
+          font-size: clamp(1.8rem, 3.2vw, 2.5rem);
           font-weight: 900;
           color: var(--nl-green-deep);
-          line-height: 1.18;
-          text-transform: uppercase;
+          line-height: 1.2;
           margin-bottom: 0.8rem;
-          letter-spacing: 0.3px;
+          text-transform: uppercase;
+          letter-spacing: -0.4px;
           text-wrap: balance;
         }
 
         .nl-section-sub {
           font-size: 1.05rem;
           color: var(--text-muted);
-          max-width: 800px;
+          max-width: 780px;
           line-height: 1.6;
           margin-bottom: 2.5rem;
         }
 
-        /* SIMULADOR MENÚ DIGITAL */
+        /* PILLAR CARD HIGHLIGHT */
+        .nl-pillar-badge {
+          display: inline-block;
+          background: var(--nl-green);
+          color: #FFF;
+          font-size: 0.8rem;
+          font-weight: 900;
+          padding: 4px 12px;
+          border-radius: 6px;
+          margin-bottom: 0.8rem;
+          letter-spacing: 0.5px;
+        }
+
+        /* SMARTPHONE SIMULATOR */
         .nl-sim-box {
           background: #FFF;
           border: 2px solid var(--nl-french-bread-border);
           border-radius: 24px;
-          padding: 2.8rem;
-          box-shadow: 0 15px 40px rgba(0,0,0,0.04);
+          padding: 2.5rem;
+          box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
         }
 
         .nl-sim-grid {
           display: grid;
-          grid-template-columns: 380px 1fr;
-          gap: 3.5rem;
+          grid-template-columns: 360px 1fr;
+          gap: 3rem;
           align-items: center;
         }
 
-        /* SMARTPHONE EN VERDE BOTELLA & TOQUES DORADOS */
         .phone-mockup {
-          width: 340px;
-          height: 620px;
-          background: #0C1E12;
-          border-radius: 40px;
-          border: 10px solid var(--nl-green);
-          box-shadow: 0 25px 60px rgba(24, 61, 47, 0.25), 0 0 0 2px rgba(217, 130, 43, 0.4);
-          position: relative;
-          overflow: hidden;
+          width: 320px;
           margin: 0 auto;
-          display: flex;
-          flex-direction: column;
+          background: #111;
+          border-radius: 42px;
+          padding: 12px;
+          box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+          border: 4px solid #2A2A2A;
+          position: relative;
         }
 
         .phone-island {
           position: absolute;
-          top: 10px;
+          top: 18px;
           left: 50%;
           transform: translateX(-50%);
-          width: 85px;
-          height: 18px;
-          background: #08140C;
-          border-radius: 20px;
-          z-index: 50;
+          width: 90px;
+          height: 22px;
+          background: #000;
+          border-radius: 14px;
+          z-index: 10;
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 6px;
         }
 
         .phone-island-cam {
-          width: 7px;
-          height: 7px;
-          background: #000;
+          width: 8px;
+          height: 8px;
           border-radius: 50%;
-          border: 1px solid var(--nl-green);
+          background: #1A1A1A;
+          margin-left: 45px;
         }
 
         .phone-screen {
-          width: 100%;
-          height: 100%;
           background: var(--nl-french-bread-bg);
-          display: flex;
-          flex-direction: column;
-          position: relative;
+          border-radius: 32px;
           overflow: hidden;
+          padding: 1.8rem 1rem 1rem 1rem;
+          position: relative;
         }
 
         .phone-header {
-          padding: 2.2rem 1rem 0.6rem 1rem;
-          background: #FFF;
-          border-bottom: 1.5px solid var(--nl-french-bread-border);
           display: flex;
           justify-content: space-between;
           align-items: center;
-          z-index: 10;
+          margin-bottom: 0.8rem;
+          padding-bottom: 0.5rem;
+          border-bottom: 1px solid var(--nl-french-bread-border);
         }
 
         .phone-header-title {
           font-family: var(--font-display);
           font-size: 0.95rem;
-          font-weight: 800;
+          font-weight: 900;
           color: var(--nl-green);
           text-transform: uppercase;
         }
 
         .phone-header-badge {
-          font-size: 0.68rem;
           background: var(--nl-tomato);
           color: #FFF;
-          padding: 2px 8px;
-          border-radius: 12px;
-          font-weight: 700;
+          font-size: 0.65rem;
+          font-weight: 800;
+          padding: 2px 7px;
+          border-radius: 4px;
         }
 
-        .phone-media-area {
-          flex: 1;
-          position: relative;
+        .phone-dish-card {
+          background: #FFF;
+          border-radius: 16px;
           overflow: hidden;
-          background: #000;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+          border: 1px solid var(--nl-french-bread-border);
         }
 
-        .phone-media-img {
+        .phone-dish-img-wrap {
+          position: relative;
+          height: 180px;
+          background: #000;
+          overflow: hidden;
+        }
+
+        .phone-dish-img {
           width: 100%;
           height: 100%;
           object-fit: cover;
           display: block;
         }
 
-        .phone-media-overlay {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          padding: 1.8rem 1rem 0.9rem 1rem;
-          background: linear-gradient(0deg, rgba(14, 33, 20, 0.96) 0%, rgba(14, 33, 20, 0.6) 65%, transparent 100%);
-          z-index: 10;
-          color: #FFF;
-        }
-
         .phone-dish-tag {
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          background: rgba(14, 52, 27, 0.9);
+          color: var(--nl-french-bread);
           font-size: 0.65rem;
-          color: var(--nl-yolk);
-          background: rgba(255, 202, 38, 0.18);
-          padding: 2px 7px;
-          border-radius: 4px;
           font-weight: 800;
-          display: inline-block;
-          margin-bottom: 0.25rem;
-          border: 1px solid rgba(255, 202, 38, 0.35);
+          padding: 3px 8px;
+          border-radius: 4px;
+          text-transform: uppercase;
+          letter-spacing: 0.4px;
         }
 
-        .phone-dish-title {
+        .phone-dish-info {
+          padding: 1rem;
+        }
+
+        .phone-dish-name {
           font-family: var(--font-display);
-          font-size: 1.15rem;
-          font-weight: 800;
-          color: #FFF;
+          font-size: 1.05rem;
+          font-weight: 900;
+          color: var(--nl-green-deep);
+          margin-bottom: 0.3rem;
           line-height: 1.2;
-          margin-bottom: 0.25rem;
-          text-transform: uppercase;
         }
 
         .phone-dish-desc {
-          font-size: 0.875rem;
-          color: var(--nl-french-bread);
-          line-height: 1.35;
-          margin-bottom: 0.6rem;
+          font-size: 0.76rem;
+          color: var(--text-muted);
+          line-height: 1.4;
+          margin-bottom: 0.8rem;
         }
 
-        .phone-price-row {
+        .phone-dish-footer {
           display: flex;
           justify-content: space-between;
           align-items: center;
+          padding-top: 0.6rem;
+          border-top: 1px dashed var(--nl-french-bread-border);
         }
 
-        .phone-price-val {
+        .phone-dish-price {
           font-family: var(--font-display);
-          font-size: 1.3rem;
+          font-size: 1.25rem;
           font-weight: 900;
-          color: var(--nl-yolk);
+          color: var(--nl-green);
         }
 
-        .phone-action-btn {
+        .phone-dish-btn {
           background: var(--nl-tomato);
           color: #FFF;
-          border: none;
-          min-height: 44px;
-          padding: 6px 14px;
-          border-radius: 22px;
-          font-size: 0.76rem;
+          font-size: 0.8rem;
           font-weight: 800;
+          padding: 6px 12px;
+          border-radius: 6px;
+          border: none;
+          cursor: pointer;
           display: flex;
           align-items: center;
-          gap: 6px;
-          cursor: pointer;
-          box-shadow: 0 3px 10px rgba(179, 57, 39, 0.4);
-          font-family: var(--font-body);
+          gap: 5px;
+          transition: transform 0.1s;
+        }
+
+        .phone-dish-btn:active {
+          transform: scale(0.95);
         }
 
         .phone-nav-controls {
-          position: absolute;
-          right: 10px;
-          bottom: 110px;
           display: flex;
-          flex-direction: column;
-          gap: 10px;
-          z-index: 20;
-        }
-
-        .phone-nav-btn {
-          width: 44px;
-          height: 44px;
-          min-width: 44px;
-          min-height: 44px;
-          border-radius: 50%;
-          background: rgba(255, 253, 249, 0.95);
-          border: 1.5px solid var(--nl-green);
-          color: var(--nl-green);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 0.9rem;
-          cursor: pointer;
-          box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        }
-
-        .phone-categories-bar {
-          background: #FFF;
-          border-top: 1.5px solid var(--nl-french-bread-border);
-          padding: 0.5rem 0.8rem;
-          display: flex;
-          gap: 6px;
-          overflow-x: auto;
-          z-index: 10;
+          justify-content: space-between;
+          margin-top: 0.8rem;
+          gap: 0.5rem;
         }
 
         .phone-cat-pill {
           min-height: 44px;
-          padding: 6px 14px;
-          border-radius: 22px;
-          font-size: 0.78rem;
-          font-weight: 700;
-          background: var(--nl-french-bread);
-          color: var(--text-dark);
-          border: 1px solid var(--nl-french-bread-border);
+          display: inline-flex;
+          align-items: center;
+          padding: 0.4rem 0.8rem;
+          border-radius: 20px;
           cursor: pointer;
-          white-space: nowrap;
-          font-family: var(--font-body);
+        }
+
+        .phone-nav-btn {
+          flex: 1;
+          min-width: 44px;
+          min-height: 44px;
           display: inline-flex;
           align-items: center;
           justify-content: center;
-        }
-
-        .phone-cat-pill.active {
-          background: var(--nl-green);
-          color: #FFF;
-          border-color: var(--nl-green);
-        }
-
-        /* SIMULATOR DETAILS & LIVE QR */
-        .nl-sim-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
           background: var(--nl-french-bread);
-          border: 1.5px solid var(--nl-green);
-          color: var(--nl-green);
-          padding: 4px 12px;
-          border-radius: 50px;
-          font-size: 0.76rem;
+          border: 1px solid var(--nl-french-bread-border);
+          color: var(--nl-green-deep);
+          font-size: 0.75rem;
           font-weight: 800;
-          margin-bottom: 0.8rem;
-          width: fit-content;
+          padding: 6px;
+          border-radius: 8px;
+          cursor: pointer;
         }
 
-        .nl-sim-title {
+        .phone-nav-btn:hover {
+          background: #E8D8B5;
+        }
+
+        /* SIMULATOR RIGHT DETAILS */
+        .nl-sim-detail h3 {
           font-family: var(--font-display);
-          font-size: 2.1rem;
+          font-size: 1.6rem;
           font-weight: 900;
-          color: var(--nl-green-deep);
-          line-height: 1.25;
+          color: var(--nl-green);
           margin-bottom: 0.8rem;
           text-transform: uppercase;
-          text-wrap: balance;
         }
 
-        .nl-sim-desc {
-          font-size: 1rem;
-          color: var(--text-muted);
-          line-height: 1.65;
-          margin-bottom: 1.6rem;
+        .nl-sim-detail p {
+          font-size: 0.98rem;
+          color: var(--text-dark);
+          line-height: 1.6;
+          margin-bottom: 1.4rem;
         }
 
         .nl-sim-qr-box {
@@ -1074,538 +946,336 @@ export default function NuevaLagunaClient() {
           line-height: 1.45;
         }
 
-        /* PLANES COMERCIALES */
-        .nl-pricing-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 2rem;
-          margin-top: 2rem;
+        /* PANTALLAS DE COMEDOR (16:9 PREVIEW) */
+        .nl-screens-box {
+          background: #111;
+          border-radius: 24px;
+          border: 3px solid var(--nl-yolk);
+          padding: 2rem;
+          color: #FFF;
+          box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+          margin-top: 1.5rem;
         }
 
-        .nl-plan-card {
-          background: #FFF;
-          border: 2px solid var(--nl-french-bread-border);
-          border-radius: 22px;
-          padding: 2.5rem;
+        .nl-screen-mockup {
           position: relative;
+          background: #000;
+          border-radius: 16px;
+          overflow: hidden;
+          aspect-ratio: 16 / 9;
+          border: 2px solid #333;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .nl-screen-mockup img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          opacity: 0.92;
+        }
+
+        .nl-screen-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(14,52,27,0.85) 100%);
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+          padding: 1.8rem;
         }
 
-        .nl-plan-card.featured {
-          border-color: var(--nl-green);
-          box-shadow: 0 15px 45px rgba(25, 83, 43, 0.12);
-          background: #FFF;
-        }
-
-        .nl-plan-badge {
-          position: absolute;
-          top: -12px;
-          right: 22px;
+        .nl-screen-badge-top {
+          align-self: flex-start;
           background: var(--nl-tomato);
           color: #FFF;
-          font-size: 0.74rem;
+          font-size: 0.8rem;
           font-weight: 900;
-          padding: 4px 14px;
+          padding: 6px 14px;
+          border-radius: 6px;
+          letter-spacing: 0.5px;
+          text-transform: uppercase;
+        }
+
+        .nl-screen-caption {
+          color: #FFF;
+        }
+
+        .nl-screen-caption h4 {
+          font-family: var(--font-display);
+          font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+          font-weight: 900;
+          color: var(--nl-french-bread);
+          text-transform: uppercase;
+          margin-bottom: 0.4rem;
+        }
+
+        .nl-screen-caption p {
+          font-size: 0.95rem;
+          color: rgba(255,255,255,0.9);
+          max-width: 600px;
+          line-height: 1.4;
+        }
+
+        .nl-screen-qr-corner {
+          position: absolute;
+          bottom: 1.8rem;
+          right: 1.8rem;
+          background: rgba(255,255,255,0.95);
+          padding: 8px 12px;
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          border: 2px solid var(--nl-yolk);
+        }
+
+        .nl-screen-qr-corner img {
+          width: 44px;
+          height: 44px;
+          object-fit: contain;
+          opacity: 1;
+        }
+
+        .nl-screen-qr-corner span {
+          font-size: 0.75rem;
+          font-weight: 800;
+          color: var(--nl-green-deep);
+          text-transform: uppercase;
+          line-height: 1.2;
+        }
+
+        /* TARJETA DE PLAN ÚNICO ($6,000) */
+        .nl-single-plan-card {
+          background: #FFF;
+          border: 3px solid var(--nl-green);
+          border-radius: 26px;
+          padding: 3rem;
+          box-shadow: 0 20px 60px rgba(24, 61, 47, 0.14);
+          position: relative;
+          max-width: 880px;
+          margin: 0 auto;
+        }
+
+        .nl-single-plan-badge {
+          position: absolute;
+          top: -14px;
+          right: 28px;
+          background: var(--nl-tomato);
+          color: #FFF;
+          font-size: 0.875rem;
+          font-weight: 900;
+          padding: 5px 18px;
           border-radius: 20px;
           letter-spacing: 0.6px;
           text-transform: uppercase;
         }
 
-        .nl-plan-name {
+        .nl-single-plan-grid {
+          display: grid;
+          grid-template-columns: 1.2fr 0.8fr;
+          gap: 2.5rem;
+          align-items: center;
+        }
+
+        .nl-single-price-box {
+          background: var(--nl-green);
+          color: #FFF;
+          border-radius: 20px;
+          padding: 2.2rem;
+          text-align: center;
+          border: 2px solid var(--nl-yolk);
+        }
+
+        .nl-single-price-amount {
           font-family: var(--font-display);
-          font-size: 1.9rem;
+          font-size: 3.4rem;
           font-weight: 900;
-          color: var(--nl-green);
-          margin-bottom: 0.3rem;
-          text-transform: uppercase;
-          text-wrap: balance;
-        }
-
-        .nl-plan-sub {
-          font-size: 0.9rem;
-          color: var(--text-muted);
-        }
-
-        .nl-plan-price-block {
-          margin: 1.4rem 0;
-          padding: 1.2rem 0;
-          border-top: 1.5px solid var(--nl-french-bread-border);
-          border-bottom: 1.5px solid var(--nl-french-bread-border);
-        }
-
-        .nl-plan-amount {
-          font-family: var(--font-display);
-          font-size: 2.8rem;
-          font-weight: 900;
-          color: var(--text-dark);
+          color: #FFF;
           line-height: 1;
         }
 
-        .nl-plan-currency {
-          font-size: 1.2rem;
-          color: var(--nl-green);
-        }
-
-        .nl-plan-period {
-          font-size: 0.9rem;
-          color: var(--text-muted);
-        }
-
-        .nl-plan-iva {
-          font-size: 0.85rem;
-          color: var(--nl-green);
-          margin-top: 0.35rem;
-          font-weight: 700;
-        }
-
-        .nl-plan-features {
-          list-style: none;
-          margin: 1.4rem 0;
-          display: flex;
-          flex-direction: column;
-          gap: 0.85rem;
-        }
-
-        .nl-plan-features li {
-          font-size: 0.92rem;
-          color: var(--text-dark);
-          display: flex;
-          align-items: flex-start;
-          gap: 10px;
-          line-height: 1.45;
-        }
-
-        .nl-plan-features li i {
-          color: var(--nl-green);
-          font-size: 1rem;
-          margin-top: 3px;
-          flex-shrink: 0;
-        }
-
-        /* BONOS DE REGALO */
-        .nl-bonuses-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 1.6rem;
-          margin-top: 2rem;
-        }
-
-        .nl-bonus-card {
-          background: var(--nl-french-bread);
-          border: 2px solid var(--nl-green);
-          border-radius: 18px;
-          padding: 1.8rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          position: relative;
-        }
-
-        .nl-bonus-badge {
-          position: absolute;
-          top: -11px;
-          left: 18px;
-          background: var(--nl-green);
-          color: #FFF;
-          font-size: 0.875rem;
-          font-weight: 900;
-          padding: 3px 12px;
-          border-radius: 20px;
-          text-transform: uppercase;
-        }
-
-        .nl-bonus-title {
-          font-family: var(--font-display);
-          font-size: 1.35rem;
-          font-weight: 800;
-          color: var(--nl-green-deep);
-          margin: 0.4rem 0;
-          text-transform: uppercase;
-          text-wrap: balance;
-        }
-
-        .nl-bonus-price-row {
-          display: flex;
-          align-items: baseline;
-          gap: 10px;
-          margin-bottom: 0.6rem;
-        }
-
-        .nl-bonus-real-val {
-          font-family: var(--font-body);
-          font-size: 0.95rem;
-          color: var(--text-muted);
-          text-decoration: line-through;
-          font-weight: 700;
-        }
-
-        .nl-bonus-free-val {
-          font-family: var(--font-display);
-          font-size: 1.35rem;
-          font-weight: 900;
-          color: var(--nl-tomato-dark);
-        }
-
-        /* COTIZADOR CON INTERRUPTOR */
-        .nl-calc-box {
-          background: #FFF;
-          border: 2px solid var(--nl-french-bread-border);
-          border-radius: 24px;
-          padding: 2.5rem;
-          margin-top: 2.5rem;
-          box-shadow: 0 15px 40px rgba(0,0,0,0.04);
-        }
-
-        .nl-calc-grid {
-          display: grid;
-          grid-template-columns: 1.3fr 1fr;
-          gap: 2.5rem;
-        }
-
-        .nl-calc-selector {
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-        }
-
-        .nl-calc-item {
-          background: var(--nl-french-bread-bg);
-          border: 2px solid var(--nl-french-bread-border);
-          border-radius: 14px;
-          padding: 1.2rem;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          cursor: pointer;
-          transition: all 0.2s ease;
-        }
-
-        .nl-calc-item:hover {
-          border-color: var(--nl-green);
-        }
-
-        .nl-calc-item.active {
-          border-color: var(--nl-green);
-          background: var(--nl-french-bread);
-        }
-
-        .nl-calc-item-left {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-        }
-
-        .nl-radio {
-          width: 22px;
-          height: 22px;
-          border-radius: 50%;
-          border: 2px solid var(--nl-green);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #FFF;
-          font-size: 0.7rem;
-          font-weight: 900;
-          flex-shrink: 0;
-          background: #FFF;
-        }
-
-        .nl-calc-item.active .nl-radio {
-          background: var(--nl-green);
-        }
-
-        /* PAUTA SWITCH BOX */
-        .nl-pauta-switch-box {
-          background: var(--nl-french-bread-bg);
-          border: 1.5px solid var(--nl-french-bread-border);
-          border-radius: 14px;
-          padding: 1.2rem;
-          display: flex;
-          flex-direction: column;
-          gap: 0.8rem;
-        }
-
-        .nl-pauta-toggle-row {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          cursor: pointer;
-        }
-
-        .nl-toggle-label {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          font-weight: 800;
-          color: var(--nl-green-deep);
-          font-size: 0.95rem;
-        }
-
-        .nl-custom-checkbox {
-          width: 22px;
-          height: 22px;
-          border-radius: 6px;
-          border: 2px solid var(--nl-green);
-          background: #FFF;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #FFF;
-          font-size: 0.75rem;
-          font-weight: 900;
-        }
-
-        .nl-custom-checkbox.checked {
-          background: var(--nl-green);
-        }
-
-        .nl-calc-summary-card {
-          background: var(--nl-green);
-          color: #FFF;
-          border-radius: 18px;
-          padding: 2.2rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          box-shadow: 0 10px 30px rgba(25, 83, 43, 0.2);
-        }
-
-        .nl-sum-row {
-          display: flex;
-          justify-content: space-between;
-          font-size: 0.9rem;
+        .nl-single-price-iva {
+          font-size: 0.88rem;
           color: var(--nl-french-bread);
-          margin-bottom: 0.5rem;
+          margin-top: 0.4rem;
+          font-weight: 700;
         }
 
-        .nl-sum-row.highlight {
-          color: #FFF;
+        .nl-single-daily-rate {
+          display: inline-block;
+          background: rgba(217, 130, 43, 0.25);
+          color: var(--nl-french-bread);
+          border: 1px solid var(--nl-yolk);
+          font-size: 0.85rem;
           font-weight: 800;
+          padding: 4px 12px;
+          border-radius: 20px;
+          margin: 1rem 0;
         }
 
-        .nl-sum-total-row {
-          margin-top: 1rem;
-          padding-top: 1rem;
-          border-top: 1.5px solid rgba(255, 255, 255, 0.2);
-          display: flex;
-          justify-content: space-between;
-          align-items: baseline;
-        }
-
-        .nl-sum-total-val {
-          font-family: var(--font-display);
-          font-size: 2.2rem;
-          font-weight: 900;
-          color: var(--nl-yolk);
+        /* ROADMAP */
+        .nl-roadmap-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1.5rem;
+          margin-top: 2rem;
         }
 
         /* MODAL */
         .nl-modal-backdrop {
           position: fixed;
-          top: 0;
-          left: 0;
-          width: 100vw;
-          height: 100vh;
-          background: rgba(18, 33, 22, 0.7);
-          backdrop-filter: blur(10px);
-          z-index: 3000;
+          inset: 0;
+          background: rgba(14, 52, 27, 0.82);
+          backdrop-filter: blur(8px);
+          z-index: 1000;
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 1.5rem;
+          padding: 1rem;
         }
 
         .nl-modal-box {
           background: #FFF;
-          border: 3px solid var(--nl-green);
-          border-radius: 20px;
+          border-radius: 24px;
+          padding: 2.5rem;
+          max-width: 520px;
           width: 100%;
-          max-width: 560px;
-          padding: 2.4rem;
+          box-shadow: 0 25px 70px rgba(0,0,0,0.35);
+          border: 2px solid var(--nl-yolk);
           position: relative;
-          max-height: 90vh;
-          overflow-y: auto;
-          box-shadow: 0 25px 60px rgba(0,0,0,0.25);
         }
 
         .nl-modal-close {
           position: absolute;
-          top: 16px;
-          right: 20px;
-          background: var(--nl-french-bread);
-          border: 1px solid var(--nl-french-bread-border);
-          color: var(--text-dark);
+          top: 18px;
+          right: 18px;
           width: 44px;
           height: 44px;
           min-width: 44px;
           min-height: 44px;
           border-radius: 50%;
-          font-size: 1.15rem;
+          background: var(--nl-french-bread);
+          border: none;
+          color: var(--nl-green-deep);
+          font-size: 1.2rem;
+          cursor: pointer;
           display: flex;
           align-items: center;
           justify-content: center;
-          cursor: pointer;
+        }
+
+        .nl-modal-close:hover {
+          background: #E8D8B5;
         }
 
         .nl-input {
-          background: var(--nl-french-bread-bg);
-          border: 1.5px solid var(--nl-french-bread-border);
-          border-radius: 8px;
-          min-height: 44px;
-          padding: 0.75rem 0.9rem;
-          color: var(--text-dark);
-          font-size: 16px;
-          outline: none;
           width: 100%;
-          margin-top: 0.3rem;
+          padding: 0.75rem 1rem;
+          border: 1.5px solid var(--nl-french-bread-border);
+          border-radius: 10px;
+          font-size: 16px;
           font-family: var(--font-body);
-        }
-
-        .nl-input::placeholder {
-          color: #5A6A5E;
-          opacity: 1;
+          margin-top: 0.3rem;
+          outline: none;
         }
 
         .nl-input:focus {
           border-color: var(--nl-green);
-          background: #FFF;
         }
 
         .nl-modal-datetime-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 0.9rem;
-          margin-bottom: 1.4rem;
+          gap: 0.8rem;
+          margin-bottom: 1.2rem;
         }
 
+        /* FOOTER */
         .nl-footer {
-          border-top: 2px solid var(--nl-french-bread-border);
-          padding: 3rem 0;
-          background: #FFF;
+          background: var(--nl-french-bread-bg);
+          border-top: 1px solid var(--nl-french-bread-border);
+          padding: 2.5rem 0;
           text-align: center;
-          margin-top: 4rem;
-        }
-
-        .nl-roadmap-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1.4rem;
         }
 
         /* RESPONSIVE */
         @media (max-width: 992px) {
-          .nl-hero-card { grid-template-columns: 1fr; padding: 2.5rem 1.8rem; }
-          .nl-sim-grid { grid-template-columns: 1fr; gap: 2rem; }
-          .nl-flow-grid { grid-template-columns: 1fr; gap: 1.2rem; }
-          .nl-pricing-grid { grid-template-columns: 1fr; }
-          .nl-bonuses-grid { grid-template-columns: 1fr; }
-          .nl-calc-grid { grid-template-columns: 1fr; }
-          .nl-roadmap-grid { grid-template-columns: 1fr; }
-        }
-
-        html, body {
-          overflow-x: hidden;
-          width: 100%;
-          max-width: 100%;
-        }
-
-        @media (max-width: 768px) {
-          .nl-wrapper { padding: 0 0.85rem; width: 100%; max-width: 100%; box-sizing: border-box; }
-          .nl-header { padding: 0.5rem 0; width: 100%; }
-          .nl-nav { width: 100%; }
-          .nl-brand-cluster { gap: 0.4rem; }
-          .nl-apolo-logo { height: 16px; }
-          .nl-divider { display: none; }
-          .nl-client-tag { display: none; }
-          .nl-nav .nl-btn { min-height: 44px; min-width: 44px; padding: 0.5rem 0.85rem; font-size: 0.875rem; flex-shrink: 0; }
-          .nl-hero { padding: 1.2rem 0 0.8rem 0; }
-          .nl-hero-card { padding: 1.5rem 1rem; border-radius: 18px; width: 100%; box-sizing: border-box; overflow: hidden; }
-          .nl-hero h1 { font-size: 1.28rem !important; line-height: 1.25; letter-spacing: 0; word-break: break-word; overflow-wrap: break-word; max-width: 100%; }
-          .nl-script-accent { font-size: 1.35rem; }
-          .nl-hero-manifesto { font-size: 0.88rem; line-height: 1.5; margin-bottom: 1.3rem; }
-          .nl-hero-logo-box { padding: 12px 20px; margin-bottom: 1.4rem; border-radius: 16px; }
-          .nl-hero-logo-img { height: 78px; max-width: 155px; }
-          .nl-hero-food-img { height: 260px; }
-          .nl-hero-badges-row { gap: 0.8rem; margin-top: 1.2rem; padding-top: 1rem; }
-          .nl-hero-badge-item { font-size: 0.875rem; }
-          .nl-minigame-alert { flex-direction: column; align-items: flex-start; gap: 0.8rem; padding: 1.1rem; }
-          .nl-metrics-grid { grid-template-columns: 1fr 1fr; gap: 0.65rem; }
-          .nl-metric-card { padding: 0.9rem 0.5rem; }
-          .nl-metric-val { font-size: 1.7rem; }
-          .phone-mockup { width: 290px; height: 520px; }
-          .nl-sim-box { padding: 1.3rem 0.8rem; border-radius: 18px; }
-          .nl-calc-box { padding: 1.3rem 0.8rem; border-radius: 18px; }
-          .nl-section-title { font-size: 1.65rem !important; line-height: 1.2; }
-          .nl-calc-item { padding: 0.9rem; }
-          .nl-roadmap-grid { grid-template-columns: 1fr; gap: 1rem; }
-          .nl-plan-card { padding: 1.5rem 1.25rem !important; }
-          .nl-calc-summary-card { padding: 1.5rem 1.25rem !important; }
-          .nl-modal-box { padding: 1.5rem 1.25rem !important; }
+          .nl-hero-card {
+            grid-template-columns: 1fr;
+            padding: 2.5rem 1.8rem;
+            text-align: center;
+          }
+          .nl-hero-left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+          .nl-hero-manifesto {
+            margin: 0 auto 2rem auto;
+          }
+          .nl-hero-badges-row {
+            justify-content: center;
+          }
+          .nl-hero-right {
+            margin-top: 1.5rem;
+          }
+          .nl-metrics-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+          .nl-sim-grid {
+            grid-template-columns: 1fr;
+          }
+          .nl-flow-grid {
+            grid-template-columns: 1fr;
+          }
+          .nl-single-plan-grid {
+            grid-template-columns: 1fr;
+          }
+          .nl-roadmap-grid {
+            grid-template-columns: 1fr;
+          }
         }
 
         @media (max-width: 580px) {
           .nl-sim-qr-box {
             flex-direction: column;
             text-align: center;
-            gap: 1.2rem;
-            padding: 1.2rem;
           }
-          .nl-qr-text {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+          .nl-modal-box .nl-modal-datetime-grid, .nl-modal-grid {
+            grid-template-columns: 1fr !important;
           }
-          .nl-qr-text .nl-btn {
-            width: 100%;
-            justify-content: center;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .nl-modal-box .nl-modal-datetime-grid,
           .nl-modal-datetime-grid {
-            grid-template-columns: 1fr;
-            gap: 0.75rem;
+            grid-template-columns: 1fr !important;
+          }
+          .nl-plan-card, .nl-single-plan-card {
+            padding: 1.5rem 1.25rem !important;
           }
         }
       `}} />
 
-      <div className="nl-bg-texture"></div>
-
       {/* HEADER */}
       <header className="nl-header">
-        <div className="nl-wrapper">
-          <div className="nl-nav">
-            <div className="nl-brand-cluster">
-              <img
-                src="/assets/apolograma-logo-v2.png"
-                alt="Apolograma Software & Design Studio"
-                className="nl-apolo-logo"
-              />
-              <div className="nl-divider"></div>
-              <span className="nl-client-tag">
-                <i className="fa fa-utensils" style={{ marginRight: "6px" }}></i>
-                Tortería La Nueva Laguna
-              </span>
+        <div className="nl-wrapper nl-header-inner">
+          <div className="nl-logo-group">
+            <span className="nl-brand-agency">APOLOGRAMA</span>
+            <div className="nl-badge-client">
+              <i className="fa fa-utensils" style={{ color: "var(--nl-green)" }}></i>
+              <span>Tortería La Nueva Laguna</span>
             </div>
+          </div>
 
-            <div>
-              <button
-                onClick={() => setIsModalOpen(true)}
-                className="nl-btn nl-btn-green"
-              >
-                <i className="fa fa-calendar-check"></i>
-                <span>Agendar Junta</span>
-              </button>
-            </div>
+          <div>
+            <button onClick={() => setIsModalOpen(true)} className="nl-btn nl-btn-green" style={{ fontSize: "0.82rem", padding: "0.55rem 1rem" }}>
+              <i className="fa fa-calendar-check"></i> Agendar Junta
+            </button>
           </div>
         </div>
       </header>
 
-      {/* HERO EDITORIAL */}
+      {/* HERO */}
       <section className="nl-hero">
         <div className="nl-wrapper">
           <div className="nl-hero-card">
@@ -1622,39 +1292,43 @@ export default function NuevaLagunaClient() {
 
               <h1>
                 TRADICIÓN EN LA COCINA. <br />
-                <span className="gold">CONTROL Y MESAS LLENAS TODO EL MES.</span>
+                <span className="gold">CONTROL Y COMEDOR DIGITAL EN CADA MESA.</span>
               </h1>
 
               <p className="nl-hero-manifesto">
                 Usted ya tiene el producto, la receta y el sazón que respalda el prestigio de La Nueva Laguna.
-                Nuestra propuesta implementa la maquinaria comercial para mantener la afluencia constante:
-                <strong> producción audiovisual semanal</strong> para antojar en toda la ciudad,
+                Nuestra propuesta equipa su sucursal con tecnología de alto impacto:
                 un <strong>menú digital interactivo en cada mesa</strong> que agiliza los pedidos de sus meseros,
-                y un <strong>minijuego interactivo con código QR</strong> para crear una base de datos propia de WhatsApp y
-                activar mesas de lunes a miércoles.
+                un <strong>minijuego interactivo con código QR</strong> que convierte comensales en contactos de WhatsApp,
+                <strong>videos de antojo y folclor lagunero</strong> para sus pantallas de comedor, y un <strong>sistema de lealtad</strong> para
+                llenar mesas de lunes a miércoles.
               </p>
 
               <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-                <a href="#sec-menu-interactivo" className="nl-btn nl-btn-yolk">
-                  <i className="fa fa-mobile-screen"></i> Probar Menú en Mesa
+                <a href="#sec-pilares" className="nl-btn nl-btn-yolk">
+                  <i className="fa fa-layer-group"></i> Conocer los 4 Pilares
                 </a>
-                <a href="#sec-planes" className="nl-btn nl-btn-outline" style={{ color: "#FFF", borderColor: "#FFF" }}>
-                  <i className="fa fa-tags"></i> Ver Propuesta Económica
+                <a href="#sec-inversion" className="nl-btn nl-btn-outline" style={{ color: "#FFF", borderColor: "#FFF" }}>
+                  <i className="fa fa-tag"></i> Ver Inversión ($6,000/mes)
                 </a>
               </div>
 
               <div className="nl-hero-badges-row">
                 <div className="nl-hero-badge-item">
                   <i className="fa fa-circle-check"></i>
-                  <span>Menú Interactivo en Mesa</span>
+                  <span>1. Menú QR en Mesa</span>
                 </div>
                 <div className="nl-hero-badge-item">
                   <i className="fa fa-circle-check"></i>
-                  <span>Minijuego Oficial QR</span>
+                  <span>2. Minijuego WhatsApp</span>
                 </div>
                 <div className="nl-hero-badge-item">
                   <i className="fa fa-circle-check"></i>
-                  <span>Producción Gastronómica Continua</span>
+                  <span>3. Videos Pantallas Comedor</span>
+                </div>
+                <div className="nl-hero-badge-item">
+                  <i className="fa fa-circle-check"></i>
+                  <span>4. Sistema de Lealtad</span>
                 </div>
               </div>
             </div>
@@ -1686,20 +1360,24 @@ export default function NuevaLagunaClient() {
               <div className="nl-metric-label">Base de Clientes Propia</div>
             </div>
             <div className="nl-metric-card">
-              <div className="nl-metric-val">$0<span className="unit">MXN</span></div>
-              <div className="nl-metric-label">Menú Digital QR (Bonificado)</div>
+              <div className="nl-metric-val">16:9<span className="unit">HD</span></div>
+              <div className="nl-metric-label">Antojo & Tradición en Pantallas</div>
             </div>
             <div className="nl-metric-card">
-              <div className="nl-metric-val">3-5<span className="unit">km</span></div>
-              <div className="nl-metric-label">Radio Hiperlocal Meta Ads</div>
+              <div className="nl-metric-val">$200<span className="unit">MXN</span></div>
+              <div className="nl-metric-label">Inversión Diaria Equivalente</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SECCIÓN 1: MENÚ DIGITAL VERTICAL */}
-      <section id="sec-menu-interactivo" className="nl-section">
+      {/* ANCLA PILARES */}
+      <div id="sec-pilares"></div>
+
+      {/* PILAR 1: MENÚ DIGITAL VERTICAL */}
+      <section className="nl-section">
         <div className="nl-wrapper">
+          <span className="nl-pillar-badge">PILAR 01</span>
           <div className="nl-section-tag">
             <i className="fa fa-mobile-screen"></i>
             Tecnología en Mesa
@@ -1708,9 +1386,9 @@ export default function NuevaLagunaClient() {
             Menú Digital Vertical: El Antojo Vende Antes de que Llegue el Mesero.
           </h2>
           <p className="nl-section-sub">
-            Sustituya las cartas físicas maltratadas o PDFs lentos por una interfaz rápida en el celular del comensal.
-            Al ver la carne recién dorada, el pan francés crujiente y los ingredientes en alta definición,
-            el comensal decide más rápido y eleva el ticket promedio de su mesa.
+            Sustituya las cartas físicas maltratadas o PDFs lentos por una webapp ágil que abre al instante escaneando el QR en mesa.
+            Al ver la pierna dorada, el pan francés crujiente y los ingredientes en alta definición,
+            el comensal decide en segundos, acelerando la rotación de mesas y elevando el ticket promedio.
           </p>
 
           <div className="nl-sim-box">
@@ -1730,119 +1408,81 @@ export default function NuevaLagunaClient() {
                     <span className="phone-header-badge">Mesa 04</span>
                   </div>
 
-                  <div className="phone-media-area">
-                    <img
-                      src={currentDish.image}
-                      alt={currentDish.name}
-                      className="phone-media-img"
-                    />
-
-                    <div className="phone-nav-controls">
-                      <button onClick={handlePrevDish} className="phone-nav-btn" title="Anterior">
-                        <i className="fa fa-chevron-up"></i>
-                      </button>
-                      <button onClick={handleNextDish} className="phone-nav-btn" title="Siguiente">
-                        <i className="fa fa-chevron-down"></i>
-                      </button>
+                  <div className="phone-dish-card">
+                    <div className="phone-dish-img-wrap">
+                      <img
+                        src={currentDish.image}
+                        alt={currentDish.name}
+                        className="phone-dish-img"
+                      />
+                      <span className="phone-dish-tag">{currentDish.tag}</span>
                     </div>
 
-                    <div className="phone-media-overlay">
-                      <span className="phone-dish-tag">{currentDish.tag}</span>
-                      <h3 className="phone-dish-title">{currentDish.name}</h3>
+                    <div className="phone-dish-info">
+                      <h4 className="phone-dish-name">{currentDish.name}</h4>
                       <p className="phone-dish-desc">{currentDish.description}</p>
-                      
-                      <div className="phone-price-row">
-                        <div className="phone-price-val">${currentDish.price} MXN</div>
+
+                      <div className="phone-dish-footer">
+                        <div className="phone-dish-price">${currentDish.price} MXN</div>
                         <button
                           onClick={() => handleCravingClick(currentDish.id)}
-                          className="phone-action-btn"
+                          className="phone-dish-btn"
                         >
                           <i className={`fa fa-heart ${heartAnim ? "fa-beat" : ""}`}></i>
-                          <span>Se me antoja ({cravings[currentDish.id] || currentDish.cravingCount})</span>
+                          <span>{cravings[currentDish.id] || currentDish.cravingCount}</span>
                         </button>
                       </div>
                     </div>
                   </div>
 
-                  <div className="phone-categories-bar">
-                    <button
-                      onClick={() => { setActiveMenuCategory("todos"); setActiveDishIndex(0); }}
-                      className={`phone-cat-pill ${activeMenuCategory === "todos" ? "active" : ""}`}
-                    >
-                      Todos
+                  <div className="phone-nav-controls">
+                    <button onClick={handlePrevDish} className="phone-nav-btn">
+                      <i className="fa fa-chevron-left"></i> Anterior
                     </button>
-                    <button
-                      onClick={() => { setActiveMenuCategory("tortas"); setActiveDishIndex(0); }}
-                      className={`phone-cat-pill ${activeMenuCategory === "tortas" ? "active" : ""}`}
-                    >
-                      Tortas
-                    </button>
-                    <button
-                      onClick={() => { setActiveMenuCategory("especiales"); setActiveDishIndex(0); }}
-                      className={`phone-cat-pill ${activeMenuCategory === "especiales" ? "active" : ""}`}
-                    >
-                      Especiales
-                    </button>
-                    <button
-                      onClick={() => { setActiveMenuCategory("tacos"); setActiveDishIndex(0); }}
-                      className={`phone-cat-pill ${activeMenuCategory === "tacos" ? "active" : ""}`}
-                    >
-                      Tacos
+                    <button onClick={handleNextDish} className="phone-nav-btn">
+                      Siguiente <i className="fa fa-chevron-right"></i>
                     </button>
                   </div>
                 </div>
               </div>
 
-              {/* SIMULATOR DETAILS & LIVE QR */}
-              <div>
-                <div className="nl-sim-badge">
-                  <i className="fa fa-circle-check"></i> 2 MÓDULOS EN MESA — BONIFICADOS POR 5 MESES ($0 MXN)
-                </div>
-
-                <h3 className="nl-sim-title">
-                  Pruébelo Ahora en su Propio Teléfono.
-                </h3>
-                
-                <p className="nl-sim-desc">
-                  El menú funciona directamente en el navegador del cliente (Safari o Chrome) sin pedirle que descargue ninguna aplicación.
-                  Carga en menos de 1 segundo y le permite cambiar precios o platillos agotados en tiempo real.
+              {/* SIMULATOR RIGHT DETAILS */}
+              <div className="nl-sim-detail">
+                <h3>Experiencia Inmersiva para Comensales</h3>
+                <p>
+                  Diseñado para abrir el apetito desde el primer segundo. Los clientes exploran fotos reales de los platillos,
+                  ven los ingredientes detallados y eligen sus bebidas o complementos sin esperar a que el mesero les entregue una carta física.
                 </p>
 
                 <div className="nl-sim-qr-box">
                   <img
                     src="/assets/nueva-laguna/qr-menu-demo.png"
-                    alt="Escanea el código QR"
+                    alt="Código QR de Prueba"
                     className="nl-qr-img"
                   />
                   <div className="nl-qr-text">
-                    <h4>Escanee con la cámara de su celular</h4>
+                    <h4>Escanee con su Celular</h4>
                     <p>
-                      Compruebe la fluidez de navegación y cómo se experimenta el menú directamente en la mesa.
+                      Pruebe la experiencia real de un comensal en su mesa. Sin instalar aplicaciones ni registros obligatorios.
                     </p>
-                    <a
-                      href="https://smash-menu-demo.vercel.app/menu"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="nl-btn nl-btn-green"
-                      style={{ fontSize: "0.8rem", padding: "0.45rem 0.9rem" }}
-                    >
-                      <i className="fa fa-arrow-up-right-from-square"></i> Ver Demo en Pantalla Completa
-                    </a>
+                    <span style={{ fontSize: "0.78rem", fontWeight: 800, color: "var(--nl-green)" }}>
+                      <i className="fa fa-bolt"></i> Carga en menos de 1 segundo en 4G/5G
+                    </span>
                   </div>
                 </div>
 
                 <div className="nl-feature-bullets">
                   <div className="nl-bullet">
                     <i className="fa fa-check-circle"></i>
-                    <span><strong>Operación ágil:</strong> El comensal explora mientras el mesero atiende otras mesas, reduciendo tiempos muertos en sala.</span>
+                    <span><strong>Actualización de Precios en Vivo:</strong> Cambie precios o agote platillos al instante sin reimprimir papel.</span>
                   </div>
                   <div className="nl-bullet">
                     <i className="fa fa-check-circle"></i>
-                    <span><strong>Control total:</strong> Si un ingrediente se termina, se apaga del menú en 1 clic sin reimprimir cartas.</span>
+                    <span><strong>Fotografía de Alto Antojo:</strong> Cada platillo se muestra con su pan crujiente y porciones generosas.</span>
                   </div>
                   <div className="nl-bullet">
                     <i className="fa fa-check-circle"></i>
-                    <span><strong>Píxel de seguimiento:</strong> Cada persona que abre el menú en su mesa queda registrada para recibir anuncios de sus promociones en redes sociales.</span>
+                    <span><strong>Mayor Rotación de Mesas:</strong> Los comensales ordenan más rápido y la cocina recibe pedidos sin demoras.</span>
                   </div>
                 </div>
               </div>
@@ -1851,32 +1491,22 @@ export default function NuevaLagunaClient() {
         </div>
       </section>
 
-      {/* SECCIÓN 2: MINIJUEGO INTERACTIVO QR Y WHATSAPP */}
+      {/* PILAR 2: MINIJUEGO INTERACTIVO QR Y WHATSAPP */}
       <section className="nl-section" style={{ background: "rgba(243, 232, 204, 0.35)" }}>
         <div className="nl-wrapper">
+          <span className="nl-pillar-badge">PILAR 02</span>
           <div className="nl-section-tag">
             <i className="fa fa-gamepad"></i>
-            Ecosistema de Captación en Mesa • Minijuego Interactivo
+            Conversión en Mesa • Minijuego Interactivo
           </div>
           <h2 className="nl-section-title">
-            Captación Directa de Clientes en Mesa.
+            El Minijuego que Convierte Comensales en Contactos de WhatsApp.
           </h2>
           <p className="nl-section-sub">
-            El error común en restaurantes es dejar que el comensal pague y se retire sin registrar su contacto.
-            Desarrollamos un minijuego oficial interactivo exclusivo para Tortería La Nueva Laguna: el cliente escanea el código QR
-            en su mesa desde su teléfono (sin descargar aplicaciones), resuelve una dinámica ágil de destreza con la identidad
-            de la marca, y desbloquea un beneficio de cortesía validado con su WhatsApp. Usted construye una base de clientes
-            propia para activar ventas de lunes a miércoles.
+            El error común en los restaurantes es dejar que el cliente coma, pague y se vaya sin dejar su contacto.
+            Con este minijuego oficial con código QR en mesa, el comensal se divierte mientras espera su comida,
+            gana un beneficio de cortesía y registra su teléfono verificado de WhatsApp.
           </p>
-
-          <div className="nl-minigame-alert">
-            <div className="nl-minigame-alert-badge">
-              <i className="fa fa-code"></i> DESARROLLO EN CURSO POR APOLOGRAMA
-            </div>
-            <div className="nl-minigame-alert-text">
-              <strong>Demo Interactiva en Preparación:</strong> Estamos programando el minijuego oficial con mecánicas de puzzles de lógica y sabor lagunero. El demo jugable se integrará directamente en este bloque para que pueda experimentarlo en su celular.
-            </div>
-          </div>
 
           <div className="nl-flow-grid">
             <div className="nl-flow-card">
@@ -1884,7 +1514,7 @@ export default function NuevaLagunaClient() {
               <div className="nl-flow-icon"><i className="fa fa-qrcode"></i></div>
               <h4 className="nl-flow-title">QR en Mesa</h4>
               <p className="nl-flow-text">
-                Acrílico elegante en mesa o mantel individual: <em>&ldquo;Escanee el código y supere el reto del minijuego oficial para ganar una cortesía en su consumo de hoy.&rdquo;</em>
+                Acrílico elegante en mesa o mantel individual: <em>&ldquo;Escanee el código y supere el reto del minijuego para ganar una cortesía en su consumo de hoy.&rdquo;</em>
               </p>
             </div>
 
@@ -1893,7 +1523,7 @@ export default function NuevaLagunaClient() {
               <div className="nl-flow-icon"><i className="fa fa-gamepad"></i></div>
               <h4 className="nl-flow-title">Minijuego en 1 Clic</h4>
               <p className="nl-flow-text">
-                Webapp ultra ligera que abre al instante en el navegador del celular sin instalar apps. Dinámica visual de destreza y humor con los ingredientes y sabor de La Nueva Laguna.
+                Webapp ultra ligera que abre al instante en el navegador del celular sin instalar apps. Dinámica visual de destreza con los ingredientes y el pan francés de La Nueva Laguna.
               </p>
             </div>
 
@@ -1902,7 +1532,7 @@ export default function NuevaLagunaClient() {
               <div className="nl-flow-icon"><i className="fa-brands fa-whatsapp"></i></div>
               <h4 className="nl-flow-title">Validación por WhatsApp</h4>
               <p className="nl-flow-text">
-                Para hacer válido el beneficio en caja o con el mesero, el cliente ingresa su número verificado de WhatsApp.
+                Para desbloquear el beneficio de cortesía y mostrarlo en caja o con el mesero, el cliente ingresa su número verificado de WhatsApp.
               </p>
             </div>
 
@@ -1918,185 +1548,94 @@ export default function NuevaLagunaClient() {
             <div className="nl-flow-card">
               <span className="nl-flow-step-num">PASO 05</span>
               <div className="nl-flow-icon"><i className="fa fa-bullhorn"></i></div>
-              <h4 className="nl-flow-title">Aumentar Frecuencia entre Semana</h4>
+              <h4 className="nl-flow-title">Llenar Mesas Lun-Mié</h4>
               <p className="nl-flow-text">
-                Difusiones por WhatsApp los lunes y martes con promociones exclusivas o lanzamientos para reactivar la afluencia entre semana.
+                Difusiones automatizadas por WhatsApp los días de menor afluencia con promociones especiales para activar mesas entre semana.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SECCIÓN 3: PLANES */}
-      <section id="sec-planes" className="nl-section">
+      {/* PILAR 3: VIDEOS PARA PANTALLAS DE COMEDOR */}
+      <section className="nl-section">
         <div className="nl-wrapper">
+          <span className="nl-pillar-badge">PILAR 03</span>
           <div className="nl-section-tag">
-            <i className="fa fa-briefcase"></i>
-            Propuesta Comercial 2026
+            <i className="fa fa-tv"></i>
+            Circuito Audiovisual en Comedor (16:9 HD)
           </div>
           <h2 className="nl-section-title">
-            Estructura de Inversión y Alcance.
+            Pantallas de Comedor: Antojo de Plancha y Orgullo Lagunero.
           </h2>
           <p className="nl-section-sub">
-            Dos esquemas claros diseñados para resolver la presencia digital y la generación continua de afluencia local en sucursal.
+            Aproveche las pantallas de televisión de su comedor para algo mucho más rentable que canales de cable genéricos:
+            un circuito continuo de video en alta definición que combina tomas irresistibles de comida con cápsulas entretenidas
+            y educativas sobre la Comarca Lagunera y el auténtico pan francés.
           </p>
 
-          <div className="nl-pricing-grid">
-            {/* PLAN INTEGRAL */}
-            <div className={`nl-plan-card featured ${selectedPlan === "integral" ? "selected" : ""}`}>
-              <div className="nl-plan-badge">RECOMENDADO</div>
-
-              <div>
-                <h3 className="nl-plan-name">Plan Integral</h3>
-                <p className="nl-plan-sub">Para delegar por completo la producción audiovisual y la pauta publicitaria local.</p>
-
-                <div className="nl-plan-price-block">
-                  <div className="nl-plan-amount">
-                    $20,000 <span className="nl-plan-currency">MXN</span>
-                    <span className="nl-plan-period"> / mes</span>
-                  </div>
-                  <div className="nl-plan-iva">+ IVA 16% ($3,200 MXN) = $23,200 MXN facturados de agencia</div>
-                  <div style={{ fontSize: "0.85rem", color: "var(--nl-green)", marginTop: "6px", fontWeight: 700 }}>
-                    + $2,000 MXN de pauta adicional (inversión directa del cliente a Meta Ads)
-                  </div>
+          <div className="nl-screens-box">
+            <div className="nl-screen-mockup">
+              <img
+                src="/assets/nueva-laguna/hero-torta-lagunera.jpg"
+                alt="Demostración Pantalla Comedor 16:9"
+              />
+              <div className="nl-screen-overlay">
+                <div className="nl-screen-badge-top">
+                  <i className="fa fa-play-circle"></i> LOOP DE ALTA DEFINICIÓN EN COMEDOR
                 </div>
 
-                <ul className="nl-plan-features">
-                  <li>
-                    <i className="fa fa-video"></i>
-                    <span><strong>Producción Audiovisual Gourmet:</strong> Videos semanales en alta definición mostrando la plancha, el pan recién partido y la preparación.</span>
-                  </li>
-                  <li>
-                    <i className="fa fa-camera"></i>
-                    <span><strong>Sesiones de Foto Profesional:</strong> Levantamiento fotográfico periódico en sucursal para renovar el archivo visual de platillos.</span>
-                  </li>
-                  <li>
-                    <i className="fa fa-clock"></i>
-                    <span><strong>Historias Diarias:</strong> Cobertura en horarios de comida (12:00 PM a 4:00 PM) para antojar y orientar comensales a la sucursal.</span>
-                  </li>
-                  <li>
-                    <i className="fa fa-bullseye"></i>
-                    <span><strong>Pauta Hiperlocal Administrada:</strong> Anuncios segmentados a comensales en un radio de 3 a 5 km de su ubicación.</span>
-                  </li>
-                  <li>
-                    <i className="fa fa-comments"></i>
-                    <span><strong>Atención de Comentarios y Mensajes:</strong> Respuestas rápidas a clientes sobre horarios, ubicación y promociones.</span>
-                  </li>
-                  <li style={{ color: "var(--nl-green)", fontWeight: 700 }}>
-                    <i className="fa fa-gift" style={{ color: "var(--nl-tomato)" }}></i>
-                    <span><strong>MÓDULO BONIFICADO 1: Menú Digital Vertical con QR</strong> ($0 MXN primeros 5 meses — Después $1,000 MXN/mes).</span>
-                  </li>
-                  <li style={{ color: "var(--nl-green)", fontWeight: 700 }}>
-                    <i className="fa fa-gift" style={{ color: "var(--nl-tomato)" }}></i>
-                    <span><strong>MÓDULO BONIFICADO 2: Dinámica de Lealtad en Mesa con WhatsApp y QR</strong> ($0 MXN primeros 5 meses — Después $1,000 MXN/mes).</span>
-                  </li>
-                </ul>
-              </div>
+                <div className="nl-screen-caption">
+                  <h4>¿Sabías por qué el Pan Francés solo sabe así en La Laguna?</h4>
+                  <p>
+                    Cápsulas culturales y folclor regional que entretienen a las familias mientras esperan su comida, intercaladas con tomas de carne dorándose al punto exacto.
+                  </p>
+                </div>
 
-              <div>
-                <button
-                  onClick={() => { setSelectedPlan("integral"); setIsModalOpen(true); }}
-                  className="nl-btn nl-btn-green"
-                  style={{ width: "100%", justifyContent: "center" }}
-                >
-                  Seleccionar Plan Integral
-                </button>
+                <div className="nl-screen-qr-corner">
+                  <img
+                    src="/assets/nueva-laguna/qr-menu-demo.png"
+                    alt="QR Pantalla"
+                  />
+                  <span>Escanea en mesa<br />y juega ahora</span>
+                </div>
               </div>
             </div>
 
-            {/* PLAN ESENCIAL */}
-            <div className={`nl-plan-card ${selectedPlan === "esencial" ? "selected" : ""}`}>
-              <div>
-                <h3 className="nl-plan-name">Plan Esencial</h3>
-                <p className="nl-plan-sub">Para mantener una presencia digital constante, limpia y profesional.</p>
-
-                <div className="nl-plan-price-block">
-                  <div className="nl-plan-amount">
-                    $10,000 <span className="nl-plan-currency">MXN</span>
-                    <span className="nl-plan-period"> / mes</span>
-                  </div>
-                  <div className="nl-plan-iva">+ IVA 16% ($1,600 MXN) = $11,600 MXN facturados de agencia</div>
-                  <div style={{ fontSize: "0.85rem", color: "var(--nl-green)", marginTop: "6px", fontWeight: 700 }}>
-                    + $2,000 MXN de pauta adicional (inversión directa del cliente a Meta Ads)
-                  </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.5rem", marginTop: "2rem" }}>
+              <div style={{ background: "#1C1C1C", padding: "1.3rem", borderRadius: "14px", border: "1px solid #333" }}>
+                <div style={{ color: "var(--nl-yolk)", fontSize: "1.2rem", marginBottom: "0.5rem" }}>
+                  <i className="fa fa-fire"></i>
                 </div>
-
-                <ul className="nl-plan-features">
-                  <li>
-                    <i className="fa fa-image"></i>
-                    <span><strong>3 Publicaciones Semanales:</strong> Gráficos pulidos de promociones, platillos estelares y paquetes familiares.</span>
-                  </li>
-                  <li>
-                    <i className="fa fa-clock"></i>
-                    <span><strong>Historias Semanales de Mantenimiento:</strong> Presencia fija de menús y horarios de apertura.</span>
-                  </li>
-                  <li>
-                    <i className="fa fa-pen-nib"></i>
-                    <span><strong>Redacción y Copywriting Profesional:</strong> Textos directos, respetando la tradición de la marca.</span>
-                  </li>
-                  <li>
-                    <i className="fa fa-sliders"></i>
-                    <span><strong>Pauta Base en Meta Ads:</strong> Mantenimiento y optimización de anuncios de reconocimiento.</span>
-                  </li>
-                  <li style={{ color: "var(--nl-green)", fontWeight: 700 }}>
-                    <i className="fa fa-gift" style={{ color: "var(--nl-tomato)" }}></i>
-                    <span><strong>MÓDULO BONIFICADO 1: Menú Digital Vertical con QR</strong> ($0 MXN primeros 5 meses — Después $1,000 MXN/mes).</span>
-                  </li>
-                  <li style={{ color: "var(--nl-green)", fontWeight: 700 }}>
-                    <i className="fa fa-gift" style={{ color: "var(--nl-tomato)" }}></i>
-                    <span><strong>MÓDULO BONIFICADO 2: Dinámica de Lealtad en Mesa con WhatsApp y QR</strong> ($0 MXN primeros 5 meses — Después $1,000 MXN/mes).</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div>
-                <button
-                  onClick={() => { setSelectedPlan("esencial"); setIsModalOpen(true); }}
-                  className="nl-btn nl-btn-outline"
-                  style={{ width: "100%", justifyContent: "center" }}
-                >
-                  Seleccionar Plan Esencial
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* SOFTWARE BONIFICADO */}
-          <div className="nl-bonuses-grid">
-            <div className="nl-bonus-card">
-              <span className="nl-bonus-badge">GRATIS PRIMEROS 5 MESES</span>
-              <div>
-                <div style={{ fontSize: "0.74rem", color: "var(--text-muted)", fontWeight: 700 }}>
-                  MÓDULO EN MESA
-                </div>
-                <h4 className="nl-bonus-title">Menú Digital Vertical con QR</h4>
-                <div className="nl-bonus-price-row">
-                  <span className="nl-bonus-real-val">$1,000 MXN/mes</span>
-                  <span className="nl-bonus-free-val">$0 MXN durante los primeros 5 meses</span>
-                </div>
-                <p style={{ fontSize: "0.88rem", color: "var(--text-dark)", lineHeight: "1.45" }}>
-                  Webapp interactiva para que el comensal explore el menú con fotos y videos en su celular,
-                  agilizando pedidos y acelerando la rotación de mesas. <strong>Sin costo de desarrollo ni mensualidad por 5 meses</strong>.
-                  A partir del mes 6, solo $1,000 MXN/mes de mantenimiento.
+                <h4 style={{ fontFamily: "var(--font-display)", color: "#FFF", fontSize: "1.1rem", marginBottom: "0.3rem", textTransform: "uppercase" }}>
+                  Antojo Visual Continuo
+                </h4>
+                <p style={{ fontSize: "0.85rem", color: "#BBB", lineHeight: "1.4" }}>
+                  Tomas macro del pan recién horneado, queso asadero fundiéndose y pierna al adobo que incitan a pedir bebidas extras o tortas para llevar.
                 </p>
               </div>
-            </div>
 
-            <div className="nl-bonus-card">
-              <span className="nl-bonus-badge">GRATIS PRIMEROS 5 MESES</span>
-              <div>
-                <div style={{ fontSize: "0.74rem", color: "var(--text-muted)", fontWeight: 700 }}>
-                  MÓDULO DE LEALTAD
+              <div style={{ background: "#1C1C1C", padding: "1.3rem", borderRadius: "14px", border: "1px solid #333" }}>
+                <div style={{ color: "var(--nl-yolk)", fontSize: "1.2rem", marginBottom: "0.5rem" }}>
+                  <i className="fa fa-book-open"></i>
                 </div>
-                <h4 className="nl-bonus-title">Dinámica de Lealtad en Mesa con WhatsApp y QR</h4>
-                <div className="nl-bonus-price-row">
-                  <span className="nl-bonus-real-val">$1,000 MXN/mes</span>
-                  <span className="nl-bonus-free-val">$0 MXN durante los primeros 5 meses</span>
+                <h4 style={{ fontFamily: "var(--font-display)", color: "#FFF", fontSize: "1.1rem", marginBottom: "0.3rem", textTransform: "uppercase" }}>
+                  Cápsulas de Tradición Lagunera
+                </h4>
+                <p style={{ fontSize: "0.85rem", color: "#BBB", lineHeight: "1.4" }}>
+                  Historias y datos curiosos de Torreón, Gómez Palacio y Lerdo que despiertan nostalgia y orgullo en los comensales locales.
+                </p>
+              </div>
+
+              <div style={{ background: "#1C1C1C", padding: "1.3rem", borderRadius: "14px", border: "1px solid #333" }}>
+                <div style={{ color: "var(--nl-yolk)", fontSize: "1.2rem", marginBottom: "0.5rem" }}>
+                  <i className="fa fa-bullhorn"></i>
                 </div>
-                <p style={{ fontSize: "0.88rem", color: "var(--text-dark)", lineHeight: "1.45" }}>
-                  Dinámica web interactiva en mesa para captar comensales y convertirlos en contactos verificados de WhatsApp,
-                  creando su base propia para difusiones los lunes y martes. <strong>Sin costo por 5 meses</strong>.
-                  A partir del mes 6, solo $1,000 MXN/mes de servidor y mantenimiento.
+                <h4 style={{ fontFamily: "var(--font-display)", color: "#FFF", fontSize: "1.1rem", marginBottom: "0.3rem", textTransform: "uppercase" }}>
+                  Llamados de Acción al QR
+                </h4>
+                <p style={{ fontSize: "0.85rem", color: "#BBB", lineHeight: "1.4" }}>
+                  Recordatorios visuales en pantalla invitando al comensal a escanear el QR de su mesa para participar en el minijuego oficial.
                 </p>
               </div>
             </div>
@@ -2104,154 +1643,230 @@ export default function NuevaLagunaClient() {
         </div>
       </section>
 
-      {/* SECCIÓN 4: COTIZADOR CON INTERRUPTOR INTERACTIVO */}
-      <section className="nl-section" style={{ background: "rgba(243, 232, 204, 0.4)" }}>
+      {/* PILAR 4: SISTEMA INTEGRADO DE LEALTAD */}
+      <section className="nl-section" style={{ background: "rgba(243, 232, 204, 0.35)" }}>
+        <div className="nl-wrapper">
+          <span className="nl-pillar-badge">PILAR 04</span>
+          <div className="nl-section-tag">
+            <i className="fa fa-award"></i>
+            Retención & Re-compra
+          </div>
+          <h2 className="nl-section-title">
+            Sistema Integrado de Lealtad: Pasaporte Digital de Visitas.
+          </h2>
+          <p className="nl-section-sub">
+            Conectado de forma invisible al minijuego de mesa y a WhatsApp. Cada vez que el comensal juega y visita la sucursal,
+            acumula sellos digitales en su teléfono. El sistema le envía recordatorios oportunos para volver a comer entre semana.
+          </p>
+
+          <div style={{
+            background: "#FFF",
+            border: "2px solid var(--nl-french-bread-border)",
+            borderRadius: "24px",
+            padding: "2.5rem",
+            boxShadow: "0 10px 30px rgba(0,0,0,0.04)",
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "2.5rem",
+            alignItems: "center"
+          }}>
+            <div>
+              <h3 style={{ fontFamily: "var(--font-display)", fontSize: "1.6rem", color: "var(--nl-green-deep)", marginBottom: "1rem", textTransform: "uppercase" }}>
+                ¿Cómo Funciona el Pasaporte Digital?
+              </h3>
+              <p style={{ fontSize: "0.95rem", color: "var(--text-dark)", lineHeight: "1.6", marginBottom: "1.2rem" }}>
+                Sin tarjetas de cartón que se pierden ni aplicaciones pesadas que nadie descarga. Todo corre dentro de WhatsApp y el navegador móvil del cliente:
+              </p>
+
+              <div className="nl-feature-bullets">
+                <div className="nl-bullet">
+                  <i className="fa fa-stamp"></i>
+                  <span><strong>Sellos Automáticos por Visita:</strong> Al validar su cortesía del minijuego, suma automáticamente una visita a su récord.</span>
+                </div>
+                <div className="nl-bullet">
+                  <i className="fa fa-gift"></i>
+                  <span><strong>Meta de Fidelización Clara:</strong> Por ejemplo: <em>&ldquo;En tu 5ta visita llévate una orden de papas o refresco gratis&rdquo;</em>.</span>
+                </div>
+                <div className="nl-bullet">
+                  <i className="fa fa-clock-rotate-left"></i>
+                  <span><strong>Alertas de Reactivación:</strong> Si un cliente regular no ha vuelto en 14 días, el sistema le envía una invitación con cortesía válida de lunes a miércoles.</span>
+                </div>
+                <div className="nl-bullet">
+                  <i className="fa fa-user-shield"></i>
+                  <span><strong>Panel de Control para el Dueño:</strong> Visualice en tiempo real cuántos clientes únicos han registrado su visita y la frecuencia de consumo.</span>
+                </div>
+              </div>
+            </div>
+
+            <div style={{
+              background: "var(--nl-green)",
+              color: "#FFF",
+              borderRadius: "20px",
+              padding: "2.2rem",
+              border: "2px solid var(--nl-yolk)",
+              boxShadow: "0 15px 35px rgba(24, 61, 47, 0.2)",
+              textAlign: "center"
+            }}>
+              <div style={{ fontSize: "0.75rem", color: "var(--nl-yolk)", fontWeight: 800, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "0.5rem" }}>
+                PASAPORTE DIGITAL LAGUNERO
+              </div>
+              <h4 style={{ fontFamily: "var(--font-display)", fontSize: "1.5rem", color: "#FFF", marginBottom: "1.5rem", textTransform: "uppercase" }}>
+                La Nueva Laguna • Comensal Frecuente
+              </h4>
+
+              <div style={{ display: "flex", justifyContent: "center", gap: "10px", margin: "1.5rem 0" }}>
+                {[1, 2, 3, 4].map((s) => (
+                  <div key={s} style={{
+                    width: "48px",
+                    height: "48px",
+                    borderRadius: "50%",
+                    background: "var(--nl-yolk)",
+                    color: "#FFF",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: "1.2rem",
+                    fontWeight: 900,
+                    boxShadow: "0 4px 10px rgba(0,0,0,0.2)"
+                  }}>
+                    <i className="fa fa-check"></i>
+                  </div>
+                ))}
+                <div style={{
+                  width: "48px",
+                  height: "48px",
+                  borderRadius: "50%",
+                  background: "transparent",
+                  border: "2px dashed var(--nl-french-bread)",
+                  color: "var(--nl-french-bread)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: "1.1rem"
+                }}>
+                  <i className="fa fa-gift"></i>
+                </div>
+              </div>
+
+              <div style={{ fontSize: "0.9rem", color: "var(--nl-french-bread)", fontWeight: 700 }}>
+                ¡Estás a 1 visita de tu cortesía especial!
+              </div>
+              <p style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.75)", marginTop: "0.5rem" }}>
+                Mensaje automático enviado al WhatsApp del comensal 7 días después de su última comida.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECCIÓN PROPUESTA ECONÓMICA ($6,000 MXN / MES) */}
+      <section id="sec-inversion" className="nl-section">
         <div className="nl-wrapper">
           <div className="nl-section-tag">
             <i className="fa fa-calculator"></i>
-            Presupuesto Transparente
+            Propuesta Económica Consolidada
           </div>
           <h2 className="nl-section-title">
-            Cotizador de Inversión Mensual.
+            Inversión Mensual Todo-Incluido.
           </h2>
           <p className="nl-section-sub">
-            Números claros sin letras chiquitas. Seleccione el plan y active o desactive el presupuesto de pauta según su conveniencia.
+            Sin paquetes confusos ni letras chiquitas. Un solo paquete integral que equipa su comedor con tecnología de punta y retención de clientes por una tarifa plana mensual.
           </p>
 
-          <div className="nl-calc-box">
-            <div className="nl-calc-grid">
-              <div className="nl-calc-selector">
-                {/* SELECTOR PLAN INTEGRAL */}
-                <div
-                  onClick={() => setSelectedPlan("integral")}
-                  className={`nl-calc-item ${selectedPlan === "integral" ? "active" : ""}`}
-                >
-                  <div className="nl-calc-item-left">
-                    <div className="nl-radio">
-                      {selectedPlan === "integral" && <i className="fa fa-check"></i>}
-                    </div>
-                    <div>
-                      <div style={{ fontWeight: 800, color: "var(--nl-green-deep)", fontSize: "1rem" }}>Plan Integral ($20,000 MXN)</div>
-                      <div style={{ fontSize: "0.875rem", color: "var(--text-muted)" }}>
-                        Producción gourmet de video, fotos, historias diarias y pauta hiperlocal
-                      </div>
-                    </div>
-                  </div>
-                  <div style={{ fontFamily: "var(--font-display)", fontWeight: 900, color: "var(--nl-green-deep)", fontSize: "1.2rem" }}>
-                    $20,000 MXN
-                  </div>
-                </div>
+          <div className="nl-single-plan-card nl-plan-card">
+            <span className="nl-single-plan-badge">PAQUETE COMPLETO</span>
 
-                {/* SELECTOR PLAN ESENCIAL */}
-                <div
-                  onClick={() => setSelectedPlan("esencial")}
-                  className={`nl-calc-item ${selectedPlan === "esencial" ? "active" : ""}`}
-                >
-                  <div className="nl-calc-item-left">
-                    <div className="nl-radio">
-                      {selectedPlan === "esencial" && <i className="fa fa-check"></i>}
-                    </div>
-                    <div>
-                      <div style={{ fontWeight: 800, color: "var(--nl-green-deep)", fontSize: "1rem" }}>Plan Esencial ($10,000 MXN)</div>
-                      <div style={{ fontSize: "0.875rem", color: "var(--text-muted)" }}>
-                        3 publicaciones por semana, diseño de promociones y mantenimiento de redes
-                      </div>
-                    </div>
-                  </div>
-                  <div style={{ fontFamily: "var(--font-display)", fontWeight: 900, color: "var(--nl-green-deep)", fontSize: "1.2rem" }}>
-                    $10,000 MXN
-                  </div>
-                </div>
+            <div className="nl-single-plan-grid">
+              <div>
+                <h3 style={{ fontFamily: "var(--font-display)", fontSize: "2rem", color: "var(--nl-green)", textTransform: "uppercase", marginBottom: "0.4rem" }}>
+                  Ecosistema Tecnológico de Comedor & Lealtad
+                </h3>
+                <p style={{ fontSize: "0.95rem", color: "var(--text-muted)", marginBottom: "1.5rem" }}>
+                  Digitalización completa de la experiencia en mesa, entretenimiento en pantallas y captación continua de comensales.
+                </p>
 
-                {/* INTERRUPTOR INTERACTIVO DE PAUTA */}
-                <div className="nl-pauta-switch-box">
-                  <div
-                    className="nl-pauta-toggle-row"
-                    onClick={() => setIncludePauta(!includePauta)}
-                  >
-                    <div className="nl-toggle-label">
-                      <div className={`nl-custom-checkbox ${includePauta ? "checked" : ""}`}>
-                        {includePauta && <i className="fa fa-check"></i>}
-                      </div>
-                      <span>Incluir Inversión en Medios Meta Ads (+$2,000 MXN/mes)</span>
-                    </div>
-                    <span style={{
-                      fontWeight: 800,
-                      color: includePauta ? "var(--nl-green)" : "var(--text-muted)",
-                      fontSize: "0.85rem"
-                    }}>
-                      {includePauta ? "ACTIVADO" : "SIN PAUTA"}
-                    </span>
+                <div className="nl-feature-bullets">
+                  <div className="nl-bullet">
+                    <i className="fa fa-check-circle"></i>
+                    <span><strong>1. Menú Digital Vertical en Mesa:</strong> Acceso por QR, fotos de alta definición y actualización ilimitada de platillos/precios.</span>
                   </div>
-
-                  <div style={{ fontSize: "0.875rem", color: "var(--text-muted)", lineHeight: "1.45" }}>
-                    Los <strong>$2,000 MXN/mes de pauta</strong> se pagan directamente a la plataforma publicitaria de Meta (Facebook e Instagram).
-                    Apolograma realiza la segmentación hiperlocal, diseño de anuncios y optimización técnica sin cobrarle comisión por manejo de presupuesto.
+                  <div className="nl-bullet">
+                    <i className="fa fa-check-circle"></i>
+                    <span><strong>2. Minijuego Interactivo QR:</strong> Dinámica ágil para mesa que capta y valida el número de WhatsApp de los comensales.</span>
+                  </div>
+                  <div className="nl-bullet">
+                    <i className="fa fa-check-circle"></i>
+                    <span><strong>3. Videos para Pantallas de Comedor:</strong> Circuito en loop 16:9 HD con antojo de carnes y cápsulas educativas/culturales de La Laguna.</span>
+                  </div>
+                  <div className="nl-bullet">
+                    <i className="fa fa-check-circle"></i>
+                    <span><strong>4. Sistema Integrado de Lealtad:</strong> Pasaporte de visitas en WhatsApp y panel privado para que el dueño consulte su base de clientes.</span>
+                  </div>
+                  <div className="nl-bullet">
+                    <i className="fa fa-check-circle"></i>
+                    <span><strong>Soporte, Hosting y Servidores Incluidos:</strong> Mantenimiento técnico continuo sin costos sorpresa.</span>
                   </div>
                 </div>
               </div>
 
-              {/* TARJETA DE RESUMEN */}
-              <div className="nl-calc-summary-card">
-                <div>
-                  <h4 style={{ fontFamily: "var(--font-display)", fontSize: "1.3rem", color: "#FFF", marginBottom: "1.1rem", textTransform: "uppercase" }}>
-                    Resumen Financiero
-                  </h4>
-
-                  <div className="nl-sum-row highlight">
-                    <span>Plan Seleccionado:</span>
-                    <span>{selectedPlan === "integral" ? "Plan Integral ($20,000 MXN)" : "Plan Esencial ($10,000 MXN)"}</span>
-                  </div>
-
-                  <div className="nl-sum-row">
-                    <span>Subtotal Agencia:</span>
-                    <span>${baseMonthly.toLocaleString("es-MX")} MXN</span>
-                  </div>
-
-                  <div className="nl-sum-row">
-                    <span>IVA (16%):</span>
-                    <span>${iva.toLocaleString("es-MX")} MXN</span>
-                  </div>
-
-                  <div className="nl-sum-row highlight">
-                    <span>Total Factura Agencia:</span>
-                    <span>${agencyTotal.toLocaleString("es-MX")} MXN</span>
-                  </div>
-
-                  <div className="nl-sum-row" style={{ color: "var(--nl-yolk)" }}>
-                    <span>Presupuesto Pauta Meta Ads:</span>
-                    <span>{includePauta ? "+$2,000 MXN" : "$0 MXN (Desactivada)"}</span>
-                  </div>
-
-                  <div className="nl-sum-row" style={{ color: "var(--nl-french-bread)" }}>
-                    <span>Módulos de Mesa (Meses 1 al 5):</span>
-                    <span>$0 MXN (100% Bonificado)</span>
-                  </div>
-
-                  <div className="nl-sum-total-row">
-                    <span style={{ fontSize: "0.875rem", textTransform: "uppercase", color: "var(--nl-french-bread)" }}>
-                      Total Mensual Estimado:
-                    </span>
-                    <span className="nl-sum-total-val">
-                      ${grandTotal.toLocaleString("es-MX")}{" "}
-                      <span style={{ fontSize: "0.95rem", color: "var(--nl-french-bread)" }}>MXN/mes</span>
-                    </span>
-                  </div>
-
-                  <div style={{ fontSize: "0.875rem", color: "rgba(255, 255, 255, 0.92)", marginTop: "0.6rem", lineHeight: "1.45" }}>
-                    * Los $2,000 MXN de pauta son adicionales a la iguala y se pagan directamente a Meta Ads con tarjeta del cliente. Los 2 módulos de software están 100% bonificados durante los primeros 5 meses ($0 MXN); a partir del mes 6 se añade el mantenimiento opcional ($1,000 MXN/mes cada uno).
-                  </div>
+              {/* COLUMNA PRECIO */}
+              <div className="nl-single-price-box">
+                <div style={{ fontSize: "0.82rem", textTransform: "uppercase", letterSpacing: "1px", color: "var(--nl-french-bread)", fontWeight: 800 }}>
+                  INVERSIÓN MENSUAL
                 </div>
 
-                <div style={{ marginTop: "1.4rem" }}>
-                  <button
-                    onClick={() => setIsModalOpen(true)}
-                    className="nl-btn nl-btn-yolk"
-                    style={{ width: "100%", justifyContent: "center" }}
+                <div className="nl-single-price-amount">
+                  $6,000 <span style={{ fontSize: "1.2rem", color: "var(--nl-yolk)" }}>MXN</span>
+                </div>
+
+                <div className="nl-single-price-iva">
+                  + IVA 16% ($960 MXN) = $6,960 MXN facturados de agencia
+                </div>
+
+                <div className="nl-single-daily-rate">
+                  <i className="fa fa-calendar-day"></i> Equivale a solo $200 MXN al día
+                </div>
+
+                <p style={{ fontSize: "0.82rem", color: "var(--nl-french-bread)", lineHeight: "1.4", marginBottom: "1.5rem" }}>
+                  Menos de lo que cuesta el consumo de una sola mesa familiar al día para tener su comedor 100% digitalizado.
+                </p>
+
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="nl-btn nl-btn-yolk"
+                  style={{ width: "100%", justifyContent: "center", fontSize: "0.95rem" }}
+                >
+                  <i className="fa fa-calendar-check"></i> Agendar Arranque
+                </button>
+
+                <div style={{ marginTop: "0.8rem" }}>
+                  <a
+                    href={`https://wa.me/526564614059?text=${whatsappMessage}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: "#FFF", fontSize: "0.82rem", textDecoration: "underline", display: "inline-flex", alignItems: "center", gap: "5px" }}
                   >
-                    <i className="fa fa-calendar-check"></i> Agendar Junta de Arranque
-                  </button>
+                    <i className="fa-brands fa-whatsapp"></i> Preguntar dudas por WhatsApp
+                  </a>
                 </div>
+              </div>
+            </div>
+
+            <div style={{
+              marginTop: "2.2rem",
+              paddingTop: "1.4rem",
+              borderTop: "1.5px dashed var(--nl-french-bread-border)",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              flexWrap: "wrap",
+              gap: "1rem"
+            }}>
+              <div style={{ fontSize: "0.88rem", color: "var(--text-muted)" }}>
+                <strong>Valor de mercado por separado:</strong> Menú QR ($2,000) + Minijuego ($2,500) + Videos Pantallas ($3,500) + CRM Lealtad ($2,500) = <s>$10,500 MXN/mes</s>.
+              </div>
+              <div style={{ color: "var(--nl-green)", fontWeight: 800, fontSize: "0.95rem" }}>
+                <i className="fa fa-shield-check"></i> Ahorro del 43% en Paquete Integrado
               </div>
             </div>
           </div>
@@ -2259,7 +1874,7 @@ export default function NuevaLagunaClient() {
       </section>
 
       {/* ROADMAP */}
-      <section className="nl-section">
+      <section className="nl-section" style={{ background: "rgba(243, 232, 204, 0.35)" }}>
         <div className="nl-wrapper">
           <div className="nl-section-tag">
             <i className="fa fa-calendar-days"></i>
@@ -2269,7 +1884,7 @@ export default function NuevaLagunaClient() {
             Implementación en 3 Semanas.
           </h2>
           <p className="nl-section-sub">
-            Activamos la estrategia sin entorpecer el servicio diario ni la operación de la cocina.
+            Instalamos y activamos los 4 pilares tecnológicos en su sucursal sin interrumpir el servicio ni estorbar en cocina.
           </p>
 
           <div className="nl-roadmap-grid">
@@ -2284,10 +1899,10 @@ export default function NuevaLagunaClient() {
                 SEMANA 01
               </div>
               <h4 style={{ fontFamily: "var(--font-display)", fontSize: "1.2rem", color: "var(--nl-green-deep)", margin: "0.4rem 0", textTransform: "uppercase" }}>
-                Levantamiento & Menú Digital
+                Menú Digital & Levantamiento
               </h4>
               <p style={{ fontSize: "0.9rem", color: "var(--text-muted)", lineHeight: "1.5" }}>
-                Sesión de foto y video de platillos en sucursal. Carga de precios y configuración de la webapp del menú.
+                Levantamiento fotográfico de platillos en sucursal. Carga de precios y configuración de la webapp del menú interactivo en mesa.
               </p>
             </div>
 
@@ -2302,10 +1917,10 @@ export default function NuevaLagunaClient() {
                 SEMANA 02
               </div>
               <h4 style={{ fontFamily: "var(--font-display)", fontSize: "1.2rem", color: "var(--nl-green-deep)", margin: "0.4rem 0", textTransform: "uppercase" }}>
-                Puesta en Mesa & Pauta Local
+                Minijuego & Pantallas Comedor
               </h4>
               <p style={{ fontSize: "0.9rem", color: "var(--text-muted)", lineHeight: "1.5" }}>
-                Colocación de códigos QR en mesas. Activación de campañas hiperlocales en Facebook e Instagram (3 a 5 km a la redonda).
+                Programación del minijuego con código QR en mesa. Edición del primer loop audiovisual en 16:9 con tomas de plancha y cápsulas culturales laguneras.
               </p>
             </div>
 
@@ -2320,10 +1935,10 @@ export default function NuevaLagunaClient() {
                 SEMANA 03 EN ADELANTE
               </div>
               <h4 style={{ fontFamily: "var(--font-display)", fontSize: "1.2rem", color: "var(--nl-green-deep)", margin: "0.4rem 0", textTransform: "uppercase" }}>
-                Operación Continua & Lealtad
+                Pasaporte Lealtad & Operación
               </h4>
               <p style={{ fontSize: "0.9rem", color: "var(--text-muted)", lineHeight: "1.5" }}>
-                Publicación regular de contenido gastronómico. Primeras difusiones directas por WhatsApp para acelerar la afluencia entre semana.
+                Conexión del sistema de sellos por WhatsApp. Capacitación breve a meseros y primeras alertas automáticas para activar consumo de lunes a miércoles.
               </p>
             </div>
           </div>
@@ -2345,10 +1960,10 @@ export default function NuevaLagunaClient() {
           }}>
             <span className="nl-script-accent">Por un 2026 de mesas llenas</span>
             <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.4rem, 4vw, 2.3rem)", textWrap: "balance", color: "#FFF", marginBottom: "0.8rem", textTransform: "uppercase" }}>
-              Coordinemos la Fecha de Arranque para la Producción.
+              Digitalicemos el Comedor de La Nueva Laguna.
             </h2>
             <p style={{ fontSize: "1.05rem", color: "var(--nl-french-bread)", maxWidth: "680px", margin: "0 auto 2rem auto", lineHeight: "1.6" }}>
-              Revisemos detalles técnicos de su menú y agendemos la primera sesión fotográfica en sucursal.
+              Revisemos los detalles técnicos de sus pantallas y códigos QR en una breve llamada o reunión en sucursal.
             </p>
             <div style={{ display: "flex", justifyContent: "center", gap: "1rem", flexWrap: "wrap" }}>
               <button
@@ -2356,7 +1971,7 @@ export default function NuevaLagunaClient() {
                 className="nl-btn nl-btn-yolk"
                 style={{ fontSize: "0.95rem", padding: "0.75rem 1.6rem" }}
               >
-                <i className="fa fa-calendar-check"></i> Agendar Junta
+                <i className="fa fa-calendar-check"></i> Agendar Junta de Arranque
               </button>
               <a
                 href={`https://wa.me/526564614059?text=${whatsappMessage}`}
@@ -2393,7 +2008,7 @@ export default function NuevaLagunaClient() {
                   Tortería La Nueva Laguna
                 </h3>
                 <p style={{ fontSize: "0.9rem", color: "var(--text-muted)", marginBottom: "1.4rem" }}>
-                  Plan: <strong>{selectedPlan === "integral" ? "Plan Integral ($20,000 MXN + IVA / mes)" : "Plan Esencial ($10,000 MXN + IVA / mes)"}</strong> con menú digital y dinámica de lealtad QR incluidos.
+                  Paquete: <strong>Ecosistema Tecnológico de Comedor & Lealtad ($6,000 MXN + IVA / mes)</strong>.
                 </p>
 
                 <form onSubmit={handleScheduleSubmit}>

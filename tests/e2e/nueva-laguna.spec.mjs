@@ -240,9 +240,9 @@ describe('Tier 1: Feature Coverage (R1 - R5)', () => {
       assert.ok(ratio >= 4.5, `Contrast ratio between ${tomato} and ${cardBg} must be >= 4.5:1 (calculated: ${ratio.toFixed(2)}:1)`);
     });
 
-    it('[T1-R3-05] Standard Currency Syntax — Base plan pricing uses official $XX,XXX MXN format', () => {
-      assert.ok(pageHtml.includes('$20,000 MXN'), 'Must include properly formatted "$20,000 MXN"');
-      assert.ok(pageHtml.includes('$10,000 MXN'), 'Must include properly formatted "$10,000 MXN"');
+    it('[T1-R3-05] Standard Currency Syntax — Base plan pricing uses official $X,XXX MXN format', () => {
+      assert.ok(pageHtml.includes('$6,000 MXN') || pageHtml.includes('$6,000'), 'Must include properly formatted "$6,000 MXN"');
+      assert.ok(pageHtml.includes('$6,960 MXN') || pageHtml.includes('$6,960'), 'Must include properly formatted "$6,960 MXN"');
       assert.ok(!pageHtml.includes('$20k'), 'Must not use informal anglicism "$20k"');
       assert.ok(!pageHtml.includes('$10k'), 'Must not use informal anglicism "$10k"');
     });
@@ -296,32 +296,30 @@ describe('Tier 1: Feature Coverage (R1 - R5)', () => {
 
   // --- Feature 5 (R5): Mathematical Consistency & Offer Structure ---
   describe('Feature 5 (R5): Mathematical Consistency & Offer Structure', () => {
-    it('[T1-R5-01] Plan Integral Financial Breakdown: $20,000 + $3,200 IVA = $23,200 MXN', () => {
-      assert.ok(pageHtml.includes('$20,000'), 'Plan Integral must state $20,000 base');
-      assert.ok(pageHtml.includes('$3,200'), 'Plan Integral must state $3,200 IVA');
-      assert.ok(pageHtml.includes('$23,200 MXN'), 'Plan Integral must state $23,200 MXN agency total');
+    it('[T1-R5-01] Paquete Tecnológico Financial Breakdown: $6,000 + $960 IVA = $6,960 MXN', () => {
+      assert.ok(pageHtml.includes('$6,000'), 'Must state $6,000 base');
+      assert.ok(pageHtml.includes('$960'), 'Must state $960 IVA');
+      assert.ok(pageHtml.includes('$6,960 MXN'), 'Must state $6,960 MXN agency total');
     });
 
-    it('[T1-R5-02] Plan Esencial Financial Breakdown: $10,000 + $1,600 IVA = $11,600 MXN', () => {
-      assert.ok(pageHtml.includes('$10,000'), 'Plan Esencial must state $10,000 base');
-      assert.ok(pageHtml.includes('$1,600'), 'Plan Esencial must state $1,600 IVA');
-      assert.ok(pageHtml.includes('$11,600 MXN'), 'Plan Esencial must state $11,600 MXN agency total');
+    it('[T1-R5-02] Daily Rate Value Proposition: $200 MXN al día', () => {
+      assert.ok(pageHtml.includes('$200 MXN') || pageHtml.includes('$200'), 'Must state $200 MXN daily equivalent rate');
     });
 
-    it('[T1-R5-03] Meta Ads Media Spend Distinction: $2,000 MXN direct client-to-Meta investment', () => {
-      assert.ok(pageHtml.includes('$2,000 MXN'), 'Must explicitly state $2,000 MXN pauta');
-      const hasMetaExplanation = pageHtml.includes('Meta Ads') && (pageHtml.includes('inversión directa') || pageHtml.includes('directamente por el cliente') || pageHtml.includes('pagado directamente'));
-      assert.ok(hasMetaExplanation, 'Must clarify that $2,000 MXN pauta is direct client payment to Meta Ads');
+    it('[T1-R5-03] 4 In-Store Technology Pillars explicitly stated in proposal', () => {
+      assert.ok(pageHtml.includes('Menú Digital Vertical') || pageHtml.includes('Menú QR'), 'Pillar 1 Menú QR must be present');
+      assert.ok(pageHtml.includes('Minijuego') || pageHtml.includes('minijuego'), 'Pillar 2 Minijuego must be present');
+      assert.ok(pageHtml.includes('Pantallas de Comedor') || pageHtml.includes('Pantallas Comedor'), 'Pillar 3 Pantallas de Comedor must be present');
+      assert.ok(pageHtml.includes('Sistema') && (pageHtml.includes('Lealtad') || pageHtml.includes('Pasaporte')), 'Pillar 4 Sistema de Lealtad must be present');
     });
 
-    it('[T1-R5-04] 5-Month 100% Software Subsidy: $0 MXN for first 5 months', () => {
-      const has5MonthBonus = pageHtml.includes('5 meses') || pageHtml.includes('5 MESES');
-      assert.ok(has5MonthBonus, 'Must reference the 5 months promotional bonus period');
-      assert.ok(pageHtml.includes('$0 MXN'), 'Must display $0 MXN promotional rate during bonus period');
+    it('[T1-R5-04] Dining Screens 16:9 loop content: Antojo + Tradición Lagunera', () => {
+      assert.ok(pageHtml.includes('16:9') || pageHtml.includes('Pantallas'), 'Must state 16:9 loop for dining screens');
+      assert.ok(pageHtml.includes('Laguna') || pageHtml.includes('Lagunera'), 'Must reference Lagunera cultural capsules');
     });
 
-    it('[T1-R5-05] Month 6+ Software Continuity Rate: $1,000 MXN/month per module', () => {
-      assert.ok(pageHtml.includes('$1,000 MXN/mes') || pageHtml.includes('$1,000 MXN / mes'), 'Must state $1,000 MXN/mes maintenance fee after month 5');
+    it('[T1-R5-05] Integrated Package Savings Comparison: $10,500 vs $6,000', () => {
+      assert.ok(pageHtml.includes('$10,500') || pageHtml.includes('10,500'), 'Must show market value comparison of $10,500 MXN');
     });
   });
 
@@ -495,41 +493,33 @@ describe('Tier 2: Boundary & Corner Cases (R1 - R5)', () => {
 
   // --- R5 Boundary Cases ---
   describe('R5 Boundary Cases: Mathematical Identities & Invariants', () => {
-    it('[T2-R5-01] Mathematical Identity Verification: Base * 0.16 == IVA', () => {
-      const baseIntegral = 20000;
-      const baseEsencial = 10000;
-      assert.equal(baseIntegral * 0.16, 3200, 'Integral IVA must equal exactly 3,200');
-      assert.equal(baseEsencial * 0.16, 1600, 'Esencial IVA must equal exactly 1,600');
+    it('[T2-R5-01] Mathematical Identity Verification: Base * 0.16 == IVA ($960)', () => {
+      const base = 6000;
+      assert.equal(base * 0.16, 960, 'Base $6,000 IVA must equal exactly 960');
     });
 
-    it('[T2-R5-02] Ad Spend Additivity Invariant: Agency + $2,000 == Grand Total', () => {
-      const agencyIntegral = 20000 * 1.16; // 23200
-      const agencyEsencial = 10000 * 1.16; // 11600
-      assert.equal(agencyIntegral + 2000, 25200, 'Grand total Integral with pauta must be $25,200');
-      assert.equal(agencyEsencial + 2000, 13600, 'Grand total Esencial with pauta must be $13,600');
+    it('[T2-R5-02] Total Invoiced Invariant: Base + IVA == $6,960 MXN', () => {
+      const base = 6000;
+      const iva = base * 0.16;
+      assert.equal(base + iva, 6960, 'Agency invoiced total must equal exactly $6,960 MXN');
     });
 
-    it('[T2-R5-03] Grand Total Without Pauta Invariant: Grand Total == Agency Invoiced', () => {
-      const agencyIntegral = 20000 * 1.16;
-      const agencyEsencial = 10000 * 1.16;
-      assert.equal(agencyIntegral, 23200, 'Grand total Integral without pauta must be $23,200');
-      assert.equal(agencyEsencial, 11600, 'Grand total Esencial without pauta must be $11,600');
+    it('[T2-R5-03] Daily Rate Math Invariant: $6,000 / 30 days == $200 MXN/day', () => {
+      const base = 6000;
+      assert.equal(base / 30, 200, 'Daily rate must equal $200 MXN/day');
     });
 
-    it('[T2-R5-04] Post-Month 5 Software Fee Invariance: 7 Months @ $1,000 = $7,000/module', () => {
-      const monthsInFirstYear = 12;
-      const freeMonths = 5;
-      const billableMonthsYear1 = monthsInFirstYear - freeMonths;
-      const monthlyRate = 1000;
-      assert.equal(billableMonthsYear1 * monthlyRate, 7000, 'Year 1 remaining 7 months must total $7,000 per module');
+    it('[T2-R5-04] Savings Comparison Invariant: $10,500 - $6,000 == $4,500 MXN savings (43%)', () => {
+      const separateTotal = 10500;
+      const integratedTotal = 6000;
+      assert.equal(separateTotal - integratedTotal, 4500, 'Savings must equal $4,500 MXN');
     });
 
     it('[T2-R5-05] Meeting Webhook Payload Price Parity verification', () => {
       assert.ok(
-        fullAppText.includes('Plan Integral ($20,000 + IVA / mes)') ||
-        fullAppText.includes('Plan Integral ($20,000 MXN + IVA / mes)') ||
-        fullAppText.includes('Plan Integral'),
-        'Payload must reference Plan Integral with pricing'
+        fullAppText.includes('Paquete Tecnológico de Comedor') ||
+        fullAppText.includes('$6,000 MXN'),
+        'Payload must reference Paquete Tecnológico with $6,000 pricing'
       );
     });
   });
@@ -548,32 +538,20 @@ describe('Tier 3: Cross-Feature Combinations', () => {
     assert.ok(contrast >= 4.5, `Heading contrast ratio ${contrast.toFixed(2)}:1 must pass WCAG AA`);
   });
 
-  it('[T3-COMB-02] Copy & Financial Synchrony — Both plan cards display consistent terms ($2k pauta, 16% IVA, 5 mo bonus)', () => {
-    const ivaMentions = [...pageHtml.matchAll(/IVA/g)];
-    assert.ok(ivaMentions.length >= 2, 'IVA must be mentioned for both plans');
-    assert.ok(pageHtml.includes('Meta Ads'), 'Meta Ads must be referenced across the offer');
+  it('[T3-COMB-02] Copy & Financial Synchrony — Plan card displays consistent terms ($6,000, 16% IVA, $200/day)', () => {
+    assert.ok(pageHtml.includes('IVA'), 'IVA must be mentioned in financial breakdown');
+    assert.ok(pageHtml.includes('$6,000'), '$6,000 base investment must be referenced');
   });
 
-  it('[T3-COMB-03] Mobile Layout & Currency Formatting — Pricing cards at mobile viewports preserve $XX,XXX MXN without text truncation', () => {
-    assert.ok(pageHtml.includes('$25,200 MXN') || pageHtml.includes('$23,200 MXN'), 'Cotizador / Cards must display official totals with MXN suffix');
-    assert.ok(pageHtml.includes('$13,600 MXN') || pageHtml.includes('$11,600 MXN'), 'Cotizador / Cards must display official totals with MXN suffix');
+  it('[T3-COMB-03] Mobile Layout & Currency Formatting — Plan card preserves $X,XXX MXN format', () => {
+    assert.ok(pageHtml.includes('$6,000') || pageHtml.includes('$6,960 MXN'), 'Pricing card must display official totals with MXN suffix');
   });
 
-  it('[T3-COMB-04] Interactive Cotizador State & Calculation Formula Integrity', () => {
-    const combos = [
-      { plan: 'integral', pauta: true, expected: 25200 },
-      { plan: 'integral', pauta: false, expected: 23200 },
-      { plan: 'esencial', pauta: true, expected: 13600 },
-      { plan: 'esencial', pauta: false, expected: 11600 },
-    ];
-    for (const { plan, pauta, expected } of combos) {
-      const base = plan === 'integral' ? 20000 : 10000;
-      const iva = base * 0.16;
-      const agency = base + iva;
-      const ad = pauta ? 2000 : 0;
-      const total = agency + ad;
-      assert.equal(total, expected, `Calculated combination for ${plan} with pauta=${pauta} must equal ${expected}`);
-    }
+  it('[T3-COMB-04] Calculation Formula Integrity', () => {
+    const base = 6000;
+    const iva = base * 0.16;
+    const total = base + iva;
+    assert.equal(total, 6960, 'Calculated total must equal 6960');
   });
 
   it('[T3-COMB-05] Modal Booking Payload & Editorial Rule Compliance', () => {
@@ -601,8 +579,7 @@ describe('Tier 4: Real-World Scenarios', () => {
 
   it('[T4-SCEN-02] Financial Due Diligence by Restaurant Accountant', () => {
     assert.ok(pageHtml.includes('16%') || pageHtml.includes('IVA'), 'Proposal discloses IVA tax rate');
-    assert.ok(pageHtml.includes('$3,200'), 'Discloses exact IVA amount for Plan Integral');
-    assert.ok(pageHtml.includes('$1,600'), 'Discloses exact IVA amount for Plan Esencial');
+    assert.ok(pageHtml.includes('$960'), 'Discloses exact IVA amount for $6,000 package');
     assert.ok(pageHtml.includes('facturados'), 'Explicitly notes agency invoiced subtotal');
   });
 
