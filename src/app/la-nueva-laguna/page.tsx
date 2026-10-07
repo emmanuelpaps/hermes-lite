@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import NuevaLagunaClient from './NuevaLagunaClient';
+import NuevaLagunaClient from '../nueva-laguna/NuevaLagunaClient';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://propuestas.tecza.com.mx'),
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: '📋 Propuesta Integral: Tortería La Nueva Laguna | Apolograma',
     description: 'Estrategia de Redes Sociales, Pauta Hiperlocal y Ecosistema Digital (Menú Interactivo Vertical + Minijuego QR de Captación de WhatsApp) para Tortería La Nueva Laguna. Desarrollado por Apolograma.',
-    url: 'https://propuestas.tecza.com.mx/nueva-laguna',
+    url: 'https://propuestas.tecza.com.mx/la-nueva-laguna',
     siteName: 'Apolograma Software & Design Studio',
     images: [
       {
@@ -30,6 +30,6 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default function NuevaLagunaPage() {
+export default function LaNuevaLagunaPage() {
   return <NuevaLagunaClient />;
 }
