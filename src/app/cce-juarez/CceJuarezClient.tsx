@@ -358,6 +358,14 @@ export default function CceJuarezClient() {
               }
             }
             @media (max-width: 640px) {
+              .cce-header-inner {
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+                justify-content: space-between !important;
+              }
+              .cce-brand-title {
+                font-size: 15px !important;
+              }
               .cce-badge-cce {
                 display: none !important;
               }
@@ -369,6 +377,14 @@ export default function CceJuarezClient() {
               }
               .cce-studio-label {
                 display: none !important;
+              }
+              .cce-header-actions {
+                gap: 6px !important;
+              }
+              .cce-header-actions .cce-btn {
+                padding: 6px 10px !important;
+                font-size: 0.78rem !important;
+                min-height: 40px !important;
               }
             }
             @media (max-width: 480px) {
@@ -393,6 +409,7 @@ export default function CceJuarezClient() {
         }}
       >
         <div
+          className="cce-header-inner"
           style={{
             maxWidth: '1200px',
             margin: '0 auto',
@@ -400,21 +417,21 @@ export default function CceJuarezClient() {
             alignItems: 'center',
             justifyContent: 'space-between',
             gap: '12px',
-            flexWrap: 'wrap',
           }}
         >
           {/* Brand Group */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/assets/apolograma-logo-v2.png"
                 alt="Logo Apolograma Studio"
-                style={{ height: '22px', width: 'auto', objectFit: 'contain' }}
+                style={{ height: '20px', width: 'auto', objectFit: 'contain' }}
               />
               <span
+                className="cce-brand-title"
                 style={{
-                  fontSize: '18px',
+                  fontSize: '17px',
                   fontWeight: 900,
                   letterSpacing: '-0.5px',
                   color: 'var(--cce-emerald)',
@@ -425,7 +442,7 @@ export default function CceJuarezClient() {
               <span
                 className="cce-studio-label"
                 style={{
-                  fontSize: '14px',
+                  fontSize: '13px',
                   fontWeight: 800,
                   letterSpacing: '1.5px',
                   color: 'var(--cce-gold-dark)',
@@ -471,7 +488,7 @@ export default function CceJuarezClient() {
           </div>
 
           {/* Action CTAs */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div className="cce-header-actions" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <a
               href="#inversion"
               className="cce-btn cce-btn-outline"
