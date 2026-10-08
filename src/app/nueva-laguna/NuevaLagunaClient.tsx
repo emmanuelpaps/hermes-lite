@@ -95,6 +95,38 @@ export default function NuevaLagunaClient() {
   const [meetingName, setMeetingName] = useState<string>("");
   const [meetingPhone, setMeetingPhone] = useState<string>("");
   const [isSubmittingMeeting, setIsSubmittingMeeting] = useState<boolean>(false);
+  const [checklistTab, setChecklistTab] = useState<"sala" | "cierre">("sala");
+  const [checklistItems, setChecklistItems] = useState<{ [key: string]: boolean }>({
+    sala_musica: true,
+    sala_pantallas: true,
+    sala_mesas: true,
+    sala_salsas: false,
+    cierre_salsas: true,
+    cierre_plancha: true,
+    cierre_banos: false,
+    cierre_pisos: false,
+  });
+  const [photoUploaded, setPhotoUploaded] = useState<{ [key: string]: boolean }>({
+    sala_musica: true,
+    sala_pantallas: true,
+    sala_mesas: true,
+    cierre_salsas: true,
+    cierre_plancha: true,
+  });
+
+  const toggleChecklistItem = (key: string) => {
+    setChecklistItems((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  };
+
+  const togglePhotoUploaded = (key: string) => {
+    setPhotoUploaded((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  };
 
   useEffect(() => {
     try {
@@ -1078,6 +1110,176 @@ export default function NuevaLagunaClient() {
           gap: 6px;
         }
 
+        /* CUSTOMER JOURNEY (RECORRIDO EN 4 MOMENTOS) */
+        .nl-journey-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 1.2rem;
+          margin-top: 2rem;
+        }
+
+        .nl-journey-card {
+          background: #FFF;
+          border: 1.5px solid var(--nl-french-bread-border);
+          border-radius: 20px;
+          padding: 1.8rem 1.4rem;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          transition: transform 0.2s;
+        }
+
+        .nl-journey-card:hover {
+          transform: translateY(-4px);
+        }
+
+        .nl-journey-step {
+          font-size: 0.78rem;
+          font-weight: 800;
+          color: var(--nl-tomato);
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          margin-bottom: 0.5rem;
+        }
+
+        .nl-journey-icon {
+          width: 48px;
+          height: 48px;
+          border-radius: 14px;
+          background: var(--nl-french-bread-bg);
+          color: var(--nl-green);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.3rem;
+          margin-bottom: 1rem;
+          border: 1px solid var(--nl-french-bread-border);
+        }
+
+        .nl-journey-title {
+          font-family: var(--font-display);
+          font-size: 1.3rem;
+          font-weight: 800;
+          color: var(--nl-green-deep);
+          margin-bottom: 0.6rem;
+          text-transform: uppercase;
+        }
+
+        .nl-journey-desc {
+          font-size: 0.88rem;
+          color: var(--text-dark);
+          line-height: 1.5;
+          margin-bottom: 1rem;
+          flex: 1;
+        }
+
+        .nl-journey-pill {
+          background: var(--nl-french-bread);
+          border-radius: 8px;
+          padding: 6px 10px;
+          font-size: 0.78rem;
+          font-weight: 700;
+          color: var(--nl-green-deep);
+          display: flex;
+          align-items: center;
+          gap: 6px;
+        }
+
+        /* CHECKLIST OPERATIVO CON FOTOS */
+        .nl-checklist-box {
+          background: #FFF;
+          border: 2px solid var(--nl-french-bread-border);
+          border-radius: 24px;
+          padding: 2.5rem;
+          box-shadow: 0 15px 40px rgba(0,0,0,0.04);
+          margin-top: 2rem;
+        }
+
+        .nl-checklist-tabs {
+          display: flex;
+          gap: 0.8rem;
+          margin-bottom: 1.8rem;
+          flex-wrap: wrap;
+        }
+
+        .nl-checklist-tab-btn {
+          min-height: 44px;
+          padding: 0.6rem 1.4rem;
+          border-radius: 30px;
+          border: 1.5px solid var(--nl-french-bread-border);
+          background: #FFF;
+          color: var(--text-dark);
+          font-weight: 700;
+          font-size: 0.88rem;
+          cursor: pointer;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          transition: all 0.2s;
+        }
+
+        .nl-checklist-tab-btn.active {
+          background: var(--nl-green);
+          color: #FFF;
+          border-color: var(--nl-green);
+        }
+
+        .nl-checklist-items-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.2rem;
+        }
+
+        .nl-checklist-item-card {
+          border: 1.5px solid var(--nl-french-bread-border);
+          border-radius: 16px;
+          padding: 1.2rem;
+          background: var(--nl-french-bread-bg);
+          display: flex;
+          gap: 1rem;
+          align-items: flex-start;
+          transition: border-color 0.2s;
+        }
+
+        .nl-checklist-item-card.completed {
+          border-color: var(--nl-green);
+          background: rgba(24, 61, 47, 0.03);
+        }
+
+        .nl-check-checkbox {
+          min-width: 24px;
+          min-height: 24px;
+          border-radius: 6px;
+          border: 2px solid var(--nl-green);
+          background: #FFF;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          margin-top: 2px;
+        }
+
+        .nl-check-checkbox.checked {
+          background: var(--nl-green);
+          color: #FFF;
+        }
+
+        .nl-evidence-photo-btn {
+          min-height: 44px;
+          min-width: 44px;
+          padding: 6px 12px;
+          border-radius: 8px;
+          font-size: 0.78rem;
+          font-weight: 700;
+          cursor: pointer;
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          margin-top: 0.6rem;
+          border: none;
+        }
+
         /* TARJETA DE PLAN ÚNICO ($6,000) */
         .nl-single-plan-card {
           background: #FFF;
@@ -1269,6 +1471,12 @@ export default function NuevaLagunaClient() {
           .nl-roadmap-grid {
             grid-template-columns: 1fr;
           }
+          .nl-journey-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+          .nl-checklist-items-grid {
+            grid-template-columns: 1fr;
+          }
         }
 
         @media (max-width: 768px) {
@@ -1288,6 +1496,12 @@ export default function NuevaLagunaClient() {
         }
 
         @media (max-width: 580px) {
+          .nl-journey-grid {
+            grid-template-columns: 1fr;
+          }
+          .nl-checklist-box {
+            padding: 1.4rem 1rem !important;
+          }
           .nl-sim-box {
             padding: 1.25rem 0.75rem !important;
           }
@@ -1342,24 +1556,27 @@ export default function NuevaLagunaClient() {
               <span className="nl-script-accent">El auténtico sabor lagunero</span>
 
               <h1>
-                TRADICIÓN EN LA COCINA. <br />
-                <span className="gold">CONTROL Y COMEDOR DIGITAL EN CADA MESA.</span>
+                MÁS QUE UNA COMIDA: <br />
+                <span className="gold">UNA GRAN EXPERIENCIA EN SALA DESDE QUE SE LLEGA HASTA QUE SE SALE.</span>
               </h1>
 
               <p className="nl-hero-manifesto">
                 Usted ya tiene el producto, la receta y el sazón que respalda el prestigio de La Nueva Laguna.
-                Nuestra propuesta equipa su sucursal con tecnología de alto impacto:
-                un <strong>menú digital interactivo en cada mesa</strong> que agiliza los pedidos de sus meseros,
+                Nuestra propuesta armoniza la interacción entre sus comensales, sus productos, la infraestructura, la música ambiental, el orden visual y la tecnología en mesa:
+                un <strong>menú digital vertical interactivo</strong> que agiliza los pedidos,
                 un <strong>minijuego interactivo con código QR</strong> que convierte comensales en contactos de WhatsApp,
                 <strong>videos de antojo y folclor lagunero</strong> para sus pantallas de comedor, y un <strong>sistema de lealtad</strong> para
-                llenar mesas de lunes a miércoles.
+                reactivar visitas de lunes a miércoles.
               </p>
 
               <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-                <a href="#sec-pilares" className="nl-btn nl-btn-yolk">
+                <a href="#sec-recorrido" className="nl-btn nl-btn-yolk">
+                  <i className="fa fa-route"></i> Recorrido del Comensal
+                </a>
+                <a href="#sec-pilares" className="nl-btn nl-btn-outline" style={{ color: "#FFF", borderColor: "#FFF" }}>
                   <i className="fa fa-layer-group"></i> Conocer los 4 Pilares
                 </a>
-                <a href="#sec-inversion" className="nl-btn nl-btn-outline" style={{ color: "#FFF", borderColor: "#FFF" }}>
+                <a href="#sec-inversion" className="nl-btn nl-btn-outline" style={{ color: "var(--nl-yolk)", borderColor: "var(--nl-yolk)" }}>
                   <i className="fa fa-tag"></i> Ver Inversión ($6,000/mes)
                 </a>
               </div>
@@ -1417,6 +1634,84 @@ export default function NuevaLagunaClient() {
             <div className="nl-metric-card">
               <div className="nl-metric-val">$200<span className="unit">MXN</span></div>
               <div className="nl-metric-label">Inversión Diaria Equivalente</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECCIÓN RECORRIDO DEL COMENSAL (CUSTOMER JOURNEY) */}
+      <section id="sec-recorrido" className="nl-section" style={{ background: "rgba(243, 232, 204, 0.25)" }}>
+        <div className="nl-wrapper">
+          <div className="nl-section-tag">
+            <i className="fa fa-route"></i>
+            Experiencia 360° en Sucursal
+          </div>
+          <h2 className="nl-section-title">
+            El Recorrido del Comensal: De la Entrada a la Salida.
+          </h2>
+          <p className="nl-section-sub">
+            Diseñamos la interacción armónica entre el cliente, sus productos, la infraestructura, la música ambiental, el olor a pan crujiente y la tecnología en salón.
+          </p>
+
+          <div className="nl-journey-grid">
+            {/* FASE 1 */}
+            <div className="nl-journey-card">
+              <div className="nl-journey-step">Fase 01 • La Llegada</div>
+              <div className="nl-journey-icon">
+                <i className="fa fa-music"></i>
+              </div>
+              <div className="nl-journey-title">Ambiente, Música & Orden</div>
+              <p className="nl-journey-desc">
+                El comensal entra y percibe un entorno limpio, acogedor y ordenado. Una playlist oficial curada para el comedor sin interrupciones y una guía de estándares visuales para mesa y barra.
+              </p>
+              <div className="nl-journey-pill">
+                <i className="fa fa-headphones"></i> Playlist Spotify + Guía Mesa
+              </div>
+            </div>
+
+            {/* FASE 2 */}
+            <div className="nl-journey-card">
+              <div className="nl-journey-step">Fase 02 • La Mesa</div>
+              <div className="nl-journey-icon">
+                <i className="fa fa-qrcode"></i>
+              </div>
+              <div className="nl-journey-title">Información Clara & Producto</div>
+              <p className="nl-journey-desc">
+                Sin cartas de papel maltratadas. Acrílicos con QR abren un menú digital vertical ágil (&lt;1s) con fotografía en alta definición de tortas en pan francés y precios en vivo.
+              </p>
+              <div className="nl-journey-pill">
+                <i className="fa fa-mobile-screen"></i> Menú Digital Vertical QR
+              </div>
+            </div>
+
+            {/* FASE 3 */}
+            <div className="nl-journey-card">
+              <div className="nl-journey-step">Fase 03 • La Espera</div>
+              <div className="nl-journey-icon">
+                <i className="fa fa-tv"></i>
+              </div>
+              <div className="nl-journey-title">Antojo Sensorial & Juego</div>
+              <p className="nl-journey-desc">
+                El aroma de la plancha se sincroniza con pantallas 16:9 HD de pan crujiente y folclor lagunero, mientras un minijuego interactivo QR en mesa entretiene y capta su WhatsApp.
+              </p>
+              <div className="nl-journey-pill">
+                <i className="fa fa-gamepad"></i> Pantallas 16:9 + Minijuego QR
+              </div>
+            </div>
+
+            {/* FASE 4 */}
+            <div className="nl-journey-card">
+              <div className="nl-journey-step">Fase 04 • La Despedida</div>
+              <div className="nl-journey-icon">
+                <i className="fa fa-award"></i>
+              </div>
+              <div className="nl-journey-title">Recuerdo Grato & Lealtad</div>
+              <p className="nl-journey-desc">
+                El comensal se retira satisfecho y con un sello digital acumulado en su Pasaporte Lagunero en WhatsApp. Al séptimo día, recibe una invitación personalizada para volver a comer entre semana.
+              </p>
+              <div className="nl-journey-pill">
+                <i className="fa fa-clock-rotate-left"></i> Pasaporte Digital en WhatsApp
+              </div>
             </div>
           </div>
         </div>
@@ -1800,6 +2095,339 @@ export default function NuevaLagunaClient() {
         </div>
       </section>
 
+      {/* MÓDULO PILOTO OPERATIVO: CHECKLIST CON FOTOS */}
+      <section className="nl-section" style={{ background: "rgba(243, 232, 204, 0.15)" }}>
+        <div className="nl-wrapper">
+          <span className="nl-pillar-badge" style={{ background: "var(--nl-green)", color: "#FFF" }}>
+            BONUS DE INNOVACIÓN OPERATIVA
+          </span>
+          <div className="nl-section-tag">
+            <i className="fa fa-clipboard-check"></i>
+            Control Interno de Sucursal
+          </div>
+          <h2 className="nl-section-title">
+            Módulo Piloto: Checklist de Empleados con Evidencia Fotográfica.
+          </h2>
+          <p className="nl-section-sub">
+            Garantice que la limpieza, el orden, la música y el montaje de salón se cumplan en cada turno.
+            Los colaboradores verifican sus tareas desde su celular y suben una fotografía obligatoria antes de liberar el turno.
+          </p>
+
+          <div className="nl-checklist-box">
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem", marginBottom: "1.5rem" }}>
+              <div>
+                <span style={{ fontSize: "0.78rem", fontWeight: 800, color: "var(--nl-tomato)", textTransform: "uppercase", letterSpacing: "1px" }}>
+                  SIMULADOR DEL SISTEMA INTERNO
+                </span>
+                <h3 style={{ fontFamily: "var(--font-display)", fontSize: "1.8rem", color: "var(--nl-green)", textTransform: "uppercase", margin: "0.2rem 0" }}>
+                  Turno Activo • Tortería La Nueva Laguna
+                </h3>
+              </div>
+
+              {/* TABS DE INSPECCIÓN */}
+              <div className="nl-checklist-tabs" style={{ marginBottom: 0 }}>
+                <button
+                  onClick={() => setChecklistTab("sala")}
+                  className={`nl-checklist-tab-btn ${checklistTab === "sala" ? "active" : ""}`}
+                >
+                  <i className="fa fa-utensils"></i> Inspección de Sala & Ambiente
+                </button>
+                <button
+                  onClick={() => setChecklistTab("cierre")}
+                  className={`nl-checklist-tab-btn ${checklistTab === "cierre" ? "active" : ""}`}
+                >
+                  <i className="fa fa-broom"></i> Inspección de Cierre & Limpieza Profunda
+                </button>
+              </div>
+            </div>
+
+            {/* CONTENIDO SEGÚN TAB */}
+            {checklistTab === "sala" ? (
+              <div className="nl-checklist-items-grid">
+                {/* ITEM 1 */}
+                <div className={`nl-checklist-item-card ${checklistItems.sala_musica ? "completed" : ""}`}>
+                  <div
+                    onClick={() => toggleChecklistItem("sala_musica")}
+                    className={`nl-check-checkbox ${checklistItems.sala_musica ? "checked" : ""}`}
+                  >
+                    {checklistItems.sala_musica && <i className="fa fa-check" style={{ fontSize: "0.75rem" }}></i>}
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontWeight: 800, color: "var(--nl-green-deep)", fontSize: "0.95rem" }}>
+                      1. Música Ambiental & Pantallas 16:9
+                    </div>
+                    <p style={{ fontSize: "0.85rem", color: "var(--text-muted)", margin: "0.3rem 0" }}>
+                      Playlist oficial en Spotify sonando a volumen óptimo y loop de antojo en pantallas activo.
+                    </p>
+                    <button
+                      onClick={() => togglePhotoUploaded("sala_musica")}
+                      className="nl-evidence-photo-btn"
+                      style={{
+                        background: photoUploaded.sala_musica ? "rgba(24, 61, 47, 0.1)" : "var(--nl-green)",
+                        color: photoUploaded.sala_musica ? "var(--nl-green)" : "#FFF",
+                        border: photoUploaded.sala_musica ? "1px solid var(--nl-green)" : "none"
+                      }}
+                    >
+                      <i className={`fa ${photoUploaded.sala_musica ? "fa-camera-rotate" : "fa-camera"}`}></i>
+                      {photoUploaded.sala_musica ? "Evidencia: Foto_Pantallas.jpg ✓" : "Subir Foto Obligatoria"}
+                    </button>
+                  </div>
+                </div>
+
+                {/* ITEM 2 */}
+                <div className={`nl-checklist-item-card ${checklistItems.sala_pantallas ? "completed" : ""}`}>
+                  <div
+                    onClick={() => toggleChecklistItem("sala_pantallas")}
+                    className={`nl-check-checkbox ${checklistItems.sala_pantallas ? "checked" : ""}`}
+                  >
+                    {checklistItems.sala_pantallas && <i className="fa fa-check" style={{ fontSize: "0.75rem" }}></i>}
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontWeight: 800, color: "var(--nl-green-deep)", fontSize: "0.95rem" }}>
+                      2. Mesas Desinfectadas & Acrílicos QR
+                    </div>
+                    <p style={{ fontSize: "0.85rem", color: "var(--text-muted)", margin: "0.3rem 0" }}>
+                      Mesas impecables, portamenús con código QR limpios y servilleteros reabastecidos.
+                    </p>
+                    <button
+                      onClick={() => togglePhotoUploaded("sala_pantallas")}
+                      className="nl-evidence-photo-btn"
+                      style={{
+                        background: photoUploaded.sala_pantallas ? "rgba(24, 61, 47, 0.1)" : "var(--nl-green)",
+                        color: photoUploaded.sala_pantallas ? "var(--nl-green)" : "#FFF",
+                        border: photoUploaded.sala_pantallas ? "1px solid var(--nl-green)" : "none"
+                      }}
+                    >
+                      <i className={`fa ${photoUploaded.sala_pantallas ? "fa-camera-rotate" : "fa-camera"}`}></i>
+                      {photoUploaded.sala_pantallas ? "Evidencia: Foto_Mesas_Sala.jpg ✓" : "Subir Foto Obligatoria"}
+                    </button>
+                  </div>
+                </div>
+
+                {/* ITEM 3 */}
+                <div className={`nl-checklist-item-card ${checklistItems.sala_mesas ? "completed" : ""}`}>
+                  <div
+                    onClick={() => toggleChecklistItem("sala_mesas")}
+                    className={`nl-check-checkbox ${checklistItems.sala_mesas ? "checked" : ""}`}
+                  >
+                    {checklistItems.sala_mesas && <i className="fa fa-check" style={{ fontSize: "0.75rem" }}></i>}
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontWeight: 800, color: "var(--nl-green-deep)", fontSize: "0.95rem" }}>
+                      3. Estación de Salsas & Barra
+                    </div>
+                    <p style={{ fontSize: "0.85rem", color: "var(--text-muted)", margin: "0.3rem 0" }}>
+                      Salseros llenos, vitrina pulida y orden de cubiertos y condimentos listos para comensales.
+                    </p>
+                    <button
+                      onClick={() => togglePhotoUploaded("sala_mesas")}
+                      className="nl-evidence-photo-btn"
+                      style={{
+                        background: photoUploaded.sala_mesas ? "rgba(24, 61, 47, 0.1)" : "var(--nl-green)",
+                        color: photoUploaded.sala_mesas ? "var(--nl-green)" : "#FFF",
+                        border: photoUploaded.sala_mesas ? "1px solid var(--nl-green)" : "none"
+                      }}
+                    >
+                      <i className={`fa ${photoUploaded.sala_mesas ? "fa-camera-rotate" : "fa-camera"}`}></i>
+                      {photoUploaded.sala_mesas ? "Evidencia: Foto_Barra_Salsas.jpg ✓" : "Subir Foto Obligatoria"}
+                    </button>
+                  </div>
+                </div>
+
+                {/* ITEM 4 */}
+                <div className={`nl-checklist-item-card ${checklistItems.sala_salsas ? "completed" : ""}`}>
+                  <div
+                    onClick={() => toggleChecklistItem("sala_salsas")}
+                    className={`nl-check-checkbox ${checklistItems.sala_salsas ? "checked" : ""}`}
+                  >
+                    {checklistItems.sala_salsas && <i className="fa fa-check" style={{ fontSize: "0.75rem" }}></i>}
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontWeight: 800, color: "var(--nl-green-deep)", fontSize: "0.95rem" }}>
+                      4. Sanitarios & Entorno Limpio
+                    </div>
+                    <p style={{ fontSize: "0.85rem", color: "var(--text-muted)", margin: "0.3rem 0" }}>
+                      Baños verificados con insumos completos (jabón, papel), piso seco y aromas neutros/frescos.
+                    </p>
+                    <button
+                      onClick={() => togglePhotoUploaded("sala_salsas")}
+                      className="nl-evidence-photo-btn"
+                      style={{
+                        background: photoUploaded.sala_salsas ? "rgba(24, 61, 47, 0.1)" : "var(--nl-green)",
+                        color: photoUploaded.sala_salsas ? "var(--nl-green)" : "#FFF",
+                        border: photoUploaded.sala_salsas ? "1px solid var(--nl-green)" : "none"
+                      }}
+                    >
+                      <i className={`fa ${photoUploaded.sala_salsas ? "fa-camera-rotate" : "fa-camera"}`}></i>
+                      {photoUploaded.sala_salsas ? "Evidencia: Foto_Banos_Ok.jpg ✓" : "Subir Foto Obligatoria"}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="nl-checklist-items-grid">
+                {/* CIERRE ITEM 1 */}
+                <div className={`nl-checklist-item-card ${checklistItems.cierre_salsas ? "completed" : ""}`}>
+                  <div
+                    onClick={() => toggleChecklistItem("cierre_salsas")}
+                    className={`nl-check-checkbox ${checklistItems.cierre_salsas ? "checked" : ""}`}
+                  >
+                    {checklistItems.cierre_salsas && <i className="fa fa-check" style={{ fontSize: "0.75rem" }}></i>}
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontWeight: 800, color: "var(--nl-green-deep)", fontSize: "0.95rem" }}>
+                      1. Resguardo de Insumos & Refrigeración
+                    </div>
+                    <p style={{ fontSize: "0.85rem", color: "var(--text-muted)", margin: "0.3rem 0" }}>
+                      Salsas y carnes resguardadas en refrigerador con temperatura adecuada y tapado hermético.
+                    </p>
+                    <button
+                      onClick={() => togglePhotoUploaded("cierre_salsas")}
+                      className="nl-evidence-photo-btn"
+                      style={{
+                        background: photoUploaded.cierre_salsas ? "rgba(24, 61, 47, 0.1)" : "var(--nl-green)",
+                        color: photoUploaded.cierre_salsas ? "var(--nl-green)" : "#FFF",
+                        border: photoUploaded.cierre_salsas ? "1px solid var(--nl-green)" : "none"
+                      }}
+                    >
+                      <i className={`fa ${photoUploaded.cierre_salsas ? "fa-camera-rotate" : "fa-camera"}`}></i>
+                      {photoUploaded.cierre_salsas ? "Evidencia: Refrigerador_Cierre.jpg ✓" : "Subir Foto Obligatoria"}
+                    </button>
+                  </div>
+                </div>
+
+                {/* CIERRE ITEM 2 */}
+                <div className={`nl-checklist-item-card ${checklistItems.cierre_plancha ? "completed" : ""}`}>
+                  <div
+                    onClick={() => toggleChecklistItem("cierre_plancha")}
+                    className={`nl-check-checkbox ${checklistItems.cierre_plancha ? "checked" : ""}`}
+                  >
+                    {checklistItems.cierre_plancha && <i className="fa fa-check" style={{ fontSize: "0.75rem" }}></i>}
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontWeight: 800, color: "var(--nl-green-deep)", fontSize: "0.95rem" }}>
+                      2. Plancha y Campana Desengrasadas
+                    </div>
+                    <p style={{ fontSize: "0.85rem", color: "var(--text-muted)", margin: "0.3rem 0" }}>
+                      Plancha pulida, campana limpia sin residuos grasos y gas cerrado bajo protocolo de seguridad.
+                    </p>
+                    <button
+                      onClick={() => togglePhotoUploaded("cierre_plancha")}
+                      className="nl-evidence-photo-btn"
+                      style={{
+                        background: photoUploaded.cierre_plancha ? "rgba(24, 61, 47, 0.1)" : "var(--nl-green)",
+                        color: photoUploaded.cierre_plancha ? "var(--nl-green)" : "#FFF",
+                        border: photoUploaded.cierre_plancha ? "1px solid var(--nl-green)" : "none"
+                      }}
+                    >
+                      <i className={`fa ${photoUploaded.cierre_plancha ? "fa-camera-rotate" : "fa-camera"}`}></i>
+                      {photoUploaded.cierre_plancha ? "Evidencia: Plancha_Limpia.jpg ✓" : "Subir Foto Obligatoria"}
+                    </button>
+                  </div>
+                </div>
+
+                {/* CIERRE ITEM 3 */}
+                <div className={`nl-checklist-item-card ${checklistItems.cierre_banos ? "completed" : ""}`}>
+                  <div
+                    onClick={() => toggleChecklistItem("cierre_banos")}
+                    className={`nl-check-checkbox ${checklistItems.cierre_banos ? "checked" : ""}`}
+                  >
+                    {checklistItems.cierre_banos && <i className="fa fa-check" style={{ fontSize: "0.75rem" }}></i>}
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontWeight: 800, color: "var(--nl-green-deep)", fontSize: "0.95rem" }}>
+                      3. Sanitización de Baños & Basura Vaciada
+                    </div>
+                    <p style={{ fontSize: "0.85rem", color: "var(--text-muted)", margin: "0.3rem 0" }}>
+                      Botes de basura vaciados con bolsa nueva, sanitarios desinfectados y piso trapeado con cloro.
+                    </p>
+                    <button
+                      onClick={() => togglePhotoUploaded("cierre_banos")}
+                      className="nl-evidence-photo-btn"
+                      style={{
+                        background: photoUploaded.cierre_banos ? "rgba(24, 61, 47, 0.1)" : "var(--nl-green)",
+                        color: photoUploaded.cierre_banos ? "var(--nl-green)" : "#FFF",
+                        border: photoUploaded.cierre_banos ? "1px solid var(--nl-green)" : "none"
+                      }}
+                    >
+                      <i className={`fa ${photoUploaded.cierre_banos ? "fa-camera-rotate" : "fa-camera"}`}></i>
+                      {photoUploaded.cierre_banos ? "Evidencia: Banos_Cierre.jpg ✓" : "Subir Foto Obligatoria"}
+                    </button>
+                  </div>
+                </div>
+
+                {/* CIERRE ITEM 4 */}
+                <div className={`nl-checklist-item-card ${checklistItems.cierre_pisos ? "completed" : ""}`}>
+                  <div
+                    onClick={() => toggleChecklistItem("cierre_pisos")}
+                    className={`nl-check-checkbox ${checklistItems.cierre_pisos ? "checked" : ""}`}
+                  >
+                    {checklistItems.cierre_pisos && <i className="fa fa-check" style={{ fontSize: "0.75rem" }}></i>}
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontWeight: 800, color: "var(--nl-green-deep)", fontSize: "0.95rem" }}>
+                      4. Salón Trapeado & Sillas Arriba
+                    </div>
+                    <p style={{ fontSize: "0.85rem", color: "var(--text-muted)", margin: "0.3rem 0" }}>
+                      Piso de salón barrido y trapeado, pantallas y luces apagadas, y candados de acceso asegurados.
+                    </p>
+                    <button
+                      onClick={() => togglePhotoUploaded("cierre_pisos")}
+                      className="nl-evidence-photo-btn"
+                      style={{
+                        background: photoUploaded.cierre_pisos ? "rgba(24, 61, 47, 0.1)" : "var(--nl-green)",
+                        color: photoUploaded.cierre_pisos ? "var(--nl-green)" : "#FFF",
+                        border: photoUploaded.cierre_pisos ? "1px solid var(--nl-green)" : "none"
+                      }}
+                    >
+                      <i className={`fa ${photoUploaded.cierre_pisos ? "fa-camera-rotate" : "fa-camera"}`}></i>
+                      {photoUploaded.cierre_pisos ? "Evidencia: Salon_Cierre.jpg ✓" : "Subir Foto Obligatoria"}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* PANEL DE CONTROL PARA EL DUEÑO */}
+            <div style={{
+              marginTop: "2rem",
+              background: "var(--nl-green)",
+              color: "#FFF",
+              borderRadius: "16px",
+              padding: "1.5rem",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              flexWrap: "wrap",
+              gap: "1.2rem"
+            }}>
+              <div>
+                <div style={{ fontSize: "0.75rem", color: "var(--nl-yolk)", fontWeight: 800, textTransform: "uppercase", letterSpacing: "1px" }}>
+                  TRANQUILIDAD PARA EL PROPIETARIO
+                </div>
+                <div style={{ fontSize: "1.05rem", fontWeight: 800, marginTop: "0.2rem" }}>
+                  Notificación Automática al WhatsApp del Dueño con Fotos y Hora de Cumplimiento
+                </div>
+                <p style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.8)", margin: "0.3rem 0 0 0" }}>
+                  Usted sabe si su sucursal abrió a tiempo, con música, limpia y con las pantallas activas, sin necesidad de estar físicamente todo el día.
+                </p>
+              </div>
+
+              <div style={{
+                background: "rgba(255,255,255,0.12)",
+                padding: "0.8rem 1.4rem",
+                borderRadius: "12px",
+                border: "1px solid rgba(255,255,255,0.2)",
+                textAlign: "center"
+              }}>
+                <div style={{ fontSize: "0.75rem", color: "var(--nl-yolk)", fontWeight: 700 }}>ESTATUS DE TURNO</div>
+                <div style={{ fontSize: "1.1rem", fontWeight: 900, color: "#FFF" }}>REPORTADO AL 100%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* SECCIÓN PROPUESTA ECONÓMICA ($6,000 MXN / MES) */}
       <section id="sec-inversion" className="nl-section">
         <div className="nl-wrapper">
@@ -1811,7 +2439,7 @@ export default function NuevaLagunaClient() {
             Inversión Mensual Todo-Incluido.
           </h2>
           <p className="nl-section-sub">
-            Sin paquetes confusos ni letras chiquitas. Un solo paquete integral que equipa su comedor con tecnología de punta y retención de clientes por una tarifa plana mensual.
+            Sin paquetes confusos ni letras chiquitas. Un solo paquete integral que equipa su comedor con tecnología de punta, experiencia sensorial y retención de clientes por una tarifa plana mensual.
           </p>
 
           <div className="nl-single-plan-card nl-plan-card">
@@ -1820,16 +2448,16 @@ export default function NuevaLagunaClient() {
             <div className="nl-single-plan-grid">
               <div>
                 <h3 style={{ fontFamily: "var(--font-display)", fontSize: "2rem", color: "var(--nl-green)", textTransform: "uppercase", marginBottom: "0.4rem" }}>
-                  Ecosistema Tecnológico de Comedor & Lealtad
+                  Ecosistema de Experiencia en Sala, Comedor & Lealtad
                 </h3>
                 <p style={{ fontSize: "0.95rem", color: "var(--text-muted)", marginBottom: "1.5rem" }}>
-                  Digitalización completa de la experiencia en mesa, entretenimiento en pantallas y captación continua de comensales.
+                  Ambientación de salón, digitalización en mesa, entretenimiento en pantallas, control operativo para el personal y captación continua de comensales.
                 </p>
 
                 <div className="nl-feature-bullets">
                   <div className="nl-bullet">
                     <i className="fa fa-check-circle"></i>
-                    <span><strong>1. Menú Digital Vertical en Mesa:</strong> Acceso por QR, fotos de alta definición y actualización ilimitada de platillos/precios.</span>
+                    <span><strong>1. Menú Digital Vertical en Mesa:</strong> Acceso por QR, fotos de alta definición en pan francés y actualización ilimitada de platillos/precios.</span>
                   </div>
                   <div className="nl-bullet">
                     <i className="fa fa-check-circle"></i>
@@ -1845,6 +2473,14 @@ export default function NuevaLagunaClient() {
                   </div>
                   <div className="nl-bullet">
                     <i className="fa fa-check-circle"></i>
+                    <span><strong>Curaduría Musical & Guía de Mesa:</strong> Playlist oficial en Spotify para el comedor + Guía de Estándares de Mesa y Barra para montaje visual.</span>
+                  </div>
+                  <div className="nl-bullet">
+                    <i className="fa fa-check-circle"></i>
+                    <span><strong>Módulo Piloto de Checklist con Fotos:</strong> Webapp interna para que el personal registre tareas de sala y cierre con evidencia fotográfica.</span>
+                  </div>
+                  <div className="nl-bullet">
+                    <i className="fa fa-check-circle"></i>
                     <span><strong>Soporte, Hosting y Servidores Incluidos:</strong> Mantenimiento técnico continuo sin costos sorpresa.</span>
                   </div>
                 </div>
@@ -1852,7 +2488,7 @@ export default function NuevaLagunaClient() {
 
               {/* COLUMNA PRECIO */}
               <div className="nl-single-price-box">
-                <div style={{ fontSize: "0.82rem", textTransform: "uppercase", letterSpacing: "1px", color: "var(--nl-french-bread)", fontWeight: 800 }}>
+                <div style={{ fontSize: "0.875rem", textTransform: "uppercase", letterSpacing: "1px", color: "var(--nl-french-bread)", fontWeight: 800 }}>
                   INVERSIÓN MENSUAL
                 </div>
 
@@ -1868,8 +2504,8 @@ export default function NuevaLagunaClient() {
                   <i className="fa fa-calendar-day"></i> Equivale a solo $200 MXN al día
                 </div>
 
-                <p style={{ fontSize: "0.82rem", color: "var(--nl-french-bread)", lineHeight: "1.4", marginBottom: "1.5rem" }}>
-                  Menos de lo que cuesta el consumo de una sola mesa familiar al día para tener su comedor 100% digitalizado.
+                <p style={{ fontSize: "0.875rem", color: "var(--nl-french-bread)", lineHeight: "1.4", marginBottom: "1.5rem" }}>
+                  Menos de lo que cuesta el consumo de una sola mesa familiar al día para tener su comedor 100% ambientado y digitalizado.
                 </p>
 
                 <button
@@ -1923,28 +2559,28 @@ export default function NuevaLagunaClient() {
             Plan de Trabajo
           </div>
           <h2 className="nl-section-title">
-            Implementación en 3 Semanas.
+            Implementación en 2 Fases (14 Días Hábiles).
           </h2>
           <p className="nl-section-sub">
-            Instalamos y activamos los 4 pilares tecnológicos en su sucursal sin interrumpir el servicio ni estorbar en cocina.
+            Desplegamos la experiencia sensorial, operativa y digital en su sucursal de manera ordenada y sin interrumpir el servicio.
           </p>
 
-          <div className="nl-roadmap-grid">
+          <div className="nl-roadmap-grid" style={{ gridTemplateColumns: "1fr 1fr" }}>
             <div style={{
               background: "#FFF",
               border: "1.5px solid var(--nl-french-bread-border)",
               borderRadius: "18px",
-              padding: "1.8rem",
+              padding: "2rem",
               boxShadow: "0 6px 18px rgba(0,0,0,0.03)",
             }}>
-              <div style={{ fontSize: "0.75rem", color: "var(--nl-green)", fontWeight: 800 }}>
-                SEMANA 01
+              <div style={{ fontSize: "0.78rem", color: "var(--nl-green)", fontWeight: 800 }}>
+                FASE 01 • DÍAS 1 A 7
               </div>
-              <h4 style={{ fontFamily: "var(--font-display)", fontSize: "1.2rem", color: "var(--nl-green-deep)", margin: "0.4rem 0", textTransform: "uppercase" }}>
-                Menú Digital & Levantamiento
+              <h4 style={{ fontFamily: "var(--font-display)", fontSize: "1.3rem", color: "var(--nl-green-deep)", margin: "0.5rem 0", textTransform: "uppercase" }}>
+                Experiencia en Sala & Operación Base
               </h4>
               <p style={{ fontSize: "0.9rem", color: "var(--text-muted)", lineHeight: "1.5" }}>
-                Levantamiento fotográfico de platillos en sucursal. Carga de precios y configuración de la webapp del menú interactivo en mesa.
+                Levantamiento fotográfico en pan francés artesanal. Configuración del Menú Digital Vertical en mesa, entrega de la Playlist Oficial en Spotify para comedor, Guía de Estándares de Mesa y activación del Checklist Operativo para el personal.
               </p>
             </div>
 
@@ -1952,35 +2588,17 @@ export default function NuevaLagunaClient() {
               background: "#FFF",
               border: "1.5px solid var(--nl-french-bread-border)",
               borderRadius: "18px",
-              padding: "1.8rem",
+              padding: "2rem",
               boxShadow: "0 6px 18px rgba(0,0,0,0.03)",
             }}>
-              <div style={{ fontSize: "0.75rem", color: "var(--nl-green)", fontWeight: 800 }}>
-                SEMANA 02
+              <div style={{ fontSize: "0.78rem", color: "var(--nl-green)", fontWeight: 800 }}>
+                FASE 02 • DÍAS 8 A 14
               </div>
-              <h4 style={{ fontFamily: "var(--font-display)", fontSize: "1.2rem", color: "var(--nl-green-deep)", margin: "0.4rem 0", textTransform: "uppercase" }}>
-                Minijuego & Pantallas Comedor
+              <h4 style={{ fontFamily: "var(--font-display)", fontSize: "1.3rem", color: "var(--nl-green-deep)", margin: "0.5rem 0", textTransform: "uppercase" }}>
+                Audiovisual, Interacción & Lealtad
               </h4>
               <p style={{ fontSize: "0.9rem", color: "var(--text-muted)", lineHeight: "1.5" }}>
-                Programación del minijuego con código QR en mesa. Edición del primer loop audiovisual en 16:9 con tomas de plancha y cápsulas culturales laguneras.
-              </p>
-            </div>
-
-            <div style={{
-              background: "#FFF",
-              border: "1.5px solid var(--nl-french-bread-border)",
-              borderRadius: "18px",
-              padding: "1.8rem",
-              boxShadow: "0 6px 18px rgba(0,0,0,0.03)",
-            }}>
-              <div style={{ fontSize: "0.75rem", color: "var(--nl-green)", fontWeight: 800 }}>
-                SEMANA 03 EN ADELANTE
-              </div>
-              <h4 style={{ fontFamily: "var(--font-display)", fontSize: "1.2rem", color: "var(--nl-green-deep)", margin: "0.4rem 0", textTransform: "uppercase" }}>
-                Pasaporte Lealtad & Operación
-              </h4>
-              <p style={{ fontSize: "0.9rem", color: "var(--text-muted)", lineHeight: "1.5" }}>
-                Conexión del sistema de sellos por WhatsApp. Capacitación breve a meseros y primeras alertas automáticas para activar consumo de lunes a miércoles.
+                Producción del circuito de videos 16:9 HD para pantallas de comedor (antojo en plancha + cápsulas culturales laguneras). Lanzamiento del minijuego interactivo QR en mesa y activación del Pasaporte Digital de Lealtad en WhatsApp con panel para el dueño.
               </p>
             </div>
           </div>
