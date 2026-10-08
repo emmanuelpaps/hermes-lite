@@ -236,7 +236,7 @@ export default function NuevaLagunaClient() {
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       <link
-        href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Bodoni+Moda:ital,opsz,wght@0,6..96,700;0,6..96,900;1,6..96,400&family=Pinyon+Script&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=DM+Serif+Display:ital@0;1&family=Pinyon+Script&display=swap"
         rel="stylesheet"
       />
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -253,7 +253,7 @@ export default function NuevaLagunaClient() {
           --nl-yolk-dark: #B86C20;
           --nl-tomato: #B33927;
           --nl-tomato-dark: #B31B10;
-          --font-display: 'Bodoni Moda', 'Playfair Display', Georgia, serif;
+          --font-display: 'Playfair Display', 'DM Serif Display', Georgia, serif;
           --font-script: 'Pinyon Script', cursive;
           --font-body: 'Almarai', system-ui, sans-serif;
           --font-mono: 'JetBrains Mono', monospace;
@@ -424,11 +424,11 @@ export default function NuevaLagunaClient() {
         .nl-hero h1 {
           font-family: var(--font-display);
           font-size: clamp(1.8rem, 3.8vw, 2.7rem);
-          font-weight: 900;
-          line-height: 1.15;
+          font-weight: 800;
+          line-height: 1.22;
           margin-bottom: 1.2rem;
           text-transform: uppercase;
-          letter-spacing: -0.5px;
+          letter-spacing: 0.5px;
           text-wrap: balance;
         }
 
