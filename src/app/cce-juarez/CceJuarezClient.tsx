@@ -357,6 +357,20 @@ export default function CceJuarezClient() {
                 grid-template-columns: 1fr !important;
               }
             }
+            @media (max-width: 640px) {
+              .cce-badge-cce {
+                display: none !important;
+              }
+              .cce-header-divider {
+                display: none !important;
+              }
+              .cce-btn-header-clabe {
+                display: none !important;
+              }
+              .cce-studio-label {
+                display: none !important;
+              }
+            }
             @media (max-width: 480px) {
               .cce-plan-card {
                 padding: 1rem;
@@ -375,7 +389,7 @@ export default function CceJuarezClient() {
           background: 'rgba(255, 255, 255, 0.95)',
           backdropFilter: 'blur(12px)',
           borderBottom: '1px solid #E2E8F0',
-          padding: '12px 20px',
+          padding: '10px 16px',
         }}
       >
         <div
@@ -385,12 +399,12 @@ export default function CceJuarezClient() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            gap: '16px',
+            gap: '12px',
             flexWrap: 'wrap',
           }}
         >
           {/* Brand Group */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -409,6 +423,7 @@ export default function CceJuarezClient() {
                 APOLOGRAMA
               </span>
               <span
+                className="cce-studio-label"
                 style={{
                   fontSize: '14px',
                   fontWeight: 800,
@@ -422,9 +437,10 @@ export default function CceJuarezClient() {
               </span>
             </div>
 
-            <span style={{ color: '#CBD5E1', fontSize: '16px', fontWeight: 300 }}>×</span>
+            <span className="cce-header-divider" style={{ color: '#CBD5E1', fontSize: '16px', fontWeight: 300 }}>×</span>
 
             <div
+              className="cce-badge-cce"
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -455,19 +471,19 @@ export default function CceJuarezClient() {
           </div>
 
           {/* Action CTAs */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <a
               href="#inversion"
               className="cce-btn cce-btn-outline"
-              style={{ padding: '8px 14px', fontSize: '0.875rem' }}
+              style={{ padding: '8px 12px', fontSize: '0.85rem' }}
             >
               Ver Inversión
             </a>
 
             <button
               onClick={handleCopyClabe}
-              className="cce-btn cce-btn-primary"
-              style={{ padding: '8px 14px', fontSize: '0.875rem' }}
+              className="cce-btn cce-btn-primary cce-btn-header-clabe"
+              style={{ padding: '8px 12px', fontSize: '0.85rem' }}
             >
               {copiedClabe ? <Check size={16} /> : <Copy size={16} />}
               {copiedClabe ? '¡CLABE Copiada!' : 'Copiar CLABE'}
@@ -478,7 +494,7 @@ export default function CceJuarezClient() {
               target="_blank"
               rel="noopener noreferrer"
               className="cce-btn cce-btn-whatsapp"
-              style={{ padding: '8px 14px', fontSize: '0.875rem' }}
+              style={{ padding: '8px 12px', fontSize: '0.85rem' }}
             >
               <MessageCircle size={16} />
               WhatsApp
