@@ -1,10 +1,8 @@
 import type { Metadata } from 'next';
 import CceJuarezClient from './CceJuarezClient';
 
-const baseUrl = process.env.BASE_URL || 'http://localhost:3005';
-
 export const metadata: Metadata = {
-  metadataBase: new URL(baseUrl),
+  metadataBase: new URL('https://propuestas.tecza.com.mx'),
   title: 'Propuesta Ejecutiva · Empresario del Año 2026 | CCE Ciudad Juárez × Apolograma',
   description:
     'Estrategia integral: Invitación Digital Web, Canal Automatizado de WhatsApp para Patrocinios, Pauta Meta Ads y Coordinación de 50-60 Mesas con Carlos Loret de Mola.',
