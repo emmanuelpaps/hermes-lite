@@ -292,18 +292,24 @@ export default function NuevaLagunaClient() {
           backdrop-filter: blur(10px);
           border-bottom: 1px solid var(--nl-french-bread-border);
           padding: 0.9rem 0;
+          width: 100%;
+          box-sizing: border-box;
         }
 
         .nl-header-inner {
           display: flex;
           justify-content: space-between;
           align-items: center;
+          width: 100%;
+          max-width: 100%;
+          box-sizing: border-box;
         }
 
         .nl-logo-group {
           display: flex;
           align-items: center;
           gap: 0.75rem;
+          min-width: 0;
         }
 
         .nl-brand-agency {
@@ -312,6 +318,7 @@ export default function NuevaLagunaClient() {
           font-size: 1.15rem;
           color: var(--nl-green-deep);
           letter-spacing: -0.3px;
+          white-space: nowrap;
         }
 
         .nl-badge-client {
@@ -325,6 +332,20 @@ export default function NuevaLagunaClient() {
           display: flex;
           align-items: center;
           gap: 5px;
+          white-space: nowrap;
+        }
+
+        .nl-header-action {
+          flex-shrink: 0;
+          display: flex;
+          align-items: center;
+        }
+
+        .nl-header-btn {
+          font-size: 0.875rem;
+          padding: 0.55rem 1rem;
+          white-space: nowrap;
+          min-height: 44px;
         }
 
         /* BUTTONS */
@@ -1240,6 +1261,7 @@ export default function NuevaLagunaClient() {
           gap: 1rem;
           align-items: flex-start;
           transition: border-color 0.2s;
+          cursor: pointer;
         }
 
         .nl-checklist-item-card.completed {
@@ -1248,15 +1270,16 @@ export default function NuevaLagunaClient() {
         }
 
         .nl-check-checkbox {
-          min-width: 24px;
-          min-height: 24px;
-          border-radius: 6px;
+          min-width: 44px;
+          min-height: 44px;
+          border-radius: 8px;
           border: 2px solid var(--nl-green);
           background: #FFF;
           display: flex;
           align-items: center;
           justify-content: center;
           cursor: pointer;
+          flex-shrink: 0;
           margin-top: 2px;
         }
 
@@ -1324,7 +1347,7 @@ export default function NuevaLagunaClient() {
 
         .nl-single-price-amount {
           font-family: var(--font-display);
-          font-size: 3.4rem;
+          font-size: clamp(2.4rem, 8vw, 3.4rem);
           font-weight: 900;
           color: #FFF;
           line-height: 1;
@@ -1352,7 +1375,7 @@ export default function NuevaLagunaClient() {
         /* ROADMAP */
         .nl-roadmap-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: 1fr 1fr;
           gap: 1.5rem;
           margin-top: 2rem;
         }
@@ -1376,6 +1399,8 @@ export default function NuevaLagunaClient() {
           padding: 2.5rem;
           max-width: 520px;
           width: 100%;
+          max-height: 90vh;
+          overflow-y: auto;
           box-shadow: 0 25px 70px rgba(0,0,0,0.35);
           border: 2px solid var(--nl-yolk);
           position: relative;
@@ -1469,7 +1494,7 @@ export default function NuevaLagunaClient() {
             grid-template-columns: 1fr;
           }
           .nl-roadmap-grid {
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr !important;
           }
           .nl-journey-grid {
             grid-template-columns: repeat(2, 1fr);
@@ -1480,6 +1505,9 @@ export default function NuevaLagunaClient() {
         }
 
         @media (max-width: 768px) {
+          .nl-roadmap-grid {
+            grid-template-columns: 1fr !important;
+          }
           .nl-screens-features-grid {
             grid-template-columns: 1fr;
             gap: 1rem;
@@ -1496,6 +1524,38 @@ export default function NuevaLagunaClient() {
         }
 
         @media (max-width: 580px) {
+          .nl-header {
+            padding: 0.65rem 0;
+          }
+          .nl-header .nl-wrapper {
+            padding: 0 0.85rem;
+          }
+          .nl-header-inner {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            gap: 0.5rem;
+          }
+          .nl-logo-group {
+            gap: 0.5rem;
+            min-width: 0;
+            flex-shrink: 1;
+          }
+          .nl-badge-client {
+            display: none;
+          }
+          .nl-header-action {
+            flex-shrink: 0;
+          }
+          .nl-header-btn {
+            padding: 8px 12px !important;
+            font-size: 0.875rem !important;
+            white-space: nowrap;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+          }
           .nl-journey-grid {
             grid-template-columns: 1fr;
           }
@@ -1518,6 +1578,75 @@ export default function NuevaLagunaClient() {
           .nl-plan-card, .nl-single-plan-card {
             padding: 1.5rem 1.25rem !important;
           }
+          .nl-screens-box {
+            padding: 1.25rem 0.8rem !important;
+          }
+          .nl-screen-overlay {
+            padding: 0.8rem !important;
+          }
+          .nl-screen-badge-top {
+            font-size: 0.65rem !important;
+            padding: 3px 8px !important;
+          }
+          .nl-screen-caption h4 {
+            font-size: 0.95rem !important;
+            line-height: 1.2 !important;
+            margin-bottom: 0 !important;
+          }
+          .nl-screen-caption p {
+            display: none;
+          }
+          .nl-screen-qr-corner {
+            bottom: 0.8rem !important;
+            right: 0.8rem !important;
+            padding: 4px 8px !important;
+            gap: 6px !important;
+          }
+          .nl-screen-qr-corner img {
+            width: 28px !important;
+            height: 28px !important;
+          }
+          .nl-screen-qr-corner span {
+            font-size: 0.65rem !important;
+            line-height: 1.1 !important;
+          }
+          .nl-single-price-box {
+            padding: 1.5rem 1rem !important;
+          }
+          .nl-single-price-amount {
+            font-size: clamp(2.2rem, 7.5vw, 3.2rem) !important;
+          }
+          .nl-modal-box {
+            padding: 1.6rem 1.2rem !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .nl-header .nl-wrapper {
+            padding: 0 0.75rem;
+          }
+          .nl-header-inner {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+          }
+          .nl-brand-agency {
+            font-size: 1.02rem;
+          }
+          .nl-badge-client {
+            display: none;
+          }
+          .nl-header-btn {
+            padding: 8px 10px !important;
+            font-size: 0.875rem !important;
+            min-height: 44px;
+          }
+          .nl-loyalty-box {
+            padding: 1.2rem 0.8rem !important;
+          }
+          .nl-loyalty-box > div:last-child {
+            padding: 1.5rem 0.8rem !important;
+          }
         }
       `}} />
 
@@ -1532,8 +1661,8 @@ export default function NuevaLagunaClient() {
             </div>
           </div>
 
-          <div>
-            <button onClick={() => setIsModalOpen(true)} className="nl-btn nl-btn-green" style={{ fontSize: "0.82rem", padding: "0.55rem 1rem" }}>
+          <div className="nl-header-action">
+            <button onClick={() => setIsModalOpen(true)} className="nl-btn nl-btn-green nl-header-btn">
               <i className="fa fa-calendar-check"></i> Agendar Junta
             </button>
           </div>
@@ -1560,13 +1689,14 @@ export default function NuevaLagunaClient() {
                 <span className="gold">UNA GRAN EXPERIENCIA EN SALA DESDE QUE SE LLEGA HASTA QUE SE SALE.</span>
               </h1>
 
+              <p className="nl-hero-manifesto" style={{ marginBottom: "0.8rem" }}>
+                Usted ya tiene el sazón, la plancha y el prestigio tradicional de La Nueva Laguna.
+              </p>
               <p className="nl-hero-manifesto">
-                Usted ya tiene el producto, la receta y el sazón que respalda el prestigio de La Nueva Laguna.
-                Nuestra propuesta armoniza la interacción entre sus comensales, sus productos, la infraestructura, la música ambiental, el orden visual y la tecnología en mesa:
-                un <strong>menú digital vertical interactivo</strong> que agiliza los pedidos,
-                un <strong>minijuego interactivo con código QR</strong> que convierte comensales en contactos de WhatsApp,
-                <strong>videos de antojo y folclor lagunero</strong> para sus pantallas de comedor, y un <strong>sistema de lealtad</strong> para
-                reactivar visitas de lunes a miércoles.
+                Nuestra propuesta transforma la sala en una experiencia integral:
+                <strong> menú digital interactivo</strong> en mesa,
+                <strong> pantallas de comedor</strong> con antojo y folclor lagunero,
+                <strong> minijuego QR</strong> en WhatsApp y <strong>pasaporte de lealtad</strong> entre semana.
               </p>
 
               <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
@@ -1732,9 +1862,8 @@ export default function NuevaLagunaClient() {
             Menú Digital Vertical: El Antojo Vende Antes de que Llegue el Mesero.
           </h2>
           <p className="nl-section-sub">
-            Sustituya las cartas físicas maltratadas o PDFs lentos por una webapp ágil que abre al instante escaneando el QR en mesa.
-            Al ver la pierna dorada, el pan francés crujiente y los ingredientes en alta definición,
-            el comensal decide en segundos, acelerando la rotación de mesas y elevando el ticket promedio.
+            Sustituya cartas maltratadas o PDFs lentos por una webapp ágil en mesa.
+            Con fotografía en pan francés crujiente, el comensal explora los platillos con claridad y pide sin demoras.
           </p>
 
           <div className="nl-sim-box">
@@ -1828,7 +1957,7 @@ export default function NuevaLagunaClient() {
                   </div>
                   <div className="nl-bullet">
                     <i className="fa fa-check-circle"></i>
-                    <span><strong>Mayor Rotación de Mesas:</strong> Los comensales ordenan más rápido y la cocina recibe pedidos sin demoras.</span>
+                    <span><strong>Agilidad en la Toma de Pedido:</strong> El comensal define su orden mientras toma asiento, facilitando la atención del personal de sala.</span>
                   </div>
                 </div>
               </div>
@@ -1849,9 +1978,8 @@ export default function NuevaLagunaClient() {
             El Minijuego que Convierte Comensales en Contactos de WhatsApp.
           </h2>
           <p className="nl-section-sub">
-            El error común en los restaurantes es dejar que el cliente coma, pague y se vaya sin dejar su contacto.
-            Con este minijuego oficial con código QR en mesa, el comensal se divierte mientras espera su comida,
-            gana un beneficio de cortesía y registra su teléfono verificado de WhatsApp.
+            Transforme el tiempo de espera en una conexión directa.
+            Con un minijuego oficial con código QR en mesa, el comensal se entretiene con el sazón lagunero y registra su WhatsApp verificado para recibir cortesías.
           </p>
 
           <div className="nl-flow-grid">
@@ -1887,7 +2015,7 @@ export default function NuevaLagunaClient() {
               <div className="nl-flow-icon"><i className="fa fa-database"></i></div>
               <h4 className="nl-flow-title">Base de Datos Propia</h4>
               <p className="nl-flow-text">
-                Semana tras semana acumula cientos de contactos directos de comensales locales que aman su sazón y ya consumieron en la sucursal.
+                Construya una base propia de comensales locales que ya conocen, consumieron y disfrutan la cocina de su sucursal.
               </p>
             </div>
 
@@ -1915,9 +2043,8 @@ export default function NuevaLagunaClient() {
             Pantallas de Comedor: Antojo de Plancha y Orgullo Lagunero.
           </h2>
           <p className="nl-section-sub">
-            Aproveche las pantallas de televisión de su comedor para algo mucho más rentable que canales de cable genéricos:
-            un circuito continuo de video en alta definición que combina tomas irresistibles de comida con cápsulas entretenidas
-            y educativas sobre la Comarca Lagunera y el auténtico pan francés.
+            Aproveche las pantallas de su comedor con un circuito continuo en 16:9 HD:
+            tomas de pan crujiente y carnes dorándose al punto, combinadas con cápsulas de folclor e historia de la Comarca Lagunera.
           </p>
 
           <div className="nl-screens-box">
@@ -2001,8 +2128,7 @@ export default function NuevaLagunaClient() {
             Sistema Integrado de Lealtad: Pasaporte Digital de Visitas.
           </h2>
           <p className="nl-section-sub">
-            Conectado de forma invisible al minijuego de mesa y a WhatsApp. Cada vez que el comensal juega y visita la sucursal,
-            acumula sellos digitales en su teléfono. El sistema le envía recordatorios oportunos para volver a comer entre semana.
+            Vinculado directamente a WhatsApp: cada visita suma sellos digitales en el teléfono del comensal, con invitaciones oportunas para volver de lunes a miércoles.
           </p>
 
           <div className="nl-loyalty-box">
@@ -2050,27 +2176,28 @@ export default function NuevaLagunaClient() {
                 La Nueva Laguna • Comensal Frecuente
               </h4>
 
-              <div style={{ display: "flex", justifyContent: "center", gap: "10px", margin: "1.5rem 0", flexWrap: "wrap" }}>
+              <div style={{ display: "flex", justifyContent: "center", gap: "6px", margin: "1.5rem 0", flexWrap: "nowrap" }}>
                 {[1, 2, 3, 4].map((s) => (
                   <div key={s} style={{
-                    width: "48px",
-                    height: "48px",
+                    width: "min(44px, 12vw)",
+                    height: "min(44px, 12vw)",
                     borderRadius: "50%",
                     background: "var(--nl-yolk)",
                     color: "#FFF",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    fontSize: "1.2rem",
+                    fontSize: "1.1rem",
                     fontWeight: 900,
-                    boxShadow: "0 4px 10px rgba(0,0,0,0.2)"
+                    boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+                    flexShrink: 0
                   }}>
                     <i className="fa fa-check"></i>
                   </div>
                 ))}
                 <div style={{
-                  width: "48px",
-                  height: "48px",
+                  width: "min(44px, 12vw)",
+                  height: "min(44px, 12vw)",
                   borderRadius: "50%",
                   background: "transparent",
                   border: "2px dashed var(--nl-french-bread)",
@@ -2078,7 +2205,8 @@ export default function NuevaLagunaClient() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  fontSize: "1.1rem"
+                  fontSize: "1rem",
+                  flexShrink: 0
                 }}>
                   <i className="fa fa-gift"></i>
                 </div>
@@ -2109,8 +2237,8 @@ export default function NuevaLagunaClient() {
             Módulo Piloto: Checklist de Empleados con Evidencia Fotográfica.
           </h2>
           <p className="nl-section-sub">
-            Garantice que la limpieza, el orden, la música y el montaje de salón se cumplan en cada turno.
-            Los colaboradores verifican sus tareas desde su celular y suben una fotografía obligatoria antes de liberar el turno.
+            Supervise el estándar de limpieza, música y montaje de salón en cada turno.
+            El personal valida sus tareas desde su celular y sube evidencia fotográfica antes de salir.
           </p>
 
           <div className="nl-checklist-box">
@@ -2145,12 +2273,12 @@ export default function NuevaLagunaClient() {
             {checklistTab === "sala" ? (
               <div className="nl-checklist-items-grid">
                 {/* ITEM 1 */}
-                <div className={`nl-checklist-item-card ${checklistItems.sala_musica ? "completed" : ""}`}>
-                  <div
-                    onClick={() => toggleChecklistItem("sala_musica")}
-                    className={`nl-check-checkbox ${checklistItems.sala_musica ? "checked" : ""}`}
-                  >
-                    {checklistItems.sala_musica && <i className="fa fa-check" style={{ fontSize: "0.75rem" }}></i>}
+                <div
+                  className={`nl-checklist-item-card ${checklistItems.sala_musica ? "completed" : ""}`}
+                  onClick={() => toggleChecklistItem("sala_musica")}
+                >
+                  <div className={`nl-check-checkbox ${checklistItems.sala_musica ? "checked" : ""}`}>
+                    {checklistItems.sala_musica && <i className="fa fa-check" style={{ fontSize: "0.95rem" }}></i>}
                   </div>
                   <div style={{ flex: 1 }}>
                     <div style={{ fontWeight: 800, color: "var(--nl-green-deep)", fontSize: "0.95rem" }}>
@@ -2160,7 +2288,10 @@ export default function NuevaLagunaClient() {
                       Playlist oficial en Spotify sonando a volumen óptimo y loop de antojo en pantallas activo.
                     </p>
                     <button
-                      onClick={() => togglePhotoUploaded("sala_musica")}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        togglePhotoUploaded("sala_musica");
+                      }}
                       className="nl-evidence-photo-btn"
                       style={{
                         background: photoUploaded.sala_musica ? "rgba(24, 61, 47, 0.1)" : "var(--nl-green)",
@@ -2175,12 +2306,12 @@ export default function NuevaLagunaClient() {
                 </div>
 
                 {/* ITEM 2 */}
-                <div className={`nl-checklist-item-card ${checklistItems.sala_pantallas ? "completed" : ""}`}>
-                  <div
-                    onClick={() => toggleChecklistItem("sala_pantallas")}
-                    className={`nl-check-checkbox ${checklistItems.sala_pantallas ? "checked" : ""}`}
-                  >
-                    {checklistItems.sala_pantallas && <i className="fa fa-check" style={{ fontSize: "0.75rem" }}></i>}
+                <div
+                  className={`nl-checklist-item-card ${checklistItems.sala_pantallas ? "completed" : ""}`}
+                  onClick={() => toggleChecklistItem("sala_pantallas")}
+                >
+                  <div className={`nl-check-checkbox ${checklistItems.sala_pantallas ? "checked" : ""}`}>
+                    {checklistItems.sala_pantallas && <i className="fa fa-check" style={{ fontSize: "0.95rem" }}></i>}
                   </div>
                   <div style={{ flex: 1 }}>
                     <div style={{ fontWeight: 800, color: "var(--nl-green-deep)", fontSize: "0.95rem" }}>
@@ -2190,7 +2321,10 @@ export default function NuevaLagunaClient() {
                       Mesas impecables, portamenús con código QR limpios y servilleteros reabastecidos.
                     </p>
                     <button
-                      onClick={() => togglePhotoUploaded("sala_pantallas")}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        togglePhotoUploaded("sala_pantallas");
+                      }}
                       className="nl-evidence-photo-btn"
                       style={{
                         background: photoUploaded.sala_pantallas ? "rgba(24, 61, 47, 0.1)" : "var(--nl-green)",
@@ -2205,12 +2339,12 @@ export default function NuevaLagunaClient() {
                 </div>
 
                 {/* ITEM 3 */}
-                <div className={`nl-checklist-item-card ${checklistItems.sala_mesas ? "completed" : ""}`}>
-                  <div
-                    onClick={() => toggleChecklistItem("sala_mesas")}
-                    className={`nl-check-checkbox ${checklistItems.sala_mesas ? "checked" : ""}`}
-                  >
-                    {checklistItems.sala_mesas && <i className="fa fa-check" style={{ fontSize: "0.75rem" }}></i>}
+                <div
+                  className={`nl-checklist-item-card ${checklistItems.sala_mesas ? "completed" : ""}`}
+                  onClick={() => toggleChecklistItem("sala_mesas")}
+                >
+                  <div className={`nl-check-checkbox ${checklistItems.sala_mesas ? "checked" : ""}`}>
+                    {checklistItems.sala_mesas && <i className="fa fa-check" style={{ fontSize: "0.95rem" }}></i>}
                   </div>
                   <div style={{ flex: 1 }}>
                     <div style={{ fontWeight: 800, color: "var(--nl-green-deep)", fontSize: "0.95rem" }}>
@@ -2220,7 +2354,10 @@ export default function NuevaLagunaClient() {
                       Salseros llenos, vitrina pulida y orden de cubiertos y condimentos listos para comensales.
                     </p>
                     <button
-                      onClick={() => togglePhotoUploaded("sala_mesas")}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        togglePhotoUploaded("sala_mesas");
+                      }}
                       className="nl-evidence-photo-btn"
                       style={{
                         background: photoUploaded.sala_mesas ? "rgba(24, 61, 47, 0.1)" : "var(--nl-green)",
@@ -2235,12 +2372,12 @@ export default function NuevaLagunaClient() {
                 </div>
 
                 {/* ITEM 4 */}
-                <div className={`nl-checklist-item-card ${checklistItems.sala_salsas ? "completed" : ""}`}>
-                  <div
-                    onClick={() => toggleChecklistItem("sala_salsas")}
-                    className={`nl-check-checkbox ${checklistItems.sala_salsas ? "checked" : ""}`}
-                  >
-                    {checklistItems.sala_salsas && <i className="fa fa-check" style={{ fontSize: "0.75rem" }}></i>}
+                <div
+                  className={`nl-checklist-item-card ${checklistItems.sala_salsas ? "completed" : ""}`}
+                  onClick={() => toggleChecklistItem("sala_salsas")}
+                >
+                  <div className={`nl-check-checkbox ${checklistItems.sala_salsas ? "checked" : ""}`}>
+                    {checklistItems.sala_salsas && <i className="fa fa-check" style={{ fontSize: "0.95rem" }}></i>}
                   </div>
                   <div style={{ flex: 1 }}>
                     <div style={{ fontWeight: 800, color: "var(--nl-green-deep)", fontSize: "0.95rem" }}>
@@ -2250,7 +2387,10 @@ export default function NuevaLagunaClient() {
                       Baños verificados con insumos completos (jabón, papel), piso seco y aromas neutros/frescos.
                     </p>
                     <button
-                      onClick={() => togglePhotoUploaded("sala_salsas")}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        togglePhotoUploaded("sala_salsas");
+                      }}
                       className="nl-evidence-photo-btn"
                       style={{
                         background: photoUploaded.sala_salsas ? "rgba(24, 61, 47, 0.1)" : "var(--nl-green)",
@@ -2267,12 +2407,12 @@ export default function NuevaLagunaClient() {
             ) : (
               <div className="nl-checklist-items-grid">
                 {/* CIERRE ITEM 1 */}
-                <div className={`nl-checklist-item-card ${checklistItems.cierre_salsas ? "completed" : ""}`}>
-                  <div
-                    onClick={() => toggleChecklistItem("cierre_salsas")}
-                    className={`nl-check-checkbox ${checklistItems.cierre_salsas ? "checked" : ""}`}
-                  >
-                    {checklistItems.cierre_salsas && <i className="fa fa-check" style={{ fontSize: "0.75rem" }}></i>}
+                <div
+                  className={`nl-checklist-item-card ${checklistItems.cierre_salsas ? "completed" : ""}`}
+                  onClick={() => toggleChecklistItem("cierre_salsas")}
+                >
+                  <div className={`nl-check-checkbox ${checklistItems.cierre_salsas ? "checked" : ""}`}>
+                    {checklistItems.cierre_salsas && <i className="fa fa-check" style={{ fontSize: "0.95rem" }}></i>}
                   </div>
                   <div style={{ flex: 1 }}>
                     <div style={{ fontWeight: 800, color: "var(--nl-green-deep)", fontSize: "0.95rem" }}>
@@ -2282,7 +2422,10 @@ export default function NuevaLagunaClient() {
                       Salsas y carnes resguardadas en refrigerador con temperatura adecuada y tapado hermético.
                     </p>
                     <button
-                      onClick={() => togglePhotoUploaded("cierre_salsas")}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        togglePhotoUploaded("cierre_salsas");
+                      }}
                       className="nl-evidence-photo-btn"
                       style={{
                         background: photoUploaded.cierre_salsas ? "rgba(24, 61, 47, 0.1)" : "var(--nl-green)",
@@ -2297,12 +2440,12 @@ export default function NuevaLagunaClient() {
                 </div>
 
                 {/* CIERRE ITEM 2 */}
-                <div className={`nl-checklist-item-card ${checklistItems.cierre_plancha ? "completed" : ""}`}>
-                  <div
-                    onClick={() => toggleChecklistItem("cierre_plancha")}
-                    className={`nl-check-checkbox ${checklistItems.cierre_plancha ? "checked" : ""}`}
-                  >
-                    {checklistItems.cierre_plancha && <i className="fa fa-check" style={{ fontSize: "0.75rem" }}></i>}
+                <div
+                  className={`nl-checklist-item-card ${checklistItems.cierre_plancha ? "completed" : ""}`}
+                  onClick={() => toggleChecklistItem("cierre_plancha")}
+                >
+                  <div className={`nl-check-checkbox ${checklistItems.cierre_plancha ? "checked" : ""}`}>
+                    {checklistItems.cierre_plancha && <i className="fa fa-check" style={{ fontSize: "0.95rem" }}></i>}
                   </div>
                   <div style={{ flex: 1 }}>
                     <div style={{ fontWeight: 800, color: "var(--nl-green-deep)", fontSize: "0.95rem" }}>
@@ -2312,7 +2455,10 @@ export default function NuevaLagunaClient() {
                       Plancha pulida, campana limpia sin residuos grasos y gas cerrado bajo protocolo de seguridad.
                     </p>
                     <button
-                      onClick={() => togglePhotoUploaded("cierre_plancha")}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        togglePhotoUploaded("cierre_plancha");
+                      }}
                       className="nl-evidence-photo-btn"
                       style={{
                         background: photoUploaded.cierre_plancha ? "rgba(24, 61, 47, 0.1)" : "var(--nl-green)",
@@ -2327,12 +2473,12 @@ export default function NuevaLagunaClient() {
                 </div>
 
                 {/* CIERRE ITEM 3 */}
-                <div className={`nl-checklist-item-card ${checklistItems.cierre_banos ? "completed" : ""}`}>
-                  <div
-                    onClick={() => toggleChecklistItem("cierre_banos")}
-                    className={`nl-check-checkbox ${checklistItems.cierre_banos ? "checked" : ""}`}
-                  >
-                    {checklistItems.cierre_banos && <i className="fa fa-check" style={{ fontSize: "0.75rem" }}></i>}
+                <div
+                  className={`nl-checklist-item-card ${checklistItems.cierre_banos ? "completed" : ""}`}
+                  onClick={() => toggleChecklistItem("cierre_banos")}
+                >
+                  <div className={`nl-check-checkbox ${checklistItems.cierre_banos ? "checked" : ""}`}>
+                    {checklistItems.cierre_banos && <i className="fa fa-check" style={{ fontSize: "0.95rem" }}></i>}
                   </div>
                   <div style={{ flex: 1 }}>
                     <div style={{ fontWeight: 800, color: "var(--nl-green-deep)", fontSize: "0.95rem" }}>
@@ -2342,7 +2488,10 @@ export default function NuevaLagunaClient() {
                       Botes de basura vaciados con bolsa nueva, sanitarios desinfectados y piso trapeado con cloro.
                     </p>
                     <button
-                      onClick={() => togglePhotoUploaded("cierre_banos")}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        togglePhotoUploaded("cierre_banos");
+                      }}
                       className="nl-evidence-photo-btn"
                       style={{
                         background: photoUploaded.cierre_banos ? "rgba(24, 61, 47, 0.1)" : "var(--nl-green)",
@@ -2357,12 +2506,12 @@ export default function NuevaLagunaClient() {
                 </div>
 
                 {/* CIERRE ITEM 4 */}
-                <div className={`nl-checklist-item-card ${checklistItems.cierre_pisos ? "completed" : ""}`}>
-                  <div
-                    onClick={() => toggleChecklistItem("cierre_pisos")}
-                    className={`nl-check-checkbox ${checklistItems.cierre_pisos ? "checked" : ""}`}
-                  >
-                    {checklistItems.cierre_pisos && <i className="fa fa-check" style={{ fontSize: "0.75rem" }}></i>}
+                <div
+                  className={`nl-checklist-item-card ${checklistItems.cierre_pisos ? "completed" : ""}`}
+                  onClick={() => toggleChecklistItem("cierre_pisos")}
+                >
+                  <div className={`nl-check-checkbox ${checklistItems.cierre_pisos ? "checked" : ""}`}>
+                    {checklistItems.cierre_pisos && <i className="fa fa-check" style={{ fontSize: "0.95rem" }}></i>}
                   </div>
                   <div style={{ flex: 1 }}>
                     <div style={{ fontWeight: 800, color: "var(--nl-green-deep)", fontSize: "0.95rem" }}>
@@ -2372,7 +2521,10 @@ export default function NuevaLagunaClient() {
                       Piso de salón barrido y trapeado, pantallas y luces apagadas, y candados de acceso asegurados.
                     </p>
                     <button
-                      onClick={() => togglePhotoUploaded("cierre_pisos")}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        togglePhotoUploaded("cierre_pisos");
+                      }}
                       className="nl-evidence-photo-btn"
                       style={{
                         background: photoUploaded.cierre_pisos ? "rgba(24, 61, 47, 0.1)" : "var(--nl-green)",
@@ -2439,7 +2591,7 @@ export default function NuevaLagunaClient() {
             Inversión Mensual Todo-Incluido.
           </h2>
           <p className="nl-section-sub">
-            Sin paquetes confusos ni letras chiquitas. Un solo paquete integral que equipa su comedor con tecnología de punta, experiencia sensorial y retención de clientes por una tarifa plana mensual.
+            Sin paquetes confusos ni letras chiquitas. Un solo paquete integral que equipa su salón con tecnología en mesa, pantallas y lealtad por una tarifa plana mensual.
           </p>
 
           <div className="nl-single-plan-card nl-plan-card">
@@ -2447,7 +2599,7 @@ export default function NuevaLagunaClient() {
 
             <div className="nl-single-plan-grid">
               <div>
-                <h3 style={{ fontFamily: "var(--font-display)", fontSize: "2rem", color: "var(--nl-green)", textTransform: "uppercase", marginBottom: "0.4rem" }}>
+                <h3 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.4rem, 4vw, 2rem)", color: "var(--nl-green)", textTransform: "uppercase", marginBottom: "0.4rem" }}>
                   Ecosistema de Experiencia en Sala, Comedor & Lealtad
                 </h3>
                 <p style={{ fontSize: "0.95rem", color: "var(--text-muted)", marginBottom: "1.5rem" }}>
@@ -2565,7 +2717,7 @@ export default function NuevaLagunaClient() {
             Desplegamos la experiencia sensorial, operativa y digital en su sucursal de manera ordenada y sin interrumpir el servicio.
           </p>
 
-          <div className="nl-roadmap-grid" style={{ gridTemplateColumns: "1fr 1fr" }}>
+          <div className="nl-roadmap-grid">
             <div style={{
               background: "#FFF",
               border: "1.5px solid var(--nl-french-bread-border)",
@@ -2580,7 +2732,7 @@ export default function NuevaLagunaClient() {
                 Experiencia en Sala & Operación Base
               </h4>
               <p style={{ fontSize: "0.9rem", color: "var(--text-muted)", lineHeight: "1.5" }}>
-                Levantamiento fotográfico en pan francés artesanal. Configuración del Menú Digital Vertical en mesa, entrega de la Playlist Oficial en Spotify para comedor, Guía de Estándares de Mesa y activación del Checklist Operativo para el personal.
+                Fotografía en pan francés artesanal, Menú Digital QR, Playlist de Spotify para comedor, Guía de Mesa y activación del Checklist Operativo.
               </p>
             </div>
 
@@ -2598,7 +2750,7 @@ export default function NuevaLagunaClient() {
                 Audiovisual, Interacción & Lealtad
               </h4>
               <p style={{ fontSize: "0.9rem", color: "var(--text-muted)", lineHeight: "1.5" }}>
-                Producción del circuito de videos 16:9 HD para pantallas de comedor (antojo en plancha + cápsulas culturales laguneras). Lanzamiento del minijuego interactivo QR en mesa y activación del Pasaporte Digital de Lealtad en WhatsApp con panel para el dueño.
+                Producción del circuito 16:9 HD para pantallas de comedor, lanzamiento del minijuego interactivo QR en mesa y activación del Pasaporte de Lealtad en WhatsApp.
               </p>
             </div>
           </div>
