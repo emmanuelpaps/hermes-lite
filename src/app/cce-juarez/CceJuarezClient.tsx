@@ -359,32 +359,39 @@ export default function CceJuarezClient() {
             }
             @media (max-width: 640px) {
               .cce-header-inner {
-                flex-direction: row !important;
-                flex-wrap: nowrap !important;
+                flex-direction: column !important;
+                align-items: stretch !important;
+                gap: 10px !important;
+              }
+              .cce-brand-group {
+                display: flex !important;
+                align-items: center !important;
                 justify-content: space-between !important;
+                width: 100% !important;
               }
               .cce-brand-title {
-                font-size: 15px !important;
+                font-size: 16px !important;
               }
               .cce-badge-cce {
-                display: none !important;
+                padding: 4px 10px !important;
               }
-              .cce-header-divider {
-                display: none !important;
+              .cce-badge-cce span {
+                font-size: 12px !important;
               }
               .cce-btn-header-clabe {
                 display: none !important;
               }
-              .cce-studio-label {
-                display: none !important;
-              }
               .cce-header-actions {
-                gap: 6px !important;
+                display: flex !important;
+                width: 100% !important;
+                gap: 8px !important;
               }
               .cce-header-actions .cce-btn {
-                padding: 6px 10px !important;
-                font-size: 0.78rem !important;
-                min-height: 40px !important;
+                flex: 1 1 0% !important;
+                justify-content: center !important;
+                padding: 8px 12px !important;
+                font-size: 0.85rem !important;
+                min-height: 44px !important;
               }
             }
             @media (max-width: 480px) {
@@ -420,7 +427,7 @@ export default function CceJuarezClient() {
           }}
         >
           {/* Brand Group */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div className="cce-brand-group" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
