@@ -610,6 +610,7 @@ export default function NuevaLagunaClient() {
 
         .phone-mockup {
           width: 320px;
+          max-width: 100%;
           margin: 0 auto;
           background: #111;
           border-radius: 42px;
@@ -752,12 +753,15 @@ export default function NuevaLagunaClient() {
           color: #FFF;
           font-size: 0.8rem;
           font-weight: 800;
-          padding: 6px 12px;
+          padding: 8px 14px;
           border-radius: 6px;
           border: none;
           cursor: pointer;
-          display: flex;
+          display: inline-flex;
           align-items: center;
+          justify-content: center;
+          min-height: 44px;
+          min-width: 44px;
           gap: 5px;
           transition: transform 0.1s;
         }
@@ -1047,6 +1051,33 @@ export default function NuevaLagunaClient() {
           line-height: 1.2;
         }
 
+        .nl-screens-features-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1.5rem;
+          margin-top: 2rem;
+        }
+
+        .nl-loyalty-box {
+          background: #FFF;
+          border: 2px solid var(--nl-french-bread-border);
+          border-radius: 24px;
+          padding: 2.5rem;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 2.5rem;
+          align-items: center;
+        }
+
+        .nl-whatsapp-link {
+          min-height: 44px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 6px;
+        }
+
         /* TARJETA DE PLAN ÚNICO ($6,000) */
         .nl-single-plan-card {
           background: #FFF;
@@ -1173,6 +1204,7 @@ export default function NuevaLagunaClient() {
 
         .nl-input {
           width: 100%;
+          min-height: 44px;
           padding: 0.75rem 1rem;
           border: 1.5px solid var(--nl-french-bread-border);
           border-radius: 10px;
@@ -1239,7 +1271,26 @@ export default function NuevaLagunaClient() {
           }
         }
 
+        @media (max-width: 768px) {
+          .nl-screens-features-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+          }
+          .nl-loyalty-box {
+            grid-template-columns: 1fr;
+            padding: 1.5rem 1.25rem;
+            gap: 1.8rem;
+          }
+          .phone-mockup {
+            max-width: 100%;
+            width: 100%;
+          }
+        }
+
         @media (max-width: 580px) {
+          .nl-sim-box {
+            padding: 1.25rem 0.75rem !important;
+          }
           .nl-sim-qr-box {
             flex-direction: column;
             text-align: center;
@@ -1602,7 +1653,7 @@ export default function NuevaLagunaClient() {
               </div>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.5rem", marginTop: "2rem" }}>
+            <div className="nl-screens-features-grid">
               <div style={{ background: "#1C1C1C", padding: "1.3rem", borderRadius: "14px", border: "1px solid #333" }}>
                 <div style={{ color: "var(--nl-yolk)", fontSize: "1.2rem", marginBottom: "0.5rem" }}>
                   <i className="fa fa-fire"></i>
@@ -1659,17 +1710,7 @@ export default function NuevaLagunaClient() {
             acumula sellos digitales en su teléfono. El sistema le envía recordatorios oportunos para volver a comer entre semana.
           </p>
 
-          <div style={{
-            background: "#FFF",
-            border: "2px solid var(--nl-french-bread-border)",
-            borderRadius: "24px",
-            padding: "2.5rem",
-            boxShadow: "0 10px 30px rgba(0,0,0,0.04)",
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "2.5rem",
-            alignItems: "center"
-          }}>
+          <div className="nl-loyalty-box">
             <div>
               <h3 style={{ fontFamily: "var(--font-display)", fontSize: "1.6rem", color: "var(--nl-green-deep)", marginBottom: "1rem", textTransform: "uppercase" }}>
                 ¿Cómo Funciona el Pasaporte Digital?
@@ -1714,7 +1755,7 @@ export default function NuevaLagunaClient() {
                 La Nueva Laguna • Comensal Frecuente
               </h4>
 
-              <div style={{ display: "flex", justifyContent: "center", gap: "10px", margin: "1.5rem 0" }}>
+              <div style={{ display: "flex", justifyContent: "center", gap: "10px", margin: "1.5rem 0", flexWrap: "wrap" }}>
                 {[1, 2, 3, 4].map((s) => (
                   <div key={s} style={{
                     width: "48px",
@@ -1844,7 +1885,8 @@ export default function NuevaLagunaClient() {
                     href={`https://wa.me/526564614059?text=${whatsappMessage}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ color: "#FFF", fontSize: "0.82rem", textDecoration: "underline", display: "inline-flex", alignItems: "center", gap: "5px" }}
+                    className="nl-whatsapp-link"
+                    style={{ color: "#FFF", fontSize: "0.88rem", textDecoration: "underline" }}
                   >
                     <i className="fa-brands fa-whatsapp"></i> Preguntar dudas por WhatsApp
                   </a>
