@@ -250,8 +250,8 @@ export default function CceJuarezClient() {
                 flex-shrink: 0 !important;
               }
               .cce-badge-cce img {
-                width: 14px !important;
-                height: 14px !important;
+                height: 16px !important;
+                width: auto !important;
               }
               .cce-badge-cce span {
                 font-size: 10px !important;
@@ -375,7 +375,7 @@ export default function CceJuarezClient() {
               <img
                 src="/assets/cce-juarez/logo_cce.png"
                 alt="Logo CCE Ciudad Juárez"
-                style={{ width: '18px', height: '18px', objectFit: 'contain' }}
+                style={{ height: '20px', width: 'auto', objectFit: 'contain' }}
               />
               <span
                 style={{
@@ -476,7 +476,7 @@ export default function CceJuarezClient() {
                 style={{
                   fontSize: '13px',
                   fontWeight: 800,
-                  color: 'var(--cce-gold-dark)',
+                  color: 'var(--cce-wood)',
                   letterSpacing: '0.8px',
                   textTransform: 'uppercase',
                   marginBottom: '8px',
@@ -515,15 +515,13 @@ export default function CceJuarezClient() {
                 Entrega de Galardones 2026 · Conferencia Magistral Carlos Loret de Mola
               </div>
 
+              <p className="cce-flow-text" style={{ fontSize: '1.0625rem', marginBottom: '12px' }}>
+                Propuesta tecnológica y creativa de <strong>Apolograma</strong> para respaldar la presidencia del{' '}
+                <strong>Mtro. Iván Lara</strong> y al Consejo Directivo del <strong>CCE Ciudad Juárez</strong>.
+              </p>
               <p className="cce-flow-text" style={{ fontSize: '1.0625rem', marginBottom: '24px' }}>
-                Propuesta integral de servicios tecnológicos y creativos presentada por{' '}
-                <strong>Apolograma</strong> para respaldar la presidencia del <strong>Mtro. Iván Lara</strong> y el
-                Consejo Directivo del <strong>CCE Ciudad Juárez</strong>. Diseñada para resolver con
-                máxima puntualidad la <strong>Invitación Digital Web</strong>, la <strong>Estrategia de
-                Contenido en Facebook</strong> (Reels, Carruseles y elevación de línea visual), la{' '}
-                <strong>Campaña de Pauta en Meta Ads</strong> para venta de boletos y el{' '}
-                <strong>Kit Gráfico para la Rueda de Prensa</strong> ante medios de comunicación con
-                asistencia automatizada por WhatsApp.
+                Despliegue integral de invitación web, estrategia de contenidos en Facebook (Reels y carruseles), pauta
+                en Meta Ads y kit digital para rueda de prensa con bot de WhatsApp.
               </p>
 
               {/* Event Context Badges */}
@@ -669,6 +667,7 @@ export default function CceJuarezClient() {
                   <img
                     src="/assets/cce-juarez/loret_oficial.png"
                     alt="Carlos Loret de Mola - Conferencia Magistral CCE Ciudad Juárez"
+                    decoding="async"
                     style={{
                       width: '100%',
                       height: '100%',
@@ -822,7 +821,7 @@ export default function CceJuarezClient() {
                 border: '1px solid #E2E8F0',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--cce-gold-dark)', marginBottom: '8px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--cce-wood)', marginBottom: '8px' }}>
                 <Video size={18} />
                 <span style={{ fontSize: '13px', fontWeight: 800, letterSpacing: '0.5px' }}>FACEBOOK Y REELS</span>
               </div>
@@ -902,8 +901,8 @@ export default function CceJuarezClient() {
               Los 4 Entregables de Apolograma
             </h2>
             <p className="cce-flow-text">
-              Propuesta tecnológica y creativa construida para resolver exactamente los frentes
-              operativos discutidos con el <strong>Mtro. Iván Lara</strong>, asegurando un lanzamiento exitoso y puntual.
+              Solución tecnológica diseñada para los frentes prioritarios acordados con el{' '}
+              <strong>Mtro. Iván Lara</strong>, garantizando entrega antes del anuncio oficial a medios.
             </p>
           </div>
 
@@ -940,7 +939,7 @@ export default function CceJuarezClient() {
                   <FileText size={24} />
                 </div>
                 <div>
-                  <span style={{ fontSize: '13px', fontWeight: 800, color: 'var(--cce-emerald-light)', letterSpacing: '0.8px' }}>
+                  <span style={{ fontSize: '13px', fontWeight: 800, color: 'var(--cce-emerald)', letterSpacing: '0.8px' }}>
                     ENTREGABLE 1
                   </span>
                   <h3 style={{ margin: 0, fontSize: '1.25rem' }}>
@@ -954,10 +953,12 @@ export default function CceJuarezClient() {
               <img
                 src="/assets/cce-juarez/entregable-1-landing.png"
                 alt="Vista previa Invitación Digital Web Mobile-First"
+                loading="lazy"
+                decoding="async"
                 style={{
                   width: '100%',
                   height: 'auto',
-                  aspectRatio: '16/9',
+                  aspectRatio: '18/10',
                   objectFit: 'cover',
                   borderRadius: '10px',
                   marginBottom: '18px',
@@ -967,8 +968,8 @@ export default function CceJuarezClient() {
               />
 
               <p className="cce-flow-text" style={{ marginBottom: '18px' }}>
-                Plataforma web oficial de carga instantánea optimizada para celulares, diseñada para enviarse por
-                WhatsApp a empresarios, consejeros y líderes gremiales:
+                Plataforma web oficial de carga rápida y diseño mobile-first, lista para compartirse por
+                WhatsApp a consejeros y líderes de las cámaras empresariales:
               </p>
 
               <ul
@@ -1008,7 +1009,7 @@ export default function CceJuarezClient() {
               >
                 <ShieldCheck size={18} color="#059669" />
                 <span style={{ fontSize: '0.875rem', fontWeight: 600, color: '#065F46' }}>
-                  Dominio seguro SSL, velocidad ultrarrápida y diseño adaptado a celulares.
+                  Dominio seguro SSL, alta velocidad de respuesta y maquetación mobile-first.
                 </span>
               </div>
             </div>
@@ -1038,7 +1039,7 @@ export default function CceJuarezClient() {
                   <Video size={24} />
                 </div>
                 <div>
-                  <span style={{ fontSize: '13px', fontWeight: 800, color: 'var(--cce-gold-dark)', letterSpacing: '0.8px' }}>
+                  <span style={{ fontSize: '13px', fontWeight: 800, color: 'var(--cce-wood)', letterSpacing: '0.8px' }}>
                     ENTREGABLE 2
                   </span>
                   <h3 style={{ margin: 0, fontSize: '1.25rem' }}>
@@ -1052,10 +1053,12 @@ export default function CceJuarezClient() {
               <img
                 src="/assets/cce-juarez/entregable-2-reels.png"
                 alt="Vista previa Contenido Facebook Reels y Carruseles"
+                loading="lazy"
+                decoding="async"
                 style={{
                   width: '100%',
                   height: 'auto',
-                  aspectRatio: '16/9',
+                  aspectRatio: '18/10',
                   objectFit: 'cover',
                   borderRadius: '10px',
                   marginBottom: '18px',
@@ -1065,8 +1068,8 @@ export default function CceJuarezClient() {
               />
 
               <p className="cce-flow-text" style={{ marginBottom: '18px' }}>
-                Estrategia y producción de contenidos de alto impacto para la página de Facebook oficial, elevando
-                la identidad visual del evento a nivel premium:
+                Producción de contenidos institucionales para la página oficial de Facebook del CCE Juárez,
+                proyectando la investidura del encuentro con sobriedad ejecutiva:
               </p>
 
               <ul
@@ -1089,7 +1092,7 @@ export default function CceJuarezClient() {
                   <strong>Diseño y publicación de carruseles:</strong> Piezas informativas multislide para Facebook sobre la trayectoria del ponente, los temas de análisis y la relevancia del encuentro empresarial.
                 </li>
                 <li>
-                  <strong>Publicación y calendarización directa:</strong> Coordinación de contenidos de aquí al día del evento para mantener una presencia activa y seria.
+                  <strong>Publicación y calendarización directa:</strong> Difusión programada de piezas hacia el 19 de noviembre para sostener presencia activa y ordenada.
                 </li>
               </ul>
 
@@ -1136,7 +1139,7 @@ export default function CceJuarezClient() {
                   <Target size={24} />
                 </div>
                 <div>
-                  <span style={{ fontSize: '13px', fontWeight: 800, color: 'var(--cce-emerald-light)', letterSpacing: '0.8px' }}>
+                  <span style={{ fontSize: '13px', fontWeight: 800, color: 'var(--cce-emerald)', letterSpacing: '0.8px' }}>
                     ENTREGABLE 3
                   </span>
                   <h3 style={{ margin: 0, fontSize: '1.25rem' }}>
@@ -1150,10 +1153,12 @@ export default function CceJuarezClient() {
               <img
                 src="/assets/cce-juarez/entregable-3-pauta.png"
                 alt="Vista previa Estrategia y Pauta en Facebook Ads Meta Ads"
+                loading="lazy"
+                decoding="async"
                 style={{
                   width: '100%',
                   height: 'auto',
-                  aspectRatio: '16/9',
+                  aspectRatio: '18/10',
                   objectFit: 'cover',
                   borderRadius: '10px',
                   marginBottom: '18px',
@@ -1163,8 +1168,8 @@ export default function CceJuarezClient() {
               />
 
               <p className="cce-flow-text" style={{ marginBottom: '18px' }}>
-                Campaña institucional quirúrgica para acelerar la colocación de boletos y maximizar el posicionamiento
-                del CCE:
+                Campaña institucional en Meta Ads para impulsar la colocación de boletos y consolidar el
+                posicionamiento del CCE en la región:
               </p>
 
               <ul
@@ -1230,7 +1235,7 @@ export default function CceJuarezClient() {
                   <Bot size={24} />
                 </div>
                 <div>
-                  <span style={{ fontSize: '13px', fontWeight: 800, color: 'var(--cce-emerald-light)', letterSpacing: '0.8px' }}>
+                  <span style={{ fontSize: '13px', fontWeight: 800, color: 'var(--cce-emerald)', letterSpacing: '0.8px' }}>
                     ENTREGABLE 4
                   </span>
                   <h3 style={{ margin: 0, fontSize: '1.25rem' }}>
@@ -1244,10 +1249,12 @@ export default function CceJuarezClient() {
               <img
                 src="/assets/cce-juarez/entregable-4-prensa-bot.png"
                 alt="Vista previa Kit Rueda de Prensa y Automatización WhatsApp"
+                loading="lazy"
+                decoding="async"
                 style={{
                   width: '100%',
                   height: 'auto',
-                  aspectRatio: '16/9',
+                  aspectRatio: '18/10',
                   objectFit: 'cover',
                   borderRadius: '10px',
                   marginBottom: '18px',
@@ -1275,10 +1282,10 @@ export default function CceJuarezClient() {
                   <strong>Artes digitales para Rueda de Prensa:</strong> Maquetación en alta resolución para pantallas, tótem o backing del anuncio oficial del <strong>Mtro. Iván Lara</strong> ante medios de comunicación.
                 </li>
                 <li>
-                  <strong>Asistente automatizado de WhatsApp:</strong> Respuestas inteligentes para preguntas frecuentes (horarios, sede Cibeles, dinámica de boletos físicos) que filtran curiosos y evitan saturar el teléfono personal del <strong>Mtro. Iván Lara</strong>.
+                  <strong>Asistente automatizado de WhatsApp:</strong> Respuestas inmediatas a dudas iniciales (horarios, sede Cibeles y boletos físicos) que resuelven inquietudes frecuentes y evitan saturar el teléfono del <strong>Mtro. Iván Lara</strong>.
                 </li>
                 <li>
-                  <strong>Canalización confidencial directa:</strong> Cuando un prospecto serio o interesado en patrocinios escriba, el bot lo conecta directamente con el <strong>Mtro. Iván Lara</strong> de forma ordenada y privada.
+                  <strong>Canalización confidencial directa:</strong> Enlace inmediato y discreto con el <strong>Mtro. Iván Lara</strong> ante solicitudes formales de empresas interesadas en patrocinios.
                 </li>
                 <li>
                   <em>Nota de alcance:</em> La captación y negociación de patrocinios es gestionada 100% por la presidencia del CCE; Apolograma provee la infraestructura técnica de enrutamiento y filtro.
@@ -1463,7 +1470,7 @@ export default function CceJuarezClient() {
               style={{
                 display: 'inline-block',
                 background: 'var(--cce-gold-light)',
-                color: 'var(--cce-gold-dark)',
+                color: 'var(--cce-wood)',
                 padding: '4px 12px',
                 borderRadius: '6px',
                 fontSize: '13px',
@@ -1717,6 +1724,197 @@ export default function CceJuarezClient() {
         </div>
       </section>
 
+      {/* SECCIÓN: PREGUNTAS FRECUENTES (FAQS) */}
+      <section style={{ padding: '64px 20px', background: '#FFFFFF', borderTop: '1px solid #E2E8F0' }}>
+        <div style={{ maxWidth: '860px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+            <div
+              style={{
+                display: 'inline-block',
+                background: 'var(--cce-emerald-wash)',
+                color: 'var(--cce-emerald)',
+                padding: '4px 12px',
+                borderRadius: '6px',
+                fontSize: '13px',
+                fontWeight: 800,
+                letterSpacing: '1px',
+                marginBottom: '12px',
+              }}
+            >
+              RESOLUCIÓN DE DUDAS
+            </div>
+            <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.3rem)', color: 'var(--cce-emerald)', marginBottom: '12px' }}>
+              Preguntas Frecuentes
+            </h2>
+            <p className="cce-flow-text">
+              Claridad operativa y alcance delimitado para el Consejo Directivo del CCE Juárez.
+            </p>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+            {/* FAQ 1 */}
+            <details
+              style={{
+                background: 'var(--cce-bg-cream)',
+                border: '1px solid #E2E8F0',
+                borderRadius: '12px',
+                padding: '16px 20px',
+                cursor: 'pointer',
+              }}
+            >
+              <summary
+                style={{
+                  fontWeight: 800,
+                  fontSize: '1rem',
+                  color: 'var(--cce-text-dark)',
+                  listStyle: 'none',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  minHeight: '44px',
+                }}
+              >
+                <span>¿Qué incluye el paquete integral de $16,000 MXN + IVA?</span>
+                <span style={{ color: 'var(--cce-emerald)', fontSize: '1.25rem', fontWeight: 700 }}>+</span>
+              </summary>
+              <p className="cce-flow-text" style={{ margin: '14px 0 0 0', fontSize: '0.9375rem' }}>
+                Cubre la totalidad de los 4 entregables: Invitación Digital Web, estrategia de contenidos en Facebook
+                (Reels y carruseles), configuración técnica de pauta en Meta Ads y kit digital para la rueda de prensa
+                con bot de atención en WhatsApp.
+              </p>
+            </details>
+
+            {/* FAQ 2 */}
+            <details
+              style={{
+                background: 'var(--cce-bg-cream)',
+                border: '1px solid #E2E8F0',
+                borderRadius: '12px',
+                padding: '16px 20px',
+                cursor: 'pointer',
+              }}
+            >
+              <summary
+                style={{
+                  fontWeight: 800,
+                  fontSize: '1rem',
+                  color: 'var(--cce-text-dark)',
+                  listStyle: 'none',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  minHeight: '44px',
+                }}
+              >
+                <span>¿Quién gestiona la captación de patrocinios y cobro de boletos?</span>
+                <span style={{ color: 'var(--cce-emerald)', fontSize: '1.25rem', fontWeight: 700 }}>+</span>
+              </summary>
+              <p className="cce-flow-text" style={{ margin: '14px 0 0 0', fontSize: '0.9375rem' }}>
+                La captación y negociación de patrocinios, así como la comercialización y cobro de boletos físicos con
+                holograma, es gestionada 100% por la presidencia del CCE Juárez. Apolograma provee exclusivamente la
+                infraestructura técnica y digital de filtro y enrutamiento.
+              </p>
+            </details>
+
+            {/* FAQ 3 */}
+            <details
+              style={{
+                background: 'var(--cce-bg-cream)',
+                border: '1px solid #E2E8F0',
+                borderRadius: '12px',
+                padding: '16px 20px',
+                cursor: 'pointer',
+              }}
+            >
+              <summary
+                style={{
+                  fontWeight: 800,
+                  fontSize: '1rem',
+                  color: 'var(--cce-text-dark)',
+                  listStyle: 'none',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  minHeight: '44px',
+                }}
+              >
+                <span>¿Cuál es el tiempo de entrega y cuándo estará lista la landing?</span>
+                <span style={{ color: 'var(--cce-emerald)', fontSize: '1.25rem', fontWeight: 700 }}>+</span>
+              </summary>
+              <p className="cce-flow-text" style={{ margin: '14px 0 0 0', fontSize: '0.9375rem' }}>
+                El cronograma de entrega es acelerado de 5 a 7 días hábiles a partir de la confirmación, garantizando
+                que los materiales estén validados y listos antes de la rueda de prensa oficial del Mtro. Iván Lara ante
+                medios de comunicación.
+              </p>
+            </details>
+
+            {/* FAQ 4 */}
+            <details
+              style={{
+                background: 'var(--cce-bg-cream)',
+                border: '1px solid #E2E8F0',
+                borderRadius: '12px',
+                padding: '16px 20px',
+                cursor: 'pointer',
+              }}
+            >
+              <summary
+                style={{
+                  fontWeight: 800,
+                  fontSize: '1rem',
+                  color: 'var(--cce-text-dark)',
+                  listStyle: 'none',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  minHeight: '44px',
+                }}
+              >
+                <span>¿Cómo se realiza el pago y la facturación fiscal?</span>
+                <span style={{ color: 'var(--cce-emerald)', fontSize: '1.25rem', fontWeight: 700 }}>+</span>
+              </summary>
+              <p className="cce-flow-text" style={{ margin: '14px 0 0 0', fontSize: '0.9375rem' }}>
+                Se formaliza en una sola exhibición por $18,560 MXN ($16,000 MXN base + $2,560 MXN de 16% IVA), con
+                factura electrónica CFDI emitida por TECNOLOGIES TECZA, S. DE R.L. DE C.V. y transferencia a la cuenta
+                oficial Banregio.
+              </p>
+            </details>
+
+            {/* FAQ 5 */}
+            <details
+              style={{
+                background: 'var(--cce-bg-cream)',
+                border: '1px solid #E2E8F0',
+                borderRadius: '12px',
+                padding: '16px 20px',
+                cursor: 'pointer',
+              }}
+            >
+              <summary
+                style={{
+                  fontWeight: 800,
+                  fontSize: '1rem',
+                  color: 'var(--cce-text-dark)',
+                  listStyle: 'none',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  minHeight: '44px',
+                }}
+              >
+                <span>¿Cómo opera la inversión publicitaria en Meta Ads?</span>
+                <span style={{ color: 'var(--cce-emerald)', fontSize: '1.25rem', fontWeight: 700 }}>+</span>
+              </summary>
+              <p className="cce-flow-text" style={{ margin: '14px 0 0 0', fontSize: '0.9375rem' }}>
+                La propuesta cubre el diseño gráfico, segmentación y optimización de las campañas. La inversión directa
+                en medios es fijada por el CCE y pagada directamente a Meta Ads desde su método de pago, sin recargos
+                ni comisiones de agencia.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+
       {/* INSTITUTIONAL FOOTER */}
       <footer
         style={{
@@ -1746,16 +1944,13 @@ export default function CceJuarezClient() {
               paddingBottom: '24px',
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/assets/cce-juarez/logo_cce.png"
-                alt="Escudo CCE Ciudad Juárez"
-                style={{ width: '28px', height: '28px', objectFit: 'contain' }}
+                src="/assets/apolograma-logo-v2.png"
+                alt="Logo Apolograma Studio"
+                style={{ height: '20px', width: 'auto', objectFit: 'contain' }}
               />
-              <span style={{ fontSize: '18px', fontWeight: 900, color: '#FFFFFF' }}>
-                APOLOGRAMA
-              </span>
               <span
                 style={{
                   fontSize: '13px',
