@@ -189,6 +189,9 @@ export interface ServiceModuleItem {
   badge: string;
   description: string;
   bullets: string[];
+  image: string;
+  imageAlt: string;
+  imageBadge: string;
 }
 
 export const SETUP_MODULES: ServiceModuleItem[] = [
@@ -199,6 +202,9 @@ export const SETUP_MODULES: ServiceModuleItem[] = [
     period: 'setup',
     tag: 'Arquitectura de Prestigio',
     badge: 'Setup Inicial',
+    image: '/assets/dr-carlos-perzabal/modulo_branding_identidad.jpg',
+    imageAlt: 'Mockup de Papelería Médica y Monograma Quirúrgico Dr. Carlos Perzabal',
+    imageBadge: 'DIRECCIÓN DE ARTE',
     description:
       'Sistema visual quirúrgico sobrio, monograma institucional del Dr. Carlos Perzabal, tipografía clínica, manual de aplicación de marca y papelería médica para consultorio (recetarios, hojas membretadas y consentimientos informados). Erradica cualquier estigma visual de clínica low-cost.',
     bullets: [
@@ -215,6 +221,9 @@ export const SETUP_MODULES: ServiceModuleItem[] = [
     period: 'setup',
     tag: 'Infraestructura Tecnológica',
     badge: 'Setup Inicial',
+    image: '/assets/dr-carlos-perzabal/modulo_webapp_binacional.jpg',
+    imageAlt: 'Portal Quirúrgico Multi-Dispositivo MacBook Pro e iPad Pro',
+    imageBadge: 'WEBAPP MULTI-DEVICE',
     description:
       'Portal web médico de alta velocidad (<1.2s en Vercel Edge) con arquitectura bilateral (Juárez · El Paso, TX), fichas técnicas interactivas con esquemas quirúrgicos vectoriales (Manga LSG, Bypass LRYGB, Vesícula CVS, Hernias TAPP y Consola Da Vinci), calculadoras clínicas y marco de turismo médico para eludir deducibles de EE.UU.',
     bullets: [
@@ -234,6 +243,9 @@ export const MONTHLY_MODULES: ServiceModuleItem[] = [
     period: 'monthly',
     tag: 'Dirección Editorial Continua',
     badge: 'Iguala Mensual',
+    image: '/assets/dr-carlos-perzabal/modulo_marketing_autoridad.jpg',
+    imageAlt: 'Tablero de Producción Audiovisual y Calendario Quirúrgico',
+    imageBadge: 'PRODUCCIÓN CLÍNICA',
     description:
       'Estrategia y dirección editorial continua: calendario mensual de contenidos clínicos, educación médica sobre patologías digestivas, preparación preoperatoria, desmitificación de bariatría y casos clínicos éticos. Cero promociones vulgares ni lenguaje de liquidación.',
     bullets: [
@@ -250,6 +262,9 @@ export const MONTHLY_MODULES: ServiceModuleItem[] = [
     period: 'monthly',
     tag: 'Gestión de Medios Digitales',
     badge: 'Iguala Mensual',
+    image: '/assets/dr-carlos-perzabal/modulo_pauta_meta.jpg',
+    imageAlt: 'Consola Meta Ads Manager con Geofencing Binacional El Paso Juárez',
+    imageBadge: 'META ADS MANAGER',
     description:
       'Gestión avanzada de campañas en Meta Business Suite hipersegmentadas en Ciudad Juárez y el condado de El Paso (Texas). Embudos de tráfico calificado hacia pacientes con necesidad de bariatría, colecistectomía o cirugía robótica. *(Inversión de pauta pagada directamente por el cliente a Meta).*',
     bullets: [
@@ -266,6 +281,9 @@ export const MONTHLY_MODULES: ServiceModuleItem[] = [
     period: 'monthly',
     tag: 'Automatización Clínica',
     badge: 'Iguala Mensual',
+    image: '/assets/dr-carlos-perzabal/modulo_bot_whatsapp.jpg',
+    imageAlt: 'iPhone 16 Pro con Chat Clínico Verificado y Triaje ASMBS',
+    imageBadge: 'WHATSAPP CLOUD API',
     description:
       'Asistente inteligente sobre WhatsApp Cloud API disponible 24/7 con árbol de triaje de 4 ramas (Bariatría bajo guías ASMBS 2022, Vesícula, Hernia y Robótica), cálculo preliminar y despacho automático de la ficha del paciente al consultorio.',
     bullets: [
@@ -282,6 +300,9 @@ export const MONTHLY_MODULES: ServiceModuleItem[] = [
     period: 'monthly',
     tag: 'Pipeline Clínico de Pacientes',
     badge: 'Iguala Mensual',
+    image: '/assets/dr-carlos-perzabal/modulo_crm_quirurgico.jpg',
+    imageAlt: 'Dashboard SaaS de Pipeline Quirúrgico Kanban 5 Etapas',
+    imageBadge: 'PIPELINE SAAS KANBAN',
     description:
       'Plataforma de gestión centralizada y pipeline de pacientes: trazabilidad desde el primer contacto (Lead Web / WhatsApp) hasta la consulta de valoración, programación de quirófano y seguimiento postoperatorio, optimizando el flujo de prospectos calificados.',
     bullets: [
@@ -543,6 +564,18 @@ export default function DrCarlosPerzabalClient() {
             }).catch(() => {});
           }
         }
+
+        const glow = document.getElementById('ambient-cursor-glow');
+        const onMouseMove = (e: MouseEvent) => {
+          if (glow) {
+            glow.style.left = `${e.clientX}px`;
+            glow.style.top = `${e.clientY}px`;
+          }
+        };
+        window.addEventListener('mousemove', onMouseMove);
+        return () => {
+          window.removeEventListener('mousemove', onMouseMove);
+        };
       }
     } catch {
       // Safe fallback
@@ -836,22 +869,26 @@ export default function DrCarlosPerzabalClient() {
       <style
         dangerouslySetInnerHTML={{
           __html: `
+            @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=JetBrains+Mono:wght@500;700&display=swap');
+
             :root {
-              --doc-slate: #070D18;
-              --doc-slate-card: #0B1426;
-              --doc-slate-card-hover: #112240;
+              --doc-slate: #081325;
+              --doc-slate-card: rgba(13, 27, 51, 0.72);
+              --doc-slate-card-hover: rgba(18, 37, 70, 0.88);
               --doc-teal: #00A3E0;
               --doc-teal-light: #38BDF8;
               --doc-teal-dark: #0284C7;
-              --doc-teal-glow: rgba(0, 163, 224, 0.15);
+              --doc-teal-glow: rgba(0, 163, 224, 0.22);
               --doc-gold: #D4AF37;
               --doc-gold-dark: #B8860B;
               --doc-gold-light: #FEF3C7;
-              --doc-white: #F8FAFC;
+              --doc-white: #F1F5F9;
               --doc-muted: #94A3B8;
-              --doc-border: rgba(148, 163, 184, 0.18);
+              --doc-border: rgba(56, 189, 248, 0.16);
               --doc-border-focus: rgba(0, 163, 224, 0.5);
               --doc-success: #10B981;
+              --font-display: 'Instrument Serif', Georgia, serif;
+              --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             }
 
             *, *::before, *::after {
@@ -864,47 +901,157 @@ export default function DrCarlosPerzabalClient() {
               overflow-x: hidden;
               background-color: var(--doc-slate);
               color: var(--doc-white);
-              font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+              font-family: var(--font-body);
               -webkit-font-smoothing: antialiased;
             }
 
             .perzabal-root {
+              position: relative;
               overflow-x: hidden;
               width: 100%;
               max-width: 100vw;
               min-height: 100vh;
-              background: var(--doc-slate);
+              background: radial-gradient(circle at 50% 0%, #0d2342 0%, #081325 65%, #050c18 100%);
               color: var(--doc-white);
               box-sizing: border-box;
+            }
+
+            /* Animated Multi-Layer Surgical Background */
+            .doc-animated-ambient-bg {
+              position: fixed;
+              inset: 0;
+              pointer-events: none;
+              z-index: 0;
+              overflow: hidden;
+            }
+
+            .doc-aurora-orb {
+              position: absolute;
+              border-radius: 50%;
+              filter: blur(90px);
+              opacity: 0.45;
+              will-change: transform, opacity;
+            }
+
+            .doc-orb-1 {
+              width: 550px;
+              height: 550px;
+              top: -120px;
+              left: 15%;
+              background: radial-gradient(circle, rgba(0, 163, 224, 0.35) 0%, rgba(2, 132, 199, 0.05) 70%, transparent 100%);
+              animation: auroraFloat1 22s ease-in-out infinite alternate;
+            }
+
+            .doc-orb-2 {
+              width: 600px;
+              height: 600px;
+              top: 35%;
+              right: -100px;
+              background: radial-gradient(circle, rgba(37, 99, 235, 0.28) 0%, rgba(29, 78, 216, 0.05) 70%, transparent 100%);
+              animation: auroraFloat2 26s ease-in-out infinite alternate;
+            }
+
+            .doc-orb-3 {
+              width: 480px;
+              height: 480px;
+              bottom: 10%;
+              left: -80px;
+              background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.04) 70%, transparent 100%);
+              animation: auroraFloat1 20s ease-in-out infinite alternate-reverse;
+            }
+
+            .doc-orb-4 {
+              width: 450px;
+              height: 450px;
+              top: 70%;
+              right: 20%;
+              background: radial-gradient(circle, rgba(212, 175, 55, 0.18) 0%, rgba(184, 134, 11, 0.03) 70%, transparent 100%);
+              animation: auroraFloat2 24s ease-in-out infinite alternate;
+            }
+
+            .doc-surgical-grid-mesh {
+              position: absolute;
+              inset: 0;
+              background-image: radial-gradient(rgba(56, 189, 248, 0.11) 1.2px, transparent 1.2px);
+              background-size: 34px 34px;
+              mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.7) 0%, transparent 85%);
+              -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.7) 0%, transparent 85%);
+              opacity: 0.6;
+            }
+
+            .doc-cursor-glow {
+              position: fixed;
+              width: 500px;
+              height: 500px;
+              border-radius: 50%;
+              pointer-events: none;
+              transform: translate(-50%, -50%);
+              background: radial-gradient(circle, rgba(0, 163, 224, 0.12) 0%, transparent 65%);
+              transition: opacity 0.3s ease;
+              z-index: 1;
+            }
+
+            @media (max-width: 768px) {
+              .doc-cursor-glow {
+                display: none !important;
+              }
+            }
+
+            @keyframes auroraFloat1 {
+              0% { transform: translate3d(0, 0, 0) scale(1); }
+              50% { transform: translate3d(60px, 40px, 0) scale(1.08); }
+              100% { transform: translate3d(-40px, 80px, 0) scale(0.95); }
+            }
+
+            @keyframes auroraFloat2 {
+              0% { transform: translate3d(0, 0, 0) scale(1); }
+              50% { transform: translate3d(-70px, -50px, 0) scale(1.12); }
+              100% { transform: translate3d(50px, -30px, 0) scale(0.92); }
             }
 
             /* Responsive Typography Clamp */
             h1, h2, h3, h4 {
               text-wrap: balance;
-              color: var(--doc-white);
-              letter-spacing: -0.025em;
-              font-weight: 800;
               overflow-wrap: break-word;
               word-break: break-word;
               margin-top: 0;
             }
 
             h1 {
-              font-size: clamp(1.6rem, 5.5vw, 3.2rem);
-              line-height: 1.15;
+              font-family: var(--font-display);
+              font-size: clamp(2rem, 5.5vw, 3.8rem);
+              line-height: 1.12;
+              font-weight: 400;
+              letter-spacing: -0.015em;
+              color: #F8FAFC;
+            }
+
+            h1 em, h1 i, h1 .serif-accent {
+              font-style: italic;
+              color: var(--doc-teal-light);
             }
 
             h2 {
-              font-size: clamp(1.35rem, 4vw, 2.3rem);
+              font-family: var(--font-body);
+              font-size: clamp(1.4rem, 4vw, 2.4rem);
               line-height: 1.25;
+              font-weight: 800;
+              letter-spacing: -0.03em;
+              background: linear-gradient(180deg, #FFFFFF 0%, #BAE6FD 100%);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
             }
 
             h3 {
+              font-family: var(--font-body);
               font-size: clamp(1.1rem, 3vw, 1.5rem);
               line-height: 1.35;
+              font-weight: 700;
+              color: #F8FAFC;
             }
 
             p {
+              font-family: var(--font-body);
               font-size: clamp(0.95rem, 1.8vw, 1.05rem);
               line-height: 1.65;
               color: var(--doc-muted);
@@ -1193,17 +1340,79 @@ export default function DrCarlosPerzabalClient() {
 
             .doc-component-card {
               background: var(--doc-slate-card);
+              backdrop-filter: blur(16px);
+              -webkit-backdrop-filter: blur(16px);
               border: 1px solid var(--doc-border);
-              border-radius: 16px;
-              padding: 32px;
+              border-radius: 18px;
+              padding: 24px;
               display: flex;
               flex-direction: column;
               justify-content: space-between;
-              transition: all 0.2s ease;
+              transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+              box-shadow: 0 16px 36px -8px rgba(2, 8, 20, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.06);
             }
             .doc-component-card:hover {
-              border-color: var(--doc-teal);
-              box-shadow: 0 10px 30px rgba(0, 163, 224, 0.08);
+              border-color: var(--doc-teal-light);
+              transform: translateY(-3px);
+              box-shadow: 0 20px 40px -8px rgba(0, 163, 224, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+            }
+
+            .doc-module-preview-frame {
+              position: relative;
+              width: 100%;
+              height: 190px;
+              border-radius: 12px;
+              overflow: hidden;
+              margin-bottom: 18px;
+              background: #050b16;
+              border: 1px solid rgba(56, 189, 248, 0.2);
+              box-shadow: 0 8px 24px rgba(2, 8, 20, 0.6);
+            }
+
+            .doc-module-preview-img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              display: block;
+              transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            .doc-component-card:hover .doc-module-preview-img {
+              transform: scale(1.05);
+            }
+
+            .doc-module-preview-badge {
+              position: absolute;
+              top: 10px;
+              right: 10px;
+              padding: 4px 9px;
+              border-radius: 6px;
+              font-size: 0.6875rem;
+              font-weight: 800;
+              letter-spacing: 0.5px;
+              background: rgba(8, 19, 37, 0.88);
+              backdrop-filter: blur(8px);
+              -webkit-backdrop-filter: blur(8px);
+              color: var(--doc-teal-light);
+              border: 1px solid rgba(56, 189, 248, 0.35);
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            }
+
+            .doc-toggle-thumb {
+              width: 58px;
+              height: 58px;
+              border-radius: 8px;
+              overflow: hidden;
+              flex-shrink: 0;
+              border: 1px solid rgba(56, 189, 248, 0.25);
+              background: #060e1d;
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            }
+
+            .doc-toggle-thumb img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
             }
 
             .doc-badge-tag {
@@ -1876,6 +2085,18 @@ export default function DrCarlosPerzabalClient() {
       />
 
       {/* ==========================================
+          ANIMATED MULTI-LAYER SURGICAL BACKGROUND
+         ========================================== */}
+      <div className="doc-animated-ambient-bg" aria-hidden="true">
+        <div className="doc-aurora-orb doc-orb-1" />
+        <div className="doc-aurora-orb doc-orb-2" />
+        <div className="doc-aurora-orb doc-orb-3" />
+        <div className="doc-aurora-orb doc-orb-4" />
+        <div className="doc-surgical-grid-mesh" />
+        <div id="ambient-cursor-glow" className="doc-cursor-glow" />
+      </div>
+
+      {/* ==========================================
           HEADER
          ========================================== */}
       <header className="doc-header">
@@ -1995,6 +2216,17 @@ export default function DrCarlosPerzabalClient() {
             {[...SETUP_MODULES, ...MONTHLY_MODULES].map((item, idx) => (
               <div key={item.id} className="doc-component-card">
                 <div>
+                  {/* Module Visual Support Preview Frame */}
+                  <div className="doc-module-preview-frame">
+                    <img
+                      src={item.image}
+                      alt={item.imageAlt}
+                      className="doc-module-preview-img"
+                      loading="lazy"
+                    />
+                    <span className="doc-module-preview-badge">{item.imageBadge}</span>
+                  </div>
+
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span className={item.period === 'setup' ? 'doc-badge-setup' : 'doc-badge-monthly'}>
                       {item.badge}
@@ -2680,7 +2912,10 @@ export default function DrCarlosPerzabalClient() {
                   onClick={() => toggleModule(item.id)}
                   className={`doc-toggle-row ${isActive ? 'active' : ''}`}
                 >
-                  <div style={{ flex: 1 }}>
+                  <div className="doc-toggle-thumb">
+                    <img src={item.image} alt={item.imageAlt} loading="lazy" />
+                  </div>
+                  <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
                       <span style={{ fontSize: '0.9375rem', fontWeight: 700, color: '#F8FAFC' }}>
                         {item.name}
@@ -2731,7 +2966,10 @@ export default function DrCarlosPerzabalClient() {
                   onClick={() => toggleModule(item.id)}
                   className={`doc-toggle-row ${isActive ? 'active' : ''}`}
                 >
-                  <div style={{ flex: 1 }}>
+                  <div className="doc-toggle-thumb">
+                    <img src={item.image} alt={item.imageAlt} loading="lazy" />
+                  </div>
+                  <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
                       <span style={{ fontSize: '0.9375rem', fontWeight: 700, color: '#F8FAFC' }}>
                         {item.name}

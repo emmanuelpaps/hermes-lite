@@ -294,11 +294,11 @@ describe('Tier 1: Feature Coverage (R1 - R5)', () => {
       assert.ok(pageHtml.includes('Apolograma'), 'Title or brand metadata must attribute to Apolograma');
     });
 
-    it('[T1-R1-03] Institutional Clinical Color Tokens in :root CSS', () => {
-      assert.equal(rootVariables['--doc-slate']?.toUpperCase(), '#070D18', '--doc-slate must be #070D18');
+    it('[T1-R1-03] Institutional Clinical Color Tokens in :root CSS (Deep Surgical Navy & Titanium)', () => {
+      assert.equal(rootVariables['--doc-slate']?.toUpperCase(), '#081325', '--doc-slate must be #081325 (Deep Surgical Navy, non-black)');
       assert.equal(rootVariables['--doc-teal']?.toUpperCase(), '#00A3E0', '--doc-teal must be #00A3E0');
       assert.equal(rootVariables['--doc-gold']?.toUpperCase(), '#D4AF37', '--doc-gold must be #D4AF37');
-      assert.equal(rootVariables['--doc-white']?.toUpperCase(), '#F8FAFC', '--doc-white must be #F8FAFC');
+      assert.equal(rootVariables['--doc-white']?.toUpperCase(), '#F1F5F9', '--doc-white must be #F1F5F9 (Pearlescent silver-white)');
       assert.ok(rootVariables['--doc-slate-card'], '--doc-slate-card token must exist');
     });
 
@@ -1122,6 +1122,12 @@ describe('Tier 4: Real-World Scenarios & Production Readiness', () => {
       'colecistectomia_strasberg.svg',
       'hernioplastia_tapp.svg',
       'consola_da_vinci.svg',
+      'modulo_branding_identidad.jpg',
+      'modulo_webapp_binacional.jpg',
+      'modulo_marketing_autoridad.jpg',
+      'modulo_pauta_meta.jpg',
+      'modulo_bot_whatsapp.jpg',
+      'modulo_crm_quirurgico.jpg',
     ];
 
     for (const f of requiredFiles) {
