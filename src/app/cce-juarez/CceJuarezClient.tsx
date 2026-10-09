@@ -69,6 +69,10 @@ export default function CceJuarezClient() {
               --cce-slate-card: #0B261D;
             }
 
+            *, *::before, *::after {
+              box-sizing: border-box;
+            }
+
             html, body {
               margin: 0;
               padding: 0;
@@ -82,8 +86,10 @@ export default function CceJuarezClient() {
             .cce-page-root {
               overflow-x: hidden;
               width: 100%;
+              max-width: 100vw;
               min-height: 100vh;
               background: var(--cce-bg-cream);
+              box-sizing: border-box;
             }
 
             /* Typography */
@@ -93,10 +99,12 @@ export default function CceJuarezClient() {
               letter-spacing: -0.025em;
               font-weight: 800;
               overflow-wrap: break-word;
+              word-break: break-word;
             }
 
             h1 {
-              word-break: break-word;
+              font-size: clamp(1.4rem, 6vw, 2.85rem);
+              line-height: 1.15;
             }
 
             .cce-flow-text {
@@ -173,6 +181,7 @@ export default function CceJuarezClient() {
               border-radius: 16px;
               padding: 2rem;
               box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+              box-sizing: border-box;
             }
 
             /* Responsive overrides */
@@ -187,11 +196,15 @@ export default function CceJuarezClient() {
               }
               .cce-hero-grid {
                 grid-template-columns: 1fr !important;
+                gap: 28px !important;
               }
               .cce-metrics-grid {
                 grid-template-columns: 1fr !important;
               }
               .cce-deliverables-grid {
+                grid-template-columns: 1fr !important;
+              }
+              .cce-event-badges-grid {
                 grid-template-columns: 1fr !important;
               }
               .cce-financial-box {
@@ -200,16 +213,19 @@ export default function CceJuarezClient() {
               .cce-header-inner {
                 flex-direction: column !important;
                 align-items: stretch !important;
-                gap: 10px !important;
+                gap: 8px !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
               }
               .cce-brand-group {
                 display: flex !important;
                 align-items: center !important;
                 justify-content: space-between !important;
                 width: 100% !important;
+                box-sizing: border-box !important;
               }
               .cce-brand-title {
-                font-size: 16px !important;
+                font-size: 15px !important;
               }
               .cce-badge-cce {
                 padding: 4px 10px !important;
@@ -221,16 +237,31 @@ export default function CceJuarezClient() {
                 display: none !important;
               }
               .cce-header-actions {
-                display: flex !important;
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
                 width: 100% !important;
                 gap: 8px !important;
+                box-sizing: border-box !important;
               }
               .cce-header-actions .cce-btn {
-                flex: 1 1 0% !important;
+                width: 100% !important;
                 justify-content: center !important;
-                padding: 8px 12px !important;
+                padding: 8px 10px !important;
                 font-size: 0.85rem !important;
                 min-height: 44px !important;
+              }
+              .cce-eyebrow-badge {
+                border-radius: 12px !important;
+                white-space: normal !important;
+                line-height: 1.3 !important;
+              }
+              .cce-hero-ctas {
+                flex-direction: column !important;
+                width: 100% !important;
+              }
+              .cce-hero-ctas .cce-btn {
+                width: 100% !important;
+                justify-content: center !important;
               }
             }
             @media (max-width: 480px) {
@@ -378,6 +409,7 @@ export default function CceJuarezClient() {
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           {/* Eyebrow badge */}
           <div
+            className="cce-eyebrow-badge"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -387,15 +419,17 @@ export default function CceJuarezClient() {
               padding: '6px 14px',
               borderRadius: '9999px',
               marginBottom: '20px',
+              maxWidth: '100%',
+              boxSizing: 'border-box',
             }}
           >
-            <Sparkles size={16} color="#B45309" />
+            <Sparkles size={16} color="#B45309" style={{ flexShrink: 0 }} />
             <span
               style={{
                 fontSize: '13px',
                 fontWeight: 800,
                 color: '#B45309',
-                letterSpacing: '1px',
+                letterSpacing: '0.5px',
                 textTransform: 'uppercase',
               }}
             >
@@ -419,7 +453,7 @@ export default function CceJuarezClient() {
                   fontSize: '13px',
                   fontWeight: 800,
                   color: 'var(--cce-gold-dark)',
-                  letterSpacing: '1px',
+                  letterSpacing: '0.8px',
                   textTransform: 'uppercase',
                   marginBottom: '8px',
                 }}
@@ -429,7 +463,6 @@ export default function CceJuarezClient() {
 
               <h1
                 style={{
-                  fontSize: 'clamp(1.65rem, 5vw, 2.85rem)',
                   lineHeight: 1.15,
                   marginBottom: '12px',
                   color: 'var(--cce-emerald)',
@@ -439,8 +472,8 @@ export default function CceJuarezClient() {
               </h1>
 
               <div
+                className="cce-hero-subtitle"
                 style={{
-                  fontSize: '1.2rem',
                   fontWeight: 800,
                   color: '#B45309',
                   fontStyle: 'italic',
@@ -463,6 +496,7 @@ export default function CceJuarezClient() {
 
               {/* Event Context Badges */}
               <div
+                className="cce-event-badges-grid"
                 style={{
                   display: 'grid',
                   gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
@@ -539,7 +573,7 @@ export default function CceJuarezClient() {
                 </div>
               </div>
 
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
+              <div className="cce-hero-ctas" style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', width: '100%' }}>
                 <a href="#entregables" className="cce-btn cce-btn-primary">
                   Ver los 4 Entregables
                   <ChevronRight size={18} />
