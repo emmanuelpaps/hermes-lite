@@ -5,10 +5,10 @@
  *
  * 4-Tier Test Matrix:
  * - Tier 1: Feature Coverage (25 tests covering R1 - R5)
- * - Tier 2: Boundary & Corner Cases (20 tests covering Math, Typography Floors, A11y & Asset Integrity)
- * - Tier 3: Cross-Feature Combinations & Brand Isolation (17 tests covering 0 FN1, 0 La X, 0 ROI, 0 discounts)
+ * - Tier 2: Boundary & Corner Cases (23 tests covering Math, Typography Floors, A11y & Asset Integrity)
+ * - Tier 3: Cross-Feature Combinations & Brand Isolation (21 tests covering 0 FN1, 0 La X, 0 ROI, 0 discounts, clinical accuracy & disclaimers)
  * - Tier 4: Real-World Scenarios & Production Readiness (12 tests covering Patient Journeys, ICM Parity & Vercel Readiness)
- * Total: 74 comprehensive tests across 14 suites
+ * Total: 81 comprehensive tests across 14 suites
  */
 
 import { describe, it, before, after } from 'node:test';
@@ -17,6 +17,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import http from 'node:http';
 import { fileURLToPath } from 'node:url';
+import { spawnSync } from 'node:child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -109,14 +110,34 @@ async function verifyAsset(assetPath) {
   }
   const fullUrl = cleanPath.startsWith('http') ? cleanPath : `${activeBaseUrl}${cleanPath}`;
   try {
-    const res = await fetch(fullUrl, { method: 'HEAD' });
-    if (res.status === 405 || !res.ok) {
-      const getRes = await fetch(fullUrl, { method: 'GET' });
-      return { ok: getRes.ok, status: getRes.status, contentType: getRes.headers.get('content-type') || '' };
-    }
-    return { ok: res.ok, status: res.status, contentType: res.headers.get('content-type') || '' };
+    const res = await fetch(fullUrl, { method: 'GET' });
+    const text = await res.text();
+    return { ok: res.ok, status: res.status, contentType: res.headers.get('content-type') || '', body: text };
   } catch (err) {
-    return { ok: false, status: 0, contentType: '', error: err.message };
+    return { ok: false, status: 0, contentType: '', body: '', error: err.message };
+  }
+}
+
+// Helper: Validate SVG XML well-formedness according to W3C XML 1.0
+function assertSvgXmlWellFormed(svgString, identifier = 'svg') {
+  assert.ok(svgString && typeof svgString === 'string', `${identifier} must be a non-empty string`);
+  assert.ok(svgString.includes('<svg') && svgString.includes('</svg>'), `${identifier} must contain <svg> root and </svg> closing tag`);
+
+  // Strip XML comments and CDATA sections
+  const stripped = svgString.replace(/<!--[\s\S]*?-->/g, '').replace(/<!\[CDATA\[[\s\S]*?\]\]>/g, '');
+
+  // W3C XML Section 2.4 / 4.1: ampersands must be properly escaped entity references
+  const rawAmpMatch = stripped.match(/&(?!(amp|lt|gt|quot|apos|#\d+|#x[0-9a-fA-F]+);)/);
+  assert.ok(!rawAmpMatch, `SVG ${identifier} contains unescaped ampersand outside comments/CDATA: "${rawAmpMatch?.[0]}"`);
+
+  // Full validation with xmllint if available on the system
+  try {
+    const lint = spawnSync('xmllint', ['--noout', '-'], { input: svgString, encoding: 'utf-8' });
+    if (lint.status !== null) {
+      assert.equal(lint.status, 0, `SVG ${identifier} failed xmllint well-formedness: ${lint.stderr || lint.stdout}`);
+    }
+  } catch {
+    // Fallback gracefully if xmllint binary is unavailable
   }
 }
 
@@ -300,6 +321,9 @@ describe('Tier 1: Feature Coverage (R1 - R5)', () => {
         const check = await verifyAsset(assetPath);
         assert.equal(check.status, 200, `Asset ${assetPath} must resolve with HTTP 200`);
         assert.ok(check.contentType.includes('svg') || check.contentType.includes('image'), `Asset ${assetPath} must have image content-type`);
+        if (assetPath.endsWith('.svg')) {
+          assertSvgXmlWellFormed(check.body, assetPath);
+        }
       }
     });
   });
@@ -634,6 +658,28 @@ describe('Tier 2: Boundary & Corner Cases (R1 - R5)', () => {
       }
       assert.ok(!stylesContent.includes('.doc-input { font-size: 12px'), 'Inputs must not be smaller than 15px');
     });
+
+    it('[T2-VIEW-06] Form inputs prevent iOS Safari auto-zoom: font-size >= 16px (1rem)', () => {
+      const inputRuleMatch = stylesContent.match(/\.doc-input\s*\{[^}]*font-size:\s*([^;]+);/i);
+      assert.ok(inputRuleMatch, '.doc-input CSS class rule must be defined');
+      const val = inputRuleMatch[1].trim();
+      if (val.endsWith('rem')) {
+        assert.ok(parseFloat(val) >= 1.0, `Input font-size must be >= 1rem to prevent iOS zoom (was ${val})`);
+      } else if (val.endsWith('px')) {
+        assert.ok(parseFloat(val) >= 16, `Input font-size must be >= 16px to prevent iOS zoom (was ${val})`);
+      }
+    });
+
+    it('[T2-VIEW-07] Switch Toggle Touch Target: .doc-switch has ::before pseudo-element with min 44x44px hit area', () => {
+      assert.ok(
+        stylesContent.includes('.doc-switch::before') || stylesContent.includes('.doc-switch:before'),
+        '.doc-switch must define ::before pseudo-element for touch area extension'
+      );
+      assert.ok(
+        stylesContent.includes('min-height: 44px') && stylesContent.includes('min-width: 44px'),
+        '.doc-switch::before must enforce at least 44x44px hit target'
+      );
+    });
   });
 
   // --- Suite 4: WCAG 2.1 Contrast Ratios & Asset Sweep ---
@@ -672,12 +718,21 @@ describe('Tier 2: Boundary & Corner Cases (R1 - R5)', () => {
         const check = await verifyAsset(svgPath);
         assert.equal(check.status, 200, `Procedure asset ${svgPath} must return status 200`);
         assert.ok(check.contentType.includes('svg') || check.contentType.includes('image'), `Asset ${svgPath} must have image content-type`);
+        assertSvgXmlWellFormed(check.body, svgPath);
       }
     });
 
     it('[T2-A11Y-05] Asset protocol security: 0 insecure external http:// asset references in page', () => {
       const insecure = [...pageHtml.matchAll(/src=["']http:\/\/([^"']+)["']/g)];
       assert.equal(insecure.length, 0, 'Page must not reference insecure http:// resources');
+    });
+
+    it('[T2-A11Y-06] Primary CTA button contrast ratio: dark text (#070D18) on surgical teal (#00A3E0) passes WCAG AA (>= 4.5:1)', () => {
+      const teal = rootVariables['--doc-teal'] || '#00A3E0';
+      const darkBtnText = '#070D18';
+      const contrast = getContrastRatio(teal, darkBtnText);
+      assert.ok(contrast >= 4.5, `Primary button contrast ${contrast.toFixed(2)}:1 must pass WCAG AA >= 4.5:1`);
+      assert.ok(stylesContent.includes('color: #070D18'), '.doc-btn-primary must explicitly declare #070D18 text color');
     });
   });
 
@@ -722,7 +777,7 @@ describe('Tier 3: Cross-Feature Combinations & Brand Isolation', () => {
     assert.equal(roiMatch, null, 'Must contain 0 claims of ROI, ROAS, or guaranteed sales');
   });
 
-  it('[T3-BRAND-07] Clinical Dignity / Zero Low-Cost Stigma: 0 mentions of "descuento", "precio bajo", "paquete económico", "oferta", "precio de remate"', () => {
+  it('[T3-BRAND-07] Clinical Dignity / Zero Low-Cost Stigma: 0 mentions of "descuento", "precio bajo", "paquete económico", "oferta", "remates"', () => {
     const lowCostStems = [
       /\bdescuento/i,
       /\bdescuentos/i,
@@ -730,7 +785,7 @@ describe('Tier 3: Cross-Feature Combinations & Brand Isolation', () => {
       /\bpaquete\s+econ[oó]mico/i,
       /\boferta\b/i,
       /\bofertas\b/i,
-      /\bprecio\s+de\s+remate/i,
+      /\bremate[s]?\b/i,
       /\bbarato/i,
     ];
     for (const pattern of lowCostStems) {
@@ -819,6 +874,64 @@ describe('Tier 3: Cross-Feature Combinations & Brand Isolation', () => {
     const setupTotal = setupSub + Math.round(setupSub * 0.16);
     const monthlyTotal = monthlySub + Math.round(monthlySub * 0.16);
     assert.equal(setupTotal + monthlyTotal, 71920, 'Initial grand total must equal exactly $71,920 MXN');
+  });
+
+  it('[T3-BRAND-18] Medically Honest Copy: 0 occurrences of absolutes "garantiza la integridad anatómica" or "eliminando el riesgo de dolor"', () => {
+    assert.ok(
+      !fullAppText.includes('garantiza la integridad anatómica'),
+      'Must not claim "garantiza la integridad anatómica" (unethical absolute guarantee)'
+    );
+    assert.ok(
+      !fullAppText.includes('eliminando el riesgo de dolor'),
+      'Must not claim "eliminando el riesgo de dolor" (unethical absolute guarantee)'
+    );
+  });
+
+  it('[T3-BRAND-19] Clinical Accuracy Phrasing: Strasberg CVS safety protocol and TAPP risk reduction explicitly declared', () => {
+    assert.ok(
+      /Protocolo de Seguridad Strasberg \(CVS\)/i.test(fullAppText),
+      'Must explicitly refer to Protocolo de Seguridad Strasberg (CVS)'
+    );
+    assert.ok(
+      /protege y salvaguarda la integridad anat[oó]mica/i.test(fullAppText),
+      'Must use protective phrasing for Strasberg CVS'
+    );
+    assert.ok(
+      /reduciendo dr[aá]sticamente el riesgo de dolor/i.test(fullAppText),
+      'Must use risk reduction phrasing for Hernioplastía TAPP'
+    );
+  });
+
+  it('[T3-BRAND-20] Formal Medical Disclaimers: Simulator and footer declare non-diagnostic preliminary intake status', () => {
+    // Simulator disclaimer in both client and static
+    const simDisclaimer = 'Orientación médica preliminar y triaje administrativo:';
+    const nonDiagnostic = 'No sustituye la consulta médica presencial ni constituye diagnóstico definitivo formal';
+    assert.ok(
+      clientTsx.includes(simDisclaimer) && clientTsx.includes(nonDiagnostic),
+      'DrCarlosPerzabalClient simulator must contain non-diagnostic preliminary intake disclaimer card'
+    );
+    assert.ok(
+      staticIndexHtml.includes(simDisclaimer) && staticIndexHtml.includes(nonDiagnostic),
+      'Static index.html simulator must contain non-diagnostic preliminary intake disclaimer card'
+    );
+    // Footer disclaimer in both client and static
+    const footerDisclaimer = 'Aviso de Responsabilidad Médica:';
+    assert.ok(
+      clientTsx.includes(footerDisclaimer),
+      'DrCarlosPerzabalClient footer must contain Aviso de Responsabilidad Médica'
+    );
+    assert.ok(
+      staticIndexHtml.includes(footerDisclaimer),
+      'Static index.html footer must contain Aviso de Responsabilidad Médica'
+    );
+  });
+
+  it('[T3-BRAND-21] Direct Meta Ads Billing Demarcation: Proposal explicitly specifies ad spend is paid directly by Dr. Perzabal to Meta Ads', () => {
+    const metaNoticeRegex = /pagado directamente por el Dr\.(?:\s+Carlos)?\s+Perzabal a Meta/i;
+    assert.ok(metaNoticeRegex.test(clientTsx), 'DrCarlosPerzabalClient must declare direct payment notice in math summary');
+    assert.ok(metaNoticeRegex.test(staticIndexHtml), 'Static index.html must declare direct payment notice in math summary');
+    assert.ok(/excluido de los honorarios de la agencia/i.test(clientTsx), 'Must declare spend is excluded from agency fees');
+    assert.ok(/excluido de los honorarios de la agencia/i.test(staticIndexHtml), 'Must declare spend is excluded from agency fees in static index.html');
   });
 
 });
@@ -986,6 +1099,14 @@ describe('Tier 4: Real-World Scenarios & Production Readiness', () => {
       assert.ok(fs.existsSync(fullPath), `ICM stage directory ${subdir} must exist`);
       assert.ok(fs.statSync(fullPath).isDirectory(), `ICM path ${subdir} must be a directory`);
     }
+
+    const stage4ClientTsxPath = path.join(ICM_BASE_DIR, '04_Ensamblaje_NextJS_React', 'DrCarlosPerzabalClient.tsx');
+    assert.ok(fs.existsSync(stage4ClientTsxPath), 'Stage 04 DrCarlosPerzabalClient.tsx must exist');
+    assert.equal(
+      fs.readFileSync(stage4ClientTsxPath, 'utf-8'),
+      clientTsx,
+      'Stage 04 DrCarlosPerzabalClient.tsx must strictly synchronize with src/app DrCarlosPerzabalClient.tsx'
+    );
   });
 
   it('[T4-SCEN-08] Public Assets Readiness: All required assets (og_dr_carlos_perzabal.jpg, monograma_perzabal.svg, all 5 procedure SVGs, all 4 credential badges) exist in public/assets/dr-carlos-perzabal/', () => {
@@ -1007,6 +1128,23 @@ describe('Tier 4: Real-World Scenarios & Production Readiness', () => {
       const filePath = path.join(PUBLIC_ASSETS_DIR, f);
       assert.ok(fs.existsSync(filePath), `Required asset ${f} must exist in public/assets/dr-carlos-perzabal/`);
       assert.ok(fs.statSync(filePath).size > 100, `Asset ${f} must not be empty`);
+      if (f.endsWith('.svg')) {
+        const rawSvg = fs.readFileSync(filePath, 'utf-8');
+        assertSvgXmlWellFormed(rawSvg, `public/${f}`);
+      }
+    }
+
+    // Mirror assets in propuestas/dr-carlos-perzabal/assets/
+    const mirrorAssetsDir = path.join(ICM_BASE_DIR, 'assets');
+    if (fs.existsSync(mirrorAssetsDir)) {
+      for (const f of requiredFiles) {
+        const mirrorPath = path.join(mirrorAssetsDir, f);
+        assert.ok(fs.existsSync(mirrorPath), `Mirror asset ${f} must exist in propuestas/dr-carlos-perzabal/assets/`);
+        if (f.endsWith('.svg')) {
+          const rawSvg = fs.readFileSync(mirrorPath, 'utf-8');
+          assertSvgXmlWellFormed(rawSvg, `mirror/${f}`);
+        }
+      }
     }
   });
 

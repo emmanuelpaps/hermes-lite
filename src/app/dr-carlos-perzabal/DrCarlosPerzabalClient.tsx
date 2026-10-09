@@ -235,7 +235,7 @@ export const MONTHLY_MODULES: ServiceModuleItem[] = [
     tag: 'Dirección Editorial Continua',
     badge: 'Iguala Mensual',
     description:
-      'Estrategia y dirección editorial continua: calendario mensual de contenidos clínicos, educación médica sobre patologías digestivas, preparación preoperatoria, desmitificación de bariatría y casos clínicos éticos. Cero promociones vulgares ni lenguaje de remate.',
+      'Estrategia y dirección editorial continua: calendario mensual de contenidos clínicos, educación médica sobre patologías digestivas, preparación preoperatoria, desmitificación de bariatría y casos clínicos éticos. Cero promociones vulgares ni lenguaje de liquidación.',
     bullets: [
       'Calendario editorial mensual con 4 pilares de rigor científico y autoridad médica',
       'Educación clínica de síntomas, preparación prequirúrgica y prevención digestiva',
@@ -272,7 +272,7 @@ export const MONTHLY_MODULES: ServiceModuleItem[] = [
       'Árbol clínico de 4 ramas (Bariatría, Vesícula, Hernia, Cirugía Robótica)',
       'Filtro previo de elegibilidad médica y cálculo de IMC',
       'Despacho automático de ficha prequirúrgica al WhatsApp del consultorio (+52 656 311 7565)',
-      'Atención 24/7 sin pérdida de prospectos calificados locales o foráneos',
+      'Atención continua 24/7 para canalización inmediata de prospectos calificados locales y foráneos',
     ],
   },
   {
@@ -283,7 +283,7 @@ export const MONTHLY_MODULES: ServiceModuleItem[] = [
     tag: 'Pipeline Clínico de Pacientes',
     badge: 'Iguala Mensual',
     description:
-      'Plataforma de gestión centralizada y pipeline de pacientes: trazabilidad desde el primer contacto (Lead Web / WhatsApp) hasta la consulta de valoración, programación de quirófano y seguimiento postoperatorio, evitando fugas de prospectos calificados.',
+      'Plataforma de gestión centralizada y pipeline de pacientes: trazabilidad desde el primer contacto (Lead Web / WhatsApp) hasta la consulta de valoración, programación de quirófano y seguimiento postoperatorio, optimizando el flujo de prospectos calificados.',
     bullets: [
       'Tablero kanban médico con 5 etapas de conversión clínica',
       'Expedientes digitales rápidos de prospectos con ficha de triaje integrada',
@@ -931,11 +931,13 @@ export default function DrCarlosPerzabalClient() {
 
             .doc-btn-primary {
               background: var(--doc-teal);
-              color: #FFFFFF;
+              color: #070D18;
+              font-weight: 800;
               border: 1px solid var(--doc-teal-light);
             }
             .doc-btn-primary:hover {
-              background: var(--doc-teal-dark);
+              background: var(--doc-teal-light);
+              color: #070D18;
               transform: translateY(-1px);
             }
 
@@ -967,6 +969,12 @@ export default function DrCarlosPerzabalClient() {
               margin: 0 auto;
               padding: 0 20px;
               box-sizing: border-box;
+            }
+
+            @media (max-width: 480px) {
+              .doc-container {
+                padding: 0 14px;
+              }
             }
 
             .doc-section {
@@ -1071,6 +1079,15 @@ export default function DrCarlosPerzabalClient() {
                 font-size: 0.75rem;
                 min-height: 44px;
                 white-space: nowrap;
+              }
+              @media (max-width: 360px) {
+                .doc-header-actions {
+                  gap: 4px;
+                }
+                .doc-header-actions .doc-btn {
+                  padding: 8px 6px;
+                  font-size: 0.7rem;
+                }
               }
             }
 
@@ -1228,6 +1245,7 @@ export default function DrCarlosPerzabalClient() {
               display: flex;
               gap: 8px;
               overflow-x: auto;
+              -webkit-overflow-scrolling: touch;
               padding-bottom: 8px;
               margin-bottom: 24px;
               border-bottom: 1px solid var(--doc-border);
@@ -1394,7 +1412,7 @@ export default function DrCarlosPerzabalClient() {
               height: 6px;
               border-radius: 50%;
               background: var(--doc-teal-light);
-              animation: blink 1.2s infinite ease-in-out;
+              animation: blink 0.75s infinite ease-in-out;
             }
             .doc-typing-dot:nth-child(2) { animation-delay: 0.2s; }
             .doc-typing-dot:nth-child(3) { animation-delay: 0.4s; }
@@ -1537,6 +1555,16 @@ export default function DrCarlosPerzabalClient() {
               border-radius: 9999px;
               transition: background 0.2s ease;
               flex-shrink: 0;
+            }
+            .doc-switch::before {
+              content: "";
+              position: absolute;
+              top: -9px;
+              bottom: -9px;
+              left: -4px;
+              right: -4px;
+              min-height: 44px;
+              min-width: 44px;
             }
             .doc-switch.active {
               background: var(--doc-teal);
@@ -1715,6 +1743,17 @@ export default function DrCarlosPerzabalClient() {
               margin-top: 12px;
             }
 
+            @media (max-width: 600px) {
+              .doc-math-card {
+                padding: 20px 14px;
+              }
+              .doc-math-total {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 10px !important;
+              }
+            }
+
             /* Banregio Fiscal Card */
             .doc-fiscal-box {
               background: #070D18;
@@ -1722,6 +1761,24 @@ export default function DrCarlosPerzabalClient() {
               border-radius: 12px;
               padding: 24px;
               margin-top: 28px;
+            }
+
+            .doc-fiscal-header {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              margin-bottom: 16px;
+              gap: 12px;
+            }
+
+            @media (max-width: 600px) {
+              .doc-fiscal-header {
+                flex-direction: column;
+                align-items: flex-start;
+              }
+              .doc-fiscal-header button {
+                width: 100%;
+              }
             }
 
             .doc-fiscal-grid {
@@ -1772,7 +1829,7 @@ export default function DrCarlosPerzabalClient() {
               border-radius: 8px;
               padding: 10px 14px;
               color: #F8FAFC;
-              font-size: 0.9375rem;
+              font-size: 1rem;
               box-sizing: border-box;
               margin-top: 6px;
               margin-bottom: 16px;
@@ -2101,7 +2158,7 @@ export default function DrCarlosPerzabalClient() {
                     </li>
                     <li>
                       <CheckCircle2 size={16} />
-                      <span><strong>Tasa Cero de Lesión Biliar:</strong> Técnica quirúrgica protocolizada que garantiza la integridad anatómica de la vía biliar principal (colédoco).</span>
+                      <span><strong>Protocolo de Seguridad Strasberg (CVS):</strong> Técnica quirúrgica protocolizada que protege y salvaguarda la integridad anatómica de la vía biliar principal (colédoco) mediante identificación inequívoca previa al corte.</span>
                     </li>
                     <li>
                       <CheckCircle2 size={16} />
@@ -2134,7 +2191,7 @@ export default function DrCarlosPerzabalClient() {
                     </li>
                     <li>
                       <CheckCircle2 size={16} />
-                      <span><strong>Prevención de Inguinodinia:</strong> Evita fijaciones traumáticas con grapas en zonas nerviosas, eliminando el riesgo de dolor pélvico o inguinal crónico.</span>
+                      <span><strong>Prevención de Inguinodinia:</strong> Evita fijaciones traumáticas con grapas en zonas nerviosas, reduciendo drásticamente el riesgo de dolor inguinal crónico.</span>
                     </li>
                     <li>
                       <CheckCircle2 size={16} />
@@ -2300,8 +2357,8 @@ export default function DrCarlosPerzabalClient() {
               <div style={{ fontSize: '0.9375rem', fontWeight: 800, color: 'var(--doc-gold)', marginBottom: '4px' }}>
                 BLINDAJE DE PRESTIGIO: POLÍTICA DE AUTORIDAD Y CERO REBAJAS COMERCIALES
               </div>
-              <p style={{ margin: 0, fontSize: '0.8125rem', color: 'var(--doc-muted)', lineHeight: 1.45 }}>
-                En Apolograma garantizamos que ninguna publicación, cápsula o anuncio contendrá rebajas, remates ni garantías mercantiles de ventas. Toda pieza de pauta educa sobre patologías, síntomas de alarma y opciones de alta especialidad (Robótica Da Vinci y Laparoscopía Avanzada), canalizando pacientes precalificados que valoran la experiencia y seguridad clínica.
+              <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--doc-muted)', lineHeight: 1.45 }}>
+                En Apolograma establecemos como política editorial estricta que ninguna publicación, cápsula o anuncio contendrá rebajas, liquidaciones ni compromisos mercantiles de ventas. Toda pieza de pauta educa sobre patologías, síntomas de alarma y opciones de alta especialidad (Robótica Da Vinci y Laparoscopía Avanzada), canalizando pacientes precalificados que valoran la experiencia y seguridad clínica.
               </p>
             </div>
           </div>
@@ -2422,6 +2479,21 @@ export default function DrCarlosPerzabalClient() {
                 ))
               )}
             </div>
+          </div>
+
+          <div style={{
+            maxWidth: '520px',
+            margin: '24px auto 0 auto',
+            padding: '12px 16px',
+            background: 'rgba(2, 132, 199, 0.08)',
+            border: '1px solid rgba(56, 189, 248, 0.25)',
+            borderRadius: '10px',
+            textAlign: 'center',
+            fontSize: '0.8125rem',
+            color: '#94A3B8',
+            lineHeight: 1.45,
+          }}>
+            <span style={{ color: 'var(--doc-teal-light)', fontWeight: 700 }}>⚡ Orientación médica preliminar y triaje administrativo:</span> No sustituye la consulta médica presencial ni constituye diagnóstico definitivo formal con el Dr. Carlos Tadeo Perzabal Avilez.
           </div>
         </div>
       </section>
@@ -2568,7 +2640,7 @@ export default function DrCarlosPerzabalClient() {
                 <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--doc-teal-light)', display: 'block', marginBottom: '4px' }}>
                   NOTA CLÍNICA GENERADA POR ASISTENTE DE TRIAJE:
                 </span>
-                <p style={{ margin: 0, fontSize: '0.8125rem', color: '#CBD5E1', lineHeight: 1.45 }}>
+                <p style={{ margin: 0, fontSize: '0.875rem', color: '#CBD5E1', lineHeight: 1.45 }}>
                   {selectedCrmPatient.clinicalNote}
                 </p>
               </div>
@@ -2596,7 +2668,7 @@ export default function DrCarlosPerzabalClient() {
               <span>1. Entregables de Implementación Inicial</span>
               <span className="doc-badge-setup">Setup Único</span>
             </div>
-            <p style={{ fontSize: '0.8125rem', color: 'var(--doc-muted)', marginBottom: '16px' }}>
+            <p style={{ fontSize: '0.875rem', color: 'var(--doc-muted)', marginBottom: '16px' }}>
               Desarrollo de infraestructura fundacional, sistema visual de alta autoridad y portal web médico binacional.
             </p>
 
@@ -2617,7 +2689,7 @@ export default function DrCarlosPerzabalClient() {
                         {item.badge}
                       </span>
                     </div>
-                    <p style={{ margin: '0 0 8px 0', fontSize: '0.8125rem', color: 'var(--doc-muted)' }}>
+                    <p style={{ margin: '0 0 8px 0', fontSize: '0.875rem', color: 'var(--doc-muted)' }}>
                       {item.description}
                     </p>
                     <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.75rem', color: '#94A3B8', display: 'flex', flexDirection: 'column', gap: '3px' }}>
@@ -2647,7 +2719,7 @@ export default function DrCarlosPerzabalClient() {
               <span>2. Servicios Operativos Mensuales</span>
               <span className="doc-badge-monthly">Iguala Recurrente</span>
             </div>
-            <p style={{ fontSize: '0.8125rem', color: 'var(--doc-muted)', marginBottom: '16px' }}>
+            <p style={{ fontSize: '0.875rem', color: 'var(--doc-muted)', marginBottom: '16px' }}>
               Gestión editorial de contenidos clínicos, administración de pauta en Meta Ads, asistente 24/7 y CRM médico.
             </p>
 
@@ -2668,7 +2740,7 @@ export default function DrCarlosPerzabalClient() {
                         {item.badge}
                       </span>
                     </div>
-                    <p style={{ margin: '0 0 8px 0', fontSize: '0.8125rem', color: 'var(--doc-muted)' }}>
+                    <p style={{ margin: '0 0 8px 0', fontSize: '0.875rem', color: 'var(--doc-muted)' }}>
                       {item.description}
                     </p>
                     <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.75rem', color: '#94A3B8', display: 'flex', flexDirection: 'column', gap: '3px' }}>
@@ -2749,6 +2821,19 @@ export default function DrCarlosPerzabalClient() {
                 <div style={{ fontSize: '0.75rem', color: 'var(--doc-muted)', marginTop: '4px', textAlign: 'right' }}>
                   Equivalente a {formatMxn(investmentMath.monthlyDaily)} MXN al día en gestión tecnológica y editorial
                 </div>
+                <div style={{
+                  marginTop: '12px',
+                  padding: '10px 14px',
+                  background: 'rgba(56, 189, 248, 0.06)',
+                  border: '1px solid rgba(56, 189, 248, 0.2)',
+                  borderRadius: '8px',
+                  fontSize: '0.8125rem',
+                  color: '#94A3B8',
+                  lineHeight: 1.45,
+                  textAlign: 'left',
+                }}>
+                  <strong style={{ color: 'var(--doc-teal-light)' }}>📌 Delimitación de Inversión Publicitaria:</strong> La iguala mensual cubre exclusivamente los honorarios profesionales de Apolograma por diseño, gestión técnica y optimización de conversión. El presupuesto de inversión publicitaria en Meta Ads (Facebook/Instagram) es pagado directamente por el Dr. Carlos Perzabal a Meta con su propio método de pago corporativo, excluido de los honorarios de la agencia.
+                </div>
               </div>
 
               {/* Initial Grand Total */}
@@ -2784,7 +2869,7 @@ export default function DrCarlosPerzabalClient() {
 
             {/* Banregio Fiscal Billing Box */}
             <div className="doc-fiscal-box">
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+              <div className="doc-fiscal-header">
                 <span style={{ fontSize: '0.8125rem', fontWeight: 800, color: 'var(--doc-teal-light)', letterSpacing: '0.5px' }}>
                   DATOS FISCALES PARA TRANSFERENCIA INTERBANCARIA
                 </span>
@@ -2987,7 +3072,7 @@ export default function DrCarlosPerzabalClient() {
                 Apolograma Interactive Studio
               </span>
             </div>
-            <p style={{ margin: 0, fontSize: '0.8125rem' }}>
+            <p style={{ margin: 0, fontSize: '0.875rem' }}>
               Desarrollo de Software, Webapps Médicas, Triaje Inteligente y Pauta Digital de Alto Nivel.
             </p>
           </div>
@@ -2999,6 +3084,22 @@ export default function DrCarlosPerzabalClient() {
               Documento confidencial preparado para el Dr. Carlos Tadeo Perzabal Avilez
             </div>
           </div>
+        </div>
+
+        <div style={{
+          marginTop: '24px',
+          paddingTop: '16px',
+          borderTop: '1px solid rgba(148, 163, 184, 0.12)',
+          fontSize: '0.75rem',
+          color: '#64748B',
+          lineHeight: 1.55,
+          textAlign: 'center',
+          maxWidth: '960px',
+          margin: '20px auto 0 auto',
+          paddingLeft: '14px',
+          paddingRight: '14px',
+        }}>
+          <strong>Aviso de Responsabilidad Médica:</strong> La información clínica, diagramas anatómicos y herramientas interactivas presentadas en esta plataforma tienen propósito exclusivamente educativo, orientativo y descriptivo de la propuesta de servicios. Las funciones de triaje digital no constituyen valoración clínica, prescripción ni diagnóstico médico definitivo; la atención a la salud requiere invariablemente la consulta presencial formal en consultorio con el Dr. Carlos Tadeo Perzabal Avilez (Cirugía General, Bariátrica y Robótica · Certificado CMCOEM / CMCG).
         </div>
       </footer>
     </div>
