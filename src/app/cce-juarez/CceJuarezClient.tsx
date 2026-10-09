@@ -73,6 +73,16 @@ export default function CceJuarezClient() {
               box-sizing: border-box;
             }
 
+            .cce-hero-grid > div,
+            .cce-metrics-grid > div,
+            .cce-deliverables-grid > div,
+            .cce-roadmap-grid > div,
+            .cce-financial-box > div,
+            .cce-fiscal-grid > div,
+            .cce-event-badges-grid > div {
+              min-width: 0;
+            }
+
             html, body {
               margin: 0;
               padding: 0;
@@ -184,6 +194,12 @@ export default function CceJuarezClient() {
               box-sizing: border-box;
             }
 
+            section, header, footer {
+              width: 100%;
+              max-width: 100%;
+              box-sizing: border-box;
+            }
+
             /* Responsive overrides */
             @media (max-width: 768px) {
               .cce-plan-card {
@@ -220,40 +236,70 @@ export default function CceJuarezClient() {
               .cce-brand-group {
                 display: flex !important;
                 align-items: center !important;
-                justify-content: space-between !important;
+                justify-content: flex-start !important;
                 width: 100% !important;
+                gap: 8px !important;
                 box-sizing: border-box !important;
               }
-              .cce-brand-title {
-                font-size: 15px !important;
+              .cce-brand-logo-img {
+                height: 12px !important;
               }
               .cce-badge-cce {
-                padding: 4px 10px !important;
+                padding: 2px 6px !important;
+                gap: 4px !important;
+                flex-shrink: 0 !important;
+              }
+              .cce-badge-cce img {
+                width: 14px !important;
+                height: 14px !important;
               }
               .cce-badge-cce span {
-                font-size: 12px !important;
+                font-size: 10px !important;
+                font-weight: 800 !important;
               }
               .cce-btn-header-clabe {
                 display: none !important;
               }
               .cce-header-actions {
-                display: grid !important;
-                grid-template-columns: 1fr 1fr !important;
+                display: flex !important;
                 width: 100% !important;
                 gap: 8px !important;
                 box-sizing: border-box !important;
               }
               .cce-header-actions .cce-btn {
-                width: 100% !important;
+                flex: 1 1 0% !important;
+                min-width: 0 !important;
+                width: calc(50% - 4px) !important;
+                max-width: calc(50% - 4px) !important;
                 justify-content: center !important;
-                padding: 8px 10px !important;
-                font-size: 0.85rem !important;
+                padding: 8px 4px !important;
+                font-size: 0.78rem !important;
+                white-space: nowrap !important;
                 min-height: 44px !important;
+                box-sizing: border-box !important;
               }
-              .cce-eyebrow-badge {
-                border-radius: 12px !important;
-                white-space: normal !important;
+              .cce-hero-section {
+                padding: 36px 16px 32px 16px !important;
+              }
+              header {
+                padding: 8px 12px !important;
+              }
+              .cce-council-tag {
+                font-size: 11px !important;
+                letter-spacing: 0.4px !important;
                 line-height: 1.3 !important;
+              }
+              h1 {
+                font-size: 1.4rem !important;
+                line-height: 1.2 !important;
+              }
+              .cce-studio-label,
+              .cce-header-divider {
+                display: none !important;
+              }
+              .cce-roadmap-grid,
+              .cce-fiscal-grid {
+                grid-template-columns: 1fr !important;
               }
               .cce-hero-ctas {
                 flex-direction: column !important;
@@ -297,50 +343,30 @@ export default function CceJuarezClient() {
           }}
         >
           {/* Brand Group */}
-          <div className="cce-brand-group" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/assets/apolograma-logo-v2.png"
-                alt="Logo Apolograma Studio"
-                style={{ height: '20px', width: 'auto', objectFit: 'contain' }}
-              />
-              <span
-                className="cce-brand-title"
-                style={{
-                  fontSize: '17px',
-                  fontWeight: 900,
-                  letterSpacing: '-0.5px',
-                  color: 'var(--cce-emerald)',
-                }}
-              >
-                APOLOGRAMA
-              </span>
-              <span
-                className="cce-studio-label"
-                style={{
-                  fontSize: '13px',
-                  fontWeight: 800,
-                  letterSpacing: '1.5px',
-                  color: 'var(--cce-gold-dark)',
-                  borderLeft: '1px solid #CBD5E1',
-                  paddingLeft: '8px',
-                }}
-              >
-                STUDIO
-              </span>
-            </div>
+          <div className="cce-brand-group" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/assets/apolograma-logo-v2.png"
+              alt="Logo Apolograma Studio"
+              className="cce-brand-logo-img"
+              style={{
+                height: '18px',
+                width: 'auto',
+                objectFit: 'contain',
+                filter: 'brightness(0.15)',
+              }}
+            />
 
-            <span className="cce-header-divider" style={{ color: '#CBD5E1', fontSize: '16px', fontWeight: 300 }}>×</span>
+            <span className="cce-header-divider" style={{ color: '#CBD5E1', fontSize: '14px', fontWeight: 300 }}>×</span>
 
             <div
               className="cce-badge-cce"
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '8px',
+                gap: '6px',
                 background: 'var(--cce-emerald-wash)',
-                padding: '6px 14px',
+                padding: '4px 10px',
                 borderRadius: '9999px',
                 border: '1px solid #A7F3D0',
               }}
@@ -349,17 +375,16 @@ export default function CceJuarezClient() {
               <img
                 src="/assets/cce-juarez/logo_cce.png"
                 alt="Logo CCE Ciudad Juárez"
-                style={{ width: '22px', height: '22px', objectFit: 'contain' }}
+                style={{ width: '18px', height: '18px', objectFit: 'contain' }}
               />
               <span
                 style={{
-                  fontSize: '14px',
+                  fontSize: '12px',
                   fontWeight: 700,
                   color: 'var(--cce-emerald)',
-                  letterSpacing: '0.2px',
                 }}
               >
-                CCE Ciudad Juárez
+                CCE Juárez
               </span>
             </div>
           </div>
@@ -369,7 +394,6 @@ export default function CceJuarezClient() {
             <a
               href="#inversion"
               className="cce-btn cce-btn-outline"
-              style={{ padding: '8px 12px', fontSize: '0.85rem' }}
             >
               Ver Inversión
             </a>
@@ -377,7 +401,6 @@ export default function CceJuarezClient() {
             <button
               onClick={handleCopyClabe}
               className="cce-btn cce-btn-primary cce-btn-header-clabe"
-              style={{ padding: '8px 12px', fontSize: '0.85rem' }}
             >
               {copiedClabe ? <Check size={16} /> : <Copy size={16} />}
               {copiedClabe ? '¡CLABE Copiada!' : 'Copiar CLABE'}
@@ -388,9 +411,8 @@ export default function CceJuarezClient() {
               target="_blank"
               rel="noopener noreferrer"
               className="cce-btn cce-btn-whatsapp"
-              style={{ padding: '8px 12px', fontSize: '0.85rem' }}
             >
-              <MessageCircle size={16} />
+              <MessageCircle size={15} />
               WhatsApp
             </a>
           </div>
@@ -399,6 +421,7 @@ export default function CceJuarezClient() {
 
       {/* HERO SECTION */}
       <section
+        className="cce-hero-section"
         style={{
           position: 'relative',
           padding: '56px 20px 48px 20px',
@@ -426,14 +449,14 @@ export default function CceJuarezClient() {
             <Sparkles size={16} color="#B45309" style={{ flexShrink: 0 }} />
             <span
               style={{
-                fontSize: '13px',
+                fontSize: '12px',
                 fontWeight: 800,
                 color: '#B45309',
                 letterSpacing: '0.5px',
                 textTransform: 'uppercase',
               }}
             >
-              Propuesta Comercial Ejecutiva · Apolograma × CCE Juárez
+              Propuesta Comercial Ejecutiva · CCE Juárez × Apolograma
             </span>
           </div>
 
@@ -449,6 +472,7 @@ export default function CceJuarezClient() {
             {/* Left Column: Title & Proposal Overview */}
             <div>
               <div
+                className="cce-council-tag"
                 style={{
                   fontSize: '13px',
                   fontWeight: 800,
@@ -456,6 +480,9 @@ export default function CceJuarezClient() {
                   letterSpacing: '0.8px',
                   textTransform: 'uppercase',
                   marginBottom: '8px',
+                  lineHeight: 1.35,
+                  wordBreak: 'break-word',
+                  overflowWrap: 'break-word',
                 }}
               >
                 CONSEJO COORDINADOR EMPRESARIAL CIUDAD JUÁREZ
@@ -466,9 +493,11 @@ export default function CceJuarezClient() {
                   lineHeight: 1.15,
                   marginBottom: '12px',
                   color: 'var(--cce-emerald)',
+                  wordBreak: 'break-word',
+                  overflowWrap: 'break-word',
                 }}
               >
-                ESTRATEGIA DIGITAL, CONTENIDO &amp; CONVOCATORIA
+                ESTRATEGIA DIGITAL,<br />CONTENIDO &amp; CONVOCATORIA
               </h1>
 
               <div
@@ -478,6 +507,9 @@ export default function CceJuarezClient() {
                   color: '#B45309',
                   fontStyle: 'italic',
                   marginBottom: '16px',
+                  lineHeight: 1.35,
+                  wordBreak: 'break-word',
+                  overflowWrap: 'break-word',
                 }}
               >
                 Entrega de Galardones 2026 · Conferencia Magistral Carlos Loret de Mola
@@ -1235,6 +1267,7 @@ export default function CceJuarezClient() {
           </div>
 
           <div
+            className="cce-roadmap-grid"
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
@@ -1568,6 +1601,7 @@ export default function CceJuarezClient() {
 
             {/* Official Fiscal Billing Card (Banregio) */}
             <div
+              className="cce-fiscal-grid"
               style={{
                 marginTop: '32px',
                 borderTop: '1px solid rgba(255, 255, 255, 0.15)',
