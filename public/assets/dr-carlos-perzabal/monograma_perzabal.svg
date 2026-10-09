@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FEF3C7" />
+      <stop offset="50%" stop-color="#D4AF37" />
+      <stop offset="100%" stop-color="#B8860B" />
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#00A3E0" />
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="32" fill="#070D18" />
+  <rect x="6" y="6" width="188" height="188" rx="26" fill="none" stroke="url(#goldGrad)" stroke-width="2" opacity="0.6" />
+  <circle cx="100" cy="100" r="76" fill="#0B1426" stroke="#00A3E0" stroke-width="1.5" stroke-dasharray="4 4" />
+  <!-- Scalpel & Caduceus Stylized Axis -->
+  <path d="M100 35 L100 165" stroke="url(#cyanGrad)" stroke-width="3" stroke-linecap="round" />
+  <!-- Precision Cross -->
+  <path d="M60 75 L140 75" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round" />
+  <!-- C & P Intertwined -->
+  <path d="M85 85 C65 85 55 95 55 110 C55 125 65 135 85 135" fill="none" stroke="#F8FAFC" stroke-width="5" stroke-linecap="round" />
+  <path d="M105 135 L105 85 C115 85 135 85 135 102 C135 118 115 118 105 118" fill="none" stroke="url(#goldGrad)" stroke-width="5" stroke-linecap="round" />
+  <!-- Robotic Dots -->
+  <circle cx="100" cy="35" r="4" fill="#38BDF8" />
+  <circle cx="100" cy="165" r="4" fill="#D4AF37" />
+  <circle cx="60" cy="75" r="3" fill="#D4AF37" />
+  <circle cx="140" cy="75" r="3" fill="#D4AF37" />
+</svg>

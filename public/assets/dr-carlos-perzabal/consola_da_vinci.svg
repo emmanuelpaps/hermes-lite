@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" width="400" height="320">
+  <defs>
+    <linearGradient id="bgDav" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070D18" />
+      <stop offset="100%" stop-color="#0B1426" />
+    </linearGradient>
+    <linearGradient id="glowG" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00A3E0" />
+      <stop offset="100%" stop-color="#60A5FA" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="320" rx="20" fill="url(#bgDav)" stroke="#1E293B" stroke-width="1.5" />
+
+  <!-- Console Chassis Outer -->
+  <rect x="80" y="40" width="240" height="180" rx="24" fill="#0B1426" stroke="#00A3E0" stroke-width="2" />
+  
+  <!-- 3D-HD Stereoscopic Viewer -->
+  <rect x="120" y="65" width="160" height="65" rx="12" fill="#020617" stroke="#38BDF8" stroke-width="1.5" />
+  <circle cx="160" cy="97" r="18" fill="#00A3E0" fill-opacity="0.3" stroke="#38BDF8" stroke-width="2" />
+  <circle cx="240" cy="97" r="18" fill="#00A3E0" fill-opacity="0.3" stroke="#38BDF8" stroke-width="2" />
+  <text x="200" y="102" fill="#F8FAFC" font-size="9" font-family="sans-serif" font-weight="bold" text-anchor="middle">3D-HD 10x</text>
+
+  <!-- Master Tool Controllers -->
+  <path d="M120 160 C120 185 150 195 160 185" fill="none" stroke="#D4AF37" stroke-width="3" stroke-linecap="round" />
+  <circle cx="160" cy="185" r="5" fill="#D4AF37" />
+  
+  <path d="M280 160 C280 185 250 195 240 185" fill="none" stroke="#D4AF37" stroke-width="3" stroke-linecap="round" />
+  <circle cx="240" cy="185" r="5" fill="#D4AF37" />
+
+  <text x="200" y="165" fill="#FEF3C7" font-size="9" font-family="sans-serif" text-anchor="middle">Controles Maestros</text>
+  <text x="200" y="178" fill="#94A3B8" font-size="8" font-family="sans-serif" text-anchor="middle">(Filtro de Temblor 5:1)</text>
+
+  <!-- EndoWrist 540° Callout -->
+  <circle cx="340" cy="110" r="28" fill="#0F172A" stroke="#00A3E0" stroke-width="1.5" />
+  <text x="340" y="105" fill="#38BDF8" font-size="10" font-family="sans-serif" font-weight="bold" text-anchor="middle">EndoWrist</text>
+  <text x="340" y="119" fill="#10B981" font-size="9" font-family="sans-serif" font-weight="bold" text-anchor="middle">540°</text>
+
+  <!-- Console Pedestal / Touch Pad -->
+  <path d="M160 220 L150 255 L250 255 L240 220 Z" fill="#1E293B" stroke="#334155" stroke-width="1" />
+
+  <!-- Bottom Technical Badges -->
+  <rect x="25" y="265" width="350" height="42" rx="8" fill="#0B1426" stroke="#00A3E0" stroke-width="1" />
+  <text x="40" y="282" fill="#00A3E0" font-size="10" font-family="sans-serif" font-weight="bold">CIRUGÍA ASISTIDA POR ROBOT DA VINCI (INTUITIVE)</text>
+  <text x="40" y="296" fill="#F8FAFC" font-size="9" font-family="sans-serif">El cirujano comanda la consola · Precisión submilimétrica · Menor sangrado y dolor</text>
+</svg>
