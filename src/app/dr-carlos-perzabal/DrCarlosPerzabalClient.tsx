@@ -1309,6 +1309,21 @@ export default function DrCarlosPerzabalClient() {
               background: rgba(0, 163, 224, 0.06);
             }
 
+            @media (max-width: 768px) {
+              .doc-toggle-row {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 12px !important;
+                padding: 14px 16px !important;
+              }
+              .doc-toggle-row > div:last-child {
+                width: 100% !important;
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+              }
+            }
+
             .doc-switch {
               position: relative;
               width: 48px;
@@ -1434,6 +1449,31 @@ export default function DrCarlosPerzabalClient() {
               border-top: 1px solid rgba(148, 163, 184, 0.15);
               font-size: 0.875rem;
               color: var(--doc-muted);
+            }
+
+            @media (max-width: 768px) {
+              .doc-footer {
+                word-break: break-word;
+                max-width: 100%;
+              }
+              .doc-footer .doc-container {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 20px !important;
+              }
+              .doc-footer .doc-container > div {
+                width: 100% !important;
+                max-width: 100% !important;
+                text-align: left !important;
+              }
+              .doc-footer .doc-container > div:first-child {
+                max-width: 100% !important;
+              }
+              .doc-footer p {
+                max-width: 100% !important;
+                word-break: break-word !important;
+              }
+            }
           `,
         }}
       />

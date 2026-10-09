@@ -928,6 +928,34 @@ describe('Tier 4: Real-World Scenarios & Production Readiness', () => {
       allCss.includes('.doc-badge-status') && allCss.includes('display: none !important'),
       'Mobile media query must hide .doc-badge-status on mobile screens to preserve width for CTAs'
     );
+
+    // 7. Configurator Add-on rows responsive mobile media query (<= 768px)
+    assert.ok(
+      clientTsx.includes('.doc-toggle-row') && clientTsx.includes('flex-direction: column !important'),
+      'DrCarlosPerzabalClient must declare flex-direction: column !important for .doc-toggle-row on mobile'
+    );
+    assert.ok(
+      staticIndexHtml.includes('.doc-toggle-row') && staticIndexHtml.includes('flex-direction: column !important'),
+      'index.html must declare flex-direction: column !important for .doc-toggle-row on mobile'
+    );
+    assert.ok(
+      allCss.includes('.doc-toggle-row > div:last-child') && allCss.includes('justify-content: space-between'),
+      'Mobile media query must expand toggle switch container to full width with space-between alignment'
+    );
+
+    // 8. Footer responsive text wrapping and container stacking on mobile
+    assert.ok(
+      clientTsx.includes('.doc-footer') && clientTsx.includes('word-break: break-word'),
+      'DrCarlosPerzabalClient must declare word-break: break-word for .doc-footer on mobile'
+    );
+    assert.ok(
+      staticIndexHtml.includes('.doc-footer') && staticIndexHtml.includes('word-break: break-word'),
+      'index.html must declare word-break: break-word for .doc-footer on mobile'
+    );
+    assert.ok(
+      allCss.includes('.doc-footer .doc-container') && allCss.includes('flex-direction: column !important'),
+      'Mobile media query must stack .doc-footer .doc-container into a column on mobile viewports'
+    );
   });
 
   it('[T4-SCEN-06] Static Delivery Parity: propuestas/dr-carlos-perzabal/index.html exists, is valid HTML, and contains matching title, credentials, pricing, and triage tree', () => {
