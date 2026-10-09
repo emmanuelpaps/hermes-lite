@@ -30,6 +30,12 @@ import {
   DollarSign,
   HeartPulse,
   Compass,
+  Users,
+  LayoutDashboard,
+  BookOpen,
+  Filter,
+  ArrowUpRight,
+  Database,
 } from 'lucide-react';
 
 // ==========================================
@@ -171,109 +177,278 @@ const TRIAGE_TREE: Record<string, TriageStep> = {
 };
 
 // ==========================================
-// 2. CONFIGURATOR DATA
+// 2. CONFIGURATOR DATA (SUITE MODULAR APOLOGRAMA)
 // ==========================================
 
-interface ConfigCoreItem {
+export interface ServiceModuleItem {
   id: string;
   name: string;
-  monthly: number;
+  price: number;
+  period: 'setup' | 'monthly';
   tag: string;
+  badge: string;
   description: string;
   bullets: string[];
 }
 
-const CORE_COMPONENTS: ConfigCoreItem[] = [
+export const SETUP_MODULES: ServiceModuleItem[] = [
   {
-    id: 'c1',
+    id: 'branding',
     name: 'Identidad Visual & Branding Médico de Alto Nivel',
-    monthly: 6000,
-    tag: 'Autoridad Institucional',
+    price: 12000,
+    period: 'setup',
+    tag: 'Arquitectura de Prestigio',
+    badge: 'Setup Inicial',
     description:
-      'Dirección de arte clínica contemporánea, monograma quirúrgico de alta jerarquía, papelería médica de consultorio (recetarios, hojas membretadas, consentimientos informados) y manual de aplicación visual.',
+      'Sistema visual quirúrgico sobrio, monograma institucional del Dr. Carlos Perzabal, tipografía clínica, manual de aplicación de marca y papelería médica para consultorio (recetarios, hojas membretadas y consentimientos informados). Erradica cualquier estigma visual de clínica low-cost.',
     bullets: [
-      'Monograma y firma quirúrgica Dr. Carlos Perzabal',
-      'Papelería médica de consultorio y consentimientos quirúrgicos',
+      'Monograma y firma quirúrgica oficial Dr. Carlos Tadeo Perzabal Avilez',
+      'Papelería médica de consultorio y consentimientos quirúrgicos informados',
       'Dirección de arte sobria: Deep Slate, Surgical Cyan y Clinical Gold',
-      'Cero ilustraciones de IA especulativas ni estigma low-cost',
+      'Cero ilustraciones de IA especulativas ni estigma de clínica low-cost',
     ],
   },
   {
-    id: 'c2',
-    name: 'Webapp / Portal Quirúrgico de Conversión Binacional',
-    monthly: 9000,
-    tag: 'Infraestructura Web',
+    id: 'desarrollo_web',
+    name: 'Desarrollo Web / Webapp Quirúrgica Binacional',
+    price: 24000,
+    period: 'setup',
+    tag: 'Infraestructura Tecnológica',
+    badge: 'Setup Inicial',
     description:
-      'Portal web de alta velocidad (<1.2s en Vercel Edge) con arquitectura bilateral (Juárez · El Paso, TX), fichas de procedimientos con rigor clínico, calculadora interactiva de IMC y credenciales hospitalarias.',
+      'Portal web médico de alta velocidad (<1.2s en Vercel Edge) con arquitectura bilateral (Juárez · El Paso, TX), fichas técnicas interactivas con esquemas quirúrgicos vectoriales (Manga LSG, Bypass LRYGB, Vesícula CVS, Hernias TAPP y Consola Da Vinci), calculadoras clínicas y marco de turismo médico para eludir deducibles de EE.UU.',
     bullets: [
-      'Fichas de procedimientos: Manga LSG, Bypass LRYGB, Vesícula CVS, Hernias TAPP, Robot Da Vinci',
-      'Marco de turismo médico: Elusión de deducibles en EE.UU. y seguridad hospitalaria',
-      'Optimización mobile-first de máxima velocidad y diseño responsivo sin desbordamiento',
-      'Respaldos institucionales: Hospital General, UACJ, CMCOEM, CMCG',
-    ],
-  },
-  {
-    id: 'c3',
-    name: 'Asistente Inteligente de Triaje en WhatsApp 24/7',
-    monthly: 5000,
-    tag: 'Automatización Clínica',
-    description:
-      'Infraestructura oficial sobre WhatsApp Cloud API con árbol de triaje clínico estructurado de 4 ramas, filtro de elegibilidad ASMBS 2022 y canalización prioritaria de fichas prequirúrgicas al consultorio.',
-    bullets: [
-      'Árbol clínico de 4 ramas (Bariatría, Vesícula, Hernia, Cirugía Robótica)',
-      'Filtro previo de elegibilidad médica y cálculo de IMC',
-      'Despacho automático de ficha prequirúrgica al consultorio',
-      'Atención 24/7 sin pérdida de prospectos calificados locales o foráneos',
-    ],
-  },
-  {
-    id: 'c4',
-    name: 'Estrategia de Pauta Meta Ads de Autoridad Educativa',
-    monthly: 7000,
-    tag: 'Gestión de Medios',
-    description:
-      'Planificación, segmentación y optimización semanal de campañas educativas en Facebook e Instagram dirigidas a pacientes digestivos y candidatos metabólicos en Ciudad Juárez y El Paso. *(Pauta pagada directamente por el cliente a Meta).*',
-    bullets: [
-      'Segmentación médica precisa en Ciudad Juárez y condado de El Paso',
-      'Contenido formativo de alta autoridad (mitos de bariatría, dolor vesicular, hernias)',
-      'Métricas puramente técnicas de tráfico calificado y conversiones',
-      'Enfoque estricto en métricas técnicas de tráfico calificado y tasa de conversión',
+      'Fichas de procedimientos con esquemas vectoriales: Manga, Bypass, Vesícula CVS, Hernias, Da Vinci',
+      'Marco de turismo médico binacional (elusión de deducibles de $5k–$10k USD en Texas)',
+      'Optimización mobile-first de máxima velocidad (<1.2s) con 0px de desbordamiento horizontal',
+      'Respaldos institucionales: Hospital General de Cd. Juárez, UACJ, CMCOEM',
     ],
   },
 ];
 
-interface ConfigAddonItem {
+export const MONTHLY_MODULES: ServiceModuleItem[] = [
+  {
+    id: 'marketing_mensual',
+    name: 'Marketing y Planeación Mensual de Autoridad',
+    price: 10000,
+    period: 'monthly',
+    tag: 'Dirección Editorial Continua',
+    badge: 'Iguala Mensual',
+    description:
+      'Estrategia y dirección editorial continua: calendario mensual de contenidos clínicos, educación médica sobre patologías digestivas, preparación preoperatoria, desmitificación de bariatría y casos clínicos éticos. Cero promociones vulgares ni lenguaje de remate.',
+    bullets: [
+      'Calendario editorial mensual con 4 pilares de rigor científico y autoridad médica',
+      'Educación clínica de síntomas, preparación prequirúrgica y prevención digestiva',
+      'Supervisión editorial médica estricta sin tácticas comerciales devaluatorias',
+      'Presentación ética de casos clínicos y tecnología quirúrgica avanzada',
+    ],
+  },
+  {
+    id: 'pauta_meta',
+    name: 'Pauta Meta Ads Quirúrgica Hipersegmentada',
+    price: 7000,
+    period: 'monthly',
+    tag: 'Gestión de Medios Digitales',
+    badge: 'Iguala Mensual',
+    description:
+      'Gestión avanzada de campañas en Meta Business Suite hipersegmentadas en Ciudad Juárez y el condado de El Paso (Texas). Embudos de tráfico calificado hacia pacientes con necesidad de bariatría, colecistectomía o cirugía robótica. *(Inversión de pauta pagada directamente por el cliente a Meta).*',
+    bullets: [
+      'Segmentación médica precisa en Ciudad Juárez y condado de El Paso / Las Cruces',
+      'Campañas segmentadas por patología (bariatría, dolor vesicular, hernias, robótica)',
+      'Métricas puramente técnicas de tráfico calificado, CTR y tasa de conversión',
+      'Optimización semanal de pauta publicitaria en Facebook e Instagram',
+    ],
+  },
+  {
+    id: 'bot_whatsapp',
+    name: 'Bot de WhatsApp con Triaje Clínico 24/7',
+    price: 5000,
+    period: 'monthly',
+    tag: 'Automatización Clínica',
+    badge: 'Iguala Mensual',
+    description:
+      'Asistente inteligente sobre WhatsApp Cloud API disponible 24/7 con árbol de triaje de 4 ramas (Bariatría bajo guías ASMBS 2022, Vesícula, Hernia y Robótica), cálculo preliminar y despacho automático de la ficha del paciente al consultorio.',
+    bullets: [
+      'Árbol clínico de 4 ramas (Bariatría, Vesícula, Hernia, Cirugía Robótica)',
+      'Filtro previo de elegibilidad médica y cálculo de IMC',
+      'Despacho automático de ficha prequirúrgica al WhatsApp del consultorio (+52 656 311 7565)',
+      'Atención 24/7 sin pérdida de prospectos calificados locales o foráneos',
+    ],
+  },
+  {
+    id: 'crm_medico',
+    name: 'CRM Quirúrgico para Médicos',
+    price: 4000,
+    period: 'monthly',
+    tag: 'Pipeline Clínico de Pacientes',
+    badge: 'Iguala Mensual',
+    description:
+      'Plataforma de gestión centralizada y pipeline de pacientes: trazabilidad desde el primer contacto (Lead Web / WhatsApp) hasta la consulta de valoración, programación de quirófano y seguimiento postoperatorio, evitando fugas de prospectos calificados.',
+    bullets: [
+      'Tablero kanban médico con 5 etapas de conversión clínica',
+      'Expedientes digitales rápidos de prospectos con ficha de triaje integrada',
+      'Seguimiento automatizado para confirmación de consulta presencial',
+      'Control de pacientes postoperados y recordatorios de citas de revisión',
+    ],
+  },
+];
+
+// CRM Mockup Data
+export interface CrmPatient {
   id: string;
   name: string;
-  price: number;
-  badge: string;
-  description: string;
+  origin: string;
+  procedure: string;
+  stage: 'lead' | 'triage' | 'cita' | 'quirofano' | 'postop';
+  stageLabel: string;
+  clinicalNote: string;
+  badgeColor: string;
+  date: string;
+  details: {
+    bmi?: string;
+    ultrasound?: string;
+    insurance?: string;
+    scheduledDate?: string;
+    nextFollowup?: string;
+  };
 }
 
-const ADDON_COMPONENTS: ConfigAddonItem[] = [
+export const CRM_PATIENTS: CrmPatient[] = [
   {
-    id: 'add_video',
-    name: 'Producción Audiovisual Quirúrgica en Quirófano',
-    price: 8500,
-    badge: 'Producción Cine 4K',
-    description:
-      'Jornada de rodaje profesional en quirófano/consultorio con óptica de cine, iluminación médica y grabación de 6 cápsulas clínicas explicativas con el Dr. Perzabal.',
+    id: 'p1',
+    name: 'Mariana R.',
+    origin: 'El Paso, TX',
+    procedure: 'Manga Gástrica por Laparoscopía (LSG)',
+    stage: 'triage',
+    stageLabel: 'Triaje Precalificado',
+    clinicalNote: 'IMC 36.8 con reflujo leve. Califica bajo guías ASMBS 2022. Desea eludir deducible de $8,500 USD en Texas.',
+    badgeColor: '#00A3E0',
+    date: 'Hoy, 09:14 AM',
+    details: {
+      bmi: '36.8 (Candidata Quirúrgica Primaria)',
+      insurance: 'Sin cobertura bariátrica en EE.UU.',
+      scheduledDate: 'En espera de elección de fecha en agenda',
+    },
   },
   {
-    id: 'add_bilingual',
-    name: 'Portal Quirúrgico Bilingüe Nativo (English)',
-    price: 6000,
-    badge: 'Texas Patient Intake',
-    description:
-      'Traducción médica completa y localización cultural al inglés para el portal web y el asistente de triaje, maximizando la captación en El Paso, Las Cruces y Texas.',
+    id: 'p2',
+    name: 'Roberto S.',
+    origin: 'Ciudad Juárez, Chih.',
+    procedure: 'Colecistectomía Laparoscópica (CVS Strasberg)',
+    stage: 'cita',
+    stageLabel: 'Cita en Consultorio Agendada',
+    clinicalNote: 'Dolor en hipocondrio derecho postprandial. Ultrasonido con litiasis de 14mm sin engrosamiento mural severo.',
+    badgeColor: '#38BDF8',
+    date: 'Lunes, 11:30 AM',
+    details: {
+      ultrasound: 'Confirmado con colelitiasis sintomática',
+      scheduledDate: 'Lunes 11:30 AM (Centro Médico Especialidades)',
+    },
   },
   {
-    id: 'add_agenda',
-    name: 'Integración de Agenda Digital & Recordatorios',
-    price: 4500,
-    badge: 'Sincronización Clínica',
+    id: 'p3',
+    name: 'Ing. Carlos V.',
+    origin: 'Ciudad Juárez, Chih.',
+    procedure: 'Hernioplastía Inguinal Robótica Da Vinci',
+    stage: 'quirofano',
+    stageLabel: 'Cirugía Programada',
+    clinicalNote: 'Hernia inguinal bilateral indirecta recurrente. Prefiere abordaje robótico Da Vinci por retorno laboral acelerado.',
+    badgeColor: '#D4AF37',
+    date: 'Jueves, 08:00 AM',
+    details: {
+      scheduledDate: 'Jueves 08:00 AM (Quirófano 3)',
+      nextFollowup: 'Protocolo de estancia corta / ambulatorio',
+    },
+  },
+  {
+    id: 'p4',
+    name: 'Patricia G.',
+    origin: 'Las Cruces, NM',
+    procedure: 'Bypass Gástrico en Y de Roux (LRYGB)',
+    stage: 'postop',
+    stageLabel: 'Seguimiento Postoperatorio',
+    clinicalNote: 'Día 14 post-quirúrgico. Evolución hemodinámica favorable (-8.2 kg, remisión temprana de hiperglicemia).',
+    badgeColor: '#10B981',
+    date: 'Día 14 Post-Op',
+    details: {
+      bmi: 'Pre-op 41.2 -> Actual 38.1',
+      nextFollowup: 'Consulta telemédica bilingüe Viernes 4:00 PM',
+    },
+  },
+  {
+    id: 'p5',
+    name: 'Esteban L.',
+    origin: 'El Paso, TX',
+    procedure: 'Reparación de Hernia Hiatal / ERGE Severo',
+    stage: 'lead',
+    stageLabel: 'Lead Captado (Meta Ads)',
+    clinicalNote: 'Ingresó vía anuncio de Autoridad Quirúrgica en Facebook (Texas). Refiere ardor retroesternal crónico resistente a IBP.',
+    badgeColor: '#94A3B8',
+    date: 'Ayer, 07:45 PM',
+    details: {
+      insurance: 'Auto-pay binacional',
+      nextFollowup: 'Canalizado al Bot de WhatsApp para triaje clínico',
+    },
+  },
+];
+
+// Marketing Authority Pillars
+export const MARKETING_PILLARS = [
+  {
+    id: 'pil_1',
+    number: '01',
+    title: 'Técnica Quirúrgica & Evidencia Científica',
+    subtitle: 'Rigor y Maestría en Quirófano',
     description:
-      'Conexión automática del triaje con Google Calendar y Doctoralia, integrando recordatorios automáticos por WhatsApp para reducir inasistencias a consulta.',
+      'Contenidos que exponen la precisión técnica del Dr. Perzabal: Visión Crítica de Seguridad Strasberg (CVS) para proteger la vía biliar, uso de consola robótica Da Vinci y prueba de hermeticidad en bariatría. Demuestra por qué la cirugía debe realizarse con un cirujano de alta especialidad.',
+    highlights: [
+      'Visión Crítica de Seguridad (CVS) en Colecistectomía',
+      'Articulación 360° y visión 3D 10x de Cirugía Robótica Da Vinci',
+      'Calibración con bujía 36 Fr y sutura invaginante en Manga Gástrica',
+      'Cero improvisaciones: infraestructura con UCI y Banco de Sangre',
+    ],
+  },
+  {
+    id: 'pil_2',
+    number: '02',
+    title: 'Consensos Clínicos & Educación Bariátrica',
+    subtitle: 'Desmitificación con Respaldos Médicos',
+    description:
+      'Artículos y piezas explicativas bajo las guías internacionales ASMBS / IFSO 2022. Explicamos al paciente por qué la obesidad es una enfermedad metabólica y cómo la cirugía modula hormonas como la grelina y GLP-1, alejándonos de culpabilizaciones y dietas milagro.',
+    highlights: [
+      'Criterios ASMBS 2022: Cirugía desde IMC 30 con comorbilidades',
+      'Regulación hormonal del apetito: grelina, GLP-1 y saciedad real',
+      'Diferencias clínicas objetivas entre Manga y Bypass Gástrico',
+      'Acompañamiento multidisciplinario: nutrición y psicología clínica',
+    ],
+  },
+  {
+    id: 'pil_3',
+    number: '03',
+    title: 'Prevención Digestiva & Síntomas de Alarma',
+    subtitle: 'Triaje Educativo Oportuno',
+    description:
+      'Alertas educativas para la población sobre complicaciones comunes: riesgos de postergar una colecistectomía (pancreatitis biliar, hidrocolecisto) o complicaciones de hernias no tratadas (estrangulamiento e incarceración). Fomenta la consulta programada antes de una urgencia.',
+    highlights: [
+      'Dolor cólico en hipocondrio derecho vs indigestión común',
+      'Por qué los medicamentos no disuelven los cálculos vesiculares',
+      'Riesgo de estrangulamiento en hernias inguinales y umbilicales',
+      'Indicaciones para colocación de malla laparoscópica de alta densidad',
+    ],
+  },
+  {
+    id: 'pil_4',
+    number: '04',
+    title: 'Atención Binacional & Turismo Quirúrgico Ético',
+    subtitle: 'Seguridad Fronteriza para Texas',
+    description:
+      'Contenidos en inglés y español para el paciente de El Paso, Las Cruces y suroeste de EE.UU. que busca eludir deducibles hospitalarios de $5,000–$10,000 USD sin sacrificar estándares hospitalarios ni seguridad clínica a 15 minutos del puente internacional.',
+    highlights: [
+      'Logística de cruce y consultorio a 15 min de Puentes Internacionales',
+      'Hospital con Unidad de Cuidados Intensivos (UCI) y Banco de Sangre',
+      'Resumen quirúrgico y notas postoperatorias bilingües oficiales',
+      'Ahorro de hasta el 65% respecto al costo hospitalario out-of-pocket en Texas',
+    ],
   },
 ];
 
@@ -282,12 +457,22 @@ const ADDON_COMPONENTS: ConfigAddonItem[] = [
 // ==========================================
 
 export default function DrCarlosPerzabalClient() {
-  // Configurator state
-  const [activeAddons, setActiveAddons] = useState<Record<string, boolean>>({
-    add_video: false,
-    add_bilingual: false,
-    add_agenda: false,
+  // Configurator state: ALL 6 modules active by default (Hybrid Setup + Monthly)
+  const [activeModules, setActiveModules] = useState<Record<string, boolean>>({
+    branding: true,
+    desarrollo_web: true,
+    marketing_mensual: true,
+    pauta_meta: true,
+    bot_whatsapp: true,
+    crm_medico: true,
   });
+
+  // CRM Interactive Pipeline State
+  const [selectedCrmPatient, setSelectedCrmPatient] = useState<CrmPatient>(CRM_PATIENTS[0]);
+  const [crmFilter, setCrmFilter] = useState<string>('todos');
+
+  // Marketing Authority Pillars State
+  const [activePillarId, setActivePillarId] = useState<string>('pil_1');
 
   // Triage state
   const [triageHistory, setTriageHistory] = useState<Array<{ sender: 'bot' | 'user'; text: string }>>([
@@ -463,38 +648,48 @@ export default function DrCarlosPerzabalClient() {
     return `https://wa.me/${phone}?text=${encodeURIComponent(lines.join('\n'))}`;
   }, [collectedData]);
 
-  // Toggle Configurator Addon
-  const toggleAddon = (addonId: string) => {
-    setActiveAddons((prev) => ({
+  // Toggle Modular Service Item
+  const toggleModule = (moduleId: string) => {
+    setActiveModules((prev) => ({
       ...prev,
-      [addonId]: !prev[addonId],
+      [moduleId]: !prev[moduleId],
     }));
   };
 
-  // Calculate Investment Math
+  // Calculate Investment Math (Hybrid Setup + Monthly Retainer)
   const investmentMath = useMemo(() => {
-    const baseCore = CORE_COMPONENTS.reduce((sum, item) => sum + item.monthly, 0); // $27,000 MXN
-    let addOnsSum = 0;
-    ADDON_COMPONENTS.forEach((addon) => {
-      if (activeAddons[addon.id]) {
-        addOnsSum += addon.price;
+    let setupSubtotal = 0;
+    SETUP_MODULES.forEach((m) => {
+      if (activeModules[m.id]) {
+        setupSubtotal += m.price;
       }
     });
+    const setupIva = Math.round(setupSubtotal * 0.16);
+    const setupTotal = setupSubtotal + setupIva;
 
-    const subtotal = baseCore + addOnsSum;
-    const iva = Math.round(subtotal * 0.16);
-    const total = subtotal + iva;
-    const daily = Math.round(total / 30);
+    let monthlySubtotal = 0;
+    MONTHLY_MODULES.forEach((m) => {
+      if (activeModules[m.id]) {
+        monthlySubtotal += m.price;
+      }
+    });
+    const monthlyIva = Math.round(monthlySubtotal * 0.16);
+    const monthlyTotal = monthlySubtotal + monthlyIva;
+    const monthlyDaily = Math.round(monthlyTotal / 30);
+
+    const initialGrandTotal = setupTotal + monthlyTotal;
 
     return {
-      baseCore,
-      addOnsSum,
-      subtotal,
-      iva,
-      total,
-      daily,
+      setupSubtotal,
+      setupIva,
+      setupTotal,
+      monthlySubtotal,
+      monthlyIva,
+      monthlyTotal,
+      monthlyDaily,
+      initialGrandTotal,
     };
-  }, [activeAddons]);
+  }, [activeModules]);
 
   // Copy CLABE
   const handleCopyClabe = async () => {
@@ -560,10 +755,15 @@ export default function DrCarlosPerzabalClient() {
     setModalLoading(true);
     setModalError('');
 
-    const selectedModulesList = ['Ecosistema Base (4 Componentes)'];
-    ADDON_COMPONENTS.forEach((addon) => {
-      if (activeAddons[addon.id]) {
-        selectedModulesList.push(addon.name);
+    const selectedModulesList: string[] = [];
+    SETUP_MODULES.forEach((m) => {
+      if (activeModules[m.id]) {
+        selectedModulesList.push(`[Setup] ${m.name}`);
+      }
+    });
+    MONTHLY_MODULES.forEach((m) => {
+      if (activeModules[m.id]) {
+        selectedModulesList.push(`[Mensual] ${m.name}`);
       }
     });
 
@@ -606,22 +806,27 @@ export default function DrCarlosPerzabalClient() {
 
   // Dynamic WhatsApp Approval Link
   const approvalWhatsAppUrl = useMemo(() => {
-    const modulesIncluded = ['4 Componentes Sinérgicos del Ecosistema Base'];
-    ADDON_COMPONENTS.forEach((ad) => {
-      if (activeAddons[ad.id]) modulesIncluded.push(ad.name);
-    });
+    const selectedSetup = SETUP_MODULES.filter((m) => activeModules[m.id]).map((m) => `• ${m.name} (${formatMxn(m.price)})`);
+    const selectedMonthly = MONTHLY_MODULES.filter((m) => activeModules[m.id]).map((m) => `• ${m.name} (${formatMxn(m.price)}/mes)`);
 
     const msg = [
-      'Hola Emmanuel, confirmo la aprobación de la propuesta comercial para el Dr. Carlos Tadeo Perzabal Avilez.',
+      'Hola Emmanuel, confirmo la aprobación de la propuesta comercial para el Dr. Carlos Tadeo Perzabal Avilez en Apolograma.',
       '',
-      `• Inversión Mensual: ${formatMxn(investmentMath.subtotal)} + IVA (${formatMxn(investmentMath.iva)}) = ${formatMxn(investmentMath.total)} MXN Facturados.`,
-      `• Módulos Seleccionados: ${modulesIncluded.join(', ')}.`,
+      '🏛️ SETUP INICIAL DE IMPLEMENTACIÓN:',
+      ...(selectedSetup.length > 0 ? selectedSetup : ['(Ninguno seleccionado)']),
+      `Subtotal Setup: ${formatMxn(investmentMath.setupSubtotal)} MXN + IVA = ${formatMxn(investmentMath.setupTotal)} MXN Facturado.`,
       '',
-      'Solicito coordinar la orden de trabajo y sesión inicial de bienvenida.',
+      '⚙️ MÓDULOS OPERATIVOS MENSUALES:',
+      ...(selectedMonthly.length > 0 ? selectedMonthly : ['(Ninguno seleccionado)']),
+      `Subtotal Mensual: ${formatMxn(investmentMath.monthlySubtotal)} MXN/mes + IVA = ${formatMxn(investmentMath.monthlyTotal)} MXN Facturado.`,
+      '',
+      `💼 INVERSIÓN INICIAL TOTAL (Setup + Mes 1): ${formatMxn(investmentMath.initialGrandTotal)} MXN Facturado.`,
+      '',
+      'Solicito coordinar la orden de trabajo e inicio de diseño e infraestructura.',
     ].join('\n');
 
     return `https://wa.me/526563117565?text=${encodeURIComponent(msg)}`;
-  }, [investmentMath, activeAddons]);
+  }, [investmentMath, activeModules]);
 
   return (
     <div className="perzabal-root">
@@ -1350,6 +1555,141 @@ export default function DrCarlosPerzabalClient() {
               transform: translateX(22px);
             }
 
+            /* CRM Kanban Styles */
+            .doc-kanban-board {
+              display: grid;
+              grid-template-columns: repeat(5, 1fr);
+              gap: 14px;
+              margin-top: 24px;
+            }
+            @media (max-width: 1100px) {
+              .doc-kanban-board {
+                grid-template-columns: repeat(3, 1fr);
+              }
+            }
+            @media (max-width: 768px) {
+              .doc-kanban-board {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 16px !important;
+              }
+            }
+            .doc-kanban-col {
+              background: #070D18;
+              border: 1px solid var(--doc-border);
+              border-radius: 12px;
+              padding: 14px;
+              display: flex;
+              flex-direction: column;
+              gap: 10px;
+            }
+            .doc-kanban-header {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              padding-bottom: 8px;
+              border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+              font-size: 0.75rem;
+              font-weight: 800;
+              letter-spacing: 0.5px;
+              color: var(--doc-teal-light);
+            }
+            .doc-kanban-card {
+              background: #0B1426;
+              border: 1px solid rgba(148, 163, 184, 0.15);
+              border-radius: 10px;
+              padding: 12px;
+              cursor: pointer;
+              transition: all 0.2s ease;
+            }
+            .doc-kanban-card:hover, .doc-kanban-card.selected {
+              border-color: var(--doc-teal);
+              box-shadow: 0 4px 20px rgba(0, 163, 224, 0.15);
+              transform: translateY(-2px);
+            }
+            .doc-patient-detail-box {
+              background: #070D18;
+              border: 1px solid var(--doc-teal);
+              border-radius: 14px;
+              padding: 24px;
+              margin-top: 24px;
+              display: flex;
+              flex-direction: column;
+              gap: 14px;
+            }
+
+            /* Marketing Authority Pillars */
+            .doc-pillar-grid {
+              display: grid;
+              grid-template-columns: repeat(2, 1fr);
+              gap: 20px;
+              margin-top: 28px;
+            }
+            @media (max-width: 768px) {
+              .doc-pillar-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+              }
+            }
+            .doc-pillar-card {
+              background: #070D18;
+              border: 1px solid var(--doc-border);
+              border-radius: 14px;
+              padding: 24px;
+              transition: all 0.2s ease;
+            }
+            .doc-pillar-card:hover {
+              border-color: var(--doc-teal);
+              box-shadow: 0 6px 24px rgba(0, 163, 224, 0.08);
+            }
+            .doc-pillar-header {
+              display: flex;
+              align-items: center;
+              gap: 14px;
+              margin-bottom: 12px;
+            }
+            .doc-pillar-num {
+              font-size: 1.5rem;
+              font-weight: 900;
+              color: var(--doc-gold);
+              font-family: serif;
+              letter-spacing: 1px;
+            }
+
+            /* Configurator Badges & Categories */
+            .doc-category-title {
+              display: flex;
+              align-items: center;
+              gap: 10px;
+              font-size: 1.2rem;
+              font-weight: 800;
+              color: var(--doc-white);
+              margin-bottom: 14px;
+              margin-top: 24px;
+            }
+            .doc-badge-setup {
+              background: rgba(212, 175, 55, 0.15);
+              color: var(--doc-gold);
+              border: 1px solid rgba(212, 175, 55, 0.3);
+              font-size: 0.7rem;
+              font-weight: 800;
+              padding: 3px 8px;
+              border-radius: 6px;
+              text-transform: uppercase;
+              letter-spacing: 0.5px;
+            }
+            .doc-badge-monthly {
+              background: rgba(0, 163, 224, 0.15);
+              color: var(--doc-teal-light);
+              border: 1px solid rgba(0, 163, 224, 0.3);
+              font-size: 0.7rem;
+              font-weight: 800;
+              padding: 3px 8px;
+              border-radius: 6px;
+              text-transform: uppercase;
+              letter-spacing: 0.5px;
+            }
+
             .doc-math-card {
               background: #040810;
               border: 2px solid var(--doc-gold);
@@ -1582,30 +1922,32 @@ export default function DrCarlosPerzabalClient() {
       </section>
 
       {/* ==========================================
-          SECTION: THE 4 SYNERGISTIC COMPONENTS
+          SECTION: LA SUITE MODULAR DE 6 SERVICIOS DE APOLOGRAMA
          ========================================== */}
       <section className="doc-section">
         <div className="doc-container">
-          <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto' }}>
-            <span className="doc-badge-tag">ARQUITECTURA DE ECOSISTEMA</span>
-            <h2>Los 4 Componentes Sinérgicos del Ecosistema Quirúrgico</h2>
+          <div style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto' }}>
+            <span className="doc-badge-tag">SUITE MODULAR INTEGRAL</span>
+            <h2>Los 6 Servicios Especializados de Apolograma</h2>
             <p>
-              Una solución integral diseñada por Apolograma que combina ingeniería de software, automatización clínica y pauta educativa, protegiendo estrictamente el prestigio profesional del cirujano.
+              Una arquitectura médica completa dividida en <strong>entregables fundacionales de implementación (Setup)</strong> y <strong>servicios continuos de operación y dirección clínica (Iguala mensual)</strong>, protegiendo estrictamente el prestigio profesional del Dr. Carlos Perzabal.
             </p>
           </div>
 
           <div className="doc-grid-4">
-            {CORE_COMPONENTS.map((item, idx) => (
+            {[...SETUP_MODULES, ...MONTHLY_MODULES].map((item, idx) => (
               <div key={item.id} className="doc-component-card">
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span className="doc-badge-tag">{item.tag}</span>
+                    <span className={item.period === 'setup' ? 'doc-badge-setup' : 'doc-badge-monthly'}>
+                      {item.badge}
+                    </span>
                     <span style={{ fontSize: '0.8125rem', color: 'var(--doc-gold)', fontWeight: 800 }}>
-                      COMPONENTE 0{idx + 1}
+                      MÓDULO 0{idx + 1}
                     </span>
                   </div>
-                  <h3>{item.name}</h3>
-                  <p>{item.description}</p>
+                  <h3 style={{ marginTop: '12px', fontSize: '1.25rem', color: '#F8FAFC' }}>{item.name}</h3>
+                  <p style={{ fontSize: '0.875rem', color: 'var(--doc-muted)', lineHeight: 1.5 }}>{item.description}</p>
                   <ul className="doc-card-bullets">
                     {item.bullets.map((b, bIdx) => (
                       <li key={bIdx}>
@@ -1617,10 +1959,10 @@ export default function DrCarlosPerzabalClient() {
                 </div>
                 <div style={{ marginTop: '24px', paddingTop: '16px', borderTop: '1px solid var(--doc-border)' }}>
                   <span style={{ fontSize: '0.75rem', color: 'var(--doc-muted)', textTransform: 'uppercase' }}>
-                    Asignación Mensual de Gestión
+                    {item.period === 'setup' ? 'Inversión Única de Implementación' : 'Gestión Operativa Mensual'}
                   </span>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--doc-white)' }}>
-                    {formatMxn(item.monthly)} <span style={{ fontSize: '0.8rem', color: 'var(--doc-muted)' }}>/ mes</span>
+                  <div style={{ fontSize: '1.35rem', fontWeight: 800, color: item.period === 'setup' ? 'var(--doc-gold)' : 'var(--doc-teal-light)' }}>
+                    {formatMxn(item.price)} <span style={{ fontSize: '0.8rem', color: 'var(--doc-muted)' }}>{item.period === 'setup' ? 'MXN' : 'MXN / mes'}</span>
                   </div>
                 </div>
               </div>
@@ -1894,6 +2236,79 @@ export default function DrCarlosPerzabalClient() {
       </section>
 
       {/* ==========================================
+          SECTION: MARKETING & PLANEACIÓN MENSUAL DE AUTORIDAD
+         ========================================== */}
+      <section id="marketing-autoridad" className="doc-section">
+        <div className="doc-container">
+          <div style={{ textAlign: 'center', maxWidth: '840px', margin: '0 auto 36px auto' }}>
+            <span className="doc-badge-tag">DIRECCIÓN EDITORIAL CLÍNICA</span>
+            <h2>Marketing y Planeación Mensual de Autoridad</h2>
+            <p>
+              Una estrategia editorial continua diseñada para <strong>exaltar el conocimiento y la maestría quirúrgica</strong> del Dr. Carlos Perzabal. Cero tácticas agresivas que devalúen su prestigio: comunicación médica con rigor científico, empatía con el paciente y respaldo académico.
+            </p>
+          </div>
+
+          {/* 4 Pillars Grid */}
+          <div className="doc-pillar-grid">
+            {MARKETING_PILLARS.map((pillar) => (
+              <div key={pillar.id} className="doc-pillar-card">
+                <div className="doc-pillar-header">
+                  <span className="doc-pillar-num">{pillar.number}</span>
+                  <div>
+                    <h3 style={{ fontSize: '1.15rem', color: '#F8FAFC', margin: 0 }}>
+                      {pillar.title}
+                    </h3>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--doc-gold)', fontWeight: 700 }}>
+                      {pillar.subtitle}
+                    </span>
+                  </div>
+                </div>
+
+                <p style={{ fontSize: '0.875rem', color: 'var(--doc-muted)', lineHeight: 1.5, marginBottom: '16px' }}>
+                  {pillar.description}
+                </p>
+
+                <div style={{ borderTop: '1px solid rgba(148, 163, 184, 0.12)', paddingTop: '12px' }}>
+                  <div style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--doc-teal-light)', marginBottom: '8px', letterSpacing: '0.5px' }}>
+                    EJES TEMÁTICOS AUDITADOS:
+                  </div>
+                  <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.8125rem', color: '#CBD5E1', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    {pillar.highlights.map((hl, idx) => (
+                      <li key={idx}>{hl}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Ethical Seal Banner */}
+          <div
+            style={{
+              background: '#040810',
+              border: '1px solid rgba(212, 175, 55, 0.35)',
+              borderRadius: '12px',
+              padding: '20px 24px',
+              marginTop: '32px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '16px',
+            }}
+          >
+            <ShieldCheck size={28} color="#D4AF37" style={{ flexShrink: 0 }} />
+            <div>
+              <div style={{ fontSize: '0.9375rem', fontWeight: 800, color: 'var(--doc-gold)', marginBottom: '4px' }}>
+                BLINDAJE DE PRESTIGIO: POLÍTICA DE AUTORIDAD Y CERO REBAJAS COMERCIALES
+              </div>
+              <p style={{ margin: 0, fontSize: '0.8125rem', color: 'var(--doc-muted)', lineHeight: 1.45 }}>
+                En Apolograma garantizamos que ninguna publicación, cápsula o anuncio contendrá rebajas, remates ni garantías mercantiles de ventas. Toda pieza de pauta educa sobre patologías, síntomas de alarma y opciones de alta especialidad (Robótica Da Vinci y Laparoscopía Avanzada), canalizando pacientes precalificados que valoran la experiencia y seguridad clínica.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ==========================================
           SECTION: INTERACTIVE WHATSAPP TRIAGE SIMULATOR
          ========================================== */}
       <section id="simulador" className="doc-section" style={{ background: '#050A14' }}>
@@ -2012,6 +2427,157 @@ export default function DrCarlosPerzabalClient() {
       </section>
 
       {/* ==========================================
+          SECTION: CRM QUIRÚRGICO PARA MÉDICOS (PIPELINE)
+         ========================================== */}
+      <section id="crm-pacientes" className="doc-section" style={{ background: '#050A14' }}>
+        <div className="doc-container">
+          <div style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto 36px auto' }}>
+            <span className="doc-badge-tag">GESTIÓN CLÍNICA Y CONVERSIÓN</span>
+            <h2>CRM Quirúrgico para Médicos: Trazabilidad y Cero Fugas</h2>
+            <p>
+              Visualice en tiempo real el pipeline de pacientes precalificados. Cada prospecto captado en el portal web o en campañas de Meta Ads es filtrado en el asistente de WhatsApp y registrado en su tablero clínico con su historial y ficha prequirúrgica.
+            </p>
+          </div>
+
+          {/* CRM Filter Controls */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'center', marginBottom: '24px' }}>
+            {[
+              { id: 'todos', label: 'Todos los Pacientes' },
+              { id: 'lead', label: '1. Lead Captado' },
+              { id: 'triage', label: '2. Triaje Calificado' },
+              { id: 'cita', label: '3. Cita en Consultorio' },
+              { id: 'quirofano', label: '4. Cirugía Programada' },
+              { id: 'postop', label: '5. Seguimiento Post-Op' },
+            ].map((st) => (
+              <button
+                key={st.id}
+                onClick={() => setCrmFilter(st.id)}
+                className={`doc-btn ${crmFilter === st.id ? 'doc-btn-primary' : 'doc-btn-outline'}`}
+                style={{ padding: '6px 14px', fontSize: '0.8125rem' }}
+              >
+                {st.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Kanban Board */}
+          <div className="doc-kanban-board">
+            {[
+              { id: 'lead', title: 'Lead Captado', tag: 'Meta / Web' },
+              { id: 'triage', title: 'Triaje Calificado', tag: 'WhatsApp ASMBS' },
+              { id: 'cita', title: 'Cita Consultorio', tag: 'Agendada CME' },
+              { id: 'quirofano', title: 'Cirugía Programada', tag: 'Quirófano / UCI' },
+              { id: 'postop', title: 'Seguimiento', tag: 'Postquirúrgico' },
+            ].map((col) => {
+              const patientsInCol = CRM_PATIENTS.filter(
+                (p) => (crmFilter === 'todos' || crmFilter === col.id) && p.stage === col.id
+              );
+              return (
+                <div key={col.id} className="doc-kanban-col">
+                  <div className="doc-kanban-header">
+                    <span>{col.title.toUpperCase()}</span>
+                    <span style={{ background: 'rgba(0, 163, 224, 0.2)', padding: '2px 6px', borderRadius: '4px' }}>
+                      {patientsInCol.length}
+                    </span>
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {patientsInCol.length === 0 ? (
+                      <div style={{ fontSize: '0.75rem', color: 'var(--doc-muted)', textAlign: 'center', padding: '16px 8px' }}>
+                        Sin pacientes en esta fase
+                      </div>
+                    ) : (
+                      patientsInCol.map((pat) => (
+                        <div
+                          key={pat.id}
+                          onClick={() => setSelectedCrmPatient(pat)}
+                          className={`doc-kanban-card ${selectedCrmPatient?.id === pat.id ? 'selected' : ''}`}
+                        >
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+                            <strong style={{ fontSize: '0.875rem', color: '#F8FAFC' }}>{pat.name}</strong>
+                            <span style={{ fontSize: '0.7rem', color: pat.badgeColor, fontWeight: 700 }}>
+                              {pat.origin}
+                            </span>
+                          </div>
+                          <div style={{ fontSize: '0.75rem', color: 'var(--doc-teal-light)', fontWeight: 600, marginBottom: '6px' }}>
+                            {pat.procedure}
+                          </div>
+                          <div style={{ fontSize: '0.72rem', color: 'var(--doc-muted)', lineHeight: 1.3 }}>
+                            {pat.clinicalNote.substring(0, 68)}...
+                          </div>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Patient Detail Inspector */}
+          {selectedCrmPatient && (
+            <div className="doc-patient-detail-box">
+              <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '12px', borderBottom: '1px solid rgba(148, 163, 184, 0.15)', paddingBottom: '12px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'rgba(0, 163, 224, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#38BDF8', fontWeight: 800 }}>
+                    {selectedCrmPatient.name.charAt(0)}
+                  </div>
+                  <div>
+                    <h4 style={{ margin: 0, fontSize: '1.05rem', color: '#F8FAFC' }}>
+                      Expediente de Prospecto: {selectedCrmPatient.name}
+                    </h4>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--doc-muted)' }}>
+                      Procedencia: {selectedCrmPatient.origin} · {selectedCrmPatient.date}
+                    </span>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span className="doc-badge-status" style={{ color: selectedCrmPatient.badgeColor, borderColor: selectedCrmPatient.badgeColor }}>
+                    {selectedCrmPatient.stageLabel}
+                  </span>
+                </div>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '14px', fontSize: '0.85rem' }}>
+                <div>
+                  <span style={{ color: 'var(--doc-muted)', display: 'block', fontSize: '0.75rem' }}>PROCEDIMIENTO CONSULTADO</span>
+                  <strong style={{ color: '#F8FAFC' }}>{selectedCrmPatient.procedure}</strong>
+                </div>
+                {selectedCrmPatient.details.bmi && (
+                  <div>
+                    <span style={{ color: 'var(--doc-muted)', display: 'block', fontSize: '0.75rem' }}>VALORACIÓN IMC</span>
+                    <strong style={{ color: '#38BDF8' }}>{selectedCrmPatient.details.bmi}</strong>
+                  </div>
+                )}
+                {selectedCrmPatient.details.ultrasound && (
+                  <div>
+                    <span style={{ color: 'var(--doc-muted)', display: 'block', fontSize: '0.75rem' }}>ESTUDIO DE IMAGEN</span>
+                    <strong style={{ color: '#10B981' }}>{selectedCrmPatient.details.ultrasound}</strong>
+                  </div>
+                )}
+                {selectedCrmPatient.details.scheduledDate && (
+                  <div>
+                    <span style={{ color: 'var(--doc-muted)', display: 'block', fontSize: '0.75rem' }}>HORARIO / FECHA</span>
+                    <strong style={{ color: 'var(--doc-gold)' }}>{selectedCrmPatient.details.scheduledDate}</strong>
+                  </div>
+                )}
+              </div>
+
+              <div style={{ background: '#040810', padding: '12px 16px', borderRadius: '8px', border: '1px solid rgba(148, 163, 184, 0.1)' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--doc-teal-light)', display: 'block', marginBottom: '4px' }}>
+                  NOTA CLÍNICA GENERADA POR ASISTENTE DE TRIAJE:
+                </span>
+                <p style={{ margin: 0, fontSize: '0.8125rem', color: '#CBD5E1', lineHeight: 1.45 }}>
+                  {selectedCrmPatient.clinicalNote}
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* ==========================================
           SECTION: INTERACTIVE INVESTMENT CONFIGURATOR
          ========================================== */}
       <section id="propuesta-economica" className="doc-section">
@@ -2025,70 +2591,46 @@ export default function DrCarlosPerzabalClient() {
           </div>
 
           <div className="doc-configurator-box">
-            <h3 style={{ fontSize: '1.25rem', marginBottom: '20px', color: 'var(--doc-white)' }}>
-              1. Ecosistema Quirúrgico Integral (4 Componentes Base Incluidos)
-            </h3>
-
-            <div className="doc-config-core-grid">
-              {CORE_COMPONENTS.map((item) => (
-                <div
-                  key={item.id}
-                  style={{
-                    background: '#070D18',
-                    border: '1px solid rgba(0, 163, 224, 0.3)',
-                    borderRadius: '10px',
-                    padding: '16px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <CheckCircle2 size={18} color="#10B981" />
-                    <div>
-                      <div style={{ fontSize: '0.875rem', fontWeight: 700, color: '#F8FAFC' }}>
-                        {item.name}
-                      </div>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--doc-muted)' }}>
-                        {item.tag}
-                      </div>
-                    </div>
-                  </div>
-                  <div style={{ fontWeight: 800, color: 'var(--doc-white)', fontSize: '0.9375rem' }}>
-                    {formatMxn(item.monthly)}
-                  </div>
-                </div>
-              ))}
+            {/* CATEGORY 1: SETUP MODULES */}
+            <div className="doc-category-title">
+              <span>1. Entregables de Implementación Inicial</span>
+              <span className="doc-badge-setup">Setup Único</span>
             </div>
+            <p style={{ fontSize: '0.8125rem', color: 'var(--doc-muted)', marginBottom: '16px' }}>
+              Desarrollo de infraestructura fundacional, sistema visual de alta autoridad y portal web médico binacional.
+            </p>
 
-            <h3 style={{ fontSize: '1.25rem', marginBottom: '16px', color: 'var(--doc-white)' }}>
-              2. Módulos Estratégicos Opcionales (Toggles Reactivos)
-            </h3>
-
-            {ADDON_COMPONENTS.map((addon) => {
-              const isActive = !!activeAddons[addon.id];
+            {SETUP_MODULES.map((item) => {
+              const isActive = !!activeModules[item.id];
               return (
                 <div
-                  key={addon.id}
-                  onClick={() => toggleAddon(addon.id)}
+                  key={item.id}
+                  onClick={() => toggleModule(item.id)}
                   className={`doc-toggle-row ${isActive ? 'active' : ''}`}
                 >
                   <div style={{ flex: 1 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
                       <span style={{ fontSize: '0.9375rem', fontWeight: 700, color: '#F8FAFC' }}>
-                        {addon.name}
+                        {item.name}
                       </span>
-                      <span className="doc-badge-tag" style={{ margin: 0, padding: '2px 8px', fontSize: '0.7rem' }}>
-                        {addon.badge}
+                      <span className="doc-badge-setup">
+                        {item.badge}
                       </span>
                     </div>
-                    <p style={{ margin: 0, fontSize: '0.8125rem' }}>{addon.description}</p>
+                    <p style={{ margin: '0 0 8px 0', fontSize: '0.8125rem', color: 'var(--doc-muted)' }}>
+                      {item.description}
+                    </p>
+                    <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.75rem', color: '#94A3B8', display: 'flex', flexDirection: 'column', gap: '3px' }}>
+                      {item.bullets.map((b, idx) => (
+                        <li key={idx}>{b}</li>
+                      ))}
+                    </ul>
                   </div>
 
                   <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                     <div style={{ textAlign: 'right' }}>
-                      <div style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--doc-gold)' }}>
-                        +{formatMxn(addon.price)}
+                      <div style={{ fontSize: '1.15rem', fontWeight: 800, color: isActive ? 'var(--doc-gold)' : 'var(--doc-muted)' }}>
+                        {formatMxn(item.price)}
                       </div>
                       <div style={{ fontSize: '0.7rem', color: 'var(--doc-muted)' }}>Inversión Única</div>
                     </div>
@@ -2100,7 +2642,58 @@ export default function DrCarlosPerzabalClient() {
               );
             })}
 
-            {/* Financial Summary Card */}
+            {/* CATEGORY 2: MONTHLY OPERATING MODULES */}
+            <div className="doc-category-title" style={{ marginTop: '32px' }}>
+              <span>2. Servicios Operativos Mensuales</span>
+              <span className="doc-badge-monthly">Iguala Recurrente</span>
+            </div>
+            <p style={{ fontSize: '0.8125rem', color: 'var(--doc-muted)', marginBottom: '16px' }}>
+              Gestión editorial de contenidos clínicos, administración de pauta en Meta Ads, asistente 24/7 y CRM médico.
+            </p>
+
+            {MONTHLY_MODULES.map((item) => {
+              const isActive = !!activeModules[item.id];
+              return (
+                <div
+                  key={item.id}
+                  onClick={() => toggleModule(item.id)}
+                  className={`doc-toggle-row ${isActive ? 'active' : ''}`}
+                >
+                  <div style={{ flex: 1 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                      <span style={{ fontSize: '0.9375rem', fontWeight: 700, color: '#F8FAFC' }}>
+                        {item.name}
+                      </span>
+                      <span className="doc-badge-monthly">
+                        {item.badge}
+                      </span>
+                    </div>
+                    <p style={{ margin: '0 0 8px 0', fontSize: '0.8125rem', color: 'var(--doc-muted)' }}>
+                      {item.description}
+                    </p>
+                    <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.75rem', color: '#94A3B8', display: 'flex', flexDirection: 'column', gap: '3px' }}>
+                      {item.bullets.map((b, idx) => (
+                        <li key={idx}>{b}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                    <div style={{ textAlign: 'right' }}>
+                      <div style={{ fontSize: '1.15rem', fontWeight: 800, color: isActive ? 'var(--doc-teal-light)' : 'var(--doc-muted)' }}>
+                        {formatMxn(item.price)}
+                      </div>
+                      <div style={{ fontSize: '0.7rem', color: 'var(--doc-muted)' }}>Mensual + IVA</div>
+                    </div>
+                    <div className={`doc-switch ${isActive ? 'active' : ''}`}>
+                      <div className="doc-switch-circle" />
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+
+            {/* Financial Summary Card (Hybrid Setup + Monthly) */}
             <div className="doc-math-card">
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
                 <ShieldCheck size={20} color="#D4AF37" />
@@ -2109,47 +2702,67 @@ export default function DrCarlosPerzabalClient() {
                 </span>
               </div>
 
-              <div className="doc-math-row">
-                <span>Ecosistema Base (4 Componentes Sinérgicos)</span>
-                <span style={{ fontWeight: 700, color: '#F8FAFC' }}>
-                  {formatMxn(investmentMath.baseCore)} MXN
-                </span>
-              </div>
-
-              {investmentMath.addOnsSum > 0 && (
+              {/* Setup Breakdown */}
+              <div style={{ borderBottom: '1px solid rgba(148, 163, 184, 0.15)', paddingBottom: '12px', marginBottom: '12px' }}>
+                <div style={{ fontSize: '0.8125rem', fontWeight: 700, color: 'var(--doc-gold)', marginBottom: '6px' }}>
+                  A. INVERSIÓN DE IMPLEMENTACIÓN (SETUP ÚNICO)
+                </div>
                 <div className="doc-math-row">
-                  <span>Módulos Opcionales Adicionales</span>
-                  <span style={{ fontWeight: 700, color: 'var(--doc-gold)' }}>
-                    +{formatMxn(investmentMath.addOnsSum)} MXN
+                  <span>Subtotal Setup Inicial</span>
+                  <span style={{ fontWeight: 700, color: '#F8FAFC' }}>
+                    {formatMxn(investmentMath.setupSubtotal)} MXN
                   </span>
                 </div>
-              )}
-
-              <div className="doc-math-row">
-                <span>Subtotal Mensual</span>
-                <span style={{ fontWeight: 700, color: '#F8FAFC' }}>
-                  {formatMxn(investmentMath.subtotal)} MXN
-                </span>
+                <div className="doc-math-row">
+                  <span>IVA Trasladado (16%)</span>
+                  <span style={{ fontWeight: 700, color: '#F8FAFC' }}>
+                    {formatMxn(investmentMath.setupIva)} MXN
+                  </span>
+                </div>
+                <div className="doc-math-row" style={{ color: 'var(--doc-gold)', fontWeight: 800 }}>
+                  <span>Total Setup Facturado</span>
+                  <span>{formatMxn(investmentMath.setupTotal)} MXN</span>
+                </div>
               </div>
 
-              <div className="doc-math-row">
-                <span>IVA Trasladado (16%)</span>
-                <span style={{ fontWeight: 700, color: '#F8FAFC' }}>
-                  {formatMxn(investmentMath.iva)} MXN
-                </span>
+              {/* Monthly Breakdown */}
+              <div style={{ borderBottom: '1px solid rgba(148, 163, 184, 0.15)', paddingBottom: '12px', marginBottom: '12px' }}>
+                <div style={{ fontSize: '0.8125rem', fontWeight: 700, color: 'var(--doc-teal-light)', marginBottom: '6px' }}>
+                  B. OPERACIÓN CONTINUA (IGUALA MENSUAL RECURRENTE)
+                </div>
+                <div className="doc-math-row">
+                  <span>Subtotal Mensual</span>
+                  <span style={{ fontWeight: 700, color: '#F8FAFC' }}>
+                    {formatMxn(investmentMath.monthlySubtotal)} MXN/mes
+                  </span>
+                </div>
+                <div className="doc-math-row">
+                  <span>IVA Trasladado (16%)</span>
+                  <span style={{ fontWeight: 700, color: '#F8FAFC' }}>
+                    {formatMxn(investmentMath.monthlyIva)} MXN
+                  </span>
+                </div>
+                <div className="doc-math-row" style={{ color: 'var(--doc-teal-light)', fontWeight: 800 }}>
+                  <span>Total Mensual Facturado</span>
+                  <span>{formatMxn(investmentMath.monthlyTotal)} MXN/mes</span>
+                </div>
+                <div style={{ fontSize: '0.75rem', color: 'var(--doc-muted)', marginTop: '4px', textAlign: 'right' }}>
+                  Equivalente a {formatMxn(investmentMath.monthlyDaily)} MXN al día en gestión tecnológica y editorial
+                </div>
               </div>
 
+              {/* Initial Grand Total */}
               <div className="doc-math-total">
                 <div>
-                  <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--doc-white)' }}>
-                    Total Facturado
+                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--doc-white)' }}>
+                    Inversión Inicial Total
                   </div>
                   <div style={{ fontSize: '0.8125rem', color: 'var(--doc-muted)' }}>
-                    Equivalente a {formatMxn(investmentMath.daily)} MXN al día en infraestructura médica
+                    Liquidación de Setup Inicial + Primer Mes Operativo
                   </div>
                 </div>
                 <div style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--doc-gold)' }}>
-                  {formatMxn(investmentMath.total)} <span style={{ fontSize: '0.9rem', color: 'var(--doc-muted)' }}>MXN/mes</span>
+                  {formatMxn(investmentMath.initialGrandTotal)} <span style={{ fontSize: '0.9rem', color: 'var(--doc-muted)' }}>MXN</span>
                 </div>
               </div>
 

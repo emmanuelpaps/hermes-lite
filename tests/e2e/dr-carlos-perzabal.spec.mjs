@@ -384,16 +384,18 @@ describe('Tier 1: Feature Coverage (R1 - R5)', () => {
       assert.ok(!fullAppText.includes('Tu inversión, desglosada'), 'Must NOT use generic phrase "Tu inversión, desglosada."');
     });
 
-    it('[T1-R4-02] Base investment package specified as $27,000 MXN base with 16% IVA ($4,320 MXN) = $31,320 MXN total', () => {
-      assert.ok(fullAppText.includes('$27,000') || fullAppText.includes('27,000'), 'Must specify $27,000 MXN base subtotal');
-      assert.ok(fullAppText.includes('$4,320') || fullAppText.includes('4,320'), 'Must specify $4,320 MXN IVA (16%)');
-      assert.ok(fullAppText.includes('$31,320') || fullAppText.includes('31,320'), 'Must specify $31,320 MXN total invoiced');
+    it('[T1-R4-02] Hybrid investment package specified as $36,000 MXN Setup + $26,000 MXN Monthly = $71,920 MXN Initial Grand Total', () => {
+      assert.ok(fullAppText.includes('$36,000') || fullAppText.includes('36,000'), 'Must specify $36,000 MXN Setup subtotal');
+      assert.ok(fullAppText.includes('$26,000') || fullAppText.includes('26,000'), 'Must specify $26,000 MXN Monthly subtotal');
+      assert.ok(fullAppText.includes('$41,760') || fullAppText.includes('41,760'), 'Must specify $41,760 MXN Total Setup invoiced');
+      assert.ok(fullAppText.includes('$30,160') || fullAppText.includes('30,160'), 'Must specify $30,160 MXN Total Monthly invoiced');
+      assert.ok(fullAppText.includes('$71,920') || fullAppText.includes('71,920'), 'Must specify $71,920 MXN Initial Grand Total');
     });
 
-    it('[T1-R4-03] Daily accessibility equivalent calculated as $1,044 MXN/día', () => {
+    it('[T1-R4-03] Daily accessibility equivalent calculated as $1,005 MXN/día', () => {
       assert.ok(
-        fullAppText.includes('$1,044 MXN') || fullAppText.includes('$1,044') || fullAppText.includes('1,044'),
-        'Must display $1,044 MXN/día daily accessibility metric'
+        fullAppText.includes('$1,005 MXN') || fullAppText.includes('$1,005') || fullAppText.includes('1,005'),
+        'Must display $1,005 MXN/día daily accessibility metric'
       );
     });
 
@@ -413,30 +415,27 @@ describe('Tier 1: Feature Coverage (R1 - R5)', () => {
     });
   });
 
-  // --- Feature 5 (R4): 4 Synergistic Deliverables & Social Metadata ---
-  describe('Feature 5 (R4): 4 Synergistic Deliverables & Social Metadata', () => {
-    it('[T1-R5-01] Deliverable 1: Identidad Visual & Branding Médico de Alto Nivel ($6,000 MXN allocation)', () => {
-      assert.ok(/Identidad\s+Visual/i.test(fullAppText), 'Deliverable 1 Identidad Visual must be detailed');
-      assert.ok(clientTsx.includes('monthly: 6000'), 'Component 1 must allocate $6,000 MXN in base core');
-      assert.ok(fullAppText.includes('monograma') || fullAppText.includes('papelería'), 'Must include monogram or stationery deliverables');
+  // --- Feature 5 (R4): 6 Synergistic Deliverables & Social Metadata ---
+  describe('Feature 5 (R4): 6 Synergistic Deliverables & Social Metadata', () => {
+    it('[T1-R5-01] Deliverable 1: Identidad Visual & Branding Médico de Alto Nivel ($12,000 MXN Setup)', () => {
+      assert.ok(/Identidad\s+Visual|Branding/i.test(fullAppText), 'Deliverable 1 Branding must be detailed');
+      assert.ok(fullAppText.includes('$12,000') || fullAppText.includes('12,000'), 'Component 1 must allocate $12,000 MXN Setup');
     });
 
-    it('[T1-R5-02] Deliverable 2: Webapp / Portal Quirúrgico de Conversión Binacional ($9,000 MXN allocation)', () => {
+    it('[T1-R5-02] Deliverable 2: Webapp / Portal Quirúrgico de Conversión Binacional ($24,000 MXN Setup)', () => {
       assert.ok(/Portal\s+Quir[uú]rgico|Webapp/i.test(fullAppText), 'Deliverable 2 Webapp / Portal must be detailed');
-      assert.ok(clientTsx.includes('monthly: 9000'), 'Component 2 must allocate $9,000 MXN in base core');
+      assert.ok(fullAppText.includes('$24,000') || fullAppText.includes('24,000'), 'Component 2 must allocate $24,000 MXN Setup');
       assert.ok(fullAppText.includes('Binacional') || fullAppText.includes('El Paso'), 'Must highlight binational patient intake architecture');
     });
 
-    it('[T1-R5-03] Deliverable 3: Asistente Inteligente de Triaje en WhatsApp 24/7 ($5,000 MXN allocation)', () => {
-      assert.ok(/Asistente\s+Inteligente|Triaje/i.test(fullAppText), 'Deliverable 3 Asistente de Triaje WhatsApp must be detailed');
-      assert.ok(clientTsx.includes('monthly: 5000'), 'Component 3 must allocate $5,000 MXN in base core');
-      assert.ok(fullAppText.includes('24/7'), 'Must highlight 24/7 responsiveness');
+    it('[T1-R5-03] Deliverable 3: Marketing y Planeación Mensual de Autoridad ($10,000 MXN / mes)', () => {
+      assert.ok(/Marketing\s+y\s+Planeaci[oó]n|Autoridad/i.test(fullAppText), 'Deliverable 3 Marketing de Autoridad must be detailed');
+      assert.ok(fullAppText.includes('$10,000') || fullAppText.includes('10,000'), 'Component 3 must allocate $10,000 MXN / mes');
     });
 
-    it('[T1-R5-04] Deliverable 4: Estrategia de Pauta Meta Ads de Autoridad Educativa ($7,000 MXN allocation)', () => {
+    it('[T1-R5-04] Deliverable 4: Pauta Meta Ads Quirúrgica Hipersegmentada ($7,000 MXN / mes)', () => {
       assert.ok(/Meta\s+Ads|Pauta/i.test(fullAppText), 'Deliverable 4 Estrategia de Pauta Meta Ads must be detailed');
-      assert.ok(clientTsx.includes('monthly: 7000'), 'Component 4 must allocate $7,000 MXN in base core');
-      assert.ok(/educativ|formativ/i.test(fullAppText), 'Must frame campaigns around clinical education');
+      assert.ok(fullAppText.includes('$7,000') || fullAppText.includes('7,000'), 'Component 4 must allocate $7,000 MXN / mes');
       assert.ok(
         /pagada\s+directamente\s+por\s+el\s+cliente/i.test(fullAppText) ||
         /directamente\s+por\s+el\s+cliente\s+a\s+Meta/i.test(fullAppText),
@@ -444,7 +443,19 @@ describe('Tier 1: Feature Coverage (R1 - R5)', () => {
       );
     });
 
-    it('[T1-R5-05] Open Graph (og:url, og:title, og:image, 1200x630) & Twitter (summary_large_image) social metadata', () => {
+    it('[T1-R5-05] Deliverable 5: Bot de WhatsApp con Triaje Clínico 24/7 ($5,000 MXN / mes)', () => {
+      assert.ok(/Asistente\s+Inteligente|Bot\s+de\s+WhatsApp|Triaje/i.test(fullAppText), 'Deliverable 5 Asistente de Triaje WhatsApp must be detailed');
+      assert.ok(fullAppText.includes('$5,000') || fullAppText.includes('5,000'), 'Component 5 must allocate $5,000 MXN / mes');
+      assert.ok(fullAppText.includes('24/7'), 'Must highlight 24/7 responsiveness');
+    });
+
+    it('[T1-R5-06] Deliverable 6: CRM Quirúrgico para Médicos ($4,000 MXN / mes)', () => {
+      assert.ok(/CRM\s+Quir[uú]rgico/i.test(fullAppText), 'Deliverable 6 CRM Quirúrgico must be detailed');
+      assert.ok(fullAppText.includes('$4,000') || fullAppText.includes('4,000'), 'Component 6 must allocate $4,000 MXN / mes');
+      assert.ok(fullAppText.includes('kanban') || fullAppText.includes('pipeline') || fullAppText.includes('trazabilidad'), 'Must highlight patient pipeline or kanban tracking');
+    });
+
+    it('[T1-R5-07] Open Graph (og:url, og:title, og:image, 1200x630) & Twitter (summary_large_image) social metadata', () => {
       const allMeta = `${pageHtml}\n${pageTsx}\n${staticIndexHtml}`;
       assert.ok(allMeta.includes('https://propuestas.tecza.com.mx/dr-carlos-perzabal'), 'Canonical or og:url must point to official URL');
       assert.ok(allMeta.includes('og:title') || allMeta.includes("og:title"), 'og:title must be declared');
@@ -462,46 +473,39 @@ describe('Tier 1: Feature Coverage (R1 - R5)', () => {
 
 describe('Tier 2: Boundary & Corner Cases (R1 - R5)', () => {
 
-  // --- Suite 1: Mathematical Identities & Add-on Toggles ---
-  describe('Suite 1: Mathematical Identities & Add-on Toggles', () => {
-    it('[T2-MATH-01] Base tax identity: $27,000 * 0.16 === $4,320 exact tax', () => {
-      const base = 27000;
-      const iva = Math.round(base * 0.16);
-      assert.equal(iva, 4320, '16% IVA on $27,000 must equal exactly $4,320 MXN');
+  // --- Suite 1: Mathematical Identities & Hybrid Modules ---
+  describe('Suite 1: Mathematical Identities & Hybrid Modules', () => {
+    it('[T2-MATH-01] Setup tax identity: $36,000 * 0.16 === $5,760 exact tax, Total Setup === $41,760 MXN', () => {
+      const setup = 36000;
+      const iva = Math.round(setup * 0.16);
+      assert.equal(iva, 5760, '16% IVA on $36,000 must equal exactly $5,760 MXN');
+      assert.equal(setup + iva, 41760, 'Total setup invoiced must equal $41,760 MXN');
     });
 
-    it('[T2-MATH-02] Total base invoiced identity: $27,000 + $4,320 === $31,320 exact total', () => {
-      const base = 27000;
-      const total = base + Math.round(base * 0.16);
-      assert.equal(total, 31320, 'Base $27,000 + IVA $4,320 must equal exactly $31,320 MXN');
+    it('[T2-MATH-02] Monthly tax identity: $26,000 * 0.16 === $4,160 exact tax, Total Monthly === $30,160 MXN', () => {
+      const monthly = 26000;
+      const iva = Math.round(monthly * 0.16);
+      assert.equal(iva, 4160, '16% IVA on $26,000 must equal exactly $4,160 MXN');
+      assert.equal(monthly + iva, 30160, 'Total monthly invoiced must equal $30,160 MXN');
     });
 
-    it('[T2-MATH-03] Add-on 1 (Video Quirófano +$8,500) math: $35,500 subtotal, $5,680 IVA, $41,180 total', () => {
-      const subtotal = 27000 + 8500;
-      assert.equal(subtotal, 35500, 'Subtotal with Video Quirófano must equal $35,500 MXN');
-      const iva = Math.round(subtotal * 0.16);
-      assert.equal(iva, 5680, 'IVA on $35,500 must equal $5,680 MXN');
-      assert.equal(subtotal + iva, 41180, 'Total with Video Quirófano must equal $41,180 MXN');
+    it('[T2-MATH-03] Initial Grand Total identity: Setup $41,760 + Month 1 $30,160 === $71,920 MXN', () => {
+      const setupTotal = 36000 + Math.round(36000 * 0.16);
+      const monthlyTotal = 26000 + Math.round(26000 * 0.16);
+      assert.equal(setupTotal + monthlyTotal, 71920, 'Initial grand total must equal exactly $71,920 MXN');
     });
 
-    it('[T2-MATH-04] Add-on 2 (Portal Bilingüe +$6,000) & Add-on 3 (Agenda Digital +$4,500) individual toggles', () => {
-      // Add-on 2 alone
-      const sub2 = 27000 + 6000;
-      assert.equal(sub2, 33000, 'Subtotal with Portal Bilingüe must equal $33,000 MXN');
-      assert.equal(sub2 + Math.round(sub2 * 0.16), 38280, 'Total with Portal Bilingüe must equal $38,280 MXN');
-
-      // Add-on 3 alone
-      const sub3 = 27000 + 4500;
-      assert.equal(sub3, 31500, 'Subtotal with Agenda Digital must equal $31,500 MXN');
-      assert.equal(sub3 + Math.round(sub3 * 0.16), 36540, 'Total with Agenda Digital must equal $36,540 MXN');
+    it('[T2-MATH-04] Daily accessibility equivalent: Math.round($30,160 / 30) === $1,005 MXN/día', () => {
+      const monthlyTotal = 26000 + Math.round(26000 * 0.16);
+      const daily = Math.round(monthlyTotal / 30);
+      assert.equal(daily, 1005, 'Daily operating cost must be $1,005 MXN/día');
     });
 
-    it('[T2-MATH-05] All 3 Add-ons active math: $27,000 + $8,500 + $6,000 + $4,500 = $46,000 subtotal, $7,360 IVA, $53,360 total', () => {
-      const allSub = 27000 + 8500 + 6000 + 4500;
-      assert.equal(allSub, 46000, 'Subtotal with all 3 add-ons must equal $46,000 MXN');
-      const iva = Math.round(allSub * 0.16);
-      assert.equal(iva, 7360, 'IVA on $46,000 must equal $7,360 MXN');
-      assert.equal(allSub + iva, 53360, 'Total with all 3 add-ons must equal $53,360 MXN');
+    it('[T2-MATH-05] Modular toggle reactivity: toggling Branding off ($12,000) adjusts Setup to $24,000 + IVA $3,840 = $27,840', () => {
+      const remainingSetup = 24000;
+      const iva = Math.round(remainingSetup * 0.16);
+      assert.equal(iva, 3840, 'IVA on remaining $24,000 must be $3,840 MXN');
+      assert.equal(remainingSetup + iva, 27840, 'Setup total without branding must be $27,840 MXN');
     });
   });
 
@@ -513,23 +517,21 @@ describe('Tier 2: Boundary & Corner Cases (R1 - R5)', () => {
       assert.ok(!/\$\d+[\d,]*\s+mxn\b/.test(fullAppText), 'Currency suffix must be strictly uppercase "MXN"');
     });
 
-    it('[T2-NOTE-02] Eradication of truncated prices ($27k, $31k, $8.5k, $6k, $4.5k prohibited)', () => {
-      assert.ok(!/\$27k\b/i.test(fullAppText), 'Must not truncate $27,000 to $27k');
-      assert.ok(!/\$31k\b/i.test(fullAppText), 'Must not truncate $31,320 to $31k');
-      assert.ok(!/\$8\.5k\b/i.test(fullAppText), 'Must not truncate $8,500 to $8.5k');
-      assert.ok(!/\$4\.5k\b/i.test(fullAppText), 'Must not truncate $4,500 to $4.5k');
+    it('[T2-NOTE-02] Eradication of truncated prices ($36k, $26k, $41.7k, $71.9k prohibited)', () => {
+      assert.ok(!/\$36k\b/i.test(fullAppText), 'Must not truncate $36,000 to $36k');
+      assert.ok(!/\$26k\b/i.test(fullAppText), 'Must not truncate $26,000 to $26k');
+      assert.ok(!/\$71\.9k\b/i.test(fullAppText), 'Must not truncate $71,920 to $71.9k');
     });
 
     it('[T2-NOTE-03] Eradication of informal currency terms ("pesos", lowercase "mxn")', () => {
       assert.ok(!/\bpesos\s+mexicanos\b/i.test(fullAppText), 'Must not use informal "pesos mexicanos"');
     });
 
-    it('[T2-NOTE-04] Eradication of legacy proposal pricing ($16,000, $18,560, $6,960, $20,000, $10,000 MXN)', () => {
+    it('[T2-NOTE-04] Eradication of legacy proposal pricing ($16,000, $18,560, $6,960, $20,000 MXN)', () => {
       assert.ok(!/\$16,000\s*MXN\b/i.test(pageHtml), 'Must not display legacy CCE $16,000 MXN pricing');
       assert.ok(!/\$18,560\s*MXN\b/i.test(pageHtml), 'Must not display legacy CCE $18,560 MXN pricing');
       assert.ok(!/\$6,960\s*MXN\b/i.test(pageHtml), 'Must not display legacy Nueva Laguna $6,960 MXN pricing');
       assert.ok(!/\$20,000\s*MXN\b/i.test(pageHtml), 'Must not display legacy $20,000 MXN pricing');
-      assert.ok(!/\$10,000\s*MXN\b/i.test(pageHtml), 'Must not display legacy $10,000 MXN pricing');
     });
 
     it('[T2-NOTE-05] Character entity & HTML quote escaping integrity: 0 double-encoded entities (&amp;amp;)', () => {
@@ -801,13 +803,22 @@ describe('Tier 3: Cross-Feature Combinations & Brand Isolation', () => {
     }
   });
 
-  it('[T3-BRAND-17] Cross-Feature Invariant: Core deliverables sum ($6,000 + $9,000 + $5,000 + $7,000) strictly equals $27,000 MXN base fee', () => {
-    const c1 = 6000;
-    const c2 = 9000;
-    const c3 = 5000;
-    const c4 = 7000;
-    const sum = c1 + c2 + c3 + c4;
-    assert.equal(sum, 27000, 'Sum of 4 core deliverables must equal exactly $27,000 MXN base fee');
+  it('[T3-BRAND-17] Cross-Feature Invariant: Core deliverables sum (Setup $36,000 + Monthly $26,000) strictly equals $62,000 MXN subtotal, $71,920 MXN initial grand total', () => {
+    const s1 = 12000;
+    const s2 = 24000;
+    const setupSub = s1 + s2;
+    assert.equal(setupSub, 36000, 'Sum of Setup deliverables must equal exactly $36,000 MXN');
+
+    const m1 = 10000;
+    const m2 = 7000;
+    const m3 = 5000;
+    const m4 = 4000;
+    const monthlySub = m1 + m2 + m3 + m4;
+    assert.equal(monthlySub, 26000, 'Sum of Monthly deliverables must equal exactly $26,000 MXN');
+
+    const setupTotal = setupSub + Math.round(setupSub * 0.16);
+    const monthlyTotal = monthlySub + Math.round(monthlySub * 0.16);
+    assert.equal(setupTotal + monthlyTotal, 71920, 'Initial grand total must equal exactly $71,920 MXN');
   });
 
 });
@@ -839,10 +850,12 @@ describe('Tier 4: Real-World Scenarios & Production Readiness', () => {
   });
 
   it('[T4-SCEN-04] Practice Administrator Fiscal Transparency: Invoicing details, Banregio CLABE, and tax breakdown immediately inspectable for payment', () => {
-    assert.ok(fullAppText.includes('$27,000'), 'Discloses base fee');
+    assert.ok(fullAppText.includes('$36,000'), 'Discloses setup fee');
+    assert.ok(fullAppText.includes('$26,000'), 'Discloses monthly fee');
     assert.ok(fullAppText.includes('16%'), 'Discloses 16% tax rate');
-    assert.ok(fullAppText.includes('$4,320'), 'Discloses exact tax amount');
-    assert.ok(fullAppText.includes('$31,320'), 'Discloses exact total invoice amount');
+    assert.ok(fullAppText.includes('$41,760'), 'Discloses exact setup invoiced amount');
+    assert.ok(fullAppText.includes('$30,160'), 'Discloses exact monthly invoiced amount');
+    assert.ok(fullAppText.includes('$71,920'), 'Discloses exact initial grand total invoice amount');
     assert.ok(fullAppText.includes('058164657492400290'), 'Discloses Banregio CLABE interbancaria');
     assert.ok(fullAppText.includes('TTE170614QI1'), 'Discloses official RFC');
   });
@@ -871,18 +884,14 @@ describe('Tier 4: Real-World Scenarios & Production Readiness', () => {
       '.doc-binational-grid must declare 3 columns for desktop'
     );
 
-    // 2. Configurator Core Grid responsive class verification
+    // 2. Configurator Categories and Toggle Rows
     assert.ok(
-      clientTsx.includes('.doc-config-core-grid') && clientTsx.includes('className="doc-config-core-grid"'),
-      'DrCarlosPerzabalClient must implement and use .doc-config-core-grid class'
+      allCss.includes('.doc-category-title'),
+      'Stylesheet must declare .doc-category-title class'
     );
     assert.ok(
-      staticIndexHtml.includes('.doc-config-core-grid') && staticIndexHtml.includes('class="doc-config-core-grid"'),
-      'index.html must implement and use .doc-config-core-grid class'
-    );
-    assert.ok(
-      allCss.includes('.doc-config-core-grid') && allCss.includes('repeat(2, 1fr)'),
-      '.doc-config-core-grid must declare 2 columns for desktop'
+      allCss.includes('.doc-toggle-row'),
+      'Stylesheet must declare .doc-toggle-row class'
     );
 
     // 3. Modal Grid responsive class verification
@@ -895,22 +904,14 @@ describe('Tier 4: Real-World Scenarios & Production Readiness', () => {
       'index.html must implement and use .doc-modal-grid class'
     );
 
-    // 4. Verify eradication of unconstrained multi-column inline grids
+    // 4. Kanban & Marketing Pillars responsive grids
     assert.ok(
-      !clientTsx.includes("gridTemplateColumns: 'repeat(3, 1fr)'"),
-      'DrCarlosPerzabalClient must not contain unconstrained inline 3-column grid'
+      allCss.includes('.doc-kanban-board'),
+      'Stylesheet must declare .doc-kanban-board class'
     );
     assert.ok(
-      !staticIndexHtml.includes('grid-template-columns: repeat(3, 1fr); gap: 20px;"'),
-      'index.html must not contain unconstrained inline 3-column grid'
-    );
-    assert.ok(
-      !clientTsx.includes("gridTemplateColumns: 'repeat(2, 1fr)'"),
-      'DrCarlosPerzabalClient must not contain unconstrained inline 2-column grid'
-    );
-    assert.ok(
-      !staticIndexHtml.includes('grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 32px;"'),
-      'index.html must not contain unconstrained inline 2-column grid'
+      allCss.includes('.doc-pillar-grid'),
+      'Stylesheet must declare .doc-pillar-grid class'
     );
 
     // 5. Responsive mobile media queries (<= 768px) collapsing grids to single column (1fr)
@@ -962,8 +963,9 @@ describe('Tier 4: Real-World Scenarios & Production Readiness', () => {
     assert.ok(fs.existsSync(STATIC_INDEX_PATH), 'propuestas/dr-carlos-perzabal/index.html must exist');
     assert.ok(staticIndexHtml.includes('<!DOCTYPE html>'), 'Static index must declare valid DOCTYPE');
     assert.ok(staticIndexHtml.includes('Dr. Carlos Tadeo Perzabal Avilez'), 'Static index must contain surgeon name');
-    assert.ok(staticIndexHtml.includes('$27,000'), 'Static index must contain base fee');
-    assert.ok(staticIndexHtml.includes('$31,320'), 'Static index must contain total fee');
+    assert.ok(staticIndexHtml.includes('$36,000'), 'Static index must contain setup fee');
+    assert.ok(staticIndexHtml.includes('$26,000'), 'Static index must contain monthly fee');
+    assert.ok(staticIndexHtml.includes('$71,920'), 'Static index must contain initial grand total');
     assert.ok(staticIndexHtml.includes('058164657492400290'), 'Static index must contain CLABE');
   });
 
