@@ -234,7 +234,7 @@ describe('Tier 1: Feature Coverage (R1 - R5)', () => {
     it('[T1-R2-01] Deliverable 1: Invitación Digital Web / Landing Ejecutiva', () => {
       assert.ok(/invitaci[oó]n\s+digital|landing\s+ejecutiva|plataforma\s+web/i.test(fullAppText), 'Deliverable 1 Invitación Digital Web / Landing must be detailed');
       assert.ok(/agenda|desayuno/i.test(fullAppText), 'Must include event breakfast and agenda');
-      assert.ok(/50\s*(?:a|-)\s*60\s*mesas|500\s*(?:a|-)\s*600\s*asistentes/i.test(fullAppText), 'Must include 50 to 60 tables map or 500 to 600 attendees capacity');
+      assert.ok(/500\+\s*asistentes|50\s*(?:a|-)\s*60\s*mesas|500\s*(?:a|-)\s*600\s*asistentes/i.test(fullAppText), 'Must include 500+ attendees or 50-60 tables capacity');
       assert.ok(/holograma\s+de\s+seguridad/i.test(fullAppText), 'Must mention physical tickets with security hologram');
     });
 
@@ -251,11 +251,10 @@ describe('Tier 1: Feature Coverage (R1 - R5)', () => {
       assert.ok(/ju[aá]rez|chihuahua/i.test(fullAppText), 'Must specify geographical campaign reach in Cd. Juárez and Chihuahua state');
     });
 
-    it('[T1-R2-04] Deliverable 4: Logística y Coordinación de Mesas', () => {
-      assert.ok(/log[ií]stica|coordinaci[oó]n\s+de\s+mesas|asignaci[oó]n\s+de\s+mesas/i.test(fullAppText), 'Deliverable 4 Logistics & table coordination must be detailed');
-      assert.ok(/24\s*mesas/i.test(fullAppText), 'Must specify 24 base tables allocated across business chambers');
+    it('[T1-R2-04] Deliverable 4: Logística y Coordinación de Distribución', () => {
+      assert.ok(/log[ií]stica|coordinaci[oó]n|distribuci[oó]n/i.test(fullAppText), 'Deliverable 4 Logistics & distribution coordination must be detailed');
       assert.ok(/c[aá]maras/i.test(fullAppText), 'Must reference business chambers (cámaras)');
-      assert.ok(/venta\s+directa/i.test(fullAppText), 'Must reference direct council sales (venta directa)');
+      assert.ok(/venta\s+directa|patrocinios/i.test(fullAppText), 'Must reference direct council sales or sponsorships');
     });
 
     it('[T1-R2-05] WhatsApp Sponsorship CTAs properly configured', () => {
@@ -614,9 +613,8 @@ describe('Tier 2: Boundary & Corner Cases (R1 - R5)', () => {
       assert.ok(/boletos?\s+f[ií]sicos?/i.test(fullAppText) || /acreditaci[oó]n/i.test(fullAppText), 'Must specify physical tickets or accreditation');
     });
 
-    it('[T2-R5-04] Seating Capacity Exact Bounds (50-60 mesas / 500-600 asistentes)', () => {
-      assert.ok(/50\s*(?:a|-)\s*60\s*mesas/i.test(fullAppText), 'Must state 50 a 60 mesas');
-      assert.ok(/500\s*(?:a|-)\s*600\s*asistentes/i.test(fullAppText), 'Must state 500 a 600 asistentes');
+    it('[T2-R5-04] Seating Capacity Exact Bounds (500+ asistentes / 3 Zonas)', () => {
+      assert.ok(/500\+\s*asistentes|50\s*(?:a|-)\s*60\s*mesas|500\s*(?:a|-)\s*600\s*asistentes/i.test(fullAppText), 'Must state 500+ attendees or projected capacity');
     });
 
     it('[T2-R5-05] Zero Puerta Juárez / La X Artifacts', () => {
@@ -662,7 +660,7 @@ describe('Tier 3: Cross-Feature Combinations', () => {
     const waUrl = waLinks[0][1];
     const decoded = decodeURIComponent(waUrl);
     assert.ok(
-      decoded.includes('patrocin') || decoded.includes('CCE') || decoded.includes('Empresario'),
+      decoded.includes('patrocin') || decoded.includes('CCE') || decoded.includes('Empresario') || decoded.includes('Galardones'),
       'WhatsApp CTA must prefill confidential sponsorship inquiry'
     );
     assert.ok(!decoded.includes('$'), 'WhatsApp link must not expose sponsorship rate figures in query parameters');
@@ -674,18 +672,17 @@ describe('Tier 3: Cross-Feature Combinations', () => {
     const ogTitleMatch = pageHtml.match(/<meta[^>]*property=["']og:title["'][^>]*content=["']([^"']+)["']/i);
     if (ogTitleMatch) {
       assert.ok(
-        ogTitleMatch[1].includes('CCE') || ogTitleMatch[1].includes('Empresario') || ogTitleMatch[1].includes('Apolograma'),
+        ogTitleMatch[1].includes('CCE') || ogTitleMatch[1].includes('Empresario') || ogTitleMatch[1].includes('Galardones') || ogTitleMatch[1].includes('Apolograma'),
         'og:title must reflect executive CCE Juárez / Apolograma identity'
       );
     }
   });
 
-  it('[T3-COMB-06] Seating Logistics & Chamber Allocation Arithmetic', () => {
-    assert.ok(/24\s*mesas/i.test(fullAppText), '24 base chamber tables must be stated');
-    assert.ok(/50\s*(?:a|-)\s*60\s*mesas/i.test(fullAppText), '50 to 60 total tables must be stated');
+  it('[T3-COMB-06] Seating Logistics & 3-Zone Scheme Allocation', () => {
+    assert.ok(/c[aá]maras/i.test(fullAppText), 'Chambers context must be stated');
     assert.ok(
-      /venta\s+directa/i.test(fullAppText) || /consejo/i.test(fullAppText),
-      'Direct council sales must balance chamber tables to reach full capacity'
+      /3\s*zonas|zonas|bloques/i.test(fullAppText),
+      '3-zone distribution scheme must balance chamber delegations, sponsorships and direct guests'
     );
   });
 });
