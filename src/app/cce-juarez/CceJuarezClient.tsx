@@ -516,8 +516,8 @@ export default function CceJuarezClient() {
               </div>
 
               <p className="cce-flow-text" style={{ fontSize: '1.0625rem', marginBottom: '12px' }}>
-                Propuesta tecnológica y creativa de <strong>Apolograma</strong> para respaldar la presidencia del{' '}
-                <strong>Mtro. Iván Lara</strong> y al Consejo Directivo del <strong>CCE Ciudad Juárez</strong>.
+                Propuesta tecnológica y creativa de <strong>Apolograma</strong> para la magna entrega de galardones del{' '}
+                <strong>Consejo Coordinador Empresarial (CCE) Ciudad Juárez</strong>, encabezado por el <strong>Mtro. Iván Lara</strong>.
               </p>
               <p className="cce-flow-text" style={{ fontSize: '1.0625rem', marginBottom: '24px' }}>
                 Despliegue integral de invitación web, estrategia de contenidos en Facebook (Reels y carruseles), pauta
@@ -1195,7 +1195,7 @@ export default function CceJuarezClient() {
                   <strong>Posicionamiento estatal selecto:</strong> Difusión institucional en Chihuahua capital para proyectar la fuerza y el liderazgo del Consejo Coordinador Empresarial.
                 </li>
                 <li>
-                  <strong>Monitoreo y optimización técnica:</strong> Supervisión de métricas de alcance, clics y tráfico sin alterar el control que el <strong>Mtro. Iván Lara</strong> mantiene sobre su cuenta de Facebook.
+                  <strong>Monitoreo y optimización técnica:</strong> Supervisión de métricas de alcance, clics y tráfico sin alterar la administración institucional que el CCE mantiene sobre su página de Facebook.
                 </li>
               </ul>
 
@@ -1271,7 +1271,7 @@ export default function CceJuarezClient() {
               />
 
               <p className="cce-flow-text" style={{ marginBottom: '18px' }}>
-                Herramientas de respaldo visual y operativo para el anuncio ante medios de comunicación y la
+                Herramientas de soporte visual y operativo para el anuncio ante medios de comunicación y la
                 atención fluida de mensajes:
               </p>
 
@@ -1289,10 +1289,10 @@ export default function CceJuarezClient() {
                   <strong>Artes digitales para Rueda de Prensa:</strong> Maquetación en alta resolución para pantallas, tótem o backing del anuncio oficial del <strong>Mtro. Iván Lara</strong> ante medios de comunicación.
                 </li>
                 <li>
-                  <strong>Asistente automatizado de WhatsApp:</strong> Respuestas inmediatas a dudas iniciales (horarios, sede Cibeles y boletos físicos) que resuelven inquietudes frecuentes y evitan saturar el teléfono del <strong>Mtro. Iván Lara</strong>.
+                  <strong>Asistente automatizado de WhatsApp:</strong> Respuestas inmediatas a dudas iniciales (horarios, sede Cibeles y boletos físicos) que resuelven inquietudes frecuentes y agilizan la atención oficial del evento.
                 </li>
                 <li>
-                  <strong>Canalización confidencial directa:</strong> Enlace inmediato y discreto con el <strong>Mtro. Iván Lara</strong> ante solicitudes formales de empresas interesadas en patrocinios.
+                  <strong>Canalización confidencial directa:</strong> Enlace inmediato y discreto con la directiva del CCE ante solicitudes formales de empresas interesadas en patrocinios.
                 </li>
                 <li>
                   <em>Nota de alcance:</em> La captación y negociación de patrocinios es gestionada 100% por la presidencia del CCE; Apolograma provee la infraestructura técnica de enrutamiento y filtro.
