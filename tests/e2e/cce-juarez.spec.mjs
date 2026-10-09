@@ -248,6 +248,7 @@ describe('Tier 1: Feature Coverage (R1 - R5)', () => {
       assert.ok(/meta\s+ads|facebook\s+ads|pauta/i.test(fullAppText), 'Deliverable 3 Meta Ads / Facebook Ads strategy must be detailed');
       assert.ok(/tomadores\s+de\s+decisi[oó]n|directivos|empresarios|c-level/i.test(fullAppText), 'Must target C-level executives and decision-makers');
       assert.ok(/ju[aá]rez|chihuahua/i.test(fullAppText), 'Must specify geographical campaign reach in Cd. Juárez and Chihuahua state');
+      assert.ok(fullAppText.includes('$4,000 MXN') || fullAppText.includes('$4,000'), 'Must explicitly disclose $4,000 MXN ad budget for Meta Ads');
     });
 
     it('[T1-R2-04] Deliverable 4: Kit Rueda de Prensa & Automatización WhatsApp', () => {

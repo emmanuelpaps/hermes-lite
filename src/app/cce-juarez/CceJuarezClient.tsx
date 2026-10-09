@@ -38,7 +38,7 @@ export default function CceJuarezClient() {
 
   const whatsappBaseUrl = 'https://wa.me/526563117565';
   const whatsappApprovalText = encodeURIComponent(
-    'Hola Emmanuel, confirmo la aprobación de la propuesta comercial para el Consejo Coordinador Empresarial (CCE) Ciudad Juárez ($16,000 MXN + IVA = $18,560 MXN facturados). Procedamos con la orden de trabajo.'
+    'Hola Emmanuel, confirmo la aprobación de la propuesta comercial para el Consejo Coordinador Empresarial (CCE) Ciudad Juárez ($16,000 MXN + IVA = $18,560 MXN facturados, incluye $4,000 MXN de pauta en Meta Ads). Procedamos con la orden de trabajo.'
   );
   const whatsappGeneralText = encodeURIComponent(
     'Hola Emmanuel, solicito más información sobre la propuesta ejecutiva de Apolograma para el CCE Ciudad Juárez.'
@@ -847,10 +847,10 @@ export default function CceJuarezClient() {
                 <span style={{ fontSize: '13px', fontWeight: 800, letterSpacing: '0.5px' }}>PAUTA META ADS</span>
               </div>
               <div style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--cce-text-dark)', marginBottom: '4px' }}>
-                Segmentación B2B
+                $4,000 MXN Incluidos
               </div>
               <p className="cce-qr-text" style={{ margin: 0 }}>
-                Venta de boletos en Ciudad Juárez y posicionamiento de marca en el estado de Chihuahua.
+                Presupuesto publicitario directo incluido para venta de boletos en Ciudad Juárez y posicionamiento estatal.
               </p>
             </div>
 
@@ -1168,7 +1168,7 @@ export default function CceJuarezClient() {
               />
 
               <p className="cce-flow-text" style={{ marginBottom: '18px' }}>
-                Campaña institucional en Meta Ads para impulsar la colocación de boletos y consolidar el
+                Campaña institucional en Meta Ads con <strong>$4,000 MXN de presupuesto publicitario incluido</strong> para impulsar la colocación de boletos y consolidar el
                 posicionamiento del CCE en la región:
               </p>
 
@@ -1182,6 +1182,9 @@ export default function CceJuarezClient() {
                 }}
                 className="cce-flow-text"
               >
+                <li>
+                  <strong>Presupuesto directo de pauta ($4,000 MXN):</strong> Saldo de inversión oficial en Meta Ads integrado en el paquete para pautar anuncios en Facebook e Instagram sin costos adicionales.
+                </li>
                 <li>
                   <strong>Segmentación B2B de alta dirección:</strong> Campaña en Ciudad Juárez dirigida a propietarios, directores generales, gerentes de planta maquiladora (Index), ejecutivos bancarios y empresarios.
                 </li>
@@ -1200,13 +1203,17 @@ export default function CceJuarezClient() {
                 style={{
                   padding: '12px 16px',
                   borderRadius: '8px',
-                  background: '#F8FAFC',
-                  border: '1px solid #E2E8F0',
-                  fontSize: '0.875rem',
-                  color: '#475569',
+                  background: 'var(--cce-emerald-wash)',
+                  border: '1px solid #A7F3D0',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
                 }}
               >
-                Creativos sobrios con la fotografía autorizada de Carlos Loret de Mola y logotipo oficial del CCE.
+                <ShieldCheck size={18} color="#059669" />
+                <span style={{ fontSize: '0.875rem', fontWeight: 600, color: '#065F46' }}>
+                  $4,000 MXN de saldo publicitario directo en Meta Ads ya incluidos en la propuesta.
+                </span>
               </div>
             </div>
 
@@ -1426,7 +1433,7 @@ export default function CceJuarezClient() {
               </span>
               <h4 style={{ margin: '10px 0 6px 0', fontSize: '1.0625rem' }}>Pauta Meta Ads &amp; Asistente WhatsApp</h4>
               <p className="cce-qr-text" style={{ margin: 0 }}>
-                Configuración de audiencias ejecutivas B2B en Meta Ads Manager y programación de los flujos de respuesta rápida y canalización en WhatsApp.
+                Configuración de audiencias ejecutivas B2B en Meta Ads Manager, activación de los $4,000 MXN de pauta publicitaria y programación de los flujos de respuesta en WhatsApp.
               </p>
             </div>
 
@@ -1571,7 +1578,7 @@ export default function CceJuarezClient() {
                   </li>
                   <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <CheckCircle2 size={18} color="#10B981" />
-                    <span>Campaña de Pauta en Meta Ads dirigida a tomadores de decisiones</span>
+                    <span>Campaña de Pauta en Meta Ads con <strong>$4,000 MXN de presupuesto publicitario incluido</strong></span>
                   </li>
                   <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <CheckCircle2 size={18} color="#10B981" />
@@ -1599,17 +1606,35 @@ export default function CceJuarezClient() {
                 }}
               >
                 <div style={{ fontSize: '14px', color: '#94A3B8', marginBottom: '4px' }}>
-                  Inversión Base
+                  Inversión Base (Incluye Pauta)
                 </div>
                 <div
                   style={{
                     fontSize: '2rem',
                     fontWeight: 800,
                     color: '#FFFFFF',
-                    marginBottom: '8px',
+                    marginBottom: '4px',
                   }}
                 >
                   $16,000 MXN
+                </div>
+
+                <div
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    background: 'rgba(16, 185, 129, 0.15)',
+                    border: '1px solid #10B981',
+                    color: '#A7F3D0',
+                    padding: '4px 10px',
+                    borderRadius: '6px',
+                    fontSize: '12px',
+                    fontWeight: 700,
+                    marginBottom: '14px',
+                  }}
+                >
+                  <span>✓ Incluye $4,000 MXN de saldo directo en Meta Ads</span>
                 </div>
 
                 <div
@@ -1779,8 +1804,7 @@ export default function CceJuarezClient() {
               </summary>
               <p className="cce-flow-text" style={{ margin: '14px 0 0 0', fontSize: '0.9375rem' }}>
                 Cubre la totalidad de los 4 entregables: Invitación Digital Web, estrategia de contenidos en Facebook
-                (Reels y carruseles), configuración técnica de pauta en Meta Ads y kit digital para la rueda de prensa
-                con bot de atención en WhatsApp.
+                (Reels y carruseles), campaña en Meta Ads con $4,000 MXN de saldo publicitario directo incluido, y kit digital para la rueda de prensa con bot de atención en WhatsApp.
               </p>
             </details>
 
@@ -1870,13 +1894,13 @@ export default function CceJuarezClient() {
                   minHeight: '44px',
                 }}
               >
-                <span>¿Cómo se realiza el pago y la facturación fiscal?</span>
+                <span>¿Cómo se realiza el pago y qué incluye el presupuesto de pauta?</span>
                 <span style={{ color: 'var(--cce-emerald)', fontSize: '1.25rem', fontWeight: 700 }}>+</span>
               </summary>
               <p className="cce-flow-text" style={{ margin: '14px 0 0 0', fontSize: '0.9375rem' }}>
                 Se formaliza en una sola exhibición por $18,560 MXN ($16,000 MXN base + $2,560 MXN de 16% IVA), con
                 factura electrónica CFDI emitida por TECNOLOGIES TECZA, S. DE R.L. DE C.V. y transferencia a la cuenta
-                oficial Banregio.
+                oficial Banregio. El monto base ya incluye los $4,000 MXN de saldo publicitario en Meta Ads, sin cargos adicionales para el CCE.
               </p>
             </details>
 
