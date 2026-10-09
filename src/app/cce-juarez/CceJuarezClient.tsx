@@ -3,8 +3,6 @@
 import React, { useState } from 'react';
 import {
   ShieldCheck,
-  Award,
-  Users,
   Calendar,
   Clock,
   MapPin,
@@ -12,95 +10,20 @@ import {
   Copy,
   Check,
   MessageCircle,
-  Mail,
   ChevronRight,
-  Lock,
-  LayoutGrid,
   FileText,
   Sparkles,
-  Shirt,
-  Building2,
-  X,
   Target,
   Mic,
-  Star,
+  Video,
+  Layers,
+  Palette,
+  Bot,
+  Tv,
 } from 'lucide-react';
 
-interface ZoneItem {
-  id: 'camaras' | 'vip' | 'general';
-  name: string;
-  badge: string;
-  description: string;
-  allocation: string;
-  accessType: string;
-  color: string;
-  borderColor: string;
-  bgColor: string;
-  benefits: string[];
-}
-
-const ZONES_DATA: ZoneItem[] = [
-  {
-    id: 'camaras',
-    name: 'Zona Cámaras CCE',
-    badge: '11 Organismos Cúpula',
-    description:
-      'Bloque institucional de mesas reservadas para presidentes, directores y comitivas oficiales de los 11 organismos que integran el Consejo Coordinador Empresarial.',
-    allocation: '22 - 24 mesas proyectadas (10 comensales por mesa)',
-    accessType: 'Asignación Institucional Directa por Organismo',
-    color: '#064E3B',
-    borderColor: '#A7F3D0',
-    bgColor: '#ECFDF5',
-    benefits: [
-      'Representación de CANACINTRA, COPARMEX, CANACO, INDEX Juárez y Hoteles y Moteles',
-      'Presidium y mesas de honor para liderazgo gremial y autoridades invitadas',
-      'Recepción y acreditación preferencial de delegaciones empresariales',
-      'Acceso con boletos conmemorativos con holograma de seguridad',
-    ],
-  },
-  {
-    id: 'vip',
-    name: 'Zona Patrocinios VIP',
-    badge: 'Corporativo & Marcas Patrocinadoras',
-    description:
-      'Mesas preferenciales en primera línea frente al escenario y pasarela de premiación, destinadas a empresas e industrias patrocinadoras del magno evento.',
-    allocation: '14 - 16 mesas de alta jerarquía (10 comensales por mesa)',
-    accessType: 'Adquisición Vía Dossier Confidencial de Patrocinio',
-    color: '#B8860B',
-    borderColor: '#FDE68A',
-    bgColor: '#FFFBEB',
-    benefits: [
-      'Ubicación estratégica con máxima visibilidad durante la conferencia de Carlos Loret de Mola',
-      'Menciones institucionales de patrocinio en medios y pantallas de sala',
-      'Mesa corporativa completa reservada a nombre de la empresa',
-      'Trato y dossier de aportación gestionado en estricta confidencialidad',
-    ],
-  },
-  {
-    id: 'general',
-    name: 'Zona General / Invitados Especiales',
-    badge: 'Empresariado & Venta Directa',
-    description:
-      'Mesas de asignación para empresarios independientes, socios directos, directivos de la región Paso del Norte y aliados estratégicos del CCE.',
-    allocation: '16 - 20 mesas ejecutivas (10 comensales por mesa)',
-    accessType: 'Venta Directa Coordinada por Dirección CCE',
-    color: '#1D4ED8',
-    borderColor: '#BFDBFE',
-    bgColor: '#EFF6FF',
-    benefits: [
-      'Acceso integral al Desayuno Empresarial en Centro de Eventos Cibeles',
-      'Participación en la Conferencia Magistral y sesión de preguntas',
-      'Convivencia y networking con más de 500 tomadores de decisiones de la región',
-      'Boleto físico individual foliado con candado de autenticidad',
-    ],
-  },
-];
-
 export default function CceJuarezClient() {
-  const [activeZone, setActiveZone] = useState<'camaras' | 'vip' | 'general'>('camaras');
   const [copiedClabe, setCopiedClabe] = useState(false);
-
-  const selectedZoneData = ZONES_DATA.find((z) => z.id === activeZone) || ZONES_DATA[0];
 
   const handleCopyClabe = async () => {
     try {
@@ -114,11 +37,11 @@ export default function CceJuarezClient() {
   };
 
   const whatsappBaseUrl = 'https://wa.me/526563117565';
-  const whatsappSponsorshipText = encodeURIComponent(
-    'Hola Emmanuel, represento a una empresa interesada en conocer los paquetes de patrocinio y asignación de mesas para la Entrega de Galardones 2026 del CCE Ciudad Juárez con Carlos Loret de Mola en Cibeles. Solicito el dossier confidencial.'
+  const whatsappApprovalText = encodeURIComponent(
+    'Hola Emmanuel, confirmo la aprobación de la propuesta comercial para el Consejo Coordinador Empresarial (CCE) Ciudad Juárez ($16,000 MXN + IVA = $18,560 MXN facturados). Procedamos con la orden de trabajo.'
   );
   const whatsappGeneralText = encodeURIComponent(
-    'Hola Emmanuel, solicito más información sobre la plataforma ejecutiva para la Entrega de Galardones 2026 del CCE Ciudad Juárez con Carlos Loret de Mola.'
+    'Hola Emmanuel, solicito más información sobre la propuesta ejecutiva de Apolograma para el CCE Ciudad Juárez.'
   );
 
   return (
@@ -136,6 +59,7 @@ export default function CceJuarezClient() {
               --cce-gold-dark: #B8860B;
               --cce-gold-light: #FFFBEB;
               --cce-gold-border: #FDE68A;
+              --cce-wood: #854D0E;
               --cce-cream: #FFFDF9;
               --cce-bg: #FFFDF9;
               --cce-bg-cream: #FFFDF9;
@@ -268,9 +192,6 @@ export default function CceJuarezClient() {
                 grid-template-columns: 1fr !important;
               }
               .cce-deliverables-grid {
-                grid-template-columns: 1fr !important;
-              }
-              .cce-sculptures-grid {
                 grid-template-columns: 1fr !important;
               }
               .cce-financial-box {
@@ -478,7 +399,7 @@ export default function CceJuarezClient() {
                 textTransform: 'uppercase',
               }}
             >
-              Evento Empresarial Oficial · Jueves 19 de Noviembre 2026
+              Propuesta Comercial Ejecutiva · Apolograma × CCE Juárez
             </span>
           </div>
 
@@ -491,7 +412,7 @@ export default function CceJuarezClient() {
               alignItems: 'center',
             }}
           >
-            {/* Left Column: Title & Institutional Description */}
+            {/* Left Column: Title & Proposal Overview */}
             <div>
               <div
                 style={{
@@ -508,39 +429,39 @@ export default function CceJuarezClient() {
 
               <h1
                 style={{
-                  fontSize: 'clamp(1.65rem, 5vw, 3rem)',
+                  fontSize: 'clamp(1.65rem, 5vw, 2.85rem)',
                   lineHeight: 1.15,
                   marginBottom: '12px',
                   color: 'var(--cce-emerald)',
                 }}
               >
-                ENTREGA DE GALARDONES 2026
+                ESTRATEGIA DIGITAL, CONTENIDO &amp; CONVOCATORIA
               </h1>
 
               <div
                 style={{
-                  fontSize: '1.25rem',
+                  fontSize: '1.2rem',
                   fontWeight: 800,
                   color: '#B45309',
                   fontStyle: 'italic',
                   marginBottom: '16px',
                 }}
               >
-                «Liderazgo que impulsa el futuro en Juárez»
+                Entrega de Galardones 2026 · Conferencia Magistral Carlos Loret de Mola
               </div>
 
               <p className="cce-flow-text" style={{ fontSize: '1.0625rem', marginBottom: '24px' }}>
-                Ecosistema integral de alta jerarquía desarrollado por{' '}
-                <strong>Apolograma</strong> para coordinar la investidura anual del{' '}
-                <strong>Consejo Coordinador Empresarial (CCE)</strong> de Ciudad Juárez. Conferencia
-                magistral de <strong>Carlos Loret de Mola</strong>, entrega de las preseas escultóricas
-                creadas por el escultor <strong>Pedro Francisco</strong> para la <em>Empresa del Año</em>{' '}
-                («Estrella Ascendente») y el <em>Empresario del Año</em> («De Altos Vuelos»), canal
-                confidencial de patrocinios y coordinación logística para más de 500 líderes empresariales
-                en <strong>Centro de Eventos Cibeles</strong>.
+                Propuesta integral de servicios tecnológicos y creativos presentada por{' '}
+                <strong>Apolograma</strong> para respaldar la presidencia del Lic. Iván Lara y el
+                Consejo Directivo del <strong>CCE Ciudad Juárez</strong>. Diseñada para resolver con
+                máxima puntualidad la <strong>Invitación Digital Web</strong>, la <strong>Estrategia de
+                Contenido en Facebook</strong> (Reels, Carruseles y elevación de línea visual), la{' '}
+                <strong>Campaña de Pauta en Meta Ads</strong> para venta de boletos y el{' '}
+                <strong>Kit Gráfico para la Rueda de Prensa</strong> ante medios de comunicación con
+                asistencia automatizada por WhatsApp.
               </p>
 
-              {/* Protocol Badges Row */}
+              {/* Event Context Badges */}
               <div
                 style={{
                   display: 'grid',
@@ -577,23 +498,6 @@ export default function CceJuarezClient() {
                     border: '1px solid #E2E8F0',
                   }}
                 >
-                  <Clock size={18} color="#059669" />
-                  <span style={{ fontSize: '14px', fontWeight: 700, color: 'var(--cce-text-dark)' }}>
-                    Registro 8:30 AM · Desayuno 9:00 AM
-                  </span>
-                </div>
-
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '10px',
-                    padding: '10px 14px',
-                    background: '#FFFFFF',
-                    borderRadius: '8px',
-                    border: '1px solid #E2E8F0',
-                  }}
-                >
                   <MapPin size={18} color="#059669" />
                   <span style={{ fontSize: '14px', fontWeight: 700, color: 'var(--cce-text-dark)' }}>
                     Centro de Eventos Cibeles
@@ -611,32 +515,43 @@ export default function CceJuarezClient() {
                     border: '1px solid #E2E8F0',
                   }}
                 >
-                  <Shirt size={18} color="#B45309" />
+                  <Clock size={18} color="#059669" />
                   <span style={{ fontSize: '14px', fontWeight: 700, color: 'var(--cce-text-dark)' }}>
-                    Vestimenta Formal
+                    Desayuno Empresarial 9:00 AM
+                  </span>
+                </div>
+
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    padding: '10px 14px',
+                    background: '#FFFFFF',
+                    borderRadius: '8px',
+                    border: '1px solid #E2E8F0',
+                  }}
+                >
+                  <ShieldCheck size={18} color="#B45309" />
+                  <span style={{ fontSize: '14px', fontWeight: 700, color: 'var(--cce-text-dark)' }}>
+                    Boletos con Holograma Físico
                   </span>
                 </div>
               </div>
 
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
                 <a href="#entregables" className="cce-btn cce-btn-primary">
-                  Explorar 4 Entregables
+                  Ver los 4 Entregables
                   <ChevronRight size={18} />
                 </a>
 
-                <a
-                  href={`${whatsappBaseUrl}?text=${whatsappSponsorshipText}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cce-btn cce-btn-gold"
-                >
-                  <Lock size={16} />
-                  Dossier Confidencial de Patrocinios
+                <a href="#inversion" className="cce-btn cce-btn-gold">
+                  Propuesta Económica ($16,000 + IVA)
                 </a>
               </div>
             </div>
 
-            {/* Right Column: Keynote Speaker Card */}
+            {/* Right Column: Keynote Speaker & Visual Anchor */}
             <div
               style={{
                 background: 'var(--cce-slate-card)',
@@ -712,7 +627,7 @@ export default function CceJuarezClient() {
                       marginBottom: '4px',
                     }}
                   >
-                    CONFERENCIA MAGISTRAL
+                    PONENTE MAGISTRAL
                   </div>
                   <h3
                     style={{
@@ -764,7 +679,7 @@ export default function CceJuarezClient() {
                       letterSpacing: '0.5px',
                     }}
                   >
-                    TEMA DE LA CONFERENCIA
+                    CONFERENCIA MAGISTRAL
                   </span>
                 </div>
                 <p
@@ -781,24 +696,19 @@ export default function CceJuarezClient() {
                 </p>
               </div>
 
-              {/* Protocol Badges */}
+              {/* Scope Note */}
               <div
                 style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr 1fr',
-                  gap: '8px',
-                  fontSize: '0.875rem',
-                  color: '#94A3B8',
+                  padding: '12px 14px',
+                  borderRadius: '8px',
+                  background: 'rgba(6, 78, 59, 0.4)',
+                  border: '1px solid rgba(167, 243, 208, 0.25)',
+                  fontSize: '0.85rem',
+                  color: '#CBD5E1',
+                  lineHeight: 1.5,
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <ShieldCheck size={16} color="#10B981" />
-                  <span>Boletos con Holograma</span>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <Users size={16} color="#10B981" />
-                  <span>Meta: 500+ Asistentes</span>
-                </div>
+                Entrega de preseas Pedro Francisco: «Estrella Ascendente» (Empresa del Año) y «De Altos Vuelos» (Empresario del Año).
               </div>
             </div>
           </div>
@@ -826,14 +736,14 @@ export default function CceJuarezClient() {
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--cce-emerald)', marginBottom: '8px' }}>
-                <Mic size={18} />
-                <span style={{ fontSize: '13px', fontWeight: 800, letterSpacing: '0.5px' }}>CONFERENCIA MAGISTRAL</span>
+                <FileText size={18} />
+                <span style={{ fontSize: '13px', fontWeight: 800, letterSpacing: '0.5px' }}>INVITACIÓN WEB</span>
               </div>
               <div style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--cce-text-dark)', marginBottom: '4px' }}>
-                Carlos Loret de Mola
+                Mobile-First
               </div>
               <p className="cce-qr-text" style={{ margin: 0 }}>
-                Análisis macroeconómico, política y la relación bilateral México - EE.UU.
+                Webapp ligera para compartir por WhatsApp con botones directos para comprar boletos.
               </p>
             </div>
 
@@ -847,14 +757,14 @@ export default function CceJuarezClient() {
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--cce-gold-dark)', marginBottom: '8px' }}>
-                <Award size={18} />
-                <span style={{ fontSize: '13px', fontWeight: 800, letterSpacing: '0.5px' }}>PRESEAS ESCULTÓRICAS</span>
+                <Video size={18} />
+                <span style={{ fontSize: '13px', fontWeight: 800, letterSpacing: '0.5px' }}>FACEBOOK Y REELS</span>
               </div>
               <div style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--cce-text-dark)', marginBottom: '4px' }}>
-                Pedro Francisco
+                Reels &amp; Carruseles
               </div>
               <p className="cce-qr-text" style={{ margin: 0 }}>
-                Esculturas oficiales «Estrella Ascendente» y «De Altos Vuelos».
+                Edición con video oficial de Loret de Mola y elevación de la línea visual institucional.
               </p>
             </div>
 
@@ -868,14 +778,14 @@ export default function CceJuarezClient() {
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--cce-emerald)', marginBottom: '8px' }}>
-                <Calendar size={18} />
-                <span style={{ fontSize: '13px', fontWeight: 800, letterSpacing: '0.5px' }}>FECHA Y SEDE</span>
+                <Target size={18} />
+                <span style={{ fontSize: '13px', fontWeight: 800, letterSpacing: '0.5px' }}>PAUTA META ADS</span>
               </div>
               <div style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--cce-text-dark)', marginBottom: '4px' }}>
-                19 Noviembre 2026
+                Segmentación B2B
               </div>
               <p className="cce-qr-text" style={{ margin: 0 }}>
-                Centro de Eventos Cibeles · Registro 8:30 AM · Desayuno 9:00 AM.
+                Venta de boletos en Ciudad Juárez y posicionamiento de marca en el estado de Chihuahua.
               </p>
             </div>
 
@@ -889,216 +799,21 @@ export default function CceJuarezClient() {
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--cce-emerald)', marginBottom: '8px' }}>
-                <Users size={18} />
-                <span style={{ fontSize: '13px', fontWeight: 800, letterSpacing: '0.5px' }}>CONVOCATORIA CÚPULA</span>
+                <Tv size={18} />
+                <span style={{ fontSize: '13px', fontWeight: 800, letterSpacing: '0.5px' }}>KIT RUEDA PRENSA</span>
               </div>
               <div style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--cce-text-dark)', marginBottom: '4px' }}>
-                500+ Asistentes
+                Pantallas + Bot WhatsApp
               </div>
               <p className="cce-qr-text" style={{ margin: 0 }}>
-                11 Cámaras del CCE, empresas patrocinadoras e invitados especiales.
+                Artes para medios el lunes y asistente de WhatsApp para filtro de dudas frecuentes.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SECTION: SCULPTURES PEDRO FRANCISCO SHOWCASE */}
-      <section style={{ padding: '64px 20px', background: '#F8FAFC', borderBottom: '1px solid #E2E8F0' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 48px auto' }}>
-            <div
-              style={{
-                display: 'inline-block',
-                background: 'var(--cce-gold-light)',
-                color: 'var(--cce-gold-dark)',
-                padding: '4px 12px',
-                borderRadius: '6px',
-                fontSize: '13px',
-                fontWeight: 800,
-                letterSpacing: '1px',
-                marginBottom: '12px',
-              }}
-            >
-              OBRAS ESCULTÓRICAS EN BRONCE
-            </div>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.5rem)', color: 'var(--cce-emerald)', marginBottom: '14px' }}>
-              Los Galardones de Pedro Francisco
-            </h2>
-            <p className="cce-flow-text">
-              El Consejo Coordinador Empresarial honra la trayectoria, visión y compromiso social de la comunidad
-              productiva de Ciudad Juárez a través de dos piezas monumentales fundidas en exclusiva por el reconocido
-              escultor juarense Pedro Francisco.
-            </p>
-          </div>
-
-          <div
-            className="cce-sculptures-grid"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: '32px',
-            }}
-          >
-            {/* Galardón 1: Estrella Ascendente */}
-            <div
-              className="cce-plan-card"
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                textAlign: 'center',
-                background: '#FFFFFF',
-              }}
-            >
-              <div
-                style={{
-                  width: '180px',
-                  height: '320px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: '20px',
-                }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/assets/cce-juarez/sculpture_estrella_ascendente.png"
-                  alt="Presea Escultórica Estrella Ascendente - Pedro Francisco"
-                  style={{
-                    maxHeight: '100%',
-                    maxWidth: '100%',
-                    objectFit: 'contain',
-                    filter: 'drop-shadow(0 12px 20px rgba(0,0,0,0.18))',
-                  }}
-                />
-              </div>
-
-              <div
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  background: 'var(--cce-emerald-wash)',
-                  color: 'var(--cce-emerald)',
-                  padding: '4px 12px',
-                  borderRadius: '9999px',
-                  fontSize: '12px',
-                  fontWeight: 800,
-                  letterSpacing: '0.5px',
-                  marginBottom: '10px',
-                }}
-              >
-                <Star size={14} />
-                EMPRESA DEL AÑO 2026
-              </div>
-
-              <h3 style={{ fontSize: '1.5rem', margin: '0 0 8px 0', color: 'var(--cce-text-dark)' }}>
-                «Estrella Ascendente»
-              </h3>
-
-              <p className="cce-flow-text" style={{ margin: '0 0 16px 0', maxWidth: '440px' }}>
-                Presea otorgada a la organización destacada por su crecimiento exponencial, solidez corporativa,
-                generación de empleos de calidad y aportación al desarrollo económico sostenible de la frontera.
-              </p>
-
-              <div
-                style={{
-                  marginTop: 'auto',
-                  padding: '10px 16px',
-                  borderRadius: '8px',
-                  background: 'var(--cce-bg-cream)',
-                  border: '1px solid #E2E8F0',
-                  fontSize: '0.85rem',
-                  color: '#64748B',
-                }}
-              >
-                Escultura conmemorativa original fundida en bronce · Certificado de autor Pedro Francisco
-              </div>
-            </div>
-
-            {/* Galardón 2: De Altos Vuelos */}
-            <div
-              className="cce-plan-card"
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                textAlign: 'center',
-                background: '#FFFFFF',
-              }}
-            >
-              <div
-                style={{
-                  width: '180px',
-                  height: '320px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: '20px',
-                }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/assets/cce-juarez/sculpture_de_altos_vuelos.png"
-                  alt="Presea Escultórica De Altos Vuelos - Pedro Francisco"
-                  style={{
-                    maxHeight: '100%',
-                    maxWidth: '100%',
-                    objectFit: 'contain',
-                    filter: 'drop-shadow(0 12px 20px rgba(0,0,0,0.18))',
-                  }}
-                />
-              </div>
-
-              <div
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  background: 'var(--cce-gold-light)',
-                  color: 'var(--cce-gold-dark)',
-                  padding: '4px 12px',
-                  borderRadius: '9999px',
-                  fontSize: '12px',
-                  fontWeight: 800,
-                  letterSpacing: '0.5px',
-                  marginBottom: '10px',
-                }}
-              >
-                <Award size={14} />
-                EMPRESARIO DEL AÑO 2026
-              </div>
-
-              <h3 style={{ fontSize: '1.5rem', margin: '0 0 8px 0', color: 'var(--cce-text-dark)' }}>
-                «De Altos Vuelos»
-              </h3>
-
-              <p className="cce-flow-text" style={{ margin: '0 0 16px 0', maxWidth: '440px' }}>
-                Máximo galardón conferido al líder empresarial que con su talento, integridad y perseverancia
-                ha alcanzado cumbres de éxito sin perder el arraigo, descendiendo para extender la mano e impulsar
-                el porvenir de su comunidad.
-              </p>
-
-              <div
-                style={{
-                  marginTop: 'auto',
-                  padding: '10px 16px',
-                  borderRadius: '8px',
-                  background: 'var(--cce-bg-cream)',
-                  border: '1px solid #E2E8F0',
-                  fontSize: '0.85rem',
-                  color: '#64748B',
-                }}
-              >
-                Placa grabada oficial CCE · Firma en bronce del maestro escultor Pedro Francisco
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION: 4 STRATEGIC DELIVERABLES */}
+      {/* SECTION: 4 REAL STRATEGIC DELIVERABLES */}
       <section id="entregables" style={{ padding: '64px 20px', background: 'var(--cce-bg-cream)' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 48px auto' }}>
@@ -1115,15 +830,14 @@ export default function CceJuarezClient() {
                 marginBottom: '12px',
               }}
             >
-              PAQUETE INTEGRAL DE DESPLIEGUE
+              ALCANCE OFICIAL DE SERVICIOS
             </div>
             <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.5rem)', color: 'var(--cce-emerald)', marginBottom: '14px' }}>
-              Los 4 Entregables Estratégicos
+              Los 4 Entregables de Apolograma
             </h2>
             <p className="cce-flow-text">
-              Arquitectura técnica, comercial y logística desarrollada por Apolograma para el Consejo
-              Coordinador Empresarial de Ciudad Juárez, garantizando un evento impecable, ordenado y de
-              máximo prestigio binacional.
+              Propuesta tecnológica y creativa construida para resolver exactamente los frentes
+              operativos discutidos con el Lic. Iván Lara, asegurando un lanzamiento exitoso y puntual.
             </p>
           </div>
 
@@ -1170,8 +884,8 @@ export default function CceJuarezClient() {
               </div>
 
               <p className="cce-flow-text" style={{ marginBottom: '18px' }}>
-                Plataforma web oficial de alta velocidad orientada a presidentes de cámaras, directivos de
-                empresas y líderes de opinión:
+                Plataforma web oficial de carga instantánea optimizada para celulares, diseñada para enviarse por
+                WhatsApp a empresarios, consejeros y líderes gremiales:
               </p>
 
               <ul
@@ -1185,21 +899,16 @@ export default function CceJuarezClient() {
                 className="cce-flow-text"
               >
                 <li>
-                  <strong>Semblanza y conferencia de Carlos Loret de Mola:</strong> «México y Estados Unidos:
-                  Poder, política y economía en tiempos de cambio».
+                  <strong>Presentación oficial de Carlos Loret de Mola:</strong> Fotografía autorizada, semblanza ejecutiva y ficha de la conferencia magistral.
                 </li>
                 <li>
-                  <strong>Agenda ejecutiva del desayuno:</strong> 08:30 Registro con credencialización,
-                  09:00 Inicio de Desayuno y mensaje CCE, 09:45 Entrega de Galardones Pedro Francisco,
-                  10:30 Conferencia Magistral, 11:45 Cierre.
+                  <strong>Ficha técnica del desayuno:</strong> Jueves 19 de Noviembre en Centro de Eventos Cibeles, registro 8:30 AM e inicio 9:00 AM.
                 </li>
                 <li>
-                  <strong>Sede y logística oficial:</strong> Centro de Eventos Cibeles (Blvd. Tomás Fernández
-                  No. 8450) con geolocalización en 1-clic y protocolo de vestimenta formal.
+                  <strong>Adquisición de boletos físicos:</strong> Botón de contacto directo para coordinar la entrega y pago de los boletos impresos con <strong>holograma de seguridad antifalsificación</strong>.
                 </li>
                 <li>
-                  <strong>Adquisición de boletos físicos:</strong> Canal directo para solicitud y entrega de
-                  boletos impresos con <strong>holograma de seguridad antifalsificación</strong>.
+                  <strong>Enlace directo a WhatsApp institucional:</strong> Canal rápido para resolver dudas sin formularios engorrosos ni registros innecesarios.
                 </li>
               </ul>
 
@@ -1216,12 +925,12 @@ export default function CceJuarezClient() {
               >
                 <ShieldCheck size={18} color="#059669" />
                 <span style={{ fontSize: '0.875rem', fontWeight: 600, color: '#065F46' }}>
-                  Dominio seguro SSL, optimizada para celulares y carga ultrarrápida.
+                  Dominio seguro SSL, velocidad ultrarrápida y diseño adaptado a celulares.
                 </span>
               </div>
             </div>
 
-            {/* ENTREGABLE 2: Canal Automatizado de WhatsApp para Patrocinios */}
+            {/* ENTREGABLE 2: Contenido & Gestión de Facebook (Reels, Carruseles y Nueva Línea Gráfica) */}
             <div className="cce-plan-card">
               <div
                 style={{
@@ -1243,21 +952,21 @@ export default function CceJuarezClient() {
                     color: 'var(--cce-gold-dark)',
                   }}
                 >
-                  <MessageCircle size={24} />
+                  <Video size={24} />
                 </div>
                 <div>
                   <span style={{ fontSize: '13px', fontWeight: 800, color: 'var(--cce-gold-dark)', letterSpacing: '0.8px' }}>
                     ENTREGABLE 2
                   </span>
                   <h3 style={{ margin: 0, fontSize: '1.25rem' }}>
-                    Canal Automatizado de WhatsApp para Patrocinios
+                    Contenido Facebook: Reels, Carruseles &amp; Línea Gráfica
                   </h3>
                 </div>
               </div>
 
               <p className="cce-flow-text" style={{ marginBottom: '18px' }}>
-                Módulo de atención corporativa confidencial que protege la investidura del evento
-                y preserva la discreción en las aportaciones de marcas:
+                Estrategia y producción de contenidos de alto impacto para la página de Facebook oficial, elevando
+                la identidad visual del evento a nivel premium:
               </p>
 
               <ul
@@ -1271,34 +980,34 @@ export default function CceJuarezClient() {
                 className="cce-flow-text"
               >
                 <li>
-                  <strong>Confidencialidad absoluta:</strong> CERO tarifas públicas en la página web;
-                  las aportaciones de patrocinio se tratan de forma privada y personalizada.
+                  <strong>Elevación de la línea gráfica:</strong> Respetamos la paleta institucional (verde esmeralda y tonos madera) elevándola con tipografía refinada, espacios limpios y balance formal de alta jerarquía.
                 </li>
                 <li>
-                  <strong>Enrutamiento automático 1-clic:</strong> Enlace oficial con mensaje pre-estructurado
-                  para solicitar el dossier ejecutivo y acordar reunión con el comité organizador.
+                  <strong>Edición de Reels institucionales:</strong> Edición del video oficial de Carlos Loret de Mola con cortinillas de entrada/salida y cintillas de texto informativas para redes sociales.
                 </li>
                 <li>
-                  <strong>Canal institucional alterno:</strong> Botón de contacto directo por correo a{' '}
-                  <strong>director@ccejuarez.org</strong> para cartas formales de intención.
+                  <strong>Diseño y publicación de carruseles:</strong> Piezas informativas multislide para Facebook sobre la trayectoria del ponente, los temas de análisis y la relevancia del encuentro empresarial.
                 </li>
                 <li>
-                  <strong>Beneficios estratégicos:</strong> Presencia de marca en presidium, mesa preferencial,
-                  mención en rueda de prensa y pauta institucional.
+                  <strong>Publicación y calendarización directa:</strong> Coordinación de contenidos de aquí al día del evento para mantener una presencia activa y seria.
                 </li>
               </ul>
 
-              <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <a
-                  href={`${whatsappBaseUrl}?text=${whatsappSponsorshipText}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cce-btn cce-btn-gold"
-                  style={{ width: '100%' }}
-                >
-                  <Lock size={16} />
-                  Solicitar Dossier Confidencial
-                </a>
+              <div
+                style={{
+                  padding: '12px 16px',
+                  borderRadius: '8px',
+                  background: 'var(--cce-gold-light)',
+                  border: '1px solid var(--cce-gold-border)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                }}
+              >
+                <Palette size={18} color="#B45309" />
+                <span style={{ fontSize: '0.875rem', fontWeight: 600, color: '#92400E' }}>
+                  Diseño gráfico editorial contemporáneo sin recurrir a ilustraciones genéricas.
+                </span>
               </div>
             </div>
 
@@ -1337,8 +1046,8 @@ export default function CceJuarezClient() {
               </div>
 
               <p className="cce-flow-text" style={{ marginBottom: '18px' }}>
-                Campaña institucional quirúrgica para posicionar el magno evento y asegurar la colocación
-                de boletos entre el empresariado calificado:
+                Campaña institucional quirúrgica para acelerar la colocación de boletos y maximizar el posicionamiento
+                del CCE:
               </p>
 
               <ul
@@ -1352,15 +1061,16 @@ export default function CceJuarezClient() {
                 className="cce-flow-text"
               >
                 <li>
-                  <strong>Segmentación B2B de alta dirección:</strong> Propietarios, directores generales,
-                  gerentes de planta maquiladora (Index), ejecutivos de banca y presidentes de cámaras.
+                  <strong>Segmentación B2B de alta dirección:</strong> Campaña en Ciudad Juárez dirigida a propietarios, directores generales, gerentes de planta maquiladora (Index), ejecutivos bancarios y empresarios.
                 </li>
                 <li>
-                  <strong>Cobertura geográfica selecta:</strong> Ciudad Juárez, El Paso TX y Chihuahua capital.
+                  <strong>Estrategia de conversión local:</strong> Pauta enfocada en detonar compras de boletos hacia la invitación web y WhatsApp.
                 </li>
                 <li>
-                  <strong>Blindaje ético riguroso:</strong> Estrategia orientada a alcance calificado,
-                  prestigio institucional y convocatoria real sin fórmulas especulativas.
+                  <strong>Posicionamiento estatal selecto:</strong> Difusión institucional en Chihuahua capital para proyectar la fuerza y el liderazgo del Consejo Coordinador Empresarial.
+                </li>
+                <li>
+                  <strong>Monitoreo y optimización técnica:</strong> Supervisión de métricas de alcance, clics y tráfico sin alterar el control que Iván Lara mantiene sobre su cuenta de Facebook.
                 </li>
               </ul>
 
@@ -1378,7 +1088,7 @@ export default function CceJuarezClient() {
               </div>
             </div>
 
-            {/* ENTREGABLE 4: Logística y Coordinación de Mesas */}
+            {/* ENTREGABLE 4: Kit Gráfico para Rueda de Prensa y Automatización de WhatsApp */}
             <div className="cce-plan-card">
               <div
                 style={{
@@ -1400,21 +1110,21 @@ export default function CceJuarezClient() {
                     color: 'var(--cce-emerald)',
                   }}
                 >
-                  <LayoutGrid size={24} />
+                  <Bot size={24} />
                 </div>
                 <div>
                   <span style={{ fontSize: '13px', fontWeight: 800, color: 'var(--cce-emerald-light)', letterSpacing: '0.8px' }}>
                     ENTREGABLE 4
                   </span>
                   <h3 style={{ margin: 0, fontSize: '1.25rem' }}>
-                    Logística y Coordinación de Distribución
+                    Kit Rueda de Prensa &amp; Automatización WhatsApp
                   </h3>
                 </div>
               </div>
 
               <p className="cce-flow-text" style={{ marginBottom: '18px' }}>
-                Sistema de control y visualización de asignación para más de 500 comensales proyectados
-                en Centro de Eventos Cibeles:
+                Herramientas de respaldo visual y operativo para el anuncio ante medios de comunicación y la
+                atención fluida de mensajes:
               </p>
 
               <ul
@@ -1428,230 +1138,34 @@ export default function CceJuarezClient() {
                 className="cce-flow-text"
               >
                 <li>
-                  <strong>Zona Cámaras CCE:</strong> Bloque base para los 11 organismos empresariales de la cúpula.
+                  <strong>Artes digitales para Rueda de Prensa:</strong> Maquetación en alta resolución para pantallas, tótem o backing del anuncio oficial de Iván Lara ante medios el lunes.
                 </li>
                 <li>
-                  <strong>Zona Patrocinios VIP:</strong> Mesas preferenciales reservadas para marcas e industrias.
+                  <strong>Asistente automatizado de WhatsApp:</strong> Respuestas inteligentes para preguntas frecuentes (horarios, sede Cibeles, dinámica de boletos físicos) que filtran curiosos y evitan saturar el teléfono personal de Iván Lara.
                 </li>
                 <li>
-                  <strong>Zona General / Venta Directa:</strong> Coordinada centralizadamente por el CCE.
+                  <strong>Canalización confidencial directa:</strong> Cuando un prospecto serio o interesado en patrocinios escriba, el bot lo conecta directamente con Iván Lara de forma ordenada y privada.
                 </li>
                 <li>
-                  <strong>Control en tiempo real:</strong> Evita duplicidades y agiliza la recepción con
-                  boletos foliados con holograma de seguridad.
+                  <em>Nota de alcance:</em> La captación y negociación de patrocinios es gestionada 100% por la presidencia del CCE; Apolograma provee la infraestructura técnica de enrutamiento y filtro.
                 </li>
               </ul>
 
-              <a
-                href="#esquema-zonas"
-                className="cce-btn cce-btn-outline"
-                style={{ width: '100%' }}
+              <div
+                style={{
+                  padding: '12px 16px',
+                  borderRadius: '8px',
+                  background: 'var(--cce-emerald-wash)',
+                  border: '1px solid #A7F3D0',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                }}
               >
-                <LayoutGrid size={16} />
-                Ver Esquema de Distribución por 3 Zonas
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION: 3-ZONE CONCEPTUAL SEATING SCHEME (NO FAKE 60-TABLE MATRIX) */}
-      <section
-        id="esquema-zonas"
-        style={{
-          padding: '64px 20px',
-          background: '#FFFFFF',
-          borderTop: '1px solid #E2E8F0',
-          borderBottom: '1px solid #E2E8F0',
-        }}
-      >
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 36px auto' }}>
-            <div
-              style={{
-                display: 'inline-block',
-                background: 'var(--cce-gold-light)',
-                color: 'var(--cce-gold-dark)',
-                padding: '4px 12px',
-                borderRadius: '6px',
-                fontSize: '13px',
-                fontWeight: 800,
-                letterSpacing: '1px',
-                marginBottom: '12px',
-              }}
-            >
-              LOGÍSTICA Y CONTROL DE AFORO
-            </div>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.5rem)', color: 'var(--cce-emerald)', marginBottom: '14px' }}>
-              Esquema de Distribución por 3 Zonas
-            </h2>
-            <p className="cce-flow-text">
-              Meta proyectada: <strong>500+ asistentes</strong> en Centro de Eventos Cibeles.
-              La logística oficial del CCE Ciudad Juárez se organiza en tres bloques estratégicos para
-              asegurar el orden protocolario, la visibilidad de patrocinadores y la comodidad de las comitivas.
-            </p>
-          </div>
-
-          {/* 3 Zone Selector Cards */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: '20px',
-              marginBottom: '32px',
-            }}
-          >
-            {ZONES_DATA.map((z) => {
-              const isSelected = activeZone === z.id;
-              return (
-                <div
-                  key={z.id}
-                  onClick={() => setActiveZone(z.id)}
-                  style={{
-                    background: isSelected ? z.bgColor : '#FFFFFF',
-                    border: `2px solid ${isSelected ? z.color : '#E2E8F0'}`,
-                    borderRadius: '16px',
-                    padding: '24px',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease',
-                    boxShadow: isSelected ? '0 10px 25px rgba(6, 78, 59, 0.12)' : 'none',
-                  }}
-                >
-                  <div
-                    style={{
-                      display: 'inline-block',
-                      background: z.bgColor,
-                      border: `1px solid ${z.borderColor}`,
-                      padding: '4px 10px',
-                      borderRadius: '4px',
-                      fontSize: '12px',
-                      fontWeight: 800,
-                      color: z.color,
-                      letterSpacing: '0.5px',
-                      marginBottom: '10px',
-                    }}
-                  >
-                    {z.badge}
-                  </div>
-
-                  <h3 style={{ margin: '0 0 6px 0', fontSize: '1.25rem', color: isSelected ? z.color : 'var(--cce-text-dark)' }}>
-                    {z.name}
-                  </h3>
-
-                  <div style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--cce-text-muted)', marginBottom: '12px' }}>
-                    {z.allocation}
-                  </div>
-
-                  <p className="cce-qr-text" style={{ margin: 0 }}>
-                    {z.description}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Detailed Selected Zone Banner */}
-          <div
-            style={{
-              background: 'var(--cce-slate-card)',
-              color: '#FFFFFF',
-              borderRadius: '20px',
-              border: '1.5px solid var(--cce-gold)',
-              padding: '32px',
-              boxShadow: '0 15px 35px rgba(6, 78, 59, 0.25)',
-            }}
-          >
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                flexWrap: 'wrap',
-                gap: '16px',
-                marginBottom: '20px',
-                borderBottom: '1px solid rgba(255, 255, 255, 0.12)',
-                paddingBottom: '20px',
-              }}
-            >
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
-                  <span
-                    style={{
-                      background: 'var(--cce-gold)',
-                      color: '#042E23',
-                      fontWeight: 900,
-                      padding: '4px 12px',
-                      borderRadius: '4px',
-                      fontSize: '12px',
-                      letterSpacing: '0.5px',
-                    }}
-                  >
-                    DETALLE OPERATIVO
-                  </span>
-                  <span style={{ fontSize: '14px', color: '#A7F3D0', fontWeight: 600 }}>
-                    {selectedZoneData.badge}
-                  </span>
-                </div>
-                <h3 style={{ margin: 0, fontSize: '1.5rem', color: '#FFFFFF' }}>
-                  {selectedZoneData.name}
-                </h3>
-              </div>
-
-              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-                <a
-                  href={`${whatsappBaseUrl}?text=${encodeURIComponent(
-                    `Hola Emmanuel, deseo consultar los detalles de asignación para la ${selectedZoneData.name} en el evento Entrega de Galardones 2026 del CCE Ciudad Juárez.`
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cce-btn cce-btn-gold"
-                >
-                  <MessageCircle size={16} />
-                  Consultar Esta Zona vía WhatsApp
-                </a>
-
-                <a
-                  href="mailto:director@ccejuarez.org?subject=Consulta%20de%20Zona%20-%20Galardones%20CCE%202026"
-                  className="cce-btn cce-btn-outline"
-                  style={{ color: '#FFFFFF', borderColor: 'rgba(255, 255, 255, 0.4)' }}
-                >
-                  <Mail size={16} />
-                  director@ccejuarez.org
-                </a>
-              </div>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px' }}>
-              <div>
-                <div style={{ fontSize: '13px', color: '#94A3B8', textTransform: 'uppercase', marginBottom: '4px' }}>
-                  Capacidad Estimada
-                </div>
-                <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#FDE68A' }}>
-                  {selectedZoneData.allocation}
-                </div>
-              </div>
-
-              <div>
-                <div style={{ fontSize: '13px', color: '#94A3B8', textTransform: 'uppercase', marginBottom: '4px' }}>
-                  Mecanismo de Acceso
-                </div>
-                <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#A7F3D0' }}>
-                  {selectedZoneData.accessType}
-                </div>
-              </div>
-            </div>
-
-            <div style={{ marginTop: '24px' }}>
-              <div style={{ fontSize: '13px', color: '#94A3B8', textTransform: 'uppercase', marginBottom: '12px' }}>
-                Protocolo y Beneficios Integrados
-              </div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '12px' }}>
-                {selectedZoneData.benefits.map((b, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontSize: '0.9rem', color: '#E2E8F0' }}>
-                    <CheckCircle2 size={16} color="#10B981" style={{ flexShrink: 0, marginTop: '2px' }} />
-                    <span>{b}</span>
-                  </div>
-                ))}
+                <Bot size={18} color="#059669" />
+                <span style={{ fontSize: '0.875rem', fontWeight: 600, color: '#065F46' }}>
+                  Filtro anti-cuello de botella para garantizar atención oportuna 24/7.
+                </span>
               </div>
             </div>
           </div>
@@ -1659,7 +1173,7 @@ export default function CceJuarezClient() {
       </section>
 
       {/* ROADMAP / CRONOGRAMA ACELERADO (5 A 7 DÍAS HÁBILES) */}
-      <section style={{ padding: '64px 20px', background: 'var(--cce-bg-cream)', borderBottom: '1px solid #E2E8F0' }}>
+      <section style={{ padding: '64px 20px', background: '#FFFFFF', borderBottom: '1px solid #E2E8F0' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 48px auto' }}>
             <div
@@ -1681,8 +1195,8 @@ export default function CceJuarezClient() {
               Cronograma Acelerado: 5 a 7 Días Hábiles
             </h2>
             <p className="cce-flow-text">
-              Despliegue prioritario para tener la plataforma web, el canal confidencial de WhatsApp y la
-              estrategia de pauta listos antes de la rueda de prensa oficial de Iván Lara y el CCE.
+              Despliegue prioritario enfocado en tener los materiales listos y validados antes de la
+              rueda de prensa oficial de Iván Lara y el CCE.
             </p>
           </div>
 
@@ -1696,7 +1210,7 @@ export default function CceJuarezClient() {
             {/* D1 */}
             <div
               style={{
-                background: '#FFFFFF',
+                background: 'var(--cce-bg-cream)',
                 borderRadius: '12px',
                 border: '1px solid #E2E8F0',
                 padding: '20px',
@@ -1714,16 +1228,16 @@ export default function CceJuarezClient() {
               >
                 DÍA 1
               </span>
-              <h4 style={{ margin: '10px 0 6px 0', fontSize: '1.0625rem' }}>Arquitectura y Dominio</h4>
+              <h4 style={{ margin: '10px 0 6px 0', fontSize: '1.0625rem' }}>Nueva Línea Gráfica</h4>
               <p className="cce-qr-text" style={{ margin: 0 }}>
-                Configuración del subdominio institucional, DNS SSL y carga de la identidad oficial de CCE Juárez.
+                Elevación de la identidad visual (verde esmeralda y madera) y definición de plantillas para redes.
               </p>
             </div>
 
             {/* D2-D3 */}
             <div
               style={{
-                background: '#FFFFFF',
+                background: 'var(--cce-bg-cream)',
                 borderRadius: '12px',
                 border: '1px solid #E2E8F0',
                 padding: '20px',
@@ -1741,16 +1255,16 @@ export default function CceJuarezClient() {
               >
                 DÍAS 2 - 3
               </span>
-              <h4 style={{ margin: '10px 0 6px 0', fontSize: '1.0625rem' }}>Invitación Web y WhatsApp</h4>
+              <h4 style={{ margin: '10px 0 6px 0', fontSize: '1.0625rem' }}>Invitación Web &amp; Rueda Prensa</h4>
               <p className="cce-qr-text" style={{ margin: 0 }}>
-                Maquetación con las fotografías oficiales de Carlos Loret de Mola y las esculturas de Pedro Francisco.
+                Maquetación de la landing mobile-first y preparación del kit de pantallas para medios el lunes.
               </p>
             </div>
 
             {/* D4-D5 */}
             <div
               style={{
-                background: '#FFFFFF',
+                background: 'var(--cce-bg-cream)',
                 borderRadius: '12px',
                 border: '1px solid #E2E8F0',
                 padding: '20px',
@@ -1768,9 +1282,9 @@ export default function CceJuarezClient() {
               >
                 DÍAS 4 - 5
               </span>
-              <h4 style={{ margin: '10px 0 6px 0', fontSize: '1.0625rem' }}>Meta Ads y Logística</h4>
+              <h4 style={{ margin: '10px 0 6px 0', fontSize: '1.0625rem' }}>Pauta Meta &amp; Bot WhatsApp</h4>
               <p className="cce-qr-text" style={{ margin: 0 }}>
-                Campaña B2B en Facebook Ads, esquema de 3 zonas y protocolo de boletos físicos con holograma.
+                Configuración del asistente de WhatsApp y arranque de la pauta publicitaria en Facebook Ads.
               </p>
             </div>
 
@@ -1796,10 +1310,10 @@ export default function CceJuarezClient() {
                 DÍAS 6 - 7
               </span>
               <h4 style={{ margin: '10px 0 6px 0', fontSize: '1.0625rem', color: 'var(--cce-emerald)' }}>
-                Rueda de Prensa y Lanzamiento
+                Reels, Carruseles y Lanzamiento
               </h4>
               <p className="cce-qr-text" style={{ margin: 0, color: '#064E3B' }}>
-                Entrega 100% terminada, pruebas de estrés y luz verde antes del anuncio oficial a medios.
+                Publicación activa de contenidos en Facebook y monitoreo continuo rumbo al 19 de noviembre.
               </p>
             </div>
           </div>
@@ -1807,7 +1321,7 @@ export default function CceJuarezClient() {
       </section>
 
       {/* SECTION: FINANCIAL PROPOSAL & OFFICIAL BANKING (BANREGIO) */}
-      <section id="inversion" style={{ padding: '64px 20px', background: '#FFFFFF' }}>
+      <section id="inversion" style={{ padding: '64px 20px', background: 'var(--cce-bg-cream)' }}>
         <div style={{ maxWidth: '960px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '40px' }}>
             <div
@@ -1830,7 +1344,7 @@ export default function CceJuarezClient() {
             </h2>
             <p className="cce-flow-text">
               Propuesta económica acordada con tarifa preferencial para el Consejo Coordinador Empresarial.
-              Cubre la totalidad de los 4 entregables sin costos adicionales.
+              Cubre la totalidad de los 4 entregables estratégicos.
             </p>
           </div>
 
@@ -1907,23 +1421,23 @@ export default function CceJuarezClient() {
                 >
                   <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <CheckCircle2 size={18} color="#10B981" />
-                    <span>Invitación Digital Web / Landing Ejecutiva con semblanza y fotos oficiales</span>
+                    <span>Invitación Digital Web / Landing Ejecutiva para Carlos Loret de Mola</span>
                   </li>
                   <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <CheckCircle2 size={18} color="#10B981" />
-                    <span>Canal Automatizado de WhatsApp para Patrocinios con máxima confidencialidad</span>
+                    <span>Estrategia de Facebook: Edición de Reels, carruseles y nueva línea gráfica</span>
                   </li>
                   <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <CheckCircle2 size={18} color="#10B981" />
-                    <span>Estrategia y Pauta en Facebook Ads / Meta Ads dirigida a directivos C-Level</span>
+                    <span>Campaña de Pauta en Meta Ads dirigida a tomadores de decisiones</span>
                   </li>
                   <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <CheckCircle2 size={18} color="#10B981" />
-                    <span>Esquema de distribución por 3 zonas para 500+ asistentes en Cibeles</span>
+                    <span>Kit gráfico para la Rueda de Prensa del lunes (pantallas y tótems)</span>
                   </li>
                   <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <CheckCircle2 size={18} color="#10B981" />
-                    <span>Control de boletos físicos numerados con holograma de seguridad</span>
+                    <span>Asistente automatizado en WhatsApp para filtro de dudas y atención 24/7</span>
                   </li>
                   <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <CheckCircle2 size={18} color="#10B981" />
@@ -1997,9 +1511,7 @@ export default function CceJuarezClient() {
                 </div>
 
                 <a
-                  href={`${whatsappBaseUrl}?text=${encodeURIComponent(
-                    'Hola Emmanuel, confirmo la aprobación de la propuesta comercial para la Entrega de Galardones 2026 del CCE Ciudad Juárez ($16,000 MXN + IVA = $18,560 MXN facturados). Procedamos con la orden de trabajo.'
-                  )}`}
+                  href={`${whatsappBaseUrl}?text=${whatsappApprovalText}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="cce-btn cce-btn-whatsapp"
@@ -2121,7 +1633,7 @@ export default function CceJuarezClient() {
             </div>
 
             <div style={{ fontSize: '0.875rem', color: '#94A3B8' }}>
-              Propuesta ejecutiva confidencial para CCE Ciudad Juárez · Entrega de Galardones 2026
+              Propuesta comercial ejecutiva para CCE Ciudad Juárez · Entrega de Galardones 2026
             </div>
           </div>
 

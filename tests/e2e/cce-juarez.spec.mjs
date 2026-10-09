@@ -229,20 +229,19 @@ describe('Tier 1: Feature Coverage (R1 - R5)', () => {
     });
   });
 
-  // --- Feature 2 (R2): 4 Integral Deliverables & Confidential WhatsApp Channel ---
-  describe('Feature 2 (R2): 4 Integral Deliverables & Confidential WhatsApp Channel', () => {
+  // --- Feature 2 (R2): 4 Integral Deliverables & Delimited Scope ---
+  describe('Feature 2 (R2): 4 Integral Deliverables & Delimited Scope', () => {
     it('[T1-R2-01] Deliverable 1: Invitación Digital Web / Landing Ejecutiva', () => {
       assert.ok(/invitaci[oó]n\s+digital|landing\s+ejecutiva|plataforma\s+web/i.test(fullAppText), 'Deliverable 1 Invitación Digital Web / Landing must be detailed');
       assert.ok(/agenda|desayuno/i.test(fullAppText), 'Must include event breakfast and agenda');
-      assert.ok(/500\+\s*asistentes|50\s*(?:a|-)\s*60\s*mesas|500\s*(?:a|-)\s*600\s*asistentes/i.test(fullAppText), 'Must include 500+ attendees or 50-60 tables capacity');
       assert.ok(/holograma\s+de\s+seguridad/i.test(fullAppText), 'Must mention physical tickets with security hologram');
     });
 
-    it('[T1-R2-02] Deliverable 2: Canal Automatizado de WhatsApp para Patrocinios', () => {
-      assert.ok(/patrocin/i.test(fullAppText), 'Deliverable 2 Corporate sponsorships must be detailed');
-      assert.ok(/whatsapp/i.test(fullAppText), 'Must route corporate sponsors to WhatsApp channel');
-      assert.ok(/confidencial|personalizad/i.test(fullAppText), 'Must emphasize confidentiality in sponsorship attention');
-      assert.ok(!/patrocinio\s+(?:oro|plata|platino|diamante)\s*[:\$]/i.test(fullAppText), 'Must NOT publish public rates or sponsorship rate cards on the open website');
+    it('[T1-R2-02] Deliverable 2: Contenido Facebook: Reels, Carruseles & Nueva Línea Gráfica', () => {
+      assert.ok(/reels/i.test(fullAppText), 'Deliverable 2 must include Reels production');
+      assert.ok(/carruseles/i.test(fullAppText), 'Must include Facebook carousels');
+      assert.ok(/l[ií]nea\s+gr[aá]fica/i.test(fullAppText), 'Must include elevating visual identity / línea gráfica');
+      assert.ok(/verde\s+esmeralda/i.test(fullAppText) && /madera/i.test(fullAppText), 'Must elevate emerald green and wood palette');
     });
 
     it('[T1-R2-03] Deliverable 3: Estrategia y Pauta en Facebook Ads / Meta Ads', () => {
@@ -251,13 +250,18 @@ describe('Tier 1: Feature Coverage (R1 - R5)', () => {
       assert.ok(/ju[aá]rez|chihuahua/i.test(fullAppText), 'Must specify geographical campaign reach in Cd. Juárez and Chihuahua state');
     });
 
-    it('[T1-R2-04] Deliverable 4: Logística y Coordinación de Distribución', () => {
-      assert.ok(/log[ií]stica|coordinaci[oó]n|distribuci[oó]n/i.test(fullAppText), 'Deliverable 4 Logistics & distribution coordination must be detailed');
-      assert.ok(/c[aá]maras/i.test(fullAppText), 'Must reference business chambers (cámaras)');
-      assert.ok(/venta\s+directa|patrocinios/i.test(fullAppText), 'Must reference direct council sales or sponsorships');
+    it('[T1-R2-04] Deliverable 4: Kit Rueda de Prensa & Automatización WhatsApp', () => {
+      assert.ok(/rueda\s+de\s+prensa/i.test(fullAppText), 'Deliverable 4 Press conference graphics must be detailed');
+      assert.ok(/pantallas|t[oó]tem/i.test(fullAppText), 'Must reference screens or display kit for press announcement');
+      assert.ok(/asistente\s+automatizado|automatizaci[oó]n\s+whatsapp|bot/i.test(fullAppText), 'Must detail WhatsApp automated assistant for FAQs');
+      assert.ok(
+        /captaci[oó]n[^\n]{0,80}100%[^\n]{0,80}cce/i.test(fullAppText) ||
+        /captaci[oó]n[^\n]{0,80}presidencia\s+del\s+cce/i.test(fullAppText),
+        'Must strictly clarify that sponsorship negotiation/acquisition is handled 100% by CCE'
+      );
     });
 
-    it('[T1-R2-05] WhatsApp Sponsorship CTAs properly configured', () => {
+    it('[T1-R2-05] WhatsApp Sponsorship & Contact CTAs properly configured', () => {
       const waLinks = [...pageHtml.matchAll(/href=["'](https:\/\/wa\.me\/[^"']+)["']/g)];
       assert.ok(waLinks.length > 0, 'Must contain at least one WhatsApp CTA link');
       for (const match of waLinks) {
@@ -613,8 +617,10 @@ describe('Tier 2: Boundary & Corner Cases (R1 - R5)', () => {
       assert.ok(/boletos?\s+f[ií]sicos?/i.test(fullAppText) || /acreditaci[oó]n/i.test(fullAppText), 'Must specify physical tickets or accreditation');
     });
 
-    it('[T2-R5-04] Seating Capacity Exact Bounds (500+ asistentes / 3 Zonas)', () => {
-      assert.ok(/500\+\s*asistentes|50\s*(?:a|-)\s*60\s*mesas|500\s*(?:a|-)\s*600\s*asistentes/i.test(fullAppText), 'Must state 500+ attendees or projected capacity');
+    it('[T2-R5-04] Event Investiture & Venue Bounds (Cibeles / Desayuno Empresarial)', () => {
+      assert.ok(/Cibeles/i.test(fullAppText), 'Must state Centro de Eventos Cibeles venue');
+      assert.ok(/Desayuno\s+Empresarial/i.test(fullAppText), 'Must state Desayuno Empresarial format');
+      assert.ok(/19\s+Noviembre\s+2026/i.test(fullAppText) || /Noviembre\s+2026/i.test(fullAppText), 'Must state event date in November 2026');
     });
 
     it('[T2-R5-05] Zero Puerta Juárez / La X Artifacts', () => {
@@ -678,11 +684,13 @@ describe('Tier 3: Cross-Feature Combinations', () => {
     }
   });
 
-  it('[T3-COMB-06] Seating Logistics & 3-Zone Scheme Allocation', () => {
-    assert.ok(/c[aá]maras/i.test(fullAppText), 'Chambers context must be stated');
+  it('[T3-COMB-06] Chamber Context & Sponsorship Delimitation', () => {
+    assert.ok(/c[aá]maras|organismos/i.test(fullAppText), 'Chambers context must be stated');
     assert.ok(
-      /3\s*zonas|zonas|bloques/i.test(fullAppText),
-      '3-zone distribution scheme must balance chamber delegations, sponsorships and direct guests'
+      /captaci[oó]n[^\n]{0,80}100%[^\n]{0,80}cce/i.test(fullAppText) ||
+      /captaci[oó]n[^\n]{0,80}presidencia\s+del\s+cce/i.test(fullAppText) ||
+      /negociaci[oó]n\s+de\s+patrocinios\s+es\s+gestionada\s+100%/i.test(fullAppText),
+      'Sponsorship negotiation/acquisition must be explicitly identified as 100% handled by CCE'
     );
   });
 });
