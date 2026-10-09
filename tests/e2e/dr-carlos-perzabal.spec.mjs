@@ -573,6 +573,43 @@ describe('Tier 2: Boundary & Corner Cases (R1 - R5)', () => {
         allCss.includes('minHeight: 44') ||
         allCss.includes('minHeight: 48');
       assert.ok(hasTouchTarget, 'Interactive buttons and links must declare min-height >= 44px');
+
+      // Reject any sub-44px declarations on buttons
+      assert.ok(!clientTsx.includes("minHeight: '36px'"), 'DrCarlosPerzabalClient must not declare minHeight: 36px');
+      assert.ok(!staticIndexHtml.includes('min-height: 36px'), 'static index.html must not declare min-height: 36px');
+      assert.ok(!clientTsx.includes("minHeight: '32px'"), 'DrCarlosPerzabalClient must not declare sub-44px heights');
+      assert.ok(!staticIndexHtml.includes('min-height: 32px'), 'static index.html must not declare sub-44px heights');
+
+      // Verify Copiar CLABE button declares minHeight/min-height >= 44px and minWidth >= 44px
+      assert.ok(
+        clientTsx.includes("minHeight: '44px'") && clientTsx.includes("minWidth: '44px'"),
+        'Copiar CLABE button in DrCarlosPerzabalClient must declare minHeight >= 44px and minWidth >= 44px'
+      );
+      assert.ok(
+        staticIndexHtml.includes('min-height: 44px') && staticIndexHtml.includes('min-width: 44px'),
+        'Copiar CLABE button in static index.html must declare min-height >= 44px and min-width >= 44px'
+      );
+
+      // Verify WhatsApp Triage Reset button declares minHeight/min-height >= 44px and minWidth >= 44px
+      const resetBtnTsxMatch = clientTsx.match(/onClick=\{handleResetTriage\}[\s\S]*?style=\{\{([^}]+)\}\}/);
+      assert.ok(resetBtnTsxMatch, 'Triage reset button must exist in DrCarlosPerzabalClient');
+      assert.ok(
+        resetBtnTsxMatch[1].includes("minHeight: '44px'") && resetBtnTsxMatch[1].includes("minWidth: '44px'"),
+        'Triage reset button in DrCarlosPerzabalClient must enforce >= 44x44px touch target'
+      );
+
+      const resetBtnHtmlMatch = staticIndexHtml.match(/onclick="resetTriage\(\)"[\s\S]*?style="([^"]+)"/);
+      assert.ok(resetBtnHtmlMatch, 'Triage reset button must exist in static index.html');
+      assert.ok(
+        resetBtnHtmlMatch[1].includes('min-height: 44px') && resetBtnHtmlMatch[1].includes('min-width: 44px'),
+        'Triage reset button in static index.html must enforce >= 44x44px touch target'
+      );
+
+      // Verify Modal close button declares min-width: 44px and min-height: 44px
+      assert.ok(
+        staticIndexHtml.includes('min-width: 44px') && staticIndexHtml.includes('min-height: 44px'),
+        'Modal close button must declare >= 44x44px'
+      );
     });
 
     it('[T2-VIEW-04] Body typography floor: font-size >= 14px on all body paragraphs and descriptions', () => {
@@ -818,6 +855,78 @@ describe('Tier 4: Real-World Scenarios & Production Readiness', () => {
       allCss.includes('overflow-x: hidden') ||
       allCss.includes('overflow-x:hidden'),
       'Suppresses horizontal scrollbar overflow on mobile viewports'
+    );
+
+    // 1. Binational Grid responsive class verification
+    assert.ok(
+      clientTsx.includes('.doc-binational-grid') && clientTsx.includes('className="doc-binational-grid"'),
+      'DrCarlosPerzabalClient must implement and use .doc-binational-grid class'
+    );
+    assert.ok(
+      staticIndexHtml.includes('.doc-binational-grid') && staticIndexHtml.includes('class="doc-binational-grid"'),
+      'index.html must implement and use .doc-binational-grid class'
+    );
+    assert.ok(
+      allCss.includes('.doc-binational-grid') && allCss.includes('repeat(3, 1fr)'),
+      '.doc-binational-grid must declare 3 columns for desktop'
+    );
+
+    // 2. Configurator Core Grid responsive class verification
+    assert.ok(
+      clientTsx.includes('.doc-config-core-grid') && clientTsx.includes('className="doc-config-core-grid"'),
+      'DrCarlosPerzabalClient must implement and use .doc-config-core-grid class'
+    );
+    assert.ok(
+      staticIndexHtml.includes('.doc-config-core-grid') && staticIndexHtml.includes('class="doc-config-core-grid"'),
+      'index.html must implement and use .doc-config-core-grid class'
+    );
+    assert.ok(
+      allCss.includes('.doc-config-core-grid') && allCss.includes('repeat(2, 1fr)'),
+      '.doc-config-core-grid must declare 2 columns for desktop'
+    );
+
+    // 3. Modal Grid responsive class verification
+    assert.ok(
+      clientTsx.includes('.doc-modal-grid') && clientTsx.includes('className="doc-modal-grid"'),
+      'DrCarlosPerzabalClient must implement and use .doc-modal-grid class'
+    );
+    assert.ok(
+      staticIndexHtml.includes('.doc-modal-grid') && staticIndexHtml.includes('class="doc-modal-grid"'),
+      'index.html must implement and use .doc-modal-grid class'
+    );
+
+    // 4. Verify eradication of unconstrained multi-column inline grids
+    assert.ok(
+      !clientTsx.includes("gridTemplateColumns: 'repeat(3, 1fr)'"),
+      'DrCarlosPerzabalClient must not contain unconstrained inline 3-column grid'
+    );
+    assert.ok(
+      !staticIndexHtml.includes('grid-template-columns: repeat(3, 1fr); gap: 20px;"'),
+      'index.html must not contain unconstrained inline 3-column grid'
+    );
+    assert.ok(
+      !clientTsx.includes("gridTemplateColumns: 'repeat(2, 1fr)'"),
+      'DrCarlosPerzabalClient must not contain unconstrained inline 2-column grid'
+    );
+    assert.ok(
+      !staticIndexHtml.includes('grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 32px;"'),
+      'index.html must not contain unconstrained inline 2-column grid'
+    );
+
+    // 5. Responsive mobile media queries (<= 768px) collapsing grids to single column (1fr)
+    assert.ok(
+      allCss.includes('grid-template-columns: 1fr'),
+      'Responsive CSS must declare single-column (1fr) collapsing rule'
+    );
+
+    // 6. Header responsiveness on mobile: hide secondary brand elements, preserve CTAs
+    assert.ok(
+      clientTsx.includes('.doc-header-actions') && staticIndexHtml.includes('.doc-header-actions'),
+      'Header actions must use .doc-header-actions container class'
+    );
+    assert.ok(
+      allCss.includes('.doc-badge-status') && allCss.includes('display: none !important'),
+      'Mobile media query must hide .doc-badge-status on mobile screens to preserve width for CTAs'
     );
   });
 

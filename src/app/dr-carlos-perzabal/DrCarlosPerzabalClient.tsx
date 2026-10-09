@@ -792,6 +792,7 @@ export default function DrCarlosPerzabalClient() {
               align-items: center;
               justify-content: space-between;
               gap: 16px;
+              width: 100%;
             }
 
             .doc-brand-cluster {
@@ -826,6 +827,46 @@ export default function DrCarlosPerzabalClient() {
               font-weight: 700;
               letter-spacing: 0.5px;
               border: 1px solid rgba(0, 163, 224, 0.3);
+            }
+
+            .doc-header-actions {
+              display: flex;
+              align-items: center;
+              gap: 10px;
+              flex-shrink: 0;
+            }
+
+            @media (max-width: 768px) {
+              .doc-header {
+                padding: 8px 0;
+              }
+              .doc-header-inner {
+                gap: 8px;
+                width: 100%;
+                max-width: 100%;
+              }
+              .doc-brand-cluster {
+                gap: 8px;
+                min-width: 0;
+                flex-shrink: 1;
+              }
+              .doc-brand-divider,
+              .doc-badge-status {
+                display: none !important;
+              }
+              .doc-apolo-logo {
+                height: 24px;
+              }
+              .doc-header-actions {
+                gap: 6px;
+                flex-shrink: 0;
+              }
+              .doc-header-actions .doc-btn {
+                padding: 8px 10px;
+                font-size: 0.75rem;
+                min-height: 44px;
+                white-space: nowrap;
+              }
             }
 
             /* Authority Hero */
@@ -1206,6 +1247,47 @@ export default function DrCarlosPerzabalClient() {
               }
             }
 
+            /* Responsive Grids */
+            .doc-binational-grid {
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 20px;
+            }
+
+            @media (max-width: 768px) {
+              .doc-binational-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+              }
+            }
+
+            .doc-config-core-grid {
+              display: grid;
+              grid-template-columns: repeat(2, 1fr);
+              gap: 12px;
+              margin-bottom: 32px;
+            }
+
+            @media (max-width: 768px) {
+              .doc-config-core-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+              }
+            }
+
+            .doc-modal-grid {
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 12px;
+            }
+
+            @media (max-width: 480px) {
+              .doc-modal-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+              }
+            }
+
             .doc-toggle-row {
               display: flex;
               align-items: center;
@@ -1373,7 +1455,7 @@ export default function DrCarlosPerzabalClient() {
             </span>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div className="doc-header-actions">
             <button onClick={openModal} className="doc-btn doc-btn-outline" style={{ display: 'inline-flex' }}>
               <Calendar size={15} /> Sesión 20 min
             </button>
@@ -1382,6 +1464,7 @@ export default function DrCarlosPerzabalClient() {
               target="_blank"
               rel="noopener noreferrer"
               className="doc-btn doc-btn-primary"
+              style={{ display: 'inline-flex' }}
             >
               <MessageCircle size={15} /> WhatsApp
             </a>
@@ -1736,7 +1819,7 @@ export default function DrCarlosPerzabalClient() {
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
+          <div className="doc-binational-grid">
             <div className="doc-metric-card" style={{ padding: '28px' }}>
               <div style={{ color: 'var(--doc-teal-light)', marginBottom: '12px' }}>
                 <DollarSign size={24} />
@@ -1813,7 +1896,12 @@ export default function DrCarlosPerzabalClient() {
                   border: 'none',
                   color: 'var(--doc-muted)',
                   cursor: 'pointer',
-                  padding: '6px',
+                  padding: '12px 14px',
+                  minHeight: '44px',
+                  minWidth: '44px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}
               >
                 <RefreshCw size={16} />
@@ -1901,7 +1989,7 @@ export default function DrCarlosPerzabalClient() {
               1. Ecosistema Quirúrgico Integral (4 Componentes Base Incluidos)
             </h3>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px', marginBottom: '32px' }}>
+            <div className="doc-config-core-grid">
               {CORE_COMPONENTS.map((item) => (
                 <div
                   key={item.id}
@@ -2050,7 +2138,8 @@ export default function DrCarlosPerzabalClient() {
                 <button
                   onClick={handleCopyClabe}
                   className="doc-btn doc-btn-outline"
-                  style={{ padding: '6px 14px', fontSize: '0.8125rem', minHeight: '36px' }}
+                  style={{ padding: '8px 16px', fontSize: '0.8125rem', minHeight: '44px', minWidth: '44px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
+                  id="btn-copy-clabe"
                 >
                   {copiedClabe ? <Check size={14} color="#10B981" /> : <Copy size={14} />}
                   <span>{copiedClabe ? '¡CLABE Copiada!' : 'Copiar CLABE'}</span>
@@ -2182,7 +2271,7 @@ export default function DrCarlosPerzabalClient() {
                   className="doc-input"
                 />
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                <div className="doc-modal-grid">
                   <div>
                     <label style={{ fontSize: '0.8125rem', fontWeight: 600, color: 'var(--doc-muted)' }}>
                       Fecha (Lun - Vie)
