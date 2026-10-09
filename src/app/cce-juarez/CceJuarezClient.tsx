@@ -517,7 +517,7 @@ export default function CceJuarezClient() {
 
               <p className="cce-flow-text" style={{ fontSize: '1.0625rem', marginBottom: '24px' }}>
                 Propuesta integral de servicios tecnológicos y creativos presentada por{' '}
-                <strong>Apolograma</strong> para respaldar la presidencia del Lic. Iván Lara y el
+                <strong>Apolograma</strong> para respaldar la presidencia del <strong>Mtro. Iván Lara</strong> y el
                 Consejo Directivo del <strong>CCE Ciudad Juárez</strong>. Diseñada para resolver con
                 máxima puntualidad la <strong>Invitación Digital Web</strong>, la <strong>Estrategia de
                 Contenido en Facebook</strong> (Reels, Carruseles y elevación de línea visual), la{' '}
@@ -903,7 +903,7 @@ export default function CceJuarezClient() {
             </h2>
             <p className="cce-flow-text">
               Propuesta tecnológica y creativa construida para resolver exactamente los frentes
-              operativos discutidos con el Lic. Iván Lara, asegurando un lanzamiento exitoso y puntual.
+              operativos discutidos con el <strong>Mtro. Iván Lara</strong>, asegurando un lanzamiento exitoso y puntual.
             </p>
           </div>
 
@@ -948,6 +948,23 @@ export default function CceJuarezClient() {
                   </h3>
                 </div>
               </div>
+
+              {/* Support Image Deliverable 1 */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/assets/cce-juarez/entregable-1-landing.png"
+                alt="Vista previa Invitación Digital Web Mobile-First"
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  aspectRatio: '16/9',
+                  objectFit: 'cover',
+                  borderRadius: '10px',
+                  marginBottom: '18px',
+                  border: '1px solid #E2E8F0',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.05)',
+                }}
+              />
 
               <p className="cce-flow-text" style={{ marginBottom: '18px' }}>
                 Plataforma web oficial de carga instantánea optimizada para celulares, diseñada para enviarse por
@@ -1030,6 +1047,23 @@ export default function CceJuarezClient() {
                 </div>
               </div>
 
+              {/* Support Image Deliverable 2 */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/assets/cce-juarez/entregable-2-reels.png"
+                alt="Vista previa Contenido Facebook Reels y Carruseles"
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  aspectRatio: '16/9',
+                  objectFit: 'cover',
+                  borderRadius: '10px',
+                  marginBottom: '18px',
+                  border: '1px solid #E2E8F0',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.05)',
+                }}
+              />
+
               <p className="cce-flow-text" style={{ marginBottom: '18px' }}>
                 Estrategia y producción de contenidos de alto impacto para la página de Facebook oficial, elevando
                 la identidad visual del evento a nivel premium:
@@ -1111,6 +1145,23 @@ export default function CceJuarezClient() {
                 </div>
               </div>
 
+              {/* Support Image Deliverable 3 */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/assets/cce-juarez/entregable-3-pauta.png"
+                alt="Vista previa Estrategia y Pauta en Facebook Ads Meta Ads"
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  aspectRatio: '16/9',
+                  objectFit: 'cover',
+                  borderRadius: '10px',
+                  marginBottom: '18px',
+                  border: '1px solid #E2E8F0',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.05)',
+                }}
+              />
+
               <p className="cce-flow-text" style={{ marginBottom: '18px' }}>
                 Campaña institucional quirúrgica para acelerar la colocación de boletos y maximizar el posicionamiento
                 del CCE:
@@ -1136,7 +1187,7 @@ export default function CceJuarezClient() {
                   <strong>Posicionamiento estatal selecto:</strong> Difusión institucional en Chihuahua capital para proyectar la fuerza y el liderazgo del Consejo Coordinador Empresarial.
                 </li>
                 <li>
-                  <strong>Monitoreo y optimización técnica:</strong> Supervisión de métricas de alcance, clics y tráfico sin alterar el control que Iván Lara mantiene sobre su cuenta de Facebook.
+                  <strong>Monitoreo y optimización técnica:</strong> Supervisión de métricas de alcance, clics y tráfico sin alterar el control que el <strong>Mtro. Iván Lara</strong> mantiene sobre su cuenta de Facebook.
                 </li>
               </ul>
 
@@ -1188,6 +1239,23 @@ export default function CceJuarezClient() {
                 </div>
               </div>
 
+              {/* Support Image Deliverable 4 */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/assets/cce-juarez/entregable-4-prensa-bot.png"
+                alt="Vista previa Kit Rueda de Prensa y Automatización WhatsApp"
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  aspectRatio: '16/9',
+                  objectFit: 'cover',
+                  borderRadius: '10px',
+                  marginBottom: '18px',
+                  border: '1px solid #E2E8F0',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.05)',
+                }}
+              />
+
               <p className="cce-flow-text" style={{ marginBottom: '18px' }}>
                 Herramientas de respaldo visual y operativo para el anuncio ante medios de comunicación y la
                 atención fluida de mensajes:
@@ -1204,13 +1272,13 @@ export default function CceJuarezClient() {
                 className="cce-flow-text"
               >
                 <li>
-                  <strong>Artes digitales para Rueda de Prensa:</strong> Maquetación en alta resolución para pantallas, tótem o backing del anuncio oficial de Iván Lara ante medios el lunes.
+                  <strong>Artes digitales para Rueda de Prensa:</strong> Maquetación en alta resolución para pantallas, tótem o backing del anuncio oficial del <strong>Mtro. Iván Lara</strong> ante medios de comunicación.
                 </li>
                 <li>
-                  <strong>Asistente automatizado de WhatsApp:</strong> Respuestas inteligentes para preguntas frecuentes (horarios, sede Cibeles, dinámica de boletos físicos) que filtran curiosos y evitan saturar el teléfono personal de Iván Lara.
+                  <strong>Asistente automatizado de WhatsApp:</strong> Respuestas inteligentes para preguntas frecuentes (horarios, sede Cibeles, dinámica de boletos físicos) que filtran curiosos y evitan saturar el teléfono personal del <strong>Mtro. Iván Lara</strong>.
                 </li>
                 <li>
-                  <strong>Canalización confidencial directa:</strong> Cuando un prospecto serio o interesado en patrocinios escriba, el bot lo conecta directamente con Iván Lara de forma ordenada y privada.
+                  <strong>Canalización confidencial directa:</strong> Cuando un prospecto serio o interesado en patrocinios escriba, el bot lo conecta directamente con el <strong>Mtro. Iván Lara</strong> de forma ordenada y privada.
                 </li>
                 <li>
                   <em>Nota de alcance:</em> La captación y negociación de patrocinios es gestionada 100% por la presidencia del CCE; Apolograma provee la infraestructura técnica de enrutamiento y filtro.
@@ -1262,7 +1330,7 @@ export default function CceJuarezClient() {
             </h2>
             <p className="cce-flow-text">
               Despliegue prioritario enfocado en tener los materiales listos y validados antes de la
-              rueda de prensa oficial de Iván Lara y el CCE.
+              rueda de prensa oficial del <strong>Mtro. Iván Lara</strong> y el Consejo Directivo del CCE.
             </p>
           </div>
 
@@ -1274,7 +1342,7 @@ export default function CceJuarezClient() {
               gap: '20px',
             }}
           >
-            {/* D1 */}
+            {/* D1-D2 */}
             <div
               style={{
                 background: 'var(--cce-bg-cream)',
@@ -1293,15 +1361,15 @@ export default function CceJuarezClient() {
                   borderRadius: '4px',
                 }}
               >
-                DÍA 1
+                DÍAS 1 - 2
               </span>
-              <h4 style={{ margin: '10px 0 6px 0', fontSize: '1.0625rem' }}>Nueva Línea Gráfica</h4>
+              <h4 style={{ margin: '10px 0 6px 0', fontSize: '1.0625rem' }}>Nueva Línea Gráfica &amp; Sistema Visual</h4>
               <p className="cce-qr-text" style={{ margin: 0 }}>
-                Elevación de la identidad visual (verde esmeralda y madera) y definición de plantillas para redes.
+                Elevación y refinamiento de la identidad visual institucional (verde esmeralda y madera noble), exploración tipográfica y definición de plantillas maestras.
               </p>
             </div>
 
-            {/* D2-D3 */}
+            {/* D3-D4 */}
             <div
               style={{
                 background: 'var(--cce-bg-cream)',
@@ -1320,15 +1388,15 @@ export default function CceJuarezClient() {
                   borderRadius: '4px',
                 }}
               >
-                DÍAS 2 - 3
+                DÍAS 3 - 4
               </span>
-              <h4 style={{ margin: '10px 0 6px 0', fontSize: '1.0625rem' }}>Invitación Web &amp; Rueda Prensa</h4>
+              <h4 style={{ margin: '10px 0 6px 0', fontSize: '1.0625rem' }}>Invitación Web &amp; Kit Rueda Prensa</h4>
               <p className="cce-qr-text" style={{ margin: 0 }}>
-                Maquetación de la landing mobile-first y preparación del kit de pantallas para medios el lunes.
+                Maquetación de la landing mobile-first aplicando la línea gráfica aprobada y preparación del kit de visuales para pantallas de la presentación oficial ante medios.
               </p>
             </div>
 
-            {/* D4-D5 */}
+            {/* D5-D6 */}
             <div
               style={{
                 background: 'var(--cce-bg-cream)',
@@ -1347,15 +1415,15 @@ export default function CceJuarezClient() {
                   borderRadius: '4px',
                 }}
               >
-                DÍAS 4 - 5
+                DÍAS 5 - 6
               </span>
-              <h4 style={{ margin: '10px 0 6px 0', fontSize: '1.0625rem' }}>Pauta Meta &amp; Bot WhatsApp</h4>
+              <h4 style={{ margin: '10px 0 6px 0', fontSize: '1.0625rem' }}>Pauta Meta Ads &amp; Asistente WhatsApp</h4>
               <p className="cce-qr-text" style={{ margin: 0 }}>
-                Configuración del asistente de WhatsApp y arranque de la pauta publicitaria en Facebook Ads.
+                Configuración de audiencias ejecutivas B2B en Meta Ads Manager y programación de los flujos de respuesta rápida y canalización en WhatsApp.
               </p>
             </div>
 
-            {/* D6-D7 */}
+            {/* D7 */}
             <div
               style={{
                 background: 'var(--cce-emerald-wash)',
@@ -1374,13 +1442,13 @@ export default function CceJuarezClient() {
                   borderRadius: '4px',
                 }}
               >
-                DÍAS 6 - 7
+                DÍA 7
               </span>
               <h4 style={{ margin: '10px 0 6px 0', fontSize: '1.0625rem', color: 'var(--cce-emerald)' }}>
-                Reels, Carruseles y Lanzamiento
+                Reels, Carruseles &amp; Convocatoria
               </h4>
               <p className="cce-qr-text" style={{ margin: 0, color: '#064E3B' }}>
-                Publicación activa de contenidos en Facebook y monitoreo continuo rumbo al 19 de noviembre.
+                Edición final de video de Carlos Loret de Mola, publicación de los primeros carruseles informativos y monitoreo continuo rumbo al 19 de noviembre.
               </p>
             </div>
           </div>
