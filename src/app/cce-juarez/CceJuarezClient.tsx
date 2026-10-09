@@ -168,6 +168,11 @@ export default function CceJuarezClient() {
               color: var(--cce-text-dark);
               letter-spacing: -0.025em;
               font-weight: 800;
+              overflow-wrap: break-word;
+            }
+
+            h1 {
+              word-break: break-word;
             }
 
             .cce-flow-text {
@@ -490,10 +495,10 @@ export default function CceJuarezClient() {
             <div>
               <div
                 style={{
-                  fontSize: '14px',
+                  fontSize: '13px',
                   fontWeight: 800,
                   color: 'var(--cce-gold-dark)',
-                  letterSpacing: '2px',
+                  letterSpacing: '1px',
                   textTransform: 'uppercase',
                   marginBottom: '8px',
                 }}
@@ -503,7 +508,7 @@ export default function CceJuarezClient() {
 
               <h1
                 style={{
-                  fontSize: 'clamp(2rem, 3.8vw, 3rem)',
+                  fontSize: 'clamp(1.65rem, 5vw, 3rem)',
                   lineHeight: 1.15,
                   marginBottom: '12px',
                   color: 'var(--cce-emerald)',
