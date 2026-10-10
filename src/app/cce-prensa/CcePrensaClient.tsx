@@ -349,11 +349,13 @@ export default function CcePrensaClient() {
   };
 
   return (
-    <div className="cce-page-container">
+    <div className={`cce-page-container ${isAdmin && adminTab === 'crm' ? 'is-crm' : 'is-gala'}`}>
       {/* SCOPED CSS ARCHITECTURE (Vanilla CSS / No Tailwind) */}
       <style
         dangerouslySetInnerHTML={{
           __html: `
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
         :root {
           --cce-emerald: #064E3B;
           --cce-emerald-dark: #042E23;
@@ -368,6 +370,15 @@ export default function CcePrensaClient() {
           --cce-text-dark: #0F172A;
           --cce-text-muted: #475569;
           --cce-border-subtle: #E2E8F0;
+
+          /* Obsidian Emerald Gala Tokens */
+          --cce-obsidian: #02120C;
+          --cce-obsidian-surface: #041D14;
+          --cce-obsidian-card: rgba(4, 29, 20, 0.78);
+          --cce-obsidian-border: rgba(212, 175, 55, 0.35);
+          --cce-gold-foil: #F5DE98;
+          --cce-gold-pure: #D4AF37;
+          --cce-gold-burnished: #AA8022;
         }
 
         * {
@@ -379,9 +390,9 @@ export default function CcePrensaClient() {
         body, html {
           max-width: 100vw;
           overflow-x: hidden;
-          background-color: var(--cce-bg);
+          background-color: #02120C;
           color: var(--cce-text-dark);
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+          font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
           -webkit-font-smoothing: antialiased;
         }
 
@@ -390,13 +401,19 @@ export default function CcePrensaClient() {
           position: relative;
           display: flex;
           flex-direction: column;
-          background: #FFFDF9;
+          background: #02120C;
           width: 100%;
           max-width: 100vw;
           overflow-x: hidden;
+          color: #F8FAFC;
         }
 
-        /* Atmospheric Living Canvas (R1: 4 GPU Orbs + Banknote Micro-Texture) */
+        .cce-page-container.is-crm {
+          background: #F8FAFC;
+          color: var(--cce-text-dark);
+        }
+
+        /* Theatrical Spotlight & Atmospheric Living Canvas */
         .cce-living-canvas {
           position: fixed;
           inset: 0;
@@ -405,19 +422,31 @@ export default function CcePrensaClient() {
           z-index: 0;
         }
 
+        .cce-spotlight {
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 100vw;
+          max-width: 1200px;
+          height: 65vh;
+          background: radial-gradient(ellipse at 50% 0%, rgba(6, 78, 59, 0.42) 0%, rgba(212, 175, 55, 0.08) 45%, transparent 75%);
+          pointer-events: none;
+        }
+
         .cce-canvas-orb {
           position: absolute;
           border-radius: 50%;
           filter: blur(100px);
           will-change: transform;
-          opacity: 0.18;
+          opacity: 0.22;
           pointer-events: none;
         }
 
         @media (max-width: 768px) {
           .cce-canvas-orb {
             filter: blur(65px);
-            opacity: 0.14;
+            opacity: 0.16;
           }
         }
 
@@ -489,30 +518,31 @@ export default function CcePrensaClient() {
         .cce-canvas-texture {
           position: absolute;
           inset: 0;
-          opacity: 0.04;
+          opacity: 0.035;
           background-image: 
-            radial-gradient(#064E3B 0.75px, transparent 0.75px),
+            radial-gradient(#D4AF37 0.75px, transparent 0.75px),
             repeating-linear-gradient(45deg, #064E3B 0, #064E3B 0.5px, transparent 0, transparent 24px),
             repeating-linear-gradient(-45deg, #D4AF37 0, #D4AF37 0.5px, transparent 0, transparent 24px);
           background-size: 16px 16px, 32px 32px, 32px 32px;
           pointer-events: none;
         }
 
-        /* Golden Shimmer Animation (R2) */
+        /* High-Contrast Golden Foil Shimmer Animation */
         .cce-golden-shimmer {
           background: linear-gradient(
             90deg,
-            #D4AF37 0%,
-            #F3CA40 25%,
+            #F5DE98 0%,
+            #FFE8A3 25%,
             #FFFFFF 50%,
-            #F3CA40 75%,
-            #D4AF37 100%
+            #D4AF37 75%,
+            #F5DE98 100%
           );
           background-size: 200% auto;
           -webkit-background-clip: text;
           background-clip: text;
           -webkit-text-fill-color: transparent;
           display: inline-block;
+          font-weight: 700;
           animation: cceGoldShimmer 4s linear infinite;
         }
 
@@ -521,39 +551,398 @@ export default function CcePrensaClient() {
           100% { background-position: 200% center; }
         }
 
-        /* Keynote Card Styles (R3: Carlos Loret de Mola) */
-        .cce-keynote-wrapper {
-          max-width: 900px;
+        /* Top Brand Header */
+        .cce-header {
+          position: sticky;
+          top: 0;
+          z-index: 50;
+          background: rgba(2, 18, 12, 0.85);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border-bottom: 1px solid rgba(212, 175, 55, 0.22);
+          padding: 14px 24px;
+          transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .cce-header.is-crm-header {
+          background: rgba(255, 253, 249, 0.95);
+          border-bottom: 1px solid rgba(6, 78, 59, 0.1);
+        }
+
+        .cce-header-inner {
+          max-width: 1360px;
+          margin: 0 auto;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+        }
+
+        .cce-brand-left {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          text-decoration: none;
+        }
+
+        .cce-logo-img {
+          height: 40px;
+          width: auto;
+          object-fit: contain;
+        }
+
+        .cce-brand-divider {
+          width: 1px;
+          height: 26px;
+          background-color: rgba(212, 175, 55, 0.35);
+        }
+
+        .cce-header.is-crm-header .cce-brand-divider {
+          background-color: rgba(6, 78, 59, 0.2);
+        }
+
+        .cce-council-tag {
+          font-size: 11px;
+          font-weight: 800;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: #F5DE98;
+          font-family: 'Cinzel', serif;
+          display: flex;
+          flex-direction: column;
+          line-height: 1.25;
+        }
+
+        .cce-header.is-crm-header .cce-council-tag {
+          color: var(--cce-emerald);
+          font-family: inherit;
+        }
+
+        .cce-council-tag span {
+          font-size: 9px;
+          color: #34D399;
+          font-weight: 600;
+          font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .cce-header.is-crm-header .cce-council-tag span {
+          color: var(--cce-gold-dark);
+        }
+
+        .cce-header-right {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .cce-admin-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 6px 14px;
+          border-radius: 9999px;
+          background-color: rgba(212, 175, 55, 0.15);
+          border: 1px solid rgba(212, 175, 55, 0.4);
+          color: #F5DE98;
+          font-size: 12px;
+          font-weight: 600;
+        }
+
+        .cce-tab-toggle {
+          display: inline-flex;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 8px;
+          padding: 2px;
+        }
+
+        .cce-header.is-crm-header .cce-tab-toggle {
+          background: #E2E8F0;
+        }
+
+        .cce-tab-btn {
+          border: none;
+          background: none;
+          padding: 8px 14px;
+          font-size: 13px;
+          font-weight: 600;
+          border-radius: 6px;
+          cursor: pointer;
+          color: #CBD5E1;
+          min-height: 44px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.2s ease;
+        }
+
+        .cce-header.is-crm-header .cce-tab-btn {
+          color: #475569;
+        }
+
+        .cce-tab-btn.active {
+          background: #D4AF37;
+          color: #02120C;
+          font-weight: 800;
+        }
+
+        .cce-header.is-crm-header .cce-tab-btn.active {
+          background: #FFFFFF;
+          color: var(--cce-emerald);
+          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        /* Hero Section */
+        .cce-hero {
+          position: relative;
+          z-index: 1;
+          padding: 50px 20px 32px 20px;
+          text-align: center;
+          max-width: 920px;
+          margin: 0 auto;
+          width: 100%;
+        }
+
+        .cce-hero-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: rgba(212, 175, 55, 0.12);
+          border: 1px solid rgba(212, 175, 55, 0.35);
+          color: #F5DE98;
+          font-size: 12px;
+          font-weight: 800;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          padding: 7px 18px;
+          border-radius: 9999px;
+          margin-bottom: 22px;
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .cce-hero-title {
+          font-family: 'Cinzel', serif;
+          font-size: clamp(28px, 5vw, 48px);
+          font-weight: 900;
+          color: #FFFFFF;
+          line-height: 1.15;
+          letter-spacing: 0.03em;
+          margin-bottom: 16px;
+          text-shadow: 0 4px 25px rgba(0, 0, 0, 0.8);
+        }
+
+        .cce-hero-subtitle {
+          font-size: clamp(16px, 2.4vw, 20px);
+          font-weight: 600;
+          color: #E2E8F0;
+          margin-bottom: 18px;
+          line-height: 1.4;
+        }
+
+        .cce-hero-description {
+          font-size: 15px;
+          line-height: 1.7;
+          color: #94A3B8;
+          max-width: 740px;
+          margin: 0 auto 26px auto;
+        }
+
+        .cce-protocol-badge {
+          display: inline-block;
+          font-size: 13px;
+          font-weight: 600;
+          color: #E2E8F0;
+          background: rgba(6, 40, 28, 0.65);
+          border: 1px solid rgba(212, 175, 55, 0.3);
+          padding: 8px 18px;
+          border-radius: 9999px;
+          margin-bottom: 32px;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+        }
+
+        .cce-protocol-badge b {
+          color: #F5DE98;
+        }
+
+        /* MONOLITHIC VIP CREDENTIAL PASS BAR (REPLACES 3 LOOSE CARDS) */
+        .cce-details-strip.cce-vip-pass-bar {
+          max-width: 920px;
           margin: 0 auto 36px auto;
           width: 100%;
-          padding: 0 20px;
+          padding: 0 10px;
+          display: block;
+        }
+
+        .cce-vip-pass-inner {
+          background: linear-gradient(180deg, rgba(6, 40, 28, 0.75) 0%, rgba(2, 18, 12, 0.92) 100%);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border: 1px solid rgba(212, 175, 55, 0.38);
+          border-radius: 20px;
+          overflow: hidden;
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(245, 222, 152, 0.25);
+          position: relative;
+          transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cce-vip-pass-inner:hover {
+          border-color: rgba(245, 222, 152, 0.65);
+          box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), 0 0 30px rgba(212, 175, 55, 0.25);
+        }
+
+        .cce-vip-pass-grid {
+          display: grid;
+          grid-template-columns: 1fr auto 1fr auto 1fr;
+          align-items: center;
+          padding: 24px 28px;
+        }
+
+        @media (max-width: 820px) {
+          .cce-vip-pass-grid {
+            grid-template-columns: 1fr;
+            gap: 16px;
+            padding: 20px 18px;
+          }
+        }
+
+        .cce-detail-card.cce-vip-pass-col {
+          display: flex;
+          align-items: flex-start;
+          gap: 16px;
+          text-align: left;
+          background: none;
+          border: none;
+          box-shadow: none;
+          padding: 0;
+          border-radius: 0;
+        }
+
+        .cce-detail-icon.cce-vip-pass-icon-box {
+          width: 44px;
+          height: 44px;
+          border-radius: 12px;
+          background: linear-gradient(135deg, rgba(212, 175, 55, 0.18) 0%, rgba(6, 78, 59, 0.4) 100%);
+          border: 1px solid rgba(212, 175, 55, 0.4);
+          color: #F5DE98;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .cce-vip-pass-divider {
+          width: 1px;
+          height: 52px;
+          background: linear-gradient(180deg, transparent, rgba(212, 175, 55, 0.35) 50%, transparent);
+        }
+
+        @media (max-width: 820px) {
+          .cce-vip-pass-divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.35) 50%, transparent);
+          }
+        }
+
+        .cce-detail-label.cce-vip-pass-label {
+          font-size: 11px;
+          font-weight: 800;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          color: #F5DE98;
+          margin-bottom: 4px;
+          font-family: 'Cinzel', serif;
+        }
+
+        .cce-detail-value.cce-vip-pass-value {
+          font-size: 16px;
+          font-weight: 700;
+          color: #F8FAFC;
+          line-height: 1.3;
+        }
+
+        .cce-detail-hint.cce-vip-pass-hint {
+          font-size: 12px;
+          color: #34D399;
+          margin-top: 3px;
+          font-weight: 500;
+        }
+
+        .cce-notice-pill.cce-vip-pass-footer {
+          border-top: 1px solid rgba(212, 175, 55, 0.22);
+          background: rgba(2, 18, 12, 0.65);
+          padding: 14px 24px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          font-size: 13px;
+          font-weight: 600;
+          color: #F5DE98;
+          letter-spacing: 0.02em;
+          border-radius: 0;
+          max-width: 100%;
+          margin: 0;
+        }
+
+        /* KEYNOTE POSTER SHOWCASE (R3: CARLOS LORET DE MOLA) */
+        .cce-keynote-wrapper {
+          max-width: 920px;
+          margin: 0 auto 40px auto;
+          width: 100%;
+          padding: 0 10px;
           position: relative;
           z-index: 1;
         }
 
         .cce-keynote-card {
           position: relative;
-          background: rgba(255, 255, 255, 0.92);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          border: 1px solid rgba(212, 175, 55, 0.45);
-          border-radius: 20px;
-          padding: 28px;
-          box-shadow: 0 10px 30px rgba(6, 78, 59, 0.06), 0 0 0 1px rgba(253, 230, 138, 0.3) inset;
+          background: linear-gradient(135deg, rgba(6, 40, 28, 0.8) 0%, rgba(2, 18, 12, 0.95) 100%);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border: 1px solid rgba(212, 175, 55, 0.4);
+          border-radius: 22px;
+          padding: 32px;
+          box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(245, 222, 152, 0.25);
           transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
           overflow: hidden;
         }
 
         .cce-keynote-card:hover {
           transform: translateY(-3px);
-          border-color: var(--cce-gold);
-          box-shadow: 0 20px 45px rgba(6, 78, 59, 0.12), 0 0 35px rgba(212, 175, 55, 0.28);
+          border-color: #F5DE98;
+          box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), 0 0 35px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Luxury Corner Filigree Brackets */
+        .cce-keynote-card::before {
+          content: '';
+          position: absolute;
+          top: 12px;
+          left: 12px;
+          width: 24px;
+          height: 24px;
+          border-top: 2px solid #F5DE98;
+          border-left: 2px solid #F5DE98;
+          pointer-events: none;
+        }
+
+        .cce-keynote-card::after {
+          content: '';
+          position: absolute;
+          bottom: 12px;
+          right: 12px;
+          width: 24px;
+          height: 24px;
+          border-bottom: 2px solid #F5DE98;
+          border-right: 2px solid #F5DE98;
+          pointer-events: none;
         }
 
         .cce-keynote-inner {
           display: flex;
           flex-direction: row;
-          gap: 28px;
+          gap: 32px;
           align-items: center;
         }
 
@@ -566,7 +955,7 @@ export default function CcePrensaClient() {
 
         .cce-keynote-media {
           flex-shrink: 0;
-          width: 220px;
+          width: 230px;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -575,7 +964,7 @@ export default function CcePrensaClient() {
         @media (max-width: 768px) {
           .cce-keynote-media {
             width: 100%;
-            max-width: 200px;
+            max-width: 220px;
             margin: 0 auto;
           }
         }
@@ -584,10 +973,10 @@ export default function CcePrensaClient() {
           position: relative;
           width: 100%;
           aspect-ratio: 3/4;
-          border-radius: 14px;
+          border-radius: 16px;
           overflow: hidden;
-          box-shadow: 0 8px 24px rgba(6, 78, 59, 0.18);
-          border: 2px solid var(--cce-gold);
+          box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7);
+          border: 2px solid #D4AF37;
         }
 
         .cce-keynote-img {
@@ -596,39 +985,40 @@ export default function CcePrensaClient() {
           object-fit: cover;
           object-position: center top;
           display: block;
-          transition: transform 0.5s ease;
+          transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .cce-keynote-card:hover .cce-keynote-img {
-          transform: scale(1.03);
+          transform: scale(1.04);
         }
 
         .cce-keynote-frame-border {
           position: absolute;
           inset: 0;
-          border-radius: 12px;
-          box-shadow: inset 0 0 20px rgba(6, 78, 59, 0.3), inset 0 0 10px rgba(212, 175, 55, 0.4);
+          border-radius: 14px;
+          box-shadow: inset 0 -35px 30px rgba(2, 18, 12, 0.8), inset 0 0 15px rgba(212, 175, 55, 0.3);
           pointer-events: none;
         }
 
         .cce-keynote-caption {
-          margin-top: 10px;
+          margin-top: 12px;
           text-align: center;
         }
 
         .cce-keynote-role {
-          font-size: 12px;
-          font-weight: 700;
-          color: var(--cce-gold-dark);
+          font-size: 11px;
+          font-weight: 800;
+          color: #F5DE98;
           text-transform: uppercase;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.12em;
+          font-family: 'Cinzel', serif;
         }
 
         .cce-keynote-content {
           flex: 1;
           display: flex;
           flex-direction: column;
-          gap: 12px;
+          gap: 14px;
           text-align: left;
         }
 
@@ -658,59 +1048,61 @@ export default function CcePrensaClient() {
           gap: 6px;
           font-size: 11px;
           font-weight: 800;
-          letter-spacing: 0.06em;
+          letter-spacing: 0.08em;
           text-transform: uppercase;
-          padding: 5px 12px;
+          padding: 6px 14px;
           border-radius: 9999px;
-          animation: goldPulse 2.8s ease-in-out infinite;
+          animation: goldPulse 3s ease-in-out infinite;
         }
 
         .cce-badge-gold {
-          background: #FFFBEB;
-          color: #92400E;
-          border: 1px solid #FDE68A;
+          background: rgba(212, 175, 55, 0.15);
+          color: #F5DE98;
+          border: 1px solid rgba(212, 175, 55, 0.5);
         }
 
         .cce-badge-emerald {
-          background: #ECFDF5;
-          color: var(--cce-emerald);
-          border: 1px solid rgba(6, 78, 59, 0.2);
+          background: rgba(6, 78, 59, 0.35);
+          color: #34D399;
+          border: 1px solid rgba(52, 211, 153, 0.35);
         }
 
         @keyframes goldPulse {
           0%, 100% {
-            box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.35);
-            border-color: rgba(212, 175, 55, 0.4);
+            box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
+            border-color: rgba(212, 175, 55, 0.5);
           }
           50% {
             box-shadow: 0 0 0 6px rgba(212, 175, 55, 0);
-            border-color: rgba(212, 175, 55, 0.85);
+            border-color: rgba(245, 222, 152, 0.9);
           }
         }
 
         .cce-keynote-title {
-          font-size: clamp(20px, 2.5vw, 26px);
+          font-family: 'Cinzel', serif;
+          font-size: clamp(22px, 2.6vw, 28px);
           font-weight: 800;
-          color: var(--cce-emerald);
+          color: #FFFFFF;
           line-height: 1.25;
+          letter-spacing: 0.02em;
         }
 
         .cce-keynote-bio {
           font-size: 14px;
-          line-height: 1.6;
-          color: var(--cce-text-muted);
+          line-height: 1.65;
+          color: #CBD5E1;
         }
 
         .cce-keynote-protocol {
           display: flex;
           flex-direction: column;
-          gap: 6px;
-          padding: 12px 14px;
-          background: rgba(6, 78, 59, 0.04);
-          border-left: 3px solid var(--cce-gold);
-          border-radius: 0 8px 8px 0;
+          gap: 8px;
+          padding: 14px 18px;
+          background: rgba(2, 18, 12, 0.65);
+          border-left: 3px solid #D4AF37;
+          border-radius: 0 10px 10px 0;
           font-size: 13px;
-          color: var(--cce-text-dark);
+          color: #E2E8F0;
           text-align: left;
         }
 
@@ -722,377 +1114,133 @@ export default function CcePrensaClient() {
         }
 
         .cce-protocol-item b {
-          color: var(--cce-emerald);
+          color: #F5DE98;
         }
 
-        /* Top Brand Header */
-        .cce-header {
-          position: sticky;
-          top: 0;
-          z-index: 50;
-          background: rgba(255, 253, 249, 0.95);
-          backdrop-filter: blur(8px);
-          border-bottom: 1px solid rgba(6, 78, 59, 0.1);
-          padding: 12px 20px;
-        }
-
-        .cce-header-inner {
-          max-width: 1360px;
-          margin: 0 auto;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 16px;
-        }
-
-        .cce-brand-left {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          text-decoration: none;
-        }
-
-        .cce-logo-img {
-          height: 38px;
-          width: auto;
-          object-fit: contain;
-        }
-
-        .cce-brand-divider {
-          width: 1px;
-          height: 24px;
-          background-color: rgba(6, 78, 59, 0.2);
-        }
-
-        .cce-council-tag {
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          color: var(--cce-emerald);
-          display: flex;
-          flex-direction: column;
-          line-height: 1.2;
-        }
-
-        .cce-council-tag span {
-          font-size: 9px;
-          color: var(--cce-gold-dark);
-          font-weight: 600;
-        }
-
-        .cce-header-right {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-        }
-
-        .cce-admin-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          padding: 6px 12px;
-          border-radius: 9999px;
-          background-color: var(--cce-gold-light);
-          border: 1px solid var(--cce-gold-border);
-          color: var(--cce-gold-dark);
-          font-size: 12px;
-          font-weight: 600;
-        }
-
-        .cce-tab-toggle {
-          display: inline-flex;
-          background: #E2E8F0;
-          border-radius: 8px;
-          padding: 2px;
-        }
-
-        .cce-tab-btn {
-          border: none;
-          background: none;
-          padding: 8px 14px;
-          font-size: 13px;
-          font-weight: 600;
-          border-radius: 6px;
-          cursor: pointer;
-          color: #475569;
-          min-height: 44px;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          transition: all 0.2s ease;
-        }
-
-        .cce-tab-btn.active {
-          background: #FFFFFF;
-          color: var(--cce-emerald);
-          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        /* Hero Section */
-        .cce-hero {
-          position: relative;
-          z-index: 1;
-          padding: 40px 20px 24px 20px;
-          text-align: center;
-          max-width: 900px;
-          margin: 0 auto;
-          width: 100%;
-        }
-
-        .cce-hero-pill {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          background-color: var(--cce-emerald-wash);
-          border: 1px solid rgba(6, 78, 59, 0.2);
-          color: var(--cce-emerald);
-          font-size: 13px;
-          font-weight: 700;
-          letter-spacing: 0.04em;
-          text-transform: uppercase;
-          padding: 6px 16px;
-          border-radius: 9999px;
-          margin-bottom: 20px;
-        }
-
-        .cce-hero-title {
-          font-size: clamp(26px, 4.5vw, 42px);
-          font-weight: 800;
-          color: var(--cce-emerald);
-          line-height: 1.15;
-          letter-spacing: -0.02em;
-          margin-bottom: 12px;
-        }
-
-        .cce-hero-subtitle {
-          font-size: clamp(16px, 2.5vw, 20px);
-          font-weight: 600;
-          color: var(--cce-gold-dark);
-          margin-bottom: 16px;
-          line-height: 1.35;
-        }
-
-        .cce-hero-description {
-          font-size: 15px;
-          line-height: 1.6;
-          color: var(--cce-text-muted);
-          max-width: 720px;
-          margin: 0 auto 24px auto;
-        }
-
-        .cce-protocol-badge {
-          display: inline-block;
-          font-size: 13px;
-          font-weight: 600;
-          color: var(--cce-emerald);
-          background: rgba(6, 78, 59, 0.06);
-          padding: 6px 14px;
-          border-radius: 8px;
-          margin-bottom: 28px;
-        }
-
-        /* Details Strip Cards */
-        .cce-details-strip {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-          gap: 16px;
-          max-width: 900px;
-          margin: 0 auto 36px auto;
-          width: 100%;
-          padding: 0 20px;
-        }
-
-        .cce-detail-card {
-          background: rgba(255, 255, 255, 0.9);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-          border: 1px solid rgba(6, 78, 59, 0.14);
-          border-radius: 14px;
-          padding: 16px 20px;
-          display: flex;
-          align-items: flex-start;
-          gap: 14px;
-          box-shadow: 0 4px 14px rgba(6, 78, 59, 0.04);
-          text-align: left;
-          transition: transform 0.2s ease, border-color 0.2s ease;
-        }
-
-        .cce-detail-card:hover {
-          transform: translateY(-2px);
-          border-color: rgba(212, 175, 55, 0.4);
-        }
-
-        .cce-detail-icon {
-          width: 40px;
-          height: 40px;
-          border-radius: 10px;
-          background: var(--cce-emerald-wash);
-          color: var(--cce-emerald);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-        }
-
-        .cce-detail-label {
-          font-size: 12px;
-          font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: var(--cce-text-muted);
-          margin-bottom: 4px;
-        }
-
-        .cce-detail-value {
-          font-size: 15px;
-          font-weight: 700;
-          color: var(--cce-text-dark);
-          line-height: 1.3;
-        }
-
-        .cce-detail-hint {
-          font-size: 12px;
-          color: var(--cce-emerald);
-          margin-top: 2px;
-          font-weight: 500;
-        }
-
-        /* Notice of Exclusivity */
-        .cce-notice-pill {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 8px;
-          background: #FEF3C7;
-          border: 1px solid #FDE68A;
-          color: #92400E;
-          font-size: 13px;
-          font-weight: 600;
-          padding: 10px 18px;
-          border-radius: 10px;
-          max-width: 650px;
-          margin: 0 auto 32px auto;
-          text-align: center;
-        }
-
-        /* Main Form Container */
+        /* VIP ACCREDITATION TERMINAL (R4) */
         .cce-main-content {
           position: relative;
           z-index: 1;
-          max-width: 680px;
+          max-width: 720px;
           margin: 0 auto 60px auto;
-          padding: 0 20px;
+          padding: 0 10px;
           width: 100%;
         }
 
-        /* Gala Glassmorphism Form Card (R4) */
         .cce-form-card {
-          background: rgba(255, 255, 255, 0.88);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          border: 1px solid rgba(212, 175, 55, 0.3);
-          border-radius: 20px;
-          padding: 36px 30px;
-          box-shadow: 0 16px 40px rgba(6, 78, 59, 0.08), 0 0 0 1px rgba(253, 230, 138, 0.25) inset;
+          background: linear-gradient(180deg, rgba(6, 40, 28, 0.8) 0%, rgba(2, 18, 12, 0.94) 100%);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border: 1px solid rgba(212, 175, 55, 0.35);
+          border-radius: 22px;
+          padding: 40px 36px;
+          box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(245, 222, 152, 0.2);
           transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .cce-form-card:hover {
-          border-color: rgba(212, 175, 55, 0.5);
-          box-shadow: 0 20px 48px rgba(6, 78, 59, 0.12), 0 0 24px rgba(212, 175, 55, 0.2);
+          border-color: rgba(245, 222, 152, 0.6);
+          box-shadow: 0 30px 70px rgba(0, 0, 0, 0.85), 0 0 30px rgba(212, 175, 55, 0.25);
         }
 
         @media (max-width: 640px) {
           .cce-form-card {
-            padding: 24px 18px;
+            padding: 28px 20px;
           }
         }
 
         .cce-form-header {
-          margin-bottom: 24px;
+          margin-bottom: 28px;
           text-align: center;
         }
 
         .cce-form-heading {
-          font-size: 22px;
-          font-weight: 700;
-          color: var(--cce-emerald);
-          margin-bottom: 6px;
+          font-family: 'Cinzel', serif;
+          font-size: clamp(22px, 3vw, 26px);
+          font-weight: 800;
+          letter-spacing: 0.04em;
+          color: #FFFFFF;
+          margin-bottom: 8px;
         }
 
         .cce-form-subheading {
           font-size: 14px;
-          color: var(--cce-text-muted);
+          color: #94A3B8;
         }
 
         .cce-form-group {
-          margin-bottom: 20px;
+          margin-bottom: 22px;
           display: flex;
           flex-direction: column;
-          gap: 6px;
+          gap: 8px;
         }
 
         .cce-label {
-          font-size: 14px;
+          font-size: 13px;
           font-weight: 700;
-          color: var(--cce-text-dark);
+          color: #F5DE98;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
           display: flex;
           align-items: center;
           justify-content: space-between;
         }
 
         .cce-required-dot {
-          color: #DC2626;
+          color: #EF4444;
           margin-left: 4px;
         }
 
         .cce-input {
           width: 100%;
-          min-height: 48px;
-          padding: 12px 16px;
+          min-height: 50px;
+          padding: 12px 18px;
           font-size: 16px; /* Prevents iOS auto-zoom */
-          color: var(--cce-text-dark);
-          background-color: rgba(250, 250, 250, 0.9);
-          border: 1.5px solid var(--cce-border-subtle);
-          border-radius: 10px;
+          color: #FFFFFF;
+          background-color: rgba(2, 18, 12, 0.7);
+          border: 1.5px solid rgba(212, 175, 55, 0.28);
+          border-radius: 12px;
           outline: none;
-          transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+          transition: border-color 0.25s, box-shadow 0.25s, background-color 0.25s;
+        }
+
+        .cce-input::placeholder {
+          color: #64748B;
         }
 
         .cce-input:focus {
-          border-color: var(--cce-gold);
-          background-color: #FFFFFF;
-          box-shadow: 0 0 0 3px rgba(6, 78, 59, 0.12), 0 0 14px rgba(212, 175, 55, 0.25);
+          border-color: #F5DE98;
+          background-color: rgba(2, 18, 12, 0.9);
+          box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2), 0 0 20px rgba(212, 175, 55, 0.35);
         }
 
         .cce-input.error {
-          border-color: #DC2626;
-          background-color: #FEF2F2;
+          border-color: #EF4444;
+          background-color: rgba(239, 68, 68, 0.08);
         }
 
         .cce-field-error {
           font-size: 12px;
-          color: #DC2626;
-          font-weight: 500;
+          color: #F87171;
+          font-weight: 600;
           margin-top: 2px;
         }
 
-        /* Attendees Pill Selector */
+        /* Attendees Segmented Control */
         .cce-attendees-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          gap: 10px;
+          gap: 12px;
         }
 
         .cce-attendee-btn {
           min-height: 48px;
-          background: rgba(250, 250, 250, 0.9);
-          border: 1.5px solid var(--cce-border-subtle);
-          border-radius: 10px;
-          font-size: 15px;
+          background: rgba(2, 18, 12, 0.65);
+          border: 1.5px solid rgba(212, 175, 55, 0.28);
+          border-radius: 12px;
+          font-size: 16px;
           font-weight: 700;
-          color: var(--cce-text-dark);
+          color: #E2E8F0;
           cursor: pointer;
           display: flex;
           align-items: center;
@@ -1101,42 +1249,45 @@ export default function CcePrensaClient() {
         }
 
         .cce-attendee-btn:hover {
-          border-color: var(--cce-gold);
-          background: #FFFDF9;
+          border-color: #F5DE98;
+          background: rgba(212, 175, 55, 0.1);
+          color: #FFFFFF;
         }
 
         .cce-attendee-btn.selected {
-          background: linear-gradient(135deg, var(--cce-emerald) 0%, var(--cce-emerald-dark) 100%);
-          color: #FFFFFF;
-          border-color: var(--cce-gold);
-          box-shadow: 0 4px 12px rgba(6, 78, 59, 0.25);
+          background: linear-gradient(135deg, #F5DE98 0%, #D4AF37 50%, #AA8022 100%);
+          color: #02120C;
+          border-color: #FFE8A3;
+          font-weight: 800;
+          box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
 
-        /* Submit Button with Active Gradient & Micro-elevation */
+        /* Submit Button with Bullion Gradient */
         .cce-submit-btn {
           width: 100%;
-          min-height: 52px;
-          background: linear-gradient(135deg, #064E3B 0%, #042E23 50%, #059669 100%);
-          border: 1px solid rgba(212, 175, 55, 0.4);
-          border-radius: 12px;
-          color: #FFFFFF;
+          min-height: 54px;
+          background: linear-gradient(135deg, #FFF6D6 0%, #F5DE98 30%, #D4AF37 70%, #AA8022 100%);
+          border: 1px solid #FFE8A3;
+          border-radius: 14px;
+          color: #02120C;
           font-size: 16px;
-          font-weight: 700;
-          letter-spacing: 0.02em;
+          font-weight: 800;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
           cursor: pointer;
           display: flex;
           align-items: center;
           justify-content: center;
           gap: 10px;
-          margin-top: 28px;
-          box-shadow: 0 8px 24px rgba(6, 78, 59, 0.25), 0 0 12px rgba(212, 175, 55, 0.2);
-          transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+          margin-top: 32px;
+          box-shadow: 0 12px 30px rgba(212, 175, 55, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+          transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, filter 0.2s ease;
         }
 
         .cce-submit-btn:hover:not(:disabled) {
           transform: translateY(-2px);
-          box-shadow: 0 12px 30px rgba(6, 78, 59, 0.35), 0 0 20px rgba(212, 175, 55, 0.35);
-          border-color: var(--cce-gold);
+          box-shadow: 0 16px 40px rgba(212, 175, 55, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+          filter: brightness(1.05);
         }
 
         .cce-submit-btn:active:not(:disabled) {
@@ -1151,8 +1302,8 @@ export default function CcePrensaClient() {
         .cce-spinner {
           width: 20px;
           height: 20px;
-          border: 2px solid rgba(255, 255, 255, 0.3);
-          border-top-color: #FFFFFF;
+          border: 2px solid rgba(2, 18, 12, 0.3);
+          border-top-color: #02120C;
           border-radius: 50%;
           animation: spin 0.8s linear infinite;
         }
@@ -1162,66 +1313,68 @@ export default function CcePrensaClient() {
         }
 
         .cce-submit-alert-error {
-          background: #FEF2F2;
-          border: 1px solid #FCA5A5;
-          color: #991B1B;
+          background: rgba(239, 68, 68, 0.15);
+          border: 1px solid #EF4444;
+          color: #FCA5A5;
           padding: 12px 16px;
           border-radius: 10px;
           font-size: 13px;
-          font-weight: 500;
+          font-weight: 600;
           margin-top: 16px;
           text-align: center;
         }
 
-        /* Gala Glassmorphism Confirmation Card (R4) */
+        /* CONFIRMATION CARD (R4) */
         .cce-confirmation-card {
-          background: rgba(255, 255, 255, 0.94);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          border: 1px solid rgba(212, 175, 55, 0.45);
-          border-radius: 20px;
-          padding: 36px 30px;
+          background: linear-gradient(180deg, rgba(6, 40, 28, 0.85) 0%, rgba(2, 18, 12, 0.95) 100%);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border: 1px solid rgba(212, 175, 55, 0.5);
+          border-radius: 22px;
+          padding: 40px 32px;
           text-align: center;
-          box-shadow: 0 20px 50px rgba(6, 78, 59, 0.1), 0 0 30px rgba(212, 175, 55, 0.15);
+          box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(212, 175, 55, 0.25);
         }
 
         .cce-confirmed-seal {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          background: linear-gradient(135deg, var(--cce-emerald-wash) 0%, #FEF3C7 100%);
-          border: 1.5px solid var(--cce-gold);
-          color: var(--cce-emerald);
-          padding: 8px 18px;
+          background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(6, 78, 59, 0.4) 100%);
+          border: 1.5px solid #F5DE98;
+          color: #F5DE98;
+          padding: 10px 22px;
           border-radius: 9999px;
           font-size: 14px;
           font-weight: 800;
-          letter-spacing: 0.03em;
+          letter-spacing: 0.06em;
           text-transform: uppercase;
-          margin-bottom: 20px;
+          margin-bottom: 22px;
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
         }
 
         .cce-confirmed-title {
+          font-family: 'Cinzel', serif;
           font-size: 26px;
           font-weight: 800;
-          color: var(--cce-emerald);
-          margin-bottom: 8px;
+          color: #FFFFFF;
+          margin-bottom: 10px;
         }
 
         .cce-confirmed-summary {
-          background: #F8FAF8;
-          border: 1px solid rgba(6, 78, 59, 0.12);
-          border-radius: 12px;
-          padding: 20px;
+          background: rgba(2, 18, 12, 0.7);
+          border: 1px solid rgba(212, 175, 55, 0.25);
+          border-radius: 14px;
+          padding: 22px;
           text-align: left;
-          margin: 24px 0;
+          margin: 26px 0;
         }
 
         .cce-summary-row {
           display: flex;
           justify-content: space-between;
-          padding: 8px 0;
-          border-bottom: 1px solid #E2E8F0;
+          padding: 10px 0;
+          border-bottom: 1px solid rgba(212, 175, 55, 0.15);
           font-size: 14px;
         }
 
@@ -1230,12 +1383,12 @@ export default function CcePrensaClient() {
         }
 
         .cce-summary-label {
-          color: var(--cce-text-muted);
+          color: #94A3B8;
           font-weight: 500;
         }
 
         .cce-summary-val {
-          color: var(--cce-text-dark);
+          color: #FFFFFF;
           font-weight: 700;
         }
 
@@ -1248,7 +1401,7 @@ export default function CcePrensaClient() {
 
         .cce-action-btn {
           min-height: 48px;
-          border-radius: 10px;
+          border-radius: 12px;
           font-size: 15px;
           font-weight: 700;
           display: flex;
@@ -1258,38 +1411,40 @@ export default function CcePrensaClient() {
           cursor: pointer;
           transition: all 0.2s ease;
           text-decoration: none;
-          padding: 10px 16px;
+          padding: 12px 18px;
         }
 
         .cce-btn-google {
-          background: #FFFFFF;
-          color: #1F2937;
-          border: 1.5px solid #D1D5DB;
+          background: rgba(255, 255, 255, 0.08);
+          color: #FFFFFF;
+          border: 1.5px solid rgba(212, 175, 55, 0.4);
         }
 
         .cce-btn-google:hover {
-          background: #F3F4F6;
-          border-color: #9CA3AF;
+          background: rgba(255, 255, 255, 0.15);
+          border-color: #F5DE98;
         }
 
         .cce-btn-apple {
-          background: var(--cce-emerald);
+          background: linear-gradient(135deg, #064E3B 0%, #042E23 100%);
           color: #FFFFFF;
-          border: 1px solid var(--cce-emerald);
+          border: 1.5px solid rgba(52, 211, 153, 0.4);
         }
 
         .cce-btn-apple:hover {
-          background: var(--cce-emerald-dark);
+          background: linear-gradient(135deg, #059669 0%, #064E3B 100%);
+          border-color: #34D399;
         }
 
         .cce-btn-maps {
-          background: #EFF6FF;
-          color: #1D4ED8;
-          border: 1px solid #BFDBFE;
+          background: rgba(212, 175, 55, 0.15);
+          color: #F5DE98;
+          border: 1.5px solid rgba(212, 175, 55, 0.5);
         }
 
         .cce-btn-maps:hover {
-          background: #DBEAFE;
+          background: rgba(212, 175, 55, 0.25);
+          border-color: #FFE8A3;
         }
 
         /* PRIVATE CRM SECTION */
@@ -1742,11 +1897,19 @@ export default function CcePrensaClient() {
         /* Footer */
         .cce-footer {
           margin-top: auto;
-          background: #FFFFFF;
-          border-top: 1px solid rgba(6, 78, 59, 0.08);
-          padding: 24px 20px;
+          background: #010B07;
+          border-top: 1px solid rgba(212, 175, 55, 0.2);
+          padding: 30px 20px;
           text-align: center;
           font-size: 13px;
+          color: #94A3B8;
+          position: relative;
+          z-index: 1;
+        }
+
+        .cce-page-container.is-crm .cce-footer {
+          background: #FFFFFF;
+          border-top: 1px solid rgba(6, 78, 59, 0.08);
           color: var(--cce-text-muted);
         }
 
@@ -1759,16 +1922,25 @@ export default function CcePrensaClient() {
           align-items: center;
         }
 
+        .cce-footer-inner b {
+          color: #F5DE98;
+        }
+
+        .cce-page-container.is-crm .cce-footer-inner b {
+          color: var(--cce-emerald);
+        }
+
         .cce-footer-sub {
           font-size: 12px;
-          color: #94A3B8;
+          color: #64748B;
         }
       `,
         }}
       />
 
-      {/* ATMOSPHERIC LIVING CANVAS (R1: 4 GPU ORBS + BANKNOTE MICRO-TEXTURE) */}
+      {/* ATMOSPHERIC LIVING CANVAS (R1: 4 GPU ORBS + SPOTLIGHT + BANKNOTE MICRO-TEXTURE) */}
       <div className="cce-living-canvas" aria-hidden="true">
+        <div className="cce-spotlight" />
         <div className="cce-canvas-orb cce-orb-1" />
         <div className="cce-canvas-orb cce-orb-2" />
         <div className="cce-canvas-orb cce-orb-3" />
@@ -1777,7 +1949,7 @@ export default function CcePrensaClient() {
       </div>
 
       {/* TOP HEADER */}
-      <header className="cce-header">
+      <header className={`cce-header ${isAdmin && adminTab === 'crm' ? 'is-crm-header' : 'is-gala-header'}`}>
         <div className="cce-header-inner">
           <div className="cce-brand-left">
             {/* CCE JUÁREZ LOGO */}
@@ -1821,7 +1993,12 @@ export default function CcePrensaClient() {
             <img
               src="/assets/apolograma-logo-v2.png"
               alt="Apolograma Studio"
-              style={{ height: '22px', width: 'auto', opacity: 0.9, filter: 'brightness(0.12)' }}
+              style={{
+                height: '22px',
+                width: 'auto',
+                opacity: 0.9,
+                filter: isAdmin && adminTab === 'crm' ? 'brightness(0.12)' : 'brightness(0) invert(1)',
+              }}
             />
           </div>
         </div>
@@ -2071,7 +2248,7 @@ export default function CcePrensaClient() {
       ) : (
         /* PUBLIC ACCREDITATION LANDING VIEW */
         <main>
-          {/* HERO SECTION (R2: EDITORIAL TYPOGRAPHY REVEAL & GOLDEN SHIMMER) */}
+          {/* HERO SECTION (EDITORIAL TYPOGRAPHY REVEAL & GOLDEN SHIMMER) */}
           <section className="cce-hero">
             <motion.div
               initial={{ opacity: 0, y: 15 }}
@@ -2133,50 +2310,61 @@ export default function CcePrensaClient() {
               </motion.div>
             </motion.div>
 
-            {/* EVENT DETAILS STRIP */}
-            <div className="cce-details-strip">
-              <div className="cce-detail-card">
-                <div className="cce-detail-icon">
-                  <Calendar size={20} />
+            {/* MONOLITHIC VIP CREDENTIAL PASS BAR (REPLACES 3 LOOSE CARDS) */}
+            <div className="cce-details-strip cce-vip-pass-bar">
+              <div className="cce-vip-pass-inner">
+                <div className="cce-vip-pass-grid">
+                  {/* Segment 1: Fecha */}
+                  <div className="cce-detail-card cce-vip-pass-col">
+                    <div className="cce-detail-icon cce-vip-pass-icon-box">
+                      <Calendar size={22} />
+                    </div>
+                    <div>
+                      <div className="cce-detail-label cce-vip-pass-label">Fecha Oficial</div>
+                      <div className="cce-detail-value cce-vip-pass-value">Lunes 12 de Octubre, 2026</div>
+                      <div className="cce-detail-hint cce-vip-pass-hint">Recepción y Desayuno</div>
+                    </div>
+                  </div>
+
+                  <div className="cce-vip-pass-divider" />
+
+                  {/* Segment 2: Horario */}
+                  <div className="cce-detail-card cce-vip-pass-col">
+                    <div className="cce-detail-icon cce-vip-pass-icon-box">
+                      <Clock size={22} />
+                    </div>
+                    <div>
+                      <div className="cce-detail-label cce-vip-pass-label">Horario Protocolario</div>
+                      <div className="cce-detail-value cce-vip-pass-value">9:00 a.m. en punto</div>
+                      <div className="cce-detail-hint cce-vip-pass-hint">Rueda de Prensa y Preguntas</div>
+                    </div>
+                  </div>
+
+                  <div className="cce-vip-pass-divider" />
+
+                  {/* Segment 3: Sede */}
+                  <div className="cce-detail-card cce-vip-pass-col">
+                    <div className="cce-detail-icon cce-vip-pass-icon-box">
+                      <MapPin size={22} />
+                    </div>
+                    <div>
+                      <div className="cce-detail-label cce-vip-pass-label">Sede del Evento</div>
+                      <div className="cce-detail-value cce-vip-pass-value">Taquería La No 4</div>
+                      <div className="cce-detail-hint cce-vip-pass-hint">Av. Paseo Triunfo 5617</div>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <div className="cce-detail-label">Fecha Oficial</div>
-                  <div className="cce-detail-value">Lunes 12 de Octubre, 2026</div>
-                  <div className="cce-detail-hint">Recepción y Desayuno</div>
+
+                {/* Integrated Exclusivity Strip */}
+                <div className="cce-notice-pill cce-vip-pass-footer">
+                  <ShieldCheck size={16} />
+                  <span>Evento exclusivo para medios de comunicación, agencias y reporteros acreditados.</span>
                 </div>
               </div>
-
-              <div className="cce-detail-card">
-                <div className="cce-detail-icon">
-                  <Clock size={20} />
-                </div>
-                <div>
-                  <div className="cce-detail-label">Horario Protocolario</div>
-                  <div className="cce-detail-value">9:00 a.m. en punto</div>
-                  <div className="cce-detail-hint">Rueda de Prensa y Preguntas</div>
-                </div>
-              </div>
-
-              <div className="cce-detail-card">
-                <div className="cce-detail-icon">
-                  <MapPin size={20} />
-                </div>
-                <div>
-                  <div className="cce-detail-label">Sede del Evento</div>
-                  <div className="cce-detail-value">Taquería La No 4</div>
-                  <div className="cce-detail-hint">Av. Paseo Triunfo 5617</div>
-                </div>
-              </div>
-            </div>
-
-            {/* NOTICE OF EXCLUSIVITY */}
-            <div className="cce-notice-pill">
-              <ShieldCheck size={16} flex-shrink={0} />
-              <span>Evento exclusivo para medios de comunicación, agencias y reporteros acreditados.</span>
             </div>
           </section>
 
-          {/* KEYNOTE CARD SECTION (R3: CARLOS LORET DE MOLA) */}
+          {/* KEYNOTE POSTER SHOWCASE (CARLOS LORET DE MOLA) */}
           <div className="cce-keynote-wrapper">
             <motion.div
               initial={{ opacity: 0, y: 25 }}
@@ -2240,7 +2428,7 @@ export default function CcePrensaClient() {
           <section className="cce-main-content">
             <AnimatePresence mode="wait">
               {confirmedRecord ? (
-                /* CONFIRMATION SCREEN (R3) */
+                /* CONFIRMATION SCREEN */
                 <motion.div
                   key="confirmation"
                   initial={{ opacity: 0, scale: 0.95 }}
@@ -2256,7 +2444,7 @@ export default function CcePrensaClient() {
 
                   <h2 className="cce-confirmed-title">¡Acreditación Registrada con Éxito!</h2>
 
-                  <p style={{ fontSize: '15px', color: '#475569', lineHeight: 1.5 }}>
+                  <p style={{ fontSize: '15px', color: '#CBD5E1', lineHeight: 1.6 }}>
                     Hemos registrado tu acreditación de prensa para el desayuno y rueda de prensa del CCE Ciudad Juárez. Te
                     esperamos puntualmente en Taquería La No 4.
                   </p>
@@ -2310,7 +2498,7 @@ export default function CcePrensaClient() {
                   </div>
                 </motion.div>
               ) : (
-                /* ACCREDITATION FORM (R2) */
+                /* ACCREDITATION FORM (VIP DESK TERMINAL) */
                 <motion.div
                   key="form"
                   initial={{ opacity: 0, y: 15 }}
@@ -2378,7 +2566,7 @@ export default function CcePrensaClient() {
                           No. de Asistentes
                           <span className="cce-required-dot">*</span>
                         </span>
-                        <span style={{ fontSize: '12px', color: '#64748B', fontWeight: 500 }}>
+                        <span style={{ fontSize: '12px', color: '#94A3B8', fontWeight: 500 }}>
                           Reporteros / Camarógrafos
                         </span>
                       </label>
@@ -2408,7 +2596,7 @@ export default function CcePrensaClient() {
                           Teléfono de Contacto (WhatsApp)
                           <span className="cce-required-dot">*</span>
                         </span>
-                        <span style={{ fontSize: '12px', color: '#64748B', fontWeight: 500 }}>10 dígitos</span>
+                        <span style={{ fontSize: '12px', color: '#94A3B8', fontWeight: 500 }}>10 dígitos</span>
                       </label>
                       <input
                         id="whatsapp"
