@@ -734,19 +734,19 @@ export default function CcePrensaClient() {
           background: linear-gradient(135deg, rgba(245, 222, 152, 0.22) 0%, rgba(6, 78, 59, 0.45) 50%, rgba(212, 175, 55, 0.18) 100%);
           border: 1px solid rgba(245, 222, 152, 0.55);
           color: #FFF3C4;
-          font-size: 12px;
+          font-size: 13px;
           font-weight: 800;
           letter-spacing: 0.1em;
           text-transform: uppercase;
-          padding: 8px 20px;
+          padding: 9px 22px;
           border-radius: 9999px;
-          margin-bottom: 22px;
+          margin-bottom: 24px;
           box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 20px rgba(212, 175, 55, 0.22);
         }
 
         .cce-hero-title {
           font-family: 'Cinzel', serif;
-          font-size: clamp(28px, 5vw, 48px);
+          font-size: clamp(32px, 5.5vw, 52px);
           font-weight: 900;
           background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 35%, #F5DE98 70%, #D4AF37 100%);
           -webkit-background-clip: text;
@@ -754,24 +754,24 @@ export default function CcePrensaClient() {
           -webkit-text-fill-color: transparent;
           line-height: 1.15;
           letter-spacing: 0.03em;
-          margin-bottom: 16px;
+          margin-bottom: 18px;
           filter: drop-shadow(0 4px 25px rgba(0, 0, 0, 0.85));
         }
 
         .cce-hero-subtitle {
-          font-size: clamp(16px, 2.4vw, 20px);
+          font-size: clamp(17px, 2.5vw, 22px);
           font-weight: 600;
           color: #E2E8F0;
-          margin-bottom: 18px;
-          line-height: 1.4;
+          margin-bottom: 20px;
+          line-height: 1.45;
         }
 
         .cce-hero-description {
-          font-size: 15px;
-          line-height: 1.7;
+          font-size: 16px;
+          line-height: 1.75;
           color: #94A3B8;
           max-width: 740px;
-          margin: 0 auto 26px auto;
+          margin: 0 auto 28px auto;
         }
 
         .cce-protocol-badge {
@@ -1068,26 +1068,26 @@ export default function CcePrensaClient() {
 
         .cce-luxury-salutation {
           font-family: 'Cinzel', serif;
-          font-size: clamp(21px, 2.4vw, 26px);
+          font-size: clamp(24px, 3.2vw, 30px);
           font-weight: 700;
           color: #FFFFFF;
-          margin-bottom: 22px;
+          margin-bottom: 24px;
           letter-spacing: 0.01em;
           text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
         }
 
         .cce-luxury-paragraph {
-          font-size: clamp(15.5px, 1.35vw, 17px);
-          line-height: 1.82;
+          font-size: clamp(17px, 1.8vw, 19.5px);
+          line-height: 1.85;
           color: #E2E8F0;
-          margin-bottom: 26px;
+          margin-bottom: 28px;
           font-weight: 400;
           letter-spacing: -0.005em;
         }
 
         .cce-luxury-paragraph strong {
           color: #FFFFFF;
-          font-weight: 600;
+          font-weight: 700;
         }
 
         /* Coordinate Schedule Grid */
@@ -1130,9 +1130,9 @@ export default function CcePrensaClient() {
         }
 
         .cce-schedule-icon-wrap {
-          width: 48px;
-          height: 48px;
-          border-radius: 13px;
+          width: 52px;
+          height: 52px;
+          border-radius: 14px;
           background: linear-gradient(135deg, rgba(16, 185, 129, 0.48) 0%, rgba(6, 78, 59, 0.95) 55%, rgba(2, 30, 22, 1) 100%);
           border: 1.5px solid rgba(245, 222, 152, 0.65);
           display: flex;
@@ -1140,13 +1140,13 @@ export default function CcePrensaClient() {
           justify-content: center;
           flex-shrink: 0;
           box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 16px rgba(52, 211, 153, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.4);
-          font-size: 22px;
+          font-size: 24px;
         }
 
         .cce-schedule-logo-wrap {
-          width: 48px;
-          height: 48px;
-          border-radius: 13px;
+          width: 52px;
+          height: 52px;
+          border-radius: 14px;
           background: linear-gradient(135deg, rgba(16, 185, 129, 0.48) 0%, rgba(6, 78, 59, 0.95) 55%, rgba(2, 30, 22, 1) 100%);
           border: 1.5px solid rgba(245, 222, 152, 0.65);
           display: flex;
@@ -1168,11 +1168,11 @@ export default function CcePrensaClient() {
         .cce-schedule-info {
           display: flex;
           flex-direction: column;
-          gap: 3px;
+          gap: 4px;
         }
 
         .cce-schedule-label {
-          font-size: 10.5px;
+          font-size: 12px;
           font-weight: 800;
           color: #F5DE98;
           text-transform: uppercase;
@@ -1181,34 +1181,34 @@ export default function CcePrensaClient() {
         }
 
         .cce-schedule-val {
-          font-size: 15.5px;
+          font-size: 17px;
           font-weight: 700;
           color: #FFFFFF;
           letter-spacing: -0.01em;
-          line-height: 1.25;
+          line-height: 1.3;
         }
 
         .cce-schedule-hint {
-          font-size: 13px;
-          font-weight: 500;
+          font-size: 14.5px;
+          font-weight: 600;
           color: #34D399;
-          margin-top: 2px;
-          line-height: 1.3;
+          margin-top: 3px;
+          line-height: 1.35;
         }
 
         .cce-schedule-address {
-          font-size: 13px;
+          font-size: 14.5px;
           color: #34D399;
-          margin-top: 2px;
-          line-height: 1.3;
+          margin-top: 3px;
+          line-height: 1.35;
         }
 
         .cce-luxury-closing {
-          font-size: clamp(16px, 1.4vw, 17.5px);
+          font-size: clamp(18px, 2.2vw, 22px);
           font-weight: 700;
           color: #F5DE98;
-          margin-top: 6px;
-          margin-bottom: 32px;
+          margin-top: 10px;
+          margin-bottom: 34px;
           line-height: 1.6;
           text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
         }
@@ -1231,7 +1231,7 @@ export default function CcePrensaClient() {
         }
 
         .cce-seal-crest {
-          width: 44px;
+          width: 48px;
           height: auto;
           filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
         }
@@ -1245,14 +1245,14 @@ export default function CcePrensaClient() {
 
         .cce-seal-org {
           font-family: 'Cinzel', serif;
-          font-size: 12.5px;
+          font-size: 13.5px;
           font-weight: 800;
           letter-spacing: 0.08em;
           color: #F5DE98;
         }
 
         .cce-seal-sub {
-          font-size: 12px;
+          font-size: 13px;
           color: #94A3B8;
         }
 
@@ -1260,12 +1260,12 @@ export default function CcePrensaClient() {
           display: inline-flex;
           align-items: center;
           gap: 6px;
-          padding: 6px 14px;
+          padding: 7px 15px;
           border-radius: 9999px;
           background: rgba(6, 78, 59, 0.4);
           border: 1px solid rgba(52, 211, 153, 0.3);
           color: #34D399;
-          font-size: 11px;
+          font-size: 12px;
           font-weight: 700;
           letter-spacing: 0.04em;
         }
@@ -1345,27 +1345,27 @@ export default function CcePrensaClient() {
 
         .cce-form-heading {
           font-family: 'Cinzel', serif;
-          font-size: clamp(22px, 3vw, 26px);
+          font-size: clamp(24px, 3.2vw, 28px);
           font-weight: 800;
           letter-spacing: 0.04em;
           color: #FFFFFF;
-          margin-bottom: 8px;
+          margin-bottom: 10px;
         }
 
         .cce-form-subheading {
-          font-size: 14px;
+          font-size: 15.5px;
           color: #94A3B8;
         }
 
         .cce-form-group {
-          margin-bottom: 22px;
+          margin-bottom: 24px;
           display: flex;
           flex-direction: column;
-          gap: 8px;
+          gap: 9px;
         }
 
         .cce-label {
-          font-size: 13px;
+          font-size: 14px;
           font-weight: 700;
           color: #F5DE98;
           letter-spacing: 0.04em;
@@ -1382,13 +1382,13 @@ export default function CcePrensaClient() {
 
         .cce-input {
           width: 100%;
-          min-height: 50px;
-          padding: 12px 18px;
-          font-size: 16px; /* Prevents iOS auto-zoom */
+          min-height: 54px;
+          padding: 14px 20px;
+          font-size: 17px; /* High legibility, prevents iOS auto-zoom */
           color: #FFFFFF;
           background: linear-gradient(180deg, rgba(1, 15, 10, 0.88) 0%, rgba(3, 28, 19, 0.78) 100%);
           border: 1.5px solid rgba(212, 175, 55, 0.38);
-          border-radius: 12px;
+          border-radius: 14px;
           outline: none;
           box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.55);
           transition: border-color 0.25s, box-shadow 0.25s, background-color 0.25s;
@@ -1410,10 +1410,10 @@ export default function CcePrensaClient() {
         }
 
         .cce-field-error {
-          font-size: 12px;
+          font-size: 13px;
           color: #F87171;
           font-weight: 600;
-          margin-top: 2px;
+          margin-top: 3px;
         }
 
         /* Attendees Segmented Control */
@@ -1424,12 +1424,12 @@ export default function CcePrensaClient() {
         }
 
         .cce-attendee-btn {
-          min-height: 48px;
+          min-height: 52px;
           background: rgba(2, 18, 12, 0.65);
           border: 1.5px solid rgba(212, 175, 55, 0.28);
           border-radius: 12px;
-          font-size: 16px;
-          font-weight: 700;
+          font-size: 18px;
+          font-weight: 800;
           color: #E2E8F0;
           cursor: pointer;
           display: flex;
@@ -1455,12 +1455,12 @@ export default function CcePrensaClient() {
         /* Submit Button with Bullion Gradient */
         .cce-submit-btn {
           width: 100%;
-          min-height: 54px;
+          min-height: 58px;
           background: linear-gradient(135deg, #FFFFFF 0%, #FFF3C4 20%, #F5DE98 45%, #D4AF37 75%, #996F15 100%);
           border: 1.5px solid #FFF1B8;
           border-radius: 14px;
           color: #02120C;
-          font-size: 16px;
+          font-size: 17px;
           font-weight: 800;
           letter-spacing: 0.06em;
           text-transform: uppercase;
@@ -1469,7 +1469,7 @@ export default function CcePrensaClient() {
           align-items: center;
           justify-content: center;
           gap: 10px;
-          margin-top: 32px;
+          margin-top: 34px;
           box-shadow: 0 14px 38px rgba(212, 175, 55, 0.5), 0 0 35px rgba(212, 175, 55, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.9), inset 0 -2px 6px rgba(138, 98, 14, 0.5);
           transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, filter 0.2s ease;
         }
@@ -2540,7 +2540,7 @@ export default function CcePrensaClient() {
                 </p>
 
                 <div className="cce-luxury-closing">
-                  Les agradeceré mucho confirmar su asistencia.&rdquo;
+                  Agradecemos mucho confirmar su asistencia.&rdquo;
                 </div>
 
                 {/* Institutional Seal & Sign-off */}
@@ -2568,10 +2568,6 @@ export default function CcePrensaClient() {
 
           {/* MAIN FORM / CONFIRMATION SECTION */}
           <section className="cce-main-content">
-            <div className="cce-notice-pill" style={{ margin: '0 auto 24px auto', maxWidth: '580px', textAlign: 'center' }}>
-              <ShieldCheck size={16} />
-              <span>Evento exclusivo para medios de comunicación, agencias y reporteros convocados.</span>
-            </div>
             <AnimatePresence mode="wait">
               {confirmedRecord ? (
                 /* CONFIRMATION SCREEN */
