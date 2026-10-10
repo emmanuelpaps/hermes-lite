@@ -881,11 +881,45 @@ export default function CcePrensaClient() {
         .cce-hero {
           position: relative;
           z-index: 1;
-          padding: 50px 20px 32px 20px;
+          padding: 40px 20px 32px 20px;
           text-align: center;
           max-width: 920px;
           margin: 0 auto;
           width: 100%;
+        }
+
+        /* Hero Institutional Logo (En Grande) */
+        .cce-hero-logo-box {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 0 auto 24px auto;
+          position: relative;
+        }
+
+        .cce-hero-logo-img {
+          width: 100%;
+          max-width: 320px;
+          height: auto;
+          object-fit: contain;
+          filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 30px rgba(212, 175, 55, 0.3));
+          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .cce-hero-logo-img:hover {
+          transform: scale(1.03);
+        }
+
+        @media (max-width: 640px) {
+          .cce-hero {
+            padding-top: 28px;
+          }
+          .cce-hero-logo-box {
+            margin-bottom: 18px;
+          }
+          .cce-hero-logo-img {
+            max-width: 220px;
+          }
         }
 
         .cce-hero-pill {
@@ -2462,6 +2496,20 @@ export default function CcePrensaClient() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] as const }}
             >
+              {/* INSTITUTIONAL CCE JUÁREZ LOGO (LARGE HERO EMBLEM) */}
+              <motion.div
+                className="cce-hero-logo-box"
+                initial={false}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] as const }}
+              >
+                <img
+                  src="/assets/cce-juarez/cce_logo_hero_prestige.svg"
+                  alt="Consejo Coordinador Empresarial Ciudad Juárez"
+                  className="cce-hero-logo-img"
+                />
+              </motion.div>
+
               <div className="cce-hero-pill">
                 <Sparkles size={14} />
                 Desayuno y Rueda de Prensa Oficial
