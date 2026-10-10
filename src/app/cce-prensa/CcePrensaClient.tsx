@@ -191,7 +191,7 @@ export default function CcePrensaClient() {
     );
     const location = encodeURIComponent('Taquería La No 4, Av. Paseo Triunfo de la República 5617, Ciudad Juárez, Chih.');
     const dates = '20261012T150000Z/20261012T163000Z';
-    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}&sprop=website:propuestas.tecza.com.mx`;
+    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}&sprop=name:CCE%20Juarez`;
 
     window.open(googleCalendarUrl, '_blank', 'noopener,noreferrer');
   };
