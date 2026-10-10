@@ -1264,10 +1264,10 @@ export default function CcePrensaClient() {
         /* Coordinate Schedule Grid */
         .cce-luxury-schedule {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 16px;
-          margin: 32px 0;
-          background: rgba(2, 20, 14, 0.72);
+          grid-template-columns: repeat(3, 1fr);
+          gap: 20px;
+          margin: 32px 0 26px 0;
+          background: rgba(2, 20, 14, 0.78);
           border: 1px solid rgba(212, 175, 55, 0.32);
           border-radius: 18px;
           padding: 24px;
@@ -1278,26 +1278,59 @@ export default function CcePrensaClient() {
           display: flex;
           align-items: flex-start;
           gap: 14px;
+          position: relative;
+        }
+
+        .cce-schedule-item + .cce-schedule-item::before {
+          content: '';
+          position: absolute;
+          left: -10px;
+          top: 6px;
+          bottom: 6px;
+          width: 1px;
+          background: rgba(212, 175, 55, 0.2);
         }
 
         .cce-schedule-item-venue {
-          grid-column: 1 / -1;
-          padding-top: 14px;
-          border-top: 1px solid rgba(212, 175, 55, 0.18);
+          grid-column: auto;
+          padding-top: 0;
+          border-top: none;
         }
 
         .cce-schedule-icon-wrap {
-          width: 44px;
-          height: 44px;
-          border-radius: 12px;
-          background: linear-gradient(135deg, rgba(6, 78, 59, 0.7) 0%, rgba(4, 46, 35, 0.9) 100%);
-          border: 1px solid rgba(212, 175, 55, 0.4);
+          width: 48px;
+          height: 48px;
+          border-radius: 13px;
+          background: linear-gradient(135deg, rgba(6, 78, 59, 0.8) 0%, rgba(4, 46, 35, 0.95) 100%);
+          border: 1px solid rgba(212, 175, 55, 0.45);
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
           box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
-          font-size: 20px;
+          font-size: 22px;
+        }
+
+        .cce-schedule-logo-wrap {
+          width: 48px;
+          height: 48px;
+          border-radius: 13px;
+          background: linear-gradient(135deg, rgba(6, 78, 59, 0.8) 0%, rgba(4, 46, 35, 0.95) 100%);
+          border: 1px solid rgba(212, 175, 55, 0.5);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(212, 175, 55, 0.15);
+          padding: 4px;
+          overflow: hidden;
+        }
+
+        .cce-taqueria-badge-img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
         }
 
         .cce-schedule-info {
@@ -1307,7 +1340,7 @@ export default function CcePrensaClient() {
         }
 
         .cce-schedule-label {
-          font-size: 11px;
+          font-size: 10.5px;
           font-weight: 800;
           color: #F5DE98;
           text-transform: uppercase;
@@ -1316,16 +1349,26 @@ export default function CcePrensaClient() {
         }
 
         .cce-schedule-val {
-          font-size: 17px;
+          font-size: 15.5px;
           font-weight: 700;
           color: #FFFFFF;
           letter-spacing: -0.01em;
+          line-height: 1.25;
+        }
+
+        .cce-schedule-hint {
+          font-size: 13px;
+          font-weight: 500;
+          color: #34D399;
+          margin-top: 2px;
+          line-height: 1.3;
         }
 
         .cce-schedule-address {
-          font-size: 14px;
-          color: #94A3B8;
+          font-size: 13px;
+          color: #34D399;
           margin-top: 2px;
+          line-height: 1.3;
         }
 
         .cce-luxury-closing {
@@ -1399,16 +1442,19 @@ export default function CcePrensaClient() {
           .cce-luxury-card {
             padding: 34px 22px;
             border-radius: 20px;
-          }
-
           .cce-luxury-schedule {
             grid-template-columns: 1fr;
             padding: 18px;
-            gap: 18px;
+            gap: 16px;
           }
 
-          .cce-schedule-item-venue {
-            padding-top: 18px;
+          .cce-schedule-item + .cce-schedule-item::before {
+            display: none;
+          }
+
+          .cce-schedule-item + .cce-schedule-item {
+            padding-top: 14px;
+            border-top: 1px solid rgba(212, 175, 55, 0.16);
           }
 
           .cce-luxury-footer-seal {
@@ -2635,32 +2681,41 @@ export default function CcePrensaClient() {
 
                 {/* Coordinate Schedule Grid */}
                 <div className="cce-luxury-schedule">
+                  {/* Segment 1: Fecha */}
                   <div className="cce-schedule-item">
                     <div className="cce-schedule-icon-wrap" aria-hidden="true">
                       <span className="cce-schedule-emoji">📅</span>
                     </div>
                     <div className="cce-schedule-info">
-                      <span className="cce-schedule-label">FECHA</span>
-                      <strong className="cce-schedule-val">Lunes 12 de octubre</strong>
+                      <span className="cce-schedule-label">FECHA OFICIAL</span>
+                      <strong className="cce-schedule-val">Lunes 12 de Octubre, 2026</strong>
+                      <span className="cce-schedule-hint">Desayuno - Conferencia</span>
                     </div>
                   </div>
 
+                  {/* Segment 2: Horario */}
                   <div className="cce-schedule-item">
                     <div className="cce-schedule-icon-wrap" aria-hidden="true">
                       <span className="cce-schedule-emoji">🕘</span>
                     </div>
                     <div className="cce-schedule-info">
                       <span className="cce-schedule-label">HORARIO</span>
-                      <strong className="cce-schedule-val">9:00 a.m.</strong>
+                      <strong className="cce-schedule-val">9:00 a.m. en punto</strong>
+                      <span className="cce-schedule-hint">Rueda de Prensa</span>
                     </div>
                   </div>
 
+                  {/* Segment 3: Sede con Logo Oficial de Taquería La No 4 */}
                   <div className="cce-schedule-item cce-schedule-item-venue">
-                    <div className="cce-schedule-icon-wrap" aria-hidden="true">
-                      <span className="cce-schedule-emoji">📍</span>
+                    <div className="cce-schedule-logo-wrap" aria-hidden="true">
+                      <img
+                        src="/assets/cce-juarez/taqueria_la_no_4_transparent_gold.png"
+                        alt="Logo Taquería La No 4"
+                        className="cce-taqueria-badge-img"
+                      />
                     </div>
                     <div className="cce-schedule-info">
-                      <span className="cce-schedule-label">SEDE Y DIRECCIÓN</span>
+                      <span className="cce-schedule-label">SEDE DEL EVENTO</span>
                       <strong className="cce-schedule-val">Taquería La No 4</strong>
                       <span className="cce-schedule-address">Av. Paseo Triunfo 5617</span>
                     </div>
