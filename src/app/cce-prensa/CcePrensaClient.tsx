@@ -414,29 +414,29 @@ export default function CcePrensaClient() {
           display: none;
         }
 
+        /* Full-Bleed Seamless Theatrical Emerald Spotlight */
         .cce-spotlight {
           position: absolute;
           top: 0;
-          left: 50%;
-          transform: translateX(-50%);
+          left: 0;
+          right: 0;
           width: 100%;
-          max-width: 1300px;
-          height: 75vh;
-          background: radial-gradient(ellipse 95% 75% at 50% -5%, rgba(16, 185, 129, 0.65) 0%, rgba(6, 78, 59, 0.92) 36%, rgba(4, 46, 35, 0.88) 60%, transparent 85%);
+          height: 80vh;
+          background: radial-gradient(ellipse 80% 65% at 50% 0%, rgba(16, 185, 129, 0.52) 0%, rgba(6, 78, 59, 0.78) 38%, rgba(4, 46, 35, 0.5) 65%, transparent 90%);
+          filter: blur(50px);
           pointer-events: none;
         }
 
-        /* Top Theatrical Golden Beam (25% Accent) */
+        /* Top Theatrical Golden Beam (25% Seamless Accent) */
         .cce-spotlight-gold {
           position: absolute;
           top: -80px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 60vw;
-          max-width: 750px;
-          height: 42vh;
-          background: radial-gradient(ellipse at 50% 12%, rgba(255, 245, 204, 0.48) 0%, rgba(245, 222, 152, 0.32) 24%, rgba(212, 175, 55, 0.18) 45%, transparent 75%);
-          filter: blur(40px);
+          left: 0;
+          right: 0;
+          width: 100%;
+          height: 48vh;
+          background: radial-gradient(ellipse 42% 35% at 50% 12%, rgba(255, 245, 204, 0.38) 0%, rgba(245, 222, 152, 0.22) 28%, rgba(212, 175, 55, 0.08) 55%, transparent 75%);
+          filter: blur(55px);
           animation: cceGoldSpotlightBreath 7s ease-in-out infinite alternate;
           pointer-events: none;
           will-change: transform, opacity;
@@ -445,15 +445,15 @@ export default function CcePrensaClient() {
         @keyframes cceGoldSpotlightBreath {
           0% {
             opacity: 0.35;
-            transform: translateX(-50%) scale(0.92);
+            transform: scale(0.95);
           }
           50% {
             opacity: 0.6;
-            transform: translateX(-50%) scale(1.1) translateY(18px);
+            transform: scale(1.08) translateY(15px);
           }
           100% {
-            opacity: 0.42;
-            transform: translateX(-50%) scale(0.96) translateY(-5px);
+            opacity: 0.4;
+            transform: scale(0.98) translateY(-5px);
           }
         }
 
@@ -463,13 +463,13 @@ export default function CcePrensaClient() {
           top: 35vh;
           left: 50%;
           transform: translate(-50%, -50%);
-          width: 55vw;
-          max-width: 720px;
-          height: 55vw;
-          max-height: 720px;
+          width: 65vw;
+          max-width: 800px;
+          height: 65vw;
+          max-height: 800px;
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(245, 222, 152, 0.22) 0%, rgba(212, 175, 55, 0.14) 20%, rgba(16, 185, 129, 0.45) 45%, rgba(6, 78, 59, 0.7) 65%, transparent 85%);
-          filter: blur(80px);
+          background: radial-gradient(circle, rgba(245, 222, 152, 0.18) 0%, rgba(212, 175, 55, 0.12) 18%, rgba(16, 185, 129, 0.42) 42%, rgba(6, 78, 59, 0.65) 65%, transparent 88%);
+          filter: blur(85px);
           animation: cceGoldPulseCenter 9s ease-in-out infinite alternate;
           pointer-events: none;
           will-change: transform, opacity;
@@ -477,16 +477,16 @@ export default function CcePrensaClient() {
 
         @keyframes cceGoldPulseCenter {
           0% {
-            transform: translate(-50%, -50%) scale(0.85);
+            transform: translate(-50%, -50%) scale(0.88);
             opacity: 0.55;
           }
           50% {
-            transform: translate(-48%, -52%) scale(1.18);
-            opacity: 0.85;
+            transform: translate(-48%, -52%) scale(1.15);
+            opacity: 0.8;
           }
           100% {
-            transform: translate(-52%, -48%) scale(0.92);
-            opacity: 0.62;
+            transform: translate(-52%, -48%) scale(0.94);
+            opacity: 0.6;
           }
         }
 
@@ -494,14 +494,14 @@ export default function CcePrensaClient() {
         .cce-gold-ambient-floating {
           position: absolute;
           top: 48vh;
-          left: 62%;
-          width: 44vw;
-          max-width: 580px;
-          height: 44vw;
-          max-height: 580px;
+          left: 58%;
+          width: 50vw;
+          max-width: 650px;
+          height: 50vw;
+          max-height: 650px;
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(212, 175, 55, 0.18) 0%, rgba(5, 150, 105, 0.42) 32%, rgba(6, 78, 59, 0.68) 55%, rgba(4, 46, 35, 0.85) 75%, transparent 88%);
-          filter: blur(85px);
+          background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(5, 150, 105, 0.38) 30%, rgba(6, 78, 59, 0.62) 55%, rgba(4, 46, 35, 0.8) 75%, transparent 90%);
+          filter: blur(95px);
           animation: cceGoldFloat 13s ease-in-out infinite alternate;
           pointer-events: none;
           will-change: transform, opacity;
@@ -509,44 +509,31 @@ export default function CcePrensaClient() {
 
         @keyframes cceGoldFloat {
           0% {
-            transform: translate3d(0, 0, 0) scale(0.9);
-            opacity: 0.45;
+            transform: translate3d(0, 0, 0) scale(0.92);
+            opacity: 0.4;
           }
           50% {
-            transform: translate3d(-12vw, 10vh, 0) scale(1.15);
-            opacity: 0.75;
+            transform: translate3d(-10vw, 8vh, 0) scale(1.12);
+            opacity: 0.7;
           }
           100% {
-            transform: translate3d(-5vw, -8vh, 0) scale(1.02);
-            opacity: 0.52;
+            transform: translate3d(-4vw, -6vh, 0) scale(1.0);
+            opacity: 0.48;
           }
         }
 
-        /* Theatrical Emerald Aurora Sweep with Golden Caustic Fringe */
+        /* Soft Seamless Aurora Glow (Zero Conic Cuts) */
         .cce-gold-shimmer-ray {
           position: absolute;
-          top: -20vh;
-          left: 20%;
-          width: 80vw;
-          height: 80vh;
-          background: conic-gradient(from 180deg at 50% 50%, rgba(6, 78, 59, 0) 0deg, rgba(16, 185, 129, 0.38) 50deg, rgba(212, 175, 55, 0.15) 85deg, rgba(6, 78, 59, 0.45) 140deg, rgba(4, 46, 35, 0.25) 210deg, rgba(243, 202, 64, 0.12) 270deg, rgba(6, 78, 59, 0) 360deg);
-          filter: blur(65px);
-          animation: cceGoldRayRotate 32s linear infinite;
+          top: -10vh;
+          left: 0;
+          right: 0;
+          width: 100%;
+          height: 70vh;
+          background: radial-gradient(ellipse 70% 50% at 50% 20%, rgba(16, 185, 129, 0.35) 0%, rgba(212, 175, 55, 0.12) 35%, rgba(6, 78, 59, 0.25) 60%, transparent 85%);
+          filter: blur(75px);
           pointer-events: none;
-          opacity: 0.52;
-          will-change: transform;
-        }
-
-        @keyframes cceGoldRayRotate {
-          0% {
-            transform: rotate(0deg) scale(1);
-          }
-          50% {
-            transform: rotate(180deg) scale(1.12);
-          }
-          100% {
-            transform: rotate(360deg) scale(1);
-          }
+          opacity: 0.6;
         }
 
         .cce-canvas-orb {
