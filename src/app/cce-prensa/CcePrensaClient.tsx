@@ -2613,11 +2613,6 @@ export default function CcePrensaClient() {
                 {/* Institutional Seal & Sign-off */}
                 <div className="cce-luxury-footer-seal">
                   <div className="cce-seal-content">
-                    <img
-                      src="/assets/cce-juarez/cce_logo_hero_prestige.svg"
-                      alt="CCE Ciudad Juárez"
-                      className="cce-seal-crest"
-                    />
                     <div className="cce-seal-text">
                       <div className="cce-seal-org">CONSEJO COORDINADOR EMPRESARIAL DE CIUDAD JUÁREZ</div>
                       <div className="cce-seal-sub">Comité Organizador · Empresa y Empresario del Año 2026</div>
