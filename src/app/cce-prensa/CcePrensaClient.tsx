@@ -381,7 +381,12 @@ export default function CcePrensaClient() {
           position: relative;
           display: flex;
           flex-direction: column;
-          background: #02120C;
+          background:
+            radial-gradient(1300px 900px at 50% -120px, rgba(16, 185, 129, 0.28) 0%, rgba(6, 78, 59, 0.5) 30%, transparent 70%),
+            radial-gradient(1000px 800px at 90% 25%, rgba(245, 222, 152, 0.22) 0%, rgba(212, 175, 55, 0.15) 30%, rgba(184, 134, 11, 0.06) 55%, transparent 75%),
+            radial-gradient(900px 800px at 10% 65%, rgba(6, 78, 59, 0.42) 0%, rgba(4, 46, 35, 0.2) 45%, transparent 70%),
+            radial-gradient(1200px 900px at 50% 100%, rgba(4, 38, 28, 0.65) 0%, rgba(2, 18, 12, 0.92) 60%, transparent 80%),
+            #010C07;
           width: 100%;
           max-width: 100vw;
           overflow-x: hidden;
@@ -415,7 +420,7 @@ export default function CcePrensaClient() {
           width: 100%;
           max-width: 1200px;
           height: 65vh;
-          background: radial-gradient(ellipse at 50% 0%, rgba(6, 78, 59, 0.42) 0%, rgba(212, 175, 55, 0.08) 45%, transparent 75%);
+          background: radial-gradient(ellipse 90% 70% at 50% -5%, rgba(16, 185, 129, 0.45) 0%, rgba(6, 78, 59, 0.8) 32%, rgba(212, 175, 55, 0.22) 58%, transparent 82%);
           pointer-events: none;
         }
 
@@ -428,7 +433,7 @@ export default function CcePrensaClient() {
           width: 90vw;
           max-width: 1100px;
           height: 60vh;
-          background: radial-gradient(ellipse at 50% 10%, rgba(245, 222, 152, 0.42) 0%, rgba(212, 175, 55, 0.24) 30%, rgba(212, 175, 55, 0.05) 58%, transparent 75%);
+          background: radial-gradient(ellipse at 50% 10%, rgba(255, 245, 204, 0.72) 0%, rgba(245, 222, 152, 0.52) 22%, rgba(212, 175, 55, 0.38) 45%, rgba(184, 134, 11, 0.16) 65%, transparent 85%);
           filter: blur(45px);
           animation: cceGoldSpotlightBreath 7s ease-in-out infinite alternate;
           pointer-events: none;
@@ -437,15 +442,15 @@ export default function CcePrensaClient() {
 
         @keyframes cceGoldSpotlightBreath {
           0% {
-            opacity: 0.45;
+            opacity: 0.6;
             transform: translateX(-50%) scale(0.92);
           }
           50% {
-            opacity: 0.95;
-            transform: translateX(-50%) scale(1.12) translateY(22px);
+            opacity: 1;
+            transform: translateX(-50%) scale(1.15) translateY(22px);
           }
           100% {
-            opacity: 0.55;
+            opacity: 0.7;
             transform: translateX(-50%) scale(0.96) translateY(-5px);
           }
         }
@@ -461,7 +466,7 @@ export default function CcePrensaClient() {
           height: 58vw;
           max-height: 750px;
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(245, 222, 152, 0.38) 0%, rgba(212, 175, 55, 0.22) 32%, rgba(243, 202, 64, 0.08) 60%, transparent 75%);
+          background: radial-gradient(circle, rgba(255, 245, 204, 0.65) 0%, rgba(245, 222, 152, 0.45) 28%, rgba(212, 175, 55, 0.32) 50%, rgba(6, 78, 59, 0.22) 70%, transparent 85%);
           filter: blur(75px);
           animation: cceGoldPulseCenter 9s ease-in-out infinite alternate;
           pointer-events: none;
@@ -471,15 +476,15 @@ export default function CcePrensaClient() {
         @keyframes cceGoldPulseCenter {
           0% {
             transform: translate(-50%, -50%) scale(0.85);
-            opacity: 0.5;
+            opacity: 0.65;
           }
           50% {
-            transform: translate(-48%, -52%) scale(1.22);
-            opacity: 0.95;
+            transform: translate(-48%, -52%) scale(1.25);
+            opacity: 1;
           }
           100% {
             transform: translate(-52%, -48%) scale(0.92);
-            opacity: 0.6;
+            opacity: 0.75;
           }
         }
 
@@ -493,7 +498,7 @@ export default function CcePrensaClient() {
           height: 48vw;
           max-height: 620px;
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(255, 232, 163, 0.35) 0%, rgba(212, 175, 55, 0.2) 35%, rgba(170, 128, 34, 0.06) 65%, transparent 75%);
+          background: radial-gradient(circle, rgba(255, 240, 190, 0.58) 0%, rgba(245, 222, 152, 0.42) 32%, rgba(212, 175, 55, 0.28) 55%, rgba(170, 128, 34, 0.12) 72%, transparent 85%);
           filter: blur(85px);
           animation: cceGoldFloat 13s ease-in-out infinite alternate;
           pointer-events: none;
@@ -503,15 +508,15 @@ export default function CcePrensaClient() {
         @keyframes cceGoldFloat {
           0% {
             transform: translate3d(0, 0, 0) scale(0.9);
-            opacity: 0.45;
+            opacity: 0.55;
           }
           50% {
-            transform: translate3d(-15vw, 12vh, 0) scale(1.18);
-            opacity: 0.92;
+            transform: translate3d(-15vw, 12vh, 0) scale(1.2);
+            opacity: 0.98;
           }
           100% {
             transform: translate3d(-6vw, -10vh, 0) scale(1.02);
-            opacity: 0.55;
+            opacity: 0.65;
           }
         }
 
@@ -522,11 +527,11 @@ export default function CcePrensaClient() {
           left: 20%;
           width: 80vw;
           height: 80vh;
-          background: conic-gradient(from 180deg at 50% 50%, rgba(212, 175, 55, 0) 0deg, rgba(245, 222, 152, 0.18) 60deg, rgba(212, 175, 55, 0) 120deg, rgba(243, 202, 64, 0.14) 220deg, rgba(212, 175, 55, 0) 360deg);
+          background: conic-gradient(from 180deg at 50% 50%, rgba(212, 175, 55, 0) 0deg, rgba(255, 238, 179, 0.3) 60deg, rgba(6, 78, 59, 0.25) 120deg, rgba(212, 175, 55, 0.05) 180deg, rgba(243, 202, 64, 0.24) 260deg, rgba(212, 175, 55, 0) 360deg);
           filter: blur(65px);
           animation: cceGoldRayRotate 32s linear infinite;
           pointer-events: none;
-          opacity: 0.75;
+          opacity: 0.88;
           will-change: transform;
         }
 
@@ -579,10 +584,10 @@ export default function CcePrensaClient() {
           left: -10%;
           width: 50vw;
           height: 50vw;
-          background: radial-gradient(circle, #064E3B 0%, rgba(6, 78, 59, 0) 70%);
+          background: radial-gradient(circle, #10B981 0%, #064E3B 40%, rgba(4, 46, 35, 0.8) 60%, rgba(6, 78, 59, 0) 78%);
           animation: cceOrbMove1 22s ease-in-out infinite alternate;
           transform: translate3d(0, 0, 0);
-          opacity: 0.32;
+          opacity: 0.55;
         }
 
         .cce-orb-2 {
@@ -590,7 +595,7 @@ export default function CcePrensaClient() {
           right: -10%;
           width: 48vw;
           height: 48vw;
-          background: radial-gradient(circle, #F5DE98 0%, #D4AF37 40%, rgba(212, 175, 55, 0) 70%);
+          background: radial-gradient(circle, #FFF6D6 0%, #F5DE98 25%, #D4AF37 50%, rgba(184, 134, 11, 0.4) 70%, rgba(212, 175, 55, 0) 80%);
           animation: cceOrbMove2 14s ease-in-out infinite alternate;
           transform: translate3d(0, 0, 0);
         }
@@ -600,10 +605,10 @@ export default function CcePrensaClient() {
           left: 10%;
           width: 55vw;
           height: 55vw;
-          background: radial-gradient(circle, #042E23 0%, rgba(4, 46, 35, 0) 70%);
+          background: radial-gradient(circle, #059669 0%, #042E23 45%, rgba(4, 46, 35, 0.7) 65%, rgba(4, 46, 35, 0) 80%);
           animation: cceOrbMove3 26s ease-in-out infinite alternate;
           transform: translate3d(0, 0, 0);
-          opacity: 0.35;
+          opacity: 0.58;
         }
 
         .cce-orb-4 {
@@ -611,7 +616,7 @@ export default function CcePrensaClient() {
           right: 5%;
           width: 45vw;
           height: 45vw;
-          background: radial-gradient(circle, #FFE8A3 0%, #F3CA40 40%, rgba(243, 202, 64, 0) 70%);
+          background: radial-gradient(circle, #FFFFFF 0%, #FFE8A3 25%, #F3CA40 50%, rgba(212, 175, 55, 0.35) 70%, rgba(243, 202, 64, 0) 80%);
           animation: cceOrbMove4 16s ease-in-out infinite alternate;
           transform: translate3d(0, 0, 0);
         }
@@ -623,9 +628,9 @@ export default function CcePrensaClient() {
         }
 
         @keyframes cceOrbMove2 {
-          0% { transform: translate3d(0, 0, 0) scale(0.92); opacity: 0.4; }
-          50% { transform: translate3d(-8vw, 10vh, 0) scale(1.22); opacity: 0.88; }
-          100% { transform: translate3d(6vw, -6vh, 0) scale(0.96); opacity: 0.5; }
+          0% { transform: translate3d(0, 0, 0) scale(0.92); opacity: 0.55; }
+          50% { transform: translate3d(-8vw, 10vh, 0) scale(1.22); opacity: 0.98; }
+          100% { transform: translate3d(6vw, -6vh, 0) scale(0.96); opacity: 0.65; }
         }
 
         @keyframes cceOrbMove3 {
@@ -635,9 +640,9 @@ export default function CcePrensaClient() {
         }
 
         @keyframes cceOrbMove4 {
-          0% { transform: translate3d(0, 0, 0) scale(0.9); opacity: 0.38; }
-          50% { transform: translate3d(-7vw, -10vh, 0) scale(1.2); opacity: 0.85; }
-          100% { transform: translate3d(8vw, 8vh, 0) scale(0.95); opacity: 0.45; }
+          0% { transform: translate3d(0, 0, 0) scale(0.9); opacity: 0.5; }
+          50% { transform: translate3d(-7vw, -10vh, 0) scale(1.2); opacity: 0.95; }
+          100% { transform: translate3d(8vw, 8vh, 0) scale(0.95); opacity: 0.6; }
         }
 
         /* Banknote / Official Document Micro-Texture */
@@ -900,28 +905,31 @@ export default function CcePrensaClient() {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          background: rgba(212, 175, 55, 0.12);
-          border: 1px solid rgba(212, 175, 55, 0.35);
-          color: #F5DE98;
+          background: linear-gradient(135deg, rgba(245, 222, 152, 0.22) 0%, rgba(6, 78, 59, 0.45) 50%, rgba(212, 175, 55, 0.18) 100%);
+          border: 1px solid rgba(245, 222, 152, 0.55);
+          color: #FFF3C4;
           font-size: 12px;
           font-weight: 800;
           letter-spacing: 0.1em;
           text-transform: uppercase;
-          padding: 7px 18px;
+          padding: 8px 20px;
           border-radius: 9999px;
           margin-bottom: 22px;
-          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 20px rgba(212, 175, 55, 0.22);
         }
 
         .cce-hero-title {
           font-family: 'Cinzel', serif;
           font-size: clamp(28px, 5vw, 48px);
           font-weight: 900;
-          color: #FFFFFF;
+          background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 35%, #F5DE98 70%, #D4AF37 100%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
           line-height: 1.15;
           letter-spacing: 0.03em;
           margin-bottom: 16px;
-          text-shadow: 0 4px 25px rgba(0, 0, 0, 0.8);
+          filter: drop-shadow(0 4px 25px rgba(0, 0, 0, 0.85));
         }
 
         .cce-hero-subtitle {
@@ -1093,17 +1101,18 @@ export default function CcePrensaClient() {
 
         .cce-luxury-card {
           position: relative;
-          background: radial-gradient(130% 130% at 50% -10%, rgba(6, 78, 59, 0.55) 0%, rgba(3, 35, 26, 0.92) 55%, rgba(1, 15, 10, 0.98) 100%);
+          background: radial-gradient(120% 115% at 50% -8%, rgba(16, 185, 129, 0.35) 0%, rgba(6, 78, 59, 0.78) 32%, rgba(3, 35, 26, 0.96) 68%, rgba(1, 15, 10, 0.99) 100%);
           backdrop-filter: blur(24px);
           -webkit-backdrop-filter: blur(24px);
-          border: 1px solid rgba(212, 175, 55, 0.45);
+          border: 1.5px solid rgba(212, 175, 55, 0.55);
           border-radius: 24px;
           padding: 48px 52px;
           box-shadow:
-            0 30px 80px rgba(0, 0, 0, 0.75),
-            0 0 50px rgba(6, 78, 59, 0.35),
-            inset 0 1px 0 rgba(245, 222, 152, 0.3),
-            inset 0 0 50px rgba(212, 175, 55, 0.04);
+            0 35px 95px rgba(0, 0, 0, 0.9),
+            0 0 75px rgba(6, 78, 59, 0.55),
+            0 0 35px rgba(212, 175, 55, 0.25),
+            inset 0 1px 0 rgba(245, 222, 152, 0.55),
+            inset 0 0 50px rgba(6, 78, 59, 0.35);
           overflow: hidden;
           transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -1111,11 +1120,12 @@ export default function CcePrensaClient() {
         .cce-luxury-card:hover {
           transform: translateY(-2px);
           box-shadow:
-            0 36px 90px rgba(0, 0, 0, 0.85),
-            0 0 60px rgba(212, 175, 55, 0.25),
-            inset 0 1px 0 rgba(245, 222, 152, 0.45),
-            inset 0 0 60px rgba(212, 175, 55, 0.06);
-          border-color: rgba(245, 222, 152, 0.7);
+            0 42px 105px rgba(0, 0, 0, 0.95),
+            0 0 85px rgba(6, 78, 59, 0.7),
+            0 0 45px rgba(212, 175, 55, 0.4),
+            inset 0 1px 0 rgba(255, 245, 204, 0.75),
+            inset 0 0 60px rgba(212, 175, 55, 0.12);
+          border-color: rgba(245, 222, 152, 0.85);
         }
 
         /* Gold Corner Filigree Accents */
@@ -1189,12 +1199,12 @@ export default function CcePrensaClient() {
           font-weight: 800;
           letter-spacing: 0.22em;
           text-transform: uppercase;
-          color: #F5DE98;
-          padding: 8px 22px;
+          color: #FFF6D6;
+          padding: 9px 24px;
           border-radius: 9999px;
-          background: linear-gradient(135deg, rgba(212, 175, 55, 0.18) 0%, rgba(6, 78, 59, 0.4) 100%);
-          border: 1px solid rgba(245, 222, 152, 0.45);
-          box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 232, 163, 0.3);
+          background: linear-gradient(135deg, rgba(6, 78, 59, 0.9) 0%, rgba(212, 175, 55, 0.35) 50%, rgba(4, 46, 35, 0.95) 100%);
+          border: 1px solid rgba(245, 222, 152, 0.65);
+          box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.28), inset 0 1px 0 rgba(255, 245, 204, 0.5);
           margin-bottom: 16px;
         }
 
@@ -1260,11 +1270,14 @@ export default function CcePrensaClient() {
           grid-template-columns: repeat(3, 1fr);
           gap: 20px;
           margin: 32px 0 26px 0;
-          background: rgba(2, 20, 14, 0.78);
-          border: 1px solid rgba(212, 175, 55, 0.32);
+          background: linear-gradient(145deg, rgba(10, 80, 60, 0.75) 0%, rgba(2, 24, 18, 0.95) 52%, rgba(5, 50, 36, 0.82) 100%);
+          border: 1.5px solid rgba(212, 175, 55, 0.48);
           border-radius: 18px;
           padding: 24px;
-          box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5), 0 10px 30px rgba(0, 0, 0, 0.3);
+          box-shadow:
+            inset 0 1px 0 rgba(245, 222, 152, 0.38),
+            inset 0 0 28px rgba(6, 78, 59, 0.45),
+            0 14px 40px rgba(0, 0, 0, 0.55);
         }
 
         .cce-schedule-item {
@@ -1294,13 +1307,13 @@ export default function CcePrensaClient() {
           width: 48px;
           height: 48px;
           border-radius: 13px;
-          background: linear-gradient(135deg, rgba(6, 78, 59, 0.8) 0%, rgba(4, 46, 35, 0.95) 100%);
-          border: 1px solid rgba(212, 175, 55, 0.45);
+          background: linear-gradient(135deg, rgba(16, 185, 129, 0.48) 0%, rgba(6, 78, 59, 0.95) 55%, rgba(2, 30, 22, 1) 100%);
+          border: 1.5px solid rgba(245, 222, 152, 0.65);
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
-          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 16px rgba(52, 211, 153, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.4);
           font-size: 22px;
         }
 
@@ -1308,13 +1321,13 @@ export default function CcePrensaClient() {
           width: 48px;
           height: 48px;
           border-radius: 13px;
-          background: linear-gradient(135deg, rgba(6, 78, 59, 0.8) 0%, rgba(4, 46, 35, 0.95) 100%);
-          border: 1px solid rgba(212, 175, 55, 0.5);
+          background: linear-gradient(135deg, rgba(16, 185, 129, 0.48) 0%, rgba(6, 78, 59, 0.95) 55%, rgba(2, 30, 22, 1) 100%);
+          border: 1.5px solid rgba(245, 222, 152, 0.65);
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
-          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(212, 175, 55, 0.15);
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 18px rgba(212, 175, 55, 0.35), inset 0 0 12px rgba(212, 175, 55, 0.25);
           padding: 4px;
           overflow: hidden;
         }
@@ -1469,19 +1482,28 @@ export default function CcePrensaClient() {
         }
 
         .cce-form-card {
-          background: linear-gradient(180deg, rgba(6, 40, 28, 0.8) 0%, rgba(2, 18, 12, 0.94) 100%);
+          background: radial-gradient(130% 120% at 50% -10%, rgba(16, 185, 129, 0.32) 0%, rgba(6, 55, 38, 0.88) 40%, rgba(2, 20, 14, 0.97) 80%, rgba(1, 12, 8, 1) 100%);
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
-          border: 1px solid rgba(212, 175, 55, 0.35);
+          border: 1.5px solid rgba(212, 175, 55, 0.52);
           border-radius: 22px;
           padding: 40px 36px;
-          box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(245, 222, 152, 0.2);
+          box-shadow:
+            0 30px 80px rgba(0, 0, 0, 0.88),
+            0 0 60px rgba(6, 78, 59, 0.45),
+            0 0 30px rgba(212, 175, 55, 0.22),
+            inset 0 1px 0 rgba(245, 222, 152, 0.5),
+            inset 0 0 40px rgba(6, 78, 59, 0.3);
           transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .cce-form-card:hover {
-          border-color: rgba(245, 222, 152, 0.6);
-          box-shadow: 0 30px 70px rgba(0, 0, 0, 0.85), 0 0 30px rgba(212, 175, 55, 0.25);
+          border-color: rgba(245, 222, 152, 0.85);
+          box-shadow:
+            0 35px 90px rgba(0, 0, 0, 0.95),
+            0 0 75px rgba(6, 78, 59, 0.6),
+            0 0 40px rgba(212, 175, 55, 0.35),
+            inset 0 1px 0 rgba(255, 245, 204, 0.7);
         }
 
         @media (max-width: 640px) {
@@ -1538,10 +1560,11 @@ export default function CcePrensaClient() {
           padding: 12px 18px;
           font-size: 16px; /* Prevents iOS auto-zoom */
           color: #FFFFFF;
-          background-color: rgba(2, 18, 12, 0.7);
-          border: 1.5px solid rgba(212, 175, 55, 0.28);
+          background: linear-gradient(180deg, rgba(1, 15, 10, 0.88) 0%, rgba(3, 28, 19, 0.78) 100%);
+          border: 1.5px solid rgba(212, 175, 55, 0.38);
           border-radius: 12px;
           outline: none;
+          box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.55);
           transition: border-color 0.25s, box-shadow 0.25s, background-color 0.25s;
         }
 
@@ -1551,8 +1574,8 @@ export default function CcePrensaClient() {
 
         .cce-input:focus {
           border-color: #F5DE98;
-          background-color: rgba(2, 18, 12, 0.9);
-          box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2), 0 0 20px rgba(212, 175, 55, 0.35);
+          background: linear-gradient(180deg, rgba(2, 22, 15, 0.95) 0%, rgba(4, 38, 26, 0.88) 100%);
+          box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25), 0 0 28px rgba(212, 175, 55, 0.45), inset 0 1px 0 rgba(245, 222, 152, 0.25);
         }
 
         .cce-input.error {
@@ -1596,19 +1619,19 @@ export default function CcePrensaClient() {
         }
 
         .cce-attendee-btn.selected {
-          background: linear-gradient(135deg, #F5DE98 0%, #D4AF37 50%, #AA8022 100%);
+          background: linear-gradient(135deg, #FFF8DB 0%, #F5DE98 25%, #D4AF37 60%, #AA8022 100%);
           color: #02120C;
           border-color: #FFE8A3;
           font-weight: 800;
-          box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+          box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 0 16px rgba(245, 222, 152, 0.4);
         }
 
         /* Submit Button with Bullion Gradient */
         .cce-submit-btn {
           width: 100%;
           min-height: 54px;
-          background: linear-gradient(135deg, #FFF6D6 0%, #F5DE98 30%, #D4AF37 70%, #AA8022 100%);
-          border: 1px solid #FFE8A3;
+          background: linear-gradient(135deg, #FFFFFF 0%, #FFF3C4 20%, #F5DE98 45%, #D4AF37 75%, #996F15 100%);
+          border: 1.5px solid #FFF1B8;
           border-radius: 14px;
           color: #02120C;
           font-size: 16px;
@@ -1621,14 +1644,14 @@ export default function CcePrensaClient() {
           justify-content: center;
           gap: 10px;
           margin-top: 32px;
-          box-shadow: 0 12px 30px rgba(212, 175, 55, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+          box-shadow: 0 14px 38px rgba(212, 175, 55, 0.5), 0 0 35px rgba(212, 175, 55, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.9), inset 0 -2px 6px rgba(138, 98, 14, 0.5);
           transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, filter 0.2s ease;
         }
 
         .cce-submit-btn:hover:not(:disabled) {
           transform: translateY(-2px);
-          box-shadow: 0 16px 40px rgba(212, 175, 55, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.8);
-          filter: brightness(1.05);
+          box-shadow: 0 18px 48px rgba(212, 175, 55, 0.65), 0 0 45px rgba(212, 175, 55, 0.5), inset 0 1px 0 rgba(255, 255, 255, 1);
+          filter: brightness(1.08);
         }
 
         .cce-submit-btn:active:not(:disabled) {
@@ -1667,31 +1690,35 @@ export default function CcePrensaClient() {
 
         /* CONFIRMATION CARD (R4) */
         .cce-confirmation-card {
-          background: linear-gradient(180deg, rgba(6, 40, 28, 0.85) 0%, rgba(2, 18, 12, 0.95) 100%);
+          background: radial-gradient(130% 120% at 50% -10%, rgba(16, 185, 129, 0.35) 0%, rgba(6, 55, 38, 0.9) 40%, rgba(2, 20, 14, 0.98) 100%);
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
-          border: 1px solid rgba(212, 175, 55, 0.5);
+          border: 1.5px solid rgba(212, 175, 55, 0.6);
           border-radius: 22px;
           padding: 40px 32px;
           text-align: center;
-          box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(212, 175, 55, 0.25);
+          box-shadow:
+            0 30px 85px rgba(0, 0, 0, 0.9),
+            0 0 65px rgba(6, 78, 59, 0.55),
+            0 0 35px rgba(212, 175, 55, 0.3),
+            inset 0 1px 0 rgba(245, 222, 152, 0.55);
         }
 
         .cce-confirmed-seal {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(6, 78, 59, 0.4) 100%);
-          border: 1.5px solid #F5DE98;
-          color: #F5DE98;
-          padding: 10px 22px;
+          background: linear-gradient(135deg, rgba(212, 175, 55, 0.3) 0%, rgba(6, 78, 59, 0.6) 100%);
+          border: 1.5px solid #FFE8A3;
+          color: #FFF6D6;
+          padding: 10px 24px;
           border-radius: 9999px;
           font-size: 14px;
           font-weight: 800;
           letter-spacing: 0.06em;
           text-transform: uppercase;
           margin-bottom: 22px;
-          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.3);
         }
 
         .cce-confirmed-title {
@@ -1703,12 +1730,13 @@ export default function CcePrensaClient() {
         }
 
         .cce-confirmed-summary {
-          background: rgba(2, 18, 12, 0.7);
-          border: 1px solid rgba(212, 175, 55, 0.25);
+          background: linear-gradient(145deg, rgba(4, 38, 28, 0.75) 0%, rgba(2, 18, 12, 0.88) 100%);
+          border: 1.5px solid rgba(212, 175, 55, 0.35);
           border-radius: 14px;
           padding: 22px;
           text-align: left;
           margin: 26px 0;
+          box-shadow: inset 0 1px 0 rgba(245, 222, 152, 0.2);
         }
 
         .cce-summary-row {
@@ -1756,36 +1784,42 @@ export default function CcePrensaClient() {
         }
 
         .cce-btn-google {
-          background: rgba(255, 255, 255, 0.08);
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
           color: #FFFFFF;
-          border: 1.5px solid rgba(212, 175, 55, 0.4);
+          border: 1.5px solid rgba(245, 222, 152, 0.5);
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
         }
 
         .cce-btn-google:hover {
-          background: rgba(255, 255, 255, 0.15);
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.1) 100%);
           border-color: #F5DE98;
+          box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
         }
 
         .cce-btn-apple {
-          background: linear-gradient(135deg, #064E3B 0%, #042E23 100%);
+          background: linear-gradient(135deg, #059669 0%, #064E3B 50%, #02261C 100%);
           color: #FFFFFF;
-          border: 1.5px solid rgba(52, 211, 153, 0.4);
+          border: 1.5px solid rgba(52, 211, 153, 0.65);
+          box-shadow: 0 4px 20px rgba(5, 150, 105, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
         }
 
         .cce-btn-apple:hover {
-          background: linear-gradient(135deg, #059669 0%, #064E3B 100%);
-          border-color: #34D399;
+          background: linear-gradient(135deg, #10B981 0%, #059669 50%, #042E23 100%);
+          border-color: #6EE7B7;
+          box-shadow: 0 6px 24px rgba(16, 185, 129, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.5);
         }
 
         .cce-btn-maps {
-          background: rgba(212, 175, 55, 0.15);
-          color: #F5DE98;
-          border: 1.5px solid rgba(212, 175, 55, 0.5);
+          background: linear-gradient(135deg, rgba(245, 222, 152, 0.32) 0%, rgba(212, 175, 55, 0.22) 50%, rgba(138, 98, 14, 0.18) 100%);
+          color: #FFF6D6;
+          border: 1.5px solid rgba(245, 222, 152, 0.65);
+          box-shadow: 0 4px 18px rgba(212, 175, 55, 0.3);
         }
 
         .cce-btn-maps:hover {
-          background: rgba(212, 175, 55, 0.25);
+          background: linear-gradient(135deg, rgba(255, 243, 196, 0.45) 0%, rgba(245, 222, 152, 0.32) 50%, rgba(170, 128, 34, 0.25) 100%);
           border-color: #FFE8A3;
+          box-shadow: 0 6px 24px rgba(212, 175, 55, 0.5);
         }
 
         /* PRIVATE CRM SECTION */
