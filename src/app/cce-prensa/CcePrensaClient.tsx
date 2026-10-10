@@ -920,7 +920,7 @@ export default function CcePrensaClient() {
            ========================================================================= */
         .cce-luxury-card-wrapper {
           max-width: 860px;
-          margin: 84px auto 52px auto;
+          margin: 84px auto 130px auto;
           width: 100%;
           padding: 0 12px;
           position: relative;
@@ -1389,7 +1389,7 @@ export default function CcePrensaClient() {
 
         @media (max-width: 640px) {
           .cce-luxury-card-wrapper {
-            margin: 64px auto 36px auto;
+            margin: 64px auto 96px auto;
             padding: 0 16px;
           }
           .cce-lambrin-niche {
