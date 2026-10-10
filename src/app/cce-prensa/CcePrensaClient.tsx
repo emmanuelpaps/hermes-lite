@@ -881,7 +881,7 @@ export default function CcePrensaClient() {
         .cce-hero {
           position: relative;
           z-index: 1;
-          padding: 40px 20px 32px 20px;
+          padding: 64px 20px 32px 20px;
           text-align: center;
           max-width: 920px;
           margin: 0 auto;
@@ -912,7 +912,7 @@ export default function CcePrensaClient() {
 
         @media (max-width: 640px) {
           .cce-hero {
-            padding-top: 28px;
+            padding-top: 44px;
           }
           .cce-hero-logo-box {
             margin-bottom: 18px;
@@ -2172,62 +2172,45 @@ export default function CcePrensaClient() {
         <div className="cce-canvas-texture" />
       </div>
 
-      {/* TOP HEADER */}
-      <header className={`cce-header ${isAdmin && adminTab === 'crm' ? 'is-crm-header' : 'is-gala-header'} ${isAdmin ? 'has-admin' : ''}`}>
-        <div className="cce-header-inner">
-          <div className="cce-brand-left">
-            {/* CCE JUÁREZ LOGO */}
-            <img
-              src="/assets/cce-juarez/logo_cce.png"
-              alt="Consejo Coordinador Empresarial Ciudad Juárez"
-              className="cce-logo-img"
-            />
-            <div className="cce-brand-divider" />
-            <div className="cce-council-tag">
-              CCE Ciudad Juárez
-              <span>Rueda de Prensa Oficial</span>
-            </div>
-          </div>
-
-          <div className="cce-header-right">
-            {isAdmin && (
-              <>
-                <div className="cce-admin-badge">
-                  <ShieldCheck size={14} />
-                  <span>Admin Conectado</span>
-                </div>
-                <div className="cce-tab-toggle">
-                  <button
-                    className={`cce-tab-btn ${adminTab === 'crm' ? 'active' : ''}`}
-                    onClick={() => setAdminTab('crm')}
-                  >
-                    Panel CRM
-                  </button>
-                  <button
-                    className={`cce-tab-btn ${adminTab === 'public' ? 'active' : ''}`}
-                    onClick={() => setAdminTab('public')}
-                  >
-                    Ver Registro
-                  </button>
-                </div>
-              </>
-            )}
-
-            {/* APOLOGRAMA ATTRIBUTION LOGO */}
-            <img
-              src="/assets/apolograma-logo-v2.png"
-              alt="Apolograma Studio"
-              className="cce-apolograma-brand-logo"
-              style={{
-                height: '22px',
-                width: 'auto',
-                opacity: 0.9,
-                filter: isAdmin && adminTab === 'crm' ? 'brightness(0.12)' : 'brightness(0) invert(1)',
-              }}
-            />
-          </div>
+      {/* FLOATING ADMIN CONTROLS (Only visible when authenticated with ?admin=cce2026 and viewing public registration) */}
+      {isAdmin && adminTab === 'public' && (
+        <div
+          style={{
+            position: 'fixed',
+            top: '16px',
+            right: '16px',
+            zIndex: 1000,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            background: 'rgba(2, 18, 12, 0.92)',
+            border: '1px solid rgba(212, 175, 55, 0.45)',
+            borderRadius: '9999px',
+            padding: '6px 14px',
+            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.6)',
+            backdropFilter: 'blur(12px)',
+          }}
+        >
+          <ShieldCheck size={14} color="#F5DE98" />
+          <span style={{ fontSize: '11px', color: '#F5DE98', fontWeight: 700 }}>Admin Conectado</span>
+          <button
+            type="button"
+            onClick={() => setAdminTab('crm')}
+            style={{
+              background: '#D4AF37',
+              color: '#02120C',
+              border: 'none',
+              borderRadius: '20px',
+              padding: '4px 12px',
+              fontSize: '11px',
+              fontWeight: 800,
+              cursor: 'pointer',
+            }}
+          >
+            Panel CRM
+          </button>
         </div>
-      </header>
+      )}
 
       {/* ADMIN CRM VIEW (Visible when ?admin=cce2026 and adminTab === 'crm') */}
       {isAdmin && adminTab === 'crm' ? (
@@ -2253,6 +2236,14 @@ export default function CcePrensaClient() {
                 <Users size={15} />
                 <span>Capacidad confirmada: <b>{crmData?.telemetry.totalAsistentes ?? 0}</b> asistentes</span>
               </div>
+              <button
+                type="button"
+                className="cce-crm-btn cce-crm-btn-secondary"
+                onClick={() => setAdminTab('public')}
+                title="Ver la landing pública de acreditación"
+              >
+                Ver Landing
+              </button>
               <button className="cce-crm-btn cce-crm-btn-secondary" onClick={fetchCrmData} disabled={isLoadingCrm}>
                 <RefreshCw size={14} className={isLoadingCrm ? 'cce-spinner' : ''} />
                 Actualizar
@@ -2881,12 +2872,24 @@ export default function CcePrensaClient() {
       {/* FOOTER */}
       <footer className="cce-footer">
         <div className="cce-footer-inner">
+          <img
+            src="/assets/apolograma-logo-v2.png"
+            alt="Apolograma Studio"
+            style={{
+              height: '18px',
+              width: 'auto',
+              opacity: 0.85,
+              marginBottom: '6px',
+              filter: isAdmin && adminTab === 'crm' ? 'brightness(0.12)' : 'brightness(0) invert(1)',
+            }}
+          />
           <div>
             <b>Consejo Coordinador Empresarial de Ciudad Juárez</b> · Comité Organizador Empresario del Año 2026
           </div>
           <div className="cce-footer-sub">
             Plataforma institucional de acreditación de prensa desarrollada y operada por <b>Apolograma Studio</b>.
           </div>
+          {/* Institutional Asset Reference: /assets/cce-juarez/logo_cce.png */}
         </div>
       </footer>
     </div>

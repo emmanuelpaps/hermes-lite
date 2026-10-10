@@ -38,6 +38,10 @@ export const metadata: Metadata = {
     index: false,
     follow: false,
   },
+  icons: {
+    icon: '/assets/cce-juarez/logo_cce.png',
+    apple: '/assets/cce-juarez/logo_cce.png',
+  },
 };
 
 export default function CcePrensaPage() {
