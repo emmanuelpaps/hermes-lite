@@ -417,15 +417,18 @@ describe('Tier 1: Feature Coverage (F1 - F26)', () => {
       assert.ok(fullAppText.includes('Paseo Triunfo'), 'Must state Av. Paseo Triunfo 5617');
     });
 
-    it('[T1-F01-04] Carlos Loret de Mola keynote & Pedro Francisco sculptural awards referenced', () => {
-      assert.ok(fullAppText.includes('Carlos Loret de Mola'), 'Must feature Carlos Loret de Mola keynote');
-      assert.ok(fullAppText.includes('Pedro Francisco'), 'Must feature Ciudad Juárez sculptor Pedro Francisco');
-      assert.ok(/galard[oó]n/i.test(fullAppText), 'Must reference official sculptural awards');
+    it('[T1-F01-04] Official luxury invitation letter renders verbatim without premature leaks', () => {
+      assert.ok(fullAppText.includes('Buen día, compañeros'), 'Must include official salutation');
+      assert.ok(fullAppText.includes('Empresa y Empresario del Año 2026'), 'Must feature Empresa y Empresario del Año 2026');
+      assert.ok(fullAppText.includes('compartir con los medios de comunicación los detalles'), 'Must emphasize sharing details with press');
+      assert.ok(fullAppText.includes('Les agradeceré mucho confirmar su asistencia'), 'Must include official closing');
     });
 
-    it('[T1-F01-05] Institutional presidential protocol: Mtro. Iván Lara acknowledged formally', () => {
-      assert.ok(fullAppText.includes('Iván Lara') || fullAppText.includes('Ivan Lara'), 'Must reference CCE President Iván Lara');
-      assert.ok(/Mtro\.?\s+Iv[aá]n\s+Lara/i.test(fullAppText), 'Must observe formal Mtro. title protocol');
+    it('[T1-F01-05] Strict Event Secrecy & Protocol: 0 occurrences of Carlos Loret de Mola, Pedro Francisco, and Iván Lara', () => {
+      const confidentialSpoilers = ['Carlos Loret de Mola', 'Loret', 'Pedro Francisco', 'Iván Lara', 'Ivan Lara'];
+      for (const term of confidentialSpoilers) {
+        assert.ok(!fullAppText.includes(term), `Confidential event detail "${term}" must NOT appear anywhere in the tool to prevent press leaks`);
+      }
     });
   });
 
@@ -1062,8 +1065,20 @@ describe('Tier 3: Cross-Feature Interactions', () => {
     assert.equal(googleTimestamp, icsTimestamp, 'Google Calendar and Apple .ics must use matching start UTC timestamps');
   });
 
-  it('[T3-CROSS-06] Brand isolation invariant across all layers: HTML, client component, and API responses', () => {
-    const forbidden = ['FN1', 'Frontera Número Uno', 'Juárez Number One', 'puerta-juarez.png', 'ruleta', 'ROI'];
+  it('[T3-CROSS-06] Brand isolation and event secrecy invariant across all layers: HTML, client component, and API responses', () => {
+    const forbidden = [
+      'FN1',
+      'Frontera Número Uno',
+      'Juárez Number One',
+      'puerta-juarez.png',
+      'ruleta',
+      'ROI',
+      'Carlos Loret',
+      'Loret',
+      'Pedro Francisco',
+      'Iván Lara',
+      'Ivan Lara',
+    ];
     for (const term of forbidden) {
       assert.ok(!fullAppText.includes(term), `Forbidden term "${term}" must not appear anywhere in client, page, or API code`);
     }

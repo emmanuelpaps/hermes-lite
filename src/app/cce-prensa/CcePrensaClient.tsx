@@ -179,9 +179,9 @@ export default function CcePrensaClient() {
   const handleGoogleCalendar = () => {
     const title = encodeURIComponent('Desayuno y Rueda de Prensa · CCE Ciudad Juárez');
     const details = encodeURIComponent(
-      'Confirmación oficial de asistencia para la presentación de galardones escultóricos de Pedro Francisco y conferencia magistral de Carlos Loret de Mola para Empresario del Año 2026.\n\nSede: Taquería La No 4 (Av. Paseo Triunfo de la República 5617).\nContacto de confirmación: CCE Ciudad Juárez.'
+      'Invitación oficial y confirmación de asistencia para el desayuno y rueda de prensa del Consejo Coordinador Empresarial de Ciudad Juárez, con el propósito de presentar oficialmente los detalles del próximo evento Empresa y Empresario del Año 2026.\n\nSede: Taquería La No 4 (Av. Paseo Triunfo 5617).\nContacto: Consejo Coordinador Empresarial de Ciudad Juárez.'
     );
-    const location = encodeURIComponent('Taquería La No 4, Av. Paseo Triunfo de la República 5617, Ciudad Juárez, Chih.');
+    const location = encodeURIComponent('Taquería La No 4, Av. Paseo Triunfo 5617, Ciudad Juárez, Chih.');
     const dates = '20261012T150000Z/20261012T163000Z';
     const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}&sprop=name:CCE%20Juarez`;
 
@@ -200,9 +200,9 @@ export default function CcePrensaClient() {
       'DTSTAMP:20261010T000000Z',
       'DTSTART:20261012T150000Z',
       'DTEND:20261012T163000Z',
-      'SUMMARY:Desayuno y Rueda de Prensa · CCE Ciudad Juárez (Empresario del Año 2026)',
-      'DESCRIPTION:Presentación oficial de los galardones escultóricos de Pedro Francisco y la conferencia magistral de Carlos Loret de Mola para Empresario del Año 2026. Evento exclusivo para medios y reporteros convocados. Ubicación: Taquería La No 4: https://maps.app.goo.gl/6PvgdE8poTMiSxcN6',
-      'LOCATION:Taquería La No 4, Av. Paseo Triunfo de la República 5617, Ciudad Juárez, Chihuahua',
+      'SUMMARY:Desayuno y Rueda de Prensa · CCE Ciudad Juárez (Empresa y Empresario del Año 2026)',
+      'DESCRIPTION:Desayuno y rueda de prensa del Consejo Coordinador Empresarial de Ciudad Juárez con el propósito de presentar oficialmente los detalles del próximo evento Empresa y Empresario del Año 2026. Ubicación: Taquería La No 4: https://maps.app.goo.gl/6PvgdE8poTMiSxcN6',
+      'LOCATION:Taquería La No 4, Av. Paseo Triunfo 5617, Ciudad Juárez, Chihuahua',
       'STATUS:CONFIRMED',
       'END:VEVENT',
       'END:VCALENDAR',
@@ -1086,127 +1086,227 @@ export default function CcePrensaClient() {
           margin: 0;
         }
 
-        /* KEYNOTE POSTER SHOWCASE (R3: CARLOS LORET DE MOLA) */
-        .cce-keynote-wrapper {
-          max-width: 920px;
-          margin: 0 auto 40px auto;
+        /* =========================================================================
+           LUXURY CONVOCATORIA INVITATION CARD ("Caja de texto de lujo")
+           ========================================================================= */
+        .cce-luxury-card-wrapper {
+          max-width: 860px;
+          margin: 0 auto 48px auto;
           width: 100%;
-          padding: 0 10px;
+          padding: 0 12px;
           position: relative;
-          z-index: 1;
+          z-index: 2;
         }
 
-        .cce-keynote-card {
+        .cce-luxury-card {
           position: relative;
-          background: linear-gradient(135deg, rgba(6, 40, 28, 0.8) 0%, rgba(2, 18, 12, 0.95) 100%);
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
-          border: 1px solid rgba(212, 175, 55, 0.4);
-          border-radius: 22px;
-          padding: 32px;
-          box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(245, 222, 152, 0.25);
-          transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+          background: radial-gradient(130% 130% at 50% -10%, rgba(6, 78, 59, 0.55) 0%, rgba(3, 35, 26, 0.92) 55%, rgba(1, 15, 10, 0.98) 100%);
+          backdrop-filter: blur(24px);
+          -webkit-backdrop-filter: blur(24px);
+          border: 1px solid rgba(212, 175, 55, 0.45);
+          border-radius: 24px;
+          padding: 48px 52px;
+          box-shadow:
+            0 30px 80px rgba(0, 0, 0, 0.75),
+            0 0 50px rgba(6, 78, 59, 0.35),
+            inset 0 1px 0 rgba(245, 222, 152, 0.3),
+            inset 0 0 50px rgba(212, 175, 55, 0.04);
           overflow: hidden;
+          transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .cce-keynote-card:hover {
-          transform: translateY(-3px);
-          border-color: #F5DE98;
-          box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), 0 0 35px rgba(212, 175, 55, 0.3);
+        .cce-luxury-card:hover {
+          transform: translateY(-2px);
+          box-shadow:
+            0 36px 90px rgba(0, 0, 0, 0.85),
+            0 0 60px rgba(212, 175, 55, 0.25),
+            inset 0 1px 0 rgba(245, 222, 152, 0.45),
+            inset 0 0 60px rgba(212, 175, 55, 0.06);
+          border-color: rgba(245, 222, 152, 0.7);
         }
 
-        /* Luxury Corner Filigree Brackets */
-        .cce-keynote-card::before {
-          content: '';
+        /* Gold Corner Filigree Accents */
+        .cce-corner-bracket {
           position: absolute;
-          top: 12px;
-          left: 12px;
-          width: 24px;
-          height: 24px;
+          width: 26px;
+          height: 26px;
+          pointer-events: none;
+          z-index: 3;
+        }
+
+        .cce-corner-tl {
+          top: 14px;
+          left: 14px;
           border-top: 2px solid #F5DE98;
           border-left: 2px solid #F5DE98;
-          pointer-events: none;
         }
 
-        .cce-keynote-card::after {
-          content: '';
-          position: absolute;
-          bottom: 12px;
-          right: 12px;
-          width: 24px;
-          height: 24px;
+        .cce-corner-tr {
+          top: 14px;
+          right: 14px;
+          border-top: 2px solid #F5DE98;
+          border-right: 2px solid #F5DE98;
+        }
+
+        .cce-corner-bl {
+          bottom: 14px;
+          left: 14px;
+          border-bottom: 2px solid #F5DE98;
+          border-left: 2px solid #F5DE98;
+        }
+
+        .cce-corner-br {
+          bottom: 14px;
+          right: 14px;
           border-bottom: 2px solid #F5DE98;
           border-right: 2px solid #F5DE98;
+        }
+
+        /* Watermark Background Seal */
+        .cce-luxury-watermark {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 480px;
+          height: 480px;
+          opacity: 0.035;
           pointer-events: none;
+          background: url('/assets/cce-juarez/cce_logo_hero_prestige.svg') no-repeat center center;
+          background-size: contain;
+          filter: drop-shadow(0 0 30px #D4AF37);
         }
 
-        .cce-keynote-inner {
-          display: flex;
-          flex-direction: row;
-          gap: 32px;
-          align-items: center;
-        }
-
-        @media (max-width: 768px) {
-          .cce-keynote-inner {
-            flex-direction: column;
-            text-align: center;
-          }
-        }
-
-        .cce-keynote-media {
-          flex-shrink: 0;
-          width: 230px;
+        /* Luxury Ribbon Header */
+        .cce-luxury-header {
           display: flex;
           flex-direction: column;
           align-items: center;
-        }
-
-        @media (max-width: 768px) {
-          .cce-keynote-media {
-            width: 100%;
-            max-width: 220px;
-            margin: 0 auto;
-          }
-        }
-
-        .cce-keynote-frame {
+          margin-bottom: 32px;
           position: relative;
+          z-index: 2;
+        }
+
+        .cce-luxury-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          font-family: 'Cinzel', serif;
+          font-size: 11.5px;
+          font-weight: 800;
+          letter-spacing: 0.22em;
+          text-transform: uppercase;
+          color: #F5DE98;
+          padding: 8px 22px;
+          border-radius: 9999px;
+          background: linear-gradient(135deg, rgba(212, 175, 55, 0.18) 0%, rgba(6, 78, 59, 0.4) 100%);
+          border: 1px solid rgba(245, 222, 152, 0.45);
+          box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 232, 163, 0.3);
+          margin-bottom: 16px;
+        }
+
+        .cce-luxury-divider {
+          display: flex;
+          align-items: center;
+          justify-content: center;
           width: 100%;
-          aspect-ratio: 3/4;
-          border-radius: 16px;
-          overflow: hidden;
-          box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7);
-          border: 2px solid #D4AF37;
+          max-width: 320px;
+          gap: 12px;
         }
 
-        .cce-keynote-img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: center top;
-          display: block;
-          transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        .cce-luxury-divider-line {
+          flex: 1;
+          height: 1px;
+          background: linear-gradient(90deg, rgba(212, 175, 55, 0) 0%, rgba(212, 175, 55, 0.6) 100%);
         }
 
-        .cce-keynote-card:hover .cce-keynote-img {
-          transform: scale(1.04);
+        .cce-luxury-divider-line:last-child {
+          background: linear-gradient(90deg, rgba(212, 175, 55, 0.6) 0%, rgba(212, 175, 55, 0) 100%);
         }
 
-        .cce-keynote-frame-border {
-          position: absolute;
-          inset: 0;
-          border-radius: 14px;
-          box-shadow: inset 0 -35px 30px rgba(2, 18, 12, 0.8), inset 0 0 15px rgba(212, 175, 55, 0.3);
-          pointer-events: none;
+        .cce-luxury-divider-emblem {
+          color: #F5DE98;
+          font-size: 11px;
+          filter: drop-shadow(0 0 6px rgba(245, 222, 152, 0.8));
         }
 
-        .cce-keynote-caption {
-          margin-top: 12px;
-          text-align: center;
+        /* Letter Body */
+        .cce-luxury-letter {
+          position: relative;
+          z-index: 2;
+          text-align: left;
         }
 
-        .cce-keynote-role {
+        .cce-luxury-salutation {
+          font-family: 'Cinzel', serif;
+          font-size: clamp(21px, 2.4vw, 26px);
+          font-weight: 700;
+          color: #FFFFFF;
+          margin-bottom: 22px;
+          letter-spacing: 0.01em;
+          text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+        }
+
+        .cce-luxury-paragraph {
+          font-size: clamp(15.5px, 1.35vw, 17px);
+          line-height: 1.82;
+          color: #E2E8F0;
+          margin-bottom: 26px;
+          font-weight: 400;
+          letter-spacing: -0.005em;
+        }
+
+        .cce-luxury-paragraph strong {
+          color: #FFFFFF;
+          font-weight: 600;
+        }
+
+        /* Coordinate Schedule Grid */
+        .cce-luxury-schedule {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 16px;
+          margin: 32px 0;
+          background: rgba(2, 20, 14, 0.72);
+          border: 1px solid rgba(212, 175, 55, 0.32);
+          border-radius: 18px;
+          padding: 24px;
+          box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5), 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .cce-schedule-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 14px;
+        }
+
+        .cce-schedule-item-venue {
+          grid-column: 1 / -1;
+          padding-top: 14px;
+          border-top: 1px solid rgba(212, 175, 55, 0.18);
+        }
+
+        .cce-schedule-icon-wrap {
+          width: 44px;
+          height: 44px;
+          border-radius: 12px;
+          background: linear-gradient(135deg, rgba(6, 78, 59, 0.7) 0%, rgba(4, 46, 35, 0.9) 100%);
+          border: 1px solid rgba(212, 175, 55, 0.4);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+          font-size: 20px;
+        }
+
+        .cce-schedule-info {
+          display: flex;
+          flex-direction: column;
+          gap: 3px;
+        }
+
+        .cce-schedule-label {
           font-size: 11px;
           font-weight: 800;
           color: #F5DE98;
@@ -1215,107 +1315,107 @@ export default function CcePrensaClient() {
           font-family: 'Cinzel', serif;
         }
 
-        .cce-keynote-content {
-          flex: 1;
+        .cce-schedule-val {
+          font-size: 17px;
+          font-weight: 700;
+          color: #FFFFFF;
+          letter-spacing: -0.01em;
+        }
+
+        .cce-schedule-address {
+          font-size: 14px;
+          color: #94A3B8;
+          margin-top: 2px;
+        }
+
+        .cce-luxury-closing {
+          font-size: clamp(16px, 1.4vw, 17.5px);
+          font-weight: 700;
+          color: #F5DE98;
+          margin-top: 6px;
+          margin-bottom: 32px;
+          line-height: 1.6;
+          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Institutional Seal Footer */
+        .cce-luxury-footer-seal {
+          position: relative;
+          padding-top: 22px;
+          border-top: 1px solid rgba(212, 175, 55, 0.22);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 18px;
+        }
+
+        .cce-seal-content {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+        }
+
+        .cce-seal-crest {
+          width: 44px;
+          height: auto;
+          filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+        }
+
+        .cce-seal-text {
           display: flex;
           flex-direction: column;
-          gap: 14px;
+          gap: 3px;
           text-align: left;
         }
 
-        @media (max-width: 768px) {
-          .cce-keynote-content {
-            text-align: center;
-            align-items: center;
-          }
+        .cce-seal-org {
+          font-family: 'Cinzel', serif;
+          font-size: 12.5px;
+          font-weight: 800;
+          letter-spacing: 0.08em;
+          color: #F5DE98;
         }
 
-        .cce-keynote-badges {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 10px;
-          align-items: center;
+        .cce-seal-sub {
+          font-size: 12px;
+          color: #94A3B8;
         }
 
-        @media (max-width: 768px) {
-          .cce-keynote-badges {
-            justify-content: center;
-          }
-        }
-
-        .cce-badge-pulse {
+        .cce-seal-badge {
           display: inline-flex;
           align-items: center;
           gap: 6px;
-          font-size: 11px;
-          font-weight: 800;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
           padding: 6px 14px;
           border-radius: 9999px;
-          animation: goldPulse 3s ease-in-out infinite;
-        }
-
-        .cce-badge-gold {
-          background: rgba(212, 175, 55, 0.15);
-          color: #F5DE98;
-          border: 1px solid rgba(212, 175, 55, 0.5);
-        }
-
-        .cce-badge-emerald {
-          background: rgba(6, 78, 59, 0.35);
+          background: rgba(6, 78, 59, 0.4);
+          border: 1px solid rgba(52, 211, 153, 0.3);
           color: #34D399;
-          border: 1px solid rgba(52, 211, 153, 0.35);
-        }
-
-        @keyframes goldPulse {
-          0%, 100% {
-            box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
-            border-color: rgba(212, 175, 55, 0.5);
-          }
-          50% {
-            box-shadow: 0 0 0 6px rgba(212, 175, 55, 0);
-            border-color: rgba(245, 222, 152, 0.9);
-          }
-        }
-
-        .cce-keynote-title {
-          font-family: 'Cinzel', serif;
-          font-size: clamp(22px, 2.6vw, 28px);
-          font-weight: 800;
-          color: #FFFFFF;
-          line-height: 1.25;
-          letter-spacing: 0.02em;
-        }
-
-        .cce-keynote-bio {
-          font-size: 14px;
-          line-height: 1.65;
-          color: #CBD5E1;
-        }
-
-        .cce-keynote-protocol {
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-          padding: 14px 18px;
-          background: rgba(2, 18, 12, 0.65);
-          border-left: 3px solid #D4AF37;
-          border-radius: 0 10px 10px 0;
-          font-size: 13px;
-          color: #E2E8F0;
-          text-align: left;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.04em;
         }
 
         @media (max-width: 768px) {
-          .cce-keynote-protocol {
-            text-align: left;
-            width: 100%;
+          .cce-luxury-card {
+            padding: 34px 22px;
+            border-radius: 20px;
           }
-        }
 
-        .cce-protocol-item b {
-          color: #F5DE98;
+          .cce-luxury-schedule {
+            grid-template-columns: 1fr;
+            padding: 18px;
+            gap: 18px;
+          }
+
+          .cce-schedule-item-venue {
+            padding-top: 18px;
+          }
+
+          .cce-luxury-footer-seal {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 14px;
+          }
         }
 
         /* VIP ACCREDITATION TERMINAL (R4) */
@@ -2489,128 +2589,109 @@ export default function CcePrensaClient() {
               </motion.h1>
 
               <div className="cce-hero-subtitle">
-                Consejo Coordinador Empresarial de Ciudad Juárez | <span className="cce-golden-shimmer">Empresario del Año 2026</span>
-              </div>
-
-              <p className="cce-hero-description">
-                El Consejo Coordinador Empresarial de Ciudad Juárez convoca formalmente a los medios de comunicación y
-                reporteros de la frontera a la rueda de prensa y desayuno oficial con motivo de la presentación de los
-                galardones escultóricos de Pedro Francisco y la conferencia magistral de <span className="cce-golden-shimmer">Carlos Loret de Mola</span>.
-              </p>
-
-              <div className="cce-protocol-badge">
-                Preside el evento: <b>Mtro. Iván Lara</b> · Presidente del CCE Ciudad Juárez
+                Consejo Coordinador Empresarial de Ciudad Juárez | <span className="cce-golden-shimmer">Empresa y Empresario del Año 2026</span>
               </div>
             </motion.div>
-
-            {/* MONOLITHIC VIP CREDENTIAL PASS BAR (REPLACES 3 LOOSE CARDS) */}
-            <div className="cce-details-strip cce-vip-pass-bar">
-              <div className="cce-vip-pass-inner">
-                <div className="cce-vip-pass-grid">
-                  {/* Segment 1: Fecha */}
-                  <div className="cce-detail-card cce-vip-pass-col">
-                    <div className="cce-detail-icon cce-vip-pass-icon-box">
-                      <Calendar size={22} />
-                    </div>
-                    <div>
-                      <div className="cce-detail-label cce-vip-pass-label">Fecha Oficial</div>
-                      <div className="cce-detail-value cce-vip-pass-value">Lunes 12 de Octubre, 2026</div>
-                      <div className="cce-detail-hint cce-vip-pass-hint">Recepción y Desayuno</div>
-                    </div>
-                  </div>
-
-                  <div className="cce-vip-pass-divider" />
-
-                  {/* Segment 2: Horario */}
-                  <div className="cce-detail-card cce-vip-pass-col">
-                    <div className="cce-detail-icon cce-vip-pass-icon-box">
-                      <Clock size={22} />
-                    </div>
-                    <div>
-                      <div className="cce-detail-label cce-vip-pass-label">Horario Protocolario</div>
-                      <div className="cce-detail-value cce-vip-pass-value">9:00 a.m. en punto</div>
-                      <div className="cce-detail-hint cce-vip-pass-hint">Rueda de Prensa y Preguntas</div>
-                    </div>
-                  </div>
-
-                  <div className="cce-vip-pass-divider" />
-
-                  {/* Segment 3: Sede */}
-                  <div className="cce-detail-card cce-vip-pass-col">
-                    <div className="cce-detail-icon cce-vip-pass-icon-box">
-                      <MapPin size={22} />
-                    </div>
-                    <div>
-                      <div className="cce-detail-label cce-vip-pass-label">Sede del Evento</div>
-                      <div className="cce-detail-value cce-vip-pass-value">Taquería La No 4</div>
-                      <div className="cce-detail-hint cce-vip-pass-hint">Av. Paseo Triunfo 5617</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Integrated Exclusivity Strip */}
-                <div className="cce-notice-pill cce-vip-pass-footer">
-                  <ShieldCheck size={16} />
-                  <span>Evento exclusivo para medios de comunicación, agencias y reporteros convocados.</span>
-                </div>
-              </div>
-            </div>
           </section>
 
-          {/* KEYNOTE POSTER SHOWCASE (CARLOS LORET DE MOLA) */}
-          <div className="cce-keynote-wrapper">
+          {/* LUXURY CONVOCATORIA INVITATION CARD ("Caja de texto de lujo") */}
+          <div className="cce-luxury-card-wrapper">
             <motion.div
               initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] as const }}
-              className="cce-keynote-card"
+              className="cce-luxury-card"
             >
-              <div className="cce-keynote-inner">
-                <div className="cce-keynote-media">
-                  <div className="cce-keynote-frame">
-                    <img
-                      src="/assets/cce-juarez/carlos_loret_de_mola.jpg"
-                      alt="Carlos Loret de Mola"
-                      className="cce-keynote-img"
-                      loading="eager"
-                      onError={(e) => {
-                        e.currentTarget.src = "/assets/cce-juarez/carlos-loret-de-mola.jpg";
-                      }}
-                    />
-                    <div className="cce-keynote-frame-border" />
+              {/* Corner Filigree Brackets */}
+              <div className="cce-corner-bracket cce-corner-tl" />
+              <div className="cce-corner-bracket cce-corner-tr" />
+              <div className="cce-corner-bracket cce-corner-bl" />
+              <div className="cce-corner-bracket cce-corner-br" />
+
+              {/* Watermark Crest */}
+              <div className="cce-luxury-watermark" aria-hidden="true" />
+
+              {/* Header Ribbon */}
+              <div className="cce-luxury-header">
+                <div className="cce-luxury-badge">
+                  <Sparkles size={13} color="#F5DE98" />
+                  CONVOCATORIA OFICIAL DE PRENSA
+                  <Sparkles size={13} color="#F5DE98" />
+                </div>
+                <div className="cce-luxury-divider">
+                  <span className="cce-luxury-divider-line" />
+                  <span className="cce-luxury-divider-emblem">✦</span>
+                  <span className="cce-luxury-divider-line" />
+                </div>
+              </div>
+
+              {/* Letter Body */}
+              <div className="cce-luxury-letter">
+                <div className="cce-luxury-salutation">&ldquo;Buen día, compañeros.</div>
+
+                <p className="cce-luxury-paragraph">
+                  Por este medio, les hacemos una cordial invitación a un desayuno y rueda de prensa del <strong>Consejo Coordinador Empresarial de Ciudad Juárez</strong>, con el propósito de presentar oficialmente los detalles de nuestro próximo evento <span className="cce-golden-shimmer" style={{ fontWeight: 800 }}>Empresa y Empresario del Año 2026</span>.
+                </p>
+
+                {/* Coordinate Schedule Grid */}
+                <div className="cce-luxury-schedule">
+                  <div className="cce-schedule-item">
+                    <div className="cce-schedule-icon-wrap" aria-hidden="true">
+                      <span className="cce-schedule-emoji">📅</span>
+                    </div>
+                    <div className="cce-schedule-info">
+                      <span className="cce-schedule-label">FECHA</span>
+                      <strong className="cce-schedule-val">Lunes 12 de octubre</strong>
+                    </div>
                   </div>
-                  <div className="cce-keynote-caption">
-                    <span className="cce-keynote-role">Periodista y Analista</span>
+
+                  <div className="cce-schedule-item">
+                    <div className="cce-schedule-icon-wrap" aria-hidden="true">
+                      <span className="cce-schedule-emoji">🕘</span>
+                    </div>
+                    <div className="cce-schedule-info">
+                      <span className="cce-schedule-label">HORARIO</span>
+                      <strong className="cce-schedule-val">9:00 a.m.</strong>
+                    </div>
+                  </div>
+
+                  <div className="cce-schedule-item cce-schedule-item-venue">
+                    <div className="cce-schedule-icon-wrap" aria-hidden="true">
+                      <span className="cce-schedule-emoji">📍</span>
+                    </div>
+                    <div className="cce-schedule-info">
+                      <span className="cce-schedule-label">SEDE Y DIRECCIÓN</span>
+                      <strong className="cce-schedule-val">Taquería La No 4</strong>
+                      <span className="cce-schedule-address">Av. Paseo Triunfo 5617</span>
+                    </div>
                   </div>
                 </div>
 
-                <div className="cce-keynote-content">
-                  <div className="cce-keynote-badges">
-                    <span className="cce-badge-pulse cce-badge-gold">
-                      <Award size={14} />
-                      CONFERENCIA MAGISTRAL EXCLUSIVA
-                    </span>
-                    <span className="cce-badge-pulse cce-badge-emerald">
-                      <ShieldCheck size={14} />
-                      CCE CIUDAD JUÁREZ
-                    </span>
+                <p className="cce-luxury-paragraph">
+                  Agradecemos de antemano su presencia y participación en este encuentro, que nos permitirá compartir con los medios de comunicación los detalles de este importante evento empresarial.
+                </p>
+
+                <div className="cce-luxury-closing">
+                  Les agradeceré mucho confirmar su asistencia.&rdquo;
+                </div>
+
+                {/* Institutional Seal & Sign-off */}
+                <div className="cce-luxury-footer-seal">
+                  <div className="cce-seal-content">
+                    <img
+                      src="/assets/cce-juarez/cce_logo_hero_prestige.svg"
+                      alt="CCE Ciudad Juárez"
+                      className="cce-seal-crest"
+                    />
+                    <div className="cce-seal-text">
+                      <div className="cce-seal-org">CONSEJO COORDINADOR EMPRESARIAL DE CIUDAD JUÁREZ</div>
+                      <div className="cce-seal-sub">Comité Organizador · Empresa y Empresario del Año 2026</div>
+                    </div>
                   </div>
 
-                  <h2 className="cce-keynote-title">
-                    Conferencia Magistral con <span className="cce-golden-shimmer">Carlos Loret de Mola</span>
-                  </h2>
-
-                  <p className="cce-keynote-bio">
-                    En el marco de la magna entrega del galardón <strong className="cce-golden-shimmer">Empresario del Año 2026</strong>, Carlos Loret de Mola impartirá una conferencia magistral exclusiva de análisis económico, perspectiva geopolítica y coyuntura bilateral para el sector productivo de Ciudad Juárez y la frontera norte.
-                  </p>
-
-                  <div className="cce-keynote-protocol">
-                    <div className="cce-protocol-item">
-                      <b>Preside:</b> Mtro. Iván Lara · Presidente del CCE Ciudad Juárez
-                    </div>
-                    <div className="cce-protocol-item">
-                      <b>Presentación Oficial:</b> Develación de los galardones escultóricos de Pedro Francisco
-                    </div>
+                  <div className="cce-seal-badge">
+                    <ShieldCheck size={14} />
+                    <span>Convocatoria Exclusiva</span>
                   </div>
                 </div>
               </div>
@@ -2619,6 +2700,10 @@ export default function CcePrensaClient() {
 
           {/* MAIN FORM / CONFIRMATION SECTION */}
           <section className="cce-main-content">
+            <div className="cce-notice-pill" style={{ margin: '0 auto 24px auto', maxWidth: '580px', textAlign: 'center' }}>
+              <ShieldCheck size={16} />
+              <span>Evento exclusivo para medios de comunicación, agencias y reporteros convocados.</span>
+            </div>
             <AnimatePresence mode="wait">
               {confirmedRecord ? (
                 /* CONFIRMATION SCREEN */
