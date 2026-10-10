@@ -682,180 +682,6 @@ export default function CcePrensaClient() {
           100% { background-position: 200% center; }
         }
 
-        /* Top Brand Header */
-        .cce-header {
-          position: sticky;
-          top: 0;
-          z-index: 50;
-          background: rgba(2, 18, 12, 0.85);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          border-bottom: 1px solid rgba(212, 175, 55, 0.22);
-          padding: 14px 24px;
-          transition: background-color 0.3s ease, border-color 0.3s ease;
-        }
-
-        .cce-header.is-crm-header {
-          background: rgba(255, 253, 249, 0.95);
-          border-bottom: 1px solid rgba(6, 78, 59, 0.1);
-        }
-
-        .cce-header-inner {
-          max-width: 1360px;
-          margin: 0 auto;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 16px;
-        }
-
-        .cce-brand-left {
-          display: flex;
-          align-items: center;
-          gap: 14px;
-          text-decoration: none;
-        }
-
-        .cce-logo-img {
-          height: 40px;
-          width: auto;
-          object-fit: contain;
-        }
-
-        @media (max-width: 640px) {
-          .cce-header {
-            padding: 10px 14px;
-          }
-          .cce-header-inner {
-            gap: 8px;
-          }
-          .cce-brand-left {
-            gap: 8px;
-          }
-          .cce-logo-img {
-            height: 28px;
-          }
-          .cce-brand-divider {
-            height: 18px;
-          }
-          .cce-header.has-admin .cce-council-tag,
-          .cce-header.has-admin .cce-brand-divider {
-            display: none;
-          }
-          .cce-admin-badge span {
-            display: none;
-          }
-          .cce-admin-badge {
-            padding: 6px 8px;
-          }
-          .cce-tab-btn {
-            padding: 5px 9px;
-            font-size: 11px;
-            min-height: 34px;
-            white-space: nowrap;
-          }
-        }
-
-        .cce-brand-divider {
-          width: 1px;
-          height: 26px;
-          background-color: rgba(212, 175, 55, 0.35);
-        }
-
-        .cce-header.is-crm-header .cce-brand-divider {
-          background-color: rgba(6, 78, 59, 0.2);
-        }
-
-        .cce-council-tag {
-          font-size: 11px;
-          font-weight: 800;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: #F5DE98;
-          font-family: 'Cinzel', serif;
-          display: flex;
-          flex-direction: column;
-          line-height: 1.25;
-        }
-
-        .cce-header.is-crm-header .cce-council-tag {
-          color: var(--cce-emerald);
-          font-family: inherit;
-        }
-
-        .cce-council-tag span {
-          font-size: 9px;
-          color: #34D399;
-          font-weight: 600;
-          font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-
-        .cce-header.is-crm-header .cce-council-tag span {
-          color: var(--cce-gold-dark);
-        }
-
-        .cce-header-right {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-        }
-
-        .cce-admin-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          padding: 6px 14px;
-          border-radius: 9999px;
-          background-color: rgba(212, 175, 55, 0.15);
-          border: 1px solid rgba(212, 175, 55, 0.4);
-          color: #F5DE98;
-          font-size: 12px;
-          font-weight: 600;
-        }
-
-        .cce-tab-toggle {
-          display: inline-flex;
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 8px;
-          padding: 2px;
-        }
-
-        .cce-header.is-crm-header .cce-tab-toggle {
-          background: #E2E8F0;
-        }
-
-        .cce-tab-btn {
-          border: none;
-          background: none;
-          padding: 8px 14px;
-          font-size: 13px;
-          font-weight: 600;
-          border-radius: 6px;
-          cursor: pointer;
-          color: #CBD5E1;
-          min-height: 44px;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          transition: all 0.2s ease;
-        }
-
-        .cce-header.is-crm-header .cce-tab-btn {
-          color: #475569;
-        }
-
-        .cce-tab-btn.active {
-          background: #D4AF37;
-          color: #02120C;
-          font-weight: 800;
-        }
-
-        .cce-header.is-crm-header .cce-tab-btn.active {
-          background: #FFFFFF;
-          color: var(--cce-emerald);
-          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
         /* Hero Section */
         .cce-hero {
           position: relative;
@@ -1476,7 +1302,7 @@ export default function CcePrensaClient() {
           position: relative;
           z-index: 1;
           max-width: 720px;
-          margin: 0 auto 60px auto;
+          margin: 0 auto 100px auto;
           padding: 0 10px;
           width: 100%;
         }
@@ -2268,47 +2094,6 @@ export default function CcePrensaClient() {
           transform: translateY(-1px);
           box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
         }
-
-        /* Footer */
-        .cce-footer {
-          margin-top: auto;
-          background: #010B07;
-          border-top: 1px solid rgba(212, 175, 55, 0.2);
-          padding: 30px 20px;
-          text-align: center;
-          font-size: 13px;
-          color: #94A3B8;
-          position: relative;
-          z-index: 1;
-        }
-
-        .cce-page-container.is-crm .cce-footer {
-          background: #FFFFFF;
-          border-top: 1px solid rgba(6, 78, 59, 0.08);
-          color: var(--cce-text-muted);
-        }
-
-        .cce-footer-inner {
-          max-width: 900px;
-          margin: 0 auto;
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-          align-items: center;
-        }
-
-        .cce-footer-inner b {
-          color: #F5DE98;
-        }
-
-        .cce-page-container.is-crm .cce-footer-inner b {
-          color: var(--cce-emerald);
-        }
-
-        .cce-footer-sub {
-          font-size: 12px;
-          color: #64748B;
-        }
       `,
         }}
       />
@@ -2970,18 +2755,7 @@ export default function CcePrensaClient() {
         </main>
       )}
 
-      {/* FOOTER */}
-      <footer className="cce-footer">
-        <div className="cce-footer-inner">
-          <div>
-            <b>Consejo Coordinador Empresarial de Ciudad Juárez</b> · Comité Organizador Empresa y Empresario del Año 2026
-          </div>
-          <div className="cce-footer-sub">
-            Plataforma institucional oficial de confirmación de asistencia para medios convocados.
-          </div>
-          {/* Institutional Asset Reference: /assets/cce-juarez/logo_cce.png */}
-        </div>
-      </footer>
+      {/* Institutional Asset Reference: /assets/cce-juarez/logo_cce.png */}
     </div>
   );
 }
