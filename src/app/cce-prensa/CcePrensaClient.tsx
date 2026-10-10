@@ -717,13 +717,21 @@ export default function CcePrensaClient() {
 
         @media (max-width: 640px) {
           .cce-hero {
-            padding-top: 44px;
+            padding-top: 40px;
+            padding-left: 14px;
+            padding-right: 14px;
           }
           .cce-hero-logo-box {
             margin-bottom: 18px;
           }
           .cce-hero-logo-img {
             max-width: 220px;
+          }
+          .cce-hero-pill {
+            font-size: 11px;
+            letter-spacing: 0.06em;
+            padding: 7px 14px;
+            max-width: 100%;
           }
         }
 
@@ -756,6 +764,8 @@ export default function CcePrensaClient() {
           letter-spacing: 0.03em;
           margin-bottom: 18px;
           filter: drop-shadow(0 4px 25px rgba(0, 0, 0, 0.85));
+          overflow-wrap: break-word;
+          word-break: break-word;
         }
 
         .cce-hero-subtitle {
@@ -1297,6 +1307,68 @@ export default function CcePrensaClient() {
           }
         }
 
+        @media (max-width: 640px) {
+          .cce-luxury-card-wrapper {
+            padding: 0 8px;
+          }
+          .cce-luxury-card {
+            padding: 26px 14px;
+            border-radius: 18px;
+          }
+          .cce-luxury-badge {
+            font-size: 10px;
+            letter-spacing: 0.08em;
+            padding: 7px 12px;
+            max-width: 100%;
+            text-align: center;
+            white-space: normal;
+          }
+          .cce-luxury-divider {
+            max-width: 220px;
+          }
+          .cce-corner-bracket {
+            width: 16px;
+            height: 16px;
+          }
+          .cce-corner-tl { top: 8px; left: 8px; }
+          .cce-corner-tr { top: 8px; right: 8px; }
+          .cce-corner-bl { bottom: 8px; left: 8px; }
+          .cce-corner-br { bottom: 8px; right: 8px; }
+          .cce-seal-content {
+            width: 100%;
+          }
+          .cce-seal-text {
+            min-width: 0;
+            flex: 1;
+          }
+          .cce-seal-org {
+            font-size: 12px;
+            letter-spacing: 0.04em;
+            word-break: break-word;
+          }
+          .cce-seal-sub {
+            font-size: 11.5px;
+          }
+          .cce-seal-badge {
+            font-size: 11px;
+            padding: 6px 12px;
+          }
+          .cce-main-content {
+            padding: 0 8px;
+          }
+          .cce-form-card {
+            padding: 26px 14px;
+            border-radius: 18px;
+          }
+          .cce-attendees-grid {
+            gap: 6px;
+          }
+          .cce-attendee-btn {
+            font-size: 16px;
+            min-height: 48px;
+          }
+        }
+
         /* VIP ACCREDITATION TERMINAL (R4) */
         .cce-main-content {
           position: relative;
@@ -1332,11 +1404,6 @@ export default function CcePrensaClient() {
             inset 0 1px 0 rgba(255, 245, 204, 0.7);
         }
 
-        @media (max-width: 640px) {
-          .cce-form-card {
-            padding: 28px 20px;
-          }
-        }
 
         .cce-form-header {
           margin-bottom: 28px;
