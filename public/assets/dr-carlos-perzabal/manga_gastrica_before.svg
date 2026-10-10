@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" width="400" height="320">
+  <defs>
+    <linearGradient id="bgMangaPre" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#060B14" />
+      <stop offset="50%" stop-color="#0A1224" />
+      <stop offset="100%" stop-color="#080F1E" />
+    </linearGradient>
+    <radialGradient id="stomachPreG" cx="45%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#DB2777" stop-opacity="0.32" />
+      <stop offset="50%" stop-color="#9D174D" stop-opacity="0.24" />
+      <stop offset="85%" stop-color="#831843" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#4C0519" stop-opacity="0.35" />
+    </radialGradient>
+    <radialGradient id="fundusGlow" cx="65%" cy="30%" r="45%">
+      <stop offset="0%" stop-color="#F43F5E" stop-opacity="0.45" />
+      <stop offset="60%" stop-color="#E11D48" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#881337" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="esoGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#475569" />
+      <stop offset="50%" stop-color="#94A3B8" />
+      <stop offset="100%" stop-color="#475569" />
+    </linearGradient>
+    <linearGradient id="duoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284C7" />
+      <stop offset="100%" stop-color="#0369A1" />
+    </linearGradient>
+    <filter id="softGlowPre" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="400" height="320" rx="16" fill="url(#bgMangaPre)" stroke="#1E293B" stroke-width="1.5" />
+
+  <!-- Subtle Surgical Grid Overlay -->
+  <g opacity="0.07" stroke="#38BDF8" stroke-width="0.5">
+    <line x1="40" y1="0" x2="40" y2="320" />
+    <line x1="120" y1="0" x2="120" y2="320" />
+    <line x1="200" y1="0" x2="200" y2="320" />
+    <line x1="280" y1="0" x2="280" y2="320" />
+    <line x1="360" y1="0" x2="360" y2="320" />
+    <line x1="0" y1="60" x2="400" y2="60" />
+    <line x1="0" y1="120" x2="400" y2="120" />
+    <line x1="0" y1="180" x2="400" y2="180" />
+    <line x1="0" y1="240" x2="400" y2="240" />
+  </g>
+
+  <!-- Esophagus (Abdominal Segment) -->
+  <path d="M172 26 L172 72 M196 26 L196 72" stroke="url(#esoGrad)" stroke-width="3.5" stroke-linecap="round" />
+  <path d="M172 45 L196 45 M172 58 L196 58" stroke="#64748B" stroke-width="1" stroke-dasharray="2 2" opacity="0.6" />
+  <text x="184" y="22" fill="#94A3B8" font-size="9" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif" font-weight="600" text-anchor="middle" letter-spacing="0.5">ESÓFAGO / CARDIAS</text>
+
+  <!-- Basal Gastric Fundus Glow (Area of Active Ghrelin Synthesis) -->
+  <ellipse cx="255" cy="120" rx="55" ry="50" fill="url(#fundusGlow)" />
+
+  <!-- Full Basal Stomach Anatomy (1,200 - 1,500 ml) -->
+  <path d="M172 72 C155 105 152 170 162 230 C166 244 175 252 188 252 C198 252 208 244 212 232 C225 185 240 160 270 148 C310 132 320 85 285 70 C240 52 205 60 196 72 Z" fill="url(#stomachPreG)" stroke="#F43F5E" stroke-width="2.5" filter="url(#softGlowPre)" />
+
+  <!-- Internal Rugae Folds (Pliegues Gástricos Naturales) -->
+  <path d="M190 90 Q215 110 240 100" stroke="#F43F5E" stroke-width="1.2" fill="none" opacity="0.45" />
+  <path d="M185 115 Q225 135 270 118" stroke="#F43F5E" stroke-width="1.2" fill="none" opacity="0.4" />
+  <path d="M182 140 Q210 165 255 145" stroke="#F43F5E" stroke-width="1.2" fill="none" opacity="0.45" />
+  <path d="M178 170 Q205 195 235 180" stroke="#F43F5E" stroke-width="1.2" fill="none" opacity="0.4" />
+  <path d="M175 200 Q195 215 215 205" stroke="#F43F5E" stroke-width="1.2" fill="none" opacity="0.35" />
+
+  <!-- Pylorus & Continuous Duodenal C-Loop -->
+  <path d="M188 252 C180 262 165 270 148 274 C132 278 116 270 110 256 C105 244 110 228 122 222" fill="none" stroke="url(#duoGrad)" stroke-width="3" stroke-linecap="round" />
+  <circle cx="188" cy="252" r="4" fill="#0284C7" stroke="#38BDF8" stroke-width="1.5" />
+  <text x="145" y="292" fill="#38BDF8" font-size="9" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif" font-weight="600" text-anchor="middle">Píloro / Duodeno Continuo</text>
+
+  <!-- Ghrelin Hormone Callout (Fondo Gástrico Íntegro) -->
+  <g transform="translate(248, 88)">
+    <line x1="0" y1="0" x2="38" y2="-12" stroke="#FDA4AF" stroke-width="1.2" />
+    <circle cx="38" cy="-12" r="2.5" fill="#F43F5E" />
+    <rect x="42" y="-24" width="102" height="28" rx="5" fill="#1E1B4B" fill-opacity="0.85" stroke="#E11D48" stroke-width="1" />
+    <text x="48" y="-12" fill="#FDA4AF" font-size="8" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif" font-weight="700">FONDO ÍNTEGRO</text>
+    <text x="48" y="-2" fill="#F43F5E" font-size="7.5" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif">Síntesis de Grelina Activa</text>
+  </g>
+
+  <!-- Capacity Indicator on Body -->
+  <g transform="translate(210, 168)">
+    <rect x="0" y="0" width="88" height="22" rx="4" fill="#0F172A" fill-opacity="0.9" stroke="#94A3B8" stroke-width="0.8" />
+    <text x="44" y="14" fill="#F1F5F9" font-size="8.5" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif" font-weight="700" text-anchor="middle">1,200 - 1,500 ml</text>
+  </g>
+
+  <!-- Top-Left Tactical Badge -->
+  <g transform="translate(16, 16)">
+    <rect width="138" height="52" rx="8" fill="#0B132B" fill-opacity="0.95" stroke="#F43F5E" stroke-width="1" />
+    <circle cx="12" cy="14" r="3.5" fill="#F43F5E" />
+    <text x="20" y="17" fill="#FDA4AF" font-size="9" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif" font-weight="800" letter-spacing="0.5">ANATOMÍA BASAL</text>
+    <text x="12" y="31" fill="#F8FAFC" font-size="8" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif">Capacidad: 1,200 - 1,500 ml</text>
+    <text x="12" y="43" fill="#94A3B8" font-size="7.5" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif">Fondo Gástrico No Resecado</text>
+  </g>
+
+  <!-- Bottom-Right Status Card -->
+  <g transform="translate(228, 252)">
+    <rect width="156" height="52" rx="8" fill="#0B132B" fill-opacity="0.95" stroke="#334155" stroke-width="1" />
+    <text x="12" y="16" fill="#FBBF24" font-size="8.5" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif" font-weight="700">ESTADO PREOPERATORIO</text>
+    <text x="12" y="30" fill="#E2E8F0" font-size="8" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif">• Almacenamiento gástrico amplio</text>
+    <text x="12" y="42" fill="#94A3B8" font-size="7.5" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif">• Estímulo de apetito no inhibido</text>
+  </g>
+</svg>

@@ -1,45 +1,129 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" width="400" height="320">
   <defs>
-    <linearGradient id="bgDav" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#070D18" />
-      <stop offset="100%" stop-color="#0B1426" />
+    <linearGradient id="bgDavVol" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#060B14" />
+      <stop offset="50%" stop-color="#0A1224" />
+      <stop offset="100%" stop-color="#080F1E" />
     </linearGradient>
-    <linearGradient id="glowG" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#00A3E0" />
-      <stop offset="100%" stop-color="#60A5FA" />
+    <linearGradient id="armVolG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E2E8F0" />
+      <stop offset="40%" stop-color="#94A3B8" />
+      <stop offset="80%" stop-color="#475569" />
+      <stop offset="100%" stop-color="#1E293B" />
     </linearGradient>
+    <linearGradient id="wristGoldVol" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FEF3C7" />
+      <stop offset="40%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#B45309" />
+    </linearGradient>
+    <radialGradient id="energyCone" cx="50%" cy="10%" r="90%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.35" />
+      <stop offset="60%" stop-color="#0284C7" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#0369A1" stop-opacity="0" />
+    </radialGradient>
+    <filter id="glowDavVol" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3.5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
   </defs>
-  <rect width="400" height="320" rx="20" fill="url(#bgDav)" stroke="#1E293B" stroke-width="1.5" />
 
-  <!-- Console Chassis Outer -->
-  <rect x="80" y="40" width="240" height="180" rx="24" fill="#0B1426" stroke="#00A3E0" stroke-width="2" />
+  <!-- Background Canvas -->
+  <rect width="400" height="320" rx="16" fill="url(#bgDavVol)" stroke="#1E293B" stroke-width="1.5" />
+
+  <!-- Subtle Surgical Grid Overlay -->
+  <g opacity="0.07" stroke="#38BDF8" stroke-width="0.5">
+    <line x1="40" y1="0" x2="40" y2="320" />
+    <line x1="120" y1="0" x2="120" y2="320" />
+    <line x1="200" y1="0" x2="200" y2="320" />
+    <line x1="280" y1="0" x2="280" y2="320" />
+    <line x1="360" y1="0" x2="360" y2="320" />
+    <line x1="0" y1="60" x2="400" y2="60" />
+    <line x1="0" y1="120" x2="400" y2="120" />
+    <line x1="0" y1="180" x2="400" y2="180" />
+    <line x1="0" y1="240" x2="400" y2="240" />
+  </g>
+
+  <!-- 3D Optical Vision Light Cone (Cámara 3D Endoscópica Central) -->
+  <polygon points="200,60 130,240 270,240" fill="url(#energyCone)" />
+
+  <!-- Surgical Field Center Line -->
+  <line x1="200" y1="60" x2="200" y2="240" stroke="#00E5FF" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.6" />
+
+  <!-- 4 Robotic Arms Boom / Arch (Carro de Quirófano Da Vinci) -->
+  <path d="M70 45 Q200 18 330 45" stroke="#334155" stroke-width="5" fill="none" stroke-linecap="round" />
   
-  <!-- 3D-HD Stereoscopic Viewer -->
-  <rect x="120" y="65" width="160" height="65" rx="12" fill="#020617" stroke="#38BDF8" stroke-width="1.5" />
-  <circle cx="160" cy="97" r="18" fill="#00A3E0" fill-opacity="0.3" stroke="#38BDF8" stroke-width="2" />
-  <circle cx="240" cy="97" r="18" fill="#00A3E0" fill-opacity="0.3" stroke="#38BDF8" stroke-width="2" />
-  <text x="200" y="102" fill="#F8FAFC" font-size="9" font-family="sans-serif" font-weight="bold" text-anchor="middle">3D-HD 10x</text>
+  <!-- Arm 1 (Bisturí Ultrasónico / Bipolar Izquierdo) -->
+  <g>
+    <path d="M100 45 L145 130 L168 215" fill="none" stroke="url(#armVolG)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Articulation Joint -->
+    <circle cx="145" cy="130" r="5" fill="#38BDF8" stroke="#0C4A6E" stroke-width="1.5" />
+    <!-- EndoWrist Joint -->
+    <circle cx="168" cy="215" r="4" fill="url(#wristGoldVol)" />
+    <!-- Micro Pincers -->
+    <path d="M168 215 L162 230 M168 215 L174 230" stroke="#FDE68A" stroke-width="2.2" stroke-linecap="round" />
+  </g>
 
-  <!-- Master Tool Controllers -->
-  <path d="M120 160 C120 185 150 195 160 185" fill="none" stroke="#D4AF37" stroke-width="3" stroke-linecap="round" />
-  <circle cx="160" cy="185" r="5" fill="#D4AF37" />
-  
-  <path d="M280 160 C280 185 250 195 240 185" fill="none" stroke="#D4AF37" stroke-width="3" stroke-linecap="round" />
-  <circle cx="240" cy="185" r="5" fill="#D4AF37" />
+  <!-- Arm 2 (Endoscopio 3D Central de Alta Definición) -->
+  <g>
+    <path d="M200 35 L200 155" fill="none" stroke="url(#armVolG)" stroke-width="7" stroke-linecap="round" />
+    <circle cx="200" cy="155" r="6" fill="#00E5FF" stroke="#0369A1" stroke-width="2" filter="url(#glowDavVol)" />
+    <!-- Dual Optics on Tip -->
+    <circle cx="198" cy="155" r="2" fill="#FFFFFF" />
+    <circle cx="202" cy="155" r="2" fill="#FFFFFF" />
+  </g>
 
-  <text x="200" y="165" fill="#FEF3C7" font-size="9" font-family="sans-serif" text-anchor="middle">Controles Maestros</text>
-  <text x="200" y="178" fill="#94A3B8" font-size="8" font-family="sans-serif" text-anchor="middle">(Filtro de Temblor 5:1)</text>
+  <!-- Arm 3 (Porta-agujas / Disección Derecha EndoWrist) -->
+  <g>
+    <path d="M300 45 L255 130 L232 215" fill="none" stroke="url(#armVolG)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Articulation Joint -->
+    <circle cx="255" cy="130" r="5" fill="#38BDF8" stroke="#0C4A6E" stroke-width="1.5" />
+    <!-- EndoWrist Joint -->
+    <circle cx="232" cy="215" r="4" fill="url(#wristGoldVol)" />
+    <!-- Micro Forceps Gripper -->
+    <path d="M232 215 L226 230 M232 215 L238 230" stroke="#FDE68A" stroke-width="2.2" stroke-linecap="round" />
+  </g>
 
-  <!-- EndoWrist 540° Callout -->
-  <circle cx="340" cy="110" r="28" fill="#0F172A" stroke="#00A3E0" stroke-width="1.5" />
-  <text x="340" y="105" fill="#38BDF8" font-size="10" font-family="sans-serif" font-weight="bold" text-anchor="middle">EndoWrist</text>
-  <text x="340" y="119" fill="#10B981" font-size="9" font-family="sans-serif" font-weight="bold" text-anchor="middle">540°</text>
+  <!-- Arm 4 (Retractor Tisular Cuarto Brazo) -->
+  <g opacity="0.75">
+    <path d="M60 55 L90 120 L120 185" fill="none" stroke="url(#armVolG)" stroke-width="4.5" stroke-linecap="round" />
+    <circle cx="90" cy="120" r="4" fill="#64748B" />
+    <circle cx="120" cy="185" r="3.5" fill="#10B981" />
+  </g>
 
-  <!-- Console Pedestal / Touch Pad -->
-  <path d="M160 220 L150 255 L250 255 L240 220 Z" fill="#1E293B" stroke="#334155" stroke-width="1" />
+  <!-- Surgical Micro-Field at Focal Point -->
+  <ellipse cx="200" cy="235" rx="42" ry="14" fill="#0369A1" fill-opacity="0.2" stroke="#38BDF8" stroke-width="1.2" stroke-dasharray="3 2" />
+  <circle cx="200" cy="235" r="3" fill="#00E5FF" filter="url(#glowDavVol)" />
+  <text x="200" y="254" fill="#F8FAFC" font-size="8" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif" font-weight="700" text-anchor="middle">Plano Quirúrgico Submilimétrico (&lt; 0.5 mm)</text>
 
-  <!-- Bottom Technical Badges -->
+  <!-- EndoWrist 540° Callout Badge (Matches existing tests) -->
+  <g transform="translate(335, 105)">
+    <circle cx="0" cy="0" r="28" fill="#0F172A" stroke="#00A3E0" stroke-width="2" filter="url(#glowDavVol)" />
+    <!-- Rotation Arrow -->
+    <path d="M-14 -12 A 18 18 0 1 1 -18 4" fill="none" stroke="#38BDF8" stroke-width="1.8" stroke-linecap="round" />
+    <polygon points="-19,7 -22,-1 -15,0" fill="#38BDF8" />
+    <text x="0" y="-3" fill="#38BDF8" font-size="9" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif" font-weight="bold" text-anchor="middle">EndoWrist</text>
+    <text x="0" y="11" fill="#10B981" font-size="9.5" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif" font-weight="bold" text-anchor="middle">540°</text>
+  </g>
+
+  <!-- 7 Degrees of Freedom Annotation -->
+  <g transform="translate(242, 172)">
+    <rect x="0" y="0" width="102" height="24" rx="4" fill="#181308" fill-opacity="0.9" stroke="#D97706" stroke-width="0.8" />
+    <text x="51" y="11" fill="#FDE68A" font-size="7.5" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif" font-weight="800" text-anchor="middle">7 GRADOS DE LIBERTAD</text>
+    <text x="51" y="20" fill="#F59E0B" font-size="6.5" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif" text-anchor="middle">Articulación Micro-Poleas</text>
+  </g>
+
+  <!-- Top-Left Tactical Badge -->
+  <g transform="translate(16, 16)">
+    <rect width="144" height="66" rx="8" fill="#0B132B" fill-opacity="0.95" stroke="#00A3E0" stroke-width="1" />
+    <circle cx="12" cy="14" r="3.5" fill="#00A3E0" />
+    <text x="20" y="17" fill="#38BDF8" font-size="9" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif" font-weight="800" letter-spacing="0.5">ROBÓTICA ENDOWRIST</text>
+    <text x="12" y="32" fill="#F8FAFC" font-size="8.5" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif" font-weight="600">4 Brazos Robóticos Multi-puerto</text>
+    <text x="12" y="45" fill="#10B981" font-size="8" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif">Rotación Axial de 540°</text>
+    <text x="12" y="58" fill="#FEF3C7" font-size="7.5" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif">Microdisección Submilimétrica</text>
+  </g>
+
+  <!-- Bottom Technical Badges Card (Exact match to tests) -->
   <rect x="25" y="265" width="350" height="42" rx="8" fill="#0B1426" stroke="#00A3E0" stroke-width="1" />
-  <text x="40" y="282" fill="#00A3E0" font-size="10" font-family="sans-serif" font-weight="bold">CIRUGÍA ASISTIDA POR ROBOT DA VINCI (INTUITIVE)</text>
-  <text x="40" y="296" fill="#F8FAFC" font-size="9" font-family="sans-serif">El cirujano comanda la consola · Precisión submilimétrica · Menor sangrado y dolor</text>
+  <text x="40" y="282" fill="#00A3E0" font-size="10" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif" font-weight="bold">CIRUGÍA ASISTIDA POR ROBOT DA VINCI (INTUITIVE)</text>
+  <text x="40" y="296" fill="#F8FAFC" font-size="9" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif">El cirujano comanda la consola · Precisión submilimétrica · Menor sangrado y dolor</text>
 </svg>

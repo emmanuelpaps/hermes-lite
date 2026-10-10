@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" width="400" height="320">
+  <defs>
+    <linearGradient id="bgDavPre" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#060B14" />
+      <stop offset="50%" stop-color="#0A1224" />
+      <stop offset="100%" stop-color="#080F1E" />
+    </linearGradient>
+    <linearGradient id="chassisVolG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="40%" stop-color="#0B132B" />
+      <stop offset="80%" stop-color="#020617" />
+      <stop offset="100%" stop-color="#090E17" />
+    </linearGradient>
+    <linearGradient id="viewerGlowPre" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00A3E0" />
+      <stop offset="50%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#00E5FF" />
+    </linearGradient>
+    <radialGradient id="opticGlowPre" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.85" />
+      <stop offset="50%" stop-color="#0284C7" stop-opacity="0.45" />
+      <stop offset="100%" stop-color="#0369A1" stop-opacity="0.1" />
+    </radialGradient>
+    <linearGradient id="masterCtrlG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FEF3C7" />
+      <stop offset="50%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+    <filter id="glowDavPre" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3.5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="400" height="320" rx="16" fill="url(#bgDavPre)" stroke="#1E293B" stroke-width="1.5" />
+
+  <!-- Subtle Surgical Grid Overlay -->
+  <g opacity="0.07" stroke="#38BDF8" stroke-width="0.5">
+    <line x1="40" y1="0" x2="40" y2="320" />
+    <line x1="120" y1="0" x2="120" y2="320" />
+    <line x1="200" y1="0" x2="200" y2="320" />
+    <line x1="280" y1="0" x2="280" y2="320" />
+    <line x1="360" y1="0" x2="360" y2="320" />
+    <line x1="0" y1="60" x2="400" y2="60" />
+    <line x1="0" y1="120" x2="400" y2="120" />
+    <line x1="0" y1="180" x2="400" y2="180" />
+    <line x1="0" y1="240" x2="400" y2="240" />
+  </g>
+
+  <!-- Surgeon Console Master Chassis (Outer Shell) -->
+  <path d="M75 42 C75 32 85 24 98 24 L302 24 C315 24 325 32 325 42 L335 224 C335 236 324 246 312 246 L88 246 C76 246 65 236 65 224 Z" fill="url(#chassisVolG)" stroke="#00A3E0" stroke-width="2" filter="url(#glowDavPre)" />
+  
+  <!-- Subtle Chassis Contour Bevel -->
+  <path d="M85 36 L315 36 M75 220 L325 220" stroke="#38BDF8" stroke-width="0.8" opacity="0.4" />
+
+  <!-- Forehead Rest & Sensor Bar (Barra de Apoyo Frontal con Sensor IR) -->
+  <rect x="135" y="46" width="130" height="12" rx="4" fill="#1E293B" stroke="#475569" stroke-width="1" />
+  <circle cx="200" cy="52" r="2.5" fill="#10B981" />
+  <text x="200" y="42" fill="#94A3B8" font-size="7.5" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif" font-weight="600" text-anchor="middle">Sensor de Presencia Infrarrojo</text>
+
+  <!-- 3D-HD Stereoscopic Binocular Viewer (Visor Binocular 3D 10x) -->
+  <rect x="115" y="64" width="170" height="74" rx="14" fill="#020617" stroke="#38BDF8" stroke-width="2" filter="url(#glowDavPre)" />
+  
+  <!-- Left Eye Optic (Ocular Izquierdo 3D-HD) -->
+  <circle cx="155" cy="100" r="22" fill="url(#opticGlowPre)" stroke="#38BDF8" stroke-width="2" />
+  <circle cx="155" cy="100" r="10" fill="#00E5FF" fill-opacity="0.6" />
+  <circle cx="152" cy="96" r="3" fill="#FFFFFF" opacity="0.75" />
+
+  <!-- Right Eye Optic (Ocular Derecho 3D-HD) -->
+  <circle cx="245" cy="100" r="22" fill="url(#opticGlowPre)" stroke="#38BDF8" stroke-width="2" />
+  <circle cx="245" cy="100" r="10" fill="#00E5FF" fill-opacity="0.6" />
+  <circle cx="242" cy="96" r="3" fill="#FFFFFF" opacity="0.75" />
+
+  <!-- Optical Divider & Magnification Badge -->
+  <g transform="translate(200, 92)">
+    <rect x="-24" y="-2" width="48" height="20" rx="4" fill="#08101E" fill-opacity="0.95" stroke="#00E5FF" stroke-width="1" />
+    <text x="0" y="12" fill="#FFFFFF" font-size="8.5" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif" font-weight="800" text-anchor="middle">3D-HD 10x</text>
+  </g>
+
+  <!-- Master Tool Controllers (Mandos Maestros con Filtro de Temblor 5:1) -->
+  <!-- Left Controller -->
+  <g transform="translate(140, 168)">
+    <path d="M0 0 C-10 18 -5 36 12 30" fill="none" stroke="url(#masterCtrlG)" stroke-width="3.5" stroke-linecap="round" />
+    <circle cx="12" cy="30" r="6" fill="#F59E0B" stroke="#FEF3C7" stroke-width="1.5" filter="url(#glowDavPre)" />
+    <!-- Finger Gimbal Loop -->
+    <ellipse cx="14" cy="30" rx="9" ry="5" fill="none" stroke="#FBBF24" stroke-width="1.2" stroke-dasharray="2 1" />
+  </g>
+
+  <!-- Right Controller -->
+  <g transform="translate(260, 168)">
+    <path d="M0 0 C10 18 5 36 -12 30" fill="none" stroke="url(#masterCtrlG)" stroke-width="3.5" stroke-linecap="round" />
+    <circle cx="-12" cy="30" r="6" fill="#F59E0B" stroke="#FEF3C7" stroke-width="1.5" filter="url(#glowDavPre)" />
+    <!-- Finger Gimbal Loop -->
+    <ellipse cx="-14" cy="30" rx="9" ry="5" fill="none" stroke="#FBBF24" stroke-width="1.2" stroke-dasharray="2 1" />
+  </g>
+
+  <!-- Controllers Center Label -->
+  <g transform="translate(200, 178)">
+    <rect x="-56" y="-10" width="112" height="30" rx="5" fill="#181308" fill-opacity="0.95" stroke="#D97706" stroke-width="1" />
+    <text x="0" y="3" fill="#FDE68A" font-size="8" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif" font-weight="800" text-anchor="middle">CONTROLES MAESTROS</text>
+    <text x="0" y="14" fill="#F59E0B" font-size="7.5" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif" font-weight="600" text-anchor="middle">Filtro de Temblor 5:1 Activo</text>
+  </g>
+
+  <!-- Console Pedestal / Multifunction Footswitch Panel (Pedalera Inferior) -->
+  <path d="M148 246 L138 264 L262 264 L252 246 Z" fill="#1E293B" stroke="#334155" stroke-width="1" />
+  <!-- Footswitch Pedals (Coagulación, Corte, Cámara) -->
+  <rect x="150" y="250" width="18" height="10" rx="2" fill="#0284C7" />
+  <rect x="174" y="250" width="18" height="10" rx="2" fill="#F59E0B" />
+  <rect x="208" y="250" width="18" height="10" rx="2" fill="#10B981" />
+  <rect x="232" y="250" width="18" height="10" rx="2" fill="#64748B" />
+
+  <!-- Top-Left Tactical Badge -->
+  <g transform="translate(16, 16)">
+    <rect width="144" height="66" rx="8" fill="#0B132B" fill-opacity="0.95" stroke="#00A3E0" stroke-width="1" />
+    <circle cx="12" cy="14" r="3.5" fill="#00A3E0" />
+    <text x="20" y="17" fill="#38BDF8" font-size="9" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif" font-weight="800" letter-spacing="0.5">CONSOLA ERGONÓMICA</text>
+    <text x="12" y="32" fill="#F8FAFC" font-size="8.5" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif" font-weight="600">Visor Binocular: 3D-HD 10x</text>
+    <text x="12" y="45" fill="#FBBF24" font-size="8" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif">Filtro Temblor: 5:1 Activo</text>
+    <text x="12" y="58" fill="#10B981" font-size="7.5" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif">Estación Cirujano al Mando</text>
+  </g>
+
+  <!-- Bottom Technical Protocol Card (Matches exact tests) -->
+  <rect x="25" y="268" width="350" height="42" rx="8" fill="#0B1426" stroke="#00A3E0" stroke-width="1.2" />
+  <text x="40" y="284" fill="#00A3E0" font-size="10" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif" font-weight="bold">CIRUGÍA ASISTIDA POR ROBOT DA VINCI (INTUITIVE)</text>
+  <text x="40" y="298" fill="#F8FAFC" font-size="8.5" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif">El cirujano comanda la consola · Precisión submilimétrica · Menor sangrado y dolor</text>
+</svg>

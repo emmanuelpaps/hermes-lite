@@ -474,6 +474,382 @@ export const MARKETING_PILLARS = [
 ];
 
 // ==========================================
+// 2.5 SURGICAL PROCEDURES REGISTRY & TYPES
+// ==========================================
+
+export interface ProcedureKpiItem {
+  label: string;
+  value: string;
+  subtext: string;
+  icon: 'clock' | 'shield' | 'activity' | 'calendar';
+}
+
+export interface TacticalMetric {
+  tag: string;
+  label: string;
+}
+
+export interface ProcedureItem {
+  id: 'manga' | 'bypass' | 'vesicula' | 'hernia' | 'robot';
+  tabLabel: string;
+  badge: string;
+  title: string;
+  shortTitle: string;
+  candidacyName: string;
+  description: string;
+  kpis: {
+    surgicalTime: ProcedureKpiItem;
+    hospitalStay: ProcedureKpiItem;
+    approach: ProcedureKpiItem;
+    recovery: ProcedureKpiItem;
+  };
+  mechanismNote: {
+    title: string;
+    text: string;
+  };
+  consensusNote: {
+    title: string;
+    text: string;
+  };
+  viewer: {
+    beforeLabel: string;
+    afterLabel: string;
+    beforeBadge: string;
+    afterBadge: string;
+    beforeSvg: string;
+    afterSvg: string;
+    beforeMetrics: TacticalMetric[];
+    afterMetrics: TacticalMetric[];
+    legendBefore: string;
+    legendAfter: string;
+  };
+  whatsappMessage: string;
+}
+
+export const SURGICAL_PROCEDURES: Record<'manga' | 'bypass' | 'vesicula' | 'hernia' | 'robot', ProcedureItem> = {
+  manga: {
+    id: 'manga',
+    tabLabel: 'Manga Gástrica (LSG)',
+    badge: 'CIRUGÍA BARIÁTRICA RESTRICTIVA & HORMONAL',
+    title: 'Manga Gástrica por Laparoscopía (LSG)',
+    shortTitle: 'Manga Gástrica',
+    candidacyName: 'Manga Gástrica',
+    description:
+      'Procedimiento metabólico de alta seguridad que consiste en la resección gástrica longitudinal del 75% al 80% del estómago mediante engrapadoras mecánicas de última generación, calibrada con sonda orogástrica de 36 Fr.',
+    kpis: {
+      surgicalTime: {
+        label: 'Tiempo Quirúrgico',
+        value: '45 - 60 min',
+        subtext: 'Promedio en quirófano',
+        icon: 'clock',
+      },
+      hospitalStay: {
+        label: 'Estancia Hospitalaria',
+        value: '24 a 48 hrs',
+        subtext: 'Suite privada monitorizada',
+        icon: 'shield',
+      },
+      approach: {
+        label: 'Abordaje Quirúrgico',
+        value: '4 puertos (5-12 mm)',
+        subtext: 'Mínima invasión laparoscópica',
+        icon: 'activity',
+      },
+      recovery: {
+        label: 'Retorno a Actividades',
+        value: '7 a 10 días',
+        subtext: 'Reincorporación laboral y física',
+        icon: 'calendar',
+      },
+    },
+    mechanismNote: {
+      title: 'Mecanismo Metabólico & Supresión de Grelina:',
+      text: 'Remoción longitudinal del 75% al 80% del fondo gástrico donde reside la hormona del apetito (grelina), induciendo saciedad precoz y modulación neuroendocrina metabólica sostenida.',
+    },
+    consensusNote: {
+      title: 'Consenso ASMBS / IFSO 2022 & Calibración:',
+      text: 'Candidatura formal directa con IMC ≥ 35 kg/m², o IMC 30–34.9 kg/m² ante comorbilidades activas (diabetes tipo 2, hipertensión arterial, apnea obstructiva del sueño). Calibración estricta con sonda orogástrica de 36 Fr y sutura hemostática invaginante.',
+    },
+    viewer: {
+      beforeLabel: 'Anatomía Previa (1,500 ml)',
+      afterLabel: 'Técnica Quirúrgica (36 Fr)',
+      beforeBadge: 'ANATOMÍA BASAL PREOPERATORIA',
+      afterBadge: 'TÉCNICA DE ALTA PRECISIÓN',
+      beforeSvg: '/assets/dr-carlos-perzabal/manga_gastrica_before.svg',
+      afterSvg: '/assets/dr-carlos-perzabal/manga_gastrica.svg',
+      beforeMetrics: [
+        { tag: '1,500 ml', label: 'Capacidad gástrica basal' },
+        { tag: 'Grelina', label: 'Fondo gástrico íntegro' },
+      ],
+      afterMetrics: [
+        { tag: '36 Fr', label: 'Sonda de calibración' },
+        { tag: '120-150 ml', label: 'Volumen residual' },
+        { tag: '75-80%', label: 'Resección del fondo' },
+      ],
+      legendBefore: 'Capacidad de almacenamiento amplia y síntesis activa de grelina sin restricción anatómica.',
+      legendAfter: 'Manga tubular restrictiva calibrada a 36 Fr con grapado continuo y sutura invaginante.',
+    },
+    whatsappMessage: 'Hola Dr. Carlos Perzabal, me interesa evaluar mi candidatura para Manga Gástrica en Ciudad Juárez / El Paso.',
+  },
+  bypass: {
+    id: 'bypass',
+    tabLabel: 'Bypass Gástrico (LRYGB)',
+    badge: 'GOLD STANDARD METABÓLICO & ANTI-REFLUJO',
+    title: 'Bypass Gástrico en Y de Roux (LRYGB)',
+    shortTitle: 'Bypass Gástrico',
+    candidacyName: 'Bypass Gástrico',
+    description:
+      'Procedimiento quirúrgico de acción mixta: se crea un reservorio gástrico proximal restrictivo (pouch de 15 a 30 ml) anastomosado a un asa yeyunal en Y de Roux de 100 a 150 cm, derivando el tránsito de quimo hacia el íleon distal.',
+    kpis: {
+      surgicalTime: {
+        label: 'Tiempo Quirúrgico',
+        value: '75 - 90 min',
+        subtext: 'Derivación en Y de Roux',
+        icon: 'clock',
+      },
+      hospitalStay: {
+        label: 'Estancia Hospitalaria',
+        value: '48 hrs',
+        subtext: 'Monitorización especializada',
+        icon: 'shield',
+      },
+      approach: {
+        label: 'Abordaje Quirúrgico',
+        value: '5 puertos (5-12 mm)',
+        subtext: 'Laparoscópico avanzado',
+        icon: 'activity',
+      },
+      recovery: {
+        label: 'Retorno a Actividades',
+        value: '10 a 14 días',
+        subtext: 'Recuperación protocolizada',
+        icon: 'calendar',
+      },
+    },
+    mechanismNote: {
+      title: 'Remisión Metabólica & Control de ERGE:',
+      text: 'Doble acción restrictiva y malabsortiva selectiva con estímulo precoz de hormonas incretinas (GLP-1 y PYY), logrando remisión de diabetes tipo 2 en >80% y control definitivo de reflujo gastroesofágico en >95% de los pacientes.',
+    },
+    consensusNote: {
+      title: 'Criterios ASMBS 2022 & Anatomía en Y de Roux:',
+      text: 'Procedimiento de elección ante obesidad severa asociada a reflujo gastroesofágico grave o diabetes de difícil control metabólico. Confección de reservorio gástrico proximal restrictivo (pouch de 15 a 30 ml) y asa alimentaria yeyunal de 100 a 150 cm con suplementación protocolizada.',
+    },
+    viewer: {
+      beforeLabel: 'Anatomía Previa (1,500 ml)',
+      afterLabel: 'Técnica Quirúrgica (Y de Roux)',
+      beforeBadge: 'TRÁNSITO DIGESTIVO CONVENCIONAL',
+      afterBadge: 'DERIVACIÓN EN Y DE ROUX',
+      beforeSvg: '/assets/dr-carlos-perzabal/bypass_gastrico_before.svg',
+      afterSvg: '/assets/dr-carlos-perzabal/bypass_gastrico.svg',
+      beforeMetrics: [
+        { tag: '1,500 ml', label: 'Estómago íntegro' },
+        { tag: 'Convencional', label: 'Tránsito duodenal basal' },
+      ],
+      afterMetrics: [
+        { tag: '15-30 ml', label: 'Pouch gástrico' },
+        { tag: '100-150 cm', label: 'Asa alimentaria' },
+        { tag: '>80%', label: 'Remisión de DM2' },
+      ],
+      legendBefore: 'Tránsito gástrico continuo sin derivación intestinal ni estímulo precoz de incretinas.',
+      legendAfter: 'Pouch gástrico restrictivo de 20-30 ml con derivación yeyunal y anastomosis calibrada.',
+    },
+    whatsappMessage: 'Hola Dr. Carlos Perzabal, me interesa evaluar mi candidatura para Bypass Gástrico en Ciudad Juárez / El Paso.',
+  },
+  vesicula: {
+    id: 'vesicula',
+    tabLabel: 'Colecistectomía (Strasberg CVS)',
+    badge: 'CIRUGÍA DIGESTIVA DE MÍNIMA INVASIÓN',
+    title: 'Colecistectomía por Laparoscopía / Robótica',
+    shortTitle: 'Colecistectomía',
+    candidacyName: 'Colecistectomía',
+    description:
+      'Extracción anatómica de la vesícula biliar por litiasis (cálculos o piedras), colecistitis o pólipos mediante 4 incisiones milimétricas, aplicando el protocolo internacional de Visión Crítica de Seguridad (CVS) del Dr. Strasberg.',
+    kpis: {
+      surgicalTime: {
+        label: 'Tiempo Quirúrgico',
+        value: '35 - 50 min',
+        subtext: 'Procedimiento de precisión',
+        icon: 'clock',
+      },
+      hospitalStay: {
+        label: 'Estancia Hospitalaria',
+        value: 'Ambulatoria o 24 hrs',
+        subtext: 'Alta médica temprana',
+        icon: 'shield',
+      },
+      approach: {
+        label: 'Abordaje Quirúrgico',
+        value: '4 puertos (3-10 mm)',
+        subtext: 'Laparoscopía / Robótica',
+        icon: 'activity',
+      },
+      recovery: {
+        label: 'Retorno a Actividades',
+        value: '5 a 7 días',
+        subtext: 'Reincorporación habitual',
+        icon: 'calendar',
+      },
+    },
+    mechanismNote: {
+      title: 'Extracción Vesicular Anatómica:',
+      text: 'Resolución definitiva de litiasis biliar sintomática (cálculos/piedras), colecistitis y pólipos, preservando la función hepatobiliar mediante el flujo directo continuo de bilis hacia el duodeno sin repercusión digestiva.',
+    },
+    consensusNote: {
+      title: 'Protocolo de Seguridad Strasberg (CVS):',
+      text: 'Técnica quirúrgica protocolizada que protege y salvaguarda la integridad anatómica de la vía biliar principal (colédoco): disección reglada del triángulo hepatocístico con despeje completo de grasa e identificación inequívoca de dos estructuras (conducto cístico y arteria cística) antes de cualquier corte o clipado.',
+    },
+    viewer: {
+      beforeLabel: 'Litiasis e Inflamación',
+      afterLabel: 'Técnica Quirúrgica (CVS)',
+      beforeBadge: 'PATOLOGÍA BILIAR ACTIVA',
+      afterBadge: 'VISIÓN CRÍTICA DE SEGURIDAD',
+      beforeSvg: '/assets/dr-carlos-perzabal/colecistectomia_strasberg_before.svg',
+      afterSvg: '/assets/dr-carlos-perzabal/colecistectomia_strasberg.svg',
+      beforeMetrics: [
+        { tag: 'Litiasis', label: 'Cálculos vesiculares' },
+        { tag: 'Calot', label: 'Triángulo ocluido por grasa' },
+      ],
+      afterMetrics: [
+        { tag: '2 Estructuras', label: 'Cístico y arteria aislados' },
+        { tag: '0%', label: 'Lesión de vía biliar' },
+        { tag: '3-10 mm', label: 'Puertos laparoscópicos' },
+      ],
+      legendBefore: 'Vesícula distendida con litiasis y triángulo hepatocístico ocluido por tejido inflamatorio.',
+      legendAfter: 'Ventana de seguridad transiluminada con clips de titanio y colédoco protegido.',
+    },
+    whatsappMessage: 'Hola Dr. Carlos Perzabal, me interesa evaluar mi candidatura para Colecistectomía en Ciudad Juárez / El Paso.',
+  },
+  hernia: {
+    id: 'hernia',
+    tabLabel: 'Hernias TAPP / TEP',
+    badge: 'PARED ABDOMINAL SIN TENSIÓN',
+    title: 'Hernioplastías Inguinales y Ventrales (TAPP/TEP)',
+    shortTitle: 'Hernioplastías TAPP / TEP',
+    candidacyName: 'Hernioplastía',
+    description:
+      'Reparación anatómica mínimamente invasiva de defectos de pared abdominal (hernias inguinales, umbilicales o sobre cicatrices quirúrgicas previas) mediante colocación de malla anatómica en el espacio preperitoneal.',
+    kpis: {
+      surgicalTime: {
+        label: 'Tiempo Quirúrgico',
+        value: '40 - 55 min',
+        subtext: 'Reparación anatómica',
+        icon: 'clock',
+      },
+      hospitalStay: {
+        label: 'Estancia Hospitalaria',
+        value: 'Ambulatoria / 12-24 hrs',
+        subtext: 'Corta estancia',
+        icon: 'shield',
+      },
+      approach: {
+        label: 'Abordaje Quirúrgico',
+        value: '3 micro-puertos (5-10 mm)',
+        subtext: 'Preperitoneal mínimamente invasivo',
+        icon: 'activity',
+      },
+      recovery: {
+        label: 'Retorno a Actividades',
+        value: '7 a 10 días',
+        subtext: 'Esfuerzo moderado gradual',
+        icon: 'calendar',
+      },
+    },
+    mechanismNote: {
+      title: 'Reparación Preperitoneal Sin Tensión:',
+      text: 'Reducción del saco herniario y colocación de prótesis anatómica de malla 3D macroporosa en el espacio preperitoneal, blindando el orificio miopectíneo de Fruchaud con una reducción drástica de la tasa de recidiva a <1.5%.',
+    },
+    consensusNote: {
+      title: 'Preservación Nerviosa & Prevención de Inguinodinia:',
+      text: 'Despliegue de malla tridimensional de 10x15 cm sin fijación traumática con grapas en el Triángulo del Dolor ni Triángulo del Destino, protegiendo las ramas nerviosas genitofemorales y reduciendo drásticamente el riesgo de dolor inguinal crónico (Guías EHS).',
+    },
+    viewer: {
+      beforeLabel: 'Defecto Herniario',
+      afterLabel: 'Técnica Quirúrgica (Malla 3D)',
+      beforeBadge: 'BRECHA FASCIAL ACTIVA',
+      afterBadge: 'BLINDAJE PREPERITONEAL',
+      beforeSvg: '/assets/dr-carlos-perzabal/hernioplastia_tapp_before.svg',
+      afterSvg: '/assets/dr-carlos-perzabal/hernioplastia_tapp.svg',
+      beforeMetrics: [
+        { tag: 'Fruchaud', label: 'Orificio miopectíneo abierto' },
+        { tag: 'Protrusión', label: 'Saco peritoneal herniado' },
+      ],
+      afterMetrics: [
+        { tag: '10 x 15 cm', label: 'Malla 3D macroporosa' },
+        { tag: '<1.5%', label: 'Tasa de recidiva' },
+        { tag: '0 Grapas', label: 'En Triángulo del Dolor' },
+      ],
+      legendBefore: 'Brecha en fascia transversalis con protrusión de contenido peritoneal por orificio herniario.',
+      legendAfter: 'Prótesis anatómica preperitoneal con cobertura tridimensional completa y cero tensión.',
+    },
+    whatsappMessage: 'Hola Dr. Carlos Perzabal, me interesa evaluar mi candidatura para Hernioplastía en Ciudad Juárez / El Paso.',
+  },
+  robot: {
+    id: 'robot',
+    tabLabel: 'Consola Robótica Da Vinci',
+    badge: 'VANGUARDIA TECNOLÓGICA INTUITIVE SURGICAL',
+    title: 'Cirugía Robótica Asistida (Consola Da Vinci)',
+    shortTitle: 'Cirugía Robótica Da Vinci',
+    candidacyName: 'Consola Robótica',
+    description:
+      'Plataforma robótica avanzada donde el cirujano opera desde una consola ergonómica con visión tridimensional inmersiva y mandos maestros que reproducen con precisión microscópica cada movimiento.',
+    kpis: {
+      surgicalTime: {
+        label: 'Tiempo Quirúrgico',
+        value: 'Adaptativo de alta precisión',
+        subtext: 'Control computarizado',
+        icon: 'clock',
+      },
+      hospitalStay: {
+        label: 'Estancia Hospitalaria',
+        value: '24 a 36 hrs',
+        subtext: 'Suite hospitalaria privada',
+        icon: 'shield',
+      },
+      approach: {
+        label: 'Abordaje Quirúrgico',
+        value: 'Micro-puertos robóticos',
+        subtext: 'Acople multiport Intuitive',
+        icon: 'activity',
+      },
+      recovery: {
+        label: 'Retorno a Actividades',
+        value: '5 a 8 días',
+        subtext: 'Mínimo dolor posoperatorio',
+        icon: 'calendar',
+      },
+    },
+    mechanismNote: {
+      title: 'Cinemática Submilimétrica Intuitive:',
+      text: 'El cirujano comanda la consola ergonómica con filtrado de temblor físico y escala de movimiento 5:1, traduciendo maniobras manuales en movimientos estables de precisión submilimétrica dentro del campo operatorio.',
+    },
+    consensusNote: {
+      title: 'Visión 3D-HD Estereoscópica 10x & Pinzas EndoWrist 540°:',
+      text: 'Sistema óptico binocular con percepción real de profundidad y magnificación óptica 10x de estructuras críticas (nervios y vasos sanguíneos). Instrumentos articulados EndoWrist con 7 grados de libertad y 540° de rotación que superan la destreza de la mano humana.',
+    },
+    viewer: {
+      beforeLabel: 'Consola Ergonómica',
+      afterLabel: 'Técnica Quirúrgica (EndoWrist 540°)',
+      beforeBadge: 'ESTACIÓN DE MANDO QUIRÚRGICO',
+      afterBadge: 'CINEMÁTICA MULTIAXIAL ROBÓTICA',
+      beforeSvg: '/assets/dr-carlos-perzabal/consola_da_vinci_before.svg',
+      afterSvg: '/assets/dr-carlos-perzabal/consola_da_vinci.svg',
+      beforeMetrics: [
+        { tag: '3D-HD', label: 'Visor binocular inmersivo' },
+        { tag: '5:1', label: 'Escala y filtrado de temblor' },
+      ],
+      afterMetrics: [
+        { tag: '540°', label: 'Articulación EndoWrist' },
+        { tag: '10x', label: 'Magnificación estereoscópica' },
+        { tag: '7 Grados', label: 'Libertad de movimiento' },
+      ],
+      legendBefore: 'Consola con controles maestros táctiles y pedalera multifunción ergonomizada.',
+      legendAfter: 'Instrumental articulado con rotación axial completa de 540° para microdisección atraumática.',
+    },
+    whatsappMessage: 'Hola Dr. Carlos Perzabal, me interesa evaluar mi candidatura para Consola Robótica en Ciudad Juárez / El Paso.',
+  },
+};
+
+// ==========================================
 // 3. MAIN COMPONENT
 // ==========================================
 
@@ -507,8 +883,14 @@ export default function DrCarlosPerzabalClient() {
   const [collectedData, setCollectedData] = useState<Record<string, string>>({});
   const chatBottomRef = useRef<HTMLDivElement>(null);
 
-  // Procedure tabs state
+  // Procedure tabs state & view mode
   const [activeProcTab, setActiveProcTab] = useState<'manga' | 'bypass' | 'vesicula' | 'hernia' | 'robot'>('manga');
+  const [procViewMode, setProcViewMode] = useState<'before' | 'after'>('after');
+
+  // Active procedure data & WhatsApp deep-link
+  const currentProc = SURGICAL_PROCEDURES[activeProcTab];
+  const encodedProcWaText = encodeURIComponent(currentProc.whatsappMessage);
+  const procWhatsAppUrl = `https://wa.me/526563117565?text=${encodedProcWaText}`;
 
   // Modal state
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -1491,7 +1873,7 @@ export default function DrCarlosPerzabalClient() {
               border: 1px solid var(--doc-border);
               border-radius: 16px;
               padding: 32px;
-              align-items: center;
+              align-items: start;
             }
 
             @media (max-width: 850px) {
@@ -1501,19 +1883,234 @@ export default function DrCarlosPerzabalClient() {
               }
             }
 
+            .doc-proc-info-col {
+              display: flex;
+              flex-direction: column;
+            }
+
+            .doc-proc-viewer-wrap {
+              display: flex;
+              flex-direction: column;
+            }
+
+            .doc-proc-viewer-header {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              margin-bottom: 12px;
+              flex-wrap: wrap;
+              gap: 8px;
+            }
+
+            .doc-proc-toggle {
+              display: flex;
+              align-items: center;
+              background: rgba(8, 19, 37, 0.95);
+              border: 1px solid var(--doc-border);
+              border-radius: 12px;
+              padding: 4px;
+              gap: 4px;
+            }
+
+            .doc-proc-toggle-btn {
+              min-height: 44px;
+              min-width: 44px;
+              padding: 8px 16px;
+              border-radius: 8px;
+              background: transparent;
+              border: 1px solid transparent;
+              color: var(--doc-muted);
+              font-size: 0.8125rem;
+              font-weight: 700;
+              cursor: pointer;
+              transition: all 0.25s ease;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              text-align: center;
+              box-sizing: border-box;
+            }
+
+            .doc-proc-toggle-btn.active {
+              background: var(--doc-teal);
+              color: #050A14;
+              font-weight: 800;
+              box-shadow: 0 4px 14px rgba(0, 163, 224, 0.35);
+            }
+
             .doc-proc-diagram-wrap {
               width: 100%;
               text-align: center;
-              background: #040810;
-              border: 1px solid rgba(148, 163, 184, 0.15);
-              border-radius: 12px;
-              padding: 16px;
+              background: radial-gradient(circle at 50% 35%, rgba(0, 163, 224, 0.08) 0%, #040810 70%);
+              border: 1px solid rgba(0, 163, 224, 0.25);
+              border-radius: 16px;
+              padding: 20px;
+              position: relative;
+              box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(0, 163, 224, 0.05);
+              box-sizing: border-box;
             }
 
             .doc-proc-img {
               width: 100%;
               max-height: 320px;
               object-fit: contain;
+              display: block;
+              margin: 0 auto;
+              filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.6));
+            }
+
+            .doc-proc-hud-chips {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 8px;
+              justify-content: center;
+              margin-top: 16px;
+            }
+
+            .doc-proc-hud-chip {
+              background: rgba(8, 19, 37, 0.85);
+              border: 1px solid rgba(56, 189, 248, 0.35);
+              border-radius: 20px;
+              padding: 6px 14px;
+              display: flex;
+              align-items: center;
+              gap: 6px;
+              font-size: 0.75rem;
+              backdrop-filter: blur(8px);
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            }
+
+            .doc-proc-hud-chip-tag {
+              color: var(--doc-teal-light);
+              font-weight: 800;
+              font-family: monospace;
+            }
+
+            .doc-proc-hud-chip-label {
+              color: var(--doc-white);
+            }
+
+            .doc-proc-legend {
+              margin-top: 14px;
+              padding: 10px 14px;
+              background: rgba(4, 8, 16, 0.85);
+              border: 1px solid rgba(148, 163, 184, 0.12);
+              border-radius: 8px;
+              font-size: 0.75rem;
+              color: var(--doc-text-muted);
+              text-align: center;
+              line-height: 1.45;
+            }
+
+            .doc-kpi-grid {
+              display: grid;
+              grid-template-columns: repeat(2, 1fr);
+              gap: 12px;
+              margin: 20px 0;
+            }
+
+            @media (max-width: 540px) {
+              .doc-kpi-grid {
+                grid-template-columns: 1fr;
+              }
+            }
+
+            .doc-kpi-card {
+              background: rgba(13, 27, 51, 0.6);
+              border: 1px solid rgba(148, 163, 184, 0.14);
+              border-radius: 12px;
+              padding: 14px;
+              backdrop-filter: blur(8px);
+              transition: border-color 0.2s ease;
+            }
+
+            .doc-kpi-card:hover {
+              border-color: rgba(0, 163, 224, 0.4);
+            }
+
+            .doc-kpi-header {
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              color: var(--doc-teal-light);
+              font-size: 0.6875rem;
+              text-transform: uppercase;
+              letter-spacing: 0.06em;
+              font-weight: 700;
+              margin-bottom: 6px;
+            }
+
+            .doc-kpi-value {
+              font-size: 1.05rem;
+              font-weight: 800;
+              color: var(--doc-white);
+              line-height: 1.25;
+            }
+
+            .doc-kpi-subtext {
+              font-size: 0.75rem;
+              color: var(--doc-muted);
+              margin-top: 4px;
+              line-height: 1.35;
+            }
+
+            .doc-proc-note {
+              background: rgba(8, 19, 37, 0.7);
+              border-left: 3px solid var(--doc-teal);
+              border-radius: 0 10px 10px 0;
+              padding: 12px 14px;
+              margin-bottom: 12px;
+              font-size: 0.8125rem;
+              line-height: 1.5;
+              color: var(--doc-text-muted);
+            }
+
+            .doc-proc-note strong {
+              color: var(--doc-white);
+              display: inline;
+              margin-right: 4px;
+            }
+
+            .doc-proc-cta-btn {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 10px;
+              width: 100%;
+              min-height: 48px;
+              padding: 14px 20px;
+              border-radius: 12px;
+              background: linear-gradient(135deg, #00A3E0 0%, #0284C7 100%);
+              color: #050A14;
+              font-weight: 800;
+              font-size: 0.9375rem;
+              text-decoration: none;
+              transition: all 0.25s ease;
+              box-shadow: 0 8px 24px rgba(0, 163, 224, 0.3);
+              box-sizing: border-box;
+            }
+
+            .doc-proc-cta-btn:hover {
+              transform: translateY(-2px);
+              box-shadow: 0 12px 28px rgba(0, 163, 224, 0.45);
+              filter: brightness(1.05);
+            }
+
+            .doc-proc-secondary-link {
+              display: inline-block;
+              width: 100%;
+              text-align: center;
+              margin-top: 10px;
+              color: var(--doc-teal-light);
+              font-size: 0.8125rem;
+              text-decoration: none;
+              font-weight: 600;
+              transition: color 0.2s ease;
+            }
+
+            .doc-proc-secondary-link:hover {
+              color: var(--doc-white);
+              text-decoration: underline;
             }
 
             /* WhatsApp Simulator Chassis */
@@ -2309,170 +2906,136 @@ export default function DrCarlosPerzabalClient() {
 
           {/* Tab Content Display */}
           <div className="doc-proc-display">
-            {activeProcTab === 'manga' && (
-              <>
-                <div>
-                  <span className="doc-badge-tag">CIRUGÍA BARIÁTRICA RESTRICTIVA & HORMONAL</span>
-                  <h3 style={{ fontSize: '1.6rem' }}>Manga Gástrica por Laparoscopía (LSG)</h3>
-                  <p>
-                    Procedimiento metabólico de alta seguridad que consiste en la resección gástrica longitudinal del 75% al 80% del estómago mediante engrapadoras mecánicas de última generación, calibrada con sonda orogástrica de 36 Fr.
-                  </p>
-                  <ul className="doc-card-bullets">
-                    <li>
-                      <CheckCircle2 size={16} />
-                      <span><strong>Supresión de Grelina:</strong> Remoción del fondo gástrico donde se produce la hormona del apetito, brindando saciedad precoz y disminución drástica del hambre.</span>
-                    </li>
-                    <li>
-                      <CheckCircle2 size={16} />
-                      <span><strong>Criterios ASMBS/IFSO 2022:</strong> Candidatura directa con IMC ≥ 35 kg/m², o IMC 30-34.9 kg/m² con comorbilidades (DM2, HTA, Apnea).</span>
-                    </li>
-                    <li>
-                      <CheckCircle2 size={16} />
-                      <span><strong>Rápida Recuperación:</strong> Estancia hospitalaria de 24 a 48 horas en hospital privado; reincorporación a labores en 7 a 10 días.</span>
-                    </li>
-                  </ul>
-                </div>
-                <div className="doc-proc-diagram-wrap">
-                  <img
-                    src="/assets/dr-carlos-perzabal/manga_gastrica.svg"
-                    alt="Diagrama Manga Gástrica"
-                    className="doc-proc-img"
-                  />
-                </div>
-              </>
-            )}
+            {/* Columna Izquierda: Ficha Modular, KPIs, Rigor Médico y Candidatura */}
+            <div className="doc-proc-info-col">
+              <span className="doc-badge-tag">{currentProc.badge}</span>
+              <h3 style={{ fontSize: '1.6rem', margin: '12px 0 8px 0', color: 'var(--doc-white)' }}>
+                {currentProc.title}
+              </h3>
+              <p style={{ fontSize: '0.925rem', color: 'var(--doc-text-muted)', lineHeight: '1.6', marginBottom: '20px' }}>
+                {currentProc.description}
+              </p>
 
-            {activeProcTab === 'bypass' && (
-              <>
-                <div>
-                  <span className="doc-badge-tag">GOLD STANDARD METABÓLICO & ANTI-REFLUJO</span>
-                  <h3 style={{ fontSize: '1.6rem' }}>Bypass Gástrico en Y de Roux (LRYGB)</h3>
-                  <p>
-                    Procedimiento quirúrgico de acción mixta: se crea un reservorio gástrico proximal pequeño (pouch de 15 a 30 ml) anastomosado a un asa yeyunal en Y de Roux de 100 a 150 cm, derivando el tránsito de quimo hacia el íleon distal.
-                  </p>
-                  <ul className="doc-card-bullets">
-                    <li>
-                      <CheckCircle2 size={16} />
-                      <span><strong>Remisión de Diabetes Tipo 2:</strong> Estímulo masivo de hormonas incretinas (GLP-1 y PYY) con resolución de la hiperglucemia en &gt;80% de los pacientes.</span>
-                    </li>
-                    <li>
-                      <CheckCircle2 size={16} />
-                      <span><strong>Control Definitivo de ERGE:</strong> Erradicación del reflujo gastroesofágico y acidez en &gt;95% de los casos. Procedimiento ideal para hernia hiatal grave.</span>
-                    </li>
-                    <li>
-                      <CheckCircle2 size={16} />
-                      <span><strong>Monitoreo y Nutrición:</strong> Acompañamiento continuo con suplementación multivitamínica de alta biodisponibilidad y control analítico.</span>
-                    </li>
-                  </ul>
+              {/* Grilla modular de 4 microtarjetas en vidrio esmerilado con iconos clínicos */}
+              <div className="doc-kpi-grid">
+                <div className="doc-kpi-card">
+                  <div className="doc-kpi-header">
+                    <Clock size={16} />
+                    <span>{currentProc.kpis.surgicalTime.label}</span>
+                  </div>
+                  <div className="doc-kpi-value">{currentProc.kpis.surgicalTime.value}</div>
+                  <div className="doc-kpi-subtext">{currentProc.kpis.surgicalTime.subtext}</div>
                 </div>
-                <div className="doc-proc-diagram-wrap">
-                  <img
-                    src="/assets/dr-carlos-perzabal/bypass_gastrico.svg"
-                    alt="Diagrama Bypass Gástrico"
-                    className="doc-proc-img"
-                  />
-                </div>
-              </>
-            )}
 
-            {activeProcTab === 'vesicula' && (
-              <>
-                <div>
-                  <span className="doc-badge-tag">CIRUGÍA DIGESTIVA DE MÍNIMA INVASIÓN</span>
-                  <h3 style={{ fontSize: '1.6rem' }}>Colecistectomía por Laparoscopía / Robótica</h3>
-                  <p>
-                    Extracción de la vesícula biliar por litiasis (cálculos o piedras), cólico vesicular o pólipos mediante 4 incisiones milimétricas, aplicando el protocolo internacional de seguridad del Dr. Strasberg.
-                  </p>
-                  <ul className="doc-card-bullets">
-                    <li>
-                      <CheckCircle2 size={16} />
-                      <span><strong>Visión Crítica de Seguridad (CVS):</strong> Despeje exhaustivo del triángulo hepatocístico con identificación inequívoca del conducto cístico y la arteria cística antes de cualquier corte.</span>
-                    </li>
-                    <li>
-                      <CheckCircle2 size={16} />
-                      <span><strong>Protocolo de Seguridad Strasberg (CVS):</strong> Técnica quirúrgica protocolizada que protege y salvaguarda la integridad anatómica de la vía biliar principal (colédoco) mediante identificación inequívoca previa al corte.</span>
-                    </li>
-                    <li>
-                      <CheckCircle2 size={16} />
-                      <span><strong>Estancia Corta:</strong> Procedimiento ambulatorio o con pernocta de 24 horas; regreso a actividades cotidianas en 5 a 7 días.</span>
-                    </li>
-                  </ul>
+                <div className="doc-kpi-card">
+                  <div className="doc-kpi-header">
+                    <ShieldCheck size={16} />
+                    <span>{currentProc.kpis.hospitalStay.label}</span>
+                  </div>
+                  <div className="doc-kpi-value">{currentProc.kpis.hospitalStay.value}</div>
+                  <div className="doc-kpi-subtext">{currentProc.kpis.hospitalStay.subtext}</div>
                 </div>
-                <div className="doc-proc-diagram-wrap">
-                  <img
-                    src="/assets/dr-carlos-perzabal/colecistectomia_strasberg.svg"
-                    alt="Diagrama Colecistectomía Strasberg"
-                    className="doc-proc-img"
-                  />
-                </div>
-              </>
-            )}
 
-            {activeProcTab === 'hernia' && (
-              <>
-                <div>
-                  <span className="doc-badge-tag">PARED ABDOMINAL SIN TENSIÓN</span>
-                  <h3 style={{ fontSize: '1.6rem' }}>Hernioplastías Inguinales y Ventrales (TAPP/TEP)</h3>
-                  <p>
-                    Reparación anatómica mínimamente invasiva de defectos de pared abdominal (hernias inguinales, umbilicales o sobre cicatrices quirúrgicas previas) mediante colocación de malla anatómica en el espacio preperitoneal.
-                  </p>
-                  <ul className="doc-card-bullets">
-                    <li>
-                      <CheckCircle2 size={16} />
-                      <span><strong>Cobertura del Orificio Miopectíneo de Fruchaud:</strong> Blindaje completo de la región inguinal profunda sin tensión tisular, reduciendo la tasa de recidiva a &lt;1.5%.</span>
-                    </li>
-                    <li>
-                      <CheckCircle2 size={16} />
-                      <span><strong>Prevención de Inguinodinia:</strong> Evita fijaciones traumáticas con grapas en zonas nerviosas, reduciendo drásticamente el riesgo de dolor inguinal crónico.</span>
-                    </li>
-                    <li>
-                      <CheckCircle2 size={16} />
-                      <span><strong>Mínimo Dolor Posoperatorio:</strong> Incisiones de 5 a 10 mm con reincorporación a la vida activa en menos de dos semanas.</span>
-                    </li>
-                  </ul>
+                <div className="doc-kpi-card">
+                  <div className="doc-kpi-header">
+                    <Activity size={16} />
+                    <span>{currentProc.kpis.approach.label}</span>
+                  </div>
+                  <div className="doc-kpi-value">{currentProc.kpis.approach.value}</div>
+                  <div className="doc-kpi-subtext">{currentProc.kpis.approach.subtext}</div>
                 </div>
-                <div className="doc-proc-diagram-wrap">
-                  <img
-                    src="/assets/dr-carlos-perzabal/hernioplastia_tapp.svg"
-                    alt="Diagrama Hernioplastía TAPP"
-                    className="doc-proc-img"
-                  />
-                </div>
-              </>
-            )}
 
-            {activeProcTab === 'robot' && (
-              <>
-                <div>
-                  <span className="doc-badge-tag">VANGUARDIA TECNOLÓGICA INTUITIVE SURGICAL</span>
-                  <h3 style={{ fontSize: '1.6rem' }}>Cirugía Robótica Asistida (Consola Da Vinci)</h3>
-                  <p>
-                    Plataforma robótica avanzada donde el cirujano opera desde una consola ergonómica con visión tridimensional inmersiva y mandos maestros que reproducen con precisión microscópica cada movimiento.
-                  </p>
-                  <ul className="doc-card-bullets">
-                    <li>
-                      <CheckCircle2 size={16} />
-                      <span><strong>Visión 3D-HD Estereoscópica 10x:</strong> Percepción de profundidad real y magnificación milimétrica de nervios y vasos sanguíneos críticos.</span>
-                    </li>
-                    <li>
-                      <CheckCircle2 size={16} />
-                      <span><strong>Pinzas EndoWrist 540°:</strong> Siete grados de libertad de movimiento que superan la capacidad de flexión de la mano humana dentro de cavidades estrechas.</span>
-                    </li>
-                    <li>
-                      <CheckCircle2 size={16} />
-                      <span><strong>Filtrado de Temblor y Escala 5:1:</strong> Movimientos submilimétricos estables y atraumáticos, reduciendo notablemente el sangrado y el dolor posoperatorio.</span>
-                    </li>
-                  </ul>
+                <div className="doc-kpi-card">
+                  <div className="doc-kpi-header">
+                    <Calendar size={16} />
+                    <span>{currentProc.kpis.recovery.label}</span>
+                  </div>
+                  <div className="doc-kpi-value">{currentProc.kpis.recovery.value}</div>
+                  <div className="doc-kpi-subtext">{currentProc.kpis.recovery.subtext}</div>
                 </div>
-                <div className="doc-proc-diagram-wrap">
-                  <img
-                    src="/assets/dr-carlos-perzabal/consola_da_vinci.svg"
-                    alt="Diagrama Consola Da Vinci"
-                    className="doc-proc-img"
-                  />
+              </div>
+
+              {/* 2 notas estructuradas de rigor médico */}
+              <div className="doc-proc-note">
+                <strong>{currentProc.mechanismNote.title}</strong>
+                <span>{currentProc.mechanismNote.text}</span>
+              </div>
+              <div className="doc-proc-note">
+                <strong>{currentProc.consensusNote.title}</strong>
+                <span>{currentProc.consensusNote.text}</span>
+              </div>
+
+              {/* Botón de candidatura principal 1-clic a WhatsApp y enlace alternativo */}
+              <div style={{ marginTop: '24px' }}>
+                <a
+                  href={procWhatsAppUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="doc-proc-cta-btn"
+                >
+                  <MessageCircle size={18} />
+                  <span>Evaluar mi candidatura a {currentProc.candidacyName} →</span>
+                </a>
+                <a href="#simulador" className="doc-proc-secondary-link">
+                  O realizar triaje interactivo en la web ↓
+                </a>
+                <p style={{ fontSize: '0.75rem', color: 'var(--doc-muted)', marginTop: '8px', textAlign: 'center' }}>
+                  Orientación médica preliminar · No sustituye la consulta médica presencial
+                </p>
+              </div>
+            </div>
+
+            {/* Columna Derecha: Visor Quirúrgico Volumétrico */}
+            <div className="doc-proc-viewer-wrap">
+              {/* Selector interactivo fluido Antes / Después */}
+              <div className="doc-proc-viewer-header">
+                <span className="doc-badge-tag" style={{ margin: 0 }}>
+                  {procViewMode === 'before' ? currentProc.viewer.beforeBadge : currentProc.viewer.afterBadge}
+                </span>
+                <div className="doc-proc-toggle" role="group" aria-label="Selector de visualización anatómica">
+                  <button
+                    type="button"
+                    onClick={() => setProcViewMode('before')}
+                    className={`doc-proc-toggle-btn ${procViewMode === 'before' ? 'active' : ''}`}
+                    aria-pressed={procViewMode === 'before'}
+                  >
+                    Anatomía Previa
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setProcViewMode('after')}
+                    className={`doc-proc-toggle-btn ${procViewMode === 'after' ? 'active' : ''}`}
+                    aria-pressed={procViewMode === 'after'}
+                  >
+                    Técnica Quirúrgica
+                  </button>
                 </div>
-              </>
-            )}
+              </div>
+
+              {/* Marco visual volumétrico con gradientes de quirófano y profundidad */}
+              <div className="doc-proc-diagram-wrap">
+                <img
+                  src={procViewMode === 'before' ? currentProc.viewer.beforeSvg : currentProc.viewer.afterSvg}
+                  alt={`${currentProc.title} - ${procViewMode === 'before' ? 'Anatomía Previa' : 'Técnica Quirúrgica'}`}
+                  className="doc-proc-img"
+                />
+
+                {/* Etiquetas tácticas HUD superpuestas con métricas clínicas (Fr, ml, cm, mm, °, x) */}
+                <div className="doc-proc-hud-chips">
+                  {(procViewMode === 'before' ? currentProc.viewer.beforeMetrics : currentProc.viewer.afterMetrics).map((metric, idx) => (
+                    <div key={idx} className="doc-proc-hud-chip">
+                      <span className="doc-proc-hud-chip-tag">{metric.tag}</span>
+                      <span className="doc-proc-hud-chip-label">{metric.label}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Indicador / Placa táctica de reducción y seguridad */}
+                <div className="doc-proc-legend">
+                  {procViewMode === 'before' ? currentProc.viewer.legendBefore : currentProc.viewer.legendAfter}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
