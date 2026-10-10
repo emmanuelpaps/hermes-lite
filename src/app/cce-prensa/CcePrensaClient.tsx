@@ -422,6 +422,10 @@ export default function CcePrensaClient() {
           contain: paint;
         }
 
+        .cce-page-container.is-crm .cce-living-canvas {
+          display: none;
+        }
+
         .cce-spotlight {
           position: absolute;
           top: 0;
@@ -434,19 +438,158 @@ export default function CcePrensaClient() {
           pointer-events: none;
         }
 
+        /* Top Theatrical Golden Beam */
+        .cce-spotlight-gold {
+          position: absolute;
+          top: -80px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 90vw;
+          max-width: 1100px;
+          height: 60vh;
+          background: radial-gradient(ellipse at 50% 10%, rgba(245, 222, 152, 0.42) 0%, rgba(212, 175, 55, 0.24) 30%, rgba(212, 175, 55, 0.05) 58%, transparent 75%);
+          filter: blur(45px);
+          animation: cceGoldSpotlightBreath 7s ease-in-out infinite alternate;
+          pointer-events: none;
+          will-change: transform, opacity;
+        }
+
+        @keyframes cceGoldSpotlightBreath {
+          0% {
+            opacity: 0.45;
+            transform: translateX(-50%) scale(0.92);
+          }
+          50% {
+            opacity: 0.95;
+            transform: translateX(-50%) scale(1.12) translateY(22px);
+          }
+          100% {
+            opacity: 0.55;
+            transform: translateX(-50%) scale(0.96) translateY(-5px);
+          }
+        }
+
+        /* Central Breathing Golden Core (Behind Hero & Form) */
+        .cce-gold-ambient-center {
+          position: absolute;
+          top: 35vh;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 58vw;
+          max-width: 750px;
+          height: 58vw;
+          max-height: 750px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(245, 222, 152, 0.38) 0%, rgba(212, 175, 55, 0.22) 32%, rgba(243, 202, 64, 0.08) 60%, transparent 75%);
+          filter: blur(75px);
+          animation: cceGoldPulseCenter 9s ease-in-out infinite alternate;
+          pointer-events: none;
+          will-change: transform, opacity;
+        }
+
+        @keyframes cceGoldPulseCenter {
+          0% {
+            transform: translate(-50%, -50%) scale(0.85);
+            opacity: 0.5;
+          }
+          50% {
+            transform: translate(-48%, -52%) scale(1.22);
+            opacity: 0.95;
+          }
+          100% {
+            transform: translate(-52%, -48%) scale(0.92);
+            opacity: 0.6;
+          }
+        }
+
+        /* Floating Golden Nebula Orb */
+        .cce-gold-ambient-floating {
+          position: absolute;
+          top: 50vh;
+          left: 60%;
+          width: 48vw;
+          max-width: 620px;
+          height: 48vw;
+          max-height: 620px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(255, 232, 163, 0.35) 0%, rgba(212, 175, 55, 0.2) 35%, rgba(170, 128, 34, 0.06) 65%, transparent 75%);
+          filter: blur(85px);
+          animation: cceGoldFloat 13s ease-in-out infinite alternate;
+          pointer-events: none;
+          will-change: transform, opacity;
+        }
+
+        @keyframes cceGoldFloat {
+          0% {
+            transform: translate3d(0, 0, 0) scale(0.9);
+            opacity: 0.45;
+          }
+          50% {
+            transform: translate3d(-15vw, 12vh, 0) scale(1.18);
+            opacity: 0.92;
+          }
+          100% {
+            transform: translate3d(-6vw, -10vh, 0) scale(1.02);
+            opacity: 0.55;
+          }
+        }
+
+        /* Slow Theatrical Golden Aurora Sweep */
+        .cce-gold-shimmer-ray {
+          position: absolute;
+          top: -20vh;
+          left: 20%;
+          width: 80vw;
+          height: 80vh;
+          background: conic-gradient(from 180deg at 50% 50%, rgba(212, 175, 55, 0) 0deg, rgba(245, 222, 152, 0.18) 60deg, rgba(212, 175, 55, 0) 120deg, rgba(243, 202, 64, 0.14) 220deg, rgba(212, 175, 55, 0) 360deg);
+          filter: blur(65px);
+          animation: cceGoldRayRotate 32s linear infinite;
+          pointer-events: none;
+          opacity: 0.75;
+          will-change: transform;
+        }
+
+        @keyframes cceGoldRayRotate {
+          0% {
+            transform: rotate(0deg) scale(1);
+          }
+          50% {
+            transform: rotate(180deg) scale(1.12);
+          }
+          100% {
+            transform: rotate(360deg) scale(1);
+          }
+        }
+
         .cce-canvas-orb {
           position: absolute;
           border-radius: 50%;
-          filter: blur(100px);
-          will-change: transform;
-          opacity: 0.22;
+          filter: blur(90px);
+          will-change: transform, opacity;
           pointer-events: none;
         }
 
         @media (max-width: 768px) {
           .cce-canvas-orb {
-            filter: blur(65px);
-            opacity: 0.16;
+            filter: blur(55px);
+          }
+          .cce-spotlight-gold {
+            filter: blur(35px);
+            width: 100vw;
+            height: 45vh;
+          }
+          .cce-gold-ambient-center {
+            filter: blur(55px);
+            width: 80vw;
+            height: 80vw;
+          }
+          .cce-gold-ambient-floating {
+            filter: blur(60px);
+            width: 70vw;
+            height: 70vw;
+          }
+          .cce-gold-shimmer-ray {
+            display: none;
           }
         }
 
@@ -458,15 +601,16 @@ export default function CcePrensaClient() {
           background: radial-gradient(circle, #064E3B 0%, rgba(6, 78, 59, 0) 70%);
           animation: cceOrbMove1 22s ease-in-out infinite alternate;
           transform: translate3d(0, 0, 0);
+          opacity: 0.32;
         }
 
         .cce-orb-2 {
           top: 15%;
           right: -10%;
-          width: 45vw;
-          height: 45vw;
-          background: radial-gradient(circle, #D4AF37 0%, rgba(212, 175, 55, 0) 70%);
-          animation: cceOrbMove2 26s ease-in-out infinite alternate;
+          width: 48vw;
+          height: 48vw;
+          background: radial-gradient(circle, #F5DE98 0%, #D4AF37 40%, rgba(212, 175, 55, 0) 70%);
+          animation: cceOrbMove2 14s ease-in-out infinite alternate;
           transform: translate3d(0, 0, 0);
         }
 
@@ -476,17 +620,18 @@ export default function CcePrensaClient() {
           width: 55vw;
           height: 55vw;
           background: radial-gradient(circle, #042E23 0%, rgba(4, 46, 35, 0) 70%);
-          animation: cceOrbMove3 30s ease-in-out infinite alternate;
+          animation: cceOrbMove3 26s ease-in-out infinite alternate;
           transform: translate3d(0, 0, 0);
+          opacity: 0.35;
         }
 
         .cce-orb-4 {
-          bottom: 20%;
+          bottom: 15%;
           right: 5%;
-          width: 40vw;
-          height: 40vw;
-          background: radial-gradient(circle, #F3CA40 0%, rgba(243, 202, 64, 0) 70%);
-          animation: cceOrbMove4 24s ease-in-out infinite alternate;
+          width: 45vw;
+          height: 45vw;
+          background: radial-gradient(circle, #FFE8A3 0%, #F3CA40 40%, rgba(243, 202, 64, 0) 70%);
+          animation: cceOrbMove4 16s ease-in-out infinite alternate;
           transform: translate3d(0, 0, 0);
         }
 
@@ -497,9 +642,9 @@ export default function CcePrensaClient() {
         }
 
         @keyframes cceOrbMove2 {
-          0% { transform: translate3d(0, 0, 0) scale(1); }
-          50% { transform: translate3d(-10vw, 8vh, 0) scale(1.12); }
-          100% { transform: translate3d(5vw, -6vh, 0) scale(0.92); }
+          0% { transform: translate3d(0, 0, 0) scale(0.92); opacity: 0.4; }
+          50% { transform: translate3d(-8vw, 10vh, 0) scale(1.22); opacity: 0.88; }
+          100% { transform: translate3d(6vw, -6vh, 0) scale(0.96); opacity: 0.5; }
         }
 
         @keyframes cceOrbMove3 {
@@ -509,9 +654,9 @@ export default function CcePrensaClient() {
         }
 
         @keyframes cceOrbMove4 {
-          0% { transform: translate3d(0, 0, 0) scale(1); }
-          50% { transform: translate3d(-8vw, -8vh, 0) scale(1.15); }
-          100% { transform: translate3d(6vw, 10vh, 0) scale(0.9); }
+          0% { transform: translate3d(0, 0, 0) scale(0.9); opacity: 0.38; }
+          50% { transform: translate3d(-7vw, -10vh, 0) scale(1.2); opacity: 0.85; }
+          100% { transform: translate3d(8vw, 8vh, 0) scale(0.95); opacity: 0.45; }
         }
 
         /* Banknote / Official Document Micro-Texture */
@@ -1979,9 +2124,13 @@ export default function CcePrensaClient() {
         }}
       />
 
-      {/* ATMOSPHERIC LIVING CANVAS (R1: 4 GPU ORBS + SPOTLIGHT + BANKNOTE MICRO-TEXTURE) */}
+      {/* ATMOSPHERIC LIVING CANVAS (R1: THEATRICAL GOLD SPOTLIGHT + AMBIENT PULSE & ORBS) */}
       <div className="cce-living-canvas" aria-hidden="true">
         <div className="cce-spotlight" />
+        <div className="cce-spotlight-gold" />
+        <div className="cce-gold-ambient-center" />
+        <div className="cce-gold-ambient-floating" />
+        <div className="cce-gold-shimmer-ray" />
         <div className="cce-canvas-orb cce-orb-1" />
         <div className="cce-canvas-orb cce-orb-2" />
         <div className="cce-canvas-orb cce-orb-3" />
