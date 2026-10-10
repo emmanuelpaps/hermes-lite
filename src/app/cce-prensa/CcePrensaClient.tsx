@@ -69,8 +69,9 @@ export default function CcePrensaClient() {
   const [submitError, setSubmitError] = useState('');
   const [confirmedRecord, setConfirmedRecord] = useState<PrensaRegistration | null>(null);
 
-  // Search filter for CRM table
+  // Search & status filters for CRM table
   const [searchFilter, setSearchFilter] = useState('');
+  const [statusFilter, setStatusFilter] = useState<'all' | 'checked' | 'pending'>('all');
   const [checkInUpdatingId, setCheckInUpdatingId] = useState<string | null>(null);
 
   // Detect ?admin=cce2026 on mount
@@ -297,7 +298,13 @@ export default function CcePrensaClient() {
     window.URL.revokeObjectURL(url);
   };
 
-  const filteredRegistrations = (crmData?.registrations || []).filter(r => {
+  const totalRegistrations = crmData?.registrations || [];
+  const checkedCount = totalRegistrations.filter(r => r.checkIn).length;
+  const pendingCount = totalRegistrations.filter(r => !r.checkIn).length;
+
+  const filteredRegistrations = totalRegistrations.filter(r => {
+    if (statusFilter === 'checked' && !r.checkIn) return false;
+    if (statusFilter === 'pending' && r.checkIn) return false;
     if (!searchFilter.trim()) return true;
     const q = searchFilter.toLowerCase().trim();
     return (
@@ -366,7 +373,7 @@ export default function CcePrensaClient() {
         }
 
         .cce-header-inner {
-          max-width: 1100px;
+          max-width: 1360px;
           margin: 0 auto;
           display: flex;
           align-items: center;
@@ -899,30 +906,67 @@ export default function CcePrensaClient() {
 
         /* PRIVATE CRM SECTION */
         .cce-crm-container {
-          max-width: 1200px;
-          margin: 20px auto 60px auto;
-          padding: 0 20px;
+          max-width: 1360px;
+          margin: 24px auto 60px auto;
+          padding: 0 24px;
           width: 100%;
         }
 
         .cce-crm-banner {
-          background: linear-gradient(135deg, var(--cce-emerald-dark) 0%, var(--cce-emerald) 100%);
-          border-radius: 16px;
-          padding: 24px 28px;
-          color: #FFFFFF;
+          background: #FFFFFF;
+          border: 1px solid rgba(6, 78, 59, 0.14);
+          border-left: 5px solid var(--cce-emerald);
+          border-radius: 14px;
+          padding: 20px 24px;
+          color: var(--cce-text-dark);
           margin-bottom: 24px;
           display: flex;
           flex-wrap: wrap;
           align-items: center;
           justify-content: space-between;
           gap: 16px;
-          box-shadow: 0 8px 30px rgba(6, 78, 59, 0.2);
+          box-shadow: 0 4px 16px rgba(6, 78, 59, 0.05);
+        }
+
+        .cce-crm-banner-left {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+        }
+
+        .cce-crm-live-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 11px;
+          font-weight: 800;
+          color: var(--cce-emerald);
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+        }
+
+        .cce-pulse-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #10B981;
+          display: inline-block;
+          box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+          animation: ccePulse 2s infinite;
+        }
+
+        @keyframes ccePulse {
+          0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+          70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+          100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
         }
 
         .cce-crm-banner-title {
           font-size: 20px;
           font-weight: 800;
+          color: var(--cce-emerald-dark);
           letter-spacing: -0.01em;
+          margin: 0;
           display: flex;
           align-items: center;
           gap: 10px;
@@ -930,8 +974,20 @@ export default function CcePrensaClient() {
 
         .cce-crm-banner-sub {
           font-size: 13px;
-          opacity: 0.85;
-          margin-top: 4px;
+          color: var(--cce-text-muted);
+        }
+
+        .cce-crm-capacity-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px 14px;
+          border-radius: 8px;
+          background: var(--cce-emerald-wash);
+          border: 1px solid #A7F3D0;
+          color: var(--cce-emerald);
+          font-size: 13px;
+          font-weight: 600;
         }
 
         .cce-crm-actions {
@@ -959,36 +1015,62 @@ export default function CcePrensaClient() {
         .cce-crm-btn-primary {
           background: var(--cce-gold);
           color: #042E23;
+          box-shadow: 0 2px 8px rgba(212, 175, 55, 0.25);
         }
 
         .cce-crm-btn-primary:hover {
           background: #F3CA40;
+          transform: translateY(-1px);
         }
 
         .cce-crm-btn-secondary {
-          background: rgba(255, 255, 255, 0.15);
-          color: #FFFFFF;
-          border: 1px solid rgba(255, 255, 255, 0.3);
+          background: #FFFFFF;
+          color: var(--cce-text-dark);
+          border: 1px solid var(--cce-border-subtle);
         }
 
         .cce-crm-btn-secondary:hover {
-          background: rgba(255, 255, 255, 0.25);
+          background: #F8FAFC;
+          border-color: #CBD5E1;
         }
 
-        /* Telemetry Radar Cards Grid */
+        /* Telemetry Radar Cards Grid (2 rows of 3 balanced cards) */
         .cce-radar-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+          grid-template-columns: repeat(3, 1fr);
           gap: 16px;
-          margin-bottom: 28px;
+          margin-bottom: 24px;
+        }
+
+        @media (max-width: 960px) {
+          .cce-radar-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        @media (max-width: 640px) {
+          .cce-radar-grid {
+            grid-template-columns: 1fr;
+          }
         }
 
         .cce-radar-card {
           background: #FFFFFF;
-          border: 1px solid rgba(6, 78, 59, 0.15);
+          border: 1px solid rgba(6, 78, 59, 0.12);
           border-radius: 12px;
-          padding: 18px 16px;
-          box-shadow: 0 2px 8px rgba(6, 78, 59, 0.04);
+          padding: 18px 20px;
+          box-shadow: 0 2px 8px rgba(6, 78, 59, 0.03);
+          transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .cce-radar-card:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 16px rgba(6, 78, 59, 0.06);
+        }
+
+        .cce-radar-card-hero {
+          border-top: 3px solid var(--cce-emerald);
+          background: linear-gradient(180deg, #FAFCFA 0%, #FFFFFF 100%);
         }
 
         .cce-radar-header {
@@ -999,25 +1081,53 @@ export default function CcePrensaClient() {
         }
 
         .cce-radar-label {
-          font-size: 12px;
-          font-weight: 600;
+          font-size: 11px;
+          font-weight: 700;
           color: var(--cce-text-muted);
           text-transform: uppercase;
-          letter-spacing: 0.04em;
+          letter-spacing: 0.05em;
+        }
+
+        .cce-radar-icon-box {
+          width: 32px;
+          height: 32px;
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
 
         .cce-radar-value {
           font-size: 24px;
           font-weight: 800;
           color: var(--cce-emerald);
-          line-height: 1.1;
+          line-height: 1.15;
+          letter-spacing: -0.02em;
         }
 
         .cce-radar-subtext {
           font-size: 11px;
-          color: var(--cce-gold-dark);
+          color: var(--cce-text-muted);
           font-weight: 600;
-          margin-top: 4px;
+          margin-top: 6px;
+        }
+
+        .cce-device-pills {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+          margin-top: 6px;
+        }
+
+        .cce-dev-pill {
+          display: inline-block;
+          padding: 2px 7px;
+          border-radius: 4px;
+          background: #F8FAFC;
+          border: 1px solid #E2E8F0;
+          font-size: 11px;
+          font-weight: 600;
+          color: #334155;
         }
 
         /* Media Table Section */
@@ -1036,14 +1146,15 @@ export default function CcePrensaClient() {
           flex-wrap: wrap;
           align-items: center;
           justify-content: space-between;
-          gap: 12px;
+          gap: 16px;
+          background: #FAFCFA;
         }
 
         .cce-search-box {
           position: relative;
-          min-width: 260px;
+          min-width: 240px;
           flex: 1;
-          max-width: 400px;
+          max-width: 360px;
         }
 
         .cce-search-icon {
@@ -1062,10 +1173,45 @@ export default function CcePrensaClient() {
           border: 1px solid var(--cce-border-subtle);
           border-radius: 8px;
           outline: none;
+          background: #FFFFFF;
         }
 
         .cce-search-input:focus {
           border-color: var(--cce-emerald);
+          box-shadow: 0 0 0 3px rgba(6, 78, 59, 0.08);
+        }
+
+        .cce-filter-tabs {
+          display: inline-flex;
+          align-items: center;
+          background: #F1F5F9;
+          border: 1px solid #E2E8F0;
+          border-radius: 8px;
+          padding: 3px;
+          gap: 2px;
+        }
+
+        .cce-filter-tab {
+          border: none;
+          background: transparent;
+          padding: 6px 14px;
+          font-size: 12px;
+          font-weight: 700;
+          border-radius: 6px;
+          cursor: pointer;
+          color: #64748B;
+          transition: all 0.15s ease;
+          min-height: 36px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          white-space: nowrap;
+        }
+
+        .cce-filter-tab.active {
+          background: #FFFFFF;
+          color: var(--cce-emerald-dark);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
         }
 
         /* Scrollable Table Wrapper */
@@ -1080,14 +1226,14 @@ export default function CcePrensaClient() {
           border-collapse: collapse;
           text-align: left;
           font-size: 13px;
-          min-width: 780px;
+          min-width: 980px;
         }
 
         .cce-th {
           background: #F8FAF8;
           color: var(--cce-text-dark);
           font-weight: 700;
-          padding: 12px 16px;
+          padding: 14px 16px;
           border-bottom: 2px solid rgba(6, 78, 59, 0.1);
           text-transform: uppercase;
           font-size: 11px;
@@ -1096,14 +1242,53 @@ export default function CcePrensaClient() {
         }
 
         .cce-td {
-          padding: 14px 16px;
+          padding: 16px;
           border-bottom: 1px solid #F1F5F9;
           color: var(--cce-text-dark);
           vertical-align: middle;
         }
 
         .cce-row:hover {
-          background-color: #F8FAF8;
+          background-color: #FAFCFA;
+        }
+
+        .cce-avatar-initials {
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+          background: var(--cce-emerald-wash);
+          border: 1px solid #A7F3D0;
+          color: var(--cce-emerald-dark);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 11px;
+          font-weight: 800;
+          flex-shrink: 0;
+        }
+
+        .cce-medio-badge {
+          display: inline-block;
+          padding: 4px 10px;
+          border-radius: 6px;
+          background: rgba(6, 78, 59, 0.06);
+          color: var(--cce-emerald-dark);
+          font-weight: 700;
+          font-size: 12px;
+          border: 1px solid rgba(6, 78, 59, 0.12);
+        }
+
+        .cce-asistentes-pill {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 4px;
+          padding: 4px 10px;
+          border-radius: 9999px;
+          background: #F1F5F9;
+          color: #1E293B;
+          font-weight: 700;
+          font-size: 12px;
         }
 
         .cce-status-badge {
@@ -1111,26 +1296,35 @@ export default function CcePrensaClient() {
           align-items: center;
           justify-content: center;
           gap: 6px;
-          padding: 8px 14px;
+          padding: 7px 12px;
           border-radius: 9999px;
           font-size: 12px;
-          font-weight: 600;
+          font-weight: 700;
           cursor: pointer;
           border: none;
-          min-height: 44px;
-          transition: all 0.15s;
+          min-height: 40px;
+          white-space: nowrap;
+          transition: all 0.15s ease;
         }
 
         .cce-status-checked {
           background: var(--cce-emerald-wash);
-          color: var(--cce-emerald);
+          color: var(--cce-emerald-dark);
           border: 1px solid #A7F3D0;
+        }
+
+        .cce-status-checked:hover {
+          background: #D1FAE5;
         }
 
         .cce-status-pending {
           background: #FEF3C7;
           color: #92400E;
           border: 1px solid #FDE68A;
+        }
+
+        .cce-status-pending:hover {
+          background: #FDE68A;
         }
 
         .cce-btn-wa-row {
@@ -1145,13 +1339,16 @@ export default function CcePrensaClient() {
           font-size: 12px;
           font-weight: 700;
           text-decoration: none;
-          transition: background 0.15s;
+          transition: background 0.15s ease, transform 0.15s ease;
           white-space: nowrap;
-          min-height: 44px;
+          min-height: 40px;
+          box-shadow: 0 2px 6px rgba(37, 211, 102, 0.2);
         }
 
         .cce-btn-wa-row:hover {
           background: #1EBE5D;
+          transform: translateY(-1px);
+          box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
         }
 
         /* Footer */
@@ -1227,7 +1424,7 @@ export default function CcePrensaClient() {
             <img
               src="/assets/apolograma-logo-v2.png"
               alt="Apolograma Studio"
-              style={{ height: '22px', width: 'auto', opacity: 0.8 }}
+              style={{ height: '22px', width: 'auto', opacity: 0.9, filter: 'brightness(0.12)' }}
             />
           </div>
         </div>
@@ -1238,24 +1435,32 @@ export default function CcePrensaClient() {
         <main className="cce-crm-container">
           {/* Executive Header Banner */}
           <div className="cce-crm-banner">
-            <div>
-              <div className="cce-crm-banner-title">
-                <BarChart3 size={24} />
-                Centro de Telemetría y Acreditación de Prensa · CCE Juárez
+            <div className="cce-crm-banner-left">
+              <div className="cce-crm-live-badge">
+                <span className="cce-pulse-dot" />
+                CENTRO DE CONTROL &amp; TELEMETRÍA · CCE JUÁREZ
               </div>
+              <h2 className="cce-crm-banner-title">
+                <BarChart3 size={22} color="#064E3B" />
+                Acreditación de Prensa · Empresario del Año 2026
+              </h2>
               <div className="cce-crm-banner-sub">
-                Empresario del Año 2026 | Desayuno y Rueda de Prensa Oficial · Taquería La No 4
+                Desayuno y Rueda de Prensa Oficial · Lunes 12 de Octubre, 9:00 a.m. · Taquería La No 4
               </div>
             </div>
 
             <div className="cce-crm-actions">
+              <div className="cce-crm-capacity-pill">
+                <Users size={15} />
+                <span>Capacidad confirmada: <b>{crmData?.telemetry.totalAsistentes ?? 0}</b> asistentes</span>
+              </div>
               <button className="cce-crm-btn cce-crm-btn-secondary" onClick={fetchCrmData} disabled={isLoadingCrm}>
                 <RefreshCw size={14} className={isLoadingCrm ? 'cce-spinner' : ''} />
-                Actualizar Datos
+                Actualizar
               </button>
-              <button className="cce-crm-btn cce-crm-btn-primary" onClick={handleExportCsv}>
+              <button className="cce-crm-btn cce-crm-btn-primary" onClick={handleExportCsv} title="Descargar lista de acreditados en formato CSV compatible con Excel">
                 <FileSpreadsheet size={16} />
-                Exportar CSV (\uFEFF)
+                Exportar CSV
               </button>
             </div>
           </div>
@@ -1263,37 +1468,23 @@ export default function CcePrensaClient() {
           {/* Telemetry Radar Cards */}
           {crmData?.telemetry && (
             <div className="cce-radar-grid">
-              <div className="cce-radar-card">
+              <div className="cce-radar-card cce-radar-card-hero">
                 <div className="cce-radar-header">
-                  <span className="cce-radar-label">Total Visitas</span>
-                  <BarChart3 size={16} color="#064E3B" />
+                  <span className="cce-radar-label">Total Asistentes</span>
+                  <div className="cce-radar-icon-box" style={{ background: '#ECFDF5', color: '#064E3B' }}>
+                    <Users size={16} />
+                  </div>
                 </div>
-                <div className="cce-radar-value">{crmData.telemetry.totalVisits}</div>
-                <div className="cce-radar-subtext">Radar de tráfico en vivo</div>
-              </div>
-
-              <div className="cce-radar-card">
-                <div className="cce-radar-header">
-                  <span className="cce-radar-label">Visitantes Únicos</span>
-                  <Users size={16} color="#064E3B" />
-                </div>
-                <div className="cce-radar-value">{crmData.telemetry.uniqueVisits}</div>
-                <div className="cce-radar-subtext">IPs independientes auditadas</div>
-              </div>
-
-              <div className="cce-radar-card">
-                <div className="cce-radar-header">
-                  <span className="cce-radar-label">Tasa de Conversión</span>
-                  <Sparkles size={16} color="#D4AF37" />
-                </div>
-                <div className="cce-radar-value">{crmData.telemetry.conversionRate}</div>
-                <div className="cce-radar-subtext">Acreditados / Visitantes</div>
+                <div className="cce-radar-value">{crmData.telemetry.totalAsistentes}</div>
+                <div className="cce-radar-subtext">Lugares confirmados en mesa</div>
               </div>
 
               <div className="cce-radar-card">
                 <div className="cce-radar-header">
                   <span className="cce-radar-label">Medios Registrados</span>
-                  <Award size={16} color="#064E3B" />
+                  <div className="cce-radar-icon-box" style={{ background: '#EFF6FF', color: '#2563EB' }}>
+                    <Award size={16} />
+                  </div>
                 </div>
                 <div className="cce-radar-value">{crmData.telemetry.totalMedios}</div>
                 <div className="cce-radar-subtext">Agencias y medios únicos</div>
@@ -1301,22 +1492,55 @@ export default function CcePrensaClient() {
 
               <div className="cce-radar-card">
                 <div className="cce-radar-header">
-                  <span className="cce-radar-label">Total Asistentes</span>
-                  <Users size={16} color="#064E3B" />
+                  <span className="cce-radar-label">Check-in en Sede</span>
+                  <div className="cce-radar-icon-box" style={{ background: '#F0FDF4', color: '#16A34A' }}>
+                    <CheckCircle2 size={16} />
+                  </div>
                 </div>
-                <div className="cce-radar-value">{crmData.telemetry.totalAsistentes}</div>
-                <div className="cce-radar-subtext">Capacidad estimada en mesa</div>
+                <div className="cce-radar-value" style={{ color: checkedCount > 0 ? '#059669' : '#64748B' }}>
+                  {checkedCount} <span style={{ fontSize: '14px', fontWeight: 600, color: '#94A3B8' }}>/ {totalRegistrations.length}</span>
+                </div>
+                <div className="cce-radar-subtext">{pendingCount} reporteros pendientes por llegar</div>
               </div>
 
               <div className="cce-radar-card">
                 <div className="cce-radar-header">
-                  <span className="cce-radar-label">Desglose de Dispositivos</span>
-                  <CheckCircle2 size={16} color="#059669" />
+                  <span className="cce-radar-label">Tráfico Web</span>
+                  <div className="cce-radar-icon-box" style={{ background: '#F8FAFC', color: '#475569' }}>
+                    <BarChart3 size={16} />
+                  </div>
                 </div>
-                <div className="cce-radar-value" style={{ fontSize: '15px', marginTop: '4px' }}>
-                  iOS {crmData.telemetry.devices.ios}% · Android {crmData.telemetry.devices.android}% · Desktop {crmData.telemetry.devices.desktop}%
+                <div className="cce-radar-value">
+                  {crmData.telemetry.totalVisits}{' '}
+                  <span style={{ fontSize: '13px', fontWeight: 600, color: '#64748B' }}>({crmData.telemetry.uniqueVisits} únicos)</span>
                 </div>
-                <div className="cce-radar-subtext">Distribución de hardware</div>
+                <div className="cce-radar-subtext">Visitas auditadas en tiempo real</div>
+              </div>
+
+              <div className="cce-radar-card">
+                <div className="cce-radar-header">
+                  <span className="cce-radar-label">Tasa de Conversión</span>
+                  <div className="cce-radar-icon-box" style={{ background: '#FFFBEB', color: '#D97706' }}>
+                    <Sparkles size={16} />
+                  </div>
+                </div>
+                <div className="cce-radar-value" style={{ color: '#B45309' }}>{crmData.telemetry.conversionRate}</div>
+                <div className="cce-radar-subtext">Acreditados vs. Total visitantes</div>
+              </div>
+
+              <div className="cce-radar-card">
+                <div className="cce-radar-header">
+                  <span className="cce-radar-label">Dispositivos</span>
+                  <div className="cce-radar-icon-box" style={{ background: '#F5F3FF', color: '#7C3AED' }}>
+                    <ShieldCheck size={16} />
+                  </div>
+                </div>
+                <div className="cce-device-pills">
+                  <span className="cce-dev-pill">📱 iOS {crmData.telemetry.devices.ios}%</span>
+                  <span className="cce-dev-pill">🤖 Android {crmData.telemetry.devices.android}%</span>
+                  <span className="cce-dev-pill">💻 Desktop {crmData.telemetry.devices.desktop}%</span>
+                </div>
+                <div className="cce-radar-subtext">Distribución de hardware en prensa</div>
               </div>
             </div>
           )}
@@ -1334,8 +1558,33 @@ export default function CcePrensaClient() {
                   className="cce-search-input"
                 />
               </div>
+
+              <div className="cce-filter-tabs">
+                <button
+                  type="button"
+                  className={`cce-filter-tab ${statusFilter === 'all' ? 'active' : ''}`}
+                  onClick={() => setStatusFilter('all')}
+                >
+                  Todos ({totalRegistrations.length})
+                </button>
+                <button
+                  type="button"
+                  className={`cce-filter-tab ${statusFilter === 'checked' ? 'active' : ''}`}
+                  onClick={() => setStatusFilter('checked')}
+                >
+                  ✓ En Sede ({checkedCount})
+                </button>
+                <button
+                  type="button"
+                  className={`cce-filter-tab ${statusFilter === 'pending' ? 'active' : ''}`}
+                  onClick={() => setStatusFilter('pending')}
+                >
+                  ⏳ Pendientes ({pendingCount})
+                </button>
+              </div>
+
               <div style={{ fontSize: '13px', color: '#64748B' }}>
-                Mostrando <b>{filteredRegistrations.length}</b> registros de prensa
+                Mostrando <b>{filteredRegistrations.length}</b> registros
               </div>
             </div>
 
@@ -1343,15 +1592,17 @@ export default function CcePrensaClient() {
               <table className="cce-table">
                 <thead>
                   <tr>
-                    <th className="cce-th">Periodista / Reportero</th>
-                    <th className="cce-th">Medio de Comunicación</th>
-                    <th className="cce-th" style={{ textAlign: 'center' }}>
+                    <th className="cce-th" style={{ width: '22%' }}>Periodista / Reportero</th>
+                    <th className="cce-th" style={{ width: '20%' }}>Medio de Comunicación</th>
+                    <th className="cce-th" style={{ width: '10%', textAlign: 'center' }}>
                       Asistentes
                     </th>
-                    <th className="cce-th">Teléfono / WhatsApp</th>
-                    <th className="cce-th">Fecha Registro</th>
-                    <th className="cce-th">Check-in en Taquería La No 4</th>
-                    <th className="cce-th" style={{ textAlign: 'right' }}>
+                    <th className="cce-th" style={{ width: '14%' }}>Teléfono / WhatsApp</th>
+                    <th className="cce-th" style={{ width: '11%' }}>Fecha Registro</th>
+                    <th className="cce-th" style={{ width: '11%', textAlign: 'center' }}>
+                      Check-in en Taquería La No 4
+                    </th>
+                    <th className="cce-th" style={{ width: '12%', textAlign: 'right' }}>
                       WhatsApp (Opción C)
                     </th>
                   </tr>
@@ -1360,28 +1611,34 @@ export default function CcePrensaClient() {
                   {filteredRegistrations.length === 0 ? (
                     <tr>
                       <td colSpan={7} style={{ textAlign: 'center', padding: '36px', color: '#94A3B8' }}>
-                        No se encontraron registros de prensa que coincidan con la búsqueda.
+                        No se encontraron registros de prensa que coincidan con los filtros aplicados.
                       </td>
                     </tr>
                   ) : (
                     filteredRegistrations.map(reg => (
                       <tr key={reg.id} className="cce-row">
-                        <td className="cce-td" style={{ fontWeight: 700 }}>
-                          {reg.nombre}
+                        <td className="cce-td">
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                            <span className="cce-avatar-initials">{reg.nombre.slice(0, 2).toUpperCase()}</span>
+                            <span style={{ fontWeight: 700 }}>{reg.nombre}</span>
+                          </div>
                         </td>
-                        <td className="cce-td" style={{ color: '#064E3B', fontWeight: 600 }}>
-                          {reg.medio}
+                        <td className="cce-td">
+                          <span className="cce-medio-badge">{reg.medio}</span>
                         </td>
-                        <td className="cce-td" style={{ textAlign: 'center', fontWeight: 700 }}>
-                          {reg.asistentes}
+                        <td className="cce-td" style={{ textAlign: 'center' }}>
+                          <span className="cce-asistentes-pill">
+                            <Users size={12} />
+                            {reg.asistentes}
+                          </span>
                         </td>
-                        <td className="cce-td" style={{ fontFamily: 'monospace' }}>
+                        <td className="cce-td" style={{ fontFamily: 'monospace', fontSize: '13px', color: '#334155' }}>
                           {reg.whatsapp}
                         </td>
                         <td className="cce-td" style={{ color: '#64748B', fontSize: '12px' }}>
                           {reg.fecha}
                         </td>
-                        <td className="cce-td">
+                        <td className="cce-td" style={{ textAlign: 'center' }}>
                           <button
                             type="button"
                             className={`cce-status-badge ${reg.checkIn ? 'cce-status-checked' : 'cce-status-pending'}`}
@@ -1391,7 +1648,7 @@ export default function CcePrensaClient() {
                             aria-label="Check-in en Taquería La No 4"
                           >
                             <CheckCircle2 size={13} />
-                            {reg.checkIn ? 'Acreditado en Taquería La No 4' : 'Check-in en Taquería La No 4'}
+                            {reg.checkIn ? 'Acreditado' : 'Check-in'}
                           </button>
                         </td>
                         <td className="cce-td" style={{ textAlign: 'right' }}>
