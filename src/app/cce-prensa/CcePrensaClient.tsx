@@ -915,7 +915,7 @@ export default function CcePrensaClient() {
         }
 
         /* =========================================================================
-           LUXURY CONVOCATORIA INVITATION CARD ("Caja de texto de lujo")
+           LUXURY CONVOCATORIA INVITATION CARD ("Caja de texto de lujo") & LAMBRÍN NICHE
            ========================================================================= */
         .cce-luxury-card-wrapper {
           max-width: 860px;
@@ -926,12 +926,100 @@ export default function CcePrensaClient() {
           z-index: 2;
         }
 
+        /* Architectural Lambrín Niche Backdrop */
+        .cce-lambrin-niche {
+          position: absolute;
+          inset: -20px -26px -24px -26px;
+          border-radius: 34px;
+          pointer-events: none;
+          z-index: 1;
+        }
+
+        .cce-lambrin-panel {
+          position: absolute;
+          inset: 0;
+          border-radius: 34px;
+          border: 1.5px solid rgba(212, 175, 55, 0.38);
+          box-shadow: 
+            0 32px 85px rgba(0, 0, 0, 0.96),
+            0 0 45px rgba(6, 78, 59, 0.45),
+            inset 0 0 50px rgba(0, 0, 0, 0.9);
+          overflow: hidden;
+          background-color: #1a120c;
+        }
+
+        /* Teak Wood Vertical Slats */
+        .cce-lambrin-slats {
+          position: absolute;
+          inset: 0;
+          background: repeating-linear-gradient(90deg, 
+            #120c07 0px, 
+            #1b120c 3px, 
+            #2b1d12 8px, 
+            #3d2819 14px, 
+            #2b1d12 18px, 
+            #1b120c 21px, 
+            #0e0804 24px
+          );
+          opacity: 0.96;
+        }
+
+        /* Subtle emerald architectural ambient integration */
+        .cce-lambrin-overlay {
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(ellipse 90% 75% at 50% 50%, rgba(6, 78, 59, 0.22) 0%, rgba(3, 35, 26, 0.6) 65%, rgba(1, 15, 10, 0.88) 100%);
+          mix-blend-mode: multiply;
+        }
+
+        /* Breathing Vertical LED Amber Columns */
+        .cce-lambrin-light-column {
+          position: absolute;
+          top: -8px;
+          bottom: -8px;
+          width: 8px;
+          border-radius: 6px;
+          background: linear-gradient(180deg, 
+            rgba(212, 175, 55, 0.3) 0%, 
+            rgba(245, 222, 152, 0.95) 50%, 
+            rgba(212, 175, 55, 0.3) 100%
+          );
+          box-shadow: 
+            0 0 30px 10px rgba(245, 222, 152, 0.48), 
+            0 0 60px 22px rgba(212, 175, 55, 0.28);
+          animation: cceLambrinBreathing 12s ease-in-out infinite alternate;
+          will-change: opacity, filter;
+          z-index: 2;
+        }
+        .cce-lambrin-light-left {
+          left: -12px;
+        }
+        .cce-lambrin-light-right {
+          right: -12px;
+        }
+
+        @keyframes cceLambrinBreathing {
+          0% {
+            opacity: 0.68;
+            filter: brightness(0.92);
+          }
+          50% {
+            opacity: 1;
+            filter: brightness(1.18);
+          }
+          100% {
+            opacity: 0.68;
+            filter: brightness(0.92);
+          }
+        }
+
         .cce-luxury-card {
           position: relative;
-          background: radial-gradient(120% 115% at 50% -8%, rgba(16, 185, 129, 0.35) 0%, rgba(6, 78, 59, 0.78) 32%, rgba(3, 35, 26, 0.96) 68%, rgba(1, 15, 10, 0.99) 100%);
-          backdrop-filter: blur(24px);
-          -webkit-backdrop-filter: blur(24px);
-          border: 1.5px solid rgba(212, 175, 55, 0.55);
+          z-index: 3;
+          background: radial-gradient(120% 115% at 50% -8%, rgba(16, 185, 129, 0.38) 0%, rgba(6, 78, 59, 0.84) 32%, rgba(3, 35, 26, 0.92) 68%, rgba(1, 16, 11, 0.96) 100%);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1.5px solid rgba(212, 175, 55, 0.6);
           border-radius: 24px;
           padding: 48px 52px;
           box-shadow:
@@ -1301,6 +1389,19 @@ export default function CcePrensaClient() {
         @media (max-width: 640px) {
           .cce-luxury-card-wrapper {
             padding: 0 8px;
+          }
+          .cce-lambrin-niche {
+            inset: -8px -6px -10px -6px;
+            border-radius: 22px;
+          }
+          .cce-lambrin-panel {
+            border-radius: 22px;
+            box-shadow: 
+              0 0 25px rgba(212, 175, 55, 0.22),
+              0 15px 40px rgba(0, 0, 0, 0.92);
+          }
+          .cce-lambrin-light-column {
+            display: none;
           }
           .cce-luxury-card {
             padding: 26px 14px;
@@ -2511,8 +2612,18 @@ export default function CcePrensaClient() {
             </motion.div>
           </section>
 
-          {/* LUXURY CONVOCATORIA INVITATION CARD ("Caja de texto de lujo") */}
+          {/* LUXURY CONVOCATORIA INVITATION CARD ("Caja de texto de lujo") & ARCHITECTURAL LAMBRÍN NICHE */}
           <div className="cce-luxury-card-wrapper">
+            {/* Architectural Lambrín Niche Backdrop with Slats & Ambient LED */}
+            <div className="cce-lambrin-niche" aria-hidden="true">
+              <div className="cce-lambrin-light-column cce-lambrin-light-left" />
+              <div className="cce-lambrin-light-column cce-lambrin-light-right" />
+              <div className="cce-lambrin-panel">
+                <div className="cce-lambrin-slats" />
+                <div className="cce-lambrin-overlay" />
+              </div>
+            </div>
+
             <motion.div
               initial={false}
               animate={{ opacity: 1, y: 0 }}
