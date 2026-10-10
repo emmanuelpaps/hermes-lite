@@ -2,26 +2,25 @@ import type { Metadata } from 'next';
 import CcePrensaClient from './CcePrensaClient';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://propuestas.tecza.com.mx'),
-  title: 'Confirmación de Asistencia · Rueda de Prensa CCE Juárez | Empresa y Empresario del Año 2026',
+  metadataBase: new URL('https://hermes-lite.vercel.app'),
+  title: 'Invitación a Rueda de Prensa | CCE Ciudad Juárez',
   description:
-    'Invitación oficial y confirmación de asistencia para medios de comunicación al desayuno y rueda de prensa del Consejo Coordinador Empresarial (CCE) de Ciudad Juárez. Lunes 12 de Octubre de 2026, 9:00 a.m. en Taquería La No 4.',
+    'Invitación a rueda de prensa · Consejo Coordinador Empresarial de Ciudad Juárez.',
   alternates: {
-    canonical: 'https://propuestas.tecza.com.mx/cce-prensa',
+    canonical: 'https://hermes-lite.vercel.app/cce-prensa',
   },
   openGraph: {
-    title: 'Confirmación de Asistencia · Rueda de Prensa CCE Juárez | Empresa y Empresario del Año 2026',
-    description:
-      'Invitación oficial y confirmación de asistencia para medios al desayuno y rueda de prensa del CCE Ciudad Juárez. Lunes 12 de Octubre de 2026, 9:00 a.m. en Taquería La No 4.',
-    url: 'https://propuestas.tecza.com.mx/cce-prensa',
+    title: 'Invitación a Rueda de Prensa',
+    description: 'Consejo Coordinador Empresarial de Ciudad Juárez',
+    url: 'https://hermes-lite.vercel.app/cce-prensa',
     siteName: 'Consejo Coordinador Empresarial de Ciudad Juárez',
     images: [
       {
-        url: '/assets/cce-juarez/og_cce_juarez.jpg',
+        url: '/assets/cce-juarez/og_cce_prensa.png',
         width: 1200,
         height: 630,
-        type: 'image/jpeg',
-        alt: 'Confirmación de Asistencia Rueda de Prensa CCE Ciudad Juárez - Empresa y Empresario del Año 2026',
+        type: 'image/png',
+        alt: 'Invitación a Rueda de Prensa · Consejo Coordinador Empresarial de Ciudad Juárez',
       },
     ],
     locale: 'es_MX',
@@ -29,10 +28,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Confirmación de Asistencia · Rueda de Prensa CCE Juárez | Empresa y Empresario del Año 2026',
-    description:
-      'Invitación oficial y confirmación de asistencia para medios de comunicación al desayuno y rueda de prensa del CCE Ciudad Juárez. Lunes 12 de Octubre de 2026, 9:00 a.m. en Taquería La No 4.',
-    images: ['/assets/cce-juarez/og_cce_juarez.jpg'],
+    title: 'Invitación a Rueda de Prensa',
+    description: 'Consejo Coordinador Empresarial de Ciudad Juárez',
+    images: ['/assets/cce-juarez/og_cce_prensa.png'],
   },
   robots: {
     index: false,
