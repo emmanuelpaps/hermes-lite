@@ -1226,23 +1226,23 @@ export default function CcePrensaClient() {
           border-collapse: collapse;
           text-align: left;
           font-size: 13px;
-          min-width: 980px;
+          min-width: 760px;
         }
 
         .cce-th {
           background: #F8FAF8;
           color: var(--cce-text-dark);
           font-weight: 700;
-          padding: 14px 16px;
+          padding: 12px 10px;
           border-bottom: 2px solid rgba(6, 78, 59, 0.1);
           text-transform: uppercase;
           font-size: 11px;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.04em;
           white-space: nowrap;
         }
 
         .cce-td {
-          padding: 16px;
+          padding: 12px 10px;
           border-bottom: 1px solid #F1F5F9;
           color: var(--cce-text-dark);
           vertical-align: middle;
@@ -1295,14 +1295,14 @@ export default function CcePrensaClient() {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          gap: 6px;
-          padding: 7px 12px;
+          gap: 5px;
+          padding: 6px 11px;
           border-radius: 9999px;
-          font-size: 12px;
+          font-size: 11.5px;
           font-weight: 700;
           cursor: pointer;
           border: none;
-          min-height: 40px;
+          min-height: 34px;
           white-space: nowrap;
           transition: all 0.15s ease;
         }
@@ -1334,14 +1334,14 @@ export default function CcePrensaClient() {
           gap: 6px;
           background: #25D366;
           color: #FFFFFF;
-          padding: 8px 14px;
+          padding: 6px 12px;
           border-radius: 8px;
-          font-size: 12px;
+          font-size: 11.5px;
           font-weight: 700;
           text-decoration: none;
           transition: background 0.15s ease, transform 0.15s ease;
           white-space: nowrap;
-          min-height: 40px;
+          min-height: 34px;
           box-shadow: 0 2px 6px rgba(37, 211, 102, 0.2);
         }
 
@@ -1592,18 +1592,18 @@ export default function CcePrensaClient() {
               <table className="cce-table">
                 <thead>
                   <tr>
-                    <th className="cce-th" style={{ width: '22%' }}>Periodista / Reportero</th>
-                    <th className="cce-th" style={{ width: '20%' }}>Medio de Comunicación</th>
-                    <th className="cce-th" style={{ width: '10%', textAlign: 'center' }}>
+                    <th className="cce-th" style={{ width: '22%' }}>Periodista / Nombre</th>
+                    <th className="cce-th" style={{ width: '18%' }}>Medio</th>
+                    <th className="cce-th" style={{ width: '8%', textAlign: 'center' }}>
                       Asistentes
                     </th>
-                    <th className="cce-th" style={{ width: '14%' }}>Teléfono / WhatsApp</th>
-                    <th className="cce-th" style={{ width: '11%' }}>Fecha Registro</th>
-                    <th className="cce-th" style={{ width: '11%', textAlign: 'center' }}>
-                      Check-in en Taquería La No 4
+                    <th className="cce-th" style={{ width: '14%' }}>Teléfono</th>
+                    <th className="cce-th" style={{ width: '11%' }}>Fecha</th>
+                    <th className="cce-th" style={{ width: '12%', textAlign: 'center' }}>
+                      Check-in
                     </th>
-                    <th className="cce-th" style={{ width: '12%', textAlign: 'right' }}>
-                      WhatsApp (Opción C)
+                    <th className="cce-th" style={{ width: '15%', textAlign: 'right' }}>
+                      WhatsApp
                     </th>
                   </tr>
                 </thead>
