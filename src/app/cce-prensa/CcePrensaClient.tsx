@@ -1017,18 +1017,23 @@ export default function CcePrensaClient() {
         .cce-luxury-card {
           position: relative;
           z-index: 3;
-          background: radial-gradient(120% 115% at 50% -8%, rgba(16, 185, 129, 0.42) 0%, rgba(6, 78, 59, 0.74) 32%, rgba(3, 35, 26, 0.84) 68%, rgba(1, 16, 11, 0.88) 100%);
-          backdrop-filter: blur(14px);
-          -webkit-backdrop-filter: blur(14px);
-          border: 1.5px solid rgba(212, 175, 55, 0.65);
+          background: radial-gradient(
+            135% 120% at 50% -8%,
+            #0f6b4f 0%,
+            #0a553e 25%,
+            #064432 55%,
+            #043527 80%,
+            #03261c 100%
+          );
+          border: 1.5px solid rgba(212, 175, 55, 0.7);
           border-radius: 24px;
           padding: 48px 52px;
           box-shadow:
             0 35px 95px rgba(0, 0, 0, 0.85),
-            0 0 75px rgba(6, 78, 59, 0.45),
+            0 0 75px rgba(16, 185, 129, 0.35),
             0 0 35px rgba(212, 175, 55, 0.25),
-            inset 0 1px 0 rgba(245, 222, 152, 0.65),
-            inset 0 0 45px rgba(6, 78, 59, 0.3);
+            inset 0 1px 0 rgba(245, 222, 152, 0.75),
+            inset 0 0 60px rgba(16, 185, 129, 0.2);
           overflow: hidden;
           transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -1037,11 +1042,11 @@ export default function CcePrensaClient() {
           transform: translateY(-2px);
           box-shadow:
             0 42px 105px rgba(0, 0, 0, 0.95),
-            0 0 85px rgba(6, 78, 59, 0.7),
+            0 0 85px rgba(16, 185, 129, 0.5),
             0 0 45px rgba(212, 175, 55, 0.4),
-            inset 0 1px 0 rgba(255, 245, 204, 0.75),
-            inset 0 0 60px rgba(212, 175, 55, 0.12);
-          border-color: rgba(245, 222, 152, 0.85);
+            inset 0 1px 0 rgba(255, 245, 204, 0.85),
+            inset 0 0 60px rgba(16, 185, 129, 0.3);
+          border-color: rgba(245, 222, 152, 0.9);
         }
 
         /* Gold Corner Filigree Accents */
@@ -1118,9 +1123,9 @@ export default function CcePrensaClient() {
           color: #FFF6D6;
           padding: 9px 24px;
           border-radius: 9999px;
-          background: linear-gradient(135deg, rgba(6, 78, 59, 0.9) 0%, rgba(212, 175, 55, 0.35) 50%, rgba(4, 46, 35, 0.95) 100%);
-          border: 1px solid rgba(245, 222, 152, 0.65);
-          box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.28), inset 0 1px 0 rgba(255, 245, 204, 0.5);
+          background: linear-gradient(135deg, #0d6e52 0%, rgba(212, 175, 55, 0.35) 50%, #064e3b 100%);
+          border: 1px solid rgba(245, 222, 152, 0.75);
+          box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5), 0 0 22px rgba(16, 185, 129, 0.38), inset 0 1px 0 rgba(255, 245, 204, 0.6);
           margin-bottom: 16px;
         }
 
@@ -1186,13 +1191,13 @@ export default function CcePrensaClient() {
           grid-template-columns: repeat(3, 1fr);
           gap: 20px;
           margin: 32px 0 26px 0;
-          background: linear-gradient(145deg, rgba(10, 80, 60, 0.75) 0%, rgba(2, 24, 18, 0.95) 52%, rgba(5, 50, 36, 0.82) 100%);
-          border: 1.5px solid rgba(212, 175, 55, 0.48);
+          background: linear-gradient(145deg, rgba(14, 105, 78, 0.92) 0%, rgba(6, 62, 46, 0.96) 52%, rgba(4, 46, 34, 0.94) 100%);
+          border: 1.5px solid rgba(212, 175, 55, 0.55);
           border-radius: 18px;
           padding: 24px;
           box-shadow:
-            inset 0 1px 0 rgba(245, 222, 152, 0.38),
-            inset 0 0 28px rgba(6, 78, 59, 0.45),
+            inset 0 1px 0 rgba(245, 222, 152, 0.45),
+            inset 0 0 35px rgba(16, 185, 129, 0.25),
             0 14px 40px rgba(0, 0, 0, 0.55);
         }
 
