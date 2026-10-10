@@ -2192,6 +2192,9 @@ export default function CcePrensaClient() {
                       alt="Carlos Loret de Mola"
                       className="cce-keynote-img"
                       loading="eager"
+                      onError={(e) => {
+                        e.currentTarget.src = "/assets/cce-juarez/carlos-loret-de-mola.jpg";
+                      }}
                     />
                     <div className="cce-keynote-frame-border" />
                   </div>
