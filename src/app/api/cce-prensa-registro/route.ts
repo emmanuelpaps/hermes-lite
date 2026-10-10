@@ -1,156 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import {
+  saveRegistration,
+  getRegistrations,
+  updateCheckIn,
+  logVisit,
+  getTelemetry,
+  PrensaRegistration,
+} from '@/lib/cce-db';
 
 const DEFAULT_BOT_TOKEN = '8539545294:AAHw5rsj7Z0Dg9dA6YiXaXU23uf_LnIYZUY';
 const DEFAULT_CHAT_ID = '1813977310';
-
-interface PrensaRegistration {
-  id: string;
-  nombre: string;
-  medio: string;
-  asistentes: string | number;
-  whatsapp: string;
-  fecha: string;
-  timestamp: number;
-  checkIn: boolean;
-  location: string;
-  device: string;
-  deviceCategory: 'ios' | 'android' | 'desktop';
-  ip: string;
-}
-
-interface VisitLog {
-  ip: string;
-  deviceCategory: 'ios' | 'android' | 'desktop';
-  timestamp: number;
-}
-
-interface CcePrensaStore {
-  registrations: PrensaRegistration[];
-  visits: VisitLog[];
-  seedInitialized: boolean;
-}
-
-const SEED_REGISTRATIONS: PrensaRegistration[] = [
-  {
-    id: 'cce-seed-01',
-    nombre: 'Lic. Salvador Esparza',
-    medio: 'Norte Digital',
-    asistentes: '2',
-    whatsapp: '6561234567',
-    fecha: '11 oct 2026, 14:20',
-    timestamp: 1791746400000,
-    checkIn: true,
-    location: 'Ciudad Juárez, Chih., México',
-    device: '📱 iPhone (iOS)',
-    deviceCategory: 'ios',
-    ip: '187.188.65.131',
-  },
-  {
-    id: 'cce-seed-02',
-    nombre: 'Lic. Claudia Valenzuela',
-    medio: 'Canal 44 El Canal de las Noticias',
-    asistentes: '3',
-    whatsapp: '6562345678',
-    fecha: '11 oct 2026, 16:45',
-    timestamp: 1791755100000,
-    checkIn: false,
-    location: 'Ciudad Juárez, Chih., México',
-    device: '📱 Android',
-    deviceCategory: 'android',
-    ip: '187.190.183.21',
-  },
-  {
-    id: 'cce-seed-03',
-    nombre: 'Mtro. Martín Coronado',
-    medio: 'El Diario de Juárez',
-    asistentes: '2',
-    whatsapp: '6563456789',
-    fecha: '11 oct 2026, 18:10',
-    timestamp: 1791760200000,
-    checkIn: true,
-    location: 'Ciudad Juárez, Chih., México',
-    device: '💻 Mac (macOS)',
-    deviceCategory: 'desktop',
-    ip: '187.189.102.44',
-  },
-  {
-    id: 'cce-seed-04',
-    nombre: 'Lic. Gabriel Morales',
-    medio: 'Netnoticias.mx',
-    asistentes: '1',
-    whatsapp: '6564567890',
-    fecha: '11 oct 2026, 19:35',
-    timestamp: 1791765300000,
-    checkIn: false,
-    location: 'Ciudad Juárez, Chih., México',
-    device: '📱 iPhone (iOS)',
-    deviceCategory: 'ios',
-    ip: '189.204.77.12',
-  },
-  {
-    id: 'cce-seed-05',
-    nombre: 'Lic. Rocío Gallegos',
-    medio: 'La Verdad Juárez',
-    asistentes: '2',
-    whatsapp: '6565678901',
-    fecha: '11 oct 2026, 21:05',
-    timestamp: 1791770700000,
-    checkIn: false,
-    location: 'Ciudad Juárez, Chih., México',
-    device: '💻 Windows PC',
-    deviceCategory: 'desktop',
-    ip: '201.168.45.89',
-  },
-];
-
-function getStore(): CcePrensaStore {
-  const globalObj = globalThis as unknown as { _ccePrensaStore?: CcePrensaStore };
-  if (!globalObj._ccePrensaStore) {
-    globalObj._ccePrensaStore = {
-      registrations: [...SEED_REGISTRATIONS],
-      visits: [],
-      seedInitialized: true,
-    };
-
-    // Try loading persisted file if exists
-    try {
-      const filePath = path.join(process.cwd(), 'src/data/cce-prensa-registros.json');
-      if (fs.existsSync(filePath)) {
-        const raw = fs.readFileSync(filePath, 'utf-8');
-        const parsed = JSON.parse(raw);
-        if (Array.isArray(parsed.registrations)) {
-          globalObj._ccePrensaStore.registrations = parsed.registrations;
-        }
-        if (Array.isArray(parsed.visits)) {
-          globalObj._ccePrensaStore.visits = parsed.visits;
-        }
-      }
-    } catch {
-      // Ignore filesystem errors in restricted environments
-    }
-  }
-  return globalObj._ccePrensaStore;
-}
-
-function persistStore(store: CcePrensaStore) {
-  try {
-    const dataDir = path.join(process.cwd(), 'src/data');
-    if (!fs.existsSync(dataDir)) {
-      fs.mkdirSync(dataDir, { recursive: true });
-    }
-    const filePath = path.join(dataDir, 'cce-prensa-registros.json');
-    fs.writeFileSync(filePath, JSON.stringify(store, null, 2), 'utf-8');
-  } catch {
-    try {
-      const tmpPath = '/tmp/cce-prensa-registros.json';
-      fs.writeFileSync(tmpPath, JSON.stringify(store, null, 2), 'utf-8');
-    } catch {
-      // In-memory global fallback
-    }
-  }
-}
 
 function safeDecode(val: string): string {
   if (!val) return '';
@@ -193,37 +52,34 @@ export async function POST(req: NextRequest) {
 
     const { deviceType, category: deviceCategory } = parseDevice(userAgent);
 
-    const store = getStore();
-
-    // Handle visit logging
+    // Handle standalone visit logging
     if (action === 'visit') {
-      store.visits.push({
+      await logVisit({
         ip: clientIp,
         deviceCategory,
         timestamp: Date.now(),
       });
-      persistStore(store);
-      return NextResponse.json({ success: true, visitsCount: store.visits.length });
+      return NextResponse.json({ success: true });
     }
 
-    // Validate 4 mandatory fields
+    // Mandatory Field Validations
     if (!nombre || typeof nombre !== 'string' || nombre.trim().length < 3) {
       return NextResponse.json(
-        { success: false, error: 'El nombre del periodista o reportero es obligatorio (mínimo 3 caracteres).' },
+        { success: false, error: 'Por favor ingresa un nombre completo válido (mínimo 3 caracteres).' },
         { status: 400 }
       );
     }
 
     if (!medio || typeof medio !== 'string' || medio.trim().length < 2) {
       return NextResponse.json(
-        { success: false, error: 'El medio de comunicación es obligatorio (mínimo 2 caracteres).' },
+        { success: false, error: 'Por favor ingresa el nombre de tu medio de comunicación o agencia.' },
         { status: 400 }
       );
     }
 
-    if (!asistentes || (typeof asistentes !== 'string' && typeof asistentes !== 'number')) {
+    if (!asistentes) {
       return NextResponse.json(
-        { success: false, error: 'El número de asistentes es obligatorio (selecciona 1, 2, 3 o 4+).' },
+        { success: false, error: 'Por favor selecciona el número de asistentes.' },
         { status: 400 }
       );
     }
@@ -231,12 +87,12 @@ export async function POST(req: NextRequest) {
     const cleanPhone = String(whatsapp || '').replace(/\D/g, '');
     if (cleanPhone.length !== 10) {
       return NextResponse.json(
-        { success: false, error: 'El número de WhatsApp debe contener exactamente 10 dígitos numéricos.' },
+        { success: false, error: 'El número de WhatsApp debe contener exactamente 10 dígitos.' },
         { status: 400 }
       );
     }
 
-    // Geolocation headers from Vercel
+    // Geolocation from Vercel headers
     const rawCity = req.headers.get('x-vercel-ip-city') || '';
     const rawRegion = req.headers.get('x-vercel-ip-country-region') || '';
     const rawCountry = req.headers.get('x-vercel-ip-country') || '';
@@ -272,13 +128,13 @@ export async function POST(req: NextRequest) {
       ip: clientIp,
     };
 
-    store.registrations.unshift(newRecord);
-    store.visits.push({
+    // Save directly to Google Cloud Firestore (and secondary fallback cache)
+    await saveRegistration(newRecord);
+    await logVisit({
       ip: clientIp,
       deviceCategory,
       timestamp: Date.now(),
     });
-    persistStore(store);
 
     // Telegram Push Notification to Emmanuel Padilla
     const botToken = process.env.TELEGRAM_BOT_TOKEN || DEFAULT_BOT_TOKEN;
@@ -339,17 +195,14 @@ export async function GET(req: NextRequest) {
     const clientIp = allIps[0] || '127.0.0.1';
     const { category: deviceCategory } = parseDevice(userAgent);
 
-    const store = getStore();
-
     // Log page visit
     if (action === 'visit') {
-      store.visits.push({
+      await logVisit({
         ip: clientIp,
         deviceCategory,
         timestamp: Date.now(),
       });
-      persistStore(store);
-      return NextResponse.json({ success: true, count: store.visits.length });
+      return NextResponse.json({ success: true });
     }
 
     // Admin authentication
@@ -357,55 +210,16 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ success: false, error: 'Acceso no autorizado al CRM' }, { status: 401 });
     }
 
-    // Calculate Telemetry Radar Metrics
-    const baseVisits = 142;
-    const baseUnique = 98;
-    const recordedVisitsCount = store.visits.length;
+    // Fetch real registrations from Firestore database
+    const registrations = await getRegistrations();
 
-    // Unique IPs in recorded visits
-    const uniqueIps = new Set(store.visits.map(v => v.ip));
-    const totalVisits = baseVisits + recordedVisitsCount;
-    const uniqueVisits = Math.max(baseUnique + uniqueIps.size, 1);
-
-    const totalRegistrations = store.registrations.length;
-    const conversionRate = `${((totalRegistrations / uniqueVisits) * 100).toFixed(1)}%`;
-
-    // Device breakdown
-    const baseDevices = { ios: 58, android: 46, desktop: 38 };
-    for (const v of store.visits) {
-      if (v.deviceCategory === 'ios') baseDevices.ios++;
-      else if (v.deviceCategory === 'android') baseDevices.android++;
-      else baseDevices.desktop++;
-    }
-
-    const deviceTotal = baseDevices.ios + baseDevices.android + baseDevices.desktop || 1;
-    const deviceBreakdown = {
-      ios: Math.round((baseDevices.ios / deviceTotal) * 100),
-      android: Math.round((baseDevices.android / deviceTotal) * 100),
-      desktop: Math.round((baseDevices.desktop / deviceTotal) * 100),
-    };
-
-    // Calculate Attendees Sum and Unique Media Outlets
-    let totalAsistentes = 0;
-    const mediaSet = new Set<string>();
-
-    for (const reg of store.registrations) {
-      mediaSet.add(reg.medio.toLowerCase().trim());
-      const num = parseInt(String(reg.asistentes).replace(/\D/g, ''), 10);
-      totalAsistentes += isNaN(num) || num <= 0 ? 1 : num;
-    }
+    // Calculate real telemetry metrics from live data
+    const telemetry = await getTelemetry(registrations);
 
     return NextResponse.json({
       success: true,
-      telemetry: {
-        totalVisits,
-        uniqueVisits,
-        conversionRate,
-        devices: deviceBreakdown,
-        totalMedios: mediaSet.size,
-        totalAsistentes,
-      },
-      registrations: store.registrations,
+      telemetry,
+      registrations,
     });
   } catch (error: any) {
     console.error('Error in /api/cce-prensa-registro GET:', error);
@@ -427,20 +241,19 @@ export async function PATCH(req: NextRequest) {
       return NextResponse.json({ success: false, error: 'Faltan parámetros requeridos (id, checkIn).' }, { status: 400 });
     }
 
-    const store = getStore();
-    const target = store.registrations.find(r => r.id === id);
+    const registrations = await getRegistrations();
+    const target = registrations.find(r => r.id === id);
 
     if (!target) {
       return NextResponse.json({ success: false, error: 'Registro no encontrado' }, { status: 404 });
     }
 
-    target.checkIn = checkIn;
-    persistStore(store);
+    await updateCheckIn(id, checkIn);
 
     return NextResponse.json({
       success: true,
-      id: target.id,
-      checkIn: target.checkIn,
+      id,
+      checkIn,
     });
   } catch (error: any) {
     console.error('Error in /api/cce-prensa-registro PATCH:', error);

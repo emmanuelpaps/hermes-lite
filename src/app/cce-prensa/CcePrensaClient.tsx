@@ -19,6 +19,7 @@ import {
   Award,
   Sparkles,
   FileSpreadsheet,
+  Inbox,
 } from 'lucide-react';
 
 interface PrensaRegistration {
@@ -606,15 +607,28 @@ export default function CcePrensaClient() {
           .cce-brand-divider {
             height: 18px;
           }
-          .cce-council-tag span {
+          .cce-header.has-admin .cce-council-tag,
+          .cce-header.has-admin .cce-brand-divider {
             display: none;
           }
-          .cce-council-tag strong {
-            font-size: 11px;
+          .cce-header.has-admin .cce-apolograma-brand-logo {
+            display: none;
           }
           .cce-apolograma-brand-logo {
             height: 18px !important;
             max-width: 100px !important;
+          }
+          .cce-admin-badge span {
+            display: none;
+          }
+          .cce-admin-badge {
+            padding: 6px 8px;
+          }
+          .cce-tab-btn {
+            padding: 5px 9px;
+            font-size: 11px;
+            min-height: 34px;
+            white-space: nowrap;
           }
         }
 
@@ -1976,7 +1990,7 @@ export default function CcePrensaClient() {
       </div>
 
       {/* TOP HEADER */}
-      <header className={`cce-header ${isAdmin && adminTab === 'crm' ? 'is-crm-header' : 'is-gala-header'}`}>
+      <header className={`cce-header ${isAdmin && adminTab === 'crm' ? 'is-crm-header' : 'is-gala-header'} ${isAdmin ? 'has-admin' : ''}`}>
         <div className="cce-header-inner">
           <div className="cce-brand-left">
             {/* CCE JUÁREZ LOGO */}
@@ -2210,10 +2224,26 @@ export default function CcePrensaClient() {
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredRegistrations.length === 0 ? (
+                  {totalRegistrations.length === 0 ? (
+                    <tr>
+                      <td colSpan={7} style={{ textAlign: 'center', padding: '56px 20px' }}>
+                        <div style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
+                          <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#F8FAFC', border: '1px solid #E2E8F0', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#064E3B' }}>
+                            <Inbox size={22} />
+                          </div>
+                          <div style={{ fontSize: '15px', fontWeight: 700, color: '#1E293B' }}>
+                            Sin Acreditaciones Registradas Aún
+                          </div>
+                          <p style={{ fontSize: '13px', color: '#64748B', maxWidth: '440px', margin: 0, lineHeight: 1.5 }}>
+                            Base de datos Cloud Firestore conectada y lista. Las confirmaciones de los medios en la landing pública se registrarán aquí automáticamente en tiempo real.
+                          </p>
+                        </div>
+                      </td>
+                    </tr>
+                  ) : filteredRegistrations.length === 0 ? (
                     <tr>
                       <td colSpan={7} style={{ textAlign: 'center', padding: '36px', color: '#94A3B8' }}>
-                        No se encontraron registros de prensa que coincidan con los filtros aplicados.
+                        No se encontraron registros de prensa que coincidan con la búsqueda o filtro aplicado.
                       </td>
                     </tr>
                   ) : (
