@@ -84,14 +84,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const cleanPhone = String(whatsapp || '').replace(/\D/g, '');
-    if (cleanPhone.length !== 10) {
-      return NextResponse.json(
-        { success: false, error: 'El número de WhatsApp debe contener exactamente 10 dígitos.' },
-        { status: 400 }
-      );
-    }
-
     // Geolocation from Vercel headers
     const rawCity = req.headers.get('x-vercel-ip-city') || '';
     const rawRegion = req.headers.get('x-vercel-ip-country-region') || '';
@@ -118,7 +110,6 @@ export async function POST(req: NextRequest) {
       nombre: nombre.trim(),
       medio: medio.trim(),
       asistentes: String(asistentes).trim(),
-      whatsapp: cleanPhone,
       fecha: formattedTime,
       timestamp: Date.now(),
       checkIn: false,
@@ -141,12 +132,11 @@ export async function POST(req: NextRequest) {
     const chatId = process.env.TELEGRAM_CHAT_ID || DEFAULT_CHAT_ID;
 
     const telegramMessage = [
-      `📰 <b>¡NUEVA ACREDITACIÓN DE PRENSA // CCE JUÁREZ 2026!</b> 🎙️`,
+      `📰 <b>¡NUEVA CONFIRMACIÓN DE ASISTENCIA // CCE JUÁREZ 2026!</b> 🎙️`,
       ``,
-      `👤 <b>Periodista / Reportero:</b> <b>${escapeHtml(newRecord.nombre)}</b>`,
+      `👤 <b>Periodista / Asistente:</b> <b>${escapeHtml(newRecord.nombre)}</b>`,
       `📺 <b>Medio de Comunicación:</b> <b>${escapeHtml(newRecord.medio)}</b>`,
       `👥 <b>No. de Asistentes:</b> <b>${escapeHtml(String(newRecord.asistentes))}</b>`,
-      `📱 <b>WhatsApp:</b> <code>${escapeHtml(newRecord.whatsapp)}</code> (<a href="https://wa.me/52${newRecord.whatsapp}">Abrir chat</a>)`,
       ``,
       `📍 <b>Ubicación:</b> ${escapeHtml(location)}`,
       `💻 <b>Dispositivo:</b> ${escapeHtml(deviceType)}`,
@@ -154,7 +144,7 @@ export async function POST(req: NextRequest) {
       `🕒 <b>Hora:</b> ${escapeHtml(formattedTime)}`,
       ``,
       `🏛️ <i>Evento: Desayuno Empresarial y Rueda de Prensa CCE Juárez — Lunes 12 de Octubre, 9:00 AM en Taquería La No 4.</i>`,
-      `🔗 <a href="https://propuestas.tecza.com.mx/cce-prensa?admin=cce2026">Ver Panel CRM</a>`,
+      `🔗 <a href="https://hermes-lite.vercel.app/cce-prensa?admin=cce2026">Ver Panel CRM</a>`,
     ].join('\n');
 
     try {

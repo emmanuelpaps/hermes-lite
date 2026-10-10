@@ -17,7 +17,7 @@ export interface PrensaRegistration {
   nombre: string;
   medio: string;
   asistentes: string | number;
-  whatsapp: string;
+  whatsapp?: string;
   fecha: string;
   timestamp: number;
   checkIn: boolean;

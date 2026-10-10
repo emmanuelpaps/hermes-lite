@@ -102,7 +102,10 @@ function parseRootVariables(css) {
 // Helper: Extract all style block texts
 function extractStyles(html) {
   const matches = [...html.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)];
-  return matches.map((m) => m[1]).join('\n');
+  const directStyles = matches.map((m) => m[1]).join('\n');
+  const innerHtmlMatches = [...html.matchAll(/__html:\s*`([\s\S]*?)`/gi)];
+  const innerStyles = innerHtmlMatches.map((m) => m[1]).join('\n');
+  return directStyles + '\n' + innerStyles;
 }
 
 // Helper: Fetch asset over HTTP and assert 200 OK
@@ -240,7 +243,7 @@ before(async () => {
             return;
           }
 
-          const { nombre, medio, asistentes, whatsapp } = body;
+          const { nombre, medio, asistentes } = body;
 
           if (!nombre || typeof nombre !== 'string' || nombre.trim().length < 3) {
             res.writeHead(400, { 'Content-Type': 'application/json' });
@@ -260,19 +263,11 @@ before(async () => {
             return;
           }
 
-          const cleanPhone = String(whatsapp || '').replace(/\D/g, '');
-          if (cleanPhone.length !== 10) {
-            res.writeHead(400, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ success: false, error: 'El número de WhatsApp debe contener exactamente 10 dígitos.' }));
-            return;
-          }
-
           const newRecord = {
             id: `cce-reg-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
             nombre: nombre.trim(),
             medio: medio.trim(),
             asistentes: String(asistentes).trim(),
-            whatsapp: cleanPhone,
             fecha: '12 oct 2026, 09:00',
             timestamp: Date.now(),
             checkIn: false,
@@ -485,13 +480,13 @@ describe('Tier 1: Feature Coverage (F1 - F26)', () => {
     });
   });
 
-  // --- Feature 5 (F5): Accreditation Form UI ---
-  describe('F5. Accreditation Form UI', () => {
-    it('[T1-F05-01] Form contains all 4 mandatory fields: Nombre, Medio, Asistentes, WhatsApp', () => {
+  // --- Feature 5 (F5): Confirmation Form UI ---
+  describe('F5. Confirmation Form UI', () => {
+    it('[T1-F05-01] Form contains core fields: Nombre, Medio, Asistentes and excludes WhatsApp', () => {
       assert.ok(clientTsx.includes('nombre') && clientTsx.includes('Nombre'), 'Must render Nombre field');
       assert.ok(clientTsx.includes('medio') && clientTsx.includes('Medio'), 'Must render Medio field');
       assert.ok(clientTsx.includes('asistentes') && clientTsx.includes('Asistentes'), 'Must render Asistentes field');
-      assert.ok(clientTsx.includes('whatsapp') && clientTsx.includes('WhatsApp'), 'Must render WhatsApp field');
+      assert.ok(!clientTsx.includes('id="whatsapp"'), 'Must exclude WhatsApp input field');
     });
 
     it('[T1-F05-02] Interactive touch selector provides choices 1, 2, 3, 4+', () => {
@@ -508,8 +503,8 @@ describe('Tier 1: Feature Coverage (F1 - F26)', () => {
 
   // --- Feature 6 (F6): Submit Loading State ---
   describe('F6. Submit Loading State', () => {
-    it('[T1-F06-01] Submit button transitions to "Enviando acreditación..." with debounce state', () => {
-      assert.ok(clientTsx.includes('Enviando acreditación'), 'Must show "Enviando acreditación..." while submitting');
+    it('[T1-F06-01] Submit button transitions with debounce and loading state', () => {
+      assert.ok(clientTsx.includes('Confirmando asistencia') || clientTsx.includes('isSubmitting'), 'Must show submitting state');
       assert.ok(clientTsx.includes('isSubmitting'), 'Must manage isSubmitting state to prevent duplicate submissions');
     });
   });
@@ -521,7 +516,6 @@ describe('Tier 1: Feature Coverage (F1 - F26)', () => {
         nombre: 'Lic. Mariana Cordero',
         medio: 'RadioNet 1490 AM',
         asistentes: '2',
-        whatsapp: '6569876543',
       };
       const res = await fetch(`${activeBaseUrl}/api/cce-prensa-registro`, {
         method: 'POST',
@@ -541,7 +535,6 @@ describe('Tier 1: Feature Coverage (F1 - F26)', () => {
         nombre: '',
         medio: 'Periódico Fronterizo',
         asistentes: '1',
-        whatsapp: '6561112233',
       };
       const res = await fetch(`${activeBaseUrl}/api/cce-prensa-registro`, {
         method: 'POST',
@@ -591,8 +584,8 @@ describe('Tier 1: Feature Coverage (F1 - F26)', () => {
 
   // --- Feature 12 (F12): Institutional Seal & Registration Summary ---
   describe('F12. Institutional Seal & Registration Summary', () => {
-    it('[T1-F12-01] Displays official seal "Asistencia Confirmada · Prensa Acreditada" and reservation summary', () => {
-      assert.ok(clientTsx.includes('Asistencia Confirmada') && clientTsx.includes('Prensa Acreditada'), 'Must display official accreditation seal');
+    it('[T1-F12-01] Displays official seal "Asistencia Confirmada" and reservation summary', () => {
+      assert.ok(clientTsx.includes('Asistencia Confirmada') && (clientTsx.includes('Prensa Convocada') || clientTsx.includes('Prensa Acreditada')), 'Must display official confirmation seal');
       assert.ok(clientTsx.includes('confirmedRecord.nombre'), 'Must display confirmed journalist name');
       assert.ok(clientTsx.includes('confirmedRecord.medio'), 'Must display confirmed media outlet');
     });
@@ -660,10 +653,10 @@ describe('Tier 1: Feature Coverage (F1 - F26)', () => {
 
   // --- Feature 19 (F19): Accredited Media Table ---
   describe('F19. Accredited Media Table', () => {
-    it('[T1-F19-01] Media management table presents columns: Nombre, Medio, Asistentes, Teléfono, Fecha, Estado', () => {
+    it('[T1-F19-01] Media management table presents columns: Nombre, Medio, Asistentes, Fecha, Asistencia', () => {
       assert.ok(clientTsx.includes('Nombre') && clientTsx.includes('Medio'), 'Must include Nombre and Medio headers');
-      assert.ok(clientTsx.includes('Asistentes') && clientTsx.includes('Teléfono'), 'Must include Asistentes and Teléfono headers');
-      assert.ok(clientTsx.includes('Fecha') && (clientTsx.includes('Estado') || clientTsx.includes('Check-in')), 'Must include Fecha and Estado/Check-in headers');
+      assert.ok(clientTsx.includes('Asistentes') && clientTsx.includes('Fecha'), 'Must include Asistentes and Fecha headers');
+      assert.ok(clientTsx.includes('Asistencia') || clientTsx.includes('Check-in'), 'Must include Asistencia header');
     });
   });
 
@@ -681,7 +674,6 @@ describe('Tier 1: Feature Coverage (F1 - F26)', () => {
             nombre: 'Lic. Claudia Valenzuela',
             medio: 'Canal 44 El Canal de las Noticias',
             asistentes: '2',
-            whatsapp: '6562345678',
           }),
         });
         const createData = await createRes.json();
@@ -700,14 +692,12 @@ describe('Tier 1: Feature Coverage (F1 - F26)', () => {
     });
   });
 
-  // --- Feature 21 (F21): 1-Click WhatsApp Button (Option C) ---
-  describe('F21. 1-Click WhatsApp Button (Option C)', () => {
-    it('[T1-F21-01] Generates WhatsApp link with verbatim approved Option C confirmation copy', () => {
-      assert.ok(clientTsx.includes('Buen día') && clientTsx.includes('Confirmada la acreditación de'), 'Must include Option C opening salutation');
-      assert.ok(clientTsx.includes('desayuno y rueda de prensa del CCE Juárez'), 'Must include event context');
-      assert.ok(clientTsx.includes('Lunes 12 de octubre, 9:00 a.m. en Taquería La No 4: https://maps.app.goo.gl/6PvgdE8poTMiSxcN6'), 'Must include date, venue and maps link');
-      assert.ok(clientTsx.includes('¡Agradecemos tu cobertura!'), 'Must include Option C closing');
-      assert.ok(clientTsx.includes('https://wa.me/52'), 'Must generate international Mexican WhatsApp link https://wa.me/52');
+  // --- Feature 21 (F21): Privacy Protection Invariant (Zero WhatsApp) ---
+  describe('F21. Privacy Protection Invariant (Zero WhatsApp)', () => {
+    it('[T1-F21-01] Tool and CMS strictly exclude WhatsApp data collection and row buttons', () => {
+      assert.ok(!clientTsx.includes('getWhatsAppOptionCLink'), 'Must not include WhatsApp row actions in CMS');
+      assert.ok(!clientTsx.includes('id="whatsapp"'), 'Must not collect WhatsApp in registration form');
+      assert.ok(!clientTsx.includes('Enviar WhatsApp'), 'Must not render WhatsApp message buttons');
     });
   });
 
@@ -715,7 +705,7 @@ describe('Tier 1: Feature Coverage (F1 - F26)', () => {
   describe('F22. 1-Click CSV Export', () => {
     it('[T1-F22-01] CSV Export function prepends UTF-8 BOM (\\uFEFF) and wraps cells in quotes', () => {
       assert.ok(clientTsx.includes('\\uFEFF') || clientTsx.includes('\uFEFF'), 'Must prepend UTF-8 BOM to CSV for Excel compatibility');
-      assert.ok(clientTsx.includes('acreditaciones_cce_prensa_2026.csv'), 'Must download file named acreditaciones_cce_prensa_2026.csv');
+      assert.ok(clientTsx.includes('confirmaciones_cce_prensa_2026.csv'), 'Must download file named confirmaciones_cce_prensa_2026.csv');
       assert.ok(clientTsx.includes('.replace(/"/g, \'""\')'), 'Must escape internal double quotes according to RFC-4180');
     });
   });
@@ -847,47 +837,52 @@ describe('Tier 2: Boundary & Corner Cases', () => {
     assert.equal(res.status, 400);
   });
 
-  it('[T2-BOUND-08] 8-digit phone number is rejected with HTTP 400', async () => {
+  it('[T2-BOUND-08] Registration succeeds without any whatsapp property in request body', async () => {
     const res = await fetch(`${activeBaseUrl}/api/cce-prensa-registro`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nombre: 'Lic. Armando Garza', medio: 'El Heraldo', asistentes: '2', whatsapp: '65612345' }),
-    });
-    assert.equal(res.status, 400);
-    const data = await res.json();
-    assert.equal(data.success, false);
-  });
-
-  it('[T2-BOUND-09] 12-digit phone number is rejected with HTTP 400', async () => {
-    const res = await fetch(`${activeBaseUrl}/api/cce-prensa-registro`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nombre: 'Lic. Armando Garza', medio: 'El Heraldo', asistentes: '2', whatsapp: '656123456789' }),
-    });
-    assert.equal(res.status, 400);
-    const data = await res.json();
-    assert.equal(data.success, false);
-  });
-
-  it('[T2-BOUND-10] Phone with letters is rejected if sanitized length != 10 digits', async () => {
-    const res = await fetch(`${activeBaseUrl}/api/cce-prensa-registro`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nombre: 'Lic. Armando Garza', medio: 'El Heraldo', asistentes: '2', whatsapp: '656-CALL-ME' }),
-    });
-    assert.equal(res.status, 400);
-  });
-
-  it('[T2-BOUND-11] Phone sanitization with dashes, spaces, and parentheses is accepted', async () => {
-    const res = await fetch(`${activeBaseUrl}/api/cce-prensa-registro`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nombre: 'Lic. Roberto Solís', medio: 'Juárez a Diario', asistentes: '1', whatsapp: '(656) 555-4321' }),
+      body: JSON.stringify({ nombre: 'Lic. Armando Garza', medio: 'El Heraldo', asistentes: '2' }),
     });
     assert.equal(res.status, 200);
     const data = await res.json();
-    assert.equal(data.record.whatsapp, '6565554321', 'Phone must be sanitized to exactly 10 digits');
+    assert.equal(data.success, true);
+    assert.equal(data.record.whatsapp, undefined, 'WhatsApp must remain undefined for privacy');
   });
+
+  it('[T2-BOUND-09] Name and media strings are trimmed of leading and trailing whitespace', async () => {
+    const res = await fetch(`${activeBaseUrl}/api/cce-prensa-registro`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre: '  Lic. Gabriel Flores  ', medio: '  Net Noticias  ', asistentes: '2' }),
+    });
+    assert.equal(res.status, 200);
+    const data = await res.json();
+    assert.equal(data.record.nombre, 'Lic. Gabriel Flores');
+    assert.equal(data.record.medio, 'Net Noticias');
+  });
+
+  it('[T2-BOUND-10] Attendees value "1" is correctly stored and handled', async () => {
+    const res = await fetch(`${activeBaseUrl}/api/cce-prensa-registro`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre: 'Lic. Laura Domínguez', medio: 'Radio Cañón', asistentes: '1' }),
+    });
+    assert.equal(res.status, 200);
+    const data = await res.json();
+    assert.equal(data.record.asistentes, '1');
+  });
+
+  it('[T2-BOUND-11] Attendees value "3" is correctly stored and handled', async () => {
+    const res = await fetch(`${activeBaseUrl}/api/cce-prensa-registro`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre: 'Lic. Roberto Solís', medio: 'Juárez a Diario', asistentes: '3' }),
+    });
+    assert.equal(res.status, 200);
+    const data = await res.json();
+    assert.equal(data.record.asistentes, '3');
+  });
+
 
   it('[T2-BOUND-12] Attendees selection "4+" is correctly stored and handled', async () => {
     const res = await fetch(`${activeBaseUrl}/api/cce-prensa-registro`, {

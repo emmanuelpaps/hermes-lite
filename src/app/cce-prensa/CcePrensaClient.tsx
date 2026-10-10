@@ -27,7 +27,7 @@ interface PrensaRegistration {
   nombre: string;
   medio: string;
   asistentes: string | number;
-  whatsapp: string;
+  whatsapp?: string;
   fecha: string;
   timestamp?: number;
   checkIn: boolean;
@@ -64,7 +64,6 @@ export default function CcePrensaClient() {
   const [nombre, setNombre] = useState('');
   const [medio, setMedio] = useState('');
   const [asistentes, setAsistentes] = useState('1');
-  const [whatsapp, setWhatsapp] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [submitError, setSubmitError] = useState('');
@@ -138,11 +137,6 @@ export default function CcePrensaClient() {
       newErrors.asistentes = 'Selecciona el número de personas que asistirán.';
     }
 
-    const cleanPhone = whatsapp.replace(/\D/g, '');
-    if (cleanPhone.length !== 10) {
-      newErrors.whatsapp = 'El número de WhatsApp debe contener exactamente 10 dígitos.';
-    }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -157,7 +151,6 @@ export default function CcePrensaClient() {
     setIsSubmitting(true);
 
     try {
-      const cleanPhone = whatsapp.replace(/\D/g, '');
       const res = await fetch('/api/cce-prensa-registro', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -165,7 +158,6 @@ export default function CcePrensaClient() {
           nombre: nombre.trim(),
           medio: medio.trim(),
           asistentes,
-          whatsapp: cleanPhone,
         }),
       });
 
@@ -173,10 +165,10 @@ export default function CcePrensaClient() {
       if (res.ok && data.success) {
         setConfirmedRecord(data.record);
       } else {
-        setSubmitError(data.error || 'Ocurrió un error al enviar tu acreditación. Intenta nuevamente.');
+        setSubmitError(data.error || 'Ocurrió un error al confirmar tu asistencia. Intenta nuevamente.');
       }
     } catch (err) {
-      console.error('Error submitting accreditation:', err);
+      console.error('Error submitting confirmation:', err);
       setSubmitError('Error de conexión. Por favor verifica tu señal e intenta nuevamente.');
     } finally {
       setIsSubmitting(false);
@@ -187,7 +179,7 @@ export default function CcePrensaClient() {
   const handleGoogleCalendar = () => {
     const title = encodeURIComponent('Desayuno y Rueda de Prensa · CCE Ciudad Juárez');
     const details = encodeURIComponent(
-      'Acreditación oficial de prensa para la presentación de galardones escultóricos de Pedro Francisco y conferencia magistral de Carlos Loret de Mola para Empresario del Año 2026.\n\nSede: Taquería La No 4 (Av. Paseo Triunfo de la República 5617).\nContacto de confirmación: CCE Ciudad Juárez.'
+      'Confirmación oficial de asistencia para la presentación de galardones escultóricos de Pedro Francisco y conferencia magistral de Carlos Loret de Mola para Empresario del Año 2026.\n\nSede: Taquería La No 4 (Av. Paseo Triunfo de la República 5617).\nContacto de confirmación: CCE Ciudad Juárez.'
     );
     const location = encodeURIComponent('Taquería La No 4, Av. Paseo Triunfo de la República 5617, Ciudad Juárez, Chih.');
     const dates = '20261012T150000Z/20261012T163000Z';
@@ -200,7 +192,7 @@ export default function CcePrensaClient() {
     const icsContent = [
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
-      'PRODID:-//CCE Ciudad Juárez//Acreditacion Prensa 2026//ES',
+      'PRODID:-//CCE Ciudad Juárez//Confirmacion Asistencia Prensa 2026//ES',
       'CALSCALE:GREGORIAN',
       'METHOD:PUBLISH',
       'BEGIN:VEVENT',
@@ -209,7 +201,7 @@ export default function CcePrensaClient() {
       'DTSTART:20261012T150000Z',
       'DTEND:20261012T163000Z',
       'SUMMARY:Desayuno y Rueda de Prensa · CCE Ciudad Juárez (Empresario del Año 2026)',
-      'DESCRIPTION:Presentación oficial de los galardones escultóricos de Pedro Francisco y la conferencia magistral de Carlos Loret de Mola para Empresario del Año 2026. Evento exclusivo para medios y reporteros acreditados. Ubicación: Taquería La No 4: https://maps.app.goo.gl/6PvgdE8poTMiSxcN6',
+      'DESCRIPTION:Presentación oficial de los galardones escultóricos de Pedro Francisco y la conferencia magistral de Carlos Loret de Mola para Empresario del Año 2026. Evento exclusivo para medios y reporteros convocados. Ubicación: Taquería La No 4: https://maps.app.goo.gl/6PvgdE8poTMiSxcN6',
       'LOCATION:Taquería La No 4, Av. Paseo Triunfo de la República 5617, Ciudad Juárez, Chihuahua',
       'STATUS:CONFIRMED',
       'END:VEVENT',
@@ -220,7 +212,7 @@ export default function CcePrensaClient() {
     const url = window.URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.setAttribute('download', 'Acreditacion_CCE_Prensa_2026.ics');
+    link.setAttribute('download', 'Confirmacion_CCE_Prensa_2026.ics');
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -263,28 +255,18 @@ export default function CcePrensaClient() {
     }
   };
 
-  // WhatsApp 1-Click Message with Option C
-  const getWhatsAppOptionCLink = (reg: PrensaRegistration) => {
-    const cleanPhone = String(reg.whatsapp).replace(/\D/g, '');
-    const numAsistentes = reg.asistentes;
-    const asistentesLabel = String(numAsistentes) === '1' ? '1 asistente' : `${numAsistentes} asistentes`;
-    const message = `Buen día ${reg.nombre}. Confirmada la acreditación de ${reg.medio} (${asistentesLabel}) para el desayuno y rueda de prensa del CCE Juárez. Lunes 12 de octubre, 9:00 a.m. en Taquería La No 4: https://maps.app.goo.gl/6PvgdE8poTMiSxcN6. ¡Agradecemos tu cobertura!`;
-    return `https://wa.me/52${cleanPhone}?text=${encodeURIComponent(message)}`;
-  };
-
   // 1-Click CSV Export with UTF-8 BOM
   const handleExportCsv = () => {
     if (!crmData || crmData.registrations.length === 0) return;
 
-    const headers = ['ID', 'Nombre', 'Medio', 'Asistentes', 'WhatsApp', 'Fecha', 'Check-In', 'Ubicación', 'Dispositivo'];
+    const headers = ['ID', 'Nombre', 'Medio', 'Asistentes', 'Fecha', 'Check-In', 'Ubicación', 'Dispositivo'];
     const rows = crmData.registrations.map(r => [
       r.id,
       `"${(r.nombre || '').replace(/"/g, '""')}"`,
       `"${(r.medio || '').replace(/"/g, '""')}"`,
       r.asistentes,
-      `"${(r.whatsapp || '').replace(/"/g, '""')}"`,
       `"${(r.fecha || '').replace(/"/g, '""')}"`,
-      r.checkIn ? 'Acreditado en Puerta' : 'Pendiente',
+      r.checkIn ? 'Confirmado en Sede' : 'Pendiente',
       `"${(r.location || '').replace(/"/g, '""')}"`,
       `"${(r.device || '').replace(/"/g, '""')}"`,
     ]);
@@ -294,7 +276,7 @@ export default function CcePrensaClient() {
     const url = window.URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.setAttribute('download', 'acreditaciones_cce_prensa_2026.csv');
+    link.setAttribute('download', 'confirmaciones_cce_prensa_2026.csv');
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -313,13 +295,12 @@ export default function CcePrensaClient() {
     return (
       r.nombre.toLowerCase().includes(q) ||
       r.medio.toLowerCase().includes(q) ||
-      r.whatsapp.includes(q) ||
       (r.location && r.location.toLowerCase().includes(q))
     );
   });
 
   // Hero Typography Reveal Variants (R2)
-  const heroTitleWords = ['Acreditación', 'Oficial', 'de', 'Prensa'];
+  const heroTitleWords = ['Confirmación', 'de', 'Asistencia'];
 
   const titleContainerVariants: Variants = {
     hidden: { opacity: 1 },
@@ -2224,7 +2205,7 @@ export default function CcePrensaClient() {
               </div>
               <h2 className="cce-crm-banner-title">
                 <BarChart3 size={22} color="#064E3B" />
-                Acreditación de Prensa · Empresario del Año 2026
+                Confirmación de Asistencia · Empresario del Año 2026
               </h2>
               <div className="cce-crm-banner-sub">
                 Desayuno y Rueda de Prensa Oficial · Lunes 12 de Octubre, 9:00 a.m. · Taquería La No 4
@@ -2240,7 +2221,7 @@ export default function CcePrensaClient() {
                 type="button"
                 className="cce-crm-btn cce-crm-btn-secondary"
                 onClick={() => setAdminTab('public')}
-                title="Ver la landing pública de acreditación"
+                title="Ver la landing pública de confirmación de asistencia"
               >
                 Ver Landing
               </button>
@@ -2248,7 +2229,7 @@ export default function CcePrensaClient() {
                 <RefreshCw size={14} className={isLoadingCrm ? 'cce-spinner' : ''} />
                 Actualizar
               </button>
-              <button className="cce-crm-btn cce-crm-btn-primary" onClick={handleExportCsv} title="Descargar lista de acreditados en formato CSV compatible con Excel">
+              <button className="cce-crm-btn cce-crm-btn-primary" onClick={handleExportCsv} title="Descargar lista de confirmaciones en formato CSV compatible con Excel">
                 <FileSpreadsheet size={16} />
                 Exportar CSV
               </button>
@@ -2315,7 +2296,7 @@ export default function CcePrensaClient() {
                   </div>
                 </div>
                 <div className="cce-radar-value" style={{ color: '#B45309' }}>{crmData.telemetry.conversionRate}</div>
-                <div className="cce-radar-subtext">Acreditados vs. Total visitantes</div>
+                <div className="cce-radar-subtext">Confirmados vs. Total visitantes</div>
               </div>
 
               <div className="cce-radar-card">
@@ -2342,7 +2323,7 @@ export default function CcePrensaClient() {
                 <Search size={16} className="cce-search-icon" />
                 <input
                   type="text"
-                  placeholder="Buscar por periodista, medio o teléfono..."
+                  placeholder="Buscar por periodista o medio..."
                   value={searchFilter}
                   onChange={e => setSearchFilter(e.target.value)}
                   className="cce-search-input"
@@ -2382,31 +2363,27 @@ export default function CcePrensaClient() {
               <table className="cce-table">
                 <thead>
                   <tr>
-                    <th className="cce-th" style={{ width: '22%' }}>Periodista / Nombre</th>
-                    <th className="cce-th" style={{ width: '18%' }}>Medio</th>
-                    <th className="cce-th" style={{ width: '8%', textAlign: 'center' }}>
+                    <th className="cce-th" style={{ width: '32%' }}>Periodista / Nombre</th>
+                    <th className="cce-th" style={{ width: '28%' }}>Medio</th>
+                    <th className="cce-th" style={{ width: '12%', textAlign: 'center' }}>
                       Asistentes
                     </th>
-                    <th className="cce-th" style={{ width: '14%' }}>Teléfono</th>
-                    <th className="cce-th" style={{ width: '11%' }}>Fecha</th>
-                    <th className="cce-th" style={{ width: '12%', textAlign: 'center' }}>
-                      Check-in
-                    </th>
-                    <th className="cce-th" style={{ width: '15%', textAlign: 'right' }}>
-                      WhatsApp
+                    <th className="cce-th" style={{ width: '14%' }}>Fecha</th>
+                    <th className="cce-th" style={{ width: '14%', textAlign: 'center' }}>
+                      Asistencia
                     </th>
                   </tr>
                 </thead>
                 <tbody>
                   {totalRegistrations.length === 0 ? (
                     <tr>
-                      <td colSpan={7} style={{ textAlign: 'center', padding: '56px 20px' }}>
+                      <td colSpan={5} style={{ textAlign: 'center', padding: '56px 20px' }}>
                         <div style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
                           <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#F8FAFC', border: '1px solid #E2E8F0', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#064E3B' }}>
                             <Inbox size={22} />
                           </div>
                           <div style={{ fontSize: '15px', fontWeight: 700, color: '#1E293B' }}>
-                            Sin Acreditaciones Registradas Aún
+                            Sin Confirmaciones Registradas Aún
                           </div>
                           <p style={{ fontSize: '13px', color: '#64748B', maxWidth: '440px', margin: 0, lineHeight: 1.5 }}>
                             Base de datos Cloud Firestore conectada y lista. Las confirmaciones de los medios en la landing pública se registrarán aquí automáticamente en tiempo real.
@@ -2416,7 +2393,7 @@ export default function CcePrensaClient() {
                     </tr>
                   ) : filteredRegistrations.length === 0 ? (
                     <tr>
-                      <td colSpan={7} style={{ textAlign: 'center', padding: '36px', color: '#94A3B8' }}>
+                      <td colSpan={5} style={{ textAlign: 'center', padding: '36px', color: '#94A3B8' }}>
                         No se encontraron registros de prensa que coincidan con la búsqueda o filtro aplicado.
                       </td>
                     </tr>
@@ -2438,9 +2415,6 @@ export default function CcePrensaClient() {
                             {reg.asistentes}
                           </span>
                         </td>
-                        <td className="cce-td" style={{ fontFamily: 'monospace', fontSize: '13px', color: '#334155' }}>
-                          {reg.whatsapp}
-                        </td>
                         <td className="cce-td" style={{ color: '#64748B', fontSize: '12px' }}>
                           {reg.fecha}
                         </td>
@@ -2450,24 +2424,12 @@ export default function CcePrensaClient() {
                             className={`cce-status-badge ${reg.checkIn ? 'cce-status-checked' : 'cce-status-pending'}`}
                             onClick={() => handleToggleCheckIn(reg)}
                             disabled={checkInUpdatingId === reg.id}
-                            title="Check-in en Taquería La No 4"
-                            aria-label="Check-in en Taquería La No 4"
+                            title="Registrar asistencia en Taquería La No 4"
+                            aria-label="Registrar asistencia en Taquería La No 4"
                           >
                             <CheckCircle2 size={13} />
-                            {reg.checkIn ? 'Acreditado' : 'Check-in'}
+                            {reg.checkIn ? 'Confirmado' : 'Check-in'}
                           </button>
-                        </td>
-                        <td className="cce-td" style={{ textAlign: 'right' }}>
-                          <a
-                            href={getWhatsAppOptionCLink(reg)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="cce-btn-wa-row"
-                            title="Enviar confirmación oficial Opción C con 1 clic"
-                          >
-                            <MessageSquare size={13} />
-                            Enviar WhatsApp
-                          </a>
                         </td>
                       </tr>
                     ))
@@ -2589,7 +2551,7 @@ export default function CcePrensaClient() {
                 {/* Integrated Exclusivity Strip */}
                 <div className="cce-notice-pill cce-vip-pass-footer">
                   <ShieldCheck size={16} />
-                  <span>Evento exclusivo para medios de comunicación, agencias y reporteros acreditados.</span>
+                  <span>Evento exclusivo para medios de comunicación, agencias y reporteros convocados.</span>
                 </div>
               </div>
             </div>
@@ -2670,13 +2632,13 @@ export default function CcePrensaClient() {
                 >
                   <div className="cce-confirmed-seal">
                     <CheckCircle2 size={16} />
-                    Asistencia Confirmada · Prensa Acreditada
+                    Asistencia Confirmada · Prensa Convocada
                   </div>
 
-                  <h2 className="cce-confirmed-title">¡Acreditación Registrada con Éxito!</h2>
+                  <h2 className="cce-confirmed-title">¡Asistencia Confirmada con Éxito!</h2>
 
                   <p style={{ fontSize: '15px', color: '#CBD5E1', lineHeight: 1.6 }}>
-                    Hemos registrado tu acreditación de prensa para el desayuno y rueda de prensa del CCE Ciudad Juárez. Te
+                    Hemos registrado tu confirmación de asistencia para el desayuno y rueda de prensa del CCE Ciudad Juárez. Te
                     esperamos puntualmente en Taquería La No 4.
                   </p>
 
@@ -2694,10 +2656,6 @@ export default function CcePrensaClient() {
                       <span className="cce-summary-val">
                         {confirmedRecord.asistentes} persona{String(confirmedRecord.asistentes) === '1' ? '' : 's'}
                       </span>
-                    </div>
-                    <div className="cce-summary-row">
-                      <span className="cce-summary-label">WhatsApp Registrado:</span>
-                      <span className="cce-summary-val">{confirmedRecord.whatsapp}</span>
                     </div>
                     <div className="cce-summary-row">
                       <span className="cce-summary-label">Fecha y Hora:</span>
@@ -2729,7 +2687,7 @@ export default function CcePrensaClient() {
                   </div>
                 </motion.div>
               ) : (
-                /* ACCREDITATION FORM (VIP DESK TERMINAL) */
+                /* CONFIRMATION FORM (VIP DESK TERMINAL) */
                 <motion.div
                   key="form"
                   initial={false}
@@ -2739,8 +2697,8 @@ export default function CcePrensaClient() {
                   className="cce-form-card"
                 >
                   <div className="cce-form-header">
-                    <h2 className="cce-form-heading">Formulario de Acreditación</h2>
-                    <p className="cce-form-subheading">Completa tus datos para confirmar tu lugar y acceso de prensa</p>
+                    <h2 className="cce-form-heading">Confirmación de Asistencia</h2>
+                    <p className="cce-form-subheading">Completa tus datos para confirmar tu lugar en el evento</p>
                   </div>
 
                   <form onSubmit={handleSubmit} noValidate>
@@ -2755,7 +2713,7 @@ export default function CcePrensaClient() {
                       <input
                         id="nombre"
                         type="text"
-                        placeholder="Ej. Lic. Alejandro Morales"
+                        placeholder="Nombre y apellidos"
                         value={nombre}
                         onChange={e => {
                           setNombre(e.target.value);
@@ -2778,7 +2736,7 @@ export default function CcePrensaClient() {
                       <input
                         id="medio"
                         type="text"
-                        placeholder="Ej. El Diario de Juárez / Canal 44 / Radio Net / Digital"
+                        placeholder="Nombre de tu medio de comunicación"
                         value={medio}
                         onChange={e => {
                           setMedio(e.target.value);
@@ -2820,31 +2778,6 @@ export default function CcePrensaClient() {
                       {errors.asistentes && <span className="cce-field-error">{errors.asistentes}</span>}
                     </div>
 
-                    {/* Campo 4: WhatsApp */}
-                    <div className="cce-form-group">
-                      <label className="cce-label" htmlFor="whatsapp">
-                        <span>
-                          Teléfono de Contacto (WhatsApp)
-                          <span className="cce-required-dot">*</span>
-                        </span>
-                        <span style={{ fontSize: '12px', color: '#94A3B8', fontWeight: 500 }}>10 dígitos</span>
-                      </label>
-                      <input
-                        id="whatsapp"
-                        type="tel"
-                        placeholder="656 123 4567"
-                        maxLength={14}
-                        value={whatsapp}
-                        onChange={e => {
-                          setWhatsapp(e.target.value);
-                          if (errors.whatsapp) setErrors({ ...errors, whatsapp: '' });
-                        }}
-                        className={`cce-input ${errors.whatsapp ? 'error' : ''}`}
-                        disabled={isSubmitting}
-                      />
-                      {errors.whatsapp && <span className="cce-field-error">{errors.whatsapp}</span>}
-                    </div>
-
                     {submitError && <div className="cce-submit-alert-error">{submitError}</div>}
 
                     {/* Botón Confirmar Asistencia */}
@@ -2852,7 +2785,7 @@ export default function CcePrensaClient() {
                       {isSubmitting ? (
                         <>
                           <div className="cce-spinner" />
-                          <span>Enviando acreditación...</span>
+                          <span>Confirmando asistencia...</span>
                         </>
                       ) : (
                         <>
@@ -2887,7 +2820,7 @@ export default function CcePrensaClient() {
             <b>Consejo Coordinador Empresarial de Ciudad Juárez</b> · Comité Organizador Empresario del Año 2026
           </div>
           <div className="cce-footer-sub">
-            Plataforma institucional de acreditación de prensa desarrollada y operada por <b>Apolograma Studio</b>.
+            Plataforma institucional de confirmación de asistencia desarrollada y operada por <b>Apolograma Studio</b>.
           </div>
           {/* Institutional Asset Reference: /assets/cce-juarez/logo_cce.png */}
         </div>
