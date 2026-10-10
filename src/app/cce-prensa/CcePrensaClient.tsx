@@ -677,7 +677,7 @@ export default function CcePrensaClient() {
         .cce-hero {
           position: relative;
           z-index: 1;
-          padding: 64px 20px 32px 20px;
+          padding: 64px 20px 48px 20px;
           text-align: center;
           max-width: 920px;
           margin: 0 auto;
@@ -919,7 +919,7 @@ export default function CcePrensaClient() {
            ========================================================================= */
         .cce-luxury-card-wrapper {
           max-width: 860px;
-          margin: 0 auto 48px auto;
+          margin: 64px auto 48px auto;
           width: 100%;
           padding: 0 12px;
           position: relative;
@@ -1388,6 +1388,7 @@ export default function CcePrensaClient() {
 
         @media (max-width: 640px) {
           .cce-luxury-card-wrapper {
+            margin: 48px auto 36px auto;
             padding: 0 16px;
           }
           .cce-lambrin-niche {
