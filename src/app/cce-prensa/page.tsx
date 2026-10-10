@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     siteName: 'Consejo Coordinador Empresarial de Ciudad Juárez',
     images: [
       {
-        url: '/assets/cce-juarez/og_cce_prensa.png',
+        url: '/assets/cce-juarez/og_cce_prensa.png?v=20261012',
         width: 1200,
         height: 630,
         type: 'image/png',
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Invitación a Rueda de Prensa',
     description: 'Consejo Coordinador Empresarial de Ciudad Juárez',
-    images: ['/assets/cce-juarez/og_cce_prensa.png'],
+    images: ['/assets/cce-juarez/og_cce_prensa.png?v=20261012'],
   },
   robots: {
     index: false,
