@@ -382,10 +382,12 @@ export default function CcePrensaClient() {
           display: flex;
           flex-direction: column;
           background:
-            radial-gradient(1300px 900px at 50% -120px, rgba(16, 185, 129, 0.28) 0%, rgba(6, 78, 59, 0.5) 30%, transparent 70%),
-            radial-gradient(1000px 800px at 90% 25%, rgba(245, 222, 152, 0.22) 0%, rgba(212, 175, 55, 0.15) 30%, rgba(184, 134, 11, 0.06) 55%, transparent 75%),
-            radial-gradient(900px 800px at 10% 65%, rgba(6, 78, 59, 0.42) 0%, rgba(4, 46, 35, 0.2) 45%, transparent 70%),
-            radial-gradient(1200px 900px at 50% 100%, rgba(4, 38, 28, 0.65) 0%, rgba(2, 18, 12, 0.92) 60%, transparent 80%),
+            /* 75% Dominant Emerald Atmosphere */
+            radial-gradient(1400px 950px at 50% -100px, rgba(16, 185, 129, 0.45) 0%, rgba(6, 78, 59, 0.72) 35%, rgba(4, 38, 28, 0.85) 60%, transparent 78%),
+            radial-gradient(1200px 900px at 10% 45%, rgba(5, 150, 105, 0.45) 0%, rgba(6, 78, 59, 0.38) 42%, transparent 70%),
+            radial-gradient(1100px 850px at 80% 80%, rgba(6, 78, 59, 0.55) 0%, rgba(4, 46, 35, 0.7) 45%, rgba(2, 24, 18, 0.95) 75%, transparent 85%),
+            /* 25% Refined Golden Glow Accent */
+            radial-gradient(850px 650px at 88% 28%, rgba(245, 222, 152, 0.16) 0%, rgba(212, 175, 55, 0.1) 32%, rgba(184, 134, 11, 0.04) 55%, transparent 70%),
             #010C07;
           width: 100%;
           max-width: 100vw;
@@ -398,7 +400,7 @@ export default function CcePrensaClient() {
           color: var(--cce-text-dark);
         }
 
-        /* Theatrical Spotlight & Atmospheric Living Canvas */
+        /* Theatrical Spotlight & Atmospheric Living Canvas (75% Emerald / 25% Gold) */
         .cce-living-canvas {
           position: fixed;
           inset: 0;
@@ -418,23 +420,23 @@ export default function CcePrensaClient() {
           left: 50%;
           transform: translateX(-50%);
           width: 100%;
-          max-width: 1200px;
-          height: 65vh;
-          background: radial-gradient(ellipse 90% 70% at 50% -5%, rgba(16, 185, 129, 0.45) 0%, rgba(6, 78, 59, 0.8) 32%, rgba(212, 175, 55, 0.22) 58%, transparent 82%);
+          max-width: 1300px;
+          height: 75vh;
+          background: radial-gradient(ellipse 95% 75% at 50% -5%, rgba(16, 185, 129, 0.65) 0%, rgba(6, 78, 59, 0.92) 36%, rgba(4, 46, 35, 0.88) 60%, transparent 85%);
           pointer-events: none;
         }
 
-        /* Top Theatrical Golden Beam */
+        /* Top Theatrical Golden Beam (25% Accent) */
         .cce-spotlight-gold {
           position: absolute;
           top: -80px;
           left: 50%;
           transform: translateX(-50%);
-          width: 90vw;
-          max-width: 1100px;
-          height: 60vh;
-          background: radial-gradient(ellipse at 50% 10%, rgba(255, 245, 204, 0.72) 0%, rgba(245, 222, 152, 0.52) 22%, rgba(212, 175, 55, 0.38) 45%, rgba(184, 134, 11, 0.16) 65%, transparent 85%);
-          filter: blur(45px);
+          width: 60vw;
+          max-width: 750px;
+          height: 42vh;
+          background: radial-gradient(ellipse at 50% 12%, rgba(255, 245, 204, 0.48) 0%, rgba(245, 222, 152, 0.32) 24%, rgba(212, 175, 55, 0.18) 45%, transparent 75%);
+          filter: blur(40px);
           animation: cceGoldSpotlightBreath 7s ease-in-out infinite alternate;
           pointer-events: none;
           will-change: transform, opacity;
@@ -442,32 +444,32 @@ export default function CcePrensaClient() {
 
         @keyframes cceGoldSpotlightBreath {
           0% {
-            opacity: 0.6;
+            opacity: 0.35;
             transform: translateX(-50%) scale(0.92);
           }
           50% {
-            opacity: 1;
-            transform: translateX(-50%) scale(1.15) translateY(22px);
+            opacity: 0.6;
+            transform: translateX(-50%) scale(1.1) translateY(18px);
           }
           100% {
-            opacity: 0.7;
+            opacity: 0.42;
             transform: translateX(-50%) scale(0.96) translateY(-5px);
           }
         }
 
-        /* Central Breathing Golden Core (Behind Hero & Form) */
+        /* Central Breathing Emerald-Gold Core (75% Emerald / 25% Gold) */
         .cce-gold-ambient-center {
           position: absolute;
           top: 35vh;
           left: 50%;
           transform: translate(-50%, -50%);
-          width: 58vw;
-          max-width: 750px;
-          height: 58vw;
-          max-height: 750px;
+          width: 55vw;
+          max-width: 720px;
+          height: 55vw;
+          max-height: 720px;
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(255, 245, 204, 0.65) 0%, rgba(245, 222, 152, 0.45) 28%, rgba(212, 175, 55, 0.32) 50%, rgba(6, 78, 59, 0.22) 70%, transparent 85%);
-          filter: blur(75px);
+          background: radial-gradient(circle, rgba(245, 222, 152, 0.22) 0%, rgba(212, 175, 55, 0.14) 20%, rgba(16, 185, 129, 0.45) 45%, rgba(6, 78, 59, 0.7) 65%, transparent 85%);
+          filter: blur(80px);
           animation: cceGoldPulseCenter 9s ease-in-out infinite alternate;
           pointer-events: none;
           will-change: transform, opacity;
@@ -476,29 +478,29 @@ export default function CcePrensaClient() {
         @keyframes cceGoldPulseCenter {
           0% {
             transform: translate(-50%, -50%) scale(0.85);
-            opacity: 0.65;
+            opacity: 0.55;
           }
           50% {
-            transform: translate(-48%, -52%) scale(1.25);
-            opacity: 1;
+            transform: translate(-48%, -52%) scale(1.18);
+            opacity: 0.85;
           }
           100% {
             transform: translate(-52%, -48%) scale(0.92);
-            opacity: 0.75;
+            opacity: 0.62;
           }
         }
 
-        /* Floating Golden Nebula Orb */
+        /* Floating Emerald-Gold Nebula Orb (75% Emerald / 25% Gold) */
         .cce-gold-ambient-floating {
           position: absolute;
-          top: 50vh;
-          left: 60%;
-          width: 48vw;
-          max-width: 620px;
-          height: 48vw;
-          max-height: 620px;
+          top: 48vh;
+          left: 62%;
+          width: 44vw;
+          max-width: 580px;
+          height: 44vw;
+          max-height: 580px;
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(255, 240, 190, 0.58) 0%, rgba(245, 222, 152, 0.42) 32%, rgba(212, 175, 55, 0.28) 55%, rgba(170, 128, 34, 0.12) 72%, transparent 85%);
+          background: radial-gradient(circle, rgba(212, 175, 55, 0.18) 0%, rgba(5, 150, 105, 0.42) 32%, rgba(6, 78, 59, 0.68) 55%, rgba(4, 46, 35, 0.85) 75%, transparent 88%);
           filter: blur(85px);
           animation: cceGoldFloat 13s ease-in-out infinite alternate;
           pointer-events: none;
@@ -508,30 +510,30 @@ export default function CcePrensaClient() {
         @keyframes cceGoldFloat {
           0% {
             transform: translate3d(0, 0, 0) scale(0.9);
-            opacity: 0.55;
+            opacity: 0.45;
           }
           50% {
-            transform: translate3d(-15vw, 12vh, 0) scale(1.2);
-            opacity: 0.98;
+            transform: translate3d(-12vw, 10vh, 0) scale(1.15);
+            opacity: 0.75;
           }
           100% {
-            transform: translate3d(-6vw, -10vh, 0) scale(1.02);
-            opacity: 0.65;
+            transform: translate3d(-5vw, -8vh, 0) scale(1.02);
+            opacity: 0.52;
           }
         }
 
-        /* Slow Theatrical Golden Aurora Sweep */
+        /* Theatrical Emerald Aurora Sweep with Golden Caustic Fringe */
         .cce-gold-shimmer-ray {
           position: absolute;
           top: -20vh;
           left: 20%;
           width: 80vw;
           height: 80vh;
-          background: conic-gradient(from 180deg at 50% 50%, rgba(212, 175, 55, 0) 0deg, rgba(255, 238, 179, 0.3) 60deg, rgba(6, 78, 59, 0.25) 120deg, rgba(212, 175, 55, 0.05) 180deg, rgba(243, 202, 64, 0.24) 260deg, rgba(212, 175, 55, 0) 360deg);
+          background: conic-gradient(from 180deg at 50% 50%, rgba(6, 78, 59, 0) 0deg, rgba(16, 185, 129, 0.38) 50deg, rgba(212, 175, 55, 0.15) 85deg, rgba(6, 78, 59, 0.45) 140deg, rgba(4, 46, 35, 0.25) 210deg, rgba(243, 202, 64, 0.12) 270deg, rgba(6, 78, 59, 0) 360deg);
           filter: blur(65px);
           animation: cceGoldRayRotate 32s linear infinite;
           pointer-events: none;
-          opacity: 0.88;
+          opacity: 0.52;
           will-change: transform;
         }
 
@@ -561,18 +563,18 @@ export default function CcePrensaClient() {
           }
           .cce-spotlight-gold {
             filter: blur(35px);
-            width: 100vw;
-            height: 45vh;
+            width: 70vw;
+            height: 35vh;
           }
           .cce-gold-ambient-center {
             filter: blur(55px);
-            width: 80vw;
-            height: 80vw;
+            width: 75vw;
+            height: 75vw;
           }
           .cce-gold-ambient-floating {
             filter: blur(60px);
-            width: 70vw;
-            height: 70vw;
+            width: 65vw;
+            height: 65vw;
           }
           .cce-gold-shimmer-ray {
             display: none;
@@ -582,43 +584,45 @@ export default function CcePrensaClient() {
         .cce-orb-1 {
           top: -10%;
           left: -10%;
-          width: 50vw;
-          height: 50vw;
-          background: radial-gradient(circle, #10B981 0%, #064E3B 40%, rgba(4, 46, 35, 0.8) 60%, rgba(6, 78, 59, 0) 78%);
+          width: 56vw;
+          height: 56vw;
+          background: radial-gradient(circle, #10B981 0%, #059669 30%, #064E3B 55%, rgba(4, 46, 35, 0.85) 75%, transparent 88%);
           animation: cceOrbMove1 22s ease-in-out infinite alternate;
           transform: translate3d(0, 0, 0);
-          opacity: 0.55;
+          opacity: 0.72;
         }
 
         .cce-orb-2 {
           top: 15%;
           right: -10%;
-          width: 48vw;
-          height: 48vw;
-          background: radial-gradient(circle, #FFF6D6 0%, #F5DE98 25%, #D4AF37 50%, rgba(184, 134, 11, 0.4) 70%, rgba(212, 175, 55, 0) 80%);
+          width: 46vw;
+          height: 46vw;
+          background: radial-gradient(circle, rgba(245, 222, 152, 0.25) 0%, rgba(212, 175, 55, 0.16) 18%, #059669 42%, #064E3B 65%, rgba(2, 24, 18, 0.9) 82%, transparent 90%);
           animation: cceOrbMove2 14s ease-in-out infinite alternate;
           transform: translate3d(0, 0, 0);
+          opacity: 0.65;
         }
 
         .cce-orb-3 {
           bottom: -15%;
           left: 10%;
-          width: 55vw;
-          height: 55vw;
-          background: radial-gradient(circle, #059669 0%, #042E23 45%, rgba(4, 46, 35, 0.7) 65%, rgba(4, 46, 35, 0) 80%);
+          width: 60vw;
+          height: 60vw;
+          background: radial-gradient(circle, #059669 0%, #064E3B 38%, #042E23 62%, rgba(2, 24, 18, 0.95) 80%, transparent 92%);
           animation: cceOrbMove3 26s ease-in-out infinite alternate;
           transform: translate3d(0, 0, 0);
-          opacity: 0.58;
+          opacity: 0.75;
         }
 
         .cce-orb-4 {
           bottom: 15%;
           right: 5%;
-          width: 45vw;
-          height: 45vw;
-          background: radial-gradient(circle, #FFFFFF 0%, #FFE8A3 25%, #F3CA40 50%, rgba(212, 175, 55, 0.35) 70%, rgba(243, 202, 64, 0) 80%);
+          width: 44vw;
+          height: 44vw;
+          background: radial-gradient(circle, rgba(245, 222, 152, 0.22) 0%, rgba(212, 175, 55, 0.14) 18%, #064E3B 48%, #042E23 72%, rgba(2, 20, 14, 0.95) 85%, transparent 90%);
           animation: cceOrbMove4 16s ease-in-out infinite alternate;
           transform: translate3d(0, 0, 0);
+          opacity: 0.62;
         }
 
         @keyframes cceOrbMove1 {
