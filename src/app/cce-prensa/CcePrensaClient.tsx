@@ -929,8 +929,8 @@ export default function CcePrensaClient() {
         /* Architectural Lambrín Niche Backdrop */
         .cce-lambrin-niche {
           position: absolute;
-          inset: -20px -26px -24px -26px;
-          border-radius: 34px;
+          inset: -38px -44px -42px -44px;
+          border-radius: 40px;
           pointer-events: none;
           z-index: 1;
         }
@@ -938,96 +938,103 @@ export default function CcePrensaClient() {
         .cce-lambrin-panel {
           position: absolute;
           inset: 0;
-          border-radius: 34px;
-          border: 1.5px solid rgba(212, 175, 55, 0.38);
+          border-radius: 40px;
+          border: 2px solid rgba(212, 175, 55, 0.65);
           box-shadow: 
-            0 32px 85px rgba(0, 0, 0, 0.96),
-            0 0 45px rgba(6, 78, 59, 0.45),
-            inset 0 0 50px rgba(0, 0, 0, 0.9);
+            0 35px 95px rgba(0, 0, 0, 0.96),
+            0 0 55px rgba(212, 175, 55, 0.4),
+            0 0 85px rgba(6, 78, 59, 0.55),
+            inset 0 0 60px rgba(0, 0, 0, 0.5);
           overflow: hidden;
-          background-color: #1a120c;
+          background-color: #2b1a0e;
         }
 
-        /* Teak Wood Vertical Slats */
+        /* Teak Wood Vertical Slats - High Brightness & Dimensional Grain */
         .cce-lambrin-slats {
           position: absolute;
           inset: 0;
           background: repeating-linear-gradient(90deg, 
-            #120c07 0px, 
-            #1b120c 3px, 
-            #2b1d12 8px, 
-            #3d2819 14px, 
-            #2b1d12 18px, 
-            #1b120c 21px, 
-            #0e0804 24px
+            #1a0f07 0px, 
+            #29180c 2px, 
+            #5c3719 5px, 
+            #a36838 9px, 
+            #e8aa66 14px, 
+            #a36838 19px, 
+            #5c3719 23px, 
+            #29180c 26px, 
+            #140b05 28px
           );
-          opacity: 0.96;
+          opacity: 1;
         }
 
-        /* Subtle emerald architectural ambient integration */
+        /* Warm Architectural Ceiling Spotlight Wash */
         .cce-lambrin-overlay {
           position: absolute;
           inset: 0;
-          background: radial-gradient(ellipse 90% 75% at 50% 50%, rgba(6, 78, 59, 0.22) 0%, rgba(3, 35, 26, 0.6) 65%, rgba(1, 15, 10, 0.88) 100%);
-          mix-blend-mode: multiply;
+          background: 
+            radial-gradient(ellipse 95% 70% at 50% 15%, rgba(255, 240, 190, 0.38) 0%, rgba(212, 175, 55, 0.18) 45%, transparent 80%),
+            linear-gradient(180deg, rgba(255, 235, 170, 0.28) 0%, transparent 40%, rgba(0, 0, 0, 0.35) 100%);
+          pointer-events: none;
         }
 
-        /* Breathing Vertical LED Amber Columns */
+        /* Luminous Breathing Vertical LED Amber Columns */
         .cce-lambrin-light-column {
           position: absolute;
-          top: -8px;
-          bottom: -8px;
-          width: 8px;
-          border-radius: 6px;
+          top: -12px;
+          bottom: -12px;
+          width: 12px;
+          border-radius: 8px;
           background: linear-gradient(180deg, 
-            rgba(212, 175, 55, 0.3) 0%, 
-            rgba(245, 222, 152, 0.95) 50%, 
-            rgba(212, 175, 55, 0.3) 100%
+            rgba(255, 235, 180, 0.85) 0%, 
+            rgba(255, 245, 204, 1) 40%, 
+            rgba(245, 222, 152, 1) 60%, 
+            rgba(212, 175, 55, 0.85) 100%
           );
           box-shadow: 
-            0 0 30px 10px rgba(245, 222, 152, 0.48), 
-            0 0 60px 22px rgba(212, 175, 55, 0.28);
-          animation: cceLambrinBreathing 12s ease-in-out infinite alternate;
+            0 0 35px 12px rgba(245, 222, 152, 0.75), 
+            0 0 75px 30px rgba(212, 175, 55, 0.5),
+            0 0 120px 45px rgba(245, 222, 152, 0.25);
+          animation: cceLambrinBreathing 10s ease-in-out infinite alternate;
           will-change: opacity, filter;
           z-index: 2;
         }
         .cce-lambrin-light-left {
-          left: -12px;
+          left: -18px;
         }
         .cce-lambrin-light-right {
-          right: -12px;
+          right: -18px;
         }
 
         @keyframes cceLambrinBreathing {
           0% {
-            opacity: 0.68;
-            filter: brightness(0.92);
+            opacity: 0.75;
+            filter: brightness(0.95);
           }
           50% {
             opacity: 1;
-            filter: brightness(1.18);
+            filter: brightness(1.22);
           }
           100% {
-            opacity: 0.68;
-            filter: brightness(0.92);
+            opacity: 0.75;
+            filter: brightness(0.95);
           }
         }
 
         .cce-luxury-card {
           position: relative;
           z-index: 3;
-          background: radial-gradient(120% 115% at 50% -8%, rgba(16, 185, 129, 0.38) 0%, rgba(6, 78, 59, 0.84) 32%, rgba(3, 35, 26, 0.92) 68%, rgba(1, 16, 11, 0.96) 100%);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          border: 1.5px solid rgba(212, 175, 55, 0.6);
+          background: radial-gradient(120% 115% at 50% -8%, rgba(16, 185, 129, 0.42) 0%, rgba(6, 78, 59, 0.74) 32%, rgba(3, 35, 26, 0.84) 68%, rgba(1, 16, 11, 0.88) 100%);
+          backdrop-filter: blur(14px);
+          -webkit-backdrop-filter: blur(14px);
+          border: 1.5px solid rgba(212, 175, 55, 0.65);
           border-radius: 24px;
           padding: 48px 52px;
           box-shadow:
-            0 35px 95px rgba(0, 0, 0, 0.9),
-            0 0 75px rgba(6, 78, 59, 0.55),
+            0 35px 95px rgba(0, 0, 0, 0.85),
+            0 0 75px rgba(6, 78, 59, 0.45),
             0 0 35px rgba(212, 175, 55, 0.25),
-            inset 0 1px 0 rgba(245, 222, 152, 0.55),
-            inset 0 0 50px rgba(6, 78, 59, 0.35);
+            inset 0 1px 0 rgba(245, 222, 152, 0.65),
+            inset 0 0 45px rgba(6, 78, 59, 0.3);
           overflow: hidden;
           transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -1388,17 +1395,18 @@ export default function CcePrensaClient() {
 
         @media (max-width: 640px) {
           .cce-luxury-card-wrapper {
-            padding: 0 8px;
+            padding: 0 12px;
           }
           .cce-lambrin-niche {
-            inset: -8px -6px -10px -6px;
-            border-radius: 22px;
+            inset: -14px -10px -18px -10px;
+            border-radius: 26px;
           }
           .cce-lambrin-panel {
-            border-radius: 22px;
+            border-radius: 26px;
+            border: 1.5px solid rgba(212, 175, 55, 0.55);
             box-shadow: 
-              0 0 25px rgba(212, 175, 55, 0.22),
-              0 15px 40px rgba(0, 0, 0, 0.92);
+              0 0 35px rgba(245, 222, 152, 0.35),
+              0 18px 45px rgba(0, 0, 0, 0.95);
           }
           .cce-lambrin-light-column {
             display: none;
