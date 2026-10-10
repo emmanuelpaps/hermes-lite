@@ -321,28 +321,26 @@ export default function CcePrensaClient() {
   const heroTitleWords = ['Acreditación', 'Oficial', 'de', 'Prensa'];
 
   const titleContainerVariants: Variants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 1 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.08,
+        staggerChildren: 0.08,
+        delayChildren: 0.04,
       },
     },
   };
 
   const titleWordVariants: Variants = {
     hidden: {
-      opacity: 0,
-      y: 25,
-      filter: 'blur(8px)',
+      opacity: 1,
+      y: 0,
     },
     visible: {
       opacity: 1,
       y: 0,
-      filter: 'blur(0px)',
       transition: {
-        duration: 0.65,
+        duration: 0.45,
         ease: [0.16, 1, 0.3, 1] as const,
       },
     },
@@ -420,6 +418,7 @@ export default function CcePrensaClient() {
           pointer-events: none;
           overflow: hidden;
           z-index: 0;
+          contain: paint;
         }
 
         .cce-spotlight {
@@ -427,7 +426,7 @@ export default function CcePrensaClient() {
           top: 0;
           left: 50%;
           transform: translateX(-50%);
-          width: 100vw;
+          width: 100%;
           max-width: 1200px;
           height: 65vh;
           background: radial-gradient(ellipse at 50% 0%, rgba(6, 78, 59, 0.42) 0%, rgba(212, 175, 55, 0.08) 45%, transparent 75%);
@@ -589,6 +588,34 @@ export default function CcePrensaClient() {
           height: 40px;
           width: auto;
           object-fit: contain;
+        }
+
+        @media (max-width: 640px) {
+          .cce-header {
+            padding: 10px 14px;
+          }
+          .cce-header-inner {
+            gap: 8px;
+          }
+          .cce-brand-left {
+            gap: 8px;
+          }
+          .cce-logo-img {
+            height: 28px;
+          }
+          .cce-brand-divider {
+            height: 18px;
+          }
+          .cce-council-tag span {
+            display: none;
+          }
+          .cce-council-tag strong {
+            font-size: 11px;
+          }
+          .cce-apolograma-brand-logo {
+            height: 18px !important;
+            max-width: 100px !important;
+          }
         }
 
         .cce-brand-divider {
@@ -1993,6 +2020,7 @@ export default function CcePrensaClient() {
             <img
               src="/assets/apolograma-logo-v2.png"
               alt="Apolograma Studio"
+              className="cce-apolograma-brand-logo"
               style={{
                 height: '22px',
                 width: 'auto',
@@ -2251,9 +2279,9 @@ export default function CcePrensaClient() {
           {/* HERO SECTION (EDITORIAL TYPOGRAPHY REVEAL & GOLDEN SHIMMER) */}
           <section className="cce-hero">
             <motion.div
-              initial={{ opacity: 0, y: 15 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] as const }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] as const }}
             >
               <div className="cce-hero-pill">
                 <Sparkles size={14} />
@@ -2263,7 +2291,7 @@ export default function CcePrensaClient() {
               <motion.h1
                 className="cce-hero-title"
                 variants={titleContainerVariants}
-                initial="hidden"
+                initial={false}
                 animate="visible"
               >
                 {heroTitleWords.map((word, i) => (
@@ -2280,34 +2308,19 @@ export default function CcePrensaClient() {
                 ))}
               </motion.h1>
 
-              <motion.div
-                className="cce-hero-subtitle"
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3, ease: [0.16, 1, 0.3, 1] as const }}
-              >
+              <div className="cce-hero-subtitle">
                 Consejo Coordinador Empresarial de Ciudad Juárez | <span className="cce-golden-shimmer">Empresario del Año 2026</span>
-              </motion.div>
+              </div>
 
-              <motion.p
-                className="cce-hero-description"
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4, ease: [0.16, 1, 0.3, 1] as const }}
-              >
+              <p className="cce-hero-description">
                 El Consejo Coordinador Empresarial de Ciudad Juárez convoca formalmente a los medios de comunicación y
                 reporteros de la frontera a la rueda de prensa y desayuno oficial con motivo de la presentación de los
                 galardones escultóricos de Pedro Francisco y la conferencia magistral de <span className="cce-golden-shimmer">Carlos Loret de Mola</span>.
-              </motion.p>
+              </p>
 
-              <motion.div
-                className="cce-protocol-badge"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.5, ease: [0.16, 1, 0.3, 1] as const }}
-              >
+              <div className="cce-protocol-badge">
                 Preside el evento: <b>Mtro. Iván Lara</b> · Presidente del CCE Ciudad Juárez
-              </motion.div>
+              </div>
             </motion.div>
 
             {/* MONOLITHIC VIP CREDENTIAL PASS BAR (REPLACES 3 LOOSE CARDS) */}
@@ -2367,9 +2380,9 @@ export default function CcePrensaClient() {
           {/* KEYNOTE POSTER SHOWCASE (CARLOS LORET DE MOLA) */}
           <div className="cce-keynote-wrapper">
             <motion.div
-              initial={{ opacity: 0, y: 25 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.35, ease: [0.16, 1, 0.3, 1] as const }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] as const }}
               className="cce-keynote-card"
             >
               <div className="cce-keynote-inner">
@@ -2501,7 +2514,7 @@ export default function CcePrensaClient() {
                 /* ACCREDITATION FORM (VIP DESK TERMINAL) */
                 <motion.div
                   key="form"
-                  initial={{ opacity: 0, y: 15 }}
+                  initial={false}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -15 }}
                   transition={{ duration: 0.3 }}
