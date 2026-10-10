@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     description:
       'Invitación oficial y confirmación de asistencia para medios al desayuno y rueda de prensa del CCE Ciudad Juárez. Lunes 12 de Octubre de 2026, 9:00 a.m. en Taquería La No 4.',
     url: 'https://propuestas.tecza.com.mx/cce-prensa',
-    siteName: 'Apolograma · Propuestas TECZA',
+    siteName: 'Consejo Coordinador Empresarial de Ciudad Juárez',
     images: [
       {
         url: '/assets/cce-juarez/og_cce_juarez.jpg',

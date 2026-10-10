@@ -737,13 +737,6 @@ export default function CcePrensaClient() {
           .cce-header.has-admin .cce-brand-divider {
             display: none;
           }
-          .cce-header.has-admin .cce-apolograma-brand-logo {
-            display: none;
-          }
-          .cce-apolograma-brand-logo {
-            height: 18px !important;
-            max-width: 100px !important;
-          }
           .cce-admin-badge span {
             display: none;
           }
@@ -2945,22 +2938,11 @@ export default function CcePrensaClient() {
       {/* FOOTER */}
       <footer className="cce-footer">
         <div className="cce-footer-inner">
-          <img
-            src="/assets/apolograma-logo-v2.png"
-            alt="Apolograma Studio"
-            style={{
-              height: '18px',
-              width: 'auto',
-              opacity: 0.85,
-              marginBottom: '6px',
-              filter: isAdmin && adminTab === 'crm' ? 'brightness(0.12)' : 'brightness(0) invert(1)',
-            }}
-          />
           <div>
-            <b>Consejo Coordinador Empresarial de Ciudad Juárez</b> · Comité Organizador Empresario del Año 2026
+            <b>Consejo Coordinador Empresarial de Ciudad Juárez</b> · Comité Organizador Empresa y Empresario del Año 2026
           </div>
           <div className="cce-footer-sub">
-            Plataforma institucional de confirmación de asistencia desarrollada y operada por <b>Apolograma Studio</b>.
+            Plataforma institucional oficial de confirmación de asistencia para medios convocados.
           </div>
           {/* Institutional Asset Reference: /assets/cce-juarez/logo_cce.png */}
         </div>

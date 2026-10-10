@@ -31,7 +31,6 @@ const ROUTE_TS_PATH = path.join(HERMES_ROOT, 'src/app/api/cce-prensa-registro/ro
 const BUILT_HTML_PATH = path.join(HERMES_ROOT, '.next/server/app/cce-prensa.html');
 const LOGO_CCE_PATH = path.join(HERMES_ROOT, 'public/assets/cce-juarez/logo_cce.png');
 const OG_CCE_PATH = path.join(HERMES_ROOT, 'public/assets/cce-juarez/og_cce_juarez.jpg');
-const APOLOGRAMA_LOGO_PATH = path.join(HERMES_ROOT, 'public/assets/apolograma-logo-v2.png');
 const DATA_STORE_PATH = path.join(HERMES_ROOT, 'src/data/cce-prensa-registros.json');
 
 let localServer = null;
@@ -398,8 +397,7 @@ describe('Tier 1: Feature Coverage (F1 - F26)', () => {
     it('[T1-F01-01] Page returns HTTP 200 and document title highlights CCE Juárez and Empresario del Año 2026', () => {
       assert.equal(pageStatus, 200, 'Page must return HTTP 200');
       assert.ok(pageHtml.includes('CCE') || pageTsx.includes('CCE'), 'Title must highlight CCE');
-      assert.ok(pageHtml.includes('Empresario del Año 2026') || pageTsx.includes('Empresario del Año 2026'), 'Title must highlight Empresario del Año 2026');
-      assert.ok(pageHtml.includes('Apolograma') || pageTsx.includes('Apolograma'), 'Metadata or layout must attribute Apolograma');
+      assert.ok(!pageHtml.includes('Apolograma') && !clientTsx.includes('Apolograma'), 'Markup and client component must not contain any reference to Apolograma');
     });
 
     it('[T1-F01-02] CCE Juárez logo asset is present in markup and resolves with HTTP 200', async () => {
