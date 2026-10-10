@@ -1435,6 +1435,7 @@ export default function CcePrensaClient() {
           .cce-luxury-card {
             padding: 34px 22px;
             border-radius: 20px;
+          }
           .cce-luxury-schedule {
             grid-template-columns: 1fr;
             padding: 18px;
