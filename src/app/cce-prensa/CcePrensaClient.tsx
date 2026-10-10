@@ -929,7 +929,7 @@ export default function CcePrensaClient() {
         /* Architectural Lambrín Niche Backdrop */
         .cce-lambrin-niche {
           position: absolute;
-          inset: -38px -44px -42px -44px;
+          inset: -44px -50px -48px -50px;
           border-radius: 40px;
           pointer-events: none;
           z-index: 1;
@@ -949,21 +949,14 @@ export default function CcePrensaClient() {
           background-color: #2b1a0e;
         }
 
-        /* Teak Wood Vertical Slats - High Brightness & Dimensional Grain */
+        /* Authentic Photorealistic Teak Wood Slat Wall (Direct Photographic Texture) */
         .cce-lambrin-slats {
           position: absolute;
           inset: 0;
-          background: repeating-linear-gradient(90deg, 
-            #1a0f07 0px, 
-            #29180c 2px, 
-            #5c3719 5px, 
-            #a36838 9px, 
-            #e8aa66 14px, 
-            #a36838 19px, 
-            #5c3719 23px, 
-            #29180c 26px, 
-            #140b05 28px
-          );
+          background-image: url('/assets/cce-juarez/lambrin_wood_texture.webp');
+          background-repeat: repeat-x;
+          background-position: center top;
+          background-size: 136px 100%;
           opacity: 1;
         }
 
@@ -972,8 +965,8 @@ export default function CcePrensaClient() {
           position: absolute;
           inset: 0;
           background: 
-            radial-gradient(ellipse 95% 70% at 50% 15%, rgba(255, 240, 190, 0.38) 0%, rgba(212, 175, 55, 0.18) 45%, transparent 80%),
-            linear-gradient(180deg, rgba(255, 235, 170, 0.28) 0%, transparent 40%, rgba(0, 0, 0, 0.35) 100%);
+            radial-gradient(ellipse 95% 70% at 50% 15%, rgba(255, 240, 190, 0.32) 0%, rgba(212, 175, 55, 0.15) 45%, transparent 80%),
+            linear-gradient(180deg, rgba(255, 235, 170, 0.22) 0%, transparent 40%, rgba(0, 0, 0, 0.3) 100%);
           pointer-events: none;
         }
 
@@ -1395,15 +1388,15 @@ export default function CcePrensaClient() {
 
         @media (max-width: 640px) {
           .cce-luxury-card-wrapper {
-            padding: 0 12px;
+            padding: 0 16px;
           }
           .cce-lambrin-niche {
-            inset: -14px -10px -18px -10px;
+            inset: -18px -14px -22px -14px;
             border-radius: 26px;
           }
           .cce-lambrin-panel {
             border-radius: 26px;
-            border: 1.5px solid rgba(212, 175, 55, 0.55);
+            border: 1.5px solid rgba(212, 175, 55, 0.65);
             box-shadow: 
               0 0 35px rgba(245, 222, 152, 0.35),
               0 18px 45px rgba(0, 0, 0, 0.95);
