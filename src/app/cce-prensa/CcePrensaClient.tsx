@@ -1,0 +1,1715 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  Calendar,
+  Clock,
+  MapPin,
+  CheckCircle2,
+  Users,
+  Send,
+  Download,
+  ExternalLink,
+  MessageSquare,
+  ShieldCheck,
+  BarChart3,
+  Search,
+  RefreshCw,
+  Award,
+  Sparkles,
+  FileSpreadsheet,
+} from 'lucide-react';
+
+interface PrensaRegistration {
+  id: string;
+  nombre: string;
+  medio: string;
+  asistentes: string | number;
+  whatsapp: string;
+  fecha: string;
+  timestamp?: number;
+  checkIn: boolean;
+  location?: string;
+  device?: string;
+  deviceCategory?: 'ios' | 'android' | 'desktop';
+  ip?: string;
+}
+
+interface TelemetryData {
+  totalVisits: number;
+  uniqueVisits: number;
+  conversionRate: string;
+  devices: {
+    ios: number;
+    android: number;
+    desktop: number;
+  };
+  totalMedios: number;
+  totalAsistentes: number;
+}
+
+export default function CcePrensaClient() {
+  // Navigation & Admin State
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [adminTab, setAdminTab] = useState<'crm' | 'public'>('crm');
+  const [isLoadingCrm, setIsLoadingCrm] = useState(false);
+  const [crmData, setCrmData] = useState<{
+    telemetry: TelemetryData;
+    registrations: PrensaRegistration[];
+  } | null>(null);
+
+  // Form State
+  const [nombre, setNombre] = useState('');
+  const [medio, setMedio] = useState('');
+  const [asistentes, setAsistentes] = useState('1');
+  const [whatsapp, setWhatsapp] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [submitError, setSubmitError] = useState('');
+  const [confirmedRecord, setConfirmedRecord] = useState<PrensaRegistration | null>(null);
+
+  // Search filter for CRM table
+  const [searchFilter, setSearchFilter] = useState('');
+  const [checkInUpdatingId, setCheckInUpdatingId] = useState<string | null>(null);
+
+  // Detect ?admin=cce2026 on mount
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const adminToken = params.get('admin');
+      const isAuthorizedAdmin = adminToken?.toLowerCase().trim() === 'cce2026';
+
+      if (isAuthorizedAdmin) {
+        setIsAdmin(true);
+        fetchCrmData();
+      } else {
+        // Track public visit once per session
+        const sessionKey = 'cce_prensa_visit_tracked';
+        if (!sessionStorage.getItem(sessionKey)) {
+          sessionStorage.setItem(sessionKey, '1');
+          fetch('/api/cce-prensa-registro?action=visit', { method: 'GET' }).catch(() => {});
+        }
+      }
+    } catch {
+      // Safe fallback
+    }
+  }, []);
+
+  const fetchCrmData = async () => {
+    setIsLoadingCrm(true);
+    try {
+      const res = await fetch('/api/cce-prensa-registro?admin=cce2026');
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success) {
+          setCrmData({
+            telemetry: data.telemetry,
+            registrations: data.registrations || [],
+          });
+        }
+      }
+    } catch (err) {
+      console.error('Error fetching CRM data:', err);
+    } finally {
+      setIsLoadingCrm(false);
+    }
+  };
+
+  // Form Validation & Submission
+  const validateForm = () => {
+    const newErrors: { [key: string]: string } = {};
+
+    if (!nombre.trim() || nombre.trim().length < 3) {
+      newErrors.nombre = 'Ingresa tu nombre completo (mínimo 3 caracteres).';
+    }
+
+    if (!medio.trim() || medio.trim().length < 2) {
+      newErrors.medio = 'Ingresa el nombre de tu medio de comunicación.';
+    }
+
+    if (!asistentes) {
+      newErrors.asistentes = 'Selecciona el número de personas que asistirán.';
+    }
+
+    const cleanPhone = whatsapp.replace(/\D/g, '');
+    if (cleanPhone.length !== 10) {
+      newErrors.whatsapp = 'El número de WhatsApp debe contener exactamente 10 dígitos.';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (isSubmitting) return;
+
+    setSubmitError('');
+    if (!validateForm()) return;
+
+    setIsSubmitting(true);
+
+    try {
+      const cleanPhone = whatsapp.replace(/\D/g, '');
+      const res = await fetch('/api/cce-prensa-registro', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nombre: nombre.trim(),
+          medio: medio.trim(),
+          asistentes,
+          whatsapp: cleanPhone,
+        }),
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setConfirmedRecord(data.record);
+      } else {
+        setSubmitError(data.error || 'Ocurrió un error al enviar tu acreditación. Intenta nuevamente.');
+      }
+    } catch (err) {
+      console.error('Error submitting accreditation:', err);
+      setSubmitError('Error de conexión. Por favor verifica tu señal e intenta nuevamente.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // Calendar Integrations
+  const handleGoogleCalendar = () => {
+    const title = encodeURIComponent('Desayuno y Rueda de Prensa · CCE Ciudad Juárez');
+    const details = encodeURIComponent(
+      'Acreditación oficial de prensa para la presentación de galardones escultóricos de Pedro Francisco y conferencia magistral de Carlos Loret de Mola para Empresario del Año 2026.\n\nSede: Taquería La No 4 (Av. Paseo Triunfo de la República 5617).\nContacto de confirmación: CCE Ciudad Juárez.'
+    );
+    const location = encodeURIComponent('Taquería La No 4, Av. Paseo Triunfo de la República 5617, Ciudad Juárez, Chih.');
+    const dates = '20261012T150000Z/20261012T163000Z';
+    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}&sprop=website:propuestas.tecza.com.mx`;
+
+    window.open(googleCalendarUrl, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleDownloadIcs = () => {
+    const icsContent = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//CCE Ciudad Juárez//Acreditacion Prensa 2026//ES',
+      'CALSCALE:GREGORIAN',
+      'METHOD:PUBLISH',
+      'BEGIN:VEVENT',
+      'UID:cce-prensa-20261012@ccejuarez.org',
+      'DTSTAMP:20261010T000000Z',
+      'DTSTART:20261012T150000Z',
+      'DTEND:20261012T163000Z',
+      'SUMMARY:Desayuno y Rueda de Prensa · CCE Ciudad Juárez (Empresario del Año 2026)',
+      'DESCRIPTION:Presentación oficial de los galardones escultóricos de Pedro Francisco y la conferencia magistral de Carlos Loret de Mola para Empresario del Año 2026. Evento exclusivo para medios y reporteros acreditados. Ubicación: Taquería La No 4: https://maps.app.goo.gl/6PvgdE8poTMiSxcN6',
+      'LOCATION:Taquería La No 4, Av. Paseo Triunfo de la República 5617, Ciudad Juárez, Chihuahua',
+      'STATUS:CONFIRMED',
+      'END:VEVENT',
+      'END:VCALENDAR',
+    ].join('\r\n');
+
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'Acreditacion_CCE_Prensa_2026.ics');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
+  };
+
+  const handleGoogleMaps = () => {
+    window.open('https://maps.app.goo.gl/6PvgdE8poTMiSxcN6', '_blank', 'noopener,noreferrer');
+  };
+
+  // Toggle Check-in in CRM
+  const handleToggleCheckIn = async (record: PrensaRegistration) => {
+    if (!crmData) return;
+    const newStatus = !record.checkIn;
+    setCheckInUpdatingId(record.id);
+
+    // Optimistic UI update
+    setCrmData({
+      ...crmData,
+      registrations: crmData.registrations.map(r => (r.id === record.id ? { ...r, checkIn: newStatus } : r)),
+    });
+
+    try {
+      const res = await fetch('/api/cce-prensa-registro?admin=cce2026', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: record.id, checkIn: newStatus }),
+      });
+      if (!res.ok) {
+        // Revert on error
+        setCrmData({
+          ...crmData,
+          registrations: crmData.registrations.map(r => (r.id === record.id ? { ...r, checkIn: record.checkIn } : r)),
+        });
+      }
+    } catch (err) {
+      console.error('Error toggling check-in:', err);
+    } finally {
+      setCheckInUpdatingId(null);
+    }
+  };
+
+  // WhatsApp 1-Click Message with Option C
+  const getWhatsAppOptionCLink = (reg: PrensaRegistration) => {
+    const cleanPhone = String(reg.whatsapp).replace(/\D/g, '');
+    const numAsistentes = reg.asistentes;
+    const asistentesLabel = String(numAsistentes) === '1' ? '1 asistente' : `${numAsistentes} asistentes`;
+    const message = `Buen día ${reg.nombre}. Confirmada la acreditación de ${reg.medio} (${asistentesLabel}) para el desayuno y rueda de prensa del CCE Juárez. Lunes 12 de octubre, 9:00 a.m. en Taquería La No 4: https://maps.app.goo.gl/6PvgdE8poTMiSxcN6. ¡Agradecemos tu cobertura!`;
+    return `https://wa.me/52${cleanPhone}?text=${encodeURIComponent(message)}`;
+  };
+
+  // 1-Click CSV Export with UTF-8 BOM
+  const handleExportCsv = () => {
+    if (!crmData || crmData.registrations.length === 0) return;
+
+    const headers = ['ID', 'Nombre', 'Medio', 'Asistentes', 'WhatsApp', 'Fecha', 'Check-In', 'Ubicación', 'Dispositivo'];
+    const rows = crmData.registrations.map(r => [
+      r.id,
+      `"${(r.nombre || '').replace(/"/g, '""')}"`,
+      `"${(r.medio || '').replace(/"/g, '""')}"`,
+      r.asistentes,
+      `"${(r.whatsapp || '').replace(/"/g, '""')}"`,
+      `"${(r.fecha || '').replace(/"/g, '""')}"`,
+      r.checkIn ? 'Acreditado en Puerta' : 'Pendiente',
+      `"${(r.location || '').replace(/"/g, '""')}"`,
+      `"${(r.device || '').replace(/"/g, '""')}"`,
+    ]);
+
+    const csvContent = '\uFEFF' + [headers.join(','), ...rows.map(row => row.join(','))].join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'acreditaciones_cce_prensa_2026.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
+  };
+
+  const filteredRegistrations = (crmData?.registrations || []).filter(r => {
+    if (!searchFilter.trim()) return true;
+    const q = searchFilter.toLowerCase().trim();
+    return (
+      r.nombre.toLowerCase().includes(q) ||
+      r.medio.toLowerCase().includes(q) ||
+      r.whatsapp.includes(q) ||
+      (r.location && r.location.toLowerCase().includes(q))
+    );
+  });
+
+  return (
+    <div className="cce-page-container">
+      {/* SCOPED CSS ARCHITECTURE (Vanilla CSS / No Tailwind) */}
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+        :root {
+          --cce-emerald: #064E3B;
+          --cce-emerald-dark: #042E23;
+          --cce-emerald-light: #059669;
+          --cce-emerald-wash: #ECFDF5;
+          --cce-gold: #D4AF37;
+          --cce-gold-dark: #B8860B;
+          --cce-gold-light: #FFFBEB;
+          --cce-gold-border: #FDE68A;
+          --cce-cream: #FFFDF9;
+          --cce-bg: #FFFDF9;
+          --cce-text-dark: #0F172A;
+          --cce-text-muted: #475569;
+          --cce-border-subtle: #E2E8F0;
+        }
+
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+        }
+
+        body, html {
+          max-width: 100vw;
+          overflow-x: hidden;
+          background-color: var(--cce-bg);
+          color: var(--cce-text-dark);
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+        }
+
+        .cce-page-container {
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+          background: linear-gradient(180deg, #F8FAF8 0%, #FFFDF9 100%);
+          width: 100%;
+          overflow-x: hidden;
+        }
+
+        /* Top Brand Header */
+        .cce-header {
+          position: sticky;
+          top: 0;
+          z-index: 50;
+          background: rgba(255, 253, 249, 0.95);
+          backdrop-filter: blur(8px);
+          border-bottom: 1px solid rgba(6, 78, 59, 0.1);
+          padding: 12px 20px;
+        }
+
+        .cce-header-inner {
+          max-width: 1100px;
+          margin: 0 auto;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+        }
+
+        .cce-brand-left {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          text-decoration: none;
+        }
+
+        .cce-logo-img {
+          height: 38px;
+          width: auto;
+          object-fit: contain;
+        }
+
+        .cce-brand-divider {
+          width: 1px;
+          height: 24px;
+          background-color: rgba(6, 78, 59, 0.2);
+        }
+
+        .cce-council-tag {
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          color: var(--cce-emerald);
+          display: flex;
+          flex-direction: column;
+          line-height: 1.2;
+        }
+
+        .cce-council-tag span {
+          font-size: 9px;
+          color: var(--cce-gold-dark);
+          font-weight: 600;
+        }
+
+        .cce-header-right {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .cce-admin-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 6px 12px;
+          border-radius: 9999px;
+          background-color: var(--cce-gold-light);
+          border: 1px solid var(--cce-gold-border);
+          color: var(--cce-gold-dark);
+          font-size: 12px;
+          font-weight: 600;
+        }
+
+        .cce-tab-toggle {
+          display: inline-flex;
+          background: #E2E8F0;
+          border-radius: 8px;
+          padding: 2px;
+        }
+
+        .cce-tab-btn {
+          border: none;
+          background: none;
+          padding: 8px 14px;
+          font-size: 13px;
+          font-weight: 600;
+          border-radius: 6px;
+          cursor: pointer;
+          color: #475569;
+          min-height: 44px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.2s ease;
+        }
+
+        .cce-tab-btn.active {
+          background: #FFFFFF;
+          color: var(--cce-emerald);
+          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        /* Hero Section */
+        .cce-hero {
+          padding: 40px 20px 24px 20px;
+          text-align: center;
+          max-width: 900px;
+          margin: 0 auto;
+          width: 100%;
+        }
+
+        .cce-hero-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background-color: var(--cce-emerald-wash);
+          border: 1px solid rgba(6, 78, 59, 0.2);
+          color: var(--cce-emerald);
+          font-size: 13px;
+          font-weight: 700;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+          padding: 6px 16px;
+          border-radius: 9999px;
+          margin-bottom: 20px;
+        }
+
+        .cce-hero-title {
+          font-size: clamp(26px, 4.5vw, 42px);
+          font-weight: 800;
+          color: var(--cce-emerald);
+          line-height: 1.15;
+          letter-spacing: -0.02em;
+          margin-bottom: 12px;
+        }
+
+        .cce-hero-subtitle {
+          font-size: clamp(16px, 2.5vw, 20px);
+          font-weight: 600;
+          color: var(--cce-gold-dark);
+          margin-bottom: 16px;
+          line-height: 1.35;
+        }
+
+        .cce-hero-description {
+          font-size: 15px;
+          line-height: 1.6;
+          color: var(--cce-text-muted);
+          max-width: 720px;
+          margin: 0 auto 24px auto;
+        }
+
+        .cce-protocol-badge {
+          display: inline-block;
+          font-size: 13px;
+          font-weight: 600;
+          color: var(--cce-emerald);
+          background: rgba(6, 78, 59, 0.06);
+          padding: 6px 14px;
+          border-radius: 8px;
+          margin-bottom: 28px;
+        }
+
+        /* Details Strip Cards */
+        .cce-details-strip {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+          gap: 16px;
+          max-width: 900px;
+          margin: 0 auto 36px auto;
+          width: 100%;
+          padding: 0 20px;
+        }
+
+        .cce-detail-card {
+          background: #FFFFFF;
+          border: 1px solid rgba(6, 78, 59, 0.12);
+          border-radius: 12px;
+          padding: 16px 20px;
+          display: flex;
+          align-items: flex-start;
+          gap: 14px;
+          box-shadow: 0 2px 6px rgba(6, 78, 59, 0.04);
+          text-align: left;
+        }
+
+        .cce-detail-icon {
+          width: 40px;
+          height: 40px;
+          border-radius: 10px;
+          background: var(--cce-emerald-wash);
+          color: var(--cce-emerald);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+
+        .cce-detail-label {
+          font-size: 12px;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          color: var(--cce-text-muted);
+          margin-bottom: 4px;
+        }
+
+        .cce-detail-value {
+          font-size: 15px;
+          font-weight: 700;
+          color: var(--cce-text-dark);
+          line-height: 1.3;
+        }
+
+        .cce-detail-hint {
+          font-size: 12px;
+          color: var(--cce-emerald);
+          margin-top: 2px;
+          font-weight: 500;
+        }
+
+        /* Notice of Exclusivity */
+        .cce-notice-pill {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          background: #FEF3C7;
+          border: 1px solid #FDE68A;
+          color: #92400E;
+          font-size: 13px;
+          font-weight: 600;
+          padding: 10px 18px;
+          border-radius: 10px;
+          max-width: 650px;
+          margin: 0 auto 32px auto;
+          text-align: center;
+        }
+
+        /* Main Form Container */
+        .cce-main-content {
+          max-width: 640px;
+          margin: 0 auto 60px auto;
+          padding: 0 20px;
+          width: 100%;
+        }
+
+        .cce-form-card {
+          background: #FFFFFF;
+          border: 1px solid var(--cce-gold-border);
+          border-radius: 16px;
+          padding: 32px 28px;
+          box-shadow: 0 8px 30px rgba(6, 78, 59, 0.06);
+        }
+
+        @media (max-width: 640px) {
+          .cce-form-card {
+            padding: 24px 18px;
+          }
+        }
+
+        .cce-form-header {
+          margin-bottom: 24px;
+          text-align: center;
+        }
+
+        .cce-form-heading {
+          font-size: 22px;
+          font-weight: 700;
+          color: var(--cce-emerald);
+          margin-bottom: 6px;
+        }
+
+        .cce-form-subheading {
+          font-size: 14px;
+          color: var(--cce-text-muted);
+        }
+
+        .cce-form-group {
+          margin-bottom: 20px;
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+
+        .cce-label {
+          font-size: 14px;
+          font-weight: 700;
+          color: var(--cce-text-dark);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .cce-required-dot {
+          color: #DC2626;
+          margin-left: 4px;
+        }
+
+        .cce-input {
+          width: 100%;
+          min-height: 48px;
+          padding: 12px 16px;
+          font-size: 16px; /* Prevents iOS auto-zoom */
+          color: var(--cce-text-dark);
+          background-color: #FAFAFA;
+          border: 1.5px solid var(--cce-border-subtle);
+          border-radius: 10px;
+          outline: none;
+          transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .cce-input:focus {
+          border-color: var(--cce-emerald);
+          background-color: #FFFFFF;
+          box-shadow: 0 0 0 3px rgba(6, 78, 59, 0.15);
+        }
+
+        .cce-input.error {
+          border-color: #DC2626;
+          background-color: #FEF2F2;
+        }
+
+        .cce-field-error {
+          font-size: 12px;
+          color: #DC2626;
+          font-weight: 500;
+          margin-top: 2px;
+        }
+
+        /* Attendees Pill Selector */
+        .cce-attendees-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 10px;
+        }
+
+        .cce-attendee-btn {
+          min-height: 48px;
+          background: #FAFAFA;
+          border: 1.5px solid var(--cce-border-subtle);
+          border-radius: 10px;
+          font-size: 15px;
+          font-weight: 700;
+          color: var(--cce-text-dark);
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.2s ease;
+        }
+
+        .cce-attendee-btn:hover {
+          border-color: var(--cce-emerald-light);
+          background: #F0FDF4;
+        }
+
+        .cce-attendee-btn.selected {
+          background: var(--cce-emerald);
+          color: #FFFFFF;
+          border-color: var(--cce-emerald);
+          box-shadow: 0 4px 12px rgba(6, 78, 59, 0.25);
+        }
+
+        /* Submit Button */
+        .cce-submit-btn {
+          width: 100%;
+          min-height: 52px;
+          background: linear-gradient(135deg, var(--cce-emerald) 0%, var(--cce-emerald-dark) 100%);
+          border: 1px solid var(--cce-gold);
+          border-radius: 12px;
+          color: #FFFFFF;
+          font-size: 16px;
+          font-weight: 700;
+          letter-spacing: 0.02em;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          margin-top: 28px;
+          box-shadow: 0 6px 18px rgba(6, 78, 59, 0.25);
+          transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .cce-submit-btn:hover:not(:disabled) {
+          transform: translateY(-1px);
+          box-shadow: 0 8px 24px rgba(6, 78, 59, 0.35);
+        }
+
+        .cce-submit-btn:active:not(:disabled) {
+          transform: translateY(0);
+        }
+
+        .cce-submit-btn:disabled {
+          opacity: 0.7;
+          cursor: not-allowed;
+        }
+
+        .cce-spinner {
+          width: 20px;
+          height: 20px;
+          border: 2px solid rgba(255, 255, 255, 0.3);
+          border-top-color: #FFFFFF;
+          border-radius: 50%;
+          animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+          to { transform: rotate(360deg); }
+        }
+
+        .cce-submit-alert-error {
+          background: #FEF2F2;
+          border: 1px solid #FCA5A5;
+          color: #991B1B;
+          padding: 12px 16px;
+          border-radius: 10px;
+          font-size: 13px;
+          font-weight: 500;
+          margin-top: 16px;
+          text-align: center;
+        }
+
+        /* Confirmation Card */
+        .cce-confirmation-card {
+          background: #FFFFFF;
+          border: 2px solid var(--cce-gold);
+          border-radius: 16px;
+          padding: 36px 28px;
+          text-align: center;
+          box-shadow: 0 10px 40px rgba(6, 78, 59, 0.08);
+        }
+
+        .cce-confirmed-seal {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: linear-gradient(135deg, var(--cce-emerald-wash) 0%, #FEF3C7 100%);
+          border: 1.5px solid var(--cce-gold);
+          color: var(--cce-emerald);
+          padding: 8px 18px;
+          border-radius: 9999px;
+          font-size: 14px;
+          font-weight: 800;
+          letter-spacing: 0.03em;
+          text-transform: uppercase;
+          margin-bottom: 20px;
+        }
+
+        .cce-confirmed-title {
+          font-size: 26px;
+          font-weight: 800;
+          color: var(--cce-emerald);
+          margin-bottom: 8px;
+        }
+
+        .cce-confirmed-summary {
+          background: #F8FAF8;
+          border: 1px solid rgba(6, 78, 59, 0.12);
+          border-radius: 12px;
+          padding: 20px;
+          text-align: left;
+          margin: 24px 0;
+        }
+
+        .cce-summary-row {
+          display: flex;
+          justify-content: space-between;
+          padding: 8px 0;
+          border-bottom: 1px solid #E2E8F0;
+          font-size: 14px;
+        }
+
+        .cce-summary-row:last-child {
+          border-bottom: none;
+        }
+
+        .cce-summary-label {
+          color: var(--cce-text-muted);
+          font-weight: 500;
+        }
+
+        .cce-summary-val {
+          color: var(--cce-text-dark);
+          font-weight: 700;
+        }
+
+        .cce-action-buttons-grid {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          margin-top: 24px;
+        }
+
+        .cce-action-btn {
+          min-height: 48px;
+          border-radius: 10px;
+          font-size: 15px;
+          font-weight: 700;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          text-decoration: none;
+          padding: 10px 16px;
+        }
+
+        .cce-btn-google {
+          background: #FFFFFF;
+          color: #1F2937;
+          border: 1.5px solid #D1D5DB;
+        }
+
+        .cce-btn-google:hover {
+          background: #F3F4F6;
+          border-color: #9CA3AF;
+        }
+
+        .cce-btn-apple {
+          background: var(--cce-emerald);
+          color: #FFFFFF;
+          border: 1px solid var(--cce-emerald);
+        }
+
+        .cce-btn-apple:hover {
+          background: var(--cce-emerald-dark);
+        }
+
+        .cce-btn-maps {
+          background: #EFF6FF;
+          color: #1D4ED8;
+          border: 1px solid #BFDBFE;
+        }
+
+        .cce-btn-maps:hover {
+          background: #DBEAFE;
+        }
+
+        /* PRIVATE CRM SECTION */
+        .cce-crm-container {
+          max-width: 1200px;
+          margin: 20px auto 60px auto;
+          padding: 0 20px;
+          width: 100%;
+        }
+
+        .cce-crm-banner {
+          background: linear-gradient(135deg, var(--cce-emerald-dark) 0%, var(--cce-emerald) 100%);
+          border-radius: 16px;
+          padding: 24px 28px;
+          color: #FFFFFF;
+          margin-bottom: 24px;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+          box-shadow: 0 8px 30px rgba(6, 78, 59, 0.2);
+        }
+
+        .cce-crm-banner-title {
+          font-size: 20px;
+          font-weight: 800;
+          letter-spacing: -0.01em;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .cce-crm-banner-sub {
+          font-size: 13px;
+          opacity: 0.85;
+          margin-top: 4px;
+        }
+
+        .cce-crm-actions {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          flex-wrap: wrap;
+        }
+
+        .cce-crm-btn {
+          min-height: 44px;
+          padding: 10px 18px;
+          border-radius: 8px;
+          font-size: 13px;
+          font-weight: 700;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          cursor: pointer;
+          border: none;
+          transition: all 0.15s ease;
+        }
+
+        .cce-crm-btn-primary {
+          background: var(--cce-gold);
+          color: #042E23;
+        }
+
+        .cce-crm-btn-primary:hover {
+          background: #F3CA40;
+        }
+
+        .cce-crm-btn-secondary {
+          background: rgba(255, 255, 255, 0.15);
+          color: #FFFFFF;
+          border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .cce-crm-btn-secondary:hover {
+          background: rgba(255, 255, 255, 0.25);
+        }
+
+        /* Telemetry Radar Cards Grid */
+        .cce-radar-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+          gap: 16px;
+          margin-bottom: 28px;
+        }
+
+        .cce-radar-card {
+          background: #FFFFFF;
+          border: 1px solid rgba(6, 78, 59, 0.15);
+          border-radius: 12px;
+          padding: 18px 16px;
+          box-shadow: 0 2px 8px rgba(6, 78, 59, 0.04);
+        }
+
+        .cce-radar-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 8px;
+        }
+
+        .cce-radar-label {
+          font-size: 12px;
+          font-weight: 600;
+          color: var(--cce-text-muted);
+          text-transform: uppercase;
+          letter-spacing: 0.04em;
+        }
+
+        .cce-radar-value {
+          font-size: 24px;
+          font-weight: 800;
+          color: var(--cce-emerald);
+          line-height: 1.1;
+        }
+
+        .cce-radar-subtext {
+          font-size: 11px;
+          color: var(--cce-gold-dark);
+          font-weight: 600;
+          margin-top: 4px;
+        }
+
+        /* Media Table Section */
+        .cce-table-card {
+          background: #FFFFFF;
+          border: 1px solid var(--cce-border-subtle);
+          border-radius: 14px;
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+          overflow: hidden;
+        }
+
+        .cce-table-toolbar {
+          padding: 16px 20px;
+          border-bottom: 1px solid var(--cce-border-subtle);
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+        }
+
+        .cce-search-box {
+          position: relative;
+          min-width: 260px;
+          flex: 1;
+          max-width: 400px;
+        }
+
+        .cce-search-icon {
+          position: absolute;
+          left: 12px;
+          top: 50%;
+          transform: translateY(-50%);
+          color: #94A3B8;
+        }
+
+        .cce-search-input {
+          width: 100%;
+          min-height: 40px;
+          padding: 8px 12px 8px 36px;
+          font-size: 14px;
+          border: 1px solid var(--cce-border-subtle);
+          border-radius: 8px;
+          outline: none;
+        }
+
+        .cce-search-input:focus {
+          border-color: var(--cce-emerald);
+        }
+
+        /* Scrollable Table Wrapper */
+        .cce-table-wrapper {
+          width: 100%;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        .cce-table {
+          width: 100%;
+          border-collapse: collapse;
+          text-align: left;
+          font-size: 13px;
+          min-width: 780px;
+        }
+
+        .cce-th {
+          background: #F8FAF8;
+          color: var(--cce-text-dark);
+          font-weight: 700;
+          padding: 12px 16px;
+          border-bottom: 2px solid rgba(6, 78, 59, 0.1);
+          text-transform: uppercase;
+          font-size: 11px;
+          letter-spacing: 0.05em;
+          white-space: nowrap;
+        }
+
+        .cce-td {
+          padding: 14px 16px;
+          border-bottom: 1px solid #F1F5F9;
+          color: var(--cce-text-dark);
+          vertical-align: middle;
+        }
+
+        .cce-row:hover {
+          background-color: #F8FAF8;
+        }
+
+        .cce-status-badge {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 6px;
+          padding: 8px 14px;
+          border-radius: 9999px;
+          font-size: 12px;
+          font-weight: 600;
+          cursor: pointer;
+          border: none;
+          min-height: 44px;
+          transition: all 0.15s;
+        }
+
+        .cce-status-checked {
+          background: var(--cce-emerald-wash);
+          color: var(--cce-emerald);
+          border: 1px solid #A7F3D0;
+        }
+
+        .cce-status-pending {
+          background: #FEF3C7;
+          color: #92400E;
+          border: 1px solid #FDE68A;
+        }
+
+        .cce-btn-wa-row {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 6px;
+          background: #25D366;
+          color: #FFFFFF;
+          padding: 8px 14px;
+          border-radius: 8px;
+          font-size: 12px;
+          font-weight: 700;
+          text-decoration: none;
+          transition: background 0.15s;
+          white-space: nowrap;
+          min-height: 44px;
+        }
+
+        .cce-btn-wa-row:hover {
+          background: #1EBE5D;
+        }
+
+        /* Footer */
+        .cce-footer {
+          margin-top: auto;
+          background: #FFFFFF;
+          border-top: 1px solid rgba(6, 78, 59, 0.08);
+          padding: 24px 20px;
+          text-align: center;
+          font-size: 13px;
+          color: var(--cce-text-muted);
+        }
+
+        .cce-footer-inner {
+          max-width: 900px;
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          align-items: center;
+        }
+
+        .cce-footer-sub {
+          font-size: 12px;
+          color: #94A3B8;
+        }
+      `,
+        }}
+      />
+
+      {/* TOP HEADER */}
+      <header className="cce-header">
+        <div className="cce-header-inner">
+          <div className="cce-brand-left">
+            {/* CCE JUÁREZ LOGO */}
+            <img
+              src="/assets/cce-juarez/logo_cce.png"
+              alt="Consejo Coordinador Empresarial Ciudad Juárez"
+              className="cce-logo-img"
+            />
+            <div className="cce-brand-divider" />
+            <div className="cce-council-tag">
+              CCE Ciudad Juárez
+              <span>Rueda de Prensa Oficial</span>
+            </div>
+          </div>
+
+          <div className="cce-header-right">
+            {isAdmin && (
+              <>
+                <div className="cce-admin-badge">
+                  <ShieldCheck size={14} />
+                  <span>Admin Conectado</span>
+                </div>
+                <div className="cce-tab-toggle">
+                  <button
+                    className={`cce-tab-btn ${adminTab === 'crm' ? 'active' : ''}`}
+                    onClick={() => setAdminTab('crm')}
+                  >
+                    Panel CRM
+                  </button>
+                  <button
+                    className={`cce-tab-btn ${adminTab === 'public' ? 'active' : ''}`}
+                    onClick={() => setAdminTab('public')}
+                  >
+                    Ver Registro
+                  </button>
+                </div>
+              </>
+            )}
+
+            {/* APOLOGRAMA ATTRIBUTION LOGO */}
+            <img
+              src="/assets/apolograma-logo-v2.png"
+              alt="Apolograma Studio"
+              style={{ height: '22px', width: 'auto', opacity: 0.8 }}
+            />
+          </div>
+        </div>
+      </header>
+
+      {/* ADMIN CRM VIEW (Visible when ?admin=cce2026 and adminTab === 'crm') */}
+      {isAdmin && adminTab === 'crm' ? (
+        <main className="cce-crm-container">
+          {/* Executive Header Banner */}
+          <div className="cce-crm-banner">
+            <div>
+              <div className="cce-crm-banner-title">
+                <BarChart3 size={24} />
+                Centro de Telemetría y Acreditación de Prensa · CCE Juárez
+              </div>
+              <div className="cce-crm-banner-sub">
+                Empresario del Año 2026 | Desayuno y Rueda de Prensa Oficial · Taquería La No 4
+              </div>
+            </div>
+
+            <div className="cce-crm-actions">
+              <button className="cce-crm-btn cce-crm-btn-secondary" onClick={fetchCrmData} disabled={isLoadingCrm}>
+                <RefreshCw size={14} className={isLoadingCrm ? 'cce-spinner' : ''} />
+                Actualizar Datos
+              </button>
+              <button className="cce-crm-btn cce-crm-btn-primary" onClick={handleExportCsv}>
+                <FileSpreadsheet size={16} />
+                Exportar CSV (\uFEFF)
+              </button>
+            </div>
+          </div>
+
+          {/* Telemetry Radar Cards */}
+          {crmData?.telemetry && (
+            <div className="cce-radar-grid">
+              <div className="cce-radar-card">
+                <div className="cce-radar-header">
+                  <span className="cce-radar-label">Total Visitas</span>
+                  <BarChart3 size={16} color="#064E3B" />
+                </div>
+                <div className="cce-radar-value">{crmData.telemetry.totalVisits}</div>
+                <div className="cce-radar-subtext">Radar de tráfico en vivo</div>
+              </div>
+
+              <div className="cce-radar-card">
+                <div className="cce-radar-header">
+                  <span className="cce-radar-label">Visitantes Únicos</span>
+                  <Users size={16} color="#064E3B" />
+                </div>
+                <div className="cce-radar-value">{crmData.telemetry.uniqueVisits}</div>
+                <div className="cce-radar-subtext">IPs independientes auditadas</div>
+              </div>
+
+              <div className="cce-radar-card">
+                <div className="cce-radar-header">
+                  <span className="cce-radar-label">Tasa de Conversión</span>
+                  <Sparkles size={16} color="#D4AF37" />
+                </div>
+                <div className="cce-radar-value">{crmData.telemetry.conversionRate}</div>
+                <div className="cce-radar-subtext">Acreditados / Visitantes</div>
+              </div>
+
+              <div className="cce-radar-card">
+                <div className="cce-radar-header">
+                  <span className="cce-radar-label">Medios Registrados</span>
+                  <Award size={16} color="#064E3B" />
+                </div>
+                <div className="cce-radar-value">{crmData.telemetry.totalMedios}</div>
+                <div className="cce-radar-subtext">Agencias y medios únicos</div>
+              </div>
+
+              <div className="cce-radar-card">
+                <div className="cce-radar-header">
+                  <span className="cce-radar-label">Total Asistentes</span>
+                  <Users size={16} color="#064E3B" />
+                </div>
+                <div className="cce-radar-value">{crmData.telemetry.totalAsistentes}</div>
+                <div className="cce-radar-subtext">Capacidad estimada en mesa</div>
+              </div>
+
+              <div className="cce-radar-card">
+                <div className="cce-radar-header">
+                  <span className="cce-radar-label">Desglose de Dispositivos</span>
+                  <CheckCircle2 size={16} color="#059669" />
+                </div>
+                <div className="cce-radar-value" style={{ fontSize: '15px', marginTop: '4px' }}>
+                  iOS {crmData.telemetry.devices.ios}% · Android {crmData.telemetry.devices.android}% · Desktop {crmData.telemetry.devices.desktop}%
+                </div>
+                <div className="cce-radar-subtext">Distribución de hardware</div>
+              </div>
+            </div>
+          )}
+
+          {/* Media Table */}
+          <div className="cce-table-card">
+            <div className="cce-table-toolbar">
+              <div className="cce-search-box">
+                <Search size={16} className="cce-search-icon" />
+                <input
+                  type="text"
+                  placeholder="Buscar por periodista, medio o teléfono..."
+                  value={searchFilter}
+                  onChange={e => setSearchFilter(e.target.value)}
+                  className="cce-search-input"
+                />
+              </div>
+              <div style={{ fontSize: '13px', color: '#64748B' }}>
+                Mostrando <b>{filteredRegistrations.length}</b> registros de prensa
+              </div>
+            </div>
+
+            <div className="cce-table-wrapper">
+              <table className="cce-table">
+                <thead>
+                  <tr>
+                    <th className="cce-th">Periodista / Reportero</th>
+                    <th className="cce-th">Medio de Comunicación</th>
+                    <th className="cce-th" style={{ textAlign: 'center' }}>
+                      Asistentes
+                    </th>
+                    <th className="cce-th">Teléfono / WhatsApp</th>
+                    <th className="cce-th">Fecha Registro</th>
+                    <th className="cce-th">Check-in en Taquería La No 4</th>
+                    <th className="cce-th" style={{ textAlign: 'right' }}>
+                      WhatsApp (Opción C)
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredRegistrations.length === 0 ? (
+                    <tr>
+                      <td colSpan={7} style={{ textAlign: 'center', padding: '36px', color: '#94A3B8' }}>
+                        No se encontraron registros de prensa que coincidan con la búsqueda.
+                      </td>
+                    </tr>
+                  ) : (
+                    filteredRegistrations.map(reg => (
+                      <tr key={reg.id} className="cce-row">
+                        <td className="cce-td" style={{ fontWeight: 700 }}>
+                          {reg.nombre}
+                        </td>
+                        <td className="cce-td" style={{ color: '#064E3B', fontWeight: 600 }}>
+                          {reg.medio}
+                        </td>
+                        <td className="cce-td" style={{ textAlign: 'center', fontWeight: 700 }}>
+                          {reg.asistentes}
+                        </td>
+                        <td className="cce-td" style={{ fontFamily: 'monospace' }}>
+                          {reg.whatsapp}
+                        </td>
+                        <td className="cce-td" style={{ color: '#64748B', fontSize: '12px' }}>
+                          {reg.fecha}
+                        </td>
+                        <td className="cce-td">
+                          <button
+                            type="button"
+                            className={`cce-status-badge ${reg.checkIn ? 'cce-status-checked' : 'cce-status-pending'}`}
+                            onClick={() => handleToggleCheckIn(reg)}
+                            disabled={checkInUpdatingId === reg.id}
+                            title="Check-in en Taquería La No 4"
+                            aria-label="Check-in en Taquería La No 4"
+                          >
+                            <CheckCircle2 size={13} />
+                            {reg.checkIn ? 'Acreditado en Taquería La No 4' : 'Check-in en Taquería La No 4'}
+                          </button>
+                        </td>
+                        <td className="cce-td" style={{ textAlign: 'right' }}>
+                          <a
+                            href={getWhatsAppOptionCLink(reg)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="cce-btn-wa-row"
+                            title="Enviar confirmación oficial Opción C con 1 clic"
+                          >
+                            <MessageSquare size={13} />
+                            Enviar WhatsApp
+                          </a>
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </main>
+      ) : (
+        /* PUBLIC ACCREDITATION LANDING VIEW */
+        <main>
+          {/* HERO SECTION */}
+          <section className="cce-hero">
+            <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
+              <div className="cce-hero-pill">
+                <Sparkles size={14} />
+                Desayuno y Rueda de Prensa Oficial
+              </div>
+
+              <h1 className="cce-hero-title">Acreditación Oficial de Prensa</h1>
+
+              <div className="cce-hero-subtitle">
+                Consejo Coordinador Empresarial de Ciudad Juárez | Empresario del Año 2026
+              </div>
+
+              <p className="cce-hero-description">
+                El Consejo Coordinador Empresarial de Ciudad Juárez convoca formalmente a los medios de comunicación y
+                reporteros de la frontera a la rueda de prensa y desayuno oficial con motivo de la presentación de los
+                galardones escultóricos de Pedro Francisco y la conferencia magistral de Carlos Loret de Mola.
+              </p>
+
+              <div className="cce-protocol-badge">
+                Preside el evento: <b>Mtro. Iván Lara</b> · Presidente del CCE Ciudad Juárez
+              </div>
+            </motion.div>
+
+            {/* EVENT DETAILS STRIP */}
+            <div className="cce-details-strip">
+              <div className="cce-detail-card">
+                <div className="cce-detail-icon">
+                  <Calendar size={20} />
+                </div>
+                <div>
+                  <div className="cce-detail-label">Fecha Oficial</div>
+                  <div className="cce-detail-value">Lunes 12 de Octubre, 2026</div>
+                  <div className="cce-detail-hint">Recepción y Desayuno</div>
+                </div>
+              </div>
+
+              <div className="cce-detail-card">
+                <div className="cce-detail-icon">
+                  <Clock size={20} />
+                </div>
+                <div>
+                  <div className="cce-detail-label">Horario Protocolario</div>
+                  <div className="cce-detail-value">9:00 a.m. en punto</div>
+                  <div className="cce-detail-hint">Rueda de Prensa y Preguntas</div>
+                </div>
+              </div>
+
+              <div className="cce-detail-card">
+                <div className="cce-detail-icon">
+                  <MapPin size={20} />
+                </div>
+                <div>
+                  <div className="cce-detail-label">Sede del Evento</div>
+                  <div className="cce-detail-value">Taquería La No 4</div>
+                  <div className="cce-detail-hint">Av. Paseo Triunfo 5617</div>
+                </div>
+              </div>
+            </div>
+
+            {/* NOTICE OF EXCLUSIVITY */}
+            <div className="cce-notice-pill">
+              <ShieldCheck size={16} flex-shrink={0} />
+              <span>Evento exclusivo para medios de comunicación, agencias y reporteros acreditados.</span>
+            </div>
+          </section>
+
+          {/* MAIN FORM / CONFIRMATION SECTION */}
+          <section className="cce-main-content">
+            <AnimatePresence mode="wait">
+              {confirmedRecord ? (
+                /* CONFIRMATION SCREEN (R3) */
+                <motion.div
+                  key="confirmation"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.35 }}
+                  className="cce-confirmation-card"
+                >
+                  <div className="cce-confirmed-seal">
+                    <CheckCircle2 size={16} />
+                    Asistencia Confirmada · Prensa Acreditada
+                  </div>
+
+                  <h2 className="cce-confirmed-title">¡Acreditación Registrada con Éxito!</h2>
+
+                  <p style={{ fontSize: '15px', color: '#475569', lineHeight: 1.5 }}>
+                    Hemos registrado tu acreditación de prensa para el desayuno y rueda de prensa del CCE Ciudad Juárez. Te
+                    esperamos puntualmente en Taquería La No 4.
+                  </p>
+
+                  <div className="cce-confirmed-summary">
+                    <div className="cce-summary-row">
+                      <span className="cce-summary-label">Periodista:</span>
+                      <span className="cce-summary-val">{confirmedRecord.nombre}</span>
+                    </div>
+                    <div className="cce-summary-row">
+                      <span className="cce-summary-label">Medio de Comunicación:</span>
+                      <span className="cce-summary-val">{confirmedRecord.medio}</span>
+                    </div>
+                    <div className="cce-summary-row">
+                      <span className="cce-summary-label">No. de Asistentes:</span>
+                      <span className="cce-summary-val">
+                        {confirmedRecord.asistentes} persona{String(confirmedRecord.asistentes) === '1' ? '' : 's'}
+                      </span>
+                    </div>
+                    <div className="cce-summary-row">
+                      <span className="cce-summary-label">WhatsApp Registrado:</span>
+                      <span className="cce-summary-val">{confirmedRecord.whatsapp}</span>
+                    </div>
+                    <div className="cce-summary-row">
+                      <span className="cce-summary-label">Fecha y Hora:</span>
+                      <span className="cce-summary-val">Lunes 12 de Octubre, 2026 · 9:00 a.m.</span>
+                    </div>
+                    <div className="cce-summary-row">
+                      <span className="cce-summary-label">Ubicación:</span>
+                      <span className="cce-summary-val">Taquería La No 4 (Av. Paseo Triunfo 5617)</span>
+                    </div>
+                  </div>
+
+                  {/* 3 ACTION BUTTONS (GOOGLE CALENDAR, APPLE CALENDAR, GOOGLE MAPS) */}
+                  <div className="cce-action-buttons-grid">
+                    <button type="button" className="cce-action-btn cce-btn-google" onClick={handleGoogleCalendar}>
+                      <Calendar size={18} />
+                      Añadir a Google Calendar
+                    </button>
+
+                    <button type="button" className="cce-action-btn cce-btn-apple" onClick={handleDownloadIcs}>
+                      <Download size={18} />
+                      Añadir a Apple Calendar (.ics)
+                    </button>
+
+                    <button type="button" className="cce-action-btn cce-btn-maps" onClick={handleGoogleMaps}>
+                      <MapPin size={18} />
+                      Cómo llegar (Google Maps)
+                      <ExternalLink size={14} />
+                    </button>
+                  </div>
+                </motion.div>
+              ) : (
+                /* ACCREDITATION FORM (R2) */
+                <motion.div
+                  key="form"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.3 }}
+                  className="cce-form-card"
+                >
+                  <div className="cce-form-header">
+                    <h2 className="cce-form-heading">Formulario de Acreditación</h2>
+                    <p className="cce-form-subheading">Completa tus datos para confirmar tu lugar y acceso de prensa</p>
+                  </div>
+
+                  <form onSubmit={handleSubmit} noValidate>
+                    {/* Campo 1: Nombre */}
+                    <div className="cce-form-group">
+                      <label className="cce-label" htmlFor="nombre">
+                        <span>
+                          Nombre Completo
+                          <span className="cce-required-dot">*</span>
+                        </span>
+                      </label>
+                      <input
+                        id="nombre"
+                        type="text"
+                        placeholder="Ej. Lic. Alejandro Morales"
+                        value={nombre}
+                        onChange={e => {
+                          setNombre(e.target.value);
+                          if (errors.nombre) setErrors({ ...errors, nombre: '' });
+                        }}
+                        className={`cce-input ${errors.nombre ? 'error' : ''}`}
+                        disabled={isSubmitting}
+                      />
+                      {errors.nombre && <span className="cce-field-error">{errors.nombre}</span>}
+                    </div>
+
+                    {/* Campo 2: Medio */}
+                    <div className="cce-form-group">
+                      <label className="cce-label" htmlFor="medio">
+                        <span>
+                          Medio de Comunicación
+                          <span className="cce-required-dot">*</span>
+                        </span>
+                      </label>
+                      <input
+                        id="medio"
+                        type="text"
+                        placeholder="Ej. El Diario de Juárez / Canal 44 / Radio Net / Digital"
+                        value={medio}
+                        onChange={e => {
+                          setMedio(e.target.value);
+                          if (errors.medio) setErrors({ ...errors, medio: '' });
+                        }}
+                        className={`cce-input ${errors.medio ? 'error' : ''}`}
+                        disabled={isSubmitting}
+                      />
+                      {errors.medio && <span className="cce-field-error">{errors.medio}</span>}
+                    </div>
+
+                    {/* Campo 3: Asistentes */}
+                    <div className="cce-form-group">
+                      <label className="cce-label">
+                        <span>
+                          No. de Asistentes
+                          <span className="cce-required-dot">*</span>
+                        </span>
+                        <span style={{ fontSize: '12px', color: '#64748B', fontWeight: 500 }}>
+                          Reporteros / Camarógrafos
+                        </span>
+                      </label>
+                      <div className="cce-attendees-grid">
+                        {['1', '2', '3', '4+'].map(val => (
+                          <button
+                            key={val}
+                            type="button"
+                            className={`cce-attendee-btn ${asistentes === val ? 'selected' : ''}`}
+                            onClick={() => {
+                              setAsistentes(val);
+                              if (errors.asistentes) setErrors({ ...errors, asistentes: '' });
+                            }}
+                            disabled={isSubmitting}
+                          >
+                            {val}
+                          </button>
+                        ))}
+                      </div>
+                      {errors.asistentes && <span className="cce-field-error">{errors.asistentes}</span>}
+                    </div>
+
+                    {/* Campo 4: WhatsApp */}
+                    <div className="cce-form-group">
+                      <label className="cce-label" htmlFor="whatsapp">
+                        <span>
+                          Teléfono de Contacto (WhatsApp)
+                          <span className="cce-required-dot">*</span>
+                        </span>
+                        <span style={{ fontSize: '12px', color: '#64748B', fontWeight: 500 }}>10 dígitos</span>
+                      </label>
+                      <input
+                        id="whatsapp"
+                        type="tel"
+                        placeholder="656 123 4567"
+                        maxLength={14}
+                        value={whatsapp}
+                        onChange={e => {
+                          setWhatsapp(e.target.value);
+                          if (errors.whatsapp) setErrors({ ...errors, whatsapp: '' });
+                        }}
+                        className={`cce-input ${errors.whatsapp ? 'error' : ''}`}
+                        disabled={isSubmitting}
+                      />
+                      {errors.whatsapp && <span className="cce-field-error">{errors.whatsapp}</span>}
+                    </div>
+
+                    {submitError && <div className="cce-submit-alert-error">{submitError}</div>}
+
+                    {/* Botón Confirmar Asistencia */}
+                    <button type="submit" className="cce-submit-btn" disabled={isSubmitting}>
+                      {isSubmitting ? (
+                        <>
+                          <div className="cce-spinner" />
+                          <span>Enviando acreditación...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send size={18} />
+                          <span>Confirmar Asistencia</span>
+                        </>
+                      )}
+                    </button>
+                  </form>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </section>
+        </main>
+      )}
+
+      {/* FOOTER */}
+      <footer className="cce-footer">
+        <div className="cce-footer-inner">
+          <div>
+            <b>Consejo Coordinador Empresarial de Ciudad Juárez</b> · Comité Organizador Empresario del Año 2026
+          </div>
+          <div className="cce-footer-sub">
+            Plataforma institucional de acreditación de prensa desarrollada y operada por <b>Apolograma Studio</b>.
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
