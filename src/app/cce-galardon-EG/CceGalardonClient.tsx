@@ -43,6 +43,11 @@ import {
   Eye,
   FileSpreadsheet,
   Award,
+  Activity,
+  Smartphone,
+  Laptop,
+  Radio,
+  CheckCheck,
 } from 'lucide-react';
 import { GalardonRegistration, GalardonTelemetryData } from '@/lib/cce-galardon-db';
 
@@ -179,6 +184,13 @@ export default function CceGalardonClient() {
   const toggleStatus = async (id: string, currentStatus: 'pendiente' | 'validado') => {
     const nextStatus = currentStatus === 'validado' ? 'pendiente' : 'validado';
     setUpdatingId(id);
+
+    // Optimistic UI update
+    setCrmRegistrations((prev) =>
+      prev.map((r) => (r.id === id ? { ...r, status: nextStatus } : r))
+    );
+    setSelectedComprobante((prev) => (prev && prev.id === id ? { ...prev, status: nextStatus } : prev));
+
     try {
       const res = await fetch('/api/cce-galardon-registro?admin=cce2026', {
         method: 'PATCH',
@@ -186,14 +198,23 @@ export default function CceGalardonClient() {
         body: JSON.stringify({ id, status: nextStatus }),
       });
       const data = await res.json();
-      if (res.ok && data.success) {
+      if (!res.ok || !data.success) {
+        // Rollback on error
         setCrmRegistrations((prev) =>
-          prev.map((r) => (r.id === id ? { ...r, status: nextStatus } : r))
+          prev.map((r) => (r.id === id ? { ...r, status: currentStatus } : r))
         );
+        setSelectedComprobante((prev) => (prev && prev.id === id ? { ...prev, status: currentStatus } : prev));
+        alert('Error al actualizar estatus en Firestore: ' + (data?.error || 'Desconocido'));
+      } else {
         fetchCrmData();
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error toggling status:', err);
+      setCrmRegistrations((prev) =>
+        prev.map((r) => (r.id === id ? { ...r, status: currentStatus } : r))
+      );
+      setSelectedComprobante((prev) => (prev && prev.id === id ? { ...prev, status: currentStatus } : prev));
+      alert('Error de conexión al actualizar estatus: ' + (err?.message || 'Error de red'));
     } finally {
       setUpdatingId(null);
     }
@@ -556,6 +577,7 @@ export default function CceGalardonClient() {
               overflow: hidden;
               z-index: 0;
               contain: paint;
+              clip-path: inset(0);
             }
 
             .cce-aurora-orb-1 {
@@ -1004,17 +1026,20 @@ export default function CceGalardonClient() {
               opacity: 0.95;
             }
 
-            /* Reusable Section Cintillos Layer (100vw Full-Bleed Edge-to-Edge) */
+            /* Reusable Section Cintillos Layer (Edge-to-Edge with strict overflow protection) */
             .cce-section-cintillos-fullbleed {
               position: absolute;
               top: 0;
               left: 50%;
               transform: translateX(-50%);
-              width: 100vw;
+              width: 100%;
+              max-width: 100vw;
               height: 100%;
               pointer-events: none;
               overflow: hidden;
               z-index: 1;
+              contain: paint;
+              clip-path: inset(0);
             }
 
             /* Section 01: Galardones Sash (Sweeping down-left across trophy cards) */
@@ -1141,6 +1166,8 @@ export default function CceGalardonClient() {
             .cce-reg-section,
             .cce-footer {
               position: relative;
+              overflow: hidden;
+              contain: paint;
             }
 
             @media (max-width: 768px) {
@@ -4382,12 +4409,148 @@ export default function CceGalardonClient() {
               color: #021812;
             }
 
+            /* Pulse Dot Animation */
+            @keyframes ccePulseGreen {
+              0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+              70% { transform: scale(1); box-shadow: 0 0 0 7px rgba(16, 185, 129, 0); }
+              100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+            }
+
+            .cce-pulse-dot {
+              width: 8px;
+              height: 8px;
+              border-radius: 50%;
+              background: #10B981;
+              display: inline-block;
+              box-shadow: 0 0 8px #10B981;
+              animation: ccePulseGreen 2s infinite ease-in-out;
+            }
+
+            /* Live Telemetry Radar Banner */
+            .cce-crm-telemetry-banner {
+              background: linear-gradient(135deg, rgba(2, 22, 16, 0.95) 0%, rgba(1, 14, 10, 0.98) 100%);
+              border: 1.5px solid rgba(16, 185, 129, 0.35);
+              border-radius: 20px;
+              padding: 20px;
+              margin-bottom: 24px;
+              box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+            }
+
+            .cce-crm-telemetry-header {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              flex-wrap: wrap;
+              gap: 10px;
+              margin-bottom: 16px;
+              padding-bottom: 12px;
+              border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+            }
+
+            .cce-crm-telemetry-title {
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              font-size: 13.5px;
+              font-weight: 800;
+              color: #FFFFFF;
+              letter-spacing: 0.02em;
+            }
+
+            .cce-crm-telemetry-status {
+              display: inline-flex;
+              align-items: center;
+              gap: 6px;
+              font-size: 11.5px;
+              color: #34D399;
+              background: rgba(16, 185, 129, 0.12);
+              border: 1px solid rgba(16, 185, 129, 0.3);
+              padding: 4px 10px;
+              border-radius: 9999px;
+            }
+
+            .cce-crm-telemetry-grid {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: 14px;
+            }
+
+            .cce-crm-telem-card {
+              background: rgba(2, 18, 13, 0.7);
+              border: 1px solid rgba(212, 175, 55, 0.2);
+              border-radius: 14px;
+              padding: 14px;
+            }
+
+            .cce-crm-telem-top {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              margin-bottom: 6px;
+            }
+
+            .cce-crm-telem-label {
+              font-size: 11px;
+              font-weight: 700;
+              text-transform: uppercase;
+              letter-spacing: 0.06em;
+              color: #94A3B8;
+            }
+
+            .cce-crm-telem-num {
+              font-size: 22px;
+              font-weight: 900;
+              color: #FFFFFF;
+              font-family: monospace;
+              margin-bottom: 2px;
+            }
+
+            .cce-crm-telem-sub {
+              font-size: 11px;
+              color: #64748B;
+            }
+
+            .cce-crm-telem-devices-card {
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+            }
+
+            .cce-crm-devices-pills {
+              display: flex;
+              align-items: center;
+              gap: 6px;
+              flex-wrap: wrap;
+              margin-bottom: 8px;
+            }
+
+            .cce-dev-pill {
+              display: inline-flex;
+              align-items: center;
+              gap: 4px;
+              font-size: 10.5px;
+              font-weight: 700;
+              padding: 2px 7px;
+              border-radius: 6px;
+              background: rgba(255, 255, 255, 0.08);
+              color: #CBD5E1;
+            }
+
+            .cce-crm-devices-bar {
+              height: 7px;
+              border-radius: 9999px;
+              overflow: hidden;
+              background: rgba(255, 255, 255, 0.1);
+              display: flex;
+              width: 100%;
+            }
+
             /* 4 Stat Metric Cards */
             .cce-crm-stats-grid {
               display: grid;
               grid-template-columns: repeat(4, 1fr);
               gap: 16px;
-              margin-bottom: 28px;
+              margin-bottom: 24px;
             }
 
             .cce-crm-stat-card {
@@ -4460,7 +4623,9 @@ export default function CceGalardonClient() {
               border: 1px solid rgba(212, 175, 55, 0.3);
               border-radius: 10px;
               padding: 8px 14px;
-              min-width: 260px;
+              min-width: 280px;
+              flex: 1;
+              max-width: 420px;
             }
 
             .cce-crm-search-input {
@@ -4496,7 +4661,11 @@ export default function CceGalardonClient() {
               border-color: #10B981;
             }
 
-            /* Table Container */
+            /* Table Container (Desktop) */
+            .cce-crm-desktop-table {
+              display: block;
+            }
+
             .cce-crm-table-card {
               background: linear-gradient(145deg, rgba(3, 26, 19, 0.92) 0%, rgba(2, 18, 14, 0.96) 100%);
               border: 1.5px solid rgba(212, 175, 55, 0.35);
@@ -4544,7 +4713,7 @@ export default function CceGalardonClient() {
               display: inline-flex;
               align-items: center;
               gap: 4px;
-              padding: 4px 10px;
+              padding: 5px 12px;
               border-radius: 9999px;
               font-size: 11px;
               font-weight: 800;
@@ -4606,36 +4775,177 @@ export default function CceGalardonClient() {
               color: #021812;
             }
 
+            /* Mobile Cards View (Touch-optimized) */
+            .cce-crm-mobile-cards {
+              display: none;
+              flex-direction: column;
+              gap: 14px;
+            }
+
+            .cce-crm-card {
+              background: linear-gradient(145deg, rgba(3, 26, 19, 0.95) 0%, rgba(2, 18, 14, 0.98) 100%);
+              border: 1.5px solid rgba(212, 175, 55, 0.35);
+              border-radius: 16px;
+              padding: 16px;
+              box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+            }
+
+            .cce-crm-card-header {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              padding-bottom: 12px;
+              border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+              margin-bottom: 12px;
+            }
+
+            .cce-crm-card-folio {
+              font-size: 14px;
+              font-weight: 900;
+              color: var(--cce-gold);
+              font-family: monospace;
+            }
+
+            .cce-crm-card-fecha {
+              font-size: 11px;
+              color: #94A3B8;
+              margin-top: 2px;
+            }
+
+            .cce-crm-card-body {
+              display: flex;
+              flex-direction: column;
+              gap: 10px;
+            }
+
+            .cce-crm-card-name {
+              font-size: 17px;
+              font-weight: 800;
+              color: #FFFFFF;
+            }
+
+            .cce-crm-card-role {
+              font-size: 12.5px;
+              color: #CBD5E1;
+            }
+
+            .cce-crm-card-loc {
+              font-size: 11px;
+              color: #94A3B8;
+            }
+
+            .cce-crm-card-details {
+              display: flex;
+              flex-direction: column;
+              gap: 6px;
+              background: rgba(2, 18, 13, 0.6);
+              border: 1px solid rgba(212, 175, 55, 0.15);
+              border-radius: 10px;
+              padding: 10px 12px;
+              margin: 4px 0;
+            }
+
+            .cce-crm-card-detail-item {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              font-size: 12px;
+            }
+
+            .cce-crm-card-detail-label {
+              color: #94A3B8;
+              font-weight: 600;
+            }
+
+            .cce-crm-card-detail-val {
+              color: #FFFFFF;
+              font-weight: 700;
+            }
+
+            .cce-crm-card-actions {
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 8px;
+              margin-top: 4px;
+            }
+
+            .cce-crm-card-btn {
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              gap: 6px;
+              padding: 10px 12px;
+              border-radius: 10px;
+              font-size: 12px;
+              font-weight: 700;
+              text-decoration: none;
+              cursor: pointer;
+              transition: all 0.2s ease;
+              text-align: center;
+            }
+
+            .cce-crm-btn-doc {
+              background: rgba(212, 175, 55, 0.15);
+              border: 1px solid rgba(212, 175, 55, 0.35);
+              color: var(--cce-gold);
+            }
+
+            .cce-crm-btn-doc:hover {
+              background: var(--cce-gold);
+              color: #021812;
+            }
+
+            .cce-crm-btn-wa {
+              background: rgba(16, 185, 129, 0.2);
+              border: 1px solid #10B981;
+              color: #34D399;
+            }
+
+            .cce-crm-btn-wa:hover {
+              background: #10B981;
+              color: #021812;
+            }
+
+            .cce-crm-empty {
+              text-align: center;
+              padding: 36px 20px;
+              background: rgba(2, 22, 16, 0.7);
+              border: 1px solid rgba(212, 175, 55, 0.25);
+              border-radius: 16px;
+              color: #94A3B8;
+              font-size: 13.5px;
+            }
+
             /* Receipt Preview Modal */
             .cce-modal-overlay {
               position: fixed;
               inset: 0;
-              background: rgba(0, 0, 0, 0.85);
-              backdrop-filter: blur(8px);
+              background: rgba(0, 0, 0, 0.88);
+              backdrop-filter: blur(10px);
               z-index: 2000;
               display: flex;
               align-items: center;
               justify-content: center;
-              padding: 20px;
+              padding: 16px;
             }
 
             .cce-modal-card {
               background: #021B14;
               border: 2px solid var(--cce-gold);
               border-radius: 20px;
-              max-width: 600px;
+              max-width: 640px;
               width: 100%;
-              max-height: 90vh;
+              max-height: 92vh;
               overflow-y: auto;
-              padding: 26px;
-              box-shadow: 0 25px 70px rgba(0, 0, 0, 0.9);
+              padding: 24px;
+              box-shadow: 0 25px 70px rgba(0, 0, 0, 0.95);
             }
 
             .cce-modal-header {
               display: flex;
-              align-items: center;
+              align-items: flex-start;
               justify-content: space-between;
-              margin-bottom: 18px;
+              margin-bottom: 16px;
               padding-bottom: 12px;
               border-bottom: 1px solid rgba(212, 175, 55, 0.3);
             }
@@ -4644,7 +4954,7 @@ export default function CceGalardonClient() {
               font-size: 18px;
               font-weight: 800;
               color: #FFFFFF;
-              margin: 0;
+              margin: 4px 0 0 0;
             }
 
             .cce-modal-close-btn {
@@ -4653,16 +4963,100 @@ export default function CceGalardonClient() {
               color: #94A3B8;
               cursor: pointer;
               padding: 4px;
+              border-radius: 6px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
             }
 
             .cce-modal-close-btn:hover {
               color: #FFFFFF;
+              background: rgba(255, 255, 255, 0.1);
             }
 
-            /* Responsive Adjustments (Sprint 4) */
+            .cce-modal-meta-grid {
+              display: grid;
+              grid-template-columns: repeat(2, 1fr);
+              gap: 10px;
+              margin-bottom: 16px;
+              background: rgba(2, 18, 13, 0.6);
+              border: 1px solid rgba(212, 175, 55, 0.2);
+              border-radius: 12px;
+              padding: 12px;
+            }
+
+            .cce-modal-meta-box {
+              display: flex;
+              flex-direction: column;
+              gap: 2px;
+            }
+
+            .cce-modal-meta-lbl {
+              font-size: 11px;
+              color: #94A3B8;
+              font-weight: 600;
+            }
+
+            .cce-modal-meta-val {
+              font-size: 13px;
+              color: #FFFFFF;
+              font-weight: 700;
+            }
+
+            .cce-modal-preview-box {
+              border: 1px solid rgba(212, 175, 55, 0.3);
+              border-radius: 12px;
+              overflow: hidden;
+              max-height: 420px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background: #010E0A;
+              padding: 10px;
+            }
+
+            .cce-modal-preview-fallback {
+              padding: 32px 20px;
+              text-align: center;
+              background: rgba(2, 20, 15, 0.8);
+              border: 1px dashed rgba(212, 175, 55, 0.3);
+              border-radius: 12px;
+              color: #94A3B8;
+            }
+
+            .cce-modal-actions-row {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              flex-wrap: wrap;
+              gap: 10px;
+              margin-top: 20px;
+              padding-top: 14px;
+              border-top: 1px solid rgba(212, 175, 55, 0.2);
+            }
+
+            /* Responsive Adjustments (Sprint 4 & CMS Audit) */
             @media (max-width: 900px) {
+              .cce-crm-telemetry-grid {
+                grid-template-columns: repeat(2, 1fr);
+              }
+
               .cce-crm-stats-grid {
                 grid-template-columns: repeat(2, 1fr);
+              }
+            }
+
+            @media (max-width: 768px) {
+              .cce-crm-desktop-table {
+                display: none;
+              }
+
+              .cce-crm-mobile-cards {
+                display: flex;
+              }
+
+              .cce-modal-meta-grid {
+                grid-template-columns: 1fr;
               }
             }
 
@@ -4683,8 +5077,93 @@ export default function CceGalardonClient() {
                 grid-template-columns: 1fr;
               }
 
-              .cce-crm-stats-grid {
+              .cce-crm-banner {
+                padding: 0 10px;
+                font-size: 11px;
+              }
+
+              .cce-crm-banner-left span:last-child {
+                display: none;
+              }
+
+              .cce-crm-banner-left::after {
+                content: "Admin CCE 2026";
+                font-weight: 800;
+                font-size: 11px;
+                color: #FFFFFF;
+              }
+
+              .cce-crm-view-btn {
+                padding: 3px 8px;
+                font-size: 10px;
+              }
+
+              .cce-crm-view-container {
+                padding: 0 12px;
+                margin-top: 50px;
+                overflow-x: hidden;
+              }
+
+              .cce-crm-header-title {
+                font-size: 21px;
+                line-height: 1.25;
+                word-break: break-word;
+              }
+
+              .cce-crm-header-sub {
+                font-size: 12px;
+                line-height: 1.4;
+              }
+
+              .cce-crm-top-bar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+              }
+
+              .cce-crm-top-actions {
+                width: 100%;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+              }
+
+              .cce-crm-action-btn {
+                width: 100%;
+                justify-content: center;
+                text-align: center;
+                font-size: 11.5px;
+                padding: 8px 12px;
+              }
+
+              .cce-crm-telemetry-banner {
+                padding: 14px;
+                border-radius: 16px;
+              }
+
+              .cce-crm-telemetry-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+              }
+
+              .cce-crm-telemetry-title {
+                font-size: 12px;
+                line-height: 1.35;
+              }
+
+              .cce-crm-telemetry-status {
+                font-size: 10.5px;
+                padding: 3px 8px;
+              }
+
+              .cce-crm-telemetry-grid {
                 grid-template-columns: 1fr;
+              }
+
+              .cce-crm-stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
               }
 
               .cce-crm-controls {
@@ -4694,10 +5173,73 @@ export default function CceGalardonClient() {
 
               .cce-crm-search-box {
                 min-width: 100%;
+                max-width: 100%;
               }
 
               .cce-crm-filters {
                 flex-wrap: wrap;
+                justify-content: stretch;
+              }
+
+              .cce-crm-filter-pill {
+                flex: 1;
+                text-align: center;
+              }
+
+              .cce-crm-card {
+                padding: 14px;
+              }
+
+              .cce-crm-card-name {
+                font-size: 15px;
+              }
+
+              .cce-crm-card-detail-item {
+                display: flex;
+                align-items: baseline;
+                justify-content: space-between;
+                gap: 8px;
+                font-size: 11.5px;
+              }
+
+              .cce-crm-card-detail-val {
+                text-align: right;
+                word-break: break-word;
+                max-width: 60%;
+              }
+
+              .cce-crm-card-actions {
+                grid-template-columns: 1fr;
+                gap: 8px;
+              }
+
+              .cce-modal-actions-row {
+                flex-direction: column;
+                align-items: stretch;
+              }
+
+              .cce-modal-actions-row > div {
+                width: 100%;
+              }
+
+              .cce-modal-actions-row .cce-crm-action-btn {
+                width: 100%;
+                justify-content: center;
+              }
+            }
+
+            @media (max-width: 480px) {
+              .cce-crm-stats-grid {
+                grid-template-columns: 1fr;
+              }
+
+              .cce-crm-view-container {
+                padding: 0 10px;
+                margin-top: 48px;
+              }
+
+              .cce-modal-card {
+                padding: 16px;
               }
             }
           `,
@@ -6283,6 +6825,86 @@ export default function CceGalardonClient() {
             </div>
           </div>
 
+          {/* Live Telemetry Radar Banner (Cloud Firestore) */}
+          <div className="cce-crm-telemetry-banner">
+            <div className="cce-crm-telemetry-header">
+              <div className="cce-crm-telemetry-title">
+                <span className="cce-pulse-dot" />
+                <span>Radar de Tráfico & Telemetría en Vivo · Cloud Firestore</span>
+              </div>
+              <div className="cce-crm-telemetry-status">
+                <Activity size={13} color="#10B981" />
+                <span>Sincronización directa (tecza-admin-26)</span>
+              </div>
+            </div>
+
+            <div className="cce-crm-telemetry-grid">
+              <div className="cce-crm-telem-card">
+                <div className="cce-crm-telem-top">
+                  <span className="cce-crm-telem-label">Visitas Totales</span>
+                  <Eye size={15} color="#D4AF37" />
+                </div>
+                <div className="cce-crm-telem-num">{telemetry?.totalVisits ?? 0}</div>
+                <div className="cce-crm-telem-sub">Lecturas de radar en landing</div>
+              </div>
+
+              <div className="cce-crm-telem-card">
+                <div className="cce-crm-telem-top">
+                  <span className="cce-crm-telem-label">Visitantes Únicos</span>
+                  <Users size={15} color="#38BDF8" />
+                </div>
+                <div className="cce-crm-telem-num">{telemetry?.uniqueVisits ?? 0}</div>
+                <div className="cce-crm-telem-sub">IPs únicas registradas</div>
+              </div>
+
+              <div className="cce-crm-telem-card">
+                <div className="cce-crm-telem-top">
+                  <span className="cce-crm-telem-label">Tasa de Conversión</span>
+                  <TrendingUp size={15} color="#10B981" />
+                </div>
+                <div className="cce-crm-telem-num" style={{ color: '#34D399' }}>
+                  {telemetry?.conversionRate ?? '0%'}
+                </div>
+                <div className="cce-crm-telem-sub">Comprobantes / Visitas</div>
+              </div>
+
+              <div className="cce-crm-telem-card cce-crm-telem-devices-card">
+                <div className="cce-crm-telem-top">
+                  <span className="cce-crm-telem-label">Desglose de Dispositivos</span>
+                  <Laptop size={15} color="#F59E0B" />
+                </div>
+                <div className="cce-crm-devices-pills">
+                  <span className="cce-dev-pill"><Smartphone size={12} /> iOS: {telemetry?.devices?.ios ?? 0}</span>
+                  <span className="cce-dev-pill"><Smartphone size={12} /> Android: {telemetry?.devices?.android ?? 0}</span>
+                  <span className="cce-dev-pill"><Laptop size={12} /> PC/Mac: {telemetry?.devices?.desktop ?? 0}</span>
+                </div>
+                <div className="cce-crm-devices-bar">
+                  <div
+                    style={{
+                      width: `${Math.round(((telemetry?.devices?.ios || 0) / Math.max(1, (telemetry?.totalVisits || 1))) * 100)}%`,
+                      background: '#38BDF8',
+                    }}
+                    title={`iOS: ${telemetry?.devices?.ios || 0}`}
+                  />
+                  <div
+                    style={{
+                      width: `${Math.round(((telemetry?.devices?.android || 0) / Math.max(1, (telemetry?.totalVisits || 1))) * 100)}%`,
+                      background: '#34D399',
+                    }}
+                    title={`Android: ${telemetry?.devices?.android || 0}`}
+                  />
+                  <div
+                    style={{
+                      width: `${Math.round(((telemetry?.devices?.desktop || 0) / Math.max(1, (telemetry?.totalVisits || 1))) * 100)}%`,
+                      background: '#F59E0B',
+                    }}
+                    title={`Desktop: ${telemetry?.devices?.desktop || 0}`}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* 4 Key Stat Cards */}
           <div className="cce-crm-stats-grid">
             <div className="cce-crm-stat-card">
@@ -6348,7 +6970,7 @@ export default function CceGalardonClient() {
               <Search size={16} color="#94A3B8" />
               <input
                 type="text"
-                placeholder="Buscar por titular, empresa o folio..."
+                placeholder="Buscar por titular, empresa, folio o WhatsApp..."
                 value={crmSearch}
                 onChange={(e) => setCrmSearch(e.target.value)}
                 className="cce-crm-search-input"
@@ -6380,146 +7002,268 @@ export default function CceGalardonClient() {
             </div>
           </div>
 
-          {/* Registrations Table */}
-          <div className="cce-crm-table-card">
-            <div className="cce-crm-table-scroll">
-              <table className="cce-crm-table">
-                <thead>
-                  <tr>
-                    <th>Folio & Fecha</th>
-                    <th>Titular & Cargo</th>
-                    <th>Empresa</th>
-                    <th>Contacto</th>
-                    <th>Boletos & Total</th>
-                    <th>Comprobante</th>
-                    <th>Factura CFDI</th>
-                    <th>Estatus SPEI</th>
-                    <th>Acción</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {crmRegistrations
-                    .filter((reg) => {
-                      if (crmFilter === 'pendiente') return reg.status !== 'validado';
-                      if (crmFilter === 'validado') return reg.status === 'validado';
-                      return true;
-                    })
-                    .filter((reg) => {
-                      if (!crmSearch.trim()) return true;
-                      const q = crmSearch.toLowerCase();
-                      return (
-                        reg.folio?.toLowerCase().includes(q) ||
-                        reg.nombre?.toLowerCase().includes(q) ||
-                        reg.empresa?.toLowerCase().includes(q) ||
-                        reg.whatsapp?.includes(q)
-                      );
-                    })
-                    .map((reg) => (
-                      <tr key={reg.id}>
-                        <td>
-                          <div style={{ fontWeight: 800, color: 'var(--cce-gold)', fontFamily: 'monospace' }}>
-                            {reg.folio}
-                          </div>
-                          <div style={{ fontSize: '11px', color: '#94A3B8' }}>{reg.fecha}</div>
-                        </td>
-                        <td>
-                          <div style={{ fontWeight: 700, color: '#FFFFFF' }}>{reg.nombre}</div>
-                          <div style={{ fontSize: '11.5px', color: '#CBD5E1' }}>{reg.cargo}</div>
-                        </td>
-                        <td>
-                          <div style={{ fontWeight: 700 }}>{reg.empresa}</div>
-                          <div style={{ fontSize: '11px', color: '#94A3B8' }}>{reg.location}</div>
-                        </td>
-                        <td>
-                          <div>
+          {/* Desktop Table View (>= 768px) */}
+          <div className="cce-crm-desktop-table">
+            <div className="cce-crm-table-card">
+              <div className="cce-crm-table-scroll">
+                <table className="cce-crm-table">
+                  <thead>
+                    <tr>
+                      <th>Folio & Fecha</th>
+                      <th>Titular & Cargo</th>
+                      <th>Empresa</th>
+                      <th>Contacto</th>
+                      <th>Boletos & Total</th>
+                      <th>Comprobante</th>
+                      <th>Factura CFDI</th>
+                      <th>Estatus SPEI</th>
+                      <th>Acción</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {crmRegistrations
+                      .filter((reg) => {
+                        if (crmFilter === 'pendiente') return reg.status !== 'validado';
+                        if (crmFilter === 'validado') return reg.status === 'validado';
+                        return true;
+                      })
+                      .filter((reg) => {
+                        if (!crmSearch.trim()) return true;
+                        const q = crmSearch.toLowerCase();
+                        return (
+                          reg.folio?.toLowerCase().includes(q) ||
+                          reg.nombre?.toLowerCase().includes(q) ||
+                          reg.empresa?.toLowerCase().includes(q) ||
+                          reg.whatsapp?.includes(q) ||
+                          reg.email?.toLowerCase().includes(q)
+                        );
+                      })
+                      .map((reg) => (
+                        <tr key={reg.id}>
+                          <td>
+                            <div style={{ fontWeight: 800, color: 'var(--cce-gold)', fontFamily: 'monospace' }}>
+                              {reg.folio}
+                            </div>
+                            <div style={{ fontSize: '11px', color: '#94A3B8' }}>{reg.fecha}</div>
+                          </td>
+                          <td>
+                            <div style={{ fontWeight: 700, color: '#FFFFFF' }}>{reg.nombre}</div>
+                            <div style={{ fontSize: '11.5px', color: '#CBD5E1' }}>{reg.cargo}</div>
+                          </td>
+                          <td>
+                            <div style={{ fontWeight: 700 }}>{reg.empresa}</div>
+                            <div style={{ fontSize: '11px', color: '#94A3B8' }}>{reg.location}</div>
+                          </td>
+                          <td>
+                            <div>
+                              <a
+                                href={`https://wa.me/52${reg.whatsapp}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{ color: '#34D399', textDecoration: 'none', fontWeight: 700 }}
+                              >
+                                📱 {reg.whatsapp}
+                              </a>
+                            </div>
+                            <div style={{ fontSize: '11.5px', color: '#94A3B8' }}>{reg.email}</div>
+                          </td>
+                          <td>
+                            <div style={{ fontWeight: 800 }}>
+                              {reg.boletos} {reg.boletos === 1 ? 'Boleto' : 'Boletos'}
+                            </div>
+                            <div style={{ color: 'var(--cce-gold-light)', fontWeight: 800, fontFamily: 'monospace' }}>
+                              ${reg.totalMonto?.toLocaleString('es-MX')} MXN
+                            </div>
+                          </td>
+                          <td>
+                            <button
+                              type="button"
+                              onClick={() => setSelectedComprobante(reg)}
+                              className="cce-crm-doc-btn"
+                            >
+                              <Eye size={12} />
+                              <span>Ver Archivo</span>
+                            </button>
+                          </td>
+                          <td>
+                            {reg.requiereFactura ? (
+                              <span style={{ fontSize: '11.5px', color: '#6EE7B7' }}>
+                                ✓ RFC: <code>{reg.facturaData?.rfc}</code>
+                              </span>
+                            ) : (
+                              <span style={{ fontSize: '11.5px', color: '#64748B' }}>
+                                Sin factura
+                              </span>
+                            )}
+                          </td>
+                          <td>
+                            <button
+                              type="button"
+                              disabled={updatingId === reg.id}
+                              onClick={() => toggleStatus(reg.id, reg.status)}
+                              className={`cce-crm-badge-status ${
+                                reg.status === 'validado'
+                                  ? 'cce-status-validado'
+                                  : 'cce-status-pendiente'
+                              }`}
+                            >
+                              {reg.status === 'validado' ? (
+                                <>
+                                  <CheckCircle2 size={12} />
+                                  <span>Validado</span>
+                                </>
+                              ) : (
+                                <>
+                                  <Clock size={12} />
+                                  <span>Pendiente</span>
+                                </>
+                              )}
+                            </button>
+                          </td>
+                          <td>
                             <a
-                              href={`https://wa.me/52${reg.whatsapp}`}
+                              href={getCrmWhatsAppUrl(reg)}
                               target="_blank"
                               rel="noopener noreferrer"
-                              style={{ color: '#34D399', textDecoration: 'none' }}
+                              className="cce-crm-wa-btn"
+                              title="Enviar WhatsApp de confirmación oficial"
                             >
-                              📱 {reg.whatsapp}
+                              <MessageSquare size={13} />
+                              <span>Confirmar WA</span>
                             </a>
-                          </div>
-                          <div style={{ fontSize: '11.5px', color: '#94A3B8' }}>{reg.email}</div>
-                        </td>
-                        <td>
-                          <div style={{ fontWeight: 800 }}>
-                            {reg.boletos} {reg.boletos === 1 ? 'Boleto' : 'Boletos'}
-                          </div>
-                          <div style={{ color: 'var(--cce-gold-light)', fontWeight: 800, fontFamily: 'monospace' }}>
-                            ${reg.totalMonto?.toLocaleString('es-MX')} MXN
-                          </div>
-                        </td>
-                        <td>
-                          <button
-                            type="button"
-                            onClick={() => setSelectedComprobante(reg)}
-                            className="cce-crm-doc-btn"
-                          >
-                            <Eye size={12} />
-                            <span>Ver Archivo</span>
-                          </button>
-                        </td>
-                        <td>
-                          {reg.requiereFactura ? (
-                            <span style={{ fontSize: '11.5px', color: '#6EE7B7' }}>
-                              ✓ RFC: <code>{reg.facturaData?.rfc}</code>
-                            </span>
-                          ) : (
-                            <span style={{ fontSize: '11.5px', color: '#64748B' }}>
-                              Sin factura
-                            </span>
-                          )}
-                        </td>
-                        <td>
-                          <button
-                            type="button"
-                            disabled={updatingId === reg.id}
-                            onClick={() => toggleStatus(reg.id, reg.status)}
-                            className={`cce-crm-badge-status ${
-                              reg.status === 'validado'
-                                ? 'cce-status-validado'
-                                : 'cce-status-pendiente'
-                            }`}
-                          >
-                            {reg.status === 'validado' ? (
-                              <>
-                                <CheckCircle2 size={12} />
-                                <span>Validado</span>
-                              </>
-                            ) : (
-                              <>
-                                <Clock size={12} />
-                                <span>Pendiente</span>
-                              </>
-                            )}
-                          </button>
-                        </td>
-                        <td>
-                          <a
-                            href={getCrmWhatsAppUrl(reg)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="cce-crm-wa-btn"
-                            title="Enviar WhatsApp de confirmación oficial"
-                          >
-                            <MessageSquare size={13} />
-                            <span>Confirmar WA</span>
-                          </a>
+                          </td>
+                        </tr>
+                      ))}
+                    {crmRegistrations.length === 0 && (
+                      <tr>
+                        <td colSpan={9} style={{ textAlign: 'center', padding: '36px', color: '#94A3B8' }}>
+                          No hay registros de acreditación capturados hasta el momento.
                         </td>
                       </tr>
-                    ))}
-                  {crmRegistrations.length === 0 && (
-                    <tr>
-                      <td colSpan={9} style={{ textAlign: 'center', padding: '36px', color: '#94A3B8' }}>
-                        No hay registros de acreditación capturados hasta el momento.
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
+                    )}
+                  </tbody>
+                </table>
+              </div>
             </div>
+          </div>
+
+          {/* Mobile Cards View (< 768px) */}
+          <div className="cce-crm-mobile-cards">
+            {crmRegistrations
+              .filter((reg) => {
+                if (crmFilter === 'pendiente') return reg.status !== 'validado';
+                if (crmFilter === 'validado') return reg.status === 'validado';
+                return true;
+              })
+              .filter((reg) => {
+                if (!crmSearch.trim()) return true;
+                const q = crmSearch.toLowerCase();
+                return (
+                  reg.folio?.toLowerCase().includes(q) ||
+                  reg.nombre?.toLowerCase().includes(q) ||
+                  reg.empresa?.toLowerCase().includes(q) ||
+                  reg.whatsapp?.includes(q) ||
+                  reg.email?.toLowerCase().includes(q)
+                );
+              })
+              .map((reg) => (
+                <div key={reg.id} className="cce-crm-card">
+                  <div className="cce-crm-card-header">
+                    <div>
+                      <div className="cce-crm-card-folio">{reg.folio}</div>
+                      <div className="cce-crm-card-fecha">{reg.fecha}</div>
+                    </div>
+                    <button
+                      type="button"
+                      disabled={updatingId === reg.id}
+                      onClick={() => toggleStatus(reg.id, reg.status)}
+                      className={`cce-crm-badge-status ${
+                        reg.status === 'validado' ? 'cce-status-validado' : 'cce-status-pendiente'
+                      }`}
+                    >
+                      {reg.status === 'validado' ? (
+                        <>
+                          <CheckCircle2 size={12} />
+                          <span>Validado</span>
+                        </>
+                      ) : (
+                        <>
+                          <Clock size={12} />
+                          <span>Pendiente</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  <div className="cce-crm-card-body">
+                    <div className="cce-crm-card-name">{reg.nombre}</div>
+                    <div className="cce-crm-card-role">
+                      {reg.cargo} · <strong style={{ color: '#F1F5F9' }}>{reg.empresa}</strong>
+                    </div>
+                    <div className="cce-crm-card-loc">{reg.location}</div>
+
+                    <div className="cce-crm-card-details">
+                      <div className="cce-crm-card-detail-item">
+                        <span className="cce-crm-card-detail-label">Modalidad:</span>
+                        <span className="cce-crm-card-detail-val">
+                          {reg.boletos} {reg.boletos === 1 ? 'Boleto' : 'Boletos'} ({reg.tipoBoleto === 'mesa' ? 'Mesa 8 Pax' : 'Individual'})
+                        </span>
+                      </div>
+                      <div className="cce-crm-card-detail-item">
+                        <span className="cce-crm-card-detail-label">Total Monto:</span>
+                        <span className="cce-crm-card-detail-val" style={{ color: 'var(--cce-gold)', fontWeight: 800 }}>
+                          ${reg.totalMonto?.toLocaleString('es-MX')} MXN
+                        </span>
+                      </div>
+                      <div className="cce-crm-card-detail-item">
+                        <span className="cce-crm-card-detail-label">Contacto:</span>
+                        <span className="cce-crm-card-detail-val">
+                          <a
+                            href={`https://wa.me/52${reg.whatsapp}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{ color: '#34D399', textDecoration: 'none', fontWeight: 700 }}
+                          >
+                            📱 {reg.whatsapp}
+                          </a>
+                        </span>
+                      </div>
+                      <div className="cce-crm-card-detail-item">
+                        <span className="cce-crm-card-detail-label">Factura:</span>
+                        <span className="cce-crm-card-detail-val">
+                          {reg.requiereFactura ? `✓ RFC: ${reg.facturaData?.rfc || ''}` : 'Sin factura'}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="cce-crm-card-actions">
+                      <button
+                        type="button"
+                        onClick={() => setSelectedComprobante(reg)}
+                        className="cce-crm-card-btn cce-crm-btn-doc"
+                      >
+                        <Eye size={14} />
+                        <span>Ver Comprobante SPEI</span>
+                      </button>
+
+                      <a
+                        href={getCrmWhatsAppUrl(reg)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="cce-crm-card-btn cce-crm-btn-wa"
+                      >
+                        <MessageSquare size={14} />
+                        <span>Confirmar por WhatsApp</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            {crmRegistrations.length === 0 && (
+              <div className="cce-crm-empty">
+                No hay registros de acreditación capturados hasta el momento.
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -6529,9 +7273,14 @@ export default function CceGalardonClient() {
         <div className="cce-modal-overlay" onClick={() => setSelectedComprobante(null)}>
           <div className="cce-modal-card" onClick={(e) => e.stopPropagation()}>
             <div className="cce-modal-header">
-              <h3 className="cce-modal-title">
-                Comprobante SPEI · {selectedComprobante.folio}
-              </h3>
+              <div>
+                <div style={{ fontSize: '11px', color: 'var(--cce-gold)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                  Auditoría de Comprobante Bancario
+                </div>
+                <h3 className="cce-modal-title">
+                  {selectedComprobante.folio} · {selectedComprobante.nombre}
+                </h3>
+              </div>
               <button
                 type="button"
                 onClick={() => setSelectedComprobante(null)}
@@ -6542,50 +7291,130 @@ export default function CceGalardonClient() {
               </button>
             </div>
 
-            <div style={{ marginBottom: '16px', fontSize: '13.5px', color: '#E2E8F0', lineHeight: 1.6 }}>
-              <div><strong>Titular:</strong> {selectedComprobante.nombre} ({selectedComprobante.empresa})</div>
-              <div><strong>Monto:</strong> ${selectedComprobante.totalMonto?.toLocaleString('es-MX')} MXN ({selectedComprobante.boletos} boletos)</div>
-              <div><strong>Archivo:</strong> {selectedComprobante.comprobanteFileName}</div>
-              <div><strong>Estatus:</strong> {selectedComprobante.status === 'validado' ? '✓ Validado' : '⏳ Pendiente de validación'}</div>
+            <div className="cce-modal-meta-grid">
+              <div className="cce-modal-meta-box">
+                <span className="cce-modal-meta-lbl">Empresa & Cargo:</span>
+                <span className="cce-modal-meta-val">{selectedComprobante.empresa} ({selectedComprobante.cargo})</span>
+              </div>
+              <div className="cce-modal-meta-box">
+                <span className="cce-modal-meta-lbl">Inversión & Boletos:</span>
+                <span className="cce-modal-meta-val" style={{ color: 'var(--cce-gold-light)', fontWeight: 800 }}>
+                  ${selectedComprobante.totalMonto?.toLocaleString('es-MX')} MXN · {selectedComprobante.boletos} boletos
+                </span>
+              </div>
+              <div className="cce-modal-meta-box">
+                <span className="cce-modal-meta-lbl">Archivo Registrado:</span>
+                <span className="cce-modal-meta-val" style={{ fontFamily: 'monospace', fontSize: '12px' }}>
+                  {selectedComprobante.comprobanteFileName}
+                </span>
+              </div>
+              <div className="cce-modal-meta-box">
+                <span className="cce-modal-meta-lbl">Estatus SPEI Actual:</span>
+                <span
+                  className="cce-modal-meta-val"
+                  style={{
+                    color: selectedComprobante.status === 'validado' ? '#34D399' : '#FCD34D',
+                    fontWeight: 800,
+                  }}
+                >
+                  {selectedComprobante.status === 'validado' ? '✓ Validado Oficialmente' : '⏳ Pendiente de Verificación'}
+                </span>
+              </div>
             </div>
 
-            {selectedComprobante.comprobanteUrl ? (
-              <div style={{ border: '1px solid rgba(212, 175, 55, 0.3)', borderRadius: '12px', overflow: 'hidden', maxHeight: '450px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#010E0A' }}>
+            {selectedComprobante.comprobanteUrl &&
+            !selectedComprobante.comprobanteFileName?.toLowerCase().endsWith('.pdf') &&
+            !selectedComprobante.comprobanteUrl.startsWith('data:application/pdf') ? (
+              <div className="cce-modal-preview-box">
                 <img
                   src={selectedComprobante.comprobanteUrl}
                   alt={`Comprobante ${selectedComprobante.folio}`}
-                  style={{ maxWidth: '100%', maxHeight: '450px', objectFit: 'contain' }}
+                  style={{ maxWidth: '100%', maxHeight: '420px', objectFit: 'contain' }}
                 />
               </div>
+            ) : selectedComprobante.comprobanteUrl &&
+              (selectedComprobante.comprobanteFileName?.toLowerCase().endsWith('.pdf') ||
+                selectedComprobante.comprobanteUrl.startsWith('data:application/pdf')) ? (
+              <div className="cce-modal-preview-fallback">
+                <FileText size={48} color="#D4AF37" style={{ margin: '0 auto 12px auto' }} />
+                <div style={{ color: '#F8FAFC', fontWeight: 800, fontSize: '15px' }}>
+                  Documento Bancario Oficial (SPEI)
+                </div>
+                <div style={{ color: '#CBD5E1', fontSize: '12px', marginTop: '4px' }}>
+                  <code>{selectedComprobante.comprobanteFileName}</code>
+                </div>
+                <div style={{ marginTop: '16px' }}>
+                  <a
+                    href={selectedComprobante.comprobanteUrl}
+                    download={selectedComprobante.comprobanteFileName || 'comprobante_spei.pdf'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cce-crm-action-btn"
+                    style={{ background: 'rgba(212, 175, 55, 0.25)', borderColor: 'var(--cce-gold)' }}
+                  >
+                    <Download size={14} />
+                    <span>Descargar Comprobante PDF</span>
+                  </a>
+                </div>
+              </div>
             ) : (
-              <div style={{ padding: '30px', textAlign: 'center', background: 'rgba(2, 20, 15, 0.8)', borderRadius: '12px', color: '#94A3B8' }}>
-                <FileText size={40} color="#D4AF37" style={{ margin: '0 auto 12px auto' }} />
-                <div>Archivo: <code>{selectedComprobante.comprobanteFileName}</code></div>
-                <div style={{ fontSize: '12px', marginTop: '6px' }}>
-                  Documento PDF o archivo físico almacenado en el servidor institucional.
+              <div className="cce-modal-preview-fallback">
+                <FileText size={44} color="#D4AF37" style={{ margin: '0 auto 12px auto' }} />
+                <div style={{ color: '#F8FAFC', fontWeight: 700 }}>
+                  Archivo Adjunto: <code>{selectedComprobante.comprobanteFileName}</code>
+                </div>
+                <div style={{ fontSize: '12px', marginTop: '6px', color: '#94A3B8' }}>
+                  Comprobante digital transmitido mediante la plataforma institucional del CCE Juárez.
                 </div>
               </div>
             )}
 
-            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px', gap: '10px' }}>
-              <button
-                type="button"
-                onClick={() => {
-                  toggleStatus(selectedComprobante.id, selectedComprobante.status);
-                  setSelectedComprobante(null);
-                }}
+            <div className="cce-modal-actions-row">
+              <a
+                href={getCrmWhatsAppUrl(selectedComprobante)}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="cce-crm-action-btn"
-                style={{ background: selectedComprobante.status === 'validado' ? 'rgba(245, 158, 11, 0.3)' : 'rgba(16, 185, 129, 0.3)', borderColor: selectedComprobante.status === 'validado' ? '#F59E0B' : '#10B981' }}
+                style={{ background: 'rgba(16, 185, 129, 0.25)', borderColor: '#10B981', color: '#34D399' }}
               >
-                {selectedComprobante.status === 'validado' ? 'Marcar como Pendiente' : '✓ Validar Comprobante'}
-              </button>
-              <button
-                type="button"
-                onClick={() => setSelectedComprobante(null)}
-                className="cce-crm-action-btn"
-              >
-                Cerrar
-              </button>
+                <MessageSquare size={14} />
+                <span>Contactar vía WhatsApp</span>
+              </a>
+
+              <div style={{ display: 'flex', gap: '8px' }}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    toggleStatus(selectedComprobante.id, selectedComprobante.status);
+                  }}
+                  className="cce-crm-action-btn"
+                  style={{
+                    background: selectedComprobante.status === 'validado' ? 'rgba(245, 158, 11, 0.25)' : 'rgba(16, 185, 129, 0.35)',
+                    borderColor: selectedComprobante.status === 'validado' ? '#F59E0B' : '#10B981',
+                    color: selectedComprobante.status === 'validado' ? '#FCD34D' : '#34D399',
+                  }}
+                >
+                  {selectedComprobante.status === 'validado' ? (
+                    <>
+                      <Clock size={14} />
+                      <span>Revertir a Pendiente</span>
+                    </>
+                  ) : (
+                    <>
+                      <CheckCircle2 size={14} />
+                      <span>✓ Validar Comprobante</span>
+                    </>
+                  )}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSelectedComprobante(null)}
+                  className="cce-crm-action-btn"
+                  style={{ background: 'rgba(255, 255, 255, 0.1)', borderColor: 'rgba(255, 255, 255, 0.2)' }}
+                >
+                  Cerrar
+                </button>
+              </div>
             </div>
           </div>
         </div>

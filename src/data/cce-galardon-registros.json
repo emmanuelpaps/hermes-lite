@@ -1,0 +1,595 @@
+{
+  "registrations": [
+    {
+      "boletos": 2,
+      "folio": "#CCE-2026-GAL-5072",
+      "location": "Ciudad Juárez, Chih., México",
+      "comprobanteFileName": "comprobante_spei_bbva_test.pdf",
+      "id": "cce-gal-1791823022570-5072",
+      "cargo": "Director General",
+      "ip": "::1",
+      "asignarNombresDespues": false,
+      "asistentesNombres": [
+        "Ing. Roberto Valenzuela M.",
+        "Lic. Claudia Morales"
+      ],
+      "status": "validado",
+      "empresa": "Grupo Industrial Fronterizo",
+      "comprobanteUrl": "data:application/pdf;base64,JVBERi0xLjQK...",
+      "facturaData": {
+        "codigoPostal": "32000",
+        "regimenFiscal": "601 General de Ley Personas Morales",
+        "rfc": "GIF900101XYZ",
+        "usoCfdi": "G03 Gastos en general",
+        "razonSocial": "Grupo Industrial Fronterizo S.A. de C.V."
+      },
+      "fecha": "12 oct 2026, 10:37",
+      "email": "roberto@gif.com.mx",
+      "timestamp": 1791823022570,
+      "requiereFactura": true,
+      "tipoBoleto": "individual",
+      "totalMonto": 5000,
+      "deviceCategory": "desktop",
+      "whatsapp": "6561803055",
+      "device": "💻 Desktop",
+      "nombre": "Ing. Roberto Valenzuela M."
+    }
+  ],
+  "visits": [
+    {
+      "ip": "187.190.183.21",
+      "timestamp": 1791873946944,
+      "deviceCategory": "desktop"
+    },
+    {
+      "ip": "201.127.20.183",
+      "deviceCategory": "android",
+      "timestamp": 1791873385375
+    },
+    {
+      "ip": "187.190.183.21",
+      "deviceCategory": "desktop",
+      "timestamp": 1791872968372
+    },
+    {
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21",
+      "timestamp": 1791872948116
+    },
+    {
+      "ip": "187.190.183.21",
+      "timestamp": 1791872587011,
+      "deviceCategory": "desktop"
+    },
+    {
+      "timestamp": 1791872030999,
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21"
+    },
+    {
+      "deviceCategory": "ios",
+      "ip": "57.141.24.94",
+      "timestamp": 1791872026091
+    },
+    {
+      "timestamp": 1791871712260,
+      "ip": "187.190.183.21",
+      "deviceCategory": "desktop"
+    },
+    {
+      "deviceCategory": "android",
+      "timestamp": 1791871706188,
+      "ip": "189.248.126.149"
+    },
+    {
+      "ip": "187.190.183.21",
+      "deviceCategory": "desktop",
+      "timestamp": 1791871433379
+    },
+    {
+      "timestamp": 1791871413161,
+      "ip": "187.190.183.21",
+      "deviceCategory": "desktop"
+    },
+    {
+      "ip": "187.190.183.21",
+      "timestamp": 1791871158125,
+      "deviceCategory": "desktop"
+    },
+    {
+      "timestamp": 1791871129458,
+      "ip": "187.190.183.21",
+      "deviceCategory": "desktop"
+    },
+    {
+      "ip": "187.190.183.21",
+      "timestamp": 1791870589452,
+      "deviceCategory": "desktop"
+    },
+    {
+      "deviceCategory": "desktop",
+      "timestamp": 1791870570374,
+      "ip": "187.190.183.21"
+    },
+    {
+      "ip": "187.190.183.21",
+      "timestamp": 1791870551006,
+      "deviceCategory": "desktop"
+    },
+    {
+      "timestamp": 1791870407520,
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21"
+    },
+    {
+      "deviceCategory": "desktop",
+      "timestamp": 1791870282659,
+      "ip": "187.190.183.21"
+    },
+    {
+      "ip": "187.190.183.21",
+      "deviceCategory": "desktop",
+      "timestamp": 1791870263162
+    },
+    {
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21",
+      "timestamp": 1791870241501
+    },
+    {
+      "deviceCategory": "android",
+      "timestamp": 1791870135915,
+      "ip": "202.5.96.26"
+    },
+    {
+      "deviceCategory": "desktop",
+      "timestamp": 1791869763224,
+      "ip": "187.190.183.21"
+    },
+    {
+      "ip": "187.190.183.21",
+      "deviceCategory": "desktop",
+      "timestamp": 1791869465113
+    },
+    {
+      "timestamp": 1791869462154,
+      "ip": "187.190.183.21",
+      "deviceCategory": "desktop"
+    },
+    {
+      "deviceCategory": "desktop",
+      "timestamp": 1791869457902,
+      "ip": "187.190.183.21"
+    },
+    {
+      "ip": "187.190.183.21",
+      "deviceCategory": "desktop",
+      "timestamp": 1791869313232
+    },
+    {
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21",
+      "timestamp": 1791869309464
+    },
+    {
+      "timestamp": 1791869305254,
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21"
+    },
+    {
+      "ip": "187.190.183.21",
+      "timestamp": 1791869038802,
+      "deviceCategory": "desktop"
+    },
+    {
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21",
+      "timestamp": 1791868950009
+    },
+    {
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21",
+      "timestamp": 1791868946280
+    },
+    {
+      "ip": "187.190.183.21",
+      "timestamp": 1791868903748,
+      "deviceCategory": "desktop"
+    },
+    {
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21",
+      "timestamp": 1791868884220
+    },
+    {
+      "deviceCategory": "desktop",
+      "timestamp": 1791868673420,
+      "ip": "187.190.183.21"
+    },
+    {
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21",
+      "timestamp": 1791868638976
+    },
+    {
+      "timestamp": 1791868620755,
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21"
+    },
+    {
+      "ip": "187.190.183.21",
+      "timestamp": 1791868601553,
+      "deviceCategory": "desktop"
+    },
+    {
+      "ip": "187.190.183.21",
+      "timestamp": 1791868550161,
+      "deviceCategory": "desktop"
+    },
+    {
+      "timestamp": 1791867997836,
+      "ip": "187.190.183.21",
+      "deviceCategory": "desktop"
+    },
+    {
+      "timestamp": 1791867981161,
+      "ip": "187.190.183.21",
+      "deviceCategory": "desktop"
+    },
+    {
+      "timestamp": 1791867943339,
+      "ip": "187.190.183.21",
+      "deviceCategory": "desktop"
+    },
+    {
+      "ip": "187.190.183.21",
+      "timestamp": 1791867923714,
+      "deviceCategory": "desktop"
+    },
+    {
+      "deviceCategory": "ios",
+      "timestamp": 1791867730022,
+      "ip": "201.146.39.128"
+    },
+    {
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21",
+      "timestamp": 1791867338888
+    },
+    {
+      "ip": "187.190.183.21",
+      "timestamp": 1791867316791,
+      "deviceCategory": "desktop"
+    },
+    {
+      "ip": "187.190.183.21",
+      "deviceCategory": "desktop",
+      "timestamp": 1791867296576
+    },
+    {
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21",
+      "timestamp": 1791867267731
+    },
+    {
+      "ip": "187.190.183.21",
+      "timestamp": 1791867251139,
+      "deviceCategory": "desktop"
+    },
+    {
+      "timestamp": 1791867244690,
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21"
+    },
+    {
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21",
+      "timestamp": 1791867132187
+    },
+    {
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21",
+      "timestamp": 1791867114106
+    },
+    {
+      "timestamp": 1791867065269,
+      "ip": "187.190.183.21",
+      "deviceCategory": "desktop"
+    },
+    {
+      "ip": "187.190.183.21",
+      "deviceCategory": "desktop",
+      "timestamp": 1791866929191
+    },
+    {
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21",
+      "timestamp": 1791866888237
+    },
+    {
+      "deviceCategory": "desktop",
+      "timestamp": 1791866869568,
+      "ip": "187.190.183.21"
+    },
+    {
+      "deviceCategory": "desktop",
+      "timestamp": 1791866773721,
+      "ip": "187.190.183.21"
+    },
+    {
+      "deviceCategory": "ios",
+      "ip": "201.146.32.218",
+      "timestamp": 1791866369510
+    },
+    {
+      "timestamp": 1791865849806,
+      "ip": "187.190.183.21",
+      "deviceCategory": "desktop"
+    },
+    {
+      "timestamp": 1791865830790,
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21"
+    },
+    {
+      "timestamp": 1791865319290,
+      "deviceCategory": "android",
+      "ip": "201.146.228.25"
+    },
+    {
+      "ip": "34.222.248.142",
+      "deviceCategory": "desktop",
+      "timestamp": 1791864385402
+    },
+    {
+      "ip": "57.141.24.58",
+      "timestamp": 1791864378000,
+      "deviceCategory": "ios"
+    },
+    {
+      "deviceCategory": "desktop",
+      "timestamp": 1791864377602,
+      "ip": "57.141.24.107"
+    },
+    {
+      "timestamp": 1791863585023,
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21"
+    },
+    {
+      "timestamp": 1791863491214,
+      "ip": "187.190.183.21",
+      "deviceCategory": "desktop"
+    },
+    {
+      "timestamp": 1791863472264,
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21"
+    },
+    {
+      "timestamp": 1791863402863,
+      "ip": "187.190.183.21",
+      "deviceCategory": "desktop"
+    },
+    {
+      "deviceCategory": "desktop",
+      "timestamp": 1791863352423,
+      "ip": "187.190.183.21"
+    },
+    {
+      "timestamp": 1791863330870,
+      "ip": "187.190.183.21",
+      "deviceCategory": "desktop"
+    },
+    {
+      "ip": "187.190.183.21",
+      "timestamp": 1791863283066,
+      "deviceCategory": "desktop"
+    },
+    {
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21",
+      "timestamp": 1791863183601
+    },
+    {
+      "timestamp": 1791863164816,
+      "ip": "187.190.183.21",
+      "deviceCategory": "desktop"
+    },
+    {
+      "timestamp": 1791863030073,
+      "ip": "187.190.183.21",
+      "deviceCategory": "desktop"
+    },
+    {
+      "ip": "187.190.183.21",
+      "deviceCategory": "desktop",
+      "timestamp": 1791863004086
+    },
+    {
+      "deviceCategory": "desktop",
+      "timestamp": 1791862949065,
+      "ip": "187.190.183.21"
+    },
+    {
+      "timestamp": 1791862484997,
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21"
+    },
+    {
+      "ip": "187.190.183.21",
+      "deviceCategory": "desktop",
+      "timestamp": 1791862466669
+    },
+    {
+      "timestamp": 1791861871823,
+      "ip": "187.190.183.21",
+      "deviceCategory": "desktop"
+    },
+    {
+      "ip": "187.190.183.21",
+      "timestamp": 1791861853854,
+      "deviceCategory": "desktop"
+    },
+    {
+      "deviceCategory": "desktop",
+      "timestamp": 1791861730991,
+      "ip": "::1"
+    },
+    {
+      "timestamp": 1791861714570,
+      "ip": "::1",
+      "deviceCategory": "desktop"
+    },
+    {
+      "deviceCategory": "desktop",
+      "ip": "::1",
+      "timestamp": 1791861697992
+    },
+    {
+      "deviceCategory": "desktop",
+      "ip": "::1",
+      "timestamp": 1791861681322
+    },
+    {
+      "timestamp": 1791861569154,
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21"
+    },
+    {
+      "timestamp": 1791861539487,
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21"
+    },
+    {
+      "ip": "187.190.183.21",
+      "deviceCategory": "desktop",
+      "timestamp": 1791861494209
+    },
+    {
+      "deviceCategory": "desktop",
+      "timestamp": 1791861425190,
+      "ip": "187.190.183.21"
+    },
+    {
+      "timestamp": 1791861390022,
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21"
+    },
+    {
+      "timestamp": 1791861087370,
+      "ip": "187.190.183.21",
+      "deviceCategory": "desktop"
+    },
+    {
+      "ip": "187.190.183.21",
+      "timestamp": 1791861016359,
+      "deviceCategory": "desktop"
+    },
+    {
+      "timestamp": 1791860978476,
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21"
+    },
+    {
+      "ip": "187.190.183.21",
+      "deviceCategory": "desktop",
+      "timestamp": 1791860697386
+    },
+    {
+      "ip": "187.190.183.21",
+      "timestamp": 1791860228030,
+      "deviceCategory": "desktop"
+    },
+    {
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21",
+      "timestamp": 1791860224891
+    },
+    {
+      "deviceCategory": "desktop",
+      "timestamp": 1791859912062,
+      "ip": "187.190.183.21"
+    },
+    {
+      "ip": "187.190.183.21",
+      "timestamp": 1791859861843,
+      "deviceCategory": "desktop"
+    },
+    {
+      "ip": "187.190.183.21",
+      "deviceCategory": "desktop",
+      "timestamp": 1791856701759
+    },
+    {
+      "timestamp": 1791829065317,
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21"
+    },
+    {
+      "timestamp": 1791826703524,
+      "deviceCategory": "desktop",
+      "ip": "200.68.152.144"
+    },
+    {
+      "timestamp": 1791826112460,
+      "deviceCategory": "desktop",
+      "ip": "200.68.152.144"
+    },
+    {
+      "timestamp": 1791826028639,
+      "deviceCategory": "desktop",
+      "ip": "187.190.183.21"
+    },
+    {
+      "timestamp": 1791826012792,
+      "deviceCategory": "ios",
+      "ip": "187.190.183.21"
+    },
+    {
+      "ip": "::1",
+      "deviceCategory": "desktop",
+      "timestamp": 1791825959493
+    },
+    {
+      "timestamp": 1791825959204,
+      "deviceCategory": "desktop",
+      "ip": "::1"
+    },
+    {
+      "ip": "::1",
+      "timestamp": 1791825957916,
+      "deviceCategory": "desktop"
+    },
+    {
+      "timestamp": 1791825392175,
+      "ip": "200.68.152.144",
+      "deviceCategory": "ios"
+    },
+    {
+      "ip": "200.68.153.54",
+      "deviceCategory": "ios",
+      "timestamp": 1791824011222
+    },
+    {
+      "deviceCategory": "ios",
+      "ip": "201.162.227.165",
+      "timestamp": 1791823291074
+    },
+    {
+      "ip": "201.162.227.165",
+      "deviceCategory": "ios",
+      "timestamp": 1791823280578
+    },
+    {
+      "deviceCategory": "desktop",
+      "timestamp": 1791823022832,
+      "ip": "::1"
+    },
+    {
+      "status": "active",
+      "timestamp": 1791822797276,
+      "test": true
+    }
+  ]
+}
