@@ -200,17 +200,19 @@ export async function POST(req: NextRequest) {
       asistentesNombres: Array.isArray(asistentesNombres) ? asistentesNombres.filter(Boolean) : [],
       asignarNombresDespues: Boolean(asignarNombresDespues),
       comprobanteFileName: String(comprobanteFileName).trim(),
-      comprobanteUrl: comprobanteUrl || undefined,
+      ...(comprobanteUrl ? { comprobanteUrl: String(comprobanteUrl).trim() } : {}),
       requiereFactura: Boolean(requiereFactura),
-      facturaData: requiereFactura
+      ...(requiereFactura && facturaData
         ? {
-            rfc: facturaData.rfc.trim().toUpperCase(),
-            razonSocial: facturaData.razonSocial.trim(),
-            regimenFiscal: facturaData.regimenFiscal || '601 General de Ley Personas Morales',
-            usoCfdi: facturaData.usoCfdi || 'G03 Gastos en general',
-            codigoPostal: facturaData.codigoPostal.trim(),
+            facturaData: {
+              rfc: facturaData.rfc.trim().toUpperCase(),
+              razonSocial: facturaData.razonSocial.trim(),
+              regimenFiscal: facturaData.regimenFiscal || '601 General de Ley Personas Morales',
+              usoCfdi: facturaData.usoCfdi || 'G03 Gastos en general',
+              codigoPostal: facturaData.codigoPostal.trim(),
+            },
           }
-        : undefined,
+        : {}),
       fecha: formattedTime,
       timestamp: Date.now(),
       status: 'pendiente',

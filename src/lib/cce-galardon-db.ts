@@ -121,11 +121,35 @@ function persistLocalCache(cache: LocalCache) {
   }
 }
 
+/**
+ * Recursively strips undefined values from an object or array so that
+ * Cloud Firestore setDoc/updateDoc never fails with "Unsupported field value: undefined".
+ */
+export function sanitizeForFirestore<T>(data: T): T {
+  if (data === null || data === undefined) {
+    return null as any;
+  }
+  if (Array.isArray(data)) {
+    return data.map((item) => sanitizeForFirestore(item)) as any;
+  }
+  if (typeof data === 'object') {
+    const clean: Record<string, any> = {};
+    for (const [key, value] of Object.entries(data as Record<string, any>)) {
+      if (value !== undefined) {
+        clean[key] = sanitizeForFirestore(value);
+      }
+    }
+    return clean as any;
+  }
+  return data;
+}
+
 export async function saveGalardonRegistration(record: GalardonRegistration): Promise<void> {
-  // 1. Primary persistence: Cloud Firestore
+  // 1. Primary persistence: Cloud Firestore (sanitized to remove any undefined fields)
   try {
     const docRef = doc(db, REGISTRATIONS_COL, record.id);
-    await setDoc(docRef, record, { merge: true });
+    const cleanRecord = sanitizeForFirestore(record);
+    await setDoc(docRef, cleanRecord, { merge: true });
   } catch (err) {
     console.error('[cce-galardon-db] Firestore write error:', err);
     throw new Error('Error al registrar en Cloud Firestore: ' + (err as Error).message);
@@ -185,11 +209,12 @@ export async function updateGalardonStatus(id: string, status: 'pendiente' | 'va
 }
 
 export async function logGalardonVisit(visit: GalardonVisitLog): Promise<void> {
-  // 1. Write to Firestore telemetry
+  // 1. Write to Firestore telemetry (sanitized)
   try {
     const visitId = `visit-${visit.timestamp}-${Math.random().toString(36).substring(2, 6)}`;
     const docRef = doc(db, TELEMETRY_COL, visitId);
-    await setDoc(docRef, visit);
+    const cleanVisit = sanitizeForFirestore(visit);
+    await setDoc(docRef, cleanVisit);
   } catch (err) {
     console.warn('[cce-galardon-db] Telemetry write notice:', err);
   }

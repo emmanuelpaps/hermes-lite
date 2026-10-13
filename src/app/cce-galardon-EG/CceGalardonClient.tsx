@@ -309,7 +309,53 @@ export default function CceGalardonClient() {
     if (file.type.startsWith('image/')) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        setComprobantePreview(e.target?.result as string);
+        const rawDataUrl = e.target?.result as string;
+        // Optimize large camera images using Canvas so they fit gracefully in Firestore
+        if (file.size > 600 * 1024) {
+          const img = new window.Image();
+          img.onload = () => {
+            try {
+              const canvas = document.createElement('canvas');
+              const MAX_DIM = 1600;
+              let width = img.width;
+              let height = img.height;
+              if (width > height && width > MAX_DIM) {
+                height = Math.round((height * MAX_DIM) / width);
+                width = MAX_DIM;
+              } else if (height > MAX_DIM) {
+                width = Math.round((width * MAX_DIM) / height);
+                height = MAX_DIM;
+              }
+              canvas.width = width;
+              canvas.height = height;
+              const ctx = canvas.getContext('2d');
+              if (ctx) {
+                ctx.drawImage(img, 0, 0, width, height);
+                setComprobantePreview(canvas.toDataURL('image/jpeg', 0.82));
+              } else {
+                setComprobantePreview(rawDataUrl);
+              }
+            } catch {
+              setComprobantePreview(rawDataUrl);
+            }
+          };
+          img.onerror = () => setComprobantePreview(rawDataUrl);
+          img.src = rawDataUrl;
+        } else {
+          setComprobantePreview(rawDataUrl);
+        }
+      };
+      reader.readAsDataURL(file);
+    } else if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
+      // Allow PDF preview/download in CRM for files <= 800 KB
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const rawDataUrl = e.target?.result as string;
+        if (file.size <= 800 * 1024) {
+          setComprobantePreview(rawDataUrl);
+        } else {
+          setComprobantePreview('');
+        }
       };
       reader.readAsDataURL(file);
     } else {
@@ -389,17 +435,19 @@ export default function CceGalardonClient() {
           asistentesNombres: !asignarNombresDespues ? asistentesNombres.filter(Boolean) : [],
           asignarNombresDespues,
           comprobanteFileName,
-          comprobanteUrl: comprobantePreview || undefined,
+          comprobanteUrl: comprobantePreview ? comprobantePreview : '',
           requiereFactura,
-          facturaData: requiereFactura
+          ...(requiereFactura
             ? {
-                rfc: rfc.trim().toUpperCase(),
-                razonSocial: razonSocial.trim(),
-                regimenFiscal,
-                usoCfdi,
-                codigoPostal: codigoPostal.trim(),
+                facturaData: {
+                  rfc: rfc.trim().toUpperCase(),
+                  razonSocial: razonSocial.trim(),
+                  regimenFiscal,
+                  usoCfdi,
+                  codigoPostal: codigoPostal.trim(),
+                },
               }
-            : undefined,
+            : {}),
         }),
       });
 

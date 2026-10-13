@@ -23,7 +23,7 @@ import { Outfit } from "next/font/google";
 import Image from "next/image";
 import { preload } from "react-dom";
 
-const titleFont = Outfit({ subsets: ["latin"], weight: ["700", "800", "900"], display: "swap" });
+const titleFont = Outfit({ subsets: ["latin"], display: "swap" });
 
 const theme = {
   superetteGreen: "#0a8244",
