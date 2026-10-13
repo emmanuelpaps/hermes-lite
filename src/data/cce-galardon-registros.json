@@ -1,40 +1,5 @@
 {
-  "registrations": [
-    {
-      "boletos": 2,
-      "folio": "#CCE-2026-GAL-5072",
-      "location": "Ciudad Juárez, Chih., México",
-      "comprobanteFileName": "comprobante_spei_bbva_test.pdf",
-      "id": "cce-gal-1791823022570-5072",
-      "cargo": "Director General",
-      "ip": "::1",
-      "asignarNombresDespues": false,
-      "asistentesNombres": [
-        "Ing. Roberto Valenzuela M.",
-        "Lic. Claudia Morales"
-      ],
-      "status": "validado",
-      "empresa": "Grupo Industrial Fronterizo",
-      "comprobanteUrl": "data:application/pdf;base64,JVBERi0xLjQK...",
-      "facturaData": {
-        "codigoPostal": "32000",
-        "regimenFiscal": "601 General de Ley Personas Morales",
-        "rfc": "GIF900101XYZ",
-        "usoCfdi": "G03 Gastos en general",
-        "razonSocial": "Grupo Industrial Fronterizo S.A. de C.V."
-      },
-      "fecha": "12 oct 2026, 10:37",
-      "email": "roberto@gif.com.mx",
-      "timestamp": 1791823022570,
-      "requiereFactura": true,
-      "tipoBoleto": "individual",
-      "totalMonto": 5000,
-      "deviceCategory": "desktop",
-      "whatsapp": "6561803055",
-      "device": "💻 Desktop",
-      "nombre": "Ing. Roberto Valenzuela M."
-    }
-  ],
+  "registrations": [],
   "visits": [
     {
       "ip": "187.190.183.21",
