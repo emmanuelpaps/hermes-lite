@@ -140,6 +140,31 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Blindaje de archivo: Validación estricta de Magic Bytes binarios
+    if (comprobanteUrl && typeof comprobanteUrl === 'string' && comprobanteUrl.startsWith('data:')) {
+      const parts = comprobanteUrl.split(',');
+      if (parts[1]) {
+        const fileBuffer = Buffer.from(parts[1], 'base64');
+        if (fileBuffer.length < 3000) {
+          return NextResponse.json(
+            { success: false, error: 'El archivo adjunto es demasiado pequeño o está incompleto. Por favor adjunta tu comprobante SPEI legible.' },
+            { status: 400 }
+          );
+        }
+        const isPdf = fileBuffer.subarray(0, 5).toString('binary') === '%PDF-';
+        const isPng = fileBuffer.subarray(0, 4).toString('hex') === '89504e47';
+        const isJpg = fileBuffer[0] === 0xFF && fileBuffer[1] === 0xD8 && fileBuffer[2] === 0xFF;
+        const isWebp = fileBuffer.subarray(0, 4).toString('binary') === 'RIFF' && fileBuffer.subarray(8, 12).toString('binary') === 'WEBP';
+
+        if (!isPdf && !isPng && !isJpg && !isWebp) {
+          return NextResponse.json(
+            { success: false, error: 'Formato de archivo no válido. Solo se permiten comprobantes en formato PDF, PNG o JPG auténticos.' },
+            { status: 400 }
+          );
+        }
+      }
+    }
+
     // Facturación validation if requested
     if (requiereFactura) {
       if (!facturaData?.rfc || facturaData.rfc.trim().length < 12) {
@@ -354,9 +379,9 @@ export async function PATCH(req: NextRequest) {
     const body = await req.json().catch(() => ({}));
     const { id, status } = body;
 
-    if (!id || (status !== 'pendiente' && status !== 'validado')) {
+    if (!id || (status !== 'pendiente' && status !== 'validado' && status !== 'rechazado')) {
       return NextResponse.json(
-        { success: false, error: 'Parámetros inválidos (id y status son requeridos).' },
+        { success: false, error: 'Parámetros inválidos (id y status válido [pendiente, validado, rechazado] son requeridos).' },
         { status: 400 }
       );
     }

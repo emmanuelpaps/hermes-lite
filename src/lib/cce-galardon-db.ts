@@ -37,7 +37,7 @@ export interface GalardonRegistration {
   };
   fecha: string;
   timestamp: number;
-  status: 'pendiente' | 'validado';
+  status: 'pendiente' | 'validado' | 'rechazado';
   location: string;
   device: string;
   deviceCategory: 'ios' | 'android' | 'desktop';
@@ -62,9 +62,11 @@ export interface GalardonTelemetryData {
   totalRegistros: number;
   totalBoletos: number;
   totalRecaudado: number;
+  totalRecaudadoConciliado: number;
   totalMesas: number;
   comprobantesPendientes: number;
   comprobantesValidados: number;
+  comprobantesRechazados: number;
 }
 
 const REGISTRATIONS_COL = 'cce_galardon_registros';
@@ -189,7 +191,7 @@ export async function getGalardonRegistrations(): Promise<GalardonRegistration[]
   }
 }
 
-export async function updateGalardonStatus(id: string, status: 'pendiente' | 'validado'): Promise<void> {
+export async function updateGalardonStatus(id: string, status: 'pendiente' | 'validado' | 'rechazado'): Promise<void> {
   // 1. Primary update in Cloud Firestore
   try {
     const docRef = doc(db, REGISTRATIONS_COL, id);
@@ -263,23 +265,35 @@ export async function getGalardonTelemetry(
     else devices.desktop++;
   });
 
-  const totalRegistros = regList.length;
+  const activeRegistrations = regList.filter(r => r.status !== 'rechazado');
+  const totalRegistros = activeRegistrations.length;
   const conversionRate =
     totalVisits > 0 ? ((totalRegistros / totalVisits) * 100).toFixed(1) + '%' : '0%';
 
   let totalBoletos = 0;
   let totalRecaudado = 0;
+  let totalRecaudadoConciliado = 0;
   let totalMesas = 0;
   let comprobantesPendientes = 0;
   let comprobantesValidados = 0;
+  let comprobantesRechazados = 0;
 
   regList.forEach(r => {
-    const b = Number(r.boletos) || 0;
-    totalBoletos += b;
-    totalRecaudado += Number(r.totalMonto) || (b === 8 ? 20000 : b * 2500);
-    if (b === 8 || b === 10) totalMesas++;
+    if (r.status !== 'rechazado') {
+      const b = Number(r.boletos) || 0;
+      totalBoletos += b;
+      const monto = Number(r.totalMonto) || (b === 8 ? 20000 : b * 2500);
+      totalRecaudado += monto;
+      if (r.status === 'validado') {
+        totalRecaudadoConciliado += monto;
+      }
+      if (b === 8 || b === 10) totalMesas++;
+    }
+
     if (r.status === 'validado') {
       comprobantesValidados++;
+    } else if (r.status === 'rechazado') {
+      comprobantesRechazados++;
     } else {
       comprobantesPendientes++;
     }
@@ -293,8 +307,10 @@ export async function getGalardonTelemetry(
     totalRegistros,
     totalBoletos,
     totalRecaudado,
+    totalRecaudadoConciliado,
     totalMesas,
     comprobantesPendientes,
     comprobantesValidados,
+    comprobantesRechazados,
   };
 }

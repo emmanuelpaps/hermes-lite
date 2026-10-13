@@ -48,6 +48,7 @@ import {
   Laptop,
   Radio,
   CheckCheck,
+  XCircle,
 } from 'lucide-react';
 import { GalardonRegistration, GalardonTelemetryData } from '@/lib/cce-galardon-db';
 
@@ -65,7 +66,7 @@ export default function CceGalardonClient() {
   const [crmLoading, setCrmLoading] = useState(false);
   const [telemetry, setTelemetry] = useState<GalardonTelemetryData | null>(null);
   const [crmRegistrations, setCrmRegistrations] = useState<GalardonRegistration[]>([]);
-  const [crmFilter, setCrmFilter] = useState<'todos' | 'pendiente' | 'validado'>('todos');
+  const [crmFilter, setCrmFilter] = useState<'todos' | 'pendiente' | 'validado' | 'rechazado'>('todos');
   const [crmSearch, setCrmSearch] = useState('');
   const [selectedComprobante, setSelectedComprobante] = useState<GalardonRegistration | null>(null);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
@@ -181,48 +182,65 @@ export default function CceGalardonClient() {
     }
   };
 
-  const toggleStatus = async (id: string, currentStatus: 'pendiente' | 'validado') => {
-    const nextStatus = currentStatus === 'validado' ? 'pendiente' : 'validado';
+  const setRegistrationStatus = async (id: string, newStatus: 'pendiente' | 'validado' | 'rechazado') => {
     setUpdatingId(id);
+    const prevReg = crmRegistrations.find((r) => r.id === id);
+    const oldStatus = prevReg?.status || 'pendiente';
 
     // Optimistic UI update
     setCrmRegistrations((prev) =>
-      prev.map((r) => (r.id === id ? { ...r, status: nextStatus } : r))
+      prev.map((r) => (r.id === id ? { ...r, status: newStatus } : r))
     );
-    setSelectedComprobante((prev) => (prev && prev.id === id ? { ...prev, status: nextStatus } : prev));
+    setSelectedComprobante((prev) => (prev && prev.id === id ? { ...prev, status: newStatus } : prev));
 
     try {
       const res = await fetch('/api/cce-galardon-registro?admin=cce2026', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id, status: nextStatus }),
+        body: JSON.stringify({ id, status: newStatus }),
       });
       const data = await res.json();
       if (!res.ok || !data.success) {
         // Rollback on error
         setCrmRegistrations((prev) =>
-          prev.map((r) => (r.id === id ? { ...r, status: currentStatus } : r))
+          prev.map((r) => (r.id === id ? { ...r, status: oldStatus } : r))
         );
-        setSelectedComprobante((prev) => (prev && prev.id === id ? { ...prev, status: currentStatus } : prev));
+        setSelectedComprobante((prev) => (prev && prev.id === id ? { ...prev, status: oldStatus } : prev));
         alert('Error al actualizar estatus en Firestore: ' + (data?.error || 'Desconocido'));
       } else {
         fetchCrmData();
       }
     } catch (err: any) {
-      console.error('Error toggling status:', err);
+      console.error('Error updating status:', err);
       setCrmRegistrations((prev) =>
-        prev.map((r) => (r.id === id ? { ...r, status: currentStatus } : r))
+        prev.map((r) => (r.id === id ? { ...r, status: oldStatus } : r))
       );
-      setSelectedComprobante((prev) => (prev && prev.id === id ? { ...prev, status: currentStatus } : prev));
+      setSelectedComprobante((prev) => (prev && prev.id === id ? { ...prev, status: oldStatus } : prev));
       alert('Error de conexión al actualizar estatus: ' + (err?.message || 'Error de red'));
     } finally {
       setUpdatingId(null);
     }
   };
 
+  const toggleStatus = (id: string, currentStatus: 'pendiente' | 'validado' | 'rechazado') => {
+    if (currentStatus === 'pendiente') {
+      setRegistrationStatus(id, 'validado');
+    } else if (currentStatus === 'validado') {
+      setRegistrationStatus(id, 'rechazado');
+    } else {
+      setRegistrationStatus(id, 'pendiente');
+    }
+  };
+
   const getCrmWhatsAppUrl = (reg: GalardonRegistration) => {
     const cleanPhone = String(reg.whatsapp || '').replace(/\D/g, '');
     const text = `Buen día ${reg.nombre}. Confirmamos la recepción de tu registro y comprobante para la Entrega de Galardones y Conferencia Magistral de Carlos Loret de Mola (Folio ${reg.folio}, ${reg.boletos} boletos). Registro: 8:30 a.m. · Inicio del Desayuno: 9:00 a.m. en Centro de Eventos Cibeles (Vestimenta Formal): https://maps.google.com/?q=Centro+de+Eventos+Cibeles+Ciudad+Juarez. ¡Agradecemos tu participación!`;
+    return `https://wa.me/52${cleanPhone}?text=${encodeURIComponent(text)}`;
+  };
+
+  const getCrmRejectWhatsAppUrl = (reg: GalardonRegistration) => {
+    const cleanPhone = String(reg.whatsapp || '').replace(/\D/g, '');
+    const text = `Buen día ${reg.nombre}. Te contactamos del Consejo Coordinador Empresarial (CCE Ciudad Juárez) respecto a tu solicitud de registro (Folio ${reg.folio}) para la Entrega de Galardones 2026. Te informamos que el comprobante bancario adjunto no pudo ser validado o no corresponde a una transferencia SPEI registrada en nuestra cuenta. Por favor compártenos por este medio tu comprobante emitido por tu banco para poder validar y liberar tus boletos. ¡Agradecemos tu atención!`;
     return `https://wa.me/52${cleanPhone}?text=${encodeURIComponent(text)}`;
   };
 
@@ -300,6 +318,11 @@ export default function CceGalardonClient() {
 
     if (file.size > 10 * 1024 * 1024) {
       setFormError('El archivo excede el tamaño máximo permitido de 10 MB.');
+      return;
+    }
+
+    if (file.size < 3000) {
+      setFormError('El archivo seleccionado es demasiado pequeño o está dañado (mínimo 3 KB). Por favor adjunta una captura legible de tu comprobante SPEI.');
       return;
     }
 
@@ -4782,6 +4805,12 @@ export default function CceGalardonClient() {
               color: #FCD34D;
             }
 
+            .cce-crm-badge-status.cce-status-rechazado {
+              background: rgba(239, 68, 68, 0.2);
+              border-color: #EF4444;
+              color: #F87171;
+            }
+
             .cce-crm-wa-btn {
               display: inline-flex;
               align-items: center;
@@ -4796,6 +4825,12 @@ export default function CceGalardonClient() {
               text-decoration: none;
               transition: all 0.2s ease;
               white-space: nowrap;
+            }
+
+            .cce-crm-wa-btn.cce-crm-wa-reject {
+              background: rgba(239, 68, 68, 0.18);
+              border-color: #EF4444;
+              color: #FCA5A5;
             }
 
             .cce-crm-wa-btn:hover {
@@ -6957,15 +6992,17 @@ export default function CceGalardonClient() {
           <div className="cce-crm-stats-grid">
             <div className="cce-crm-stat-card">
               <div className="cce-crm-stat-top">
-                <span className="cce-crm-stat-label">Recaudación Acumulada</span>
+                <span className="cce-crm-stat-label">Recaudación Conciliada</span>
                 <div className="cce-crm-stat-icon">
                   <DollarSign size={18} />
                 </div>
               </div>
               <div className="cce-crm-stat-val">
-                ${(telemetry?.totalRecaudado || 0).toLocaleString('es-MX')} MXN
+                ${(telemetry?.totalRecaudadoConciliado || 0).toLocaleString('es-MX')} MXN
               </div>
-              <div className="cce-crm-stat-sub">Ingresos confirmados SPEI</div>
+              <div className="cce-crm-stat-sub">
+                ${((telemetry?.totalRecaudado || 0) - (telemetry?.totalRecaudadoConciliado || 0)).toLocaleString('es-MX')} MXN por conciliar
+              </div>
             </div>
 
             <div className="cce-crm-stat-card">
@@ -6998,16 +7035,16 @@ export default function CceGalardonClient() {
 
             <div className="cce-crm-stat-card">
               <div className="cce-crm-stat-top">
-                <span className="cce-crm-stat-label">Comprobantes Pendientes</span>
+                <span className="cce-crm-stat-label">Estatus Comprobantes</span>
                 <div className="cce-crm-stat-icon" style={{ color: '#F59E0B', borderColor: 'rgba(245, 158, 11, 0.4)' }}>
                   <AlertCircle size={18} />
                 </div>
               </div>
               <div className="cce-crm-stat-val" style={{ color: '#FCD34D' }}>
-                {telemetry?.comprobantesPendientes || 0}
+                {telemetry?.comprobantesPendientes || 0} <span style={{ fontSize: '13px', color: '#94A3B8' }}>pendientes</span>
               </div>
               <div className="cce-crm-stat-sub" style={{ color: '#94A3B8' }}>
-                {telemetry?.comprobantesValidados || 0} validados
+                {telemetry?.comprobantesValidados || 0} validados · {telemetry?.comprobantesRechazados || 0} rechazados
               </div>
             </div>
           </div>
@@ -7038,7 +7075,7 @@ export default function CceGalardonClient() {
                 onClick={() => setCrmFilter('pendiente')}
                 className={`cce-crm-filter-pill ${crmFilter === 'pendiente' ? 'cce-filter-active' : ''}`}
               >
-                ⏳ Pendientes ({crmRegistrations.filter((r) => r.status !== 'validado').length})
+                ⏳ Pendientes ({crmRegistrations.filter((r) => r.status === 'pendiente').length})
               </button>
               <button
                 type="button"
@@ -7046,6 +7083,13 @@ export default function CceGalardonClient() {
                 className={`cce-crm-filter-pill ${crmFilter === 'validado' ? 'cce-filter-active' : ''}`}
               >
                 ✓ Validados ({crmRegistrations.filter((r) => r.status === 'validado').length})
+              </button>
+              <button
+                type="button"
+                onClick={() => setCrmFilter('rechazado')}
+                className={`cce-crm-filter-pill ${crmFilter === 'rechazado' ? 'cce-filter-active' : ''}`}
+              >
+                ❌ Rechazados ({crmRegistrations.filter((r) => r.status === 'rechazado').length})
               </button>
             </div>
           </div>
@@ -7152,6 +7196,8 @@ export default function CceGalardonClient() {
                               className={`cce-crm-badge-status ${
                                 reg.status === 'validado'
                                   ? 'cce-status-validado'
+                                  : reg.status === 'rechazado'
+                                  ? 'cce-status-rechazado'
                                   : 'cce-status-pendiente'
                               }`}
                             >
@@ -7159,6 +7205,11 @@ export default function CceGalardonClient() {
                                 <>
                                   <CheckCircle2 size={12} />
                                   <span>Validado</span>
+                                </>
+                              ) : reg.status === 'rechazado' ? (
+                                <>
+                                  <XCircle size={12} />
+                                  <span>Rechazado</span>
                                 </>
                               ) : (
                                 <>
@@ -7169,16 +7220,29 @@ export default function CceGalardonClient() {
                             </button>
                           </td>
                           <td>
-                            <a
-                              href={getCrmWhatsAppUrl(reg)}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="cce-crm-wa-btn"
-                              title="Enviar WhatsApp de confirmación oficial"
-                            >
-                              <MessageSquare size={13} />
-                              <span>Confirmar WA</span>
-                            </a>
+                            {reg.status === 'rechazado' ? (
+                              <a
+                                href={getCrmRejectWhatsAppUrl(reg)}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="cce-crm-wa-btn cce-crm-wa-reject"
+                                title="Solicitar comprobante bancario SPEI legítimo por WhatsApp"
+                              >
+                                <MessageSquare size={13} />
+                                <span>Reclamar SPEI</span>
+                              </a>
+                            ) : (
+                              <a
+                                href={getCrmWhatsAppUrl(reg)}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="cce-crm-wa-btn"
+                                title="Enviar WhatsApp de confirmación oficial"
+                              >
+                                <MessageSquare size={13} />
+                                <span>Confirmar WA</span>
+                              </a>
+                            )}
                           </td>
                         </tr>
                       ))}
@@ -7199,8 +7263,9 @@ export default function CceGalardonClient() {
           <div className="cce-crm-mobile-cards">
             {crmRegistrations
               .filter((reg) => {
-                if (crmFilter === 'pendiente') return reg.status !== 'validado';
+                if (crmFilter === 'pendiente') return reg.status === 'pendiente';
                 if (crmFilter === 'validado') return reg.status === 'validado';
+                if (crmFilter === 'rechazado') return reg.status === 'rechazado';
                 return true;
               })
               .filter((reg) => {
@@ -7226,13 +7291,22 @@ export default function CceGalardonClient() {
                       disabled={updatingId === reg.id}
                       onClick={() => toggleStatus(reg.id, reg.status)}
                       className={`cce-crm-badge-status ${
-                        reg.status === 'validado' ? 'cce-status-validado' : 'cce-status-pendiente'
+                        reg.status === 'validado'
+                          ? 'cce-status-validado'
+                          : reg.status === 'rechazado'
+                          ? 'cce-status-rechazado'
+                          : 'cce-status-pendiente'
                       }`}
                     >
                       {reg.status === 'validado' ? (
                         <>
                           <CheckCircle2 size={12} />
                           <span>Validado</span>
+                        </>
+                      ) : reg.status === 'rechazado' ? (
+                        <>
+                          <XCircle size={12} />
+                          <span>Rechazado</span>
                         </>
                       ) : (
                         <>
@@ -7294,15 +7368,28 @@ export default function CceGalardonClient() {
                         <span>Ver Comprobante SPEI</span>
                       </button>
 
-                      <a
-                        href={getCrmWhatsAppUrl(reg)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="cce-crm-card-btn cce-crm-btn-wa"
-                      >
-                        <MessageSquare size={14} />
-                        <span>Confirmar por WhatsApp</span>
-                      </a>
+                      {reg.status === 'rechazado' ? (
+                        <a
+                          href={getCrmRejectWhatsAppUrl(reg)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="cce-crm-card-btn cce-crm-btn-wa"
+                          style={{ background: 'rgba(239, 68, 68, 0.2)', borderColor: '#EF4444', color: '#FCA5A5' }}
+                        >
+                          <MessageSquare size={14} />
+                          <span>Solicitar SPEI por WhatsApp</span>
+                        </a>
+                      ) : (
+                        <a
+                          href={getCrmWhatsAppUrl(reg)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="cce-crm-card-btn cce-crm-btn-wa"
+                        >
+                          <MessageSquare size={14} />
+                          <span>Confirmar por WhatsApp</span>
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -7361,11 +7448,20 @@ export default function CceGalardonClient() {
                 <span
                   className="cce-modal-meta-val"
                   style={{
-                    color: selectedComprobante.status === 'validado' ? '#34D399' : '#FCD34D',
+                    color:
+                      selectedComprobante.status === 'validado'
+                        ? '#34D399'
+                        : selectedComprobante.status === 'rechazado'
+                        ? '#F87171'
+                        : '#FCD34D',
                     fontWeight: 800,
                   }}
                 >
-                  {selectedComprobante.status === 'validado' ? '✓ Validado Oficialmente' : '⏳ Pendiente de Verificación'}
+                  {selectedComprobante.status === 'validado'
+                    ? '✓ Validado Oficialmente'
+                    : selectedComprobante.status === 'rechazado'
+                    ? '❌ Rechazado / Sospechoso'
+                    : '⏳ Pendiente de Verificación'}
                 </span>
               </div>
             </div>
@@ -7418,42 +7514,84 @@ export default function CceGalardonClient() {
             )}
 
             <div className="cce-modal-actions-row">
-              <a
-                href={getCrmWhatsAppUrl(selectedComprobante)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="cce-crm-action-btn"
-                style={{ background: 'rgba(16, 185, 129, 0.25)', borderColor: '#10B981', color: '#34D399' }}
-              >
-                <MessageSquare size={14} />
-                <span>Contactar vía WhatsApp</span>
-              </a>
-
-              <div style={{ display: 'flex', gap: '8px' }}>
-                <button
-                  type="button"
-                  onClick={() => {
-                    toggleStatus(selectedComprobante.id, selectedComprobante.status);
-                  }}
+              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                <a
+                  href="https://www.banxico.org.mx/cep/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="cce-crm-action-btn"
-                  style={{
-                    background: selectedComprobante.status === 'validado' ? 'rgba(245, 158, 11, 0.25)' : 'rgba(16, 185, 129, 0.35)',
-                    borderColor: selectedComprobante.status === 'validado' ? '#F59E0B' : '#10B981',
-                    color: selectedComprobante.status === 'validado' ? '#FCD34D' : '#34D399',
-                  }}
+                  style={{ background: 'rgba(59, 130, 246, 0.2)', borderColor: '#3B82F6', color: '#93C5FD' }}
+                  title="Consultar Comprobante Electrónico de Pago oficial en Banxico"
                 >
-                  {selectedComprobante.status === 'validado' ? (
-                    <>
-                      <Clock size={14} />
-                      <span>Revertir a Pendiente</span>
-                    </>
-                  ) : (
-                    <>
-                      <CheckCircle2 size={14} />
-                      <span>✓ Validar Comprobante</span>
-                    </>
-                  )}
-                </button>
+                  <ExternalLink size={14} />
+                  <span>Verificar en Banxico (CEP)</span>
+                </a>
+
+                {selectedComprobante.status === 'rechazado' ? (
+                  <a
+                    href={getCrmRejectWhatsAppUrl(selectedComprobante)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cce-crm-action-btn"
+                    style={{ background: 'rgba(239, 68, 68, 0.25)', borderColor: '#EF4444', color: '#FCA5A5' }}
+                  >
+                    <MessageSquare size={14} />
+                    <span>Solicitar SPEI por WhatsApp</span>
+                  </a>
+                ) : (
+                  <a
+                    href={getCrmWhatsAppUrl(selectedComprobante)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cce-crm-action-btn"
+                    style={{ background: 'rgba(16, 185, 129, 0.25)', borderColor: '#10B981', color: '#34D399' }}
+                  >
+                    <MessageSquare size={14} />
+                    <span>Contactar por WhatsApp</span>
+                  </a>
+                )}
+              </div>
+
+              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                {selectedComprobante.status !== 'validado' && (
+                  <button
+                    type="button"
+                    disabled={updatingId === selectedComprobante.id}
+                    onClick={() => setRegistrationStatus(selectedComprobante.id, 'validado')}
+                    className="cce-crm-action-btn"
+                    style={{ background: 'rgba(16, 185, 129, 0.35)', borderColor: '#10B981', color: '#34D399' }}
+                  >
+                    <CheckCircle2 size={14} />
+                    <span>✓ Validar</span>
+                  </button>
+                )}
+
+                {selectedComprobante.status !== 'rechazado' && (
+                  <button
+                    type="button"
+                    disabled={updatingId === selectedComprobante.id}
+                    onClick={() => setRegistrationStatus(selectedComprobante.id, 'rechazado')}
+                    className="cce-crm-action-btn"
+                    style={{ background: 'rgba(239, 68, 68, 0.25)', borderColor: '#EF4444', color: '#F87171' }}
+                  >
+                    <XCircle size={14} />
+                    <span>❌ Rechazar</span>
+                  </button>
+                )}
+
+                {selectedComprobante.status !== 'pendiente' && (
+                  <button
+                    type="button"
+                    disabled={updatingId === selectedComprobante.id}
+                    onClick={() => setRegistrationStatus(selectedComprobante.id, 'pendiente')}
+                    className="cce-crm-action-btn"
+                    style={{ background: 'rgba(245, 158, 11, 0.25)', borderColor: '#F59E0B', color: '#FCD34D' }}
+                  >
+                    <Clock size={14} />
+                    <span>⏳ Pendiente</span>
+                  </button>
+                )}
+
                 <button
                   type="button"
                   onClick={() => setSelectedComprobante(null)}
