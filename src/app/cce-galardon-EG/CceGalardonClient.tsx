@@ -166,6 +166,8 @@ export default function CceGalardonClient() {
     }
   }, [isAdmin, crmView]);
 
+  const [auditingId, setAuditingId] = useState<string | null>(null);
+
   const fetchCrmData = async () => {
     setCrmLoading(true);
     try {
@@ -173,12 +175,60 @@ export default function CceGalardonClient() {
       const data = await res.json();
       if (res.ok && data.success) {
         setTelemetry(data.telemetry);
-        setCrmRegistrations(data.registrations || []);
+        const regs: GalardonRegistration[] = data.registrations || [];
+        setCrmRegistrations(regs);
+
+        // Si algún registro aún no cuenta con dictamen IA/OCR, disparar auditoría automática en segundo plano
+        if (regs.some((r) => !r.aiAudit)) {
+          fetch('/api/cce-galardon-registro?admin=cce2026', {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'audit' }),
+          })
+            .then((r) => r.json())
+            .then((auditRes) => {
+              if (auditRes?.success && auditRes.auditedCount > 0) {
+                fetch('/api/cce-galardon-registro?admin=cce2026')
+                  .then((r2) => r2.json())
+                  .then((d2) => {
+                    if (d2?.success) {
+                      setCrmRegistrations(d2.registrations || []);
+                    }
+                  })
+                  .catch(() => {});
+              }
+            })
+            .catch(() => {});
+        }
       }
     } catch (err) {
       console.error('Error fetching CRM data:', err);
     } finally {
       setCrmLoading(false);
+    }
+  };
+
+  const runAiAuditForRecord = async (id: string) => {
+    setAuditingId(id);
+    try {
+      const res = await fetch('/api/cce-galardon-registro?admin=cce2026', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'audit', id }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success && data.aiAudit) {
+        setCrmRegistrations((prev) =>
+          prev.map((r) => (r.id === id ? { ...r, aiAudit: data.aiAudit } : r))
+        );
+        setSelectedComprobante((prev) =>
+          prev && prev.id === id ? { ...prev, aiAudit: data.aiAudit } : prev
+        );
+      }
+    } catch (err) {
+      console.error('Error running AI/OCR audit:', err);
+    } finally {
+      setAuditingId(null);
     }
   };
 
@@ -259,6 +309,10 @@ export default function CceGalardonClient() {
       'Total Monto MXN',
       'Modalidad',
       'Estatus Comprobante',
+      'Dictamen IA/OCR',
+      'Banco Detectado OCR',
+      'Monto Leído OCR',
+      'Clave Rastreo OCR',
       'Requiere Factura',
       'RFC',
       'Razón Social',
@@ -280,6 +334,10 @@ export default function CceGalardonClient() {
       r.totalMonto,
       `"${r.tipoBoleto === 'mesa' ? 'Mesa Corporativa (8 Pax)' : 'Individual'}"`,
       `"${r.status}"`,
+      `"${r.aiAudit?.veredicto || 'pendiente'}"`,
+      `"${(r.aiAudit?.bancoDetectado || '').replace(/"/g, '""')}"`,
+      r.aiAudit?.montoDetectado ?? '',
+      `"${(r.aiAudit?.claveRastreo || '').replace(/"/g, '""')}"`,
       `"${r.requiereFactura ? 'SÍ' : 'NO'}"`,
       `"${r.facturaData?.rfc || ''}"`,
       `"${(r.facturaData?.razonSocial || '').replace(/"/g, '""')}"`,
@@ -7176,6 +7234,81 @@ export default function CceGalardonClient() {
                               <Eye size={12} />
                               <span>Ver Archivo</span>
                             </button>
+                            {reg.aiAudit ? (
+                              <div style={{ marginTop: '6px' }}>
+                                <span
+                                  style={{
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: '4px',
+                                    fontSize: '10.5px',
+                                    fontWeight: 800,
+                                    padding: '2px 7px',
+                                    borderRadius: '999px',
+                                    background:
+                                      reg.aiAudit.veredicto === 'legitimo'
+                                        ? 'rgba(16, 185, 129, 0.18)'
+                                        : reg.aiAudit.veredicto === 'revision'
+                                        ? 'rgba(245, 158, 11, 0.2)'
+                                        : 'rgba(239, 68, 68, 0.22)',
+                                    color:
+                                      reg.aiAudit.veredicto === 'legitimo'
+                                        ? '#34D399'
+                                        : reg.aiAudit.veredicto === 'revision'
+                                        ? '#FCD34D'
+                                        : '#F87171',
+                                    border: `1px solid ${
+                                      reg.aiAudit.veredicto === 'legitimo'
+                                        ? 'rgba(16, 185, 129, 0.45)'
+                                        : reg.aiAudit.veredicto === 'revision'
+                                        ? 'rgba(245, 158, 11, 0.45)'
+                                        : 'rgba(239, 68, 68, 0.45)'
+                                    }`,
+                                    whiteSpace: 'nowrap',
+                                  }}
+                                >
+                                  {reg.aiAudit.veredicto === 'legitimo'
+                                    ? `🤖 IA: Legítimo (${reg.aiAudit.confianza}%)`
+                                    : reg.aiAudit.veredicto === 'revision'
+                                    ? '⚠️ IA: Revisar Monto'
+                                    : '🚨 IA: Sospechoso'}
+                                </span>
+                                <div
+                                  style={{
+                                    fontSize: '10.5px',
+                                    color: '#CBD5E1',
+                                    marginTop: '3px',
+                                    fontFamily: 'monospace',
+                                    whiteSpace: 'nowrap',
+                                  }}
+                                >
+                                  {reg.aiAudit.bancoDetectado}
+                                  {reg.aiAudit.montoDetectado !== null
+                                    ? ` · $${reg.aiAudit.montoDetectado.toLocaleString('es-MX')}`
+                                    : ''}
+                                </div>
+                              </div>
+                            ) : (
+                              <div style={{ marginTop: '5px' }}>
+                                <button
+                                  type="button"
+                                  disabled={auditingId === reg.id}
+                                  onClick={() => runAiAuditForRecord(reg.id)}
+                                  style={{
+                                    background: 'rgba(212, 175, 55, 0.15)',
+                                    border: '1px solid rgba(212, 175, 55, 0.4)',
+                                    color: '#FCD34D',
+                                    fontSize: '10.5px',
+                                    fontWeight: 700,
+                                    padding: '2px 7px',
+                                    borderRadius: '6px',
+                                    cursor: 'pointer',
+                                  }}
+                                >
+                                  {auditingId === reg.id ? '⏳ Analizando...' : '🤖 Analizar IA/OCR'}
+                                </button>
+                              </div>
+                            )}
                           </td>
                           <td>
                             {reg.requiereFactura ? (
@@ -7358,6 +7491,60 @@ export default function CceGalardonClient() {
                       </div>
                     </div>
 
+                    {reg.aiAudit && (
+                      <div
+                        style={{
+                          marginBottom: '12px',
+                          padding: '10px 12px',
+                          borderRadius: '10px',
+                          background:
+                            reg.aiAudit.veredicto === 'legitimo'
+                              ? 'rgba(16, 185, 129, 0.12)'
+                              : reg.aiAudit.veredicto === 'revision'
+                              ? 'rgba(245, 158, 11, 0.14)'
+                              : 'rgba(239, 68, 68, 0.15)',
+                          border: `1px solid ${
+                            reg.aiAudit.veredicto === 'legitimo'
+                              ? 'rgba(16, 185, 129, 0.35)'
+                              : reg.aiAudit.veredicto === 'revision'
+                              ? 'rgba(245, 158, 11, 0.35)'
+                              : 'rgba(239, 68, 68, 0.4)'
+                          }`,
+                        }}
+                      >
+                        <div
+                          style={{
+                            fontSize: '11.5px',
+                            fontWeight: 800,
+                            color:
+                              reg.aiAudit.veredicto === 'legitimo'
+                                ? '#34D399'
+                                : reg.aiAudit.veredicto === 'revision'
+                                ? '#FCD34D'
+                                : '#F87171',
+                            marginBottom: '4px',
+                          }}
+                        >
+                          {reg.aiAudit.veredicto === 'legitimo'
+                            ? `🤖 IA/OCR: Comprobante Legítimo (${reg.aiAudit.confianza}%)`
+                            : reg.aiAudit.veredicto === 'revision'
+                            ? '⚠️ IA/OCR: Revisar Monto / Datos'
+                            : '🚨 IA/OCR: Imagen Sospechosa'}
+                        </div>
+                        <div style={{ fontSize: '11px', color: '#E2E8F0', fontFamily: 'monospace' }}>
+                          🏦 {reg.aiAudit.bancoDetectado} · 💰{' '}
+                          {reg.aiAudit.montoDetectado !== null
+                            ? `$${reg.aiAudit.montoDetectado.toLocaleString('es-MX')} MXN`
+                            : 'Por verificar'}
+                          {reg.aiAudit.claveRastreo && reg.aiAudit.claveRastreo !== 'No especificada'
+                            ? ` · 🔑 ${reg.aiAudit.claveRastreo}`
+                            : reg.aiAudit.referencia && reg.aiAudit.referencia !== 'No especificada'
+                            ? ` · Ref: ${reg.aiAudit.referencia}`
+                            : ''}
+                        </div>
+                      </div>
+                    )}
+
                     <div className="cce-crm-card-actions">
                       <button
                         type="button"
@@ -7464,6 +7651,191 @@ export default function CceGalardonClient() {
                     : '⏳ Pendiente de Verificación'}
                 </span>
               </div>
+            </div>
+
+            {/* Panel de Pre-Conciliación Inteligente IA + OCR */}
+            <div
+              style={{
+                marginBottom: '16px',
+                padding: '14px 16px',
+                borderRadius: '12px',
+                background:
+                  selectedComprobante.aiAudit?.veredicto === 'legitimo'
+                    ? 'rgba(16, 185, 129, 0.1)'
+                    : selectedComprobante.aiAudit?.veredicto === 'sospechoso'
+                    ? 'rgba(239, 68, 68, 0.14)'
+                    : 'rgba(245, 158, 11, 0.12)',
+                border: `1px solid ${
+                  selectedComprobante.aiAudit?.veredicto === 'legitimo'
+                    ? 'rgba(16, 185, 129, 0.4)'
+                    : selectedComprobante.aiAudit?.veredicto === 'sospechoso'
+                    ? 'rgba(239, 68, 68, 0.45)'
+                    : 'rgba(245, 158, 11, 0.4)'
+                }`,
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  flexWrap: 'wrap',
+                  gap: '8px',
+                  marginBottom: '10px',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span
+                    style={{
+                      fontSize: '12px',
+                      fontWeight: 800,
+                      color:
+                        selectedComprobante.aiAudit?.veredicto === 'legitimo'
+                          ? '#34D399'
+                          : selectedComprobante.aiAudit?.veredicto === 'sospechoso'
+                          ? '#F87171'
+                          : '#FCD34D',
+                    }}
+                  >
+                    {selectedComprobante.aiAudit
+                      ? selectedComprobante.aiAudit.veredicto === 'legitimo'
+                        ? `🤖 Pre-Auditoría IA / OCR: Comprobante Legítimo (${selectedComprobante.aiAudit.confianza}% confianza)`
+                        : selectedComprobante.aiAudit.veredicto === 'revision'
+                        ? `⚠️ Pre-Auditoría IA / OCR: Revisión Sugerida (${selectedComprobante.aiAudit.confianza}% confianza)`
+                        : `🚨 Pre-Auditoría IA / OCR: Archivo Sospechoso / Sin Datos SPEI`
+                      : '🤖 Pre-Auditoría IA / OCR: Pendiente de escaneo'}
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  disabled={auditingId === selectedComprobante.id}
+                  onClick={() => runAiAuditForRecord(selectedComprobante.id)}
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.08)',
+                    border: '1px solid rgba(212, 175, 55, 0.4)',
+                    color: '#FCD34D',
+                    fontSize: '11px',
+                    fontWeight: 700,
+                    padding: '4px 10px',
+                    borderRadius: '6px',
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '5px',
+                  }}
+                >
+                  <RefreshCw size={12} />
+                  <span>{auditingId === selectedComprobante.id ? 'Escaneando OCR...' : 'Re-escanear con IA/OCR'}</span>
+                </button>
+              </div>
+
+              {selectedComprobante.aiAudit ? (
+                <>
+                  <div
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))',
+                      gap: '8px',
+                      marginBottom: '10px',
+                    }}
+                  >
+                    <div
+                      style={{
+                        background: 'rgba(2, 24, 18, 0.65)',
+                        padding: '8px 10px',
+                        borderRadius: '8px',
+                        border: '1px solid rgba(255, 255, 255, 0.08)',
+                      }}
+                    >
+                      <div style={{ fontSize: '10px', color: '#94A3B8', textTransform: 'uppercase', fontWeight: 700 }}>
+                        Banco Detectado (OCR)
+                      </div>
+                      <div style={{ fontSize: '12.5px', color: '#F8FAFC', fontWeight: 800, marginTop: '2px' }}>
+                        🏦 {selectedComprobante.aiAudit.bancoDetectado}
+                      </div>
+                    </div>
+
+                    <div
+                      style={{
+                        background: 'rgba(2, 24, 18, 0.65)',
+                        padding: '8px 10px',
+                        borderRadius: '8px',
+                        border: '1px solid rgba(255, 255, 255, 0.08)',
+                      }}
+                    >
+                      <div style={{ fontSize: '10px', color: '#94A3B8', textTransform: 'uppercase', fontWeight: 700 }}>
+                        Monto Leído en Captura
+                      </div>
+                      <div
+                        style={{
+                          fontSize: '12.5px',
+                          color: selectedComprobante.aiAudit.montoCoincide ? '#34D399' : '#FCD34D',
+                          fontWeight: 800,
+                          fontFamily: 'monospace',
+                          marginTop: '2px',
+                        }}
+                      >
+                        {selectedComprobante.aiAudit.montoDetectado !== null
+                          ? `$${selectedComprobante.aiAudit.montoDetectado.toLocaleString('es-MX')} MXN ${
+                              selectedComprobante.aiAudit.montoCoincide ? '✓ Coincide' : '⚠️ Difiere'
+                            }`
+                          : 'No legible'}
+                      </div>
+                    </div>
+
+                    <div
+                      style={{
+                        background: 'rgba(2, 24, 18, 0.65)',
+                        padding: '8px 10px',
+                        borderRadius: '8px',
+                        border: '1px solid rgba(255, 255, 255, 0.08)',
+                      }}
+                    >
+                      <div style={{ fontSize: '10px', color: '#94A3B8', textTransform: 'uppercase', fontWeight: 700 }}>
+                        Clave Rastreo / Ref
+                      </div>
+                      <div style={{ fontSize: '12px', color: '#F8FAFC', fontFamily: 'monospace', fontWeight: 700, marginTop: '2px' }}>
+                        {selectedComprobante.aiAudit.claveRastreo !== 'No especificada'
+                          ? selectedComprobante.aiAudit.claveRastreo
+                          : selectedComprobante.aiAudit.referencia !== 'No especificada'
+                          ? `Ref: ${selectedComprobante.aiAudit.referencia}`
+                          : 'No especificada'}
+                      </div>
+                    </div>
+
+                    <div
+                      style={{
+                        background: 'rgba(2, 24, 18, 0.65)',
+                        padding: '8px 10px',
+                        borderRadius: '8px',
+                        border: '1px solid rgba(255, 255, 255, 0.08)',
+                      }}
+                    >
+                      <div style={{ fontSize: '10px', color: '#94A3B8', textTransform: 'uppercase', fontWeight: 700 }}>
+                        Cuenta Destino / Receptor
+                      </div>
+                      <div style={{ fontSize: '11.5px', color: '#E2E8F0', fontWeight: 700, marginTop: '2px' }}>
+                        {selectedComprobante.aiAudit.beneficiarioDetectado}
+                      </div>
+                    </div>
+                  </div>
+
+                  {selectedComprobante.aiAudit.hallazgos && selectedComprobante.aiAudit.hallazgos.length > 0 && (
+                    <div style={{ fontSize: '11.5px', color: '#CBD5E1', lineHeight: 1.45 }}>
+                      {selectedComprobante.aiAudit.hallazgos.map((h, i) => (
+                        <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '2px' }}>
+                          <span style={{ color: 'var(--cce-gold)' }}>•</span>
+                          <span>{h}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </>
+              ) : (
+                <div style={{ fontSize: '12px', color: '#CBD5E1' }}>
+                  Haz clic en &ldquo;Re-escanear con IA/OCR&rdquo; para extraer automáticamente el banco, importe y clave de rastreo de este documento.
+                </div>
+              )}
             </div>
 
             {selectedComprobante.comprobanteUrl &&

@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   // Removido output: 'export' y unoptimized: true para aprovechar todo el poder de Vercel
+  serverExternalPackages: ['tesseract.js', 'sharp', 'unpdf'],
   experimental: {
     optimizeCss: true
   },

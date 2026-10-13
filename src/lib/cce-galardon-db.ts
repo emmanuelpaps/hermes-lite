@@ -12,6 +12,25 @@ import { db } from './firebase';
 import fs from 'fs';
 import path from 'path';
 
+export interface GalardonAiAudit {
+  veredicto: 'legitimo' | 'revision' | 'sospechoso';
+  confianza: number;
+  esComprobanteBancario: boolean;
+  bancoDetectado: string;
+  montoDetectado: number | null;
+  montoEsperado: number;
+  montoCoincide: boolean;
+  cuentaDestinoValida: boolean;
+  beneficiarioDetectado: string;
+  claveRastreo: string;
+  referencia: string;
+  fechaOperacion: string;
+  resumenIa: string;
+  hallazgos: string[];
+  textoExtraido: string;
+  auditadoEn: string;
+}
+
 export interface GalardonRegistration {
   id: string;
   folio: string; // e.g. #CCE-2026-GAL-8472
@@ -35,6 +54,7 @@ export interface GalardonRegistration {
     usoCfdi: string;
     codigoPostal: string;
   };
+  aiAudit?: GalardonAiAudit;
   fecha: string;
   timestamp: number;
   status: 'pendiente' | 'validado' | 'rechazado';
@@ -206,6 +226,24 @@ export async function updateGalardonStatus(id: string, status: 'pendiente' | 'va
   const record = cache.registrations.find(r => r.id === id);
   if (record) {
     record.status = status;
+    persistLocalCache(cache);
+  }
+}
+
+export async function updateGalardonAiAudit(id: string, aiAudit: GalardonAiAudit): Promise<void> {
+  const cleanAudit = sanitizeForFirestore(aiAudit);
+  try {
+    const docRef = doc(db, REGISTRATIONS_COL, id);
+    await updateDoc(docRef, { aiAudit: cleanAudit });
+  } catch (err) {
+    console.error('[cce-galardon-db] Firestore updateAiAudit error:', err);
+    throw new Error('Error al guardar auditoría IA en Cloud Firestore: ' + (err as Error).message);
+  }
+
+  const cache = getLocalCache();
+  const record = cache.registrations.find(r => r.id === id);
+  if (record) {
+    record.aiAudit = cleanAudit;
     persistLocalCache(cache);
   }
 }

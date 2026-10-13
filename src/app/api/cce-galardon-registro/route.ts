@@ -3,13 +3,12 @@ import {
   saveGalardonRegistration,
   getGalardonRegistrations,
   updateGalardonStatus,
+  updateGalardonAiAudit,
   logGalardonVisit,
   getGalardonTelemetry,
   GalardonRegistration,
 } from '@/lib/cce-galardon-db';
-
-const DEFAULT_BOT_TOKEN = '8539545294:AAHw5rsj7Z0Dg9dA6YiXaXU23uf_LnIYZUY';
-const DEFAULT_CHAT_ID = '1813977310';
+import { auditComprobanteWithAiOcr } from '@/lib/cce-galardon-ai-audit';
 
 function safeDecode(val: string): string {
   if (!val) return '';
@@ -18,15 +17,6 @@ function safeDecode(val: string): string {
   } catch {
     return val;
   }
-}
-
-function escapeHtml(text: string): string {
-  return text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
 }
 
 function parseDevice(userAgent: string): { deviceType: string; category: 'ios' | 'android' | 'desktop' } {
@@ -211,6 +201,18 @@ export async function POST(req: NextRequest) {
     const folio = `#CCE-2026-GAL-${randomSuffix}`;
     const recordId = `cce-gal-${Date.now()}-${randomSuffix}`;
 
+    // Enfoque 2: Pre-Conciliación IA + OCR en segundo plano (sin bloquear el registro)
+    let aiAudit = undefined;
+    try {
+      aiAudit = await auditComprobanteWithAiOcr(
+        comprobanteUrl ? String(comprobanteUrl).trim() : undefined,
+        String(comprobanteFileName).trim(),
+        totalMonto
+      );
+    } catch (auditErr) {
+      console.warn('AI/OCR audit non-blocking warning:', auditErr);
+    }
+
     const newRecord: GalardonRegistration = {
       id: recordId,
       folio,
@@ -238,6 +240,7 @@ export async function POST(req: NextRequest) {
             },
           }
         : {}),
+      ...(aiAudit ? { aiAudit } : {}),
       fecha: formattedTime,
       timestamp: Date.now(),
       status: 'pendiente',
@@ -247,73 +250,13 @@ export async function POST(req: NextRequest) {
       ip: clientIp,
     };
 
-    // Save registration & visit
+    // Save registration & visit exclusively in Firestore / CRM (Zero Telegram messages)
     await saveGalardonRegistration(newRecord);
     await logGalardonVisit({
       ip: clientIp,
       deviceCategory,
       timestamp: Date.now(),
     });
-
-    // Telegram Alert to Emmanuel Padilla
-    const botToken = process.env.TELEGRAM_BOT_TOKEN || DEFAULT_BOT_TOKEN;
-    const chatId = process.env.TELEGRAM_CHAT_ID || DEFAULT_CHAT_ID;
-
-    const montoFormateado = `$${totalMonto.toLocaleString('es-MX')} MXN`;
-    const tipoEtiqueta =
-      numBoletos === 8
-        ? '⭐ Mesa Corporativa Completa (8 Pax)'
-        : `${numBoletos} ${numBoletos === 1 ? 'Boleto Individual' : 'Boletos Individuales'}`;
-
-    const asistentesTexto =
-      newRecord.asistentesNombres && newRecord.asistentesNombres.length > 0
-        ? `\n👥 <b>Asistentes:</b> ${escapeHtml(newRecord.asistentesNombres.join(', '))}`
-        : newRecord.asignarNombresDespues
-        ? `\n👥 <b>Asistentes:</b> Por coordinar antes del evento con CCE`
-        : '';
-
-    const facturaTexto = newRecord.requiereFactura
-      ? `\n🧾 <b>Factura Solicitada:</b> RFC: <code>${escapeHtml(newRecord.facturaData?.rfc || '')}</code> | ${escapeHtml(newRecord.facturaData?.razonSocial || '')} (CP ${newRecord.facturaData?.codigoPostal})`
-      : `\n🧾 <b>Factura:</b> No solicitada`;
-
-    const telegramMessage = [
-      `🎟️ <b>¡NUEVO REGISTRO & COMPROBANTE // CCE GALARDÓN 2026!</b> 🏆`,
-      ``,
-      `🔖 <b>Folio Oficial:</b> <code>${folio}</code>`,
-      `👤 <b>Titular:</b> <b>${escapeHtml(newRecord.nombre)}</b>`,
-      `🏢 <b>Empresa:</b> <b>${escapeHtml(newRecord.empresa)}</b> (${escapeHtml(newRecord.cargo)})`,
-      `📱 <b>WhatsApp:</b> <a href="https://wa.me/52${cleanPhone}">${cleanPhone}</a>`,
-      `✉️ <b>Email:</b> <code>${escapeHtml(newRecord.email)}</code>`,
-      ``,
-      `🎟️ <b>Modalidad:</b> ${tipoEtiqueta}`,
-      `💰 <b>Monto Registrado:</b> <b>${montoFormateado}</b>`,
-      `📎 <b>Comprobante Adjunto:</b> <code>${escapeHtml(newRecord.comprobanteFileName)}</code>`,
-      asistentesTexto,
-      facturaTexto,
-      ``,
-      `📍 <b>Ubicación:</b> ${escapeHtml(location)}`,
-      `💻 <b>Dispositivo:</b> ${escapeHtml(deviceType)}`,
-      `🌐 <b>IP:</b> <code>${escapeHtml(clientIp)}</code>`,
-      `🕒 <b>Hora:</b> ${escapeHtml(formattedTime)}`,
-      ``,
-      `🏛️ <i>Evento: Empresario del Año 2026 con Carlos Loret de Mola · Centro de Eventos Cibeles · 19 Nov 2026</i>`,
-      `🔗 <a href="https://hermes-lite.vercel.app/cce-galardon-EG?admin=cce2026">Abrir Consola CRM CCE</a>`,
-    ].filter(Boolean).join('\n');
-
-    try {
-      await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text: telegramMessage,
-          parse_mode: 'HTML',
-          disable_web_page_preview: true,
-        }),
-      });
-    } catch (tgError) {
-      console.warn('Could not dispatch Telegram alert:', tgError);
-    }
 
     return NextResponse.json({
       success: true,
@@ -377,8 +320,50 @@ export async function PATCH(req: NextRequest) {
     }
 
     const body = await req.json().catch(() => ({}));
-    const { id, status } = body;
+    const { id, status, action } = body;
 
+    // Acción 1: Ejecutar o re-ejecutar Auditoría IA / OCR para un registro o todos los pendientes de auditar
+    if (action === 'audit') {
+      const registrations = await getGalardonRegistrations();
+      if (id) {
+        const target = registrations.find(r => r.id === id);
+        if (!target) {
+          return NextResponse.json({ success: false, error: 'Registro no encontrado.' }, { status: 404 });
+        }
+        const aiAudit = await auditComprobanteWithAiOcr(
+          target.comprobanteUrl,
+          target.comprobanteFileName,
+          target.totalMonto
+        );
+        await updateGalardonAiAudit(target.id, aiAudit);
+        return NextResponse.json({
+          success: true,
+          id: target.id,
+          aiAudit,
+        });
+      }
+
+      // Auditar todos los que aún no tengan aiAudit
+      const updated: { id: string; aiAudit: any }[] = [];
+      for (const reg of registrations) {
+        if (!reg.aiAudit) {
+          const aiAudit = await auditComprobanteWithAiOcr(
+            reg.comprobanteUrl,
+            reg.comprobanteFileName,
+            reg.totalMonto
+          );
+          await updateGalardonAiAudit(reg.id, aiAudit);
+          updated.push({ id: reg.id, aiAudit });
+        }
+      }
+      return NextResponse.json({
+        success: true,
+        auditedCount: updated.length,
+        updated,
+      });
+    }
+
+    // Acción 2: Actualizar estatus SPEI
     if (!id || (status !== 'pendiente' && status !== 'validado' && status !== 'rechazado')) {
       return NextResponse.json(
         { success: false, error: 'Parámetros inválidos (id y status válido [pendiente, validado, rechazado] son requeridos).' },
