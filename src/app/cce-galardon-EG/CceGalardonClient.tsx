@@ -1087,18 +1087,18 @@ export default function CceGalardonClient() {
               opacity: 0.92;
             }
 
-            /* Section 06: Footer Transition Sash (Sweeping into obsidian footer) */
+            /* Section 06: Footer Transition Sash (Sweeping behind footer cards) */
             .cce-sash-footer {
               position: absolute;
-              top: 25px;
+              top: 50%;
               left: 50%;
               width: 145vw;
-              transform: translateX(-50%) rotate(6.5deg);
+              transform: translateX(-50%) translateY(-50%) rotate(5deg);
               display: flex;
               flex-direction: column;
               gap: 12px;
               filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.95));
-              opacity: 0.88;
+              opacity: 0.92;
             }
 
             /* Staggered Light Sweep Sheen Delays */
@@ -1128,7 +1128,8 @@ export default function CceGalardonClient() {
             .cce-reg-ticket-summary,
             .cce-form-card,
             .cce-confirm-card,
-            .cce-footer-container {
+            .cce-footer-container,
+            .cce-footer-col {
               position: relative;
               z-index: 5;
             }
@@ -3150,34 +3151,38 @@ export default function CceGalardonClient() {
             .cce-footer {
               position: relative;
               z-index: 10;
-              border-top: 1px solid rgba(212, 175, 55, 0.3);
+              border-top: 1.5px solid rgba(212, 175, 55, 0.4);
               background: linear-gradient(180deg, rgba(2, 20, 15, 0.98) 0%, rgba(1, 10, 8, 1) 100%);
-              padding: 60px 20px 32px 20px;
-              margin-top: 60px;
+              padding: 70px 20px 36px 20px;
+              margin-top: 80px;
+              overflow: hidden;
             }
 
             .cce-footer-container {
               max-width: 1200px;
               margin: 0 auto;
+              position: relative;
+              z-index: 5;
             }
 
             .cce-footer-grid {
               display: grid;
               grid-template-columns: 1fr;
-              gap: 36px;
+              gap: 24px;
             }
 
             @media (min-width: 640px) {
               .cce-footer-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 32px;
+                gap: 24px;
               }
             }
 
             @media (min-width: 1024px) {
               .cce-footer-grid {
-                grid-template-columns: 1.35fr 1fr 1.1fr 1fr;
-                gap: 40px;
+                grid-template-columns: 1.35fr 1.05fr 1.15fr 1fr;
+                gap: 24px;
+                align-items: stretch;
               }
             }
 
@@ -3186,30 +3191,42 @@ export default function CceGalardonClient() {
               flex-direction: column;
               align-items: flex-start;
               text-align: left;
+              background: linear-gradient(180deg, rgba(3, 24, 18, 0.95) 0%, rgba(1, 14, 10, 0.98) 100%);
+              border: 1.5px solid rgba(212, 175, 55, 0.35);
+              border-radius: 20px;
+              padding: 28px 24px;
+              box-shadow: 0 18px 45px rgba(0, 0, 0, 0.85);
+              backdrop-filter: blur(20px);
+              -webkit-backdrop-filter: blur(20px);
+              position: relative;
+              z-index: 5;
+              width: 100%;
             }
 
             .cce-footer-brand {
               display: flex;
               align-items: center;
+              justify-content: center;
               margin-bottom: 20px;
+              width: 100%;
               filter: drop-shadow(0 6px 24px rgba(0, 0, 0, 0.7));
             }
 
             .cce-footer-brand img {
-              height: 200px !important;
+              height: 160px !important;
               width: auto !important;
               max-width: 100%;
             }
 
             @media (max-width: 640px) {
               .cce-footer-brand img {
-                height: 140px !important;
+                height: 130px !important;
               }
             }
 
             .cce-footer-motto {
               font-family: var(--font-cinzel), 'Cinzel', Georgia, serif;
-              font-size: 13.5px;
+              font-size: 14.5px;
               font-style: italic;
               color: var(--cce-gold-light);
               margin-bottom: 12px;
@@ -3217,18 +3234,22 @@ export default function CceGalardonClient() {
             }
 
             .cce-footer-text {
-              font-size: 12.5px;
-              color: #94A3B8;
+              font-size: 13.5px;
+              color: #CBD5E1;
               line-height: 1.6;
-              margin: 0 0 16px 0;
+              margin: 0 0 18px 0;
             }
 
             .cce-footer-contact-inline {
-              display: flex;
+              display: inline-flex;
               align-items: center;
               gap: 8px;
-              font-size: 12.5px;
+              font-size: 13.5px;
               color: #E2E8F0;
+              background: rgba(6, 78, 59, 0.35);
+              border: 1px solid rgba(212, 175, 55, 0.3);
+              padding: 8px 16px;
+              border-radius: 9999px;
             }
 
             .cce-footer-link-highlight {
@@ -3244,15 +3265,19 @@ export default function CceGalardonClient() {
 
             .cce-footer-col-title {
               font-family: var(--font-cinzel), 'Cinzel', Georgia, serif;
-              font-size: 13px;
-              font-weight: 700;
+              font-size: 14.5px;
+              font-weight: 800;
               letter-spacing: 0.08em;
               text-transform: uppercase;
-              color: var(--cce-gold);
-              margin: 0 0 16px 0;
+              color: var(--cce-gold-light);
+              margin: 0 0 18px 0;
+              padding-bottom: 12px;
+              border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+              width: 100%;
               display: flex;
               align-items: center;
-              gap: 8px;
+              gap: 9px;
+              text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95);
             }
 
             .cce-footer-list {
@@ -3270,16 +3295,17 @@ export default function CceGalardonClient() {
               flex-direction: row;
               align-items: center;
               gap: 12px;
-              padding: 6px 8px;
-              border-radius: 10px;
+              padding: 8px 10px;
+              border-radius: 12px;
               transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-              background: rgba(255, 255, 255, 0.02);
-              border: 1px solid rgba(255, 255, 255, 0.05);
+              background: rgba(2, 20, 15, 0.75);
+              border: 1px solid rgba(212, 175, 55, 0.2);
+              width: 100%;
             }
 
             .cce-footer-org-item:hover {
-              background: rgba(6, 78, 59, 0.3);
-              border-color: rgba(212, 175, 55, 0.35);
+              background: rgba(6, 78, 59, 0.4);
+              border-color: rgba(212, 175, 55, 0.4);
               transform: translateX(3px);
             }
 
@@ -3311,30 +3337,41 @@ export default function CceGalardonClient() {
             }
 
             .cce-org-name {
-              font-size: 12.5px;
+              font-size: 13.5px;
               font-weight: 800;
               color: #F8FAFC;
-              letter-spacing: 0.03em;
+              letter-spacing: 0.02em;
             }
 
             .cce-org-desc {
-              font-size: 10.5px;
+              font-size: 11.5px;
               color: #94A3B8;
-              line-height: 1.25;
+              line-height: 1.3;
             }
 
             .cce-footer-info-item {
               display: flex;
               align-items: flex-start;
-              gap: 10px;
+              gap: 12px;
+              padding: 10px 12px;
+              background: rgba(6, 78, 59, 0.25);
+              border: 1px solid rgba(212, 175, 55, 0.2);
+              border-radius: 12px;
+              width: 100%;
+              transition: all 0.2s ease;
+            }
+
+            .cce-footer-info-item:hover {
+              background: rgba(6, 78, 59, 0.45);
+              border-color: rgba(212, 175, 55, 0.45);
             }
 
             .cce-footer-info-icon {
-              width: 26px;
-              height: 26px;
-              border-radius: 6px;
-              background: rgba(212, 175, 55, 0.12);
-              border: 1px solid rgba(212, 175, 55, 0.3);
+              width: 30px;
+              height: 30px;
+              border-radius: 8px;
+              background: rgba(212, 175, 55, 0.15);
+              border: 1px solid rgba(212, 175, 55, 0.4);
               display: flex;
               align-items: center;
               justify-content: center;
@@ -3345,44 +3382,66 @@ export default function CceGalardonClient() {
 
             .cce-footer-info-label {
               display: block;
-              font-size: 10px;
+              font-size: 11px;
               font-family: monospace;
               letter-spacing: 0.12em;
               text-transform: uppercase;
               color: var(--cce-gold);
-              font-weight: 700;
+              font-weight: 800;
+              margin-bottom: 2px;
             }
 
             .cce-footer-info-val {
-              font-size: 12px;
-              color: #CBD5E1;
-              line-height: 1.35;
+              font-size: 13.5px;
+              font-weight: 600;
+              color: #FFFFFF;
+              line-height: 1.4;
             }
 
             .cce-footer-nav-link {
-              font-size: 12.5px;
-              color: #94A3B8;
+              font-size: 14px;
+              font-weight: 600;
+              color: #E2E8F0;
               text-decoration: none;
               transition: all 0.2s ease;
-              display: inline-block;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              padding: 8px 12px;
+              border-radius: 10px;
+              background: rgba(255, 255, 255, 0.03);
+              border: 1px solid rgba(255, 255, 255, 0.06);
+              width: 100%;
             }
 
             .cce-footer-nav-link:hover {
               color: var(--cce-gold-light);
-              transform: translateX(3px);
+              background: rgba(6, 78, 59, 0.4);
+              border-color: rgba(212, 175, 55, 0.4);
+              transform: translateX(4px);
             }
 
             .cce-footer-privacy-btn {
-              background: none;
-              border: none;
-              padding: 0;
-              color: var(--cce-gold);
-              font-size: 12px;
+              background: rgba(212, 175, 55, 0.12);
+              border: 1px solid rgba(212, 175, 55, 0.35);
+              padding: 10px 14px;
+              border-radius: 10px;
+              color: var(--cce-gold-light);
+              font-size: 13px;
               font-weight: 700;
               cursor: pointer;
               text-align: left;
-              text-decoration: underline;
-              transition: color 0.2s ease;
+              transition: all 0.2s ease;
+              width: 100%;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+
+            .cce-footer-privacy-btn:hover {
+              background: rgba(212, 175, 55, 0.25);
+              color: #FFFFFF;
+              border-color: var(--cce-gold);
             }
 
             .cce-footer-privacy-btn:hover {
