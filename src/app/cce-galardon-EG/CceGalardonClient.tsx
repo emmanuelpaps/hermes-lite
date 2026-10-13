@@ -1226,6 +1226,395 @@ export default function CceGalardonClient() {
                 top: 20px;
                 transform: translateX(-50%) rotate(9deg);
               }
+
+              /* =========================================================
+                 ESCALADO DE TIPOGRAFÍA MÓVIL (LEGIBILIDAD ÓPTIMA <= 768PX)
+                 ========================================================= */
+
+              /* Hero & Badges de Contexto */
+              .cce-hero-pill {
+                font-size: 12.5px !important;
+                letter-spacing: 0.1em !important;
+                padding: 7px 16px !important;
+                line-height: 1.35 !important;
+              }
+              .cce-hero-title {
+                font-size: clamp(36px, 9.5vw, 46px) !important;
+                line-height: 1.12 !important;
+                letter-spacing: 0.025em !important;
+              }
+              .cce-hero-motto {
+                font-size: 15.5px !important;
+                letter-spacing: 0.08em !important;
+                line-height: 1.45 !important;
+                margin-bottom: 20px !important;
+              }
+              .cce-hero-lead {
+                font-size: 16.5px !important;
+                line-height: 1.65 !important;
+                margin-bottom: 30px !important;
+              }
+              .cce-hero-cta {
+                font-size: 15px !important;
+                padding: 16px 28px !important;
+                width: 100% !important;
+                max-width: 380px !important;
+              }
+              .cce-badge-card {
+                padding: 22px 18px !important;
+              }
+              .cce-badge-label {
+                font-size: 12.5px !important;
+                letter-spacing: 0.14em !important;
+              }
+              .cce-badge-val {
+                font-size: 19.5px !important;
+              }
+              .cce-badge-sub {
+                font-size: 14.5px !important;
+                line-height: 1.4 !important;
+              }
+
+              /* Encabezados Comunes de Sección */
+              .cce-section-pill {
+                font-size: 12.5px !important;
+                padding: 7px 18px !important;
+                letter-spacing: 0.12em !important;
+              }
+              .cce-section-title {
+                font-size: clamp(26px, 6.8vw, 32px) !important;
+                line-height: 1.25 !important;
+              }
+              .cce-section-subtitle {
+                font-size: 15.5px !important;
+                line-height: 1.6 !important;
+              }
+
+              /* Sección 01: Galardones 2026 */
+              .cce-galardones-motto {
+                font-size: 16.5px !important;
+                line-height: 1.45 !important;
+              }
+              .cce-galardon-badge {
+                font-size: 12px !important;
+                padding: 6px 14px !important;
+                letter-spacing: 0.12em !important;
+              }
+              .cce-galardon-tagline {
+                font-size: 13px !important;
+                letter-spacing: 0.14em !important;
+              }
+              .cce-galardon-name {
+                font-size: 22px !important;
+                line-height: 1.25 !important;
+              }
+              .cce-galardon-desc {
+                font-size: 15.5px !important;
+                line-height: 1.65 !important;
+                max-width: 100% !important;
+              }
+              .cce-galardon-criteria {
+                font-size: 14px !important;
+                padding: 10px 16px !important;
+                line-height: 1.45 !important;
+              }
+              .cce-institutional-contact-bar {
+                font-size: 14.5px !important;
+                line-height: 1.55 !important;
+                padding: 16px 18px !important;
+              }
+
+              /* Sección 02: Carlos Loret de Mola & Conferencia Magistral */
+              .cce-loret-pill {
+                font-size: 12.5px !important;
+                padding: 7px 16px !important;
+                letter-spacing: 0.1em !important;
+              }
+              .cce-loret-name {
+                font-size: clamp(28px, 7vw, 34px) !important;
+                line-height: 1.18 !important;
+              }
+              .cce-loret-role {
+                font-size: 13.5px !important;
+                letter-spacing: 0.14em !important;
+              }
+              .cce-keynote-tag {
+                font-size: 12px !important;
+                letter-spacing: 0.12em !important;
+              }
+              .cce-keynote-title {
+                font-size: 17px !important;
+                line-height: 1.45 !important;
+              }
+              .cce-semblanza-lead {
+                font-size: 16.5px !important;
+                line-height: 1.55 !important;
+                padding-left: 14px !important;
+              }
+              .cce-semblanza-p {
+                font-size: 15.5px !important;
+                line-height: 1.7 !important;
+              }
+              .cce-pillar-title {
+                font-size: 16px !important;
+              }
+              .cce-pillar-desc {
+                font-size: 14.5px !important;
+                line-height: 1.55 !important;
+              }
+              .cce-audio-btn-preview {
+                font-size: 15px !important;
+                padding: 14px 20px !important;
+              }
+              .cce-loret-cta {
+                font-size: 15px !important;
+                padding: 15px 22px !important;
+                letter-spacing: 0.05em !important;
+              }
+
+              /* Sección 03: Boletos & SPEI */
+              .cce-ticket-folio {
+                font-size: 13px !important;
+                letter-spacing: 0.1em !important;
+              }
+              .cce-ticket-badge {
+                font-size: 12px !important;
+                padding: 5px 12px !important;
+              }
+              .cce-modality-tab {
+                font-size: 13.5px !important;
+                padding: 11px 10px !important;
+              }
+              .cce-tab-sub {
+                font-size: 12px !important;
+              }
+              .cce-stepper-label {
+                font-size: 15px !important;
+              }
+              .cce-stepper-value {
+                font-size: 21px !important;
+              }
+              .cce-quick-btn {
+                font-size: 13px !important;
+                padding: 10px 8px !important;
+              }
+              .cce-ticket-price-tag {
+                font-size: 12.5px !important;
+                letter-spacing: 0.12em !important;
+              }
+              .cce-ticket-price-val {
+                font-size: 34px !important;
+              }
+              .cce-ticket-price-note {
+                font-size: 14px !important;
+              }
+              .cce-scarcity-info {
+                font-size: 13.5px !important;
+              }
+              .cce-benefit-item {
+                font-size: 15px !important;
+                line-height: 1.55 !important;
+              }
+              .cce-ticket-footnote {
+                font-size: 13px !important;
+                line-height: 1.45 !important;
+              }
+              .cce-ticket-submit-btn {
+                font-size: 15px !important;
+                padding: 16px 24px !important;
+              }
+              .cce-spei-steps-title {
+                font-size: 20px !important;
+              }
+              .cce-spei-steps-sub {
+                font-size: 14.5px !important;
+              }
+              .cce-step-body-title {
+                font-size: 15.5px !important;
+              }
+              .cce-step-body-desc {
+                font-size: 14px !important;
+                line-height: 1.55 !important;
+              }
+              .cce-bank-title {
+                font-size: 16.5px !important;
+              }
+              .cce-bank-field-label {
+                font-size: 12px !important;
+              }
+              .cce-bank-field-val {
+                font-size: 15.5px !important;
+              }
+              .cce-clabe-num {
+                font-size: 18px !important;
+              }
+              .cce-btn-copy-clabe {
+                font-size: 13.5px !important;
+                padding: 11px 16px !important;
+              }
+
+              /* Sección 04: Puntos de Venta */
+              .cce-pos-badge {
+                font-size: 12px !important;
+              }
+              .cce-pos-name {
+                font-size: 18.5px !important;
+              }
+              .cce-pos-address {
+                font-size: 14.5px !important;
+                line-height: 1.6 !important;
+              }
+              .cce-pos-btn {
+                font-size: 14px !important;
+                padding: 12px 18px !important;
+              }
+              .cce-contact-title {
+                font-size: 22px !important;
+              }
+              .cce-contact-intro {
+                font-size: 15.5px !important;
+                line-height: 1.6 !important;
+              }
+              .cce-contact-pill {
+                font-size: 14.5px !important;
+                padding: 12px 22px !important;
+              }
+              .cce-contact-closing {
+                font-size: 15px !important;
+              }
+
+              /* Sección 05: Formulario de Registro Oficial */
+              .cce-reg-pill {
+                font-size: 13px !important;
+              }
+              .cce-reg-title {
+                font-size: clamp(25px, 6vw, 30px) !important;
+                line-height: 1.25 !important;
+              }
+              .cce-reg-subtitle {
+                font-size: 15.5px !important;
+                line-height: 1.55 !important;
+              }
+              .cce-reg-ticket-label {
+                font-size: 13px !important;
+              }
+              .cce-reg-ticket-val {
+                font-size: 18px !important;
+              }
+              .cce-reg-ticket-total-label {
+                font-size: 13px !important;
+              }
+              .cce-reg-ticket-total-val {
+                font-size: 25px !important;
+              }
+              .cce-label {
+                font-size: 15px !important;
+              }
+              .cce-input,
+              .cce-select {
+                font-size: 16px !important;
+                min-height: 50px !important;
+              }
+              .cce-attendees-title {
+                font-size: 15.5px !important;
+              }
+              .cce-opt-btn {
+                font-size: 14px !important;
+                padding: 9px 16px !important;
+              }
+              .cce-attendees-note {
+                font-size: 14px !important;
+                line-height: 1.5 !important;
+              }
+              .cce-upload-title {
+                font-size: 16.5px !important;
+              }
+              .cce-upload-desc {
+                font-size: 14px !important;
+                line-height: 1.5 !important;
+              }
+              .cce-upload-file-info {
+                font-size: 14.5px !important;
+              }
+              .cce-factura-title {
+                font-size: 16px !important;
+              }
+              .cce-factura-sub {
+                font-size: 14px !important;
+              }
+              .cce-btn-submit {
+                font-size: 17px !important;
+                padding: 16px 24px !important;
+                min-height: 54px !important;
+              }
+              .cce-form-disclaimer {
+                font-size: 13.5px !important;
+                line-height: 1.55 !important;
+              }
+              .cce-confirm-seal {
+                font-size: 13.5px !important;
+                padding: 8px 18px !important;
+              }
+              .cce-confirm-title {
+                font-size: 28px !important;
+              }
+              .cce-confirm-msg {
+                font-size: 16px !important;
+                line-height: 1.6 !important;
+              }
+              .cce-confirm-field-label {
+                font-size: 12.5px !important;
+              }
+              .cce-confirm-field-val {
+                font-size: 15.5px !important;
+              }
+              .cce-btn-cal {
+                font-size: 14.5px !important;
+                padding: 14px 22px !important;
+              }
+              .cce-confirm-note {
+                font-size: 14px !important;
+                line-height: 1.55 !important;
+              }
+
+              /* Footer */
+              .cce-footer-motto {
+                font-size: 15.5px !important;
+              }
+              .cce-footer-text {
+                font-size: 14.5px !important;
+                line-height: 1.65 !important;
+              }
+              .cce-footer-contact-inline {
+                font-size: 14.5px !important;
+              }
+              .cce-footer-col-title {
+                font-size: 15px !important;
+              }
+              .cce-org-name {
+                font-size: 14.5px !important;
+              }
+              .cce-org-desc {
+                font-size: 12.5px !important;
+                line-height: 1.35 !important;
+              }
+              .cce-footer-info-label {
+                font-size: 12px !important;
+              }
+              .cce-footer-info-val {
+                font-size: 14.5px !important;
+                line-height: 1.45 !important;
+              }
+              .cce-footer-nav-link {
+                font-size: 14.5px !important;
+              }
+              .cce-footer-privacy-btn {
+                font-size: 14px !important;
+              }
+              .cce-footer-copy {
+                font-size: 13px !important;
+                line-height: 1.55 !important;
+              }
             }
 
             /* Large Hero Institutional Logo */
@@ -1279,10 +1668,10 @@ export default function CceGalardonClient() {
 
             @media (max-width: 640px) {
               .cce-hero-pill {
-                font-size: 9.5px;
-                letter-spacing: 0.08em;
-                padding: 6px 12px;
-                line-height: 1.3;
+                font-size: 12.5px;
+                letter-spacing: 0.1em;
+                padding: 7px 16px;
+                line-height: 1.35;
               }
             }
 
@@ -1300,9 +1689,9 @@ export default function CceGalardonClient() {
 
             @media (max-width: 640px) {
               .cce-hero-title {
-                font-size: 34px;
-                line-height: 1.15;
-                letter-spacing: 0.03em;
+                font-size: clamp(36px, 9.5vw, 46px);
+                line-height: 1.12;
+                letter-spacing: 0.025em;
               }
             }
 
@@ -1320,8 +1709,9 @@ export default function CceGalardonClient() {
 
             @media (max-width: 640px) {
               .cce-hero-motto {
-                font-size: 12px;
+                font-size: 15.5px;
                 letter-spacing: 0.08em;
+                line-height: 1.45;
               }
             }
 
@@ -1853,8 +2243,9 @@ export default function CceGalardonClient() {
             @media (max-width: 640px) {
               .cce-loret-cta {
                 width: 100%;
-                font-size: 11.5px;
-                padding: 12px 18px;
+                font-size: 15px;
+                padding: 15px 22px;
+                letter-spacing: 0.05em;
               }
             }
 
