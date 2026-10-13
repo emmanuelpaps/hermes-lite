@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 120" width="300" height="120">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F3E5AB" />
+      <stop offset="50%" stop-color="#D4AF37" />
+      <stop offset="100%" stop-color="#AA7C11" />
+    </linearGradient>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#022C22" />
+    </linearGradient>
+  </defs>
+  <!-- Emblem Shield -->
+  <g transform="translate(10, 15)">
+    <rect x="0" y="0" width="90" height="90" rx="18" fill="url(#emeraldGrad)" stroke="url(#goldGrad)" stroke-width="2" />
+    <!-- Stylized Wheat / Produce / Wholesale geometric icon -->
+    <path d="M45 18 C30 30 24 55 45 74 C66 55 60 30 45 18 Z" fill="none" stroke="url(#goldGrad)" stroke-width="2.5" />
+    <path d="M45 28 L45 72" stroke="url(#goldGrad)" stroke-width="2" />
+    <path d="M35 42 Q45 48 55 42" fill="none" stroke="url(#goldGrad)" stroke-width="1.8" />
+    <path d="M32 54 Q45 60 58 54" fill="none" stroke="url(#goldGrad)" stroke-width="1.8" />
+    <circle cx="45" cy="76" r="3" fill="#D4AF37" />
+  </g>
+  <!-- Text -->
+  <g transform="translate(112, 42)">
+    <text font-family="'Cinzel', Georgia, serif" font-size="14" font-weight="800" fill="#FFFFFF" letter-spacing="1.2">CENTRAL DE</text>
+    <text y="20" font-family="'Cinzel', Georgia, serif" font-size="16" font-weight="800" fill="url(#goldGrad)" letter-spacing="1.5">ABASTOS</text>
+    <text y="38" font-family="-apple-system, sans-serif" font-size="9" font-weight="700" fill="#94A3B8" letter-spacing="2">CD. JUÁREZ</text>
+  </g>
+</svg>
