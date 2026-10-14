@@ -3466,9 +3466,9 @@ export default function CceGalardonClient() {
             }
 
             .cce-org-logo-wrap {
-              width: 46px;
-              height: 38px;
-              min-width: 46px;
+              width: 58px;
+              height: 42px;
+              min-width: 58px;
               border-radius: 8px;
               background: rgba(2, 20, 15, 0.92);
               border: 1px solid rgba(212, 175, 55, 0.38);
