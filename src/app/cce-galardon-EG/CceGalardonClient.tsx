@@ -6379,7 +6379,7 @@ export default function CceGalardonClient() {
                   </div>
 
                   <div className="cce-reg-ticket-total">
-                    <div className="cce-reg-ticket-total-label">Inversión Total</div>
+                    <div className="cce-reg-ticket-total-label">Cuota de Recuperación</div>
                     <div className="cce-reg-ticket-total-val">
                       ${(ticketQuantity * 2500).toLocaleString('es-MX')} MXN
                     </div>
