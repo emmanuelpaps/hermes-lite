@@ -3466,21 +3466,23 @@ export default function CceGalardonClient() {
             }
 
             .cce-org-logo-wrap {
-              width: 34px;
-              height: 34px;
-              min-width: 34px;
+              width: 46px;
+              height: 38px;
+              min-width: 46px;
               border-radius: 8px;
-              background: rgba(2, 20, 15, 0.85);
-              border: 1px solid rgba(212, 175, 55, 0.35);
+              background: rgba(2, 20, 15, 0.92);
+              border: 1px solid rgba(212, 175, 55, 0.38);
               display: flex;
               align-items: center;
               justify-content: center;
-              padding: 4px;
+              padding: 3px 4px;
               box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
               overflow: hidden;
             }
 
             .cce-org-logo-wrap img {
+              width: 100%;
+              height: 100%;
               max-width: 100%;
               max-height: 100%;
               object-fit: contain;
@@ -8035,8 +8037,8 @@ export default function CceGalardonClient() {
                     <Image
                       src="/assets/cce-juarez/organismos/index_juarez.png"
                       alt="INDEX Juárez"
-                      width={28}
-                      height={28}
+                      width={38}
+                      height={30}
                       unoptimized
                       style={{ objectFit: 'contain' }}
                     />
@@ -8052,8 +8054,8 @@ export default function CceGalardonClient() {
                     <Image
                       src="/assets/cce-juarez/organismos/cmic_juarez_clean.png"
                       alt="CMIC Juárez"
-                      width={28}
-                      height={28}
+                      width={38}
+                      height={30}
                       unoptimized
                       style={{ objectFit: 'contain' }}
                     />
@@ -8068,9 +8070,9 @@ export default function CceGalardonClient() {
                   <div className="cce-org-logo-wrap">
                     <Image
                       src="/assets/cce-juarez/organismos/canacar_transportistas.svg"
-                      alt="Asociación de Transportistas / CANACAR"
-                      width={28}
-                      height={28}
+                      alt="Asociación de Transportistas de Cd. Juárez"
+                      width={38}
+                      height={30}
                       unoptimized
                       style={{ objectFit: 'contain' }}
                     />
@@ -8086,8 +8088,8 @@ export default function CceGalardonClient() {
                     <Image
                       src="/assets/cce-juarez/organismos/central_abastos_juarez.svg"
                       alt="Central de Abastos de Cd. Juárez"
-                      width={28}
-                      height={28}
+                      width={38}
+                      height={30}
                       unoptimized
                       style={{ objectFit: 'contain' }}
                     />
@@ -8103,8 +8105,8 @@ export default function CceGalardonClient() {
                     <Image
                       src="/assets/cce-juarez/organismos/amexme_juarez.svg"
                       alt="AMEXME Juárez"
-                      width={28}
-                      height={28}
+                      width={38}
+                      height={30}
                       unoptimized
                       style={{ objectFit: 'contain' }}
                     />
@@ -8120,8 +8122,8 @@ export default function CceGalardonClient() {
                     <Image
                       src="/assets/cce-juarez/organismos/ampi_juarez_clean.png"
                       alt="AMPI Juárez"
-                      width={28}
-                      height={28}
+                      width={38}
+                      height={30}
                       unoptimized
                       style={{ objectFit: 'contain' }}
                     />
@@ -8137,8 +8139,8 @@ export default function CceGalardonClient() {
                     <Image
                       src="/assets/cce-juarez/organismos/evm_juarez.png"
                       alt="EVM"
-                      width={28}
-                      height={28}
+                      width={38}
+                      height={30}
                       unoptimized
                       style={{ objectFit: 'contain' }}
                     />
