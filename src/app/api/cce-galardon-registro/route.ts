@@ -6,6 +6,8 @@ import {
   updateGalardonStatus,
   updateGalardonAiAudit,
   logGalardonVisit,
+  saveGalardonAttempt,
+  getGalardonFailedAttempts,
   getGalardonTelemetry,
   GalardonRegistration,
 } from '@/lib/cce-galardon-db';
@@ -43,10 +45,30 @@ function parseDevice(userAgent: string): { deviceType: string; category: 'ios' |
 }
 
 export async function POST(req: NextRequest) {
+  let activeAttemptBase: {
+    attemptId: string;
+    nombre: string;
+    empresa: string;
+    cargo: string;
+    whatsapp: string;
+    email: string;
+    boletos: number;
+    totalMonto: number;
+    comprobanteFileName: string;
+    comprobanteSizeBytes?: number;
+    source?: string;
+    fecha: string;
+    timestamp: number;
+    device: string;
+    deviceCategory: 'ios' | 'android' | 'desktop';
+    ip: string;
+  } | null = null;
+
   try {
     const body = await req.json().catch(() => ({}));
     const {
       action,
+      attemptId,
       source,
       nombre,
       empresa,
@@ -57,6 +79,7 @@ export async function POST(req: NextRequest) {
       asistentesNombres,
       asignarNombresDespues,
       comprobanteFileName,
+      comprobanteSizeBytes,
       comprobanteUrl,
       requiereFactura,
       facturaData,
@@ -80,18 +103,92 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: true });
     }
 
+    const nowAttempt = new Date();
+    const formattedAttemptTime = new Intl.DateTimeFormat('es-MX', {
+      timeZone: 'America/Ciudad_Juarez',
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    }).format(nowAttempt);
+
+    const parsedBoletos = Math.max(1, Math.min(24, parseInt(String(boletos || 1), 10) || 1));
+    const resolvedAttemptId =
+      typeof attemptId === 'string' && attemptId.trim().length > 4
+        ? attemptId.trim()
+        : `attempt-${Date.now()}-${Math.floor(1000 + Math.random() * 9000)}`;
+
+    activeAttemptBase = {
+      attemptId: resolvedAttemptId,
+      nombre: typeof nombre === 'string' ? nombre.trim() : '',
+      empresa: typeof empresa === 'string' ? empresa.trim() : '',
+      cargo: typeof cargo === 'string' ? cargo.trim() : '',
+      whatsapp: String(whatsapp || '').replace(/\D/g, ''),
+      email: typeof email === 'string' ? email.trim().toLowerCase() : '',
+      boletos: parsedBoletos,
+      totalMonto: parsedBoletos * 2500,
+      comprobanteFileName: typeof comprobanteFileName === 'string' ? comprobanteFileName.trim() : '',
+      ...(typeof comprobanteSizeBytes === 'number' ? { comprobanteSizeBytes } : {}),
+      ...(typeof source === 'string' && source ? { source } : {}),
+      fecha: formattedAttemptTime,
+      timestamp: Date.now(),
+      device: deviceType,
+      deviceCategory,
+      ip: clientIp,
+    };
+
+    // Pre-flight lightweight checkpoint (se dispara desde el cliente ANTES de subir el binario pesado)
+    // Garantiza que aunque falle la red móvil o el archivo exceda 4.5 MB, tengamos los datos de contacto en Firestore.
+    if (action === 'attempt') {
+      console.info('[CCE-GALARDON-ATTEMPT-START]', JSON.stringify(activeAttemptBase));
+      await saveGalardonAttempt({
+        ...activeAttemptBase,
+        eventType: 'registration_attempt',
+        status: 'iniciado',
+      });
+      return NextResponse.json(
+        { success: true, attemptId: activeAttemptBase.attemptId },
+        { headers: NO_STORE_HEADERS }
+      );
+    }
+
+    // Registrar también en bitácora del servidor antes de procesar validaciones o archivos
+    console.info('[CCE-GALARDON-POST-RECEIVED]', JSON.stringify(activeAttemptBase));
+    await saveGalardonAttempt({
+      ...activeAttemptBase,
+      eventType: 'registration_attempt',
+      status: 'iniciado',
+    });
+
+    const rejectWithAudit = async (errorMsg: string, statusCode: number, extra: Record<string, any> = {}) => {
+      console.warn(
+        '[CCE-GALARDON-POST-REJECTED]',
+        JSON.stringify({ ...activeAttemptBase, statusCode, errorMsg })
+      );
+      if (activeAttemptBase) {
+        await saveGalardonAttempt({
+          ...activeAttemptBase,
+          eventType: 'registration_attempt',
+          status: 'fallido',
+          errorReason: errorMsg,
+        });
+      }
+      return NextResponse.json(
+        { success: false, error: errorMsg, ...extra },
+        { status: statusCode, headers: NO_STORE_HEADERS }
+      );
+    };
+
     // Ventana especial de regularización / confirmación prioritaria:
     // Jueves 12 de Noviembre de 2026 a las 11:59:59 P.M. (Ciudad Juárez, MST UTC-7 -> 2026-11-13T06:59:59Z)
     const RECOVERY_DEADLINE_MS = 1794553199000;
     if (source === 'confirmacion_especial' && Date.now() > RECOVERY_DEADLINE_MS) {
-      return NextResponse.json(
-        {
-          success: false,
-          error:
-            'El plazo extraordinario de confirmación concluyó el jueves 12 de noviembre a las 11:59 p.m. Para asistencia directa comunícate al WhatsApp del CCE (656 180 3055).',
-          deadlineExpired: true,
-        },
-        { status: 403, headers: NO_STORE_HEADERS }
+      return rejectWithAudit(
+        'El plazo extraordinario de confirmación concluyó el jueves 12 de noviembre a las 11:59 p.m. Para asistencia directa comunícate al WhatsApp del CCE (656 180 3055).',
+        403,
+        { deadlineExpired: true }
       );
     }
 
@@ -100,52 +197,34 @@ export async function POST(req: NextRequest) {
     // Cierre estricto: 19 de Noviembre de 2026 a las 11:00 A.M. (17:00:00 UTC)
     const EVENT_DEADLINE_MS = 1795107600000;
     if (Date.now() > EVENT_DEADLINE_MS) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: 'El periodo de registro oficial ha concluido formalmente. Las acreditaciones cerraron 2 horas después de iniciado el evento (19 de Noviembre de 2026 a las 11:00 A.M.).',
-          deadlineExpired: true,
-        },
-        { status: 403 }
+      return rejectWithAudit(
+        'El periodo de registro oficial ha concluido formalmente. Las acreditaciones cerraron 2 horas después de iniciado el evento (19 de Noviembre de 2026 a las 11:00 A.M.).',
+        403,
+        { deadlineExpired: true }
       );
     }
 
     // Validations
     if (!nombre || typeof nombre !== 'string' || nombre.trim().length < 3) {
-      return NextResponse.json(
-        { success: false, error: 'Por favor ingresa un nombre completo válido (mínimo 3 caracteres).' },
-        { status: 400 }
-      );
+      return rejectWithAudit('Por favor ingresa un nombre completo válido (mínimo 3 caracteres).', 400);
     }
 
     if (!empresa || typeof empresa !== 'string' || empresa.trim().length < 2) {
-      return NextResponse.json(
-        { success: false, error: 'Por favor ingresa el nombre de tu empresa u organización.' },
-        { status: 400 }
-      );
+      return rejectWithAudit('Por favor ingresa el nombre de tu empresa u organización.', 400);
     }
 
     if (!cargo || typeof cargo !== 'string' || cargo.trim().length < 2) {
-      return NextResponse.json(
-        { success: false, error: 'Por favor ingresa tu cargo o puesto directivo.' },
-        { status: 400 }
-      );
+      return rejectWithAudit('Por favor ingresa tu cargo o puesto directivo.', 400);
     }
 
     const cleanPhone = String(whatsapp || '').replace(/\D/g, '');
     if (cleanPhone.length < 10) {
-      return NextResponse.json(
-        { success: false, error: 'Por favor ingresa un número de teléfono celular con WhatsApp a 10 dígitos.' },
-        { status: 400 }
-      );
+      return rejectWithAudit('Por favor ingresa un número de teléfono celular con WhatsApp a 10 dígitos.', 400);
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email || !emailRegex.test(String(email).trim())) {
-      return NextResponse.json(
-        { success: false, error: 'Por favor ingresa un correo electrónico válido.' },
-        { status: 400 }
-      );
+      return rejectWithAudit('Por favor ingresa un correo electrónico válido.', 400);
     }
 
     const numBoletos = Math.max(1, Math.min(24, parseInt(String(boletos || 1), 10)));
@@ -153,10 +232,7 @@ export async function POST(req: NextRequest) {
     const tipoBoleto = numBoletos === 8 ? 'mesa' : 'individual';
 
     if (!comprobanteFileName) {
-      return NextResponse.json(
-        { success: false, error: 'Es obligatorio adjuntar el comprobante de transferencia bancaria SPEI.' },
-        { status: 400 }
-      );
+      return rejectWithAudit('Es obligatorio adjuntar el comprobante de transferencia bancaria SPEI.', 400);
     }
 
     // Blindaje de archivo: Validación estricta de Magic Bytes binarios
@@ -165,9 +241,9 @@ export async function POST(req: NextRequest) {
       if (parts[1]) {
         const fileBuffer = Buffer.from(parts[1], 'base64');
         if (fileBuffer.length < 3000) {
-          return NextResponse.json(
-            { success: false, error: 'El archivo adjunto es demasiado pequeño o está incompleto. Por favor adjunta tu comprobante SPEI legible.' },
-            { status: 400 }
+          return rejectWithAudit(
+            'El archivo adjunto es demasiado pequeño o está incompleto. Por favor adjunta tu comprobante SPEI legible.',
+            400
           );
         }
         const isPdf = fileBuffer.subarray(0, 5).toString('binary') === '%PDF-';
@@ -176,9 +252,9 @@ export async function POST(req: NextRequest) {
         const isWebp = fileBuffer.subarray(0, 4).toString('binary') === 'RIFF' && fileBuffer.subarray(8, 12).toString('binary') === 'WEBP';
 
         if (!isPdf && !isPng && !isJpg && !isWebp) {
-          return NextResponse.json(
-            { success: false, error: 'Formato de archivo no válido. Solo se permiten comprobantes en formato PDF, PNG o JPG auténticos.' },
-            { status: 400 }
+          return rejectWithAudit(
+            'Formato de archivo no válido. Solo se permiten comprobantes en formato PDF, PNG o JPG auténticos.',
+            400
           );
         }
       }
@@ -187,22 +263,16 @@ export async function POST(req: NextRequest) {
     // Facturación validation if requested
     if (requiereFactura) {
       if (!facturaData?.rfc || facturaData.rfc.trim().length < 12) {
-        return NextResponse.json(
-          { success: false, error: 'Por favor ingresa un RFC válido (12 o 13 caracteres).' },
-          { status: 400 }
-        );
+        return rejectWithAudit('Por favor ingresa un RFC válido (12 o 13 caracteres).', 400);
       }
       if (!facturaData?.razonSocial || facturaData.razonSocial.trim().length < 3) {
-        return NextResponse.json(
-          { success: false, error: 'Por favor ingresa la Razón Social tal como aparece en tu Constancia de Situación Fiscal.' },
-          { status: 400 }
+        return rejectWithAudit(
+          'Por favor ingresa la Razón Social tal como aparece en tu Constancia de Situación Fiscal.',
+          400
         );
       }
       if (!facturaData?.codigoPostal || facturaData.codigoPostal.trim().length !== 5) {
-        return NextResponse.json(
-          { success: false, error: 'Por favor ingresa el Código Postal fiscal a 5 dígitos.' },
-          { status: 400 }
-        );
+        return rejectWithAudit('Por favor ingresa el Código Postal fiscal a 5 dígitos.', 400);
       }
     }
 
@@ -278,6 +348,16 @@ export async function POST(req: NextRequest) {
     // Garantiza que ningún timeout o fallo en worker pueda perder jamás una acreditación.
     await saveGalardonRegistration(newRecord);
 
+    // Marcar el checkpoint de intento como completado exitosamente con su folio
+    if (activeAttemptBase) {
+      saveGalardonAttempt({
+        ...activeAttemptBase,
+        eventType: 'registration_attempt',
+        status: 'completado',
+        folio: newRecord.folio,
+      }).catch(() => {});
+    }
+
     // Registrar telemetría sin bloquear la acreditación
     logGalardonVisit({
       ip: clientIp,
@@ -313,7 +393,18 @@ export async function POST(req: NextRequest) {
       { headers: NO_STORE_HEADERS }
     );
   } catch (error: any) {
-    console.error('Error in /api/cce-galardon-registro POST:', error);
+    console.error(
+      '[CCE-GALARDON-POST-EXCEPTION]',
+      JSON.stringify({ attempt: activeAttemptBase, error: error?.message || String(error) })
+    );
+    if (activeAttemptBase) {
+      await saveGalardonAttempt({
+        ...activeAttemptBase,
+        eventType: 'registration_attempt',
+        status: 'fallido',
+        errorReason: error?.message || 'Excepción interna del servidor',
+      }).catch(() => {});
+    }
     return NextResponse.json(
       { success: false, error: error.message || 'Error interno del servidor' },
       { status: 500, headers: NO_STORE_HEADERS }
@@ -366,7 +457,10 @@ export async function GET(req: NextRequest) {
     }
 
     const registrations = await getGalardonRegistrations();
-    const telemetry = await getGalardonTelemetry(registrations);
+    const [telemetry, failedAttempts] = await Promise.all([
+      getGalardonTelemetry(registrations),
+      getGalardonFailedAttempts(registrations),
+    ]);
 
     // Blindaje contra el límite de 4.5 MB de respuesta en Vercel Serverless:
     // Si el listado acumulado supera 3.2 MB, los registros excedentes omiten el binario inline
@@ -389,6 +483,7 @@ export async function GET(req: NextRequest) {
         success: true,
         telemetry,
         registrations: safeRegistrations,
+        failedAttempts,
       },
       { headers: NO_STORE_HEADERS }
     );

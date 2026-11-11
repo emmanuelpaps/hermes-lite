@@ -71,6 +71,29 @@ export interface GalardonVisitLog {
   timestamp: number;
 }
 
+export interface GalardonRegistrationAttempt {
+  attemptId: string;
+  eventType: 'registration_attempt';
+  status: 'iniciado' | 'fallido' | 'completado';
+  folio?: string;
+  nombre: string;
+  empresa: string;
+  cargo: string;
+  whatsapp: string;
+  email: string;
+  boletos: number;
+  totalMonto: number;
+  comprobanteFileName: string;
+  comprobanteSizeBytes?: number;
+  source?: string;
+  errorReason?: string;
+  fecha: string;
+  timestamp: number;
+  device: string;
+  deviceCategory: 'ios' | 'android' | 'desktop';
+  ip: string;
+}
+
 export interface GalardonTelemetryData {
   totalVisits: number;
   uniqueVisits: number;
@@ -306,6 +329,70 @@ export async function logGalardonVisit(visit: GalardonVisitLog): Promise<void> {
   persistLocalCache(cache);
 }
 
+export async function saveGalardonAttempt(attempt: GalardonRegistrationAttempt): Promise<void> {
+  try {
+    const cleanId = attempt.attemptId.startsWith('attempt-')
+      ? attempt.attemptId
+      : `attempt-${attempt.attemptId}`;
+    const docRef = doc(db, TELEMETRY_COL, cleanId);
+    const cleanAttempt = sanitizeForFirestore({
+      ...attempt,
+      attemptId: cleanId,
+      eventType: 'registration_attempt' as const,
+    });
+    await withFirestoreRetry(() => setDoc(docRef, cleanAttempt, { merge: true }));
+  } catch (err) {
+    console.warn('[cce-galardon-db] Attempt checkpoint warning:', err);
+  }
+}
+
+export async function getGalardonFailedAttempts(
+  registrations: GalardonRegistration[] = []
+): Promise<GalardonRegistrationAttempt[]> {
+  try {
+    const telemRef = collection(db, TELEMETRY_COL);
+    const q = query(telemRef, orderBy('timestamp', 'desc'), limit(2000));
+    const snap = await withFirestoreRetry(() => getDocs(q));
+
+    const registeredPhones = new Set(
+      registrations.map((r) => String(r.whatsapp || '').replace(/\D/g, '')).filter(Boolean)
+    );
+    const registeredEmails = new Set(
+      registrations.map((r) => String(r.email || '').trim().toLowerCase()).filter(Boolean)
+    );
+
+    const byPerson = new Map<string, GalardonRegistrationAttempt>();
+    const now = Date.now();
+
+    snap.forEach((d) => {
+      const raw = d.data() as any;
+      if (!d.id.startsWith('attempt-') && raw?.eventType !== 'registration_attempt') return;
+      const att = raw as GalardonRegistrationAttempt;
+      if (att.status === 'completado') return;
+      // Ignore in-flight attempts started less than 45 seconds ago unless explicitly marked 'fallido'
+      if (att.status === 'iniciado' && now - (att.timestamp || 0) < 45_000) return;
+
+      const phone = String(att.whatsapp || '').replace(/\D/g, '');
+      const email = String(att.email || '').trim().toLowerCase();
+      // If this person already succeeded in cce_galardon_registros, do not show as lost
+      if ((phone && registeredPhones.has(phone)) || (email && registeredEmails.has(email))) {
+        return;
+      }
+
+      const dedupeKey = phone || email || att.ip || att.attemptId;
+      const existing = byPerson.get(dedupeKey);
+      if (!existing || (att.timestamp || 0) > (existing.timestamp || 0)) {
+        byPerson.set(dedupeKey, att);
+      }
+    });
+
+    return Array.from(byPerson.values()).sort((a, b) => b.timestamp - a.timestamp);
+  } catch (err) {
+    console.warn('[cce-galardon-db] Could not read failed attempts:', err);
+    return [];
+  }
+}
+
 export async function getGalardonTelemetry(
   registrations?: GalardonRegistration[]
 ): Promise<GalardonTelemetryData> {
@@ -318,7 +405,11 @@ export async function getGalardonTelemetry(
     const q = query(telemRef, orderBy('timestamp', 'desc'), limit(2000));
     const snap = await getDocs(q);
     snap.forEach(d => {
-      visits.push(d.data() as GalardonVisitLog);
+      const data = d.data() as any;
+      if (d.id.startsWith('attempt-') || data?.eventType === 'registration_attempt') {
+        return;
+      }
+      visits.push(data as GalardonVisitLog);
     });
     // Sync into memory cache
     cache.visits = visits;

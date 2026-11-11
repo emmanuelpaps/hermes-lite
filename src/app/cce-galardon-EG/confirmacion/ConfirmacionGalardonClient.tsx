@@ -302,8 +302,27 @@ export default function ConfirmacionGalardonClient() {
     }
 
     setFormSubmitting(true);
+    const attemptId = `attempt-${Date.now()}-${Math.floor(1000 + Math.random() * 9000)}`;
 
     try {
+      await fetch('/api/cce-galardon-registro', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'attempt',
+          attemptId,
+          source: 'confirmacion_especial',
+          nombre: nombre.trim(),
+          empresa: empresa.trim(),
+          cargo: cargo.trim(),
+          whatsapp: cleanPhone,
+          email: email.trim().toLowerCase(),
+          boletos: ticketQuantity,
+          comprobanteFileName,
+          comprobanteSizeBytes: comprobanteFile?.size || 0,
+        }),
+      }).catch(() => {});
+
       let finalComprobanteUrl = comprobantePreview || '';
       if ((comprobanteReading || !finalComprobanteUrl) && comprobanteReadPromiseRef.current) {
         finalComprobanteUrl = await comprobanteReadPromiseRef.current;
@@ -313,6 +332,7 @@ export default function ConfirmacionGalardonClient() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          attemptId,
           source: 'confirmacion_especial',
           nombre: nombre.trim(),
           empresa: empresa.trim(),

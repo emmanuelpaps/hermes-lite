@@ -50,7 +50,11 @@ import {
   CheckCheck,
   XCircle,
 } from 'lucide-react';
-import { GalardonRegistration, GalardonTelemetryData } from '@/lib/cce-galardon-db';
+import {
+  GalardonRegistration,
+  GalardonRegistrationAttempt,
+  GalardonTelemetryData,
+} from '@/lib/cce-galardon-db';
 
 export default function CceGalardonClient() {
   const [scrolled, setScrolled] = useState(false);
@@ -66,6 +70,7 @@ export default function CceGalardonClient() {
   const [crmLoading, setCrmLoading] = useState(false);
   const [telemetry, setTelemetry] = useState<GalardonTelemetryData | null>(null);
   const [crmRegistrations, setCrmRegistrations] = useState<GalardonRegistration[]>([]);
+  const [crmFailedAttempts, setCrmFailedAttempts] = useState<GalardonRegistrationAttempt[]>([]);
   const [crmFilter, setCrmFilter] = useState<'todos' | 'pendiente' | 'validado' | 'rechazado'>('todos');
   const [crmSearch, setCrmSearch] = useState('');
   const [selectedComprobante, setSelectedComprobante] = useState<GalardonRegistration | null>(null);
@@ -206,6 +211,7 @@ export default function CceGalardonClient() {
         setTelemetry(data.telemetry);
         const regs: GalardonRegistration[] = data.registrations || [];
         setCrmRegistrations(regs);
+        setCrmFailedAttempts(Array.isArray(data.failedAttempts) ? data.failedAttempts : []);
 
         // Si algún registro aún no cuenta con dictamen IA/OCR, disparar auditoría automática una sola vez por sesión
         if (regs.some((r) => !r.aiAudit) && !hasTriggeredAutoAuditRef.current) {
@@ -572,8 +578,29 @@ export default function CceGalardonClient() {
     }
 
     setFormSubmitting(true);
+    const attemptId = `attempt-${Date.now()}-${Math.floor(1000 + Math.random() * 9000)}`;
 
     try {
+      // PASO 0 (Pre-Flight ~400B): Guardar datos de contacto en Firestore ANTES de transmitir el archivo pesado.
+      // Garantiza 0% pérdida de prospectos aunque falle la red móvil o el comprobante supere el límite de carga.
+      await fetch('/api/cce-galardon-registro', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'attempt',
+          attemptId,
+          source: 'public_landing',
+          nombre: nombre.trim(),
+          empresa: empresa.trim(),
+          cargo: cargo.trim(),
+          whatsapp: cleanPhone,
+          email: email.trim().toLowerCase(),
+          boletos: ticketQuantity,
+          comprobanteFileName,
+          comprobanteSizeBytes: comprobanteFile?.size || 0,
+        }),
+      }).catch(() => {});
+
       // Si el archivo aún se está codificando/comprimiendo en memoria, esperar antes de enviar
       let finalComprobanteUrl = comprobantePreview || '';
       if ((comprobanteReading || !finalComprobanteUrl) && comprobanteReadPromiseRef.current) {
@@ -584,6 +611,8 @@ export default function CceGalardonClient() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          attemptId,
+          source: 'public_landing',
           nombre: nombre.trim(),
           empresa: empresa.trim(),
           cargo: cargo.trim(),
@@ -7240,6 +7269,86 @@ export default function CceGalardonClient() {
               </button>
             </div>
           </div>
+
+          {/* Alerta Automática de Intentos Incompletos / Fallidos (visible solo si existen) */}
+          {crmFailedAttempts.length > 0 && (
+            <div
+              style={{
+                maxWidth: '1280px',
+                margin: '0 auto 22px auto',
+                padding: '16px 20px',
+                borderRadius: '16px',
+                background: 'rgba(245, 158, 11, 0.12)',
+                border: '1px solid rgba(245, 158, 11, 0.45)',
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  fontSize: '13px',
+                  fontWeight: 800,
+                  color: '#FCD34D',
+                  marginBottom: '10px',
+                }}
+              >
+                <AlertCircle size={16} />
+                <span>
+                  Bitácora de Rescate: {crmFailedAttempts.length}{' '}
+                  {crmFailedAttempts.length === 1
+                    ? 'intento de registro no concluido'
+                    : 'intentos de registro no concluidos'}
+                </span>
+              </div>
+              <div style={{ display: 'grid', gap: '8px' }}>
+                {crmFailedAttempts.map((att) => (
+                  <div
+                    key={att.attemptId}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      flexWrap: 'wrap',
+                      gap: '10px',
+                      padding: '10px 14px',
+                      borderRadius: '10px',
+                      background: 'rgba(2, 20, 15, 0.8)',
+                      border: '1px solid rgba(212, 175, 55, 0.25)',
+                      fontSize: '12.5px',
+                    }}
+                  >
+                    <div>
+                      <strong style={{ color: '#FFFFFF' }}>{att.nombre || 'Sin nombre'}</strong> ·{' '}
+                      <span style={{ color: '#CBD5E1' }}>{att.empresa || 'Sin empresa'}</span> ·{' '}
+                      <span style={{ color: 'var(--cce-gold-light)', fontWeight: 800 }}>
+                        {att.boletos} bol (${att.totalMonto?.toLocaleString('es-MX')} MXN)
+                      </span>
+                      <div style={{ fontSize: '11px', color: '#94A3B8', marginTop: '2px' }}>
+                        {att.fecha} · 📱 {att.whatsapp || 'N/A'} · ✉️ {att.email || 'N/A'} ·{' '}
+                        <span style={{ color: '#FCA5A5' }}>
+                          {att.errorReason || 'Carga interrumpida antes de finalizar'}
+                        </span>
+                      </div>
+                    </div>
+                    {att.whatsapp && (
+                      <a
+                        href={`https://wa.me/52${att.whatsapp}?text=${encodeURIComponent(
+                          `Buen día ${att.nombre || ''}. Notamos que iniciaste tu registro para la Entrega de Galardones 2026 del CCE Ciudad Juárez (${att.boletos} boletos) pero no se completó el envío de tu comprobante. Puedes concluirlo aquí: https://hermes-lite.vercel.app/cce-galardon-EG/confirmacion`
+                        )}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="cce-crm-wa-btn"
+                      >
+                        <MessageSquare size={13} />
+                        <span>Asistir por WA</span>
+                      </a>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Desktop Table View (>= 768px) */}
           <div className="cce-crm-desktop-table">
