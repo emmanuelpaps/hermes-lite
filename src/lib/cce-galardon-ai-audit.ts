@@ -1,12 +1,14 @@
 import sharp from 'sharp';
 import { createWorker } from 'tesseract.js';
 import { extractText } from 'unpdf';
+import fs from 'fs';
+import path from 'path';
 import { GalardonAiAudit } from './cce-galardon-db';
 
 /**
  * Extrae imágenes JPEG embebidas dentro de un buffer PDF (por ejemplo, PDFs escaneados o impresos como imagen).
  */
-function extractEmbeddedJpegFromPdf(pdfBuffer: Buffer): Buffer | null {
+export function extractEmbeddedJpegFromPdf(pdfBuffer: Buffer): Buffer | null {
   let jpgStart = -1;
   for (let i = 0; i < pdfBuffer.length - 3; i++) {
     if (pdfBuffer[i] === 0xff && pdfBuffer[i + 1] === 0xd8 && pdfBuffer[i + 2] === 0xff) {
@@ -28,30 +30,162 @@ function extractEmbeddedJpegFromPdf(pdfBuffer: Buffer): Buffer | null {
 }
 
 /**
+ * Optimiza el comprobante en Base64 para que SIEMPRE quepa con holgura debajo del límite de 1 MiB de Cloud Firestore,
+ * sin perder legibilidad visual en el CRM.
+ */
+export async function optimizeComprobanteForStorage(
+  dataUrl: string | undefined,
+  fileName: string
+): Promise<string | undefined> {
+  if (!dataUrl || !dataUrl.startsWith('data:')) return undefined;
+  // Si ya es ligero (< 550 KB en texto Base64), guardar intacto
+  if (dataUrl.length <= 550_000) return dataUrl;
+
+  const parts = dataUrl.split(',');
+  if (!parts[1]) return undefined;
+
+  const buffer = Buffer.from(parts[1], 'base64');
+  const isPdf =
+    buffer.subarray(0, 5).toString('binary') === '%PDF-' ||
+    fileName.toLowerCase().endsWith('.pdf') ||
+    dataUrl.startsWith('data:application/pdf');
+
+  if (isPdf) {
+    // Un PDF hasta ~720,000 caracteres Base64 (~540 KB binario) cabe seguro en Firestore (< 1 MiB)
+    if (dataUrl.length <= 720_000) {
+      return dataUrl;
+    }
+    // Si el PDF pesa más de 540 KB y contiene imagen embebida, extraer vista previa JPEG optimizada
+    const embeddedJpg = extractEmbeddedJpegFromPdf(buffer);
+    if (embeddedJpg) {
+      try {
+        const compressed = await sharp(embeddedJpg)
+          .resize({ width: 1400, withoutEnlargement: true })
+          .jpeg({ quality: 76 })
+          .toBuffer();
+        if (compressed.length <= 450_000) {
+          return `data:image/jpeg;base64,${compressed.toString('base64')}`;
+        }
+      } catch {
+        // Ignorar si no es JPEG decodificable
+      }
+    }
+    // Omitir binario inline excesivo para garantizar que el registro jamás sea rechazado por Firestore (1 MiB)
+    return undefined;
+  }
+
+  // Es imagen (PNG, JPG, WebP): comprimir con Sharp a JPEG nítido < 350 KB
+  try {
+    const compressed = await sharp(buffer)
+      .rotate()
+      .resize({ width: 1400, height: 1800, fit: 'inside', withoutEnlargement: true })
+      .jpeg({ quality: 78, mozjpeg: true })
+      .toBuffer();
+    const outDataUrl = `data:image/jpeg;base64,${compressed.toString('base64')}`;
+    if (outDataUrl.length <= 720_000) {
+      return outDataUrl;
+    }
+    const ultraCompressed = await sharp(buffer)
+      .rotate()
+      .resize({ width: 1000, height: 1400, fit: 'inside', withoutEnlargement: true })
+      .jpeg({ quality: 65 })
+      .toBuffer();
+    const fallbackUrl = `data:image/jpeg;base64,${ultraCompressed.toString('base64')}`;
+    return fallbackUrl.length <= 720_000 ? fallbackUrl : undefined;
+  } catch (err) {
+    console.warn('Image compression warning:', err);
+    return dataUrl.length <= 720_000 ? dataUrl : undefined;
+  }
+}
+
+/**
  * Ejecuta OCR optimizado con pre-procesamiento de alto contraste en Sharp + Tesseract.js
+ * Blindado con errorHandler y timeout estricto de 7.5s para evitar cuelgues en entornos Serverless.
  */
 async function runOcrOnImageBuffer(imageBuffer: Buffer): Promise<string> {
-  try {
+  let workerRef: Awaited<ReturnType<typeof createWorker>> | null = null;
+
+  const ocrTask = async (): Promise<string> => {
     const meta = await sharp(imageBuffer).metadata();
-    const targetWidth = Math.min(2800, Math.max(1400, (meta.width || 1200) * 2));
+    const targetWidth = Math.min(2200, Math.max(1200, (meta.width || 1200) * 1.5));
 
     const enhancedBuffer = await sharp(imageBuffer)
-      .resize({ width: targetWidth, withoutEnlargement: false })
+      .rotate()
+      .resize({ width: Math.round(targetWidth), withoutEnlargement: false })
       .grayscale()
       .normalize()
       .sharpen()
       .toBuffer();
 
-    const worker = await createWorker('spa', 1, {
-      cachePath: '/tmp',
-    });
+    const candidateWorkerPath = path.join(
+      process.cwd(),
+      'node_modules/tesseract.js/src/worker-script/node/index.js'
+    );
+    const candidateParentIndex = path.join(
+      process.cwd(),
+      'node_modules/tesseract.js/src/worker-script/index.js'
+    );
 
-    try {
-      const result = await worker.recognize(enhancedBuffer);
-      return result?.data?.text || '';
-    } finally {
-      await worker.terminate();
+    // Verificar antes de lanzar worker_threads que el bundle Serverless tenga todos los archivos requeridos
+    if (!fs.existsSync(candidateWorkerPath) || !fs.existsSync(candidateParentIndex)) {
+      console.warn('[cce-galardon-ai-audit] Tesseract worker scripts ausentes en bundle serverless; omitiendo OCR de imagen.');
+      return '';
     }
+
+    return await new Promise<string>((resolve) => {
+      let settled = false;
+      const finish = (val: string) => {
+        if (!settled) {
+          settled = true;
+          resolve(val);
+        }
+      };
+
+      createWorker('spa', 1, {
+        cachePath: '/tmp',
+        workerPath: candidateWorkerPath,
+        errorHandler: (err) => {
+          console.warn('[cce-galardon-ai-audit] Worker error capturado:', err);
+          finish('');
+        },
+      })
+        .then(async (worker) => {
+          workerRef = worker;
+          try {
+            const result = await worker.recognize(enhancedBuffer);
+            finish(result?.data?.text || '');
+          } catch (recErr) {
+            console.warn('[cce-galardon-ai-audit] Recognize error:', recErr);
+            finish('');
+          } finally {
+            try {
+              await worker.terminate();
+            } catch {
+              // Ignore terminate errors
+            }
+            workerRef = null;
+          }
+        })
+        .catch((initErr) => {
+          console.warn('[cce-galardon-ai-audit] createWorker catch:', initErr);
+          finish('');
+        });
+    });
+  };
+
+  const timeoutPromise = new Promise<string>((resolve) => {
+    setTimeout(() => {
+      console.warn('[cce-galardon-ai-audit] OCR superó el límite de 7.5s; continuando sin bloquear.');
+      if (workerRef) {
+        workerRef.terminate().catch(() => {});
+        workerRef = null;
+      }
+      resolve('');
+    }, 7500);
+  });
+
+  try {
+    return await Promise.race([ocrTask(), timeoutPromise]);
   } catch (err) {
     console.warn('Error en OCR de imagen:', err);
     return '';
@@ -315,6 +449,11 @@ export function analyzeReceiptText(
     veredicto = 'revision';
     confianza = 60;
     resumenIa = `Estructura de recibo bancario (${bancoDetectado}) detectada; requiere confirmar importe visualmente.`;
+  } else if (cleanText.length < 10) {
+    veredicto = 'revision';
+    confianza = 50;
+    resumenIa = `Comprobante recibido (${fileName}); requiere verificación visual del importe en consola CRM.`;
+    hallazgos.push('El documento es escaneado o imagen sin capa de texto legible automática; verificar visualmente.');
   } else {
     veredicto = 'sospechoso';
     confianza = 12;

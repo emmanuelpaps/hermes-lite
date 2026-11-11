@@ -82,6 +82,8 @@ export default function CceGalardonClient() {
   const [comprobanteFile, setComprobanteFile] = useState<File | null>(null);
   const [comprobanteFileName, setComprobanteFileName] = useState('');
   const [comprobantePreview, setComprobantePreview] = useState<string>('');
+  const [comprobanteReading, setComprobanteReading] = useState(false);
+  const comprobanteReadPromiseRef = useRef<Promise<string> | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -167,19 +169,47 @@ export default function CceGalardonClient() {
   }, [isAdmin, crmView]);
 
   const [auditingId, setAuditingId] = useState<string | null>(null);
+  const hasTriggeredAutoAuditRef = useRef(false);
+
+  const openComprobanteModal = async (reg: GalardonRegistration) => {
+    setSelectedComprobante(reg);
+    if (!reg.comprobanteUrl && reg.comprobanteFileName) {
+      try {
+        const res = await fetch(
+          `/api/cce-galardon-registro?admin=cce2026&id=${encodeURIComponent(reg.id)}`,
+          { cache: 'no-store' }
+        );
+        const data = await res.json();
+        if (res.ok && data?.success && data.registration?.comprobanteUrl) {
+          const fullUrl = data.registration.comprobanteUrl;
+          setCrmRegistrations((prev) =>
+            prev.map((r) => (r.id === reg.id ? { ...r, comprobanteUrl: fullUrl } : r))
+          );
+          setSelectedComprobante((prev) =>
+            prev && prev.id === reg.id ? { ...prev, comprobanteUrl: fullUrl } : prev
+          );
+        }
+      } catch (err) {
+        console.warn('Could not load on-demand comprobante:', err);
+      }
+    }
+  };
 
   const fetchCrmData = async () => {
     setCrmLoading(true);
     try {
-      const res = await fetch('/api/cce-galardon-registro?admin=cce2026');
+      const res = await fetch('/api/cce-galardon-registro?admin=cce2026', {
+        cache: 'no-store',
+      });
       const data = await res.json();
       if (res.ok && data.success) {
         setTelemetry(data.telemetry);
         const regs: GalardonRegistration[] = data.registrations || [];
         setCrmRegistrations(regs);
 
-        // Si algún registro aún no cuenta con dictamen IA/OCR, disparar auditoría automática en segundo plano
-        if (regs.some((r) => !r.aiAudit)) {
+        // Si algún registro aún no cuenta con dictamen IA/OCR, disparar auditoría automática una sola vez por sesión
+        if (regs.some((r) => !r.aiAudit) && !hasTriggeredAutoAuditRef.current) {
+          hasTriggeredAutoAuditRef.current = true;
           fetch('/api/cce-galardon-registro?admin=cce2026', {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
@@ -188,7 +218,7 @@ export default function CceGalardonClient() {
             .then((r) => r.json())
             .then((auditRes) => {
               if (auditRes?.success && auditRes.auditedCount > 0) {
-                fetch('/api/cce-galardon-registro?admin=cce2026')
+                fetch('/api/cce-galardon-registro?admin=cce2026', { cache: 'no-store' })
                   .then((r2) => r2.json())
                   .then((d2) => {
                     if (d2?.success) {
@@ -386,62 +416,103 @@ export default function CceGalardonClient() {
 
     setComprobanteFile(file);
     setComprobanteFileName(file.name);
+    setComprobanteReading(true);
 
-    if (file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const rawDataUrl = e.target?.result as string;
-        // Optimize large camera images using Canvas so they fit gracefully in Firestore
-        if (file.size > 600 * 1024) {
-          const img = new window.Image();
-          img.onload = () => {
-            try {
-              const canvas = document.createElement('canvas');
-              const MAX_DIM = 1600;
-              let width = img.width;
-              let height = img.height;
-              if (width > height && width > MAX_DIM) {
-                height = Math.round((height * MAX_DIM) / width);
-                width = MAX_DIM;
-              } else if (height > MAX_DIM) {
-                width = Math.round((width * MAX_DIM) / height);
-                height = MAX_DIM;
+    const readPromise = new Promise<string>((resolve) => {
+      const isImage =
+        file.type.startsWith('image/') ||
+        /\.(png|jpe?g|webp)$/i.test(fileName);
+      const isPdf =
+        file.type === 'application/pdf' || fileName.endsWith('.pdf');
+
+      if (isImage) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const rawDataUrl = (e.target?.result as string) || '';
+          // Optimizar imágenes en Canvas para evitar exceder 4.5 MB de Vercel o 1 MiB de Firestore
+          if (file.size > 200 * 1024 || !file.type.includes('jpeg')) {
+            const img = new window.Image();
+            img.onload = () => {
+              try {
+                const canvas = document.createElement('canvas');
+                const MAX_DIM = 1400;
+                let width = img.width;
+                let height = img.height;
+                if (width > height && width > MAX_DIM) {
+                  height = Math.round((height * MAX_DIM) / width);
+                  width = MAX_DIM;
+                } else if (height > MAX_DIM) {
+                  width = Math.round((width * MAX_DIM) / height);
+                  height = MAX_DIM;
+                }
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                if (ctx) {
+                  ctx.fillStyle = '#FFFFFF';
+                  ctx.fillRect(0, 0, width, height);
+                  ctx.drawImage(img, 0, 0, width, height);
+                  const compressed = canvas.toDataURL('image/jpeg', 0.8);
+                  setComprobantePreview(compressed);
+                  setComprobanteReading(false);
+                  resolve(compressed);
+                  return;
+                }
+              } catch {
+                // fallback below
               }
-              canvas.width = width;
-              canvas.height = height;
-              const ctx = canvas.getContext('2d');
-              if (ctx) {
-                ctx.drawImage(img, 0, 0, width, height);
-                setComprobantePreview(canvas.toDataURL('image/jpeg', 0.82));
-              } else {
-                setComprobantePreview(rawDataUrl);
-              }
-            } catch {
               setComprobantePreview(rawDataUrl);
-            }
+              setComprobanteReading(false);
+              resolve(rawDataUrl);
+            };
+            img.onerror = () => {
+              setComprobantePreview(rawDataUrl);
+              setComprobanteReading(false);
+              resolve(rawDataUrl);
+            };
+            img.src = rawDataUrl;
+          } else {
+            setComprobantePreview(rawDataUrl);
+            setComprobanteReading(false);
+            resolve(rawDataUrl);
+          }
+        };
+        reader.onerror = () => {
+          setComprobantePreview('');
+          setComprobanteReading(false);
+          resolve('');
+        };
+        reader.readAsDataURL(file);
+      } else if (isPdf) {
+        // Permitir lectura de PDF hasta 3.2 MB (bajo el límite de 4.5 MB de request body en Vercel);
+        // el backend optimiza automáticamente el almacenamiento en Firestore (< 1 MiB).
+        if (file.size <= 3.2 * 1024 * 1024) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const rawDataUrl = (e.target?.result as string) || '';
+            setComprobantePreview(rawDataUrl);
+            setComprobanteReading(false);
+            resolve(rawDataUrl);
           };
-          img.onerror = () => setComprobantePreview(rawDataUrl);
-          img.src = rawDataUrl;
-        } else {
-          setComprobantePreview(rawDataUrl);
-        }
-      };
-      reader.readAsDataURL(file);
-    } else if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
-      // Allow PDF preview/download in CRM for files <= 800 KB
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const rawDataUrl = e.target?.result as string;
-        if (file.size <= 800 * 1024) {
-          setComprobantePreview(rawDataUrl);
+          reader.onerror = () => {
+            setComprobantePreview('');
+            setComprobanteReading(false);
+            resolve('');
+          };
+          reader.readAsDataURL(file);
         } else {
           setComprobantePreview('');
+          setComprobanteReading(false);
+          resolve('');
         }
-      };
-      reader.readAsDataURL(file);
-    } else {
-      setComprobantePreview('');
-    }
+      } else {
+        setComprobantePreview('');
+        setComprobanteReading(false);
+        resolve('');
+      }
+    });
+
+    comprobanteReadPromiseRef.current = readPromise;
   };
 
   const handleFormSubmit = async (e: React.FormEvent) => {
@@ -503,6 +574,12 @@ export default function CceGalardonClient() {
     setFormSubmitting(true);
 
     try {
+      // Si el archivo aún se está codificando/comprimiendo en memoria, esperar antes de enviar
+      let finalComprobanteUrl = comprobantePreview || '';
+      if ((comprobanteReading || !finalComprobanteUrl) && comprobanteReadPromiseRef.current) {
+        finalComprobanteUrl = await comprobanteReadPromiseRef.current;
+      }
+
       const res = await fetch('/api/cce-galardon-registro', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -516,7 +593,7 @@ export default function CceGalardonClient() {
           asistentesNombres: !asignarNombresDespues ? asistentesNombres.filter(Boolean) : [],
           asignarNombresDespues,
           comprobanteFileName,
-          comprobanteUrl: comprobantePreview ? comprobantePreview : '',
+          comprobanteUrl: finalComprobanteUrl,
           requiereFactura,
           ...(requiereFactura
             ? {
@@ -532,7 +609,17 @@ export default function CceGalardonClient() {
         }),
       });
 
-      const data = await res.json();
+      const rawText = await res.text();
+      let data: any = null;
+      try {
+        data = JSON.parse(rawText);
+      } catch {
+        if (res.status === 413) {
+          throw new Error('El comprobante adjunto es demasiado pesado. Por favor sube una captura JPG/PNG o un PDF más ligero.');
+        }
+        throw new Error(`No se recibió respuesta válida del servidor (código ${res.status}). Por favor intenta nuevamente.`);
+      }
+
       if (!res.ok || !data.success) {
         throw new Error(data.error || 'Error al procesar el registro.');
       }
@@ -7175,8 +7262,9 @@ export default function CceGalardonClient() {
                   <tbody>
                     {crmRegistrations
                       .filter((reg) => {
-                        if (crmFilter === 'pendiente') return reg.status !== 'validado';
+                        if (crmFilter === 'pendiente') return reg.status === 'pendiente';
                         if (crmFilter === 'validado') return reg.status === 'validado';
+                        if (crmFilter === 'rechazado') return reg.status === 'rechazado';
                         return true;
                       })
                       .filter((reg) => {
@@ -7230,7 +7318,7 @@ export default function CceGalardonClient() {
                           <td>
                             <button
                               type="button"
-                              onClick={() => setSelectedComprobante(reg)}
+                              onClick={() => openComprobanteModal(reg)}
                               className="cce-crm-doc-btn"
                             >
                               <Eye size={12} />
@@ -7550,7 +7638,7 @@ export default function CceGalardonClient() {
                     <div className="cce-crm-card-actions">
                       <button
                         type="button"
-                        onClick={() => setSelectedComprobante(reg)}
+                        onClick={() => openComprobanteModal(reg)}
                         className="cce-crm-card-btn cce-crm-btn-doc"
                       >
                         <Eye size={14} />

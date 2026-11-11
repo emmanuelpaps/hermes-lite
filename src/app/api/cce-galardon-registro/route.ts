@@ -2,13 +2,26 @@ import { NextRequest, NextResponse } from 'next/server';
 import {
   saveGalardonRegistration,
   getGalardonRegistrations,
+  getGalardonRegistrationById,
   updateGalardonStatus,
   updateGalardonAiAudit,
   logGalardonVisit,
   getGalardonTelemetry,
   GalardonRegistration,
 } from '@/lib/cce-galardon-db';
-import { auditComprobanteWithAiOcr } from '@/lib/cce-galardon-ai-audit';
+import {
+  auditComprobanteWithAiOcr,
+  optimizeComprobanteForStorage,
+} from '@/lib/cce-galardon-ai-audit';
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+const NO_STORE_HEADERS = {
+  'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+  Pragma: 'no-cache',
+  Expires: '0',
+};
 
 function safeDecode(val: string): string {
   if (!val) return '';
@@ -201,17 +214,13 @@ export async function POST(req: NextRequest) {
     const folio = `#CCE-2026-GAL-${randomSuffix}`;
     const recordId = `cce-gal-${Date.now()}-${randomSuffix}`;
 
-    // Enfoque 2: Pre-Conciliación IA + OCR en segundo plano (sin bloquear el registro)
-    let aiAudit = undefined;
-    try {
-      aiAudit = await auditComprobanteWithAiOcr(
-        comprobanteUrl ? String(comprobanteUrl).trim() : undefined,
-        String(comprobanteFileName).trim(),
-        totalMonto
-      );
-    } catch (auditErr) {
-      console.warn('AI/OCR audit non-blocking warning:', auditErr);
-    }
+    const rawComprobanteUrl = comprobanteUrl ? String(comprobanteUrl).trim() : '';
+    const cleanFileName = String(comprobanteFileName).trim();
+
+    // Optimizar comprobante antes de guardar para jamás exceder el límite de 1 MiB por documento en Cloud Firestore
+    const storedComprobanteUrl = rawComprobanteUrl
+      ? await optimizeComprobanteForStorage(rawComprobanteUrl, cleanFileName)
+      : '';
 
     const newRecord: GalardonRegistration = {
       id: recordId,
@@ -226,8 +235,8 @@ export async function POST(req: NextRequest) {
       tipoBoleto,
       asistentesNombres: Array.isArray(asistentesNombres) ? asistentesNombres.filter(Boolean) : [],
       asignarNombresDespues: Boolean(asignarNombresDespues),
-      comprobanteFileName: String(comprobanteFileName).trim(),
-      ...(comprobanteUrl ? { comprobanteUrl: String(comprobanteUrl).trim() } : {}),
+      comprobanteFileName: cleanFileName,
+      ...(storedComprobanteUrl ? { comprobanteUrl: storedComprobanteUrl } : {}),
       requiereFactura: Boolean(requiereFactura),
       ...(requiereFactura && facturaData
         ? {
@@ -240,7 +249,6 @@ export async function POST(req: NextRequest) {
             },
           }
         : {}),
-      ...(aiAudit ? { aiAudit } : {}),
       fecha: formattedTime,
       timestamp: Date.now(),
       status: 'pendiente',
@@ -250,25 +258,49 @@ export async function POST(req: NextRequest) {
       ip: clientIp,
     };
 
-    // Save registration & visit exclusively in Firestore / CRM (Zero Telegram messages)
+    // PASO 1 CRÍTICO (Save-First): Persistir el registro inmediatamente en Firestore ANTES de cualquier OCR/IA
+    // Garantiza que ningún timeout o fallo en worker pueda perder jamás una acreditación.
     await saveGalardonRegistration(newRecord);
-    await logGalardonVisit({
+
+    // Registrar telemetría sin bloquear la acreditación
+    logGalardonVisit({
       ip: clientIp,
       deviceCategory,
       timestamp: Date.now(),
-    });
+    }).catch(() => {});
 
-    return NextResponse.json({
-      success: true,
-      folio: newRecord.folio,
-      id: newRecord.id,
-      record: newRecord,
-    });
+    // PASO 2 NO BLOQUEANTE: Pre-Conciliación IA + OCR con timeout estricto de 8.5s
+    try {
+      const aiAudit = await Promise.race([
+        auditComprobanteWithAiOcr(
+          rawComprobanteUrl || storedComprobanteUrl || undefined,
+          cleanFileName,
+          totalMonto
+        ),
+        new Promise<undefined>((resolve) => setTimeout(() => resolve(undefined), 8500)),
+      ]);
+      if (aiAudit) {
+        await updateGalardonAiAudit(newRecord.id, aiAudit);
+        newRecord.aiAudit = aiAudit;
+      }
+    } catch (auditErr) {
+      console.warn('AI/OCR audit non-blocking warning (record already saved):', auditErr);
+    }
+
+    return NextResponse.json(
+      {
+        success: true,
+        folio: newRecord.folio,
+        id: newRecord.id,
+        record: newRecord,
+      },
+      { headers: NO_STORE_HEADERS }
+    );
   } catch (error: any) {
     console.error('Error in /api/cce-galardon-registro POST:', error);
     return NextResponse.json(
       { success: false, error: error.message || 'Error interno del servidor' },
-      { status: 500 }
+      { status: 500, headers: NO_STORE_HEADERS }
     );
   }
 }
@@ -277,6 +309,7 @@ export async function GET(req: NextRequest) {
   try {
     const adminParam = req.nextUrl.searchParams.get('admin');
     const action = req.nextUrl.searchParams.get('action');
+    const singleId = req.nextUrl.searchParams.get('id');
 
     const userAgent = req.headers.get('user-agent') || 'Desconocido';
     const rawXForwarded = req.headers.get('x-forwarded-for') || '';
@@ -291,24 +324,64 @@ export async function GET(req: NextRequest) {
         deviceCategory,
         timestamp: Date.now(),
       });
-      return NextResponse.json({ success: true });
+      return NextResponse.json({ success: true }, { headers: NO_STORE_HEADERS });
     }
 
     if (!adminParam || adminParam.toLowerCase().trim() !== 'cce2026') {
-      return NextResponse.json({ success: false, error: 'Acceso no autorizado a la consola CRM' }, { status: 401 });
+      return NextResponse.json(
+        { success: false, error: 'Acceso no autorizado a la consola CRM' },
+        { status: 401, headers: NO_STORE_HEADERS }
+      );
+    }
+
+    // Consulta individual bajo demanda del comprobante completo de un registro
+    if (singleId) {
+      const registration = await getGalardonRegistrationById(singleId.trim());
+      if (!registration) {
+        return NextResponse.json(
+          { success: false, error: 'Registro no encontrado' },
+          { status: 404, headers: NO_STORE_HEADERS }
+        );
+      }
+      return NextResponse.json(
+        { success: true, registration },
+        { headers: NO_STORE_HEADERS }
+      );
     }
 
     const registrations = await getGalardonRegistrations();
     const telemetry = await getGalardonTelemetry(registrations);
 
-    return NextResponse.json({
-      success: true,
-      telemetry,
-      registrations,
+    // Blindaje contra el límite de 4.5 MB de respuesta en Vercel Serverless:
+    // Si el listado acumulado supera 3.2 MB, los registros excedentes omiten el binario inline
+    // y el Dashboard lo descarga bajo demanda al abrir el modal "Ver Archivo".
+    const MAX_INLINE_LIST_BYTES = 3_200_000;
+    let cumulativeBytes = 0;
+    const safeRegistrations = registrations.map((reg) => {
+      const regSize = Buffer.byteLength(JSON.stringify(reg), 'utf8');
+      if (cumulativeBytes + regSize <= MAX_INLINE_LIST_BYTES) {
+        cumulativeBytes += regSize;
+        return reg;
+      }
+      const { comprobanteUrl: _omitted, ...lightReg } = reg;
+      cumulativeBytes += Buffer.byteLength(JSON.stringify(lightReg), 'utf8');
+      return lightReg as GalardonRegistration;
     });
+
+    return NextResponse.json(
+      {
+        success: true,
+        telemetry,
+        registrations: safeRegistrations,
+      },
+      { headers: NO_STORE_HEADERS }
+    );
   } catch (error: any) {
     console.error('Error in /api/cce-galardon-registro GET:', error);
-    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: error.message },
+      { status: 500, headers: NO_STORE_HEADERS }
+    );
   }
 }
 

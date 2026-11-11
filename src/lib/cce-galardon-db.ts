@@ -2,6 +2,7 @@ import {
   collection,
   doc,
   setDoc,
+  getDoc,
   getDocs,
   updateDoc,
   query,
@@ -166,12 +167,38 @@ export function sanitizeForFirestore<T>(data: T): T {
   return data;
 }
 
+async function withFirestoreRetry<T>(fn: () => Promise<T>, retries = 3): Promise<T> {
+  let lastErr: unknown;
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      return await fn();
+    } catch (err) {
+      lastErr = err;
+      if (attempt < retries) {
+        await new Promise((r) => setTimeout(r, attempt * 350));
+      }
+    }
+  }
+  throw lastErr;
+}
+
 export async function saveGalardonRegistration(record: GalardonRegistration): Promise<void> {
-  // 1. Primary persistence: Cloud Firestore (sanitized to remove any undefined fields)
+  // 1. Primary persistence: Cloud Firestore (sanitized & size-guarded under 1 MiB hard limit)
   try {
     const docRef = doc(db, REGISTRATIONS_COL, record.id);
-    const cleanRecord = sanitizeForFirestore(record);
-    await setDoc(docRef, cleanRecord, { merge: true });
+    const cleanRecord = sanitizeForFirestore({ ...record });
+
+    // Cloud Firestore hard limit is 1,048,576 bytes per document.
+    // Guard against oversized base64 payloads so a registration is NEVER rejected.
+    const estimatedBytes = Buffer.byteLength(JSON.stringify(cleanRecord), 'utf8');
+    if (estimatedBytes > 920_000 && cleanRecord.comprobanteUrl) {
+      console.warn(
+        `[cce-galardon-db] Payload (${estimatedBytes} bytes) near 1 MiB Firestore limit; omitting inline base64 for ${record.id}`
+      );
+      delete cleanRecord.comprobanteUrl;
+    }
+
+    await withFirestoreRetry(() => setDoc(docRef, cleanRecord, { merge: true }));
   } catch (err) {
     console.error('[cce-galardon-db] Firestore write error:', err);
     throw new Error('Error al registrar en Cloud Firestore: ' + (err as Error).message);
@@ -188,13 +215,27 @@ export async function saveGalardonRegistration(record: GalardonRegistration): Pr
   persistLocalCache(cache);
 }
 
+export async function getGalardonRegistrationById(id: string): Promise<GalardonRegistration | null> {
+  try {
+    const docRef = doc(db, REGISTRATIONS_COL, id);
+    const snap = await withFirestoreRetry(() => getDoc(docRef));
+    if (snap.exists()) {
+      return snap.data() as GalardonRegistration;
+    }
+  } catch (err) {
+    console.warn('[cce-galardon-db] getById warning:', err);
+  }
+  const cache = getLocalCache();
+  return cache.registrations.find((r) => r.id === id) || null;
+}
+
 export async function getGalardonRegistrations(): Promise<GalardonRegistration[]> {
   const cache = getLocalCache();
 
   try {
     const colRef = collection(db, REGISTRATIONS_COL);
     const q = query(colRef, orderBy('timestamp', 'desc'), limit(500));
-    const snapshot = await getDocs(q);
+    const snapshot = await withFirestoreRetry(() => getDocs(q));
 
     const firestoreData: GalardonRegistration[] = [];
     snapshot.forEach(docSnap => {
