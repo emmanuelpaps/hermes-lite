@@ -47,6 +47,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json().catch(() => ({}));
     const {
       action,
+      source,
       nombre,
       empresa,
       cargo,
@@ -77,6 +78,21 @@ export async function POST(req: NextRequest) {
         timestamp: Date.now(),
       });
       return NextResponse.json({ success: true });
+    }
+
+    // Ventana especial de regularización / confirmación prioritaria:
+    // Jueves 12 de Noviembre de 2026 a las 11:59:59 P.M. (Ciudad Juárez, MST UTC-7 -> 2026-11-13T06:59:59Z)
+    const RECOVERY_DEADLINE_MS = 1794553199000;
+    if (source === 'confirmacion_especial' && Date.now() > RECOVERY_DEADLINE_MS) {
+      return NextResponse.json(
+        {
+          success: false,
+          error:
+            'El plazo extraordinario de confirmación concluyó el jueves 12 de noviembre a las 11:59 p.m. Para asistencia directa comunícate al WhatsApp del CCE (656 180 3055).',
+          deadlineExpired: true,
+        },
+        { status: 403, headers: NO_STORE_HEADERS }
+      );
     }
 
     // Ventana oficial de registro: desde ahora hasta 2 horas después de iniciado el evento
