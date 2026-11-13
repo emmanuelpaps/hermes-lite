@@ -583,11 +583,10 @@ export default function CceAcreditacionPrensaClient() {
           display: flex;
           flex-direction: column;
           background:
-            radial-gradient(1400px 950px at 50% -100px, rgba(16, 185, 129, 0.45) 0%, rgba(6, 78, 59, 0.72) 35%, rgba(4, 38, 28, 0.85) 60%, transparent 78%),
-            radial-gradient(1200px 900px at 10% 45%, rgba(5, 150, 105, 0.45) 0%, rgba(6, 78, 59, 0.38) 42%, transparent 70%),
-            radial-gradient(1100px 850px at 80% 80%, rgba(6, 78, 59, 0.55) 0%, rgba(4, 46, 35, 0.7) 45%, rgba(2, 24, 18, 0.95) 75%, transparent 85%),
-            radial-gradient(850px 650px at 88% 28%, rgba(245, 222, 152, 0.16) 0%, rgba(212, 175, 55, 0.1) 32%, rgba(184, 134, 11, 0.04) 55%, transparent 70%),
-            #010C07;
+            radial-gradient(1300px 900px at 50% -80px, rgba(16, 185, 129, 0.42) 0%, rgba(6, 78, 59, 0.72) 35%, rgba(4, 38, 28, 0.88) 60%, transparent 78%),
+            radial-gradient(1100px 800px at 10% 45%, rgba(5, 150, 105, 0.38) 0%, rgba(6, 78, 59, 0.32) 42%, transparent 70%),
+            radial-gradient(1000px 750px at 85% 80%, rgba(6, 78, 59, 0.52) 0%, rgba(4, 46, 35, 0.68) 45%, rgba(2, 24, 18, 0.95) 75%, transparent 85%),
+            #02120C;
           width: 100%;
           max-width: 100vw;
           overflow-x: hidden;
@@ -606,177 +605,73 @@ export default function CceAcreditacionPrensaClient() {
           overflow: hidden;
           z-index: 0;
           contain: paint;
+          clip-path: inset(0);
         }
 
         .cce-page-container.is-crm .cce-living-canvas {
           display: none;
         }
 
-        .cce-spotlight {
+        .cce-aurora-orb-1 {
           position: absolute;
-          top: 0;
+          top: -8vw;
           left: 0;
           right: 0;
-          width: 100%;
-          height: 80vh;
-          background: radial-gradient(ellipse 80% 65% at 50% 0%, rgba(16, 185, 129, 0.52) 0%, rgba(6, 78, 59, 0.78) 38%, rgba(4, 46, 35, 0.5) 65%, transparent 90%);
-          filter: blur(50px);
-          pointer-events: none;
-        }
-
-        .cce-spotlight-gold {
-          position: absolute;
-          top: -80px;
-          left: 0;
-          right: 0;
-          width: 100%;
-          height: 48vh;
-          background: radial-gradient(ellipse 42% 35% at 50% 12%, rgba(255, 245, 204, 0.38) 0%, rgba(245, 222, 152, 0.22) 28%, rgba(212, 175, 55, 0.08) 55%, transparent 75%);
-          filter: blur(55px);
-          animation: cceGoldSpotlightBreath 7s ease-in-out infinite alternate;
-          pointer-events: none;
-          will-change: transform, opacity;
-        }
-
-        @keyframes cceGoldSpotlightBreath {
-          0% { opacity: 0.35; transform: scale(0.95); }
-          50% { opacity: 0.6; transform: scale(1.08) translateY(15px); }
-          100% { opacity: 0.4; transform: scale(0.98) translateY(-5px); }
-        }
-
-        .cce-gold-ambient-center {
-          position: absolute;
-          top: 35vh;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          width: 65vw;
-          max-width: 800px;
-          height: 65vw;
-          max-height: 800px;
-          border-radius: 50%;
-          background: radial-gradient(circle, rgba(245, 222, 152, 0.18) 0%, rgba(212, 175, 55, 0.12) 18%, rgba(16, 185, 129, 0.42) 42%, rgba(6, 78, 59, 0.65) 65%, transparent 88%);
-          filter: blur(85px);
-          animation: cceGoldPulseCenter 9s ease-in-out infinite alternate;
-          pointer-events: none;
-          will-change: transform, opacity;
-        }
-
-        @keyframes cceGoldPulseCenter {
-          0% { transform: translate(-50%, -50%) scale(0.88); opacity: 0.55; }
-          50% { transform: translate(-48%, -52%) scale(1.15); opacity: 0.8; }
-          100% { transform: translate(-52%, -48%) scale(0.94); opacity: 0.6; }
-        }
-
-        .cce-gold-ambient-floating {
-          position: absolute;
-          top: 48vh;
-          left: 58%;
-          width: 50vw;
+          margin: 0 auto;
+          width: 90vw;
           max-width: 650px;
-          height: 50vw;
-          max-height: 650px;
+          height: 45vw;
+          max-height: 450px;
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(5, 150, 105, 0.38) 30%, rgba(6, 78, 59, 0.62) 55%, rgba(4, 46, 35, 0.8) 75%, transparent 90%);
-          filter: blur(95px);
-          animation: cceGoldFloat 13s ease-in-out infinite alternate;
-          pointer-events: none;
+          background: radial-gradient(circle, rgba(16, 185, 129, 0.28) 0%, rgba(6, 78, 59, 0.18) 50%, transparent 75%);
+          filter: blur(65px);
+          animation: cceAuroraFloat 16s ease-in-out infinite alternate;
           will-change: transform, opacity;
         }
 
-        @keyframes cceGoldFloat {
-          0% { transform: translate3d(0, 0, 0) scale(0.92); opacity: 0.4; }
-          50% { transform: translate3d(-10vw, 8vh, 0) scale(1.12); opacity: 0.7; }
-          100% { transform: translate3d(-4vw, -6vh, 0) scale(1.0); opacity: 0.48; }
-        }
-
-        .cce-gold-shimmer-ray {
+        .cce-aurora-orb-2 {
           position: absolute;
-          top: -10vh;
-          left: 0;
-          right: 0;
-          width: 100%;
-          height: 70vh;
-          background: radial-gradient(ellipse 70% 50% at 50% 20%, rgba(16, 185, 129, 0.35) 0%, rgba(212, 175, 55, 0.12) 35%, rgba(6, 78, 59, 0.25) 60%, transparent 85%);
+          top: 30vh;
+          left: -10vw;
+          width: 45vw;
+          max-width: 450px;
+          height: 45vw;
+          max-height: 450px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(16, 185, 129, 0.18) 0%, transparent 65%);
           filter: blur(75px);
-          pointer-events: none;
-          opacity: 0.6;
+          animation: cceAuroraFloat 20s ease-in-out infinite alternate-reverse;
+          will-change: transform;
         }
 
-        .cce-canvas-orb {
+        .cce-aurora-orb-3 {
           position: absolute;
+          top: 45vh;
+          right: -10vw;
+          width: 50vw;
+          max-width: 500px;
+          height: 50vw;
+          max-height: 500px;
           border-radius: 50%;
-          filter: blur(90px);
-          will-change: transform, opacity;
-          pointer-events: none;
+          background: radial-gradient(circle, rgba(5, 150, 105, 0.22) 0%, transparent 70%);
+          filter: blur(80px);
+          animation: cceAuroraFloat 18s ease-in-out infinite alternate;
+          will-change: transform;
         }
 
-        @media (max-width: 768px) {
-          .cce-canvas-orb { filter: blur(55px); }
-          .cce-spotlight-gold { filter: blur(35px); width: 70vw; height: 35vh; }
-          .cce-gold-ambient-center { filter: blur(55px); width: 75vw; height: 75vw; }
-          .cce-gold-ambient-floating { filter: blur(60px); width: 65vw; height: 65vw; }
-          .cce-gold-shimmer-ray { display: none; }
-        }
-
-        .cce-orb-1 {
-          top: -10%; left: -10%; width: 56vw; height: 56vw;
-          background: radial-gradient(circle, #10B981 0%, #059669 30%, #064E3B 55%, rgba(4, 46, 35, 0.85) 75%, transparent 88%);
-          animation: cceOrbMove1 22s ease-in-out infinite alternate;
-          opacity: 0.72;
-        }
-
-        .cce-orb-2 {
-          top: 15%; right: -10%; width: 46vw; height: 46vw;
-          background: radial-gradient(circle, rgba(245, 222, 152, 0.25) 0%, rgba(212, 175, 55, 0.16) 18%, #059669 42%, #064E3B 65%, rgba(2, 24, 18, 0.9) 82%, transparent 90%);
-          animation: cceOrbMove2 14s ease-in-out infinite alternate;
-          opacity: 0.65;
-        }
-
-        .cce-orb-3 {
-          bottom: -15%; left: 10%; width: 60vw; height: 60vw;
-          background: radial-gradient(circle, #059669 0%, #064E3B 38%, #042E23 62%, rgba(2, 24, 18, 0.95) 80%, transparent 92%);
-          animation: cceOrbMove3 26s ease-in-out infinite alternate;
-          opacity: 0.75;
-        }
-
-        .cce-orb-4 {
-          bottom: 15%; right: 5%; width: 44vw; height: 44vw;
-          background: radial-gradient(circle, rgba(245, 222, 152, 0.22) 0%, rgba(212, 175, 55, 0.14) 18%, #064E3B 48%, #042E23 72%, rgba(2, 20, 14, 0.95) 85%, transparent 90%);
-          animation: cceOrbMove4 16s ease-in-out infinite alternate;
-          opacity: 0.62;
-        }
-
-        @keyframes cceOrbMove1 {
-          0% { transform: translate3d(0, 0, 0) scale(1); }
-          50% { transform: translate3d(8vw, 6vh, 0) scale(1.1); }
-          100% { transform: translate3d(-4vw, 12vh, 0) scale(0.95); }
-        }
-        @keyframes cceOrbMove2 {
-          0% { transform: translate3d(0, 0, 0) scale(0.92); opacity: 0.55; }
-          50% { transform: translate3d(-8vw, 10vh, 0) scale(1.22); opacity: 0.98; }
-          100% { transform: translate3d(6vw, -6vh, 0) scale(0.96); opacity: 0.65; }
-        }
-        @keyframes cceOrbMove3 {
-          0% { transform: translate3d(0, 0, 0) scale(1); }
-          50% { transform: translate3d(12vw, -10vh, 0) scale(1.08); }
-          100% { transform: translate3d(-6vw, -4vh, 0) scale(0.96); }
-        }
-        @keyframes cceOrbMove4 {
-          0% { transform: translate3d(0, 0, 0) scale(0.9); opacity: 0.5; }
-          50% { transform: translate3d(-7vw, -10vh, 0) scale(1.2); opacity: 0.95; }
-          100% { transform: translate3d(8vw, 8vh, 0) scale(0.95); opacity: 0.6; }
-        }
-
-        .cce-canvas-texture {
-          position: absolute;
-          inset: 0;
-          opacity: 0.035;
-          background-image:
-            radial-gradient(#D4AF37 0.75px, transparent 0.75px),
-            repeating-linear-gradient(45deg, #064E3B 0, #064E3B 0.5px, transparent 0, transparent 24px),
-            repeating-linear-gradient(-45deg, #D4AF37 0, #D4AF37 0.5px, transparent 0, transparent 24px);
-          background-size: 16px 16px, 32px 32px, 32px 32px;
-          pointer-events: none;
+        @keyframes cceAuroraFloat {
+          0% {
+            transform: translateY(0) scale(1);
+            opacity: 0.85;
+          }
+          50% {
+            transform: translateY(-20px) scale(1.05);
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(15px) scale(0.95);
+            opacity: 0.8;
+          }
         }
 
         /* Inline-safe Golden Foil Shimmer (no forced block line-breaks inside paragraphs) */
@@ -798,31 +693,246 @@ export default function CceAcreditacionPrensaClient() {
           100% { background-position: 200% center; }
         }
 
-        /* Hero Section */
+        /* Public Main Wrapper (Matches /cce-galardon-EG top alignment) */
+        .cce-public-main {
+          position: relative;
+          z-index: 10;
+          padding: 40px 0 0 0;
+          width: 100%;
+        }
+
+        @media (max-width: 640px) {
+          .cce-public-main {
+            padding: 24px 0 0 0;
+          }
+        }
+
+        /* Hero Section & Full-Bleed Cintillos Cruzados en X (Copied from /cce-galardon-EG) */
         .cce-hero {
           position: relative;
-          z-index: 1;
-          padding: 56px 20px 28px 20px;
           text-align: center;
-          max-width: 900px;
+          max-width: 1040px;
           margin: 0 auto;
+          padding: 20px 20px 36px 20px;
           width: 100%;
+        }
+
+        .cce-hero-content {
+          position: relative;
+          z-index: 5;
+        }
+
+        .cce-hero-cintillos-fullbleed {
+          position: absolute;
+          top: -40px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 100vw;
+          height: calc(100% + 760px);
+          min-height: 1180px;
+          pointer-events: none;
+          overflow: hidden;
+          z-index: 1;
+        }
+
+        .cce-band-main {
+          width: 100%;
+          height: 240px;
+          background: linear-gradient(180deg,
+            #FFFDE8 0%,
+            #FAEAAB 7%,
+            #E9C762 16%,
+            #DCAE33 28%,
+            #FFF6D1 42%,
+            #F0CA56 56%,
+            #FFF6D1 70%,
+            #DEB43F 84%,
+            #B38424 94%,
+            #7A5510 100%
+          );
+          border-top: 3px solid #FFFDEB;
+          border-bottom: 3px solid #382404;
+          box-shadow: 0 38px 85px rgba(0, 0, 0, 0.98), 0 0 70px rgba(212, 175, 55, 0.45);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .cce-band-sheen {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.7) 50%, transparent 100%);
+          width: 25%;
+          transform: skewX(-30deg) translateX(-200%);
+          animation: cceRibbonSweep 8s infinite ease-in-out;
+        }
+
+        @keyframes cceRibbonSweep {
+          0% { transform: skewX(-30deg) translateX(-200%); }
+          25%, 100% { transform: skewX(-30deg) translateX(450%); }
+        }
+
+        .cce-band-sub {
+          width: 100%;
+          height: 16px;
+          background: linear-gradient(180deg,
+            #FFFDE6 0%,
+            #E5BE4A 45%,
+            #9E7422 55%,
+            #66460D 100%
+          );
+          border-top: 1.5px solid #FFFDEB;
+          border-bottom: 1.5px solid #201302;
+          box-shadow: 0 0 25px rgba(212, 175, 55, 0.65);
+        }
+
+        .cce-band-main-sash {
+          width: 100%;
+          height: 75px;
+          background: linear-gradient(180deg,
+            #FFF8D6 0%,
+            #ECD17E 18%,
+            #D4AF37 46%,
+            #825916 50%,
+            #A87926 64%,
+            #52360E 88%,
+            #301B03 100%
+          );
+          border-top: 2px solid #FFFDEB;
+          border-bottom: 2px solid #1F1202;
+          box-shadow: 0 26px 55px rgba(0, 0, 0, 0.96), 0 0 38px rgba(212, 175, 55, 0.35);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .cce-x-arm-1 {
+          position: absolute;
+          top: 40px;
+          left: 50%;
+          width: 140vw;
+          transform: translateX(-50%) rotate(-7.5deg);
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+          filter: drop-shadow(0 35px 60px rgba(0, 0, 0, 0.98));
+          opacity: 0.95;
+        }
+
+        .cce-x-arm-2 {
+          position: absolute;
+          top: 40px;
+          left: 50%;
+          width: 140vw;
+          transform: translateX(-50%) rotate(7.5deg);
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+          filter: drop-shadow(0 35px 60px rgba(0, 0, 0, 0.98));
+          opacity: 0.95;
+        }
+
+        .cce-sash-bottom-full {
+          position: absolute;
+          top: 720px;
+          left: 50%;
+          width: 145vw;
+          transform: translateX(-50%) rotate(9.5deg);
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          filter: drop-shadow(0 28px 45px rgba(0, 0, 0, 0.95));
+          opacity: 0.95;
+        }
+
+        .cce-section-cintillos-fullbleed {
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 100%;
+          max-width: 100vw;
+          height: 100%;
+          pointer-events: none;
+          overflow: hidden;
+          z-index: 1;
+          contain: paint;
+          clip-path: inset(0);
+        }
+
+        .cce-sash-reg {
+          position: absolute;
+          top: 46%;
+          left: 50%;
+          width: 145vw;
+          transform: translateX(-50%) rotate(-8deg);
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+          filter: drop-shadow(0 26px 45px rgba(0, 0, 0, 0.95));
+          opacity: 0.92;
+        }
+
+        .cce-sheen-delay-1 { animation-delay: 2.5s; }
+        .cce-sheen-delay-2 { animation-delay: 5s; }
+
+        @media (max-width: 768px) {
+          .cce-hero {
+            padding: 10px 14px 26px 14px;
+          }
+          .cce-hero-cintillos-fullbleed {
+            top: -15px;
+            height: calc(100% + 620px);
+            min-height: 920px;
+          }
+          .cce-band-main {
+            height: 190px;
+          }
+          .cce-band-sub {
+            height: 12px;
+          }
+          .cce-band-main-sash {
+            height: 42px;
+          }
+          .cce-x-arm-1 {
+            top: 20px;
+            width: 160vw;
+            transform: translateX(-50%) rotate(-9deg);
+            gap: 10px;
+          }
+          .cce-x-arm-2 {
+            top: 20px;
+            width: 160vw;
+            transform: translateX(-50%) rotate(9deg);
+            gap: 10px;
+          }
+          .cce-sash-bottom-full {
+            top: 560px;
+            width: 160vw;
+            transform: translateX(-50%) rotate(14deg);
+            gap: 10px;
+          }
+          .cce-sash-reg {
+            top: 45%;
+            width: 160vw;
+            transform: translateX(-50%) rotate(-12deg);
+            gap: 10px;
+          }
         }
 
         .cce-hero-logo-box {
           display: flex;
           justify-content: center;
           align-items: center;
-          margin: 0 auto 22px auto;
+          margin: 10px auto 24px auto;
           position: relative;
+          z-index: 5;
         }
 
         .cce-hero-logo-img {
           width: 100%;
-          max-width: 300px;
+          max-width: 320px;
           height: auto;
           object-fit: contain;
-          filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 30px rgba(212, 175, 55, 0.3));
+          filter: drop-shadow(0 1px 0px rgba(255, 255, 255, 0.75)) drop-shadow(0 6px 16px rgba(0, 0, 0, 0.45));
           transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -830,49 +940,53 @@ export default function CceAcreditacionPrensaClient() {
           transform: scale(1.03);
         }
 
-        @media (max-width: 640px) {
-          .cce-hero {
-            padding: 36px 16px 20px 16px;
-          }
-          .cce-hero-logo-box { margin-bottom: 16px; }
-          .cce-hero-logo-img { max-width: 215px; }
-          .cce-hero-pill {
-            font-size: 11px;
-            letter-spacing: 0.07em;
-            padding: 7px 14px;
-            max-width: 100%;
-          }
-        }
-
         .cce-hero-pill {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          background: linear-gradient(135deg, rgba(245, 222, 152, 0.22) 0%, rgba(6, 78, 59, 0.45) 50%, rgba(212, 175, 55, 0.18) 100%);
-          border: 1px solid rgba(245, 222, 152, 0.55);
-          color: #FFF3C4;
-          font-size: 12.5px;
+          background: rgba(6, 78, 59, 0.72);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          border: 1px solid rgba(212, 175, 55, 0.45);
+          color: #F5DE98;
+          font-size: 12px;
           font-weight: 800;
-          letter-spacing: 0.11em;
+          letter-spacing: 0.14em;
           text-transform: uppercase;
-          padding: 8px 20px;
+          padding: 7px 18px;
           border-radius: 9999px;
-          margin-bottom: 20px;
-          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 20px rgba(212, 175, 55, 0.22);
+          margin-bottom: 22px;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+          max-width: 100%;
+        }
+
+        @media (max-width: 640px) {
+          .cce-hero-logo-box {
+            margin: 8px auto 16px auto;
+          }
+          .cce-hero-logo-img {
+            max-width: 235px;
+          }
+          .cce-hero-pill {
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            padding: 7px 14px;
+            line-height: 1.35;
+          }
         }
 
         .cce-hero-title {
           font-family: var(--cce-serif);
-          font-size: clamp(30px, 5.2vw, 48px);
+          font-size: clamp(30px, 5.2vw, 52px);
           font-weight: 800;
           background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 35%, #F5DE98 70%, #D4AF37 100%);
           -webkit-background-clip: text;
           background-clip: text;
           -webkit-text-fill-color: transparent;
-          line-height: 1.16;
+          line-height: 1.15;
           letter-spacing: 0.03em;
           margin-bottom: 14px;
-          filter: drop-shadow(0 4px 25px rgba(0, 0, 0, 0.85));
+          filter: drop-shadow(0 4px 25px rgba(0, 0, 0, 0.9));
           text-wrap: balance;
         }
 
@@ -889,11 +1003,11 @@ export default function CceAcreditacionPrensaClient() {
         /* LUXURY CONVOCATORIA INVITATION CARD & LAMBRÍN NICHE */
         .cce-luxury-card-wrapper {
           max-width: 860px;
-          margin: 48px auto 76px auto;
+          margin: 44px auto 72px auto;
           width: 100%;
           padding: 0 12px;
           position: relative;
-          z-index: 2;
+          z-index: 5;
         }
 
         .cce-lambrin-niche {
@@ -939,15 +1053,14 @@ export default function CceAcreditacionPrensaClient() {
 
         .cce-lambrin-light-column {
           position: absolute;
-          top: -12px;
-          bottom: -12px;
-          width: 12px;
+          top: -8px;
+          bottom: -8px;
+          width: 10px;
           border-radius: 8px;
           background: linear-gradient(180deg, rgba(255, 235, 180, 0.85) 0%, rgba(255, 245, 204, 1) 40%, rgba(245, 222, 152, 1) 60%, rgba(212, 175, 55, 0.85) 100%);
           box-shadow:
-            0 0 35px 12px rgba(245, 222, 152, 0.75),
-            0 0 75px 30px rgba(212, 175, 55, 0.5),
-            0 0 120px 45px rgba(245, 222, 152, 0.25);
+            0 0 18px 4px rgba(245, 222, 152, 0.55),
+            0 0 36px 10px rgba(212, 175, 55, 0.25);
           animation: cceLambrinBreathing 10s ease-in-out infinite alternate;
           will-change: opacity, filter;
           z-index: 2;
@@ -1008,11 +1121,10 @@ export default function CceAcreditacionPrensaClient() {
           transform: translate(-50%, -50%);
           width: 440px;
           height: 440px;
-          opacity: 0.022;
+          opacity: 0.025;
           pointer-events: none;
-          background: url('/assets/cce-juarez/cce_logo_hero_prestige.svg') no-repeat center center;
+          background: url('/assets/cce-juarez/cce_logo_hero_white.svg') no-repeat center center;
           background-size: contain;
-          filter: drop-shadow(0 0 30px #D4AF37);
         }
 
         .cce-luxury-header {
@@ -1282,11 +1394,19 @@ export default function CceAcreditacionPrensaClient() {
         }
 
         /* VIP ACCREDITATION TERMINAL */
+        .cce-reg-section {
+          position: relative;
+          overflow: hidden;
+          contain: paint;
+          padding: 12px 0 100px 0;
+          width: 100%;
+        }
+
         .cce-main-content {
           position: relative;
-          z-index: 1;
+          z-index: 5;
           max-width: 720px;
-          margin: 0 auto 100px auto;
+          margin: 0 auto;
           padding: 0 10px;
           width: 100%;
         }
@@ -2244,18 +2364,11 @@ export default function CceAcreditacionPrensaClient() {
         }}
       />
 
-      {/* ATMOSPHERIC LIVING CANVAS */}
+      {/* ATMOSPHERIC LIVING CANVAS (Pure Emerald — Zero Golden Background Glow) */}
       <div className="cce-living-canvas" aria-hidden="true">
-        <div className="cce-spotlight" />
-        <div className="cce-spotlight-gold" />
-        <div className="cce-gold-ambient-center" />
-        <div className="cce-gold-ambient-floating" />
-        <div className="cce-gold-shimmer-ray" />
-        <div className="cce-canvas-orb cce-orb-1" />
-        <div className="cce-canvas-orb cce-orb-2" />
-        <div className="cce-canvas-orb cce-orb-3" />
-        <div className="cce-canvas-orb cce-orb-4" />
-        <div className="cce-canvas-texture" />
+        <div className="cce-aurora-orb-1" />
+        <div className="cce-aurora-orb-2" />
+        <div className="cce-aurora-orb-3" />
       </div>
 
       {/* FLOATING ADMIN CONTROLS (When authenticated & viewing public page) */}
@@ -2801,10 +2914,33 @@ export default function CceAcreditacionPrensaClient() {
         </main>
       ) : (
         /* PUBLIC PRESS ACCREDITATION LANDING VIEW */
-        <main>
+        <main className="cce-public-main">
           {/* HERO SECTION */}
           <section className="cce-hero">
+            {/* Diagonal Beveled Gold Ribbons Full-Bleed (Cintillos Cruzados en X from /cce-galardon-EG) */}
+            <div className="cce-hero-cintillos-fullbleed" aria-hidden="true">
+              <div className="cce-x-arm-1">
+                <div className="cce-band-sub" />
+                <div className="cce-band-main">
+                  <div className="cce-band-sheen" />
+                </div>
+              </div>
+              <div className="cce-x-arm-2">
+                <div className="cce-band-main">
+                  <div className="cce-band-sheen cce-sheen-delay-1" />
+                </div>
+                <div className="cce-band-sub" />
+              </div>
+              <div className="cce-sash-bottom-full">
+                <div className="cce-band-main-sash">
+                  <div className="cce-band-sheen cce-sheen-delay-2" />
+                </div>
+                <div className="cce-band-sub" />
+              </div>
+            </div>
+
             <motion.div
+              className="cce-hero-content"
               initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] as const }}
@@ -2816,8 +2952,10 @@ export default function CceAcreditacionPrensaClient() {
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] as const }}
               >
                 <img
-                  src="/assets/cce-juarez/cce_logo_hero_prestige.svg"
-                  alt="Consejo Coordinador Empresarial de Ciudad Juárez"
+                  src="/assets/cce-juarez/cce_logo_verde_transparente.png"
+                  width={340}
+                  height={217}
+                  alt="Consejo Coordinador Empresarial Ciudad Juárez"
                   className="cce-hero-logo-img"
                 />
               </motion.div>
@@ -2982,7 +3120,17 @@ export default function CceAcreditacionPrensaClient() {
           </div>
 
           {/* MAIN FORM / CONFIRMATION SECTION */}
-          <section className="cce-main-content">
+          <div className="cce-reg-section">
+            <div className="cce-section-cintillos-fullbleed" aria-hidden="true">
+              <div className="cce-sash-reg">
+                <div className="cce-band-sub" />
+                <div className="cce-band-main-sash">
+                  <div className="cce-band-sheen cce-sheen-delay-1" />
+                </div>
+              </div>
+            </div>
+
+            <section className="cce-main-content">
             <AnimatePresence mode="wait">
               {confirmedRecord ? (
                 /* CONFIRMATION SCREEN */
@@ -3353,7 +3501,8 @@ export default function CceAcreditacionPrensaClient() {
                 </motion.div>
               )}
             </AnimatePresence>
-          </section>
+            </section>
+          </div>
         </main>
       )}
     </div>
