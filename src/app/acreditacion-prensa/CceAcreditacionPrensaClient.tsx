@@ -209,24 +209,24 @@ export default function CceAcreditacionPrensaClient() {
     const cleanPhone = normalizeMxPhoneInput(whatsapp);
 
     if (!nombre.trim() || nombre.trim().length < 3) {
-      newErrors.nombre = 'Ingresa el nombre completo del periodista o reportero titular.';
+      newErrors.nombre = 'Ingrese el nombre completo del periodista o reportero titular.';
     }
 
     if (!medio.trim() || medio.trim().length < 2) {
-      newErrors.medio = 'Ingresa el nombre del medio de comunicación o agencia.';
+      newErrors.medio = 'Ingrese el nombre del medio de comunicación o agencia.';
     }
 
     if (cleanPhone.length !== 10) {
-      newErrors.whatsapp = 'Ingresa un número de WhatsApp válido a 10 dígitos.';
+      newErrors.whatsapp = 'Ingrese un número de WhatsApp válido a 10 dígitos.';
     }
 
     if (asistentes !== '1' && asistentes !== '2') {
-      newErrors.asistentes = 'Selecciona 1 o 2 acreditaciones para tu medio.';
+      newErrors.asistentes = 'Seleccione 1 o 2 gafetes para su medio.';
     }
 
     if (asistentes === '2' && (!acompananteNombre.trim() || acompananteNombre.trim().length < 3)) {
       newErrors.acompananteNombre =
-        'Ingresa el nombre completo del acompañante (camarógrafo / fotógrafo) para su gafete.';
+        'Ingrese el nombre completo del acompañante para rotular su segundo gafete.';
     }
 
     setErrors(newErrors);
@@ -287,12 +287,12 @@ export default function CceAcreditacionPrensaClient() {
         }
       } else {
         setSubmitError(
-          data.error || 'Ocurrió un error al registrar tu acreditación. Intenta nuevamente.'
+          data.error || 'No fue posible registrar la acreditación. Por favor intente nuevamente.'
         );
       }
     } catch (err) {
       console.error('Error submitting press accreditation:', err);
-      setSubmitError('Error de conexión. Por favor verifica tu señal e intenta nuevamente.');
+      setSubmitError('Error de conexión. Verifique su señal de internet e intente nuevamente.');
     } finally {
       setIsSubmitting(false);
     }
@@ -314,21 +314,21 @@ export default function CceAcreditacionPrensaClient() {
     setSubmitError('');
   };
 
-  // Calendar & Maps Integrations (Jueves 19 de Noviembre, 2026 · 9:00 a.m. Ciudad Juárez = 16:00 UTC)
+  // Calendar & Maps Integrations (Jueves 19 de noviembre de 2026 · 9:00 a.m. Ciudad Juárez = 16:00 UTC)
   const handleGoogleCalendar = () => {
     const folioStr = confirmedRecord?.folio || '#CCE-PRENSA-2026';
     const title = encodeURIComponent(
-      'Cobertura de Prensa · Galardones 2026 & Conferencia Loret · CCE Juárez'
+      'Cobertura de Prensa · Galardones Empresariales 2026 y Conferencia Carlos Loret de Mola'
     );
     const details = encodeURIComponent(
-      `Acreditación oficial de prensa para la cobertura de la Entrega de Galardones Empresariales 2026 (Estrella Ascendente y De Altos Vuelos) y Conferencia Magistral con Carlos Loret de Mola.\n\nFolio de Prensa: ${folioStr}\nPeriodista Titular: ${confirmedRecord?.nombre || ''}\nMedio: ${confirmedRecord?.medio || ''}${
+      `Acreditación de prensa del Consejo Coordinador Empresarial de Ciudad Juárez para la Entrega de Galardones Empresariales 2026 y la Conferencia Magistral de Carlos Loret de Mola.\n\nFolio: ${folioStr}\nTitular: ${confirmedRecord?.nombre || ''}\nMedio: ${confirmedRecord?.medio || ''}${
         confirmedRecord?.acompananteNombre
           ? `\nAcompañante: ${confirmedRecord.acompananteNombre}`
           : ''
-      }\n\nCita a Medios: 9:00 a.m. en punto\nSede: Centro de Eventos Cibeles (Blvd. Tomás Fernández No. 8450, Cd. Juárez, Chih.).`
+      }\n\nCita de prensa: 9:00 a.m.\nSede: Centro de Eventos Cibeles (Blvd. Tomás Fernández 8450, Ciudad Juárez, Chih.).`
     );
     const location = encodeURIComponent(
-      'Centro de Eventos Cibeles, Blvd. Tomás Fernández No. 8450, Ciudad Juárez, Chih.'
+      'Centro de Eventos Cibeles, Blvd. Tomás Fernández 8450, Ciudad Juárez, Chih.'
     );
     const dates = '20261119T160000Z/20261119T190000Z';
     const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}&sprop=name:CCE%20Juarez`;
@@ -342,7 +342,7 @@ export default function CceAcreditacionPrensaClient() {
     const icsContent = [
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
-      'PRODID:-//CCE Ciudad Juárez//Acreditacion Oficial Prensa Galardones 2026//ES',
+      'PRODID:-//CCE Ciudad Juárez//Acreditacion Prensa Galardones 2026//ES',
       'CALSCALE:GREGORIAN',
       'METHOD:PUBLISH',
       'BEGIN:VEVENT',
@@ -350,9 +350,9 @@ export default function CceAcreditacionPrensaClient() {
       `DTSTAMP:${dtStamp}`,
       'DTSTART:20261119T160000Z',
       'DTEND:20261119T190000Z',
-      'SUMMARY:Cobertura de Prensa · Galardones 2026 & Conferencia Loret (CCE Juárez)',
-      `DESCRIPTION:Acreditación oficial de prensa (${folioStr}) del Consejo Coordinador Empresarial de Ciudad Juárez para la Entrega de Galardones Empresariales 2026 y Conferencia Magistral con Carlos Loret de Mola. Cita a medios: 9:00 a.m. en Centro de Eventos Cibeles (Blvd. Tomás Fernández No. 8450).`,
-      'LOCATION:Centro de Eventos Cibeles, Blvd. Tomás Fernández No. 8450, Ciudad Juárez, Chihuahua',
+      'SUMMARY:Cobertura de Prensa · Galardones Empresariales 2026 (CCE Juárez)',
+      `DESCRIPTION:Acreditación de prensa (${folioStr}) del Consejo Coordinador Empresarial de Ciudad Juárez para la Entrega de Galardones Empresariales 2026 y la Conferencia Magistral de Carlos Loret de Mola. Cita de prensa: 9:00 a.m. en Centro de Eventos Cibeles (Blvd. Tomás Fernández 8450).`,
+      'LOCATION:Centro de Eventos Cibeles, Blvd. Tomás Fernández 8450, Ciudad Juárez, Chihuahua',
       'STATUS:CONFIRMED',
       'END:VEVENT',
       'END:VCALENDAR',
@@ -428,10 +428,10 @@ export default function CceAcreditacionPrensaClient() {
     const fullPhone = cleanDigits.length === 10 ? `52${cleanDigits}` : cleanDigits;
     const acompananteTxt =
       Number(reg.asistentes) === 2 && reg.acompananteNombre
-        ? ` y tu acompañante ${reg.acompananteNombre}`
+        ? ` y de ${reg.acompananteNombre}`
         : '';
     const msg = encodeURIComponent(
-      `Buen día ${reg.nombre} (${reg.medio}). Confirmamos tu acreditación oficial de prensa (${reg.folio})${acompananteTxt} para la cobertura de la Entrega de Galardones Empresariales 2026 y Conferencia Magistral de Carlos Loret de Mola del CCE Ciudad Juárez. Te esperamos el jueves 19 de noviembre a las 9:00 a.m. en Centro de Eventos Cibeles.`
+      `Estimado(a) ${reg.nombre} (${reg.medio}), confirmamos su acreditación de prensa (${reg.folio})${acompananteTxt} para la cobertura de la Entrega de Galardones Empresariales 2026 y la Conferencia Magistral de Carlos Loret de Mola del CCE Ciudad Juárez. Le esperamos el jueves 19 de noviembre a las 9:00 a.m. en Centro de Eventos Cibeles.`
     );
     return `https://wa.me/${fullPhone}?text=${msg}`;
   };
@@ -443,7 +443,7 @@ export default function CceAcreditacionPrensaClient() {
     const headers = [
       'Folio',
       'Periodista Titular',
-      'Acompañante (2do Gafete)',
+      'Acompañante (2.º Gafete)',
       'Medio de Comunicación',
       'WhatsApp',
       'Total Gafetes',
@@ -536,7 +536,8 @@ export default function CceAcreditacionPrensaClient() {
       <style
         dangerouslySetInnerHTML={{
           __html: `
-        :root {
+        :root,
+        .cce-page-container {
           --cce-emerald: #064E3B;
           --cce-emerald-dark: #042E23;
           --cce-emerald-light: #059669;
@@ -801,9 +802,9 @@ export default function CceAcreditacionPrensaClient() {
         .cce-hero {
           position: relative;
           z-index: 1;
-          padding: 64px 20px 52px 20px;
+          padding: 56px 20px 28px 20px;
           text-align: center;
-          max-width: 940px;
+          max-width: 900px;
           margin: 0 auto;
           width: 100%;
         }
@@ -812,13 +813,13 @@ export default function CceAcreditacionPrensaClient() {
           display: flex;
           justify-content: center;
           align-items: center;
-          margin: 0 auto 24px auto;
+          margin: 0 auto 22px auto;
           position: relative;
         }
 
         .cce-hero-logo-img {
           width: 100%;
-          max-width: 320px;
+          max-width: 300px;
           height: auto;
           object-fit: contain;
           filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 30px rgba(212, 175, 55, 0.3));
@@ -831,13 +832,13 @@ export default function CceAcreditacionPrensaClient() {
 
         @media (max-width: 640px) {
           .cce-hero {
-            padding: 40px 14px 36px 14px;
+            padding: 36px 16px 20px 16px;
           }
-          .cce-hero-logo-box { margin-bottom: 18px; }
-          .cce-hero-logo-img { max-width: 220px; }
+          .cce-hero-logo-box { margin-bottom: 16px; }
+          .cce-hero-logo-img { max-width: 215px; }
           .cce-hero-pill {
             font-size: 11px;
-            letter-spacing: 0.06em;
+            letter-spacing: 0.07em;
             padding: 7px 14px;
             max-width: 100%;
           }
@@ -850,44 +851,45 @@ export default function CceAcreditacionPrensaClient() {
           background: linear-gradient(135deg, rgba(245, 222, 152, 0.22) 0%, rgba(6, 78, 59, 0.45) 50%, rgba(212, 175, 55, 0.18) 100%);
           border: 1px solid rgba(245, 222, 152, 0.55);
           color: #FFF3C4;
-          font-size: 13px;
+          font-size: 12.5px;
           font-weight: 800;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.11em;
           text-transform: uppercase;
-          padding: 9px 22px;
+          padding: 8px 20px;
           border-radius: 9999px;
-          margin-bottom: 24px;
+          margin-bottom: 20px;
           box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 20px rgba(212, 175, 55, 0.22);
         }
 
         .cce-hero-title {
           font-family: var(--cce-serif);
-          font-size: clamp(32px, 5.5vw, 52px);
-          font-weight: 900;
+          font-size: clamp(30px, 5.2vw, 48px);
+          font-weight: 800;
           background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 35%, #F5DE98 70%, #D4AF37 100%);
           -webkit-background-clip: text;
           background-clip: text;
           -webkit-text-fill-color: transparent;
-          line-height: 1.15;
+          line-height: 1.16;
           letter-spacing: 0.03em;
-          margin-bottom: 18px;
+          margin-bottom: 14px;
           filter: drop-shadow(0 4px 25px rgba(0, 0, 0, 0.85));
-          overflow-wrap: break-word;
-          word-break: break-word;
+          text-wrap: balance;
         }
 
         .cce-hero-subtitle {
-          font-size: clamp(17px, 2.4vw, 21px);
-          font-weight: 600;
+          font-size: clamp(16px, 2.1vw, 19.5px);
+          font-weight: 500;
           color: #E2E8F0;
-          margin-bottom: 20px;
-          line-height: 1.45;
+          max-width: 640px;
+          margin: 0 auto 8px auto;
+          line-height: 1.55;
+          text-wrap: balance;
         }
 
         /* LUXURY CONVOCATORIA INVITATION CARD & LAMBRÍN NICHE */
         .cce-luxury-card-wrapper {
           max-width: 860px;
-          margin: 68px auto 110px auto;
+          margin: 48px auto 76px auto;
           width: 100%;
           padding: 0 12px;
           position: relative;
@@ -1001,12 +1003,12 @@ export default function CceAcreditacionPrensaClient() {
 
         .cce-luxury-watermark {
           position: absolute;
-          top: 50%;
+          top: 44%;
           left: 50%;
           transform: translate(-50%, -50%);
-          width: 480px;
-          height: 480px;
-          opacity: 0.035;
+          width: 440px;
+          height: 440px;
+          opacity: 0.022;
           pointer-events: none;
           background: url('/assets/cce-juarez/cce_logo_hero_prestige.svg') no-repeat center center;
           background-size: contain;
@@ -1017,7 +1019,7 @@ export default function CceAcreditacionPrensaClient() {
           display: flex;
           flex-direction: column;
           align-items: center;
-          margin-bottom: 32px;
+          margin-bottom: 28px;
           position: relative;
           z-index: 2;
         }
@@ -1029,7 +1031,7 @@ export default function CceAcreditacionPrensaClient() {
           font-family: var(--cce-serif);
           font-size: 11.5px;
           font-weight: 800;
-          letter-spacing: 0.22em;
+          letter-spacing: 0.2em;
           text-transform: uppercase;
           color: #FFF6D6;
           padding: 9px 24px;
@@ -1037,7 +1039,7 @@ export default function CceAcreditacionPrensaClient() {
           background: linear-gradient(135deg, #0d6e52 0%, rgba(212, 175, 55, 0.35) 50%, #064e3b 100%);
           border: 1px solid rgba(245, 222, 152, 0.75);
           box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5), 0 0 22px rgba(16, 185, 129, 0.38), inset 0 1px 0 rgba(255, 245, 204, 0.6);
-          margin-bottom: 16px;
+          margin-bottom: 14px;
         }
 
         .cce-luxury-divider {
@@ -1045,7 +1047,7 @@ export default function CceAcreditacionPrensaClient() {
           align-items: center;
           justify-content: center;
           width: 100%;
-          max-width: 320px;
+          max-width: 300px;
           gap: 12px;
         }
 
@@ -1073,21 +1075,25 @@ export default function CceAcreditacionPrensaClient() {
 
         .cce-luxury-salutation {
           font-family: var(--cce-serif);
-          font-size: clamp(23px, 3.1vw, 29px);
+          font-size: clamp(20px, 2.5vw, 24.5px);
           font-weight: 700;
+          line-height: 1.35;
           color: #FFFFFF;
-          margin-bottom: 24px;
-          letter-spacing: 0.01em;
+          margin-bottom: 20px;
+          letter-spacing: 0.015em;
           text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+          text-wrap: balance;
         }
 
         .cce-luxury-paragraph {
-          font-size: clamp(16.5px, 1.8vw, 19px);
-          line-height: 1.82;
+          font-size: clamp(16px, 1.75vw, 18.5px);
+          line-height: 1.78;
           color: #E2E8F0;
-          margin-bottom: 26px;
+          margin-bottom: 24px;
           font-weight: 400;
-          letter-spacing: -0.005em;
+          letter-spacing: 0.004em;
+          word-spacing: 0.02em;
+          text-wrap: pretty;
         }
 
         .cce-luxury-paragraph strong {
@@ -1097,13 +1103,13 @@ export default function CceAcreditacionPrensaClient() {
 
         .cce-luxury-schedule {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 20px;
-          margin: 30px 0 26px 0;
+          grid-template-columns: 1.08fr 0.88fr 1.14fr;
+          gap: 22px;
+          margin: 28px 0 26px 0;
           background: linear-gradient(145deg, rgba(14, 105, 78, 0.92) 0%, rgba(6, 62, 46, 0.96) 52%, rgba(4, 46, 34, 0.94) 100%);
           border: 1.5px solid rgba(212, 175, 55, 0.55);
           border-radius: 18px;
-          padding: 24px;
+          padding: 22px 24px;
           box-shadow:
             inset 0 1px 0 rgba(245, 222, 152, 0.45),
             inset 0 0 35px rgba(16, 185, 129, 0.25),
@@ -1113,24 +1119,24 @@ export default function CceAcreditacionPrensaClient() {
         .cce-schedule-item {
           display: flex;
           align-items: flex-start;
-          gap: 14px;
+          gap: 13px;
           position: relative;
         }
 
         .cce-schedule-item + .cce-schedule-item::before {
           content: '';
           position: absolute;
-          left: -10px;
+          left: -11px;
           top: 6px;
           bottom: 6px;
           width: 1px;
-          background: rgba(212, 175, 55, 0.2);
+          background: rgba(212, 175, 55, 0.22);
         }
 
         .cce-schedule-icon-wrap {
-          width: 52px;
-          height: 52px;
-          border-radius: 14px;
+          width: 46px;
+          height: 46px;
+          border-radius: 13px;
           background: linear-gradient(135deg, rgba(16, 185, 129, 0.48) 0%, rgba(6, 78, 59, 0.95) 55%, rgba(2, 30, 22, 1) 100%);
           border: 1.5px solid rgba(245, 222, 152, 0.65);
           display: flex;
@@ -1144,11 +1150,12 @@ export default function CceAcreditacionPrensaClient() {
         .cce-schedule-info {
           display: flex;
           flex-direction: column;
-          gap: 4px;
+          gap: 3px;
+          min-width: 0;
         }
 
         .cce-schedule-label {
-          font-size: 11.5px;
+          font-size: 11px;
           font-weight: 800;
           color: #F5DE98;
           text-transform: uppercase;
@@ -1157,29 +1164,30 @@ export default function CceAcreditacionPrensaClient() {
         }
 
         .cce-schedule-val {
-          font-size: 16.5px;
+          font-size: 16px;
           font-weight: 700;
           color: #FFFFFF;
-          letter-spacing: -0.01em;
-          line-height: 1.3;
+          letter-spacing: -0.005em;
+          line-height: 1.32;
         }
 
         .cce-schedule-hint {
-          font-size: 13.5px;
+          font-size: 13px;
           font-weight: 600;
           color: #34D399;
-          margin-top: 2px;
+          margin-top: 1px;
           line-height: 1.35;
         }
 
         .cce-luxury-closing {
-          font-size: clamp(17.5px, 2.1vw, 21px);
+          font-size: clamp(16.5px, 1.85vw, 19px);
           font-weight: 700;
           color: #F5DE98;
-          margin-top: 10px;
-          margin-bottom: 32px;
-          line-height: 1.6;
+          margin-top: 6px;
+          margin-bottom: 28px;
+          line-height: 1.55;
           text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+          text-wrap: pretty;
         }
 
         .cce-luxury-footer-seal {
@@ -1201,13 +1209,13 @@ export default function CceAcreditacionPrensaClient() {
         .cce-seal-text {
           display: flex;
           flex-direction: column;
-          gap: 3px;
+          gap: 4px;
           text-align: left;
         }
 
         .cce-seal-org {
           font-family: var(--cce-serif);
-          font-size: 13.5px;
+          font-size: 13px;
           font-weight: 800;
           letter-spacing: 0.08em;
           color: #F5DE98;
@@ -1230,6 +1238,7 @@ export default function CceAcreditacionPrensaClient() {
           font-size: 12px;
           font-weight: 700;
           letter-spacing: 0.04em;
+          flex-shrink: 0;
         }
 
         @media (max-width: 768px) {
@@ -1244,7 +1253,7 @@ export default function CceAcreditacionPrensaClient() {
         }
 
         @media (max-width: 640px) {
-          .cce-luxury-card-wrapper { margin: 54px auto 84px auto; padding: 0 16px; }
+          .cce-luxury-card-wrapper { margin: 36px auto 56px auto; padding: 0 16px; }
           .cce-lambrin-niche { inset: -18px -14px -22px -14px; border-radius: 26px; }
           .cce-lambrin-panel {
             border-radius: 26px;
@@ -1252,11 +1261,11 @@ export default function CceAcreditacionPrensaClient() {
             box-shadow: 0 0 35px rgba(245, 222, 152, 0.35), 0 18px 45px rgba(0, 0, 0, 0.95);
           }
           .cce-lambrin-light-column { display: none; }
-          .cce-luxury-card { padding: 26px 14px; border-radius: 18px; }
+          .cce-luxury-card { padding: 28px 18px; border-radius: 18px; }
           .cce-luxury-badge {
             font-size: 10px;
             letter-spacing: 0.08em;
-            padding: 7px 12px;
+            padding: 7px 14px;
             max-width: 100%;
             text-align: center;
             white-space: normal;
@@ -1299,8 +1308,8 @@ export default function CceAcreditacionPrensaClient() {
         }
 
         @media (max-width: 640px) {
-          .cce-main-content { padding: 0 8px; }
-          .cce-form-card { padding: 26px 14px; border-radius: 18px; }
+          .cce-main-content { padding: 0 12px; }
+          .cce-form-card { padding: 28px 18px; border-radius: 18px; }
         }
 
         .cce-form-card:hover {
@@ -1319,17 +1328,21 @@ export default function CceAcreditacionPrensaClient() {
 
         .cce-form-heading {
           font-family: var(--cce-serif);
-          font-size: clamp(23px, 3.2vw, 28px);
+          font-size: clamp(22px, 3vw, 27px);
           font-weight: 800;
           letter-spacing: 0.04em;
           color: #FFFFFF;
           margin-bottom: 10px;
+          text-wrap: balance;
         }
 
         .cce-form-subheading {
           font-size: 15px;
           color: #CBD5E1;
-          line-height: 1.5;
+          line-height: 1.55;
+          max-width: 500px;
+          margin: 0 auto;
+          text-wrap: balance;
         }
 
         .cce-form-group {
@@ -2300,7 +2313,7 @@ export default function CceAcreditacionPrensaClient() {
                 <span>Acreditación de Medios · Galardones Empresariales 2026</span>
               </h2>
               <div className="cce-crm-banner-sub">
-                Cobertura Oficial y Conferencia Carlos Loret de Mola · Jueves 19 de Noviembre, 9:00 a.m. · Centro de Eventos Cibeles
+                Cobertura de Prensa y Conferencia de Carlos Loret de Mola · Jueves 19 de noviembre, 9:00 a.m. · Centro de Eventos Cibeles
               </div>
             </div>
 
@@ -2598,10 +2611,10 @@ export default function CceAcreditacionPrensaClient() {
                     <thead>
                       <tr>
                         <th className="cce-th" style={{ width: '12%' }}>Folio</th>
-                        <th className="cce-th" style={{ width: '28%' }}>Periodista &amp; Equipo (Gafetes)</th>
+                        <th className="cce-th" style={{ width: '28%' }}>Periodista y Equipo (Gafetes)</th>
                         <th className="cce-th" style={{ width: '20%' }}>Medio</th>
                         <th className="cce-th" style={{ width: '14%' }}>WhatsApp</th>
-                        <th className="cce-th" style={{ width: '8%', textAlign: 'center' }}>Pases</th>
+                        <th className="cce-th" style={{ width: '8%', textAlign: 'center' }}>Gafetes</th>
                         <th className="cce-th" style={{ width: '9%' }}>Registro</th>
                         <th className="cce-th" style={{ width: '9%', textAlign: 'center' }}>Acceso Cibeles</th>
                       </tr>
@@ -2635,7 +2648,7 @@ export default function CceAcreditacionPrensaClient() {
                                 {Number(reg.asistentes) === 2 && reg.acompananteNombre && (
                                   <div className="cce-companion-pill">
                                     <UserPlus size={12} />
-                                    <span>2do Gafete: {reg.acompananteNombre}</span>
+                                    <span>2.º gafete: {reg.acompananteNombre}</span>
                                   </div>
                                 )}
                               </div>
@@ -2728,7 +2741,7 @@ export default function CceAcreditacionPrensaClient() {
                         {Number(reg.asistentes) === 2 && reg.acompananteNombre && (
                           <div className="cce-companion-pill">
                             <UserPlus size={12} />
-                            <span>2do Gafete: {reg.acompananteNombre}</span>
+                            <span>2.º gafete: {reg.acompananteNombre}</span>
                           </div>
                         )}
                       </div>
@@ -2804,14 +2817,14 @@ export default function CceAcreditacionPrensaClient() {
               >
                 <img
                   src="/assets/cce-juarez/cce_logo_hero_prestige.svg"
-                  alt="Consejo Coordinador Empresarial Ciudad Juárez"
+                  alt="Consejo Coordinador Empresarial de Ciudad Juárez"
                   className="cce-hero-logo-img"
                 />
               </motion.div>
 
               <div className="cce-hero-pill">
                 <Sparkles size={14} />
-                Acreditación Oficial de Medios · Día del Evento
+                Convocatoria a Medios · Cobertura del Evento
               </div>
 
               <motion.h1
@@ -2835,10 +2848,11 @@ export default function CceAcreditacionPrensaClient() {
               </motion.h1>
 
               <div className="cce-hero-subtitle">
-                Consejo Coordinador Empresarial de Ciudad Juárez |{' '}
                 <span className="cce-golden-shimmer">
-                  Entrega de Galardones 2026 &amp; Conferencia Carlos Loret de Mola
-                </span>
+                  Entrega de Galardones Empresariales 2026
+                </span>{' '}
+                y Conferencia Magistral de{' '}
+                <strong style={{ color: '#FFFFFF', fontWeight: 700 }}>Carlos Loret de Mola</strong>
               </div>
             </motion.div>
           </section>
@@ -2870,7 +2884,7 @@ export default function CceAcreditacionPrensaClient() {
               <div className="cce-luxury-header">
                 <div className="cce-luxury-badge">
                   <Sparkles size={13} color="#F5DE98" />
-                  ACREDITACIÓN OFICIAL DE PRENSA
+                  INVITACIÓN INSTITUCIONAL
                   <Sparkles size={13} color="#F5DE98" />
                 </div>
                 <div className="cce-luxury-divider">
@@ -2882,15 +2896,18 @@ export default function CceAcreditacionPrensaClient() {
 
               <div className="cce-luxury-letter">
                 <div className="cce-luxury-salutation">
-                  &ldquo;Buen día, compañeros de los medios de comunicación.
+                  Estimados compañeros de los medios de comunicación:
                 </div>
 
                 <p className="cce-luxury-paragraph">
-                  Por este medio, el <strong>Consejo Coordinador Empresarial de Ciudad Juárez</strong> les extiende una cordial invitación para realizar su <strong>acreditación oficial de prensa</strong> para la cobertura de nuestra magna ceremonia de{' '}
+                  El <strong>Consejo Coordinador Empresarial de Ciudad Juárez</strong> les invita
+                  cordialmente a acreditar a su equipo para la cobertura de la{' '}
                   <span className="cce-golden-shimmer" style={{ fontWeight: 800 }}>
                     Entrega de Galardones Empresariales 2026
-                  </span>{' '}
-                  (<em>Estrella Ascendente</em> y <em>De Altos Vuelos</em>) y la Conferencia Magistral impartida por <strong>Carlos Loret de Mola</strong>.
+                  </span>
+                  , en sus categorías <em>Estrella Ascendente</em> y <em>De Altos Vuelos</em>, así
+                  como de la Conferencia Magistral impartida por{' '}
+                  <strong>Carlos Loret de Mola</strong>.
                 </p>
 
                 {/* Coordinate Schedule Grid */}
@@ -2898,46 +2915,49 @@ export default function CceAcreditacionPrensaClient() {
                   {/* Segment 1: Fecha */}
                   <div className="cce-schedule-item">
                     <div className="cce-schedule-icon-wrap" aria-hidden="true">
-                      <Calendar size={24} color="#F5DE98" />
+                      <Calendar size={22} color="#F5DE98" />
                     </div>
                     <div className="cce-schedule-info">
-                      <span className="cce-schedule-label">FECHA OFICIAL</span>
-                      <strong className="cce-schedule-val">Jueves 19 de Noviembre, 2026</strong>
-                      <span className="cce-schedule-hint">Galardones &amp; Conferencia</span>
+                      <span className="cce-schedule-label">FECHA DEL EVENTO</span>
+                      <strong className="cce-schedule-val">Jueves 19 de noviembre</strong>
+                      <span className="cce-schedule-hint">Galardones y Conferencia 2026</span>
                     </div>
                   </div>
 
                   {/* Segment 2: Horario (Vector Gold Clock Icon) */}
                   <div className="cce-schedule-item">
                     <div className="cce-schedule-icon-wrap" aria-hidden="true">
-                      <Clock size={24} color="#F5DE98" />
+                      <Clock size={22} color="#F5DE98" />
                     </div>
                     <div className="cce-schedule-info">
-                      <span className="cce-schedule-label">CITA A MEDIOS</span>
-                      <strong className="cce-schedule-val">9:00 a.m. en punto</strong>
-                      <span className="cce-schedule-hint">Recepción y Gafetes de Prensa</span>
+                      <span className="cce-schedule-label">CITA DE PRENSA</span>
+                      <strong className="cce-schedule-val">9:00 a.m.</strong>
+                      <span className="cce-schedule-hint">Registro y entrega de gafetes</span>
                     </div>
                   </div>
 
                   {/* Segment 3: Sede Oficial Centro de Eventos Cibeles */}
                   <div className="cce-schedule-item">
                     <div className="cce-schedule-icon-wrap" aria-hidden="true">
-                      <Building2 size={24} color="#F5DE98" />
+                      <Building2 size={22} color="#F5DE98" />
                     </div>
                     <div className="cce-schedule-info">
-                      <span className="cce-schedule-label">SEDE DEL EVENTO</span>
+                      <span className="cce-schedule-label">SEDE</span>
                       <strong className="cce-schedule-val">Centro de Eventos Cibeles</strong>
-                      <span className="cce-schedule-hint">Blvd. Tomás Fernández No. 8450</span>
+                      <span className="cce-schedule-hint">Blvd. Tomás Fernández 8450</span>
                     </div>
                   </div>
                 </div>
 
                 <p className="cce-luxury-paragraph">
-                  Para agilizar su ingreso al recinto y preparar con anticipación los gafetes nominales en la mesa de prensa, solicitamos amablemente registrar los datos del periodista titular y, en caso de requerirlo, de su camarógrafo o fotógrafo acompañante (máximo 2 pases por medio).
+                  Para agilizar su acceso al recinto y preparar con anticipación sus gafetes
+                  personalizados en recepción, les solicitamos registrar al periodista titular y, en
+                  caso de requerirlo, a su camarógrafo o fotógrafo acompañante. El cupo está
+                  limitado a un máximo de <strong>dos gafetes por medio</strong>.
                 </p>
 
                 <div className="cce-luxury-closing">
-                  Agradecemos confirmar su acreditación oficial.&rdquo;
+                  Agradecemos de antemano su puntual asistencia y cobertura periodística.
                 </div>
 
                 <div className="cce-luxury-footer-seal">
@@ -2976,61 +2996,66 @@ export default function CceAcreditacionPrensaClient() {
                 >
                   <div className="cce-confirmed-seal">
                     <CheckCircle2 size={16} />
-                    {wasUpdatedRecord ? 'Acreditación Actualizada' : 'Acreditación Registrada'} · {confirmedRecord.folio}
+                    {wasUpdatedRecord ? 'Acreditación Actualizada' : 'Acreditación Registrada'} ·{' '}
+                    {confirmedRecord.folio}
                   </div>
 
                   <h2 className="cce-confirmed-title">
-                    {wasUpdatedRecord ? '¡Datos de Acreditación Actualizados!' : '¡Acreditación Confirmada con Éxito!'}
+                    {wasUpdatedRecord
+                      ? 'Datos de acreditación actualizados'
+                      : 'Acreditación confirmada'}
                   </h2>
 
                   <p style={{ fontSize: '15px', color: '#CBD5E1', lineHeight: 1.6 }}>
-                    Tu registro ha quedado guardado en el padrón oficial de medios del CCE Ciudad Juárez. Presenta tu nombre o folio en la mesa de prensa al llegar a Centro de Eventos Cibeles.
+                    Su registro quedó guardado en el padrón de prensa del CCE Ciudad Juárez.
+                    Presente su nombre o número de folio en la mesa de prensa al llegar a Centro de
+                    Eventos Cibeles.
                   </p>
 
                   <div className="cce-confirmed-summary">
                     <div className="cce-summary-row">
-                      <span className="cce-summary-label">Folio de Prensa:</span>
+                      <span className="cce-summary-label">Folio de prensa:</span>
                       <span className="cce-summary-val" style={{ color: '#F5DE98' }}>
                         {confirmedRecord.folio}
                       </span>
                     </div>
                     <div className="cce-summary-row">
-                      <span className="cce-summary-label">Periodista Titular:</span>
+                      <span className="cce-summary-label">Periodista titular:</span>
                       <span className="cce-summary-val">{confirmedRecord.nombre}</span>
                     </div>
                     {Number(confirmedRecord.asistentes) === 2 && confirmedRecord.acompananteNombre && (
                       <div className="cce-summary-row">
-                        <span className="cce-summary-label">2do Gafete (Acompañante):</span>
+                        <span className="cce-summary-label">Acompañante (2.º gafete):</span>
                         <span className="cce-summary-val">{confirmedRecord.acompananteNombre}</span>
                       </div>
                     )}
                     <div className="cce-summary-row">
-                      <span className="cce-summary-label">Medio de Comunicación:</span>
+                      <span className="cce-summary-label">Medio de comunicación:</span>
                       <span className="cce-summary-val">{confirmedRecord.medio}</span>
                     </div>
                     <div className="cce-summary-row">
-                      <span className="cce-summary-label">WhatsApp Registrado:</span>
+                      <span className="cce-summary-label">WhatsApp registrado:</span>
                       <span className="cce-summary-val">
                         {formatPhoneDisplay(confirmedRecord.whatsapp)}
                       </span>
                     </div>
                     <div className="cce-summary-row">
-                      <span className="cce-summary-label">Total de Acreditaciones:</span>
+                      <span className="cce-summary-label">Gafetes asignados:</span>
                       <span className="cce-summary-val">
                         {confirmedRecord.asistentes} gafete
                         {Number(confirmedRecord.asistentes) === 1 ? '' : 's'}
                       </span>
                     </div>
                     <div className="cce-summary-row">
-                      <span className="cce-summary-label">Cita a Medios:</span>
+                      <span className="cce-summary-label">Cita de prensa:</span>
                       <span className="cce-summary-val">
-                        Jueves 19 de Noviembre, 2026 · 9:00 a.m.
+                        Jueves 19 de noviembre · 9:00 a.m.
                       </span>
                     </div>
                     <div className="cce-summary-row">
-                      <span className="cce-summary-label">Sede Oficial:</span>
+                      <span className="cce-summary-label">Sede:</span>
                       <span className="cce-summary-val">
-                        Centro de Eventos Cibeles (Blvd. Tomás Fernández No. 8450)
+                        Centro de Eventos Cibeles · Blvd. Tomás Fernández 8450
                       </span>
                     </div>
                   </div>
@@ -3061,7 +3086,7 @@ export default function CceAcreditacionPrensaClient() {
                       onClick={handleGoogleMaps}
                     >
                       <MapPin size={18} />
-                      Cómo llegar a Cibeles (Google Maps)
+                      Ubicación en Google Maps
                       <ExternalLink size={14} />
                     </button>
                   </div>
@@ -3072,7 +3097,7 @@ export default function CceAcreditacionPrensaClient() {
                     onClick={handleRegisterAnother}
                   >
                     <PlusCircle size={14} />
-                    Registrar a otro periodista de mi medio
+                    Registrar a otro integrante de prensa
                   </button>
                 </motion.div>
               ) : (
@@ -3086,9 +3111,10 @@ export default function CceAcreditacionPrensaClient() {
                   className="cce-form-card"
                 >
                   <div className="cce-form-header">
-                    <h2 className="cce-form-heading">Registro de Acreditación</h2>
+                    <h2 className="cce-form-heading">Registro de Prensa</h2>
                     <p className="cce-form-subheading">
-                      Completa los datos de tu medio para generar tus gafetes de prensa en Centro de Eventos Cibeles
+                      Complete los datos de quienes cubrirán el evento para rotular sus gafetes de
+                      acceso.
                     </p>
                   </div>
 
@@ -3097,11 +3123,18 @@ export default function CceAcreditacionPrensaClient() {
                     <div className="cce-form-group">
                       <label className="cce-label" htmlFor="nombre">
                         <span>
-                          Nombre Completo (Titular)
+                          Periodista o Reportero Titular
                           <span className="cce-required-dot">*</span>
                         </span>
-                        <span style={{ fontSize: '11.5px', color: '#94A3B8', fontWeight: 500, textTransform: 'none' }}>
-                          Reportero / Periodista
+                        <span
+                          style={{
+                            fontSize: '11.5px',
+                            color: '#94A3B8',
+                            fontWeight: 500,
+                            textTransform: 'none',
+                          }}
+                        >
+                          Primer gafete
                         </span>
                       </label>
                       <input
@@ -3109,7 +3142,7 @@ export default function CceAcreditacionPrensaClient() {
                         name="name"
                         type="text"
                         autoComplete="name"
-                        placeholder="Nombre y apellidos para tu gafete"
+                        placeholder="Nombre y apellidos completos"
                         value={nombre}
                         onChange={(e) => {
                           setNombre(e.target.value);
@@ -3128,13 +3161,23 @@ export default function CceAcreditacionPrensaClient() {
                           Medio de Comunicación
                           <span className="cce-required-dot">*</span>
                         </span>
+                        <span
+                          style={{
+                            fontSize: '11.5px',
+                            color: '#94A3B8',
+                            fontWeight: 500,
+                            textTransform: 'none',
+                          }}
+                        >
+                          Prensa, radio, TV o medio digital
+                        </span>
                       </label>
                       <input
                         id="medio"
                         name="organization"
                         type="text"
                         autoComplete="organization"
-                        placeholder="Ej. El Diario, Canal 44, Netnoticias..."
+                        placeholder="Ej. El Diario, Canal 44, Netnoticias"
                         value={medio}
                         onChange={(e) => {
                           setMedio(e.target.value);
@@ -3171,7 +3214,7 @@ export default function CceAcreditacionPrensaClient() {
                         inputMode="numeric"
                         autoComplete="tel"
                         maxLength={20}
-                        placeholder="Ej. 656 123 4567"
+                        placeholder="656 123 4567"
                         value={whatsapp}
                         onChange={(e) => {
                           const normalized = normalizeMxPhoneInput(e.target.value);
@@ -3184,14 +3227,21 @@ export default function CceAcreditacionPrensaClient() {
                       {errors.whatsapp && <span className="cce-field-error">{errors.whatsapp}</span>}
                     </div>
 
-                    {/* Campo 4: No. de Acreditaciones (Topado a 1 o 2 por medio) */}
+                    {/* Campo 4: Gafetes Solicitados (Topado a 1 o 2 por medio) */}
                     <div className="cce-form-group">
                       <label className="cce-label">
                         <span>
-                          No. de Pases / Gafetes
+                          Gafetes Solicitados
                           <span className="cce-required-dot">*</span>
                         </span>
-                        <span style={{ fontSize: '11.5px', color: '#94A3B8', fontWeight: 500, textTransform: 'none' }}>
+                        <span
+                          style={{
+                            fontSize: '11.5px',
+                            color: '#94A3B8',
+                            fontWeight: 500,
+                            textTransform: 'none',
+                          }}
+                        >
                           Máximo 2 por medio
                         </span>
                       </label>
@@ -3207,8 +3257,8 @@ export default function CceAcreditacionPrensaClient() {
                           }}
                           disabled={isSubmitting}
                         >
-                          <span className="cce-attendee-btn-title">1 Pase</span>
-                          <span className="cce-attendee-btn-sub">Periodista / Reportero Individual</span>
+                          <span className="cce-attendee-btn-title">1 Gafete</span>
+                          <span className="cce-attendee-btn-sub">Cobertura individual</span>
                         </button>
 
                         <button
@@ -3220,8 +3270,10 @@ export default function CceAcreditacionPrensaClient() {
                           }}
                           disabled={isSubmitting}
                         >
-                          <span className="cce-attendee-btn-title">2 Pases</span>
-                          <span className="cce-attendee-btn-sub">Titular + Camarógrafo / Fotógrafo</span>
+                          <span className="cce-attendee-btn-title">2 Gafetes</span>
+                          <span className="cce-attendee-btn-sub">
+                            Titular + camarógrafo o fotógrafo
+                          </span>
                         </button>
                       </div>
                       {errors.asistentes && (
@@ -3244,7 +3296,7 @@ export default function CceAcreditacionPrensaClient() {
                             <div className="cce-form-group" style={{ marginBottom: 0 }}>
                               <label className="cce-label" htmlFor="acompananteNombre">
                                 <span>
-                                  Nombre Completo del Acompañante
+                                  Nombre del Acompañante
                                   <span className="cce-required-dot">*</span>
                                 </span>
                                 <span
@@ -3255,7 +3307,7 @@ export default function CceAcreditacionPrensaClient() {
                                     textTransform: 'none',
                                   }}
                                 >
-                                  Para impresión de 2do gafete
+                                  Segundo gafete
                                 </span>
                               </label>
                               <input
@@ -3293,7 +3345,7 @@ export default function CceAcreditacionPrensaClient() {
                       ) : (
                         <>
                           <Send size={18} />
-                          <span>Confirmar Acreditación de Prensa</span>
+                          <span>Confirmar Acreditación</span>
                         </>
                       )}
                     </button>

@@ -17,16 +17,16 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://hermes-lite.vercel.app'),
-  title: 'Acreditación Oficial de Prensa · Galardones 2026 | CCE Ciudad Juárez',
+  title: 'Acreditación de Prensa · Galardones Empresariales 2026 | CCE Ciudad Juárez',
   description:
-    'Registro y acreditación oficial de medios de comunicación para la cobertura de la Entrega de Galardones Empresariales 2026 y Conferencia Magistral de Carlos Loret de Mola · Jueves 19 de Noviembre, 9:00 a.m. en Centro de Eventos Cibeles.',
+    'Registro de prensa para la cobertura de la Entrega de Galardones Empresariales 2026 y la Conferencia Magistral de Carlos Loret de Mola. Jueves 19 de noviembre, 9:00 a.m., Centro de Eventos Cibeles.',
   alternates: {
     canonical: 'https://hermes-lite.vercel.app/acreditacion-prensa',
   },
   openGraph: {
-    title: 'Acreditación Oficial de Prensa · Galardones 2026',
+    title: 'Acreditación de Prensa · Galardones Empresariales 2026',
     description:
-      'Consejo Coordinador Empresarial de Ciudad Juárez · Jueves 19 de Noviembre, 9:00 a.m. · Centro de Eventos Cibeles.',
+      'Consejo Coordinador Empresarial de Ciudad Juárez · Jueves 19 de noviembre, 9:00 a.m. · Centro de Eventos Cibeles.',
     url: 'https://hermes-lite.vercel.app/acreditacion-prensa',
     siteName: 'Consejo Coordinador Empresarial de Ciudad Juárez',
     images: [
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         type: 'image/png',
-        alt: 'Acreditación Oficial de Prensa · Galardones 2026 · CCE Ciudad Juárez',
+        alt: 'Acreditación de Prensa · Galardones Empresariales 2026 · CCE Ciudad Juárez',
       },
     ],
     locale: 'es_MX',
@@ -43,9 +43,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Acreditación Oficial de Prensa · Galardones 2026',
+    title: 'Acreditación de Prensa · Galardones Empresariales 2026',
     description:
-      'Consejo Coordinador Empresarial de Ciudad Juárez · Jueves 19 de Noviembre, 9:00 a.m. · Centro de Eventos Cibeles.',
+      'Consejo Coordinador Empresarial de Ciudad Juárez · Jueves 19 de noviembre, 9:00 a.m. · Centro de Eventos Cibeles.',
     images: ['/assets/cce-juarez/og_cce_logo_only.png?v=20261112'],
   },
   robots: {
