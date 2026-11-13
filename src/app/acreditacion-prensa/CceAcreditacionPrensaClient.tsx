@@ -968,10 +968,11 @@ export default function CceAcreditacionPrensaClient() {
             max-width: 235px;
           }
           .cce-hero-pill {
-            font-size: 11px;
-            letter-spacing: 0.08em;
-            padding: 7px 14px;
-            line-height: 1.35;
+            font-size: 9.8px;
+            letter-spacing: 0.05em;
+            padding: 6px 12px;
+            gap: 6px;
+            line-height: 1.3;
           }
         }
 
@@ -1506,6 +1507,16 @@ export default function CceAcreditacionPrensaClient() {
 
         .cce-input::placeholder {
           color: #64748B;
+        }
+
+        @media (max-width: 640px) {
+          .cce-input {
+            font-size: 16px;
+            padding: 13px 14px;
+          }
+          .cce-input::placeholder {
+            font-size: 14px;
+          }
         }
 
         .cce-input:focus {
