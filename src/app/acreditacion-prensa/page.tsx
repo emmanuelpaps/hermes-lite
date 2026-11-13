@@ -31,10 +31,10 @@ export const metadata: Metadata = {
     siteName: 'Consejo Coordinador Empresarial de Ciudad Juárez',
     images: [
       {
-        url: '/assets/cce-juarez/og_cce_logo_only.png?v=20261112',
+        url: 'https://hermes-lite.vercel.app/assets/cce-juarez/og_acreditacion_prensa_2026.jpg?v=20261113',
         width: 1200,
         height: 630,
-        type: 'image/png',
+        type: 'image/jpeg',
         alt: 'Acreditación de Prensa · Galardones Empresariales 2026 · CCE Ciudad Juárez',
       },
     ],
@@ -46,7 +46,9 @@ export const metadata: Metadata = {
     title: 'Acreditación de Prensa · Galardones Empresariales 2026',
     description:
       'Consejo Coordinador Empresarial de Ciudad Juárez · Jueves 19 de noviembre, 9:00 a.m. · Centro de Eventos Cibeles.',
-    images: ['/assets/cce-juarez/og_cce_logo_only.png?v=20261112'],
+    images: [
+      'https://hermes-lite.vercel.app/assets/cce-juarez/og_acreditacion_prensa_2026.jpg?v=20261113',
+    ],
   },
   robots: {
     index: false,
