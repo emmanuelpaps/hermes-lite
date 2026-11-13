@@ -259,7 +259,7 @@ export async function POST(req: NextRequest) {
         {
           success: false,
           error:
-            'Por favor ingresa el nombre completo de tu acompañante (camarógrafo / fotógrafo) para su gafete.',
+            'Por favor ingrese el nombre completo de su camarógrafo o fotógrafo acompañante.',
         },
         { status: 400, headers: NO_STORE_HEADERS }
       );

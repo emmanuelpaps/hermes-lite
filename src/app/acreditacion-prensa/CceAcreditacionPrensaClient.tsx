@@ -221,12 +221,12 @@ export default function CceAcreditacionPrensaClient() {
     }
 
     if (asistentes !== '1' && asistentes !== '2') {
-      newErrors.asistentes = 'Seleccione 1 o 2 gafetes para su medio.';
+      newErrors.asistentes = 'Seleccione 1 o 2 personas para su acreditación.';
     }
 
     if (asistentes === '2' && (!acompananteNombre.trim() || acompananteNombre.trim().length < 3)) {
       newErrors.acompananteNombre =
-        'Ingrese el nombre completo del acompañante para rotular su segundo gafete.';
+        'Ingrese el nombre completo del camarógrafo o fotógrafo acompañante.';
     }
 
     setErrors(newErrors);
@@ -436,17 +436,17 @@ export default function CceAcreditacionPrensaClient() {
     return `https://wa.me/${fullPhone}?text=${msg}`;
   };
 
-  // 1-Click CSV Export with UTF-8 BOM (Ready for Badge Printing & Reception List)
+  // 1-Click CSV Export with UTF-8 BOM (Official Press Accreditation Roster)
   const handleExportCsv = () => {
     if (!crmData || crmData.registrations.length === 0) return;
 
     const headers = [
       'Folio',
       'Periodista Titular',
-      'Acompañante (2.º Gafete)',
+      'Acompañante Acreditado',
       'Medio de Comunicación',
       'WhatsApp',
-      'Total Gafetes',
+      'Personas Acreditadas',
       'Fecha de Registro',
       'Check-In Cibeles',
       'Ubicación',
@@ -2445,7 +2445,7 @@ export default function CceAcreditacionPrensaClient() {
               <div className="cce-crm-capacity-pill">
                 <Users size={15} />
                 <span>
-                  Gafetes acreditados: <b>{crmData?.telemetry.totalAsistentes ?? 0}</b> personas
+                  Prensa acreditada: <b>{crmData?.telemetry.totalAsistentes ?? 0}</b> personas
                 </span>
               </div>
               <button
@@ -2469,10 +2469,10 @@ export default function CceAcreditacionPrensaClient() {
                 type="button"
                 className="cce-crm-btn cce-crm-btn-primary"
                 onClick={handleExportCsv}
-                title="Descargar padrón de gafetes de prensa en CSV compatible con Excel"
+                title="Descargar padrón de prensa acreditada en CSV compatible con Excel"
               >
                 <FileSpreadsheet size={16} />
-                Exportar Gafetes CSV
+                Exportar Padrón CSV
               </button>
             </div>
           </div>
@@ -2550,7 +2550,7 @@ export default function CceAcreditacionPrensaClient() {
             <div className="cce-radar-grid">
               <div className="cce-radar-card cce-radar-card-hero">
                 <div className="cce-radar-header">
-                  <span className="cce-radar-label">Total Gafetes (Personas)</span>
+                  <span className="cce-radar-label">Personas Acreditadas</span>
                   <div className="cce-radar-icon-box" style={{ background: '#ECFDF5', color: '#064E3B' }}>
                     <Users size={16} />
                   </div>
@@ -2735,10 +2735,10 @@ export default function CceAcreditacionPrensaClient() {
                     <thead>
                       <tr>
                         <th className="cce-th" style={{ width: '12%' }}>Folio</th>
-                        <th className="cce-th" style={{ width: '28%' }}>Periodista y Equipo (Gafetes)</th>
+                        <th className="cce-th" style={{ width: '28%' }}>Periodista y Equipo</th>
                         <th className="cce-th" style={{ width: '20%' }}>Medio</th>
                         <th className="cce-th" style={{ width: '14%' }}>WhatsApp</th>
-                        <th className="cce-th" style={{ width: '8%', textAlign: 'center' }}>Gafetes</th>
+                        <th className="cce-th" style={{ width: '8%', textAlign: 'center' }}>Personas</th>
                         <th className="cce-th" style={{ width: '9%' }}>Registro</th>
                         <th className="cce-th" style={{ width: '9%', textAlign: 'center' }}>Acceso Cibeles</th>
                       </tr>
@@ -2772,7 +2772,7 @@ export default function CceAcreditacionPrensaClient() {
                                 {Number(reg.asistentes) === 2 && reg.acompananteNombre && (
                                   <div className="cce-companion-pill">
                                     <UserPlus size={12} />
-                                    <span>2.º gafete: {reg.acompananteNombre}</span>
+                                    <span>Acompañante: {reg.acompananteNombre}</span>
                                   </div>
                                 )}
                               </div>
@@ -2814,7 +2814,7 @@ export default function CceAcreditacionPrensaClient() {
                               }`}
                               onClick={() => handleToggleCheckIn(reg)}
                               disabled={checkInUpdatingId === reg.id}
-                              title="Registrar ingreso en mesa de prensa en Centro de Eventos Cibeles"
+                              title="Registrar asistencia en Centro de Eventos Cibeles"
                             >
                               <CheckCircle2 size={13} />
                               {reg.checkIn ? 'En Cibeles' : 'Check-in'}
@@ -2854,7 +2854,7 @@ export default function CceAcreditacionPrensaClient() {
                         </span>
                         <span className="cce-asistentes-pill">
                           <Users size={12} />
-                          {reg.asistentes} gafete{Number(reg.asistentes) === 1 ? '' : 's'}
+                          {reg.asistentes} persona{Number(reg.asistentes) === 1 ? '' : 's'}
                         </span>
                       </div>
 
@@ -2865,7 +2865,7 @@ export default function CceAcreditacionPrensaClient() {
                         {Number(reg.asistentes) === 2 && reg.acompananteNombre && (
                           <div className="cce-companion-pill">
                             <UserPlus size={12} />
-                            <span>2.º gafete: {reg.acompananteNombre}</span>
+                            <span>Acompañante: {reg.acompananteNombre}</span>
                           </div>
                         )}
                       </div>
@@ -3081,7 +3081,7 @@ export default function CceAcreditacionPrensaClient() {
                     <div className="cce-schedule-info">
                       <span className="cce-schedule-label">CITA DE PRENSA</span>
                       <strong className="cce-schedule-val">9:00 a.m.</strong>
-                      <span className="cce-schedule-hint">Registro y entrega de gafetes</span>
+                      <span className="cce-schedule-hint">Recepción de medios acreditados</span>
                     </div>
                   </div>
 
@@ -3099,10 +3099,9 @@ export default function CceAcreditacionPrensaClient() {
                 </div>
 
                 <p className="cce-luxury-paragraph">
-                  Para agilizar su acceso al recinto y preparar con anticipación sus gafetes
-                  personalizados en recepción, les solicitamos registrar al periodista titular y, en
-                  caso de requerirlo, a su camarógrafo o fotógrafo acompañante. El cupo está
-                  limitado a un máximo de <strong>dos gafetes por medio</strong>.
+                  Para confirmar su acreditación, les solicitamos registrar los datos del periodista
+                  titular y, en caso de requerirlo, de su camarógrafo o fotógrafo acompañante. El
+                  registro está limitado a un máximo de <strong>dos personas por medio</strong>.
                 </p>
 
                 <div className="cce-luxury-closing">
@@ -3166,9 +3165,8 @@ export default function CceAcreditacionPrensaClient() {
                   </h2>
 
                   <p style={{ fontSize: '15px', color: '#CBD5E1', lineHeight: 1.6 }}>
-                    Su registro quedó guardado en el padrón de prensa del CCE Ciudad Juárez.
-                    Presente su nombre o número de folio en la mesa de prensa al llegar a Centro de
-                    Eventos Cibeles.
+                    Su acreditación quedó registrada en el padrón de prensa del CCE Ciudad Juárez
+                    para el jueves 19 de noviembre a las 9:00 a.m. en Centro de Eventos Cibeles.
                   </p>
 
                   <div className="cce-confirmed-summary">
@@ -3184,7 +3182,7 @@ export default function CceAcreditacionPrensaClient() {
                     </div>
                     {Number(confirmedRecord.asistentes) === 2 && confirmedRecord.acompananteNombre && (
                       <div className="cce-summary-row">
-                        <span className="cce-summary-label">Acompañante (2.º gafete):</span>
+                        <span className="cce-summary-label">Acompañante acreditado:</span>
                         <span className="cce-summary-val">{confirmedRecord.acompananteNombre}</span>
                       </div>
                     )}
@@ -3199,9 +3197,9 @@ export default function CceAcreditacionPrensaClient() {
                       </span>
                     </div>
                     <div className="cce-summary-row">
-                      <span className="cce-summary-label">Gafetes asignados:</span>
+                      <span className="cce-summary-label">Personas acreditadas:</span>
                       <span className="cce-summary-val">
-                        {confirmedRecord.asistentes} gafete
+                        {confirmedRecord.asistentes} persona
                         {Number(confirmedRecord.asistentes) === 1 ? '' : 's'}
                       </span>
                     </div>
@@ -3272,8 +3270,8 @@ export default function CceAcreditacionPrensaClient() {
                   <div className="cce-form-header">
                     <h2 className="cce-form-heading">Registro de Prensa</h2>
                     <p className="cce-form-subheading">
-                      Complete los datos de quienes cubrirán el evento para rotular sus gafetes de
-                      acceso.
+                      Complete los datos de quienes asistirán a cubrir el evento para confirmar su
+                      acreditación.
                     </p>
                   </div>
 
@@ -3293,7 +3291,7 @@ export default function CceAcreditacionPrensaClient() {
                             textTransform: 'none',
                           }}
                         >
-                          Primer gafete
+                          Titular acreditado
                         </span>
                       </label>
                       <input
@@ -3386,11 +3384,11 @@ export default function CceAcreditacionPrensaClient() {
                       {errors.whatsapp && <span className="cce-field-error">{errors.whatsapp}</span>}
                     </div>
 
-                    {/* Campo 4: Gafetes Solicitados (Topado a 1 o 2 por medio) */}
+                    {/* Campo 4: Personas a Acreditar (Topado a 1 o 2 por medio) */}
                     <div className="cce-form-group">
                       <label className="cce-label">
                         <span>
-                          Gafetes Solicitados
+                          Personas a Acreditar
                           <span className="cce-required-dot">*</span>
                         </span>
                         <span
@@ -3416,7 +3414,7 @@ export default function CceAcreditacionPrensaClient() {
                           }}
                           disabled={isSubmitting}
                         >
-                          <span className="cce-attendee-btn-title">1 Gafete</span>
+                          <span className="cce-attendee-btn-title">1 Persona</span>
                           <span className="cce-attendee-btn-sub">Cobertura individual</span>
                         </button>
 
@@ -3429,7 +3427,7 @@ export default function CceAcreditacionPrensaClient() {
                           }}
                           disabled={isSubmitting}
                         >
-                          <span className="cce-attendee-btn-title">2 Gafetes</span>
+                          <span className="cce-attendee-btn-title">2 Personas</span>
                           <span className="cce-attendee-btn-sub">
                             Titular + camarógrafo o fotógrafo
                           </span>
@@ -3466,7 +3464,7 @@ export default function CceAcreditacionPrensaClient() {
                                     textTransform: 'none',
                                   }}
                                 >
-                                  Segundo gafete
+                                  Acompañante acreditado
                                 </span>
                               </label>
                               <input
