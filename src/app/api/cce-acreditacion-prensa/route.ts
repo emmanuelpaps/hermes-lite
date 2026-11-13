@@ -77,6 +77,7 @@ export async function POST(req: NextRequest) {
     medio: string;
     whatsapp: string;
     asistentes: number;
+    acompanantes?: string[];
     acompananteNombre?: string;
     fecha: string;
     timestamp: number;
@@ -94,6 +95,7 @@ export async function POST(req: NextRequest) {
       medio,
       whatsapp,
       asistentes,
+      acompanantes,
       acompananteNombre,
     } = body;
 
@@ -129,7 +131,17 @@ export async function POST(req: NextRequest) {
           ? attemptId.trim()
           : `attempt-${nowMs}-${Math.random().toString(36).substring(2, 6)}`;
       const cleanPhone = normalizeMxPhone(whatsapp);
-      const parsedAsistentes = Number(asistentes) === 2 ? 2 : 1;
+      const rawNum = Number(asistentes);
+      const parsedAsistentes =
+        Number.isInteger(rawNum) && rawNum >= 1 && rawNum <= 4 ? rawNum : 1;
+      const preflightCompanions = Array.isArray(acompanantes)
+        ? acompanantes
+            .slice(0, parsedAsistentes - 1)
+            .map((c) => String(c || '').trim())
+            .filter(Boolean)
+        : parsedAsistentes > 1 && acompananteNombre
+          ? [String(acompananteNombre).trim()].filter(Boolean)
+          : [];
 
       console.info(
         JSON.stringify({
@@ -139,8 +151,7 @@ export async function POST(req: NextRequest) {
           medio: String(medio || '').trim(),
           whatsapp: cleanPhone,
           asistentes: parsedAsistentes,
-          acompananteNombre:
-            parsedAsistentes === 2 ? String(acompananteNombre || '').trim() : undefined,
+          acompanantes: preflightCompanions.length > 0 ? preflightCompanions : undefined,
           ip: clientIp,
           fecha: formattedTime,
         })
@@ -154,10 +165,9 @@ export async function POST(req: NextRequest) {
         medio: String(medio || '').trim(),
         whatsapp: cleanPhone,
         asistentes: parsedAsistentes,
+        acompanantes: preflightCompanions.length > 0 ? preflightCompanions : undefined,
         acompananteNombre:
-          parsedAsistentes === 2 && acompananteNombre
-            ? String(acompananteNombre).trim()
-            : undefined,
+          preflightCompanions.length > 0 ? preflightCompanions.join(' · ') : undefined,
         fecha: formattedTime,
         timestamp: nowMs,
         device: deviceType,
@@ -176,8 +186,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          error:
-            'El periodo de acreditación en línea ha concluido. Por favor acude directamente a la mesa de prensa en Centro de Eventos Cibeles.',
+          error: 'El periodo de acreditación de prensa en línea ha concluido.',
         },
         { status: 403, headers: NO_STORE_HEADERS }
       );
@@ -188,10 +197,21 @@ export async function POST(req: NextRequest) {
     const cleanMedio = typeof medio === 'string' ? medio.trim().replace(/\s+/g, ' ') : '';
     const cleanWhatsapp = normalizeMxPhone(whatsapp);
     const numAsistentes = Number(asistentes);
-    const cleanAcompanante =
-      typeof acompananteNombre === 'string'
-        ? acompananteNombre.trim().replace(/\s+/g, ' ')
-        : '';
+    const safeAsistentesCount =
+      Number.isInteger(numAsistentes) && numAsistentes >= 1 && numAsistentes <= 4
+        ? numAsistentes
+        : 1;
+    const requiredCompanions = safeAsistentesCount - 1;
+
+    const cleanCompanions: string[] = Array.isArray(acompanantes)
+      ? acompanantes
+          .slice(0, requiredCompanions)
+          .map((item) => (typeof item === 'string' ? item.trim().replace(/\s+/g, ' ') : ''))
+      : requiredCompanions === 1 && typeof acompananteNombre === 'string'
+        ? [acompananteNombre.trim().replace(/\s+/g, ' ')]
+        : [];
+
+    const nonEmptyCompanions = cleanCompanions.filter(Boolean);
 
     activeAttemptId =
       typeof attemptId === 'string' && attemptId.trim()
@@ -202,9 +222,10 @@ export async function POST(req: NextRequest) {
       nombre: cleanNombre,
       medio: cleanMedio,
       whatsapp: cleanWhatsapp,
-      asistentes: numAsistentes === 2 ? 2 : 1,
+      asistentes: safeAsistentesCount,
+      acompanantes: nonEmptyCompanions.length > 0 ? nonEmptyCompanions : undefined,
       acompananteNombre:
-        numAsistentes === 2 && cleanAcompanante ? cleanAcompanante : undefined,
+        nonEmptyCompanions.length > 0 ? nonEmptyCompanions.join(' · ') : undefined,
       fecha: formattedTime,
       timestamp: nowMs,
       device: deviceType,
@@ -217,7 +238,7 @@ export async function POST(req: NextRequest) {
         {
           success: false,
           error:
-            'Por favor ingresa el nombre completo del periodista o reportero titular (mínimo 3 caracteres).',
+            'Por favor ingrese el nombre completo del periodista o reportero titular (mínimo 3 caracteres).',
         },
         { status: 400, headers: NO_STORE_HEADERS }
       );
@@ -227,7 +248,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          error: 'Por favor ingresa el nombre del medio de comunicación o agencia.',
+          error: 'Por favor ingrese el nombre del medio de comunicación o agencia.',
         },
         { status: 400, headers: NO_STORE_HEADERS }
       );
@@ -237,32 +258,37 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          error: 'Por favor ingresa un número celular con WhatsApp válido a 10 dígitos.',
+          error: 'Por favor ingrese un número celular con WhatsApp válido a 10 dígitos.',
         },
         { status: 400, headers: NO_STORE_HEADERS }
       );
     }
 
-    if (numAsistentes !== 1 && numAsistentes !== 2) {
+    if (!Number.isInteger(numAsistentes) || numAsistentes < 1 || numAsistentes > 4) {
       return NextResponse.json(
         {
           success: false,
           error:
-            'El límite máximo de acreditaciones es de 1 o 2 personas por medio de comunicación.',
+            'El límite máximo de acreditaciones es de 1 a 4 personas por medio de comunicación.',
         },
         { status: 400, headers: NO_STORE_HEADERS }
       );
     }
 
-    if (numAsistentes === 2 && cleanAcompanante.length < 3) {
-      return NextResponse.json(
-        {
-          success: false,
-          error:
-            'Por favor ingrese el nombre completo de su camarógrafo o fotógrafo acompañante.',
-        },
-        { status: 400, headers: NO_STORE_HEADERS }
-      );
+    for (let i = 0; i < requiredCompanions; i++) {
+      const compName = cleanCompanions[i] || '';
+      if (compName.length < 3) {
+        return NextResponse.json(
+          {
+            success: false,
+            error:
+              requiredCompanions === 1
+                ? 'Por favor ingrese el nombre completo del acompañante.'
+                : `Por favor ingrese el nombre completo del acompañante ${i + 1}.`,
+          },
+          { status: 400, headers: NO_STORE_HEADERS }
+        );
+      }
     }
 
     // 5. Geolocation from Vercel headers
@@ -273,7 +299,7 @@ export async function POST(req: NextRequest) {
       [city, region, country].filter(Boolean).join(', ') || 'Ciudad Juárez, Chih., México';
 
     // 6. Idempotent Deduplication: if same journalist + same WhatsApp already registered,
-    //    update their accreditation & keep their original Folio instead of creating duplicate badges.
+    //    update their accreditation & keep their original Folio.
     const existing = await findExistingAcreditacionByJournalist(cleanNombre, cleanWhatsapp);
 
     const randomDigits = Math.floor(1000 + Math.random() * 9000);
@@ -288,7 +314,12 @@ export async function POST(req: NextRequest) {
       medio: cleanMedio,
       whatsapp: cleanWhatsapp,
       asistentes: numAsistentes,
-      ...(numAsistentes === 2 ? { acompananteNombre: cleanAcompanante } : {}),
+      ...(requiredCompanions > 0
+        ? {
+            acompanantes: cleanCompanions,
+            acompananteNombre: cleanCompanions.join(' · '),
+          }
+        : {}),
       fecha: formattedTime,
       timestamp: existing?.timestamp || nowMs,
       checkIn: existing?.checkIn || false,

@@ -18,8 +18,9 @@ export interface AcreditacionPrensaRegistration {
   nombre: string;
   medio: string;
   whatsapp: string;
-  asistentes: number; // 1 | 2
-  acompananteNombre?: string;
+  asistentes: number; // 1 | 2 | 3 | 4
+  acompanantes?: string[]; // 0 to 3 companion full names
+  acompananteNombre?: string; // Joined string for backwards compatibility
   fecha: string;
   timestamp: number;
   checkIn: boolean;
@@ -44,6 +45,7 @@ export interface AcreditacionPrensaAttempt {
   medio: string;
   whatsapp: string;
   asistentes: number;
+  acompanantes?: string[];
   acompananteNombre?: string;
   errorReason?: string;
   fecha: string;
@@ -398,8 +400,8 @@ export async function getAcreditacionPrensaTelemetry(
     if (reg.medio) {
       mediaSet.add(reg.medio.toLowerCase().trim());
     }
-    const num = Number(reg.asistentes) || 1;
-    totalAsistentes += num >= 2 ? 2 : 1;
+    const num = Math.min(4, Math.max(1, Number(reg.asistentes) || 1));
+    totalAsistentes += num;
   }
 
   return {
