@@ -3177,7 +3177,7 @@ export default function CceAcreditacionPrensaClient() {
                         name="organization"
                         type="text"
                         autoComplete="organization"
-                        placeholder="Ej. El Diario, Canal 44, Netnoticias"
+                        placeholder="Nombre del medio o plataforma informativa"
                         value={medio}
                         onChange={(e) => {
                           setMedio(e.target.value);
@@ -3214,7 +3214,7 @@ export default function CceAcreditacionPrensaClient() {
                         inputMode="numeric"
                         autoComplete="tel"
                         maxLength={20}
-                        placeholder="656 123 4567"
+                        placeholder="Número celular a 10 dígitos"
                         value={whatsapp}
                         onChange={(e) => {
                           const normalized = normalizeMxPhoneInput(e.target.value);
