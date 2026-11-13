@@ -137,8 +137,8 @@ export default function CceAcreditacionPrensaClient() {
   const [nombre, setNombre] = useState('');
   const [medio, setMedio] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
-  const [asistentes, setAsistentes] = useState<'1' | '2' | '3' | '4'>('1');
-  const [acompanantes, setAcompanantes] = useState<[string, string, string]>(['', '', '']);
+  const [asistentes, setAsistentes] = useState<'1' | '2'>('1');
+  const [acompanantes, setAcompanantes] = useState<[string]>(['']);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [submitError, setSubmitError] = useState('');
@@ -246,18 +246,15 @@ export default function CceAcreditacionPrensaClient() {
       newErrors.whatsapp = 'Ingrese un número de WhatsApp válido a 10 dígitos.';
     }
 
-    if (!['1', '2', '3', '4'].includes(asistentes)) {
-      newErrors.asistentes = 'Seleccione de 1 a 4 personas para su acreditación.';
+    if (!['1', '2'].includes(asistentes)) {
+      newErrors.asistentes = 'Seleccione 1 o 2 personas para su acreditación.';
     }
 
     const neededCompanions = Math.max(0, Number(asistentes) - 1);
     for (let idx = 0; idx < neededCompanions; idx++) {
       const compVal = (acompanantes[idx] || '').trim();
       if (compVal.length < 3) {
-        newErrors[`acompanante_${idx}`] =
-          neededCompanions === 1
-            ? 'Ingrese el nombre completo del acompañante.'
-            : `Ingrese el nombre completo del acompañante ${idx + 1}.`;
+        newErrors[`acompanante_${idx}`] = 'Ingrese el nombre completo del acompañante.';
       }
     }
 
@@ -275,7 +272,7 @@ export default function CceAcreditacionPrensaClient() {
     setIsSubmitting(true);
 
     const cleanPhone = normalizeMxPhoneInput(whatsapp);
-    const numAsistentes = Math.min(4, Math.max(1, Number(asistentes) || 1));
+    const numAsistentes = Math.min(2, Math.max(1, Number(asistentes) || 1));
     const activeCompanions = acompanantes
       .slice(0, numAsistentes - 1)
       .map((name) => name.trim());
@@ -348,7 +345,7 @@ export default function CceAcreditacionPrensaClient() {
     setNombre('');
     setWhatsapp('');
     setAsistentes('1');
-    setAcompanantes(['', '', '']);
+    setAcompanantes(['']);
     setErrors({});
     setSubmitError('');
   };
@@ -362,7 +359,7 @@ export default function CceAcreditacionPrensaClient() {
     );
     const details = encodeURIComponent(
       `Acreditación de prensa del Consejo Coordinador Empresarial de Ciudad Juárez para la Entrega de Galardones Empresariales 2026 y la Conferencia Magistral de Carlos Loret de Mola.\n\nFolio: ${folioStr}\nTitular: ${confirmedRecord?.nombre || ''}\nMedio: ${confirmedRecord?.medio || ''}${
-        companions.length > 0 ? `\nAcompañantes: ${companions.join(', ')}` : ''
+        companions.length > 0 ? `\nAcompañante: ${companions[0]}` : ''
       }\n\nCita de prensa: 9:00 a.m.\nSede: Centro de Eventos Cibeles (Blvd. Tomás Fernández 8450, Ciudad Juárez, Chih.).`
     );
     const location = encodeURIComponent(
@@ -480,9 +477,7 @@ export default function CceAcreditacionPrensaClient() {
     const headers = [
       'Folio',
       'Periodista Titular',
-      'Acompañante 1',
-      'Acompañante 2',
-      'Acompañante 3',
+      'Acompañante',
       'Medio de Comunicación',
       'WhatsApp',
       'Personas Acreditadas',
@@ -497,8 +492,6 @@ export default function CceAcreditacionPrensaClient() {
         `"${(r.folio || r.id).replace(/"/g, '""')}"`,
         `"${(r.nombre || '').replace(/"/g, '""')}"`,
         `"${(comps[0] || '').replace(/"/g, '""')}"`,
-        `"${(comps[1] || '').replace(/"/g, '""')}"`,
-        `"${(comps[2] || '').replace(/"/g, '""')}"`,
         `"${(r.medio || '').replace(/"/g, '""')}"`,
         `"${String(r.whatsapp || '').replace(/"/g, '""')}"`,
         r.asistentes,
@@ -528,7 +521,7 @@ export default function CceAcreditacionPrensaClient() {
   const pendingCount = totalRegistrations.filter((r) => !r.checkIn).length;
   const checkedPeopleCount = totalRegistrations
     .filter((r) => r.checkIn)
-    .reduce((acc, r) => acc + Math.min(4, Math.max(1, Number(r.asistentes) || 1)), 0);
+    .reduce((acc, r) => acc + Math.min(2, Math.max(1, Number(r.asistentes) || 1)), 0);
 
   const filteredRegistrations = totalRegistrations.filter((r) => {
     if (statusFilter === 'checked' && !r.checkIn) return false;
@@ -1583,18 +1576,11 @@ export default function CceAcreditacionPrensaClient() {
           margin-top: 2px;
         }
 
-        /* 4-Option Segmented Control (Max 4 per media outlet) */
-        .cce-attendees-grid-quad {
+        /* 2-Option Segmented Control (Max 2 per media outlet) */
+        .cce-attendees-grid-dual {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 10px;
-        }
-
-        @media (max-width: 600px) {
-          .cce-attendees-grid-quad {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-          }
+          grid-template-columns: repeat(2, 1fr);
+          gap: 12px;
         }
 
         .cce-attendee-btn-card {
@@ -3158,9 +3144,9 @@ export default function CceAcreditacionPrensaClient() {
 
                 <p className="cce-luxury-paragraph">
                   Para confirmar su acreditación, les solicitamos registrar los datos del periodista
-                  titular y, en caso de asistir en equipo, los nombres de sus acompañantes
-                  (camarógrafos, fotógrafos o equipo editorial). El registro está limitado a un
-                  máximo de <strong>cuatro personas por medio</strong>.
+                  titular y, en caso de requerirlo, el nombre de su acompañante (camarógrafo,
+                  fotógrafo o equipo editorial). El registro está limitado a un máximo de{' '}
+                  <strong>dos personas por medio</strong>.
                 </p>
 
                 <div className="cce-luxury-closing">
@@ -3447,7 +3433,7 @@ export default function CceAcreditacionPrensaClient() {
                       {errors.whatsapp && <span className="cce-field-error">{errors.whatsapp}</span>}
                     </div>
 
-                    {/* Campo 4: Personas a Acreditar (Topado de 1 a 4 por medio) */}
+                    {/* Campo 4: Personas a Acreditar (Topado de 1 a 2 por medio) */}
                     <div className="cce-form-group">
                       <label className="cce-label">
                         <span>
@@ -3462,16 +3448,14 @@ export default function CceAcreditacionPrensaClient() {
                             textTransform: 'none',
                           }}
                         >
-                          Máximo 4 por medio
+                          Máximo 2 por medio
                         </span>
                       </label>
-                      <div className="cce-attendees-grid-quad">
+                      <div className="cce-attendees-grid-dual">
                         {(
                           [
                             { val: '1', title: '1 Persona', sub: 'Individual' },
-                            { val: '2', title: '2 Personas', sub: 'Titular + 1' },
-                            { val: '3', title: '3 Personas', sub: 'Titular + 2' },
-                            { val: '4', title: '4 Personas', sub: 'Titular + 3' },
+                            { val: '2', title: '2 Personas', sub: 'Titular + Acompañante' },
                           ] as const
                         ).map((opt) => (
                           <button
@@ -3480,10 +3464,9 @@ export default function CceAcreditacionPrensaClient() {
                             className={`cce-attendee-btn-card ${asistentes === opt.val ? 'selected' : ''}`}
                             onClick={() => {
                               setAsistentes(opt.val);
-                              const maxComp = Number(opt.val) - 1;
                               const nextErrors: Record<string, string> = { ...errors, asistentes: '' };
-                              for (let k = maxComp; k < 3; k++) {
-                                nextErrors[`acompanante_${k}`] = '';
+                              if (opt.val === '1') {
+                                nextErrors.acompanante_0 = '';
                               }
                               setErrors(nextErrors);
                             }}
@@ -3499,9 +3482,9 @@ export default function CceAcreditacionPrensaClient() {
                       )}
                     </div>
 
-                    {/* Campos Condicionales: Nombres de los Acompañantes (1 a 3 según selección) */}
+                    {/* Campo Condicional: Nombre del Acompañante (cuando elige 2 Personas) */}
                     <AnimatePresence initial={false}>
-                      {Number(asistentes) > 1 && (
+                      {asistentes === '2' && (
                         <motion.div
                           key="companions-fields"
                           initial={{ opacity: 0, height: 0, y: -6 }}
@@ -3511,56 +3494,42 @@ export default function CceAcreditacionPrensaClient() {
                           style={{ overflow: 'hidden', marginBottom: '12px' }}
                         >
                           <div className="cce-companion-box">
-                            {Array.from({ length: Number(asistentes) - 1 }).map((_, idx) => {
-                              const totalCompanions = Number(asistentes) - 1;
-                              const errKey = `acompanante_${idx}`;
-                              return (
-                                <div
-                                  key={idx}
-                                  className="cce-form-group"
-                                  style={{ marginBottom: 0 }}
+                            <div className="cce-form-group" style={{ marginBottom: 0 }}>
+                              <label className="cce-label" htmlFor="acompanante_0">
+                                <span>
+                                  Nombre del Acompañante
+                                  <span className="cce-required-dot">*</span>
+                                </span>
+                                <span
+                                  style={{
+                                    fontSize: '11.5px',
+                                    color: '#34D399',
+                                    fontWeight: 600,
+                                    textTransform: 'none',
+                                  }}
                                 >
-                                  <label className="cce-label" htmlFor={`acompanante_${idx}`}>
-                                    <span>
-                                      {totalCompanions === 1
-                                        ? 'Nombre del Acompañante'
-                                        : `Nombre del Acompañante ${idx + 1}`}
-                                      <span className="cce-required-dot">*</span>
-                                    </span>
-                                    <span
-                                      style={{
-                                        fontSize: '11.5px',
-                                        color: '#34D399',
-                                        fontWeight: 600,
-                                        textTransform: 'none',
-                                      }}
-                                    >
-                                      {`Persona ${idx + 2} de ${asistentes}`}
-                                    </span>
-                                  </label>
-                                  <input
-                                    id={`acompanante_${idx}`}
-                                    type="text"
-                                    autoComplete="off"
-                                    placeholder="Nombre y apellidos completos del acompañante"
-                                    value={acompanantes[idx]}
-                                    onChange={(e) => {
-                                      const updated: [string, string, string] = [...acompanantes];
-                                      updated[idx] = e.target.value;
-                                      setAcompanantes(updated);
-                                      if (errors[errKey]) {
-                                        setErrors({ ...errors, [errKey]: '' });
-                                      }
-                                    }}
-                                    className={`cce-input ${errors[errKey] ? 'error' : ''}`}
-                                    disabled={isSubmitting}
-                                  />
-                                  {errors[errKey] && (
-                                    <span className="cce-field-error">{errors[errKey]}</span>
-                                  )}
-                                </div>
-                              );
-                            })}
+                                  Persona 2 de 2
+                                </span>
+                              </label>
+                              <input
+                                id="acompanante_0"
+                                type="text"
+                                autoComplete="off"
+                                placeholder="Nombre y apellidos completos del acompañante"
+                                value={acompanantes[0]}
+                                onChange={(e) => {
+                                  setAcompanantes([e.target.value]);
+                                  if (errors.acompanante_0) {
+                                    setErrors({ ...errors, acompanante_0: '' });
+                                  }
+                                }}
+                                className={`cce-input ${errors.acompanante_0 ? 'error' : ''}`}
+                                disabled={isSubmitting}
+                              />
+                              {errors.acompanante_0 && (
+                                <span className="cce-field-error">{errors.acompanante_0}</span>
+                              )}
+                            </div>
                           </div>
                         </motion.div>
                       )}

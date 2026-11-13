@@ -18,9 +18,9 @@ export interface AcreditacionPrensaRegistration {
   nombre: string;
   medio: string;
   whatsapp: string;
-  asistentes: number; // 1 | 2 | 3 | 4
-  acompanantes?: string[]; // 0 to 3 companion full names
-  acompananteNombre?: string; // Joined string for backwards compatibility
+  asistentes: number; // 1 | 2
+  acompanantes?: string[]; // 0 or 1 companion full name
+  acompananteNombre?: string; // Companion full name
   fecha: string;
   timestamp: number;
   checkIn: boolean;
@@ -400,7 +400,7 @@ export async function getAcreditacionPrensaTelemetry(
     if (reg.medio) {
       mediaSet.add(reg.medio.toLowerCase().trim());
     }
-    const num = Math.min(4, Math.max(1, Number(reg.asistentes) || 1));
+    const num = Math.min(2, Math.max(1, Number(reg.asistentes) || 1));
     totalAsistentes += num;
   }
 

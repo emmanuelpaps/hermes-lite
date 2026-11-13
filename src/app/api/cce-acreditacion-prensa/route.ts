@@ -133,7 +133,7 @@ export async function POST(req: NextRequest) {
       const cleanPhone = normalizeMxPhone(whatsapp);
       const rawNum = Number(asistentes);
       const parsedAsistentes =
-        Number.isInteger(rawNum) && rawNum >= 1 && rawNum <= 4 ? rawNum : 1;
+        Number.isInteger(rawNum) && rawNum >= 1 && rawNum <= 2 ? rawNum : 1;
       const preflightCompanions = Array.isArray(acompanantes)
         ? acompanantes
             .slice(0, parsedAsistentes - 1)
@@ -198,7 +198,7 @@ export async function POST(req: NextRequest) {
     const cleanWhatsapp = normalizeMxPhone(whatsapp);
     const numAsistentes = Number(asistentes);
     const safeAsistentesCount =
-      Number.isInteger(numAsistentes) && numAsistentes >= 1 && numAsistentes <= 4
+      Number.isInteger(numAsistentes) && numAsistentes >= 1 && numAsistentes <= 2
         ? numAsistentes
         : 1;
     const requiredCompanions = safeAsistentesCount - 1;
@@ -264,12 +264,12 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    if (!Number.isInteger(numAsistentes) || numAsistentes < 1 || numAsistentes > 4) {
+    if (!Number.isInteger(numAsistentes) || numAsistentes < 1 || numAsistentes > 2) {
       return NextResponse.json(
         {
           success: false,
           error:
-            'El límite máximo de acreditaciones es de 1 a 4 personas por medio de comunicación.',
+            'El límite máximo de acreditaciones es de 1 o 2 personas por medio de comunicación.',
         },
         { status: 400, headers: NO_STORE_HEADERS }
       );
