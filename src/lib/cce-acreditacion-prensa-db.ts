@@ -75,6 +75,27 @@ interface LocalCache {
   visits: AcreditacionPrensaVisitLog[];
 }
 
+export function normalizeMxPhone(raw: unknown): string {
+  let digits = String(raw || '').replace(/\D/g, '');
+  if (digits.length === 13 && digits.startsWith('521')) {
+    digits = digits.slice(3);
+  } else if (digits.length === 12 && digits.startsWith('52')) {
+    digits = digits.slice(2);
+  }
+  return digits.slice(0, 10);
+}
+
+export function normalizePersonKey(nombre: string, whatsapp: string): string {
+  const cleanName = String(nombre || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/\s+/g, ' ')
+    .trim();
+  const cleanPhone = normalizeMxPhone(whatsapp);
+  return `${cleanName}|${cleanPhone}`;
+}
+
 function getLocalCache(): LocalCache {
   const globalObj = globalThis as unknown as { _cceAcreditacionPrensaCache?: LocalCache };
   if (!globalObj._cceAcreditacionPrensaCache) {
@@ -154,14 +175,30 @@ async function withFirestoreRetry<T>(fn: () => Promise<T>, retries = 3): Promise
   throw lastErr;
 }
 
+export async function findExistingAcreditacionByJournalist(
+  nombre: string,
+  whatsapp: string
+): Promise<AcreditacionPrensaRegistration | null> {
+  const targetKey = normalizePersonKey(nombre, whatsapp);
+  try {
+    const list = await getAcreditacionPrensaList();
+    return (
+      list.find((r) => normalizePersonKey(r.nombre, r.whatsapp) === targetKey) || null
+    );
+  } catch {
+    return null;
+  }
+}
+
 export async function saveAcreditacionPrensa(
   record: AcreditacionPrensaRegistration
 ): Promise<AcreditacionPrensaRegistration> {
-  // 1. Authoritative write to Cloud Firestore (throws on error so user never sees false confirmation)
+  // 1. Authoritative full-document write to Cloud Firestore
+  //    (Avoids { merge: true } so switching from 2 passes back to 1 pass cleanly removes acompananteNombre)
   try {
     const docRef = doc(db, REGISTRATIONS_COL, record.id);
     const cleanRecord = sanitizeForFirestore({ ...record });
-    await withFirestoreRetry(() => setDoc(docRef, cleanRecord, { merge: true }));
+    await withFirestoreRetry(() => setDoc(docRef, cleanRecord));
   } catch (err) {
     console.error('[cce-acreditacion-prensa-db] Firestore write error:', err);
     throw new Error('Error al guardar acreditación en Cloud Firestore: ' + (err as Error).message);
@@ -268,11 +305,11 @@ export async function getAcreditacionPrensaFailedAttempts(
     const q = query(telemRef, orderBy('timestamp', 'desc'), limit(1500));
     const snap = await withFirestoreRetry(() => getDocs(q));
 
-    const registeredPhones = new Set(
-      registrations.map((r) => String(r.whatsapp || '').replace(/\D/g, '')).filter(Boolean)
+    const registeredKeys = new Set(
+      registrations.map((r) => normalizePersonKey(r.nombre, r.whatsapp))
     );
-    const registeredNames = new Set(
-      registrations.map((r) => `${(r.nombre || '').toLowerCase().trim()}|${(r.medio || '').toLowerCase().trim()}`)
+    const registeredPhones = new Set(
+      registrations.map((r) => normalizeMxPhone(r.whatsapp)).filter(Boolean)
     );
 
     const byPerson = new Map<string, AcreditacionPrensaAttempt>();
@@ -285,14 +322,14 @@ export async function getAcreditacionPrensaFailedAttempts(
       if (att.status === 'completado') return;
       if (att.status === 'iniciado' && now - (att.timestamp || 0) < 45_000) return;
 
-      const phone = String(att.whatsapp || '').replace(/\D/g, '');
-      const nameKey = `${(att.nombre || '').toLowerCase().trim()}|${(att.medio || '').toLowerCase().trim()}`;
+      const phone = normalizeMxPhone(att.whatsapp);
+      const personKey = normalizePersonKey(att.nombre, att.whatsapp);
 
-      if ((phone && registeredPhones.has(phone)) || registeredNames.has(nameKey)) {
+      if (registeredKeys.has(personKey) || (phone && registeredPhones.has(phone))) {
         return;
       }
 
-      const dedupeKey = phone || nameKey || att.ip || att.attemptId;
+      const dedupeKey = personKey || phone || att.ip || att.attemptId;
       const existing = byPerson.get(dedupeKey);
       if (!existing || (att.timestamp || 0) > (existing.timestamp || 0)) {
         byPerson.set(dedupeKey, att);
@@ -329,14 +366,15 @@ export async function getAcreditacionPrensaTelemetry(
     visits = cache.visits;
   }
 
-  const totalVisits = visits.length > 0 ? visits.length : registrations.length;
+  const totalRegistros = registrations.length;
+  const totalVisits = Math.max(visits.length, totalRegistros);
   const uniqueIps = new Set(visits.map((v) => v.ip).filter(Boolean));
   const uniqueVisits = Math.max(uniqueIps.size, totalVisits > 0 ? 1 : 0);
 
-  const totalRegistros = registrations.length;
+  // Use totalVisits as denominator so multiple reporters sharing one newsroom NAT Wi-Fi IP never distort conversion
   const conversionRate =
-    uniqueVisits > 0
-      ? `${Math.min(100, (totalRegistros / uniqueVisits) * 100).toFixed(1)}%`
+    totalVisits > 0
+      ? `${Math.min(100, (totalRegistros / totalVisits) * 100).toFixed(1)}%`
       : '0.0%';
 
   const deviceCounts = { ios: 0, android: 0, desktop: 0 };

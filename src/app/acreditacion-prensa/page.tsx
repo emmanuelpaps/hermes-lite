@@ -1,10 +1,17 @@
 import type { Metadata, Viewport } from 'next';
+import { Cinzel } from 'next/font/google';
 import CceAcreditacionPrensaClient from './CceAcreditacionPrensaClient';
+
+const cinzel = Cinzel({
+  subsets: ['latin'],
+  weight: ['600', '700', '800', '900'],
+  display: 'swap',
+  variable: '--font-cinzel',
+});
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
   themeColor: '#042e23',
 };
 
@@ -52,5 +59,9 @@ export const metadata: Metadata = {
 };
 
 export default function AcreditacionPrensaPage() {
-  return <CceAcreditacionPrensaClient />;
+  return (
+    <div className={cinzel.variable}>
+      <CceAcreditacionPrensaClient />
+    </div>
+  );
 }

@@ -1,12 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import {
   saveAcreditacionPrensa,
+  findExistingAcreditacionByJournalist,
   getAcreditacionPrensaList,
   updateAcreditacionPrensaCheckIn,
   logAcreditacionPrensaVisit,
   saveAcreditacionPrensaAttempt,
   getAcreditacionPrensaFailedAttempts,
   getAcreditacionPrensaTelemetry,
+  normalizeMxPhone,
   AcreditacionPrensaRegistration,
 } from '@/lib/cce-acreditacion-prensa-db';
 
@@ -19,8 +21,19 @@ const NO_STORE_HEADERS = {
   Expires: '0',
 };
 
-// Cutoff aligned with Firestore rule isGalardonRegistrationOpen(): 2026-11-19T17:00:00Z (10:00 a.m. Ciudad Juárez)
-const EVENT_DEADLINE_MS = 1795107600000;
+// Cutoff aligned with Firestore rule isPrensaEventRegistrationOpen():
+// 2026-11-19T21:00:00Z = 2:00 p.m. Ciudad Juárez (MST UTC-7), covering the full ceremony & keynote
+const EVENT_DEADLINE_MS = 1795122000000;
+
+const BOT_UA_REGEX =
+  /bot|crawler|spider|whatsapp|facebookexternalhit|telegrambot|twitterbot|slackbot|discordbot|linkedinbot|preview|headlesschrome|lighthouse|vercel-screenshot/i;
+
+function isBotOrLocalVisit(userAgent: string, clientIp: string, host: string): boolean {
+  if (BOT_UA_REGEX.test(userAgent)) return true;
+  if (clientIp === '127.0.0.1' || clientIp === '::1') return true;
+  if (/localhost|127\.0\.0\.1/i.test(host)) return true;
+  return false;
+}
 
 function safeDecode(val: string): string {
   if (!val) return '';
@@ -31,12 +44,16 @@ function safeDecode(val: string): string {
   }
 }
 
-function parseDevice(userAgent: string): { deviceType: string; category: 'ios' | 'android' | 'desktop' } {
+function parseDevice(userAgent: string): {
+  deviceType: string;
+  category: 'ios' | 'android' | 'desktop';
+} {
   if (/iphone/i.test(userAgent)) return { deviceType: '📱 iPhone (iOS)', category: 'ios' };
   if (/ipad/i.test(userAgent)) return { deviceType: '📱 iPad (iPadOS)', category: 'ios' };
   if (/android/i.test(userAgent)) return { deviceType: '📱 Android', category: 'android' };
   if (/mobile/i.test(userAgent)) return { deviceType: '📱 Móvil', category: 'android' };
-  if (/macintosh|mac os x/i.test(userAgent)) return { deviceType: '💻 Mac (macOS)', category: 'desktop' };
+  if (/macintosh|mac os x/i.test(userAgent))
+    return { deviceType: '💻 Mac (macOS)', category: 'desktop' };
   if (/windows/i.test(userAgent)) return { deviceType: '💻 Windows PC', category: 'desktop' };
   return { deviceType: '💻 Desktop', category: 'desktop' };
 }
@@ -81,6 +98,7 @@ export async function POST(req: NextRequest) {
     } = body;
 
     const userAgent = req.headers.get('user-agent') || 'Desconocido';
+    const host = req.headers.get('host') || '';
     const rawXForwarded = req.headers.get('x-forwarded-for') || '';
     const rawRealIp = req.headers.get('x-real-ip') || '';
     const allIps = (rawXForwarded + ',' + rawRealIp)
@@ -92,13 +110,15 @@ export async function POST(req: NextRequest) {
     const nowMs = Date.now();
     const formattedTime = formatJuarezTimestamp(new Date(nowMs));
 
-    // 1. Standalone visit telemetry ping
+    // 1. Standalone visit telemetry ping (ignores bots & localhost)
     if (action === 'visit') {
-      await logAcreditacionPrensaVisit({
-        ip: clientIp,
-        deviceCategory,
-        timestamp: nowMs,
-      });
+      if (!isBotOrLocalVisit(userAgent, clientIp, host)) {
+        await logAcreditacionPrensaVisit({
+          ip: clientIp,
+          deviceCategory,
+          timestamp: nowMs,
+        });
+      }
       return NextResponse.json({ success: true }, { headers: NO_STORE_HEADERS });
     }
 
@@ -108,7 +128,7 @@ export async function POST(req: NextRequest) {
         typeof attemptId === 'string' && attemptId.trim()
           ? attemptId.trim()
           : `attempt-${nowMs}-${Math.random().toString(36).substring(2, 6)}`;
-      const cleanPhone = String(whatsapp || '').replace(/\D/g, '').slice(-10);
+      const cleanPhone = normalizeMxPhone(whatsapp);
       const parsedAsistentes = Number(asistentes) === 2 ? 2 : 1;
 
       console.info(
@@ -119,7 +139,8 @@ export async function POST(req: NextRequest) {
           medio: String(medio || '').trim(),
           whatsapp: cleanPhone,
           asistentes: parsedAsistentes,
-          acompananteNombre: parsedAsistentes === 2 ? String(acompananteNombre || '').trim() : undefined,
+          acompananteNombre:
+            parsedAsistentes === 2 ? String(acompananteNombre || '').trim() : undefined,
           ip: clientIp,
           fecha: formattedTime,
         })
@@ -134,7 +155,9 @@ export async function POST(req: NextRequest) {
         whatsapp: cleanPhone,
         asistentes: parsedAsistentes,
         acompananteNombre:
-          parsedAsistentes === 2 && acompananteNombre ? String(acompananteNombre).trim() : undefined,
+          parsedAsistentes === 2 && acompananteNombre
+            ? String(acompananteNombre).trim()
+            : undefined,
         fecha: formattedTime,
         timestamp: nowMs,
         device: deviceType,
@@ -148,7 +171,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 3. Enforce Event Cutoff
+    // 3. Enforce Event Cutoff (Nov 19, 2026 2:00 p.m. Ciudad Juárez)
     if (nowMs > EVENT_DEADLINE_MS) {
       return NextResponse.json(
         {
@@ -161,12 +184,14 @@ export async function POST(req: NextRequest) {
     }
 
     // 4. Strict Input Validations
-    const cleanNombre = typeof nombre === 'string' ? nombre.trim() : '';
-    const cleanMedio = typeof medio === 'string' ? medio.trim() : '';
-    const cleanWhatsapp = String(whatsapp || '').replace(/\D/g, '').slice(-10);
+    const cleanNombre = typeof nombre === 'string' ? nombre.trim().replace(/\s+/g, ' ') : '';
+    const cleanMedio = typeof medio === 'string' ? medio.trim().replace(/\s+/g, ' ') : '';
+    const cleanWhatsapp = normalizeMxPhone(whatsapp);
     const numAsistentes = Number(asistentes);
     const cleanAcompanante =
-      typeof acompananteNombre === 'string' ? acompananteNombre.trim() : '';
+      typeof acompananteNombre === 'string'
+        ? acompananteNombre.trim().replace(/\s+/g, ' ')
+        : '';
 
     activeAttemptId =
       typeof attemptId === 'string' && attemptId.trim()
@@ -178,7 +203,8 @@ export async function POST(req: NextRequest) {
       medio: cleanMedio,
       whatsapp: cleanWhatsapp,
       asistentes: numAsistentes === 2 ? 2 : 1,
-      acompananteNombre: numAsistentes === 2 && cleanAcompanante ? cleanAcompanante : undefined,
+      acompananteNombre:
+        numAsistentes === 2 && cleanAcompanante ? cleanAcompanante : undefined,
       fecha: formattedTime,
       timestamp: nowMs,
       device: deviceType,
@@ -190,7 +216,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          error: 'Por favor ingresa el nombre completo del periodista o reportero titular (mínimo 3 caracteres).',
+          error:
+            'Por favor ingresa el nombre completo del periodista o reportero titular (mínimo 3 caracteres).',
         },
         { status: 400, headers: NO_STORE_HEADERS }
       );
@@ -220,7 +247,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          error: 'El límite máximo de acreditaciones es de 1 o 2 personas por medio de comunicación.',
+          error:
+            'El límite máximo de acreditaciones es de 1 o 2 personas por medio de comunicación.',
         },
         { status: 400, headers: NO_STORE_HEADERS }
       );
@@ -230,7 +258,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          error: 'Por favor ingresa el nombre completo de tu acompañante (camarógrafo / fotógrafo) para su gafete.',
+          error:
+            'Por favor ingresa el nombre completo de tu acompañante (camarógrafo / fotógrafo) para su gafete.',
         },
         { status: 400, headers: NO_STORE_HEADERS }
       );
@@ -243,9 +272,14 @@ export async function POST(req: NextRequest) {
     const location =
       [city, region, country].filter(Boolean).join(', ') || 'Ciudad Juárez, Chih., México';
 
+    // 6. Idempotent Deduplication: if same journalist + same WhatsApp already registered,
+    //    update their accreditation & keep their original Folio instead of creating duplicate badges.
+    const existing = await findExistingAcreditacionByJournalist(cleanNombre, cleanWhatsapp);
+
     const randomDigits = Math.floor(1000 + Math.random() * 9000);
-    const folio = `#CCE-PRENSA-${randomDigits}`;
-    const recordId = `cce-acred-${nowMs}-${Math.random().toString(36).substring(2, 7)}`;
+    const folio = existing?.folio || `#CCE-PRENSA-${randomDigits}`;
+    const recordId =
+      existing?.id || `cce-acred-${nowMs}-${Math.random().toString(36).substring(2, 7)}`;
 
     const newRecord: AcreditacionPrensaRegistration = {
       id: recordId,
@@ -256,35 +290,29 @@ export async function POST(req: NextRequest) {
       asistentes: numAsistentes,
       ...(numAsistentes === 2 ? { acompananteNombre: cleanAcompanante } : {}),
       fecha: formattedTime,
-      timestamp: nowMs,
-      checkIn: false,
+      timestamp: existing?.timestamp || nowMs,
+      checkIn: existing?.checkIn || false,
       location,
       device: deviceType,
       deviceCategory,
       ip: clientIp,
     };
 
-    // Save exclusively to Cloud Firestore + CRM (Zero Telegram messages)
+    // Save exclusively to Cloud Firestore + CRM (Zero Telegram messages, no duplicate visit ping)
     await saveAcreditacionPrensa(newRecord);
 
-    await Promise.allSettled([
-      logAcreditacionPrensaVisit({
-        ip: clientIp,
-        deviceCategory,
-        timestamp: nowMs,
-      }),
-      saveAcreditacionPrensaAttempt({
-        attemptId: activeAttemptId,
-        eventType: 'registration_attempt',
-        status: 'completado',
-        folio,
-        ...attemptSnapshot,
-      }),
-    ]);
+    await saveAcreditacionPrensaAttempt({
+      attemptId: activeAttemptId,
+      eventType: 'registration_attempt',
+      status: 'completado',
+      folio,
+      ...attemptSnapshot,
+    }).catch(() => {});
 
     return NextResponse.json(
       {
         success: true,
+        updated: Boolean(existing),
         id: newRecord.id,
         record: newRecord,
       },
@@ -319,6 +347,7 @@ export async function GET(req: NextRequest) {
     const action = req.nextUrl.searchParams.get('action');
 
     const userAgent = req.headers.get('user-agent') || 'Desconocido';
+    const host = req.headers.get('host') || '';
     const rawXForwarded = req.headers.get('x-forwarded-for') || '';
     const rawRealIp = req.headers.get('x-real-ip') || '';
     const allIps = (rawXForwarded + ',' + rawRealIp)
@@ -329,11 +358,13 @@ export async function GET(req: NextRequest) {
     const { category: deviceCategory } = parseDevice(userAgent);
 
     if (action === 'visit') {
-      await logAcreditacionPrensaVisit({
-        ip: clientIp,
-        deviceCategory,
-        timestamp: Date.now(),
-      });
+      if (!isBotOrLocalVisit(userAgent, clientIp, host)) {
+        await logAcreditacionPrensaVisit({
+          ip: clientIp,
+          deviceCategory,
+          timestamp: Date.now(),
+        });
+      }
       return NextResponse.json({ success: true }, { headers: NO_STORE_HEADERS });
     }
 

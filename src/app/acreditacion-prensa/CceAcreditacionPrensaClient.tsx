@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import {
   Calendar,
+  Clock,
   MapPin,
   CheckCircle2,
   Users,
@@ -22,6 +23,7 @@ import {
   UserPlus,
   Building2,
   AlertTriangle,
+  PlusCircle,
 } from 'lucide-react';
 
 interface AcreditacionPrensaRegistration {
@@ -70,8 +72,24 @@ interface TelemetryData {
   totalAsistentes: number;
 }
 
+const CONFIRMED_STORAGE_KEY = 'cce_acreditacion_prensa_confirmed_v1';
+
+/**
+ * Safely normalizes Mexican mobile numbers pasted or autofilled with +52 / +52 1
+ * so that iOS/Android autofill never truncates the last 2 digits.
+ */
+function normalizeMxPhoneInput(raw: string): string {
+  let digits = String(raw || '').replace(/\D/g, '');
+  if (digits.length === 13 && digits.startsWith('521')) {
+    digits = digits.slice(3);
+  } else if (digits.length === 12 && digits.startsWith('52')) {
+    digits = digits.slice(2);
+  }
+  return digits.slice(0, 10);
+}
+
 function formatPhoneDisplay(raw?: string): string {
-  const digits = String(raw || '').replace(/\D/g, '').slice(-10);
+  const digits = normalizeMxPhoneInput(String(raw || ''));
   if (digits.length === 10) {
     return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
   }
@@ -99,21 +117,25 @@ export default function CceAcreditacionPrensaClient() {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [submitError, setSubmitError] = useState('');
   const [confirmedRecord, setConfirmedRecord] = useState<AcreditacionPrensaRegistration | null>(null);
+  const [wasUpdatedRecord, setWasUpdatedRecord] = useState(false);
 
   // Search & status filters for CRM table
   const [searchFilter, setSearchFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'checked' | 'pending'>('all');
   const [checkInUpdatingId, setCheckInUpdatingId] = useState<string | null>(null);
+  const checkInUpdatingRef = useRef<string | null>(null);
 
-  const fetchCrmData = useCallback(async () => {
-    setIsLoadingCrm(true);
+  const fetchCrmData = useCallback(async (silent = false) => {
+    // Avoid overwriting optimistic check-in UI while a PATCH is in flight
+    if (silent && checkInUpdatingRef.current) return;
+    if (!silent) setIsLoadingCrm(true);
     try {
       const res = await fetch('/api/cce-acreditacion-prensa?admin=cce2026', {
         cache: 'no-store',
       });
       if (res.ok) {
         const data = await res.json();
-        if (data.success) {
+        if (data.success && (!silent || !checkInUpdatingRef.current)) {
           setCrmData({
             telemetry: data.telemetry,
             registrations: data.registrations || [],
@@ -124,11 +146,11 @@ export default function CceAcreditacionPrensaClient() {
     } catch (err) {
       console.error('Error fetching CRM data:', err);
     } finally {
-      setIsLoadingCrm(false);
+      if (!silent) setIsLoadingCrm(false);
     }
   }, []);
 
-  // Detect ?admin=cce2026 on mount & auto-refresh CRM every 15s
+  // Detect ?admin=cce2026 on mount, restore saved pass on public view, & auto-refresh CRM silently
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
@@ -141,13 +163,30 @@ export default function CceAcreditacionPrensaClient() {
 
       if (isAuthorizedAdmin) {
         setIsAdmin(true);
-        fetchCrmData();
+        if (params.get('view') === 'public') {
+          setAdminTab('public');
+        }
+        fetchCrmData(false);
         refreshTimer = setInterval(() => {
-          fetchCrmData();
+          fetchCrmData(true);
         }, 15000);
       } else {
+        // Restore confirmed pass from localStorage so journalist can show their Folio at Cibeles
+        const savedPass = localStorage.getItem(CONFIRMED_STORAGE_KEY);
+        if (savedPass) {
+          try {
+            const parsed = JSON.parse(savedPass);
+            if (parsed && parsed.folio && parsed.nombre) {
+              setConfirmedRecord(parsed);
+            }
+          } catch {
+            // Ignore malformed storage
+          }
+        }
+
+        const isPreview = params.get('preview') === '1';
         const sessionKey = 'cce_acreditacion_prensa_visit_tracked';
-        if (!sessionStorage.getItem(sessionKey)) {
+        if (!isPreview && !sessionStorage.getItem(sessionKey)) {
           sessionStorage.setItem(sessionKey, '1');
           fetch('/api/cce-acreditacion-prensa?action=visit', {
             method: 'GET',
@@ -167,7 +206,7 @@ export default function CceAcreditacionPrensaClient() {
   // Form Validation
   const validateForm = () => {
     const newErrors: { [key: string]: string } = {};
-    const cleanPhone = whatsapp.replace(/\D/g, '');
+    const cleanPhone = normalizeMxPhoneInput(whatsapp);
 
     if (!nombre.trim() || nombre.trim().length < 3) {
       newErrors.nombre = 'Ingresa el nombre completo del periodista o reportero titular.';
@@ -203,7 +242,7 @@ export default function CceAcreditacionPrensaClient() {
 
     setIsSubmitting(true);
 
-    const cleanPhone = whatsapp.replace(/\D/g, '').slice(-10);
+    const cleanPhone = normalizeMxPhoneInput(whatsapp);
     const numAsistentes = asistentes === '2' ? 2 : 1;
     const attemptId = `attempt-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
 
@@ -239,7 +278,13 @@ export default function CceAcreditacionPrensaClient() {
 
       const data = await res.json();
       if (res.ok && data.success) {
+        setWasUpdatedRecord(Boolean(data.updated));
         setConfirmedRecord(data.record);
+        try {
+          localStorage.setItem(CONFIRMED_STORAGE_KEY, JSON.stringify(data.record));
+        } catch {
+          // Ignore storage quota issues
+        }
       } else {
         setSubmitError(
           data.error || 'Ocurrió un error al registrar tu acreditación. Intenta nuevamente.'
@@ -251,6 +296,22 @@ export default function CceAcreditacionPrensaClient() {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleRegisterAnother = () => {
+    try {
+      localStorage.removeItem(CONFIRMED_STORAGE_KEY);
+    } catch {
+      // Ignore
+    }
+    setConfirmedRecord(null);
+    setWasUpdatedRecord(false);
+    setNombre('');
+    setWhatsapp('');
+    setAsistentes('1');
+    setAcompananteNombre('');
+    setErrors({});
+    setSubmitError('');
   };
 
   // Calendar & Maps Integrations (Jueves 19 de Noviembre, 2026 · 9:00 a.m. Ciudad Juárez = 16:00 UTC)
@@ -277,6 +338,7 @@ export default function CceAcreditacionPrensaClient() {
 
   const handleDownloadIcs = () => {
     const folioStr = confirmedRecord?.folio || '#CCE-PRENSA-2026';
+    const dtStamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
     const icsContent = [
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
@@ -285,7 +347,7 @@ export default function CceAcreditacionPrensaClient() {
       'METHOD:PUBLISH',
       'BEGIN:VEVENT',
       `UID:cce-acreditacion-prensa-20261119-${folioStr.replace(/[^A-Z0-9]/gi, '')}@ccejuarez.org`,
-      'DTSTAMP:20261112T190000Z',
+      `DTSTAMP:${dtStamp}`,
       'DTSTART:20261119T160000Z',
       'DTEND:20261119T190000Z',
       'SUMMARY:Cobertura de Prensa · Galardones 2026 & Conferencia Loret (CCE Juárez)',
@@ -319,15 +381,20 @@ export default function CceAcreditacionPrensaClient() {
   const handleToggleCheckIn = async (record: AcreditacionPrensaRegistration) => {
     if (!crmData) return;
     const newStatus = !record.checkIn;
+    checkInUpdatingRef.current = record.id;
     setCheckInUpdatingId(record.id);
 
     // Optimistic UI update
-    setCrmData({
-      ...crmData,
-      registrations: crmData.registrations.map((r) =>
-        r.id === record.id ? { ...r, checkIn: newStatus } : r
-      ),
-    });
+    setCrmData((prev) =>
+      prev
+        ? {
+            ...prev,
+            registrations: prev.registrations.map((r) =>
+              r.id === record.id ? { ...r, checkIn: newStatus } : r
+            ),
+          }
+        : prev
+    );
 
     try {
       const res = await fetch('/api/cce-acreditacion-prensa?admin=cce2026', {
@@ -336,26 +403,31 @@ export default function CceAcreditacionPrensaClient() {
         body: JSON.stringify({ id: record.id, checkIn: newStatus }),
       });
       if (!res.ok) {
-        setCrmData({
-          ...crmData,
-          registrations: crmData.registrations.map((r) =>
-            r.id === record.id ? { ...r, checkIn: record.checkIn } : r
-          ),
-        });
+        setCrmData((prev) =>
+          prev
+            ? {
+                ...prev,
+                registrations: prev.registrations.map((r) =>
+                  r.id === record.id ? { ...r, checkIn: record.checkIn } : r
+                ),
+              }
+            : prev
+        );
       }
     } catch (err) {
       console.error('Error toggling check-in:', err);
     } finally {
+      checkInUpdatingRef.current = null;
       setCheckInUpdatingId(null);
     }
   };
 
   // Build WhatsApp direct link for CRM rows
   const getWhatsAppUrl = (reg: AcreditacionPrensaRegistration) => {
-    const cleanDigits = String(reg.whatsapp || '').replace(/\D/g, '').slice(-10);
+    const cleanDigits = normalizeMxPhoneInput(String(reg.whatsapp || ''));
     const fullPhone = cleanDigits.length === 10 ? `52${cleanDigits}` : cleanDigits;
     const acompananteTxt =
-      reg.asistentes === 2 && reg.acompananteNombre
+      Number(reg.asistentes) === 2 && reg.acompananteNombre
         ? ` y tu acompañante ${reg.acompananteNombre}`
         : '';
     const msg = encodeURIComponent(
@@ -460,12 +532,10 @@ export default function CceAcreditacionPrensaClient() {
 
   return (
     <div className={`cce-page-container ${isAdmin && adminTab === 'crm' ? 'is-crm' : 'is-gala'}`}>
-      {/* SCOPED CSS ARCHITECTURE (Vanilla CSS / Identical Luxury Emerald & Gold System) */}
+      {/* SCOPED CSS ARCHITECTURE */}
       <style
         dangerouslySetInnerHTML={{
           __html: `
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-
         :root {
           --cce-emerald: #064E3B;
           --cce-emerald-dark: #042E23;
@@ -480,6 +550,7 @@ export default function CceAcreditacionPrensaClient() {
           --cce-text-dark: #0F172A;
           --cce-text-muted: #475569;
           --cce-border-subtle: #E2E8F0;
+          --cce-serif: var(--font-cinzel), 'Cinzel', Georgia, serif;
 
           --cce-obsidian: #02120C;
           --cce-obsidian-surface: #041D14;
@@ -707,13 +778,16 @@ export default function CceAcreditacionPrensaClient() {
           pointer-events: none;
         }
 
+        /* Inline-safe Golden Foil Shimmer (no forced block line-breaks inside paragraphs) */
         .cce-golden-shimmer {
           background: linear-gradient(90deg, #F5DE98 0%, #FFE8A3 25%, #FFFFFF 50%, #D4AF37 75%, #F5DE98 100%);
           background-size: 200% auto;
           -webkit-background-clip: text;
           background-clip: text;
           -webkit-text-fill-color: transparent;
-          display: inline-block;
+          -webkit-box-decoration-break: clone;
+          box-decoration-break: clone;
+          display: inline;
           font-weight: 700;
           animation: cceGoldShimmer 4s linear infinite;
         }
@@ -787,7 +861,7 @@ export default function CceAcreditacionPrensaClient() {
         }
 
         .cce-hero-title {
-          font-family: 'Cinzel', serif;
+          font-family: var(--cce-serif);
           font-size: clamp(32px, 5.5vw, 52px);
           font-weight: 900;
           background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 35%, #F5DE98 70%, #D4AF37 100%);
@@ -952,7 +1026,7 @@ export default function CceAcreditacionPrensaClient() {
           display: inline-flex;
           align-items: center;
           gap: 10px;
-          font-family: 'Cinzel', serif;
+          font-family: var(--cce-serif);
           font-size: 11.5px;
           font-weight: 800;
           letter-spacing: 0.22em;
@@ -998,7 +1072,7 @@ export default function CceAcreditacionPrensaClient() {
         }
 
         .cce-luxury-salutation {
-          font-family: 'Cinzel', serif;
+          font-family: var(--cce-serif);
           font-size: clamp(23px, 3.1vw, 29px);
           font-weight: 700;
           color: #FFFFFF;
@@ -1064,7 +1138,6 @@ export default function CceAcreditacionPrensaClient() {
           justify-content: center;
           flex-shrink: 0;
           box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 16px rgba(52, 211, 153, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.4);
-          font-size: 23px;
           color: #F5DE98;
         }
 
@@ -1080,7 +1153,7 @@ export default function CceAcreditacionPrensaClient() {
           color: #F5DE98;
           text-transform: uppercase;
           letter-spacing: 0.12em;
-          font-family: 'Cinzel', serif;
+          font-family: var(--cce-serif);
         }
 
         .cce-schedule-val {
@@ -1133,7 +1206,7 @@ export default function CceAcreditacionPrensaClient() {
         }
 
         .cce-seal-org {
-          font-family: 'Cinzel', serif;
+          font-family: var(--cce-serif);
           font-size: 13.5px;
           font-weight: 800;
           letter-spacing: 0.08em;
@@ -1245,7 +1318,7 @@ export default function CceAcreditacionPrensaClient() {
         }
 
         .cce-form-heading {
-          font-family: 'Cinzel', serif;
+          font-family: var(--cce-serif);
           font-size: clamp(23px, 3.2vw, 28px);
           font-weight: 800;
           letter-spacing: 0.04em;
@@ -1427,6 +1500,10 @@ export default function CceAcreditacionPrensaClient() {
           animation: spin 0.8s linear infinite;
         }
 
+        .cce-spin-icon {
+          animation: spin 0.8s linear infinite;
+        }
+
         @keyframes spin {
           to { transform: rotate(360deg); }
         }
@@ -1459,6 +1536,13 @@ export default function CceAcreditacionPrensaClient() {
             inset 0 1px 0 rgba(245, 222, 152, 0.55);
         }
 
+        @media (max-width: 640px) {
+          .cce-confirmation-card {
+            padding: 28px 16px;
+            border-radius: 18px;
+          }
+        }
+
         .cce-confirmed-seal {
           display: inline-flex;
           align-items: center;
@@ -1477,7 +1561,7 @@ export default function CceAcreditacionPrensaClient() {
         }
 
         .cce-confirmed-title {
-          font-family: 'Cinzel', serif;
+          font-family: var(--cce-serif);
           font-size: 26px;
           font-weight: 800;
           color: #FFFFFF;
@@ -1501,6 +1585,16 @@ export default function CceAcreditacionPrensaClient() {
           padding: 10px 0;
           border-bottom: 1px solid rgba(212, 175, 55, 0.15);
           font-size: 14px;
+        }
+
+        @media (max-width: 480px) {
+          .cce-summary-row {
+            flex-direction: column;
+            gap: 3px;
+          }
+          .cce-summary-val {
+            text-align: left !important;
+          }
         }
 
         .cce-summary-row:last-child {
@@ -1577,12 +1671,39 @@ export default function CceAcreditacionPrensaClient() {
           border-color: #FFE8A3;
         }
 
+        .cce-btn-new-pass {
+          margin-top: 18px;
+          background: transparent;
+          border: none;
+          color: #94A3B8;
+          font-size: 13px;
+          font-weight: 600;
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          cursor: pointer;
+          text-decoration: underline;
+          text-underline-offset: 4px;
+        }
+
+        .cce-btn-new-pass:hover {
+          color: #F5DE98;
+        }
+
         /* PRIVATE CRM SECTION */
         .cce-crm-container {
           max-width: 1400px;
+          min-width: 0;
           margin: 24px auto 60px auto;
           padding: 0 24px;
           width: 100%;
+        }
+
+        @media (max-width: 640px) {
+          .cce-crm-container {
+            margin: 14px auto 44px auto;
+            padding: 0 12px;
+          }
         }
 
         .cce-crm-banner {
@@ -1601,10 +1722,17 @@ export default function CceAcreditacionPrensaClient() {
           box-shadow: 0 4px 16px rgba(6, 78, 59, 0.05);
         }
 
+        @media (max-width: 640px) {
+          .cce-crm-banner {
+            padding: 16px;
+          }
+        }
+
         .cce-crm-banner-left {
           display: flex;
           flex-direction: column;
           gap: 4px;
+          min-width: 0;
         }
 
         .cce-crm-live-badge {
@@ -1624,6 +1752,7 @@ export default function CceAcreditacionPrensaClient() {
           border-radius: 50%;
           background: #10B981;
           display: inline-block;
+          flex-shrink: 0;
           box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
           animation: ccePulse 2s infinite;
         }
@@ -1718,7 +1847,7 @@ export default function CceAcreditacionPrensaClient() {
           .cce-radar-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 640px) {
-          .cce-radar-grid { grid-template-columns: 1fr; }
+          .cce-radar-grid { grid-template-columns: 1fr; gap: 12px; }
         }
 
         .cce-radar-card {
@@ -1797,13 +1926,15 @@ export default function CceAcreditacionPrensaClient() {
           color: #334155;
         }
 
-        /* Media Table Section */
+        /* Media Table & Mobile Cards Section */
         .cce-table-card {
           background: #FFFFFF;
           border: 1px solid var(--cce-border-subtle);
           border-radius: 14px;
           box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
           overflow: hidden;
+          min-width: 0;
+          width: 100%;
         }
 
         .cce-table-toolbar {
@@ -1813,15 +1944,31 @@ export default function CceAcreditacionPrensaClient() {
           flex-wrap: wrap;
           align-items: center;
           justify-content: space-between;
-          gap: 16px;
+          gap: 12px;
           background: #FAFCFA;
+        }
+
+        @media (max-width: 640px) {
+          .cce-table-toolbar {
+            padding: 14px;
+            flex-direction: column;
+            align-items: stretch;
+          }
         }
 
         .cce-search-box {
           position: relative;
-          min-width: 240px;
-          flex: 1;
+          min-width: 0;
+          width: 100%;
+          flex: 1 1 240px;
           max-width: 380px;
+        }
+
+        @media (max-width: 640px) {
+          .cce-search-box {
+            max-width: 100%;
+            flex: none;
+          }
         }
 
         .cce-search-icon {
@@ -1856,12 +2003,21 @@ export default function CceAcreditacionPrensaClient() {
           border-radius: 8px;
           padding: 3px;
           gap: 2px;
+          max-width: 100%;
+        }
+
+        @media (max-width: 640px) {
+          .cce-filter-tabs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            width: 100%;
+          }
         }
 
         .cce-filter-tab {
           border: none;
           background: transparent;
-          padding: 6px 14px;
+          padding: 6px 12px;
           font-size: 12px;
           font-weight: 700;
           border-radius: 6px;
@@ -1875,16 +2031,57 @@ export default function CceAcreditacionPrensaClient() {
           white-space: nowrap;
         }
 
+        @media (max-width: 640px) {
+          .cce-filter-tab {
+            padding: 6px 4px;
+            font-size: 11px;
+          }
+        }
+
         .cce-filter-tab.active {
           background: #FFFFFF;
           color: var(--cce-emerald-dark);
           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
         }
 
+        .cce-empty-state-box {
+          text-align: center;
+          padding: 52px 20px;
+          width: 100%;
+        }
+
         .cce-table-wrapper {
           width: 100%;
           overflow-x: auto;
           -webkit-overflow-scrolling: touch;
+        }
+
+        .cce-mobile-cards-list {
+          display: none;
+        }
+
+        @media (max-width: 768px) {
+          .cce-desktop-table-only {
+            display: none;
+          }
+          .cce-mobile-cards-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 14px;
+            background: #F8FAFC;
+          }
+        }
+
+        .cce-mobile-reg-card {
+          background: #FFFFFF;
+          border: 1px solid #E2E8F0;
+          border-radius: 12px;
+          padding: 14px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
         }
 
         .cce-table {
@@ -1982,7 +2179,7 @@ export default function CceAcreditacionPrensaClient() {
           font-weight: 700;
           cursor: pointer;
           border: none;
-          min-height: 34px;
+          min-height: 36px;
           white-space: nowrap;
           transition: all 0.15s ease;
         }
@@ -2021,7 +2218,7 @@ export default function CceAcreditacionPrensaClient() {
           text-decoration: none;
           transition: background 0.15s ease, transform 0.15s ease;
           white-space: nowrap;
-          min-height: 34px;
+          min-height: 36px;
           box-shadow: 0 2px 6px rgba(37, 211, 102, 0.2);
         }
 
@@ -2096,11 +2293,11 @@ export default function CceAcreditacionPrensaClient() {
             <div className="cce-crm-banner-left">
               <div className="cce-crm-live-badge">
                 <span className="cce-pulse-dot" />
-                CENTRO DE ACREDITACIÓN DE PRENSA · DÍA DEL EVENTO · CCE JUÁREZ
+                <span>CENTRO DE ACREDITACIÓN DE PRENSA · DÍA DEL EVENTO · CCE JUÁREZ</span>
               </div>
               <h2 className="cce-crm-banner-title">
-                <BarChart3 size={22} color="#064E3B" />
-                Acreditación de Medios · Galardones Empresariales 2026
+                <BarChart3 size={22} color="#064E3B" style={{ flexShrink: 0 }} />
+                <span>Acreditación de Medios · Galardones Empresariales 2026</span>
               </h2>
               <div className="cce-crm-banner-sub">
                 Cobertura Oficial y Conferencia Carlos Loret de Mola · Jueves 19 de Noviembre, 9:00 a.m. · Centro de Eventos Cibeles
@@ -2123,14 +2320,16 @@ export default function CceAcreditacionPrensaClient() {
                 Ver Landing
               </button>
               <button
+                type="button"
                 className="cce-crm-btn cce-crm-btn-secondary"
-                onClick={fetchCrmData}
+                onClick={() => fetchCrmData(false)}
                 disabled={isLoadingCrm}
               >
-                <RefreshCw size={14} className={isLoadingCrm ? 'cce-spinner' : ''} />
+                <RefreshCw size={14} className={isLoadingCrm ? 'cce-spin-icon' : ''} />
                 Actualizar
               </button>
               <button
+                type="button"
                 className="cce-crm-btn cce-crm-btn-primary"
                 onClick={handleExportCsv}
                 title="Descargar padrón de gafetes de prensa en CSV compatible con Excel"
@@ -2194,7 +2393,7 @@ export default function CceAcreditacionPrensaClient() {
                     </div>
                     {att.whatsapp && (
                       <a
-                        href={`https://wa.me/52${att.whatsapp.replace(/\D/g, '').slice(-10)}`}
+                        href={`https://wa.me/52${normalizeMxPhoneInput(att.whatsapp)}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="cce-btn-wa-row"
@@ -2270,7 +2469,7 @@ export default function CceAcreditacionPrensaClient() {
                     ({crmData.telemetry.uniqueVisits} únicos)
                   </span>
                 </div>
-                <div className="cce-radar-subtext">Visitas auditadas en tiempo real</div>
+                <div className="cce-radar-subtext">Visitas reales sin bots</div>
               </div>
 
               <div className="cce-radar-card">
@@ -2283,7 +2482,7 @@ export default function CceAcreditacionPrensaClient() {
                 <div className="cce-radar-value" style={{ color: '#B45309' }}>
                   {crmData.telemetry.conversionRate}
                 </div>
-                <div className="cce-radar-subtext">Acreditados vs. Visitantes únicos</div>
+                <div className="cce-radar-subtext">Registros vs. Visitas totales</div>
               </div>
 
               <div className="cce-radar-card">
@@ -2303,7 +2502,7 @@ export default function CceAcreditacionPrensaClient() {
             </div>
           )}
 
-          {/* Media Table */}
+          {/* Media Table & Mobile Reception Cards */}
           <div className="cce-table-card">
             <div className="cce-table-toolbar">
               <div className="cce-search-box">
@@ -2346,152 +2545,245 @@ export default function CceAcreditacionPrensaClient() {
               </div>
             </div>
 
-            <div className="cce-table-wrapper">
-              <table className="cce-table">
-                <thead>
-                  <tr>
-                    <th className="cce-th" style={{ width: '12%' }}>Folio</th>
-                    <th className="cce-th" style={{ width: '28%' }}>Periodista &amp; Equipo (Gafetes)</th>
-                    <th className="cce-th" style={{ width: '20%' }}>Medio</th>
-                    <th className="cce-th" style={{ width: '14%' }}>WhatsApp</th>
-                    <th className="cce-th" style={{ width: '8%', textAlign: 'center' }}>Pases</th>
-                    <th className="cce-th" style={{ width: '9%' }}>Registro</th>
-                    <th className="cce-th" style={{ width: '9%', textAlign: 'center' }}>Acceso Cibeles</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {totalRegistrations.length === 0 ? (
-                    <tr>
-                      <td colSpan={7} style={{ textAlign: 'center', padding: '56px 20px' }}>
-                        <div
+            {totalRegistrations.length === 0 ? (
+              <div className="cce-empty-state-box">
+                <div
+                  style={{
+                    display: 'inline-flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: '10px',
+                  }}
+                >
+                  <div
+                    style={{
+                      width: '48px',
+                      height: '48px',
+                      borderRadius: '12px',
+                      background: '#F8FAFC',
+                      border: '1px solid #E2E8F0',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#064E3B',
+                    }}
+                  >
+                    <Inbox size={22} />
+                  </div>
+                  <div style={{ fontSize: '15px', fontWeight: 700, color: '#1E293B' }}>
+                    Sin Acreditaciones de Prensa Registradas Aún
+                  </div>
+                  <p
+                    style={{
+                      fontSize: '13px',
+                      color: '#64748B',
+                      maxWidth: '460px',
+                      margin: 0,
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    Colección Cloud Firestore dedicada y conectada en tiempo real. Cada periodista y camarógrafo acreditado para el evento aparecerá aquí automáticamente.
+                  </p>
+                </div>
+              </div>
+            ) : filteredRegistrations.length === 0 ? (
+              <div className="cce-empty-state-box" style={{ padding: '36px 20px', color: '#94A3B8', fontSize: '13.5px' }}>
+                No se encontraron acreditaciones que coincidan con la búsqueda o filtro aplicado.
+              </div>
+            ) : (
+              <>
+                {/* Desktop Executive Table */}
+                <div className="cce-table-wrapper cce-desktop-table-only">
+                  <table className="cce-table">
+                    <thead>
+                      <tr>
+                        <th className="cce-th" style={{ width: '12%' }}>Folio</th>
+                        <th className="cce-th" style={{ width: '28%' }}>Periodista &amp; Equipo (Gafetes)</th>
+                        <th className="cce-th" style={{ width: '20%' }}>Medio</th>
+                        <th className="cce-th" style={{ width: '14%' }}>WhatsApp</th>
+                        <th className="cce-th" style={{ width: '8%', textAlign: 'center' }}>Pases</th>
+                        <th className="cce-th" style={{ width: '9%' }}>Registro</th>
+                        <th className="cce-th" style={{ width: '9%', textAlign: 'center' }}>Acceso Cibeles</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filteredRegistrations.map((reg) => (
+                        <tr key={reg.id} className="cce-row">
+                          <td className="cce-td">
+                            <span
+                              style={{
+                                fontFamily: 'monospace',
+                                fontSize: '12px',
+                                fontWeight: 800,
+                                color: '#064E3B',
+                                background: '#ECFDF5',
+                                padding: '3px 7px',
+                                borderRadius: '6px',
+                                border: '1px solid #A7F3D0',
+                              }}
+                            >
+                              {reg.folio || '#CCE-PRENSA'}
+                            </span>
+                          </td>
+                          <td className="cce-td">
+                            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                              <span className="cce-avatar-initials">
+                                {reg.nombre.slice(0, 2).toUpperCase()}
+                              </span>
+                              <div>
+                                <div style={{ fontWeight: 700, color: '#0F172A' }}>{reg.nombre}</div>
+                                {Number(reg.asistentes) === 2 && reg.acompananteNombre && (
+                                  <div className="cce-companion-pill">
+                                    <UserPlus size={12} />
+                                    <span>2do Gafete: {reg.acompananteNombre}</span>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          </td>
+                          <td className="cce-td">
+                            <span className="cce-medio-badge">{reg.medio}</span>
+                          </td>
+                          <td className="cce-td">
+                            {reg.whatsapp ? (
+                              <a
+                                href={getWhatsAppUrl(reg)}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="cce-btn-wa-row"
+                                title={`Enviar WhatsApp a ${reg.nombre}`}
+                              >
+                                <MessageSquare size={13} />
+                                {formatPhoneDisplay(reg.whatsapp)}
+                              </a>
+                            ) : (
+                              <span style={{ color: '#94A3B8' }}>—</span>
+                            )}
+                          </td>
+                          <td className="cce-td" style={{ textAlign: 'center' }}>
+                            <span className="cce-asistentes-pill">
+                              <Users size={12} />
+                              {reg.asistentes}
+                            </span>
+                          </td>
+                          <td className="cce-td" style={{ color: '#64748B', fontSize: '12px' }}>
+                            {reg.fecha}
+                          </td>
+                          <td className="cce-td" style={{ textAlign: 'center' }}>
+                            <button
+                              type="button"
+                              className={`cce-status-badge ${
+                                reg.checkIn ? 'cce-status-checked' : 'cce-status-pending'
+                              }`}
+                              onClick={() => handleToggleCheckIn(reg)}
+                              disabled={checkInUpdatingId === reg.id}
+                              title="Registrar ingreso en mesa de prensa en Centro de Eventos Cibeles"
+                            >
+                              <CheckCircle2 size={13} />
+                              {reg.checkIn ? 'En Cibeles' : 'Check-in'}
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                {/* Mobile Reception Cards (< 768px — 1-thumb Check-in in Cibeles) */}
+                <div className="cce-mobile-cards-list">
+                  {filteredRegistrations.map((reg) => (
+                    <div key={reg.id} className="cce-mobile-reg-card">
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          gap: '8px',
+                        }}
+                      >
+                        <span
                           style={{
-                            display: 'inline-flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            gap: '10px',
+                            fontFamily: 'monospace',
+                            fontSize: '12px',
+                            fontWeight: 800,
+                            color: '#064E3B',
+                            background: '#ECFDF5',
+                            padding: '3px 8px',
+                            borderRadius: '6px',
+                            border: '1px solid #A7F3D0',
                           }}
                         >
-                          <div
-                            style={{
-                              width: '48px',
-                              height: '48px',
-                              borderRadius: '12px',
-                              background: '#F8FAFC',
-                              border: '1px solid #E2E8F0',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              color: '#064E3B',
-                            }}
-                          >
-                            <Inbox size={22} />
-                          </div>
-                          <div style={{ fontSize: '15px', fontWeight: 700, color: '#1E293B' }}>
-                            Sin Acreditaciones de Prensa Registradas Aún
-                          </div>
-                          <p
-                            style={{
-                              fontSize: '13px',
-                              color: '#64748B',
-                              maxWidth: '460px',
-                              margin: 0,
-                              lineHeight: 1.5,
-                            }}
-                          >
-                            Colección Cloud Firestore dedicada y conectada en tiempo real. Cada periodista y camarógrafo acreditado para el evento aparecerá aquí automáticamente.
-                          </p>
+                          {reg.folio || '#CCE-PRENSA'}
+                        </span>
+                        <span className="cce-asistentes-pill">
+                          <Users size={12} />
+                          {reg.asistentes} gafete{Number(reg.asistentes) === 1 ? '' : 's'}
+                        </span>
+                      </div>
+
+                      <div>
+                        <div style={{ fontSize: '15px', fontWeight: 800, color: '#0F172A' }}>
+                          {reg.nombre}
                         </div>
-                      </td>
-                    </tr>
-                  ) : filteredRegistrations.length === 0 ? (
-                    <tr>
-                      <td colSpan={7} style={{ textAlign: 'center', padding: '36px', color: '#94A3B8' }}>
-                        No se encontraron acreditaciones que coincidan con la búsqueda o filtro aplicado.
-                      </td>
-                    </tr>
-                  ) : (
-                    filteredRegistrations.map((reg) => (
-                      <tr key={reg.id} className="cce-row">
-                        <td className="cce-td">
-                          <span
-                            style={{
-                              fontFamily: 'monospace',
-                              fontSize: '12px',
-                              fontWeight: 800,
-                              color: '#064E3B',
-                              background: '#ECFDF5',
-                              padding: '3px 7px',
-                              borderRadius: '6px',
-                              border: '1px solid #A7F3D0',
-                            }}
-                          >
-                            {reg.folio || '#CCE-PRENSA'}
-                          </span>
-                        </td>
-                        <td className="cce-td">
-                          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                            <span className="cce-avatar-initials">
-                              {reg.nombre.slice(0, 2).toUpperCase()}
-                            </span>
-                            <div>
-                              <div style={{ fontWeight: 700, color: '#0F172A' }}>{reg.nombre}</div>
-                              {Number(reg.asistentes) === 2 && reg.acompananteNombre && (
-                                <div className="cce-companion-pill">
-                                  <UserPlus size={12} />
-                                  <span>2do Gafete: {reg.acompananteNombre}</span>
-                                </div>
-                              )}
-                            </div>
+                        {Number(reg.asistentes) === 2 && reg.acompananteNombre && (
+                          <div className="cce-companion-pill">
+                            <UserPlus size={12} />
+                            <span>2do Gafete: {reg.acompananteNombre}</span>
                           </div>
-                        </td>
-                        <td className="cce-td">
-                          <span className="cce-medio-badge">{reg.medio}</span>
-                        </td>
-                        <td className="cce-td">
-                          {reg.whatsapp ? (
-                            <a
-                              href={getWhatsAppUrl(reg)}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="cce-btn-wa-row"
-                              title={`Enviar WhatsApp a ${reg.nombre}`}
-                            >
-                              <MessageSquare size={13} />
-                              {formatPhoneDisplay(reg.whatsapp)}
-                            </a>
-                          ) : (
-                            <span style={{ color: '#94A3B8' }}>—</span>
-                          )}
-                        </td>
-                        <td className="cce-td" style={{ textAlign: 'center' }}>
-                          <span className="cce-asistentes-pill">
-                            <Users size={12} />
-                            {reg.asistentes}
-                          </span>
-                        </td>
-                        <td className="cce-td" style={{ color: '#64748B', fontSize: '12px' }}>
-                          {reg.fecha}
-                        </td>
-                        <td className="cce-td" style={{ textAlign: 'center' }}>
-                          <button
-                            type="button"
-                            className={`cce-status-badge ${
-                              reg.checkIn ? 'cce-status-checked' : 'cce-status-pending'
-                            }`}
-                            onClick={() => handleToggleCheckIn(reg)}
-                            disabled={checkInUpdatingId === reg.id}
-                            title="Registrar ingreso en mesa de prensa en Centro de Eventos Cibeles"
+                        )}
+                      </div>
+
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          gap: '8px',
+                          flexWrap: 'wrap',
+                        }}
+                      >
+                        <span className="cce-medio-badge">{reg.medio}</span>
+                        <span style={{ fontSize: '11.5px', color: '#64748B' }}>{reg.fecha}</span>
+                      </div>
+
+                      <div
+                        style={{
+                          display: 'grid',
+                          gridTemplateColumns: reg.whatsapp ? '1fr 1fr' : '1fr',
+                          gap: '8px',
+                          marginTop: '4px',
+                        }}
+                      >
+                        {reg.whatsapp && (
+                          <a
+                            href={getWhatsAppUrl(reg)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="cce-btn-wa-row"
+                            style={{ width: '100%' }}
                           >
-                            <CheckCircle2 size={13} />
-                            {reg.checkIn ? 'En Cibeles' : 'Check-in'}
-                          </button>
-                        </td>
-                      </tr>
-                    ))
-                  )}
-                </tbody>
-              </table>
-            </div>
+                            <MessageSquare size={13} />
+                            WhatsApp
+                          </a>
+                        )}
+                        <button
+                          type="button"
+                          className={`cce-status-badge ${
+                            reg.checkIn ? 'cce-status-checked' : 'cce-status-pending'
+                          }`}
+                          style={{ width: '100%' }}
+                          onClick={() => handleToggleCheckIn(reg)}
+                          disabled={checkInUpdatingId === reg.id}
+                        >
+                          <CheckCircle2 size={14} />
+                          {reg.checkIn ? 'En Cibeles' : 'Check-in'}
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
           </div>
         </main>
       ) : (
@@ -2615,10 +2907,10 @@ export default function CceAcreditacionPrensaClient() {
                     </div>
                   </div>
 
-                  {/* Segment 2: Horario */}
+                  {/* Segment 2: Horario (Vector Gold Clock Icon) */}
                   <div className="cce-schedule-item">
                     <div className="cce-schedule-icon-wrap" aria-hidden="true">
-                      <span role="img" aria-label="Reloj">🕘</span>
+                      <Clock size={24} color="#F5DE98" />
                     </div>
                     <div className="cce-schedule-info">
                       <span className="cce-schedule-label">CITA A MEDIOS</span>
@@ -2684,10 +2976,12 @@ export default function CceAcreditacionPrensaClient() {
                 >
                   <div className="cce-confirmed-seal">
                     <CheckCircle2 size={16} />
-                    Acreditación Registrada · {confirmedRecord.folio}
+                    {wasUpdatedRecord ? 'Acreditación Actualizada' : 'Acreditación Registrada'} · {confirmedRecord.folio}
                   </div>
 
-                  <h2 className="cce-confirmed-title">¡Acreditación Confirmada con Éxito!</h2>
+                  <h2 className="cce-confirmed-title">
+                    {wasUpdatedRecord ? '¡Datos de Acreditación Actualizados!' : '¡Acreditación Confirmada con Éxito!'}
+                  </h2>
 
                   <p style={{ fontSize: '15px', color: '#CBD5E1', lineHeight: 1.6 }}>
                     Tu registro ha quedado guardado en el padrón oficial de medios del CCE Ciudad Juárez. Presenta tu nombre o folio en la mesa de prensa al llegar a Centro de Eventos Cibeles.
@@ -2771,6 +3065,15 @@ export default function CceAcreditacionPrensaClient() {
                       <ExternalLink size={14} />
                     </button>
                   </div>
+
+                  <button
+                    type="button"
+                    className="cce-btn-new-pass"
+                    onClick={handleRegisterAnother}
+                  >
+                    <PlusCircle size={14} />
+                    Registrar a otro periodista de mi medio
+                  </button>
                 </motion.div>
               ) : (
                 /* PRESS ACCREDITATION FORM */
@@ -2803,7 +3106,9 @@ export default function CceAcreditacionPrensaClient() {
                       </label>
                       <input
                         id="nombre"
+                        name="name"
                         type="text"
+                        autoComplete="name"
                         placeholder="Nombre y apellidos para tu gafete"
                         value={nombre}
                         onChange={(e) => {
@@ -2826,8 +3131,10 @@ export default function CceAcreditacionPrensaClient() {
                       </label>
                       <input
                         id="medio"
+                        name="organization"
                         type="text"
-                        placeholder="Ej. El Diario, Canal 44, Netnoticias, Radio..."
+                        autoComplete="organization"
+                        placeholder="Ej. El Diario, Canal 44, Netnoticias..."
                         value={medio}
                         onChange={(e) => {
                           setMedio(e.target.value);
@@ -2839,27 +3146,36 @@ export default function CceAcreditacionPrensaClient() {
                       {errors.medio && <span className="cce-field-error">{errors.medio}</span>}
                     </div>
 
-                    {/* Campo 3: WhatsApp (10 dígitos) */}
+                    {/* Campo 3: WhatsApp (10 dígitos — compatible con autofill +52) */}
                     <div className="cce-form-group">
                       <label className="cce-label" htmlFor="whatsapp">
                         <span>
                           WhatsApp de Contacto
                           <span className="cce-required-dot">*</span>
                         </span>
-                        <span style={{ fontSize: '11.5px', color: '#94A3B8', fontWeight: 500, textTransform: 'none' }}>
-                          10 dígitos
+                        <span
+                          style={{
+                            fontSize: '11.5px',
+                            color: whatsapp.length === 10 ? '#34D399' : '#94A3B8',
+                            fontWeight: 600,
+                            textTransform: 'none',
+                          }}
+                        >
+                          {whatsapp.length > 0 ? `${whatsapp.length}/10 dígitos` : '10 dígitos'}
                         </span>
                       </label>
                       <input
                         id="whatsapp"
+                        name="tel"
                         type="tel"
                         inputMode="numeric"
-                        maxLength={14}
+                        autoComplete="tel"
+                        maxLength={20}
                         placeholder="Ej. 656 123 4567"
                         value={whatsapp}
                         onChange={(e) => {
-                          const digitsOnly = e.target.value.replace(/\D/g, '').slice(0, 10);
-                          setWhatsapp(digitsOnly);
+                          const normalized = normalizeMxPhoneInput(e.target.value);
+                          setWhatsapp(normalized);
                           if (errors.whatsapp) setErrors({ ...errors, whatsapp: '' });
                         }}
                         className={`cce-input ${errors.whatsapp ? 'error' : ''}`}
@@ -2945,6 +3261,7 @@ export default function CceAcreditacionPrensaClient() {
                               <input
                                 id="acompananteNombre"
                                 type="text"
+                                autoComplete="off"
                                 placeholder="Nombre y apellidos del camarógrafo o fotógrafo"
                                 value={acompananteNombre}
                                 onChange={(e) => {
