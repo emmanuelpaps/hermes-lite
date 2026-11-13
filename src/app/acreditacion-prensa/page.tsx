@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     siteName: 'Consejo Coordinador Empresarial de Ciudad Juárez',
     images: [
       {
-        url: 'https://hermes-lite.vercel.app/assets/cce-juarez/og_acreditacion_prensa_2026.jpg?v=20261113',
+        url: 'https://hermes-lite.vercel.app/assets/cce-juarez/og_acreditacion_prensa_cce.jpg',
         width: 1200,
         height: 630,
         type: 'image/jpeg',
@@ -47,16 +47,12 @@ export const metadata: Metadata = {
     description:
       'Consejo Coordinador Empresarial de Ciudad Juárez · Jueves 19 de noviembre, 9:00 a.m. · Centro de Eventos Cibeles.',
     images: [
-      'https://hermes-lite.vercel.app/assets/cce-juarez/og_acreditacion_prensa_2026.jpg?v=20261113',
+      'https://hermes-lite.vercel.app/assets/cce-juarez/og_acreditacion_prensa_cce.jpg',
     ],
   },
-  robots: {
-    index: false,
-    follow: false,
-  },
   icons: {
-    icon: '/assets/cce-juarez/logo_cce.png',
-    apple: '/assets/cce-juarez/logo_cce.png',
+    icon: '/assets/cce-juarez/cce_icon_512.png',
+    apple: '/assets/cce-juarez/cce_icon_512.png',
   },
 };
 
