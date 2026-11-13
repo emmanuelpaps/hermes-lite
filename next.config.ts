@@ -21,6 +21,16 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/cce-acreditacion-prensa',
+        destination: '/acreditacion-prensa',
+        permanent: false,
+      },
+      {
+        source: '/cce-acreditacion-prensa/',
+        destination: '/acreditacion-prensa',
+        permanent: false,
+      },
+      {
         source: '/la-nueva-laguna',
         destination: '/nueva-laguna',
         permanent: true,
