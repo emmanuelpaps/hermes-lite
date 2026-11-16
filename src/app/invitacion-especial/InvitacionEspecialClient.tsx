@@ -2419,6 +2419,18 @@ export default function InvitacionEspecialClient() {
             /* =========================================================
                HERO QUICK ACTION BAR & INVITACIÓN ESPECIAL VENUE SECTION
                ========================================================= */
+            .cce-galardones-section,
+            .cce-loret-section {
+              position: relative;
+              z-index: 5;
+            }
+
+            .cce-section-header,
+            .cce-galardones-grid {
+              position: relative;
+              z-index: 5;
+            }
+
             .cce-inv-hero-actions {
               display: flex;
               flex-wrap: wrap;
@@ -2606,6 +2618,13 @@ export default function InvitacionEspecialClient() {
               .cce-venue-map-wrap,
               .cce-venue-map-iframe {
                 min-height: 290px;
+              }
+            }
+
+            @media (max-width: 768px) {
+              .cce-sash-bottom-full {
+                top: 640px;
+                bottom: auto;
               }
             }
 
