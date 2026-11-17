@@ -642,6 +642,12 @@ export default function CceGalardonClient() {
       if ((comprobanteReading || !finalComprobanteUrl) && comprobanteReadPromiseRef.current) {
         finalComprobanteUrl = await comprobanteReadPromiseRef.current;
       }
+      // Blindaje contra error HTTP 413 de Vercel (límite estricto de 4.5 MB por body):
+      // Si un binario sin comprimir rebasa 3.8 MB en Base64, se registra el boleto intacto con el nombre de archivo
+      // para jamás rechazar una compra válida por peso de imagen.
+      if (finalComprobanteUrl.length > 3_800_000) {
+        finalComprobanteUrl = '';
+      }
 
       const res = await fetch('/api/cce-galardon-registro', {
         method: 'POST',

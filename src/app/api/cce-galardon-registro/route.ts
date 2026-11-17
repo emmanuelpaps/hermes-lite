@@ -256,8 +256,9 @@ export async function POST(req: NextRequest) {
         const isPng = fileBuffer.subarray(0, 4).toString('hex') === '89504e47';
         const isJpg = fileBuffer[0] === 0xFF && fileBuffer[1] === 0xD8 && fileBuffer[2] === 0xFF;
         const isWebp = fileBuffer.subarray(0, 4).toString('binary') === 'RIFF' && fileBuffer.subarray(8, 12).toString('binary') === 'WEBP';
+        const isHeic = fileBuffer.subarray(4, 8).toString('binary') === 'ftyp';
 
-        if (!isPdf && !isPng && !isJpg && !isWebp) {
+        if (!isPdf && !isPng && !isJpg && !isWebp && !isHeic) {
           return rejectWithAudit(
             'Formato de archivo no válido. Solo se permiten comprobantes en formato PDF, PNG o JPG auténticos.',
             400
