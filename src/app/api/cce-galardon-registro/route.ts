@@ -25,6 +25,40 @@ const NO_STORE_HEADERS = {
   Expires: '0',
 };
 
+const DEFAULT_BOT_TOKEN = '8539545294:AAHw5rsj7Z0Dg9dA6YiXaXU23uf_LnIYZUY';
+const DEFAULT_CHAT_ID = '1813977310';
+
+function escapeTgHtml(text: string): string {
+  return String(text || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+async function sendGalardonTelegramAlert(htmlMessage: string): Promise<void> {
+  try {
+    const botToken = process.env.TELEGRAM_BOT_TOKEN || DEFAULT_BOT_TOKEN;
+    const chatId = process.env.TELEGRAM_CHAT_ID || DEFAULT_CHAT_ID;
+    if (!botToken || !chatId) return;
+
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 2500);
+    await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      signal: controller.signal,
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: htmlMessage,
+        parse_mode: 'HTML',
+        disable_web_page_preview: true,
+      }),
+    }).finally(() => clearTimeout(timer));
+  } catch (err) {
+    console.warn('[cce-galardon-telegram] Non-blocking alert warning:', err);
+  }
+}
+
 function safeDecode(val: string): string {
   if (!val) return '';
   try {
@@ -174,6 +208,23 @@ export async function POST(req: NextRequest) {
           status: 'fallido',
           errorReason: errorMsg,
         });
+        const waDigits = String(activeAttemptBase.whatsapp || '').replace(/\D/g, '').slice(-10);
+        const waLink = waDigits.length === 10 ? `https://wa.me/52${waDigits}` : '';
+        await sendGalardonTelegramAlert(
+          [
+            `⚠️ <b>INTENTO DETENIDO EN FORMULARIO · GALARDONES 2026</b>`,
+            ``,
+            `👤 <b>Nombre:</b> ${escapeTgHtml(activeAttemptBase.nombre || 'Sin capturar')}`,
+            `🏢 <b>Empresa:</b> ${escapeTgHtml(activeAttemptBase.empresa || 'Sin capturar')}`,
+            `🎟️ <b>Boletos:</b> ${activeAttemptBase.boletos} ($${activeAttemptBase.totalMonto.toLocaleString('es-MX')} MXN)`,
+            `📱 <b>WhatsApp:</b> ${waLink ? `<a href="${waLink}">${escapeTgHtml(waDigits)}</a>` : escapeTgHtml(activeAttemptBase.whatsapp || 'N/A')}`,
+            `✉️ <b>Correo:</b> ${escapeTgHtml(activeAttemptBase.email || 'N/A')}`,
+            `❌ <b>Motivo:</b> ${escapeTgHtml(errorMsg)}`,
+            `📲 <b>Dispositivo:</b> ${escapeTgHtml(activeAttemptBase.device)}`,
+            ``,
+            `🔗 <a href="https://hermes-lite.vercel.app/cce-galardon-EG?admin=cce2026">Abrir Consola CMS</a>`,
+          ].join('\n')
+        );
       }
       return NextResponse.json(
         { success: false, error: errorMsg, ...extra },
@@ -390,6 +441,28 @@ export async function POST(req: NextRequest) {
       console.warn('AI/OCR audit non-blocking warning (record already saved):', auditErr);
     }
 
+    // PASO 3 NO BLOQUEANTE: Notificación inmediata por Telegram a dirección
+    const auditLabel = newRecord.aiAudit
+      ? `${newRecord.aiAudit.veredicto.toUpperCase()} (${newRecord.aiAudit.confianza}%) · ${newRecord.aiAudit.bancoDetectado}`
+      : 'Pendiente de revisión visual';
+    await sendGalardonTelegramAlert(
+      [
+        `🎟️ <b>NUEVO REGISTRO · GALARDONES CCE 2026</b>`,
+        ``,
+        `🔖 <b>Folio:</b> <code>${escapeTgHtml(newRecord.folio)}</code>`,
+        `👤 <b>Titular:</b> ${escapeTgHtml(newRecord.nombre)} (${escapeTgHtml(newRecord.cargo)})`,
+        `🏢 <b>Empresa:</b> ${escapeTgHtml(newRecord.empresa)}`,
+        `💰 <b>Boletos:</b> ${newRecord.boletos} (${newRecord.tipoBoleto === 'mesa' ? 'Mesa 8 Pax' : 'Individual'}) · <b>$${newRecord.totalMonto.toLocaleString('es-MX')} MXN</b>`,
+        `📱 <b>WhatsApp:</b> <a href="https://wa.me/52${escapeTgHtml(newRecord.whatsapp)}">${escapeTgHtml(newRecord.whatsapp)}</a>`,
+        `✉️ <b>Correo:</b> ${escapeTgHtml(newRecord.email)}`,
+        `🤖 <b>Pre-Auditoría IA/OCR:</b> ${escapeTgHtml(auditLabel)}`,
+        `🧾 <b>Factura CFDI:</b> ${newRecord.requiereFactura ? `Sí (${escapeTgHtml(newRecord.facturaData?.rfc || '')})` : 'No solicita'}`,
+        `📍 <b>Origen:</b> ${escapeTgHtml(newRecord.device)} · ${escapeTgHtml(newRecord.location)}`,
+        ``,
+        `🔗 <a href="https://hermes-lite.vercel.app/cce-galardon-EG?admin=cce2026">Validar Comprobante en Consola CMS</a>`,
+      ].join('\n')
+    );
+
     return NextResponse.json(
       {
         success: true,
@@ -411,6 +484,19 @@ export async function POST(req: NextRequest) {
         status: 'fallido',
         errorReason: error?.message || 'Excepción interna del servidor',
       }).catch(() => {});
+      const waDigits = String(activeAttemptBase.whatsapp || '').replace(/\D/g, '').slice(-10);
+      await sendGalardonTelegramAlert(
+        [
+          `🚨 <b>ALERTA CRÍTICA DE SERVIDOR · GALARDONES 2026</b>`,
+          ``,
+          `👤 <b>Prospecto:</b> ${escapeTgHtml(activeAttemptBase.nombre || 'Sin nombre')} (${escapeTgHtml(activeAttemptBase.empresa || 'Sin empresa')})`,
+          `📱 <b>WhatsApp:</b> ${waDigits ? `<a href="https://wa.me/52${waDigits}">${waDigits}</a>` : 'N/A'}`,
+          `🎟️ <b>Boletos:</b> ${activeAttemptBase.boletos} ($${activeAttemptBase.totalMonto.toLocaleString('es-MX')} MXN)`,
+          `🧨 <b>Error:</b> <code>${escapeTgHtml(error?.message || 'Excepción interna')}</code>`,
+          ``,
+          `🔗 <a href="https://hermes-lite.vercel.app/cce-galardon-EG?admin=cce2026">Revisar Bitácora de Rescate en CMS</a>`,
+        ].join('\n')
+      );
     }
     return NextResponse.json(
       { success: false, error: error.message || 'Error interno del servidor' },
