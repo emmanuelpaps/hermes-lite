@@ -68,6 +68,9 @@ export default function CceGalardonClient() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [crmView, setCrmView] = useState<'landing' | 'crm'>('landing');
   const [crmLoading, setCrmLoading] = useState(false);
+  const [crmError, setCrmError] = useState<string | null>(null);
+  const [loadingComprobanteId, setLoadingComprobanteId] = useState<string | null>(null);
+  const isFetchingCrmRef = useRef(false);
   const [telemetry, setTelemetry] = useState<GalardonTelemetryData | null>(null);
   const [crmRegistrations, setCrmRegistrations] = useState<GalardonRegistration[]>([]);
   const [crmFailedAttempts, setCrmFailedAttempts] = useState<GalardonRegistrationAttempt[]>([]);
@@ -153,21 +156,22 @@ export default function CceGalardonClient() {
       setIsRegistrationClosed(Date.now() > EVENT_DEADLINE_MS);
       const params = new URLSearchParams(window.location.search);
       const adminToken = params.get('admin');
-      if (adminToken && adminToken.toLowerCase() === 'cce2026') {
+      if (adminToken && adminToken.toLowerCase().trim() === 'cce2026') {
         setIsAdmin(true);
         setCrmView('crm');
-        fetchCrmData();
+        setCrmLoading(true);
+        fetchCrmData(false);
       } else {
         fetch('/api/cce-galardon-registro?action=visit', { method: 'GET' }).catch(() => {});
       }
     }
   }, []);
 
-  // Real-time Firestore auto-refresh in CRM console (every 15s)
+  // Real-time Firestore auto-refresh in CRM console (every 15s, silent & non-overlapping)
   useEffect(() => {
     if (isAdmin && crmView === 'crm') {
       const interval = setInterval(() => {
-        fetchCrmData();
+        fetchCrmData(true);
       }, 15000);
       return () => clearInterval(interval);
     }
@@ -179,6 +183,7 @@ export default function CceGalardonClient() {
   const openComprobanteModal = async (reg: GalardonRegistration) => {
     setSelectedComprobante(reg);
     if (!reg.comprobanteUrl && reg.comprobanteFileName) {
+      setLoadingComprobanteId(reg.id);
       try {
         const res = await fetch(
           `/api/cce-galardon-registro?admin=cce2026&id=${encodeURIComponent(reg.id)}`,
@@ -196,52 +201,80 @@ export default function CceGalardonClient() {
         }
       } catch (err) {
         console.warn('Could not load on-demand comprobante:', err);
+      } finally {
+        setLoadingComprobanteId(null);
       }
     }
   };
 
-  const fetchCrmData = async () => {
-    setCrmLoading(true);
-    try {
-      const res = await fetch('/api/cce-galardon-registro?admin=cce2026', {
-        cache: 'no-store',
-      });
-      const data = await res.json();
-      if (res.ok && data.success) {
-        setTelemetry(data.telemetry);
-        const regs: GalardonRegistration[] = data.registrations || [];
-        setCrmRegistrations(regs);
-        setCrmFailedAttempts(Array.isArray(data.failedAttempts) ? data.failedAttempts : []);
-
-        // Si algún registro aún no cuenta con dictamen IA/OCR, disparar auditoría automática una sola vez por sesión
-        if (regs.some((r) => !r.aiAudit) && !hasTriggeredAutoAuditRef.current) {
-          hasTriggeredAutoAuditRef.current = true;
-          fetch('/api/cce-galardon-registro?admin=cce2026', {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ action: 'audit' }),
-          })
-            .then((r) => r.json())
-            .then((auditRes) => {
-              if (auditRes?.success && auditRes.auditedCount > 0) {
-                fetch('/api/cce-galardon-registro?admin=cce2026', { cache: 'no-store' })
-                  .then((r2) => r2.json())
-                  .then((d2) => {
-                    if (d2?.success) {
-                      setCrmRegistrations(d2.registrations || []);
-                    }
-                  })
-                  .catch(() => {});
-              }
-            })
-            .catch(() => {});
-        }
-      }
-    } catch (err) {
-      console.error('Error fetching CRM data:', err);
-    } finally {
-      setCrmLoading(false);
+  const fetchCrmData = async (silent = false) => {
+    if (isFetchingCrmRef.current) return;
+    isFetchingCrmRef.current = true;
+    if (!silent) {
+      setCrmLoading(true);
+      setCrmError(null);
     }
+
+    let lastError = 'No fue posible sincronizar los registros en este momento.';
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      try {
+        const res = await fetch(`/api/cce-galardon-registro?admin=cce2026&_t=${Date.now()}`, {
+          cache: 'no-store',
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          setCrmError(null);
+          setTelemetry(data.telemetry);
+          const incomingRegs: GalardonRegistration[] = data.registrations || [];
+          // Conservar comprobantes ya descargados en memoria durante refrescos silenciosos
+          setCrmRegistrations((prev) => {
+            const cachedUrls = new Map<string, string>();
+            for (const p of prev) {
+              if (p.comprobanteUrl) cachedUrls.set(p.id, p.comprobanteUrl);
+            }
+            return incomingRegs.map((r) =>
+              !r.comprobanteUrl && cachedUrls.has(r.id)
+                ? { ...r, comprobanteUrl: cachedUrls.get(r.id) }
+                : r
+            );
+          });
+          setCrmFailedAttempts(Array.isArray(data.failedAttempts) ? data.failedAttempts : []);
+
+          // Si algún registro aún no cuenta con dictamen IA/OCR, disparar auditoría automática una sola vez por sesión
+          if (incomingRegs.some((r) => !r.aiAudit) && !hasTriggeredAutoAuditRef.current) {
+            hasTriggeredAutoAuditRef.current = true;
+            fetch('/api/cce-galardon-registro?admin=cce2026', {
+              method: 'PATCH',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ action: 'audit' }),
+            })
+              .then((r) => r.json())
+              .then((auditRes) => {
+                if (auditRes?.success && auditRes.auditedCount > 0) {
+                  isFetchingCrmRef.current = false;
+                  fetchCrmData(true);
+                }
+              })
+              .catch(() => {});
+          }
+          isFetchingCrmRef.current = false;
+          setCrmLoading(false);
+          return;
+        }
+        lastError = data?.error || `Respuesta inesperada del servidor (${res.status}).`;
+      } catch (err: any) {
+        lastError = err?.message || 'Fallo de red móvil al descargar registros.';
+      }
+      if (attempt < 3) {
+        await new Promise((r) => setTimeout(r, attempt * 900));
+      }
+    }
+
+    if (!silent) {
+      setCrmError(lastError);
+    }
+    isFetchingCrmRef.current = false;
+    setCrmLoading(false);
   };
 
   const runAiAuditForRecord = async (id: string) => {
@@ -294,7 +327,7 @@ export default function CceGalardonClient() {
         setSelectedComprobante((prev) => (prev && prev.id === id ? { ...prev, status: oldStatus } : prev));
         alert('Error al actualizar estatus en Firestore: ' + (data?.error || 'Desconocido'));
       } else {
-        fetchCrmData();
+        fetchCrmData(true);
       }
     } catch (err: any) {
       console.error('Error updating status:', err);
@@ -401,9 +434,12 @@ export default function CceGalardonClient() {
     setFormError(null);
     if (!file) return;
 
-    const validExtensions = ['.png', '.jpg', '.jpeg', '.webp', '.pdf'];
+    const validExtensions = ['.png', '.jpg', '.jpeg', '.webp', '.heic', '.heif', '.pdf'];
     const fileName = file.name.toLowerCase();
-    const hasValidExt = validExtensions.some((ext) => fileName.endsWith(ext));
+    const hasValidExt =
+      validExtensions.some((ext) => fileName.endsWith(ext)) ||
+      file.type.startsWith('image/') ||
+      file.type === 'application/pdf';
 
     if (!hasValidExt) {
       setFormError('Formato no soportado. Por favor adjunta un archivo en formato PNG, JPG, JPEG, WebP o PDF.');
@@ -689,8 +725,8 @@ export default function CceGalardonClient() {
       'SUMMARY:Entrega de Galardones 2026 & Conferencia Loret · CCE Juárez',
       `DESCRIPTION:Entrega de Galardones Empresariales 2026 (Estrella Ascendente y De Altos Vuelos) y Conferencia Magistral con Carlos Loret de Mola: "México y Estados Unidos: Poder, política y economía en tiempos de cambio".\\n\\nFolio Oficial: ${folioStr}\\nHorario: Registro 8:30 a.m. | Inicio del Desayuno 9:00 a.m.\\nCódigo de Vestimenta: Formal.\\nSede: Centro de Eventos Cibeles.`,
       'LOCATION:Centro de Eventos Cibeles, Blvd. Tomás Fernández No. 8450, Cd. Juárez, Chih.',
-      'DTSTART:20261119T143000Z',
-      'DTEND:20261119T180000Z',
+      'DTSTART:20261119T153000Z',
+      'DTEND:20261119T190000Z',
       'STATUS:CONFIRMED',
       'END:VEVENT',
       'END:VCALENDAR',
@@ -714,7 +750,7 @@ export default function CceGalardonClient() {
     const location = encodeURIComponent(
       'Centro de Eventos Cibeles, Blvd. Tomás Fernández No. 8450, Cd. Juárez, Chih.'
     );
-    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=20261119T143000Z/20261119T180000Z&details=${details}&location=${location}`;
+    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=20261119T153000Z/20261119T190000Z&details=${details}&location=${location}`;
   };
 
   useEffect(() => {
@@ -6575,11 +6611,22 @@ export default function CceGalardonClient() {
                     <input
                       id="reg-whatsapp"
                       type="tel"
+                      inputMode="numeric"
+                      autoComplete="tel"
                       required
-                      maxLength={10}
+                      maxLength={18}
                       placeholder="Ej. 6561803055"
                       value={whatsapp}
-                      onChange={(e) => setWhatsapp(e.target.value.replace(/\D/g, ''))}
+                      onChange={(e) => {
+                        const digits = e.target.value.replace(/\D/g, '');
+                        const normalized =
+                          digits.length > 10 && digits.startsWith('52')
+                            ? digits.slice(-10)
+                            : digits.length === 11 && digits.startsWith('1')
+                            ? digits.slice(1)
+                            : digits.slice(0, 10);
+                        setWhatsapp(normalized);
+                      }}
                       className="cce-input"
                     />
                   </div>
@@ -6682,7 +6729,7 @@ export default function CceGalardonClient() {
                       <input
                         ref={fileInputRef}
                         type="file"
-                        accept=".png,.jpg,.jpeg,.webp,.pdf,image/png,image/jpeg,image/webp,application/pdf"
+                        accept="image/*,application/pdf,.png,.jpg,.jpeg,.webp,.heic,.heif,.pdf"
                         style={{ display: 'none' }}
                         onChange={(e) => {
                           if (e.target.files && e.target.files[0]) {
@@ -7001,7 +7048,7 @@ export default function CceGalardonClient() {
                 </button>
 
                 <a
-                  href="https://maps.google.com/?q=Centro+de+Eventos+Cibeles+Av+Valle+de+Juarez+6839+Ciudad+Juarez"
+                  href="https://maps.google.com/?q=Centro+de+Eventos+Cibeles+Blvd+Tomas+Fernandez+8450+Ciudad+Juarez"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="cce-btn-cal cce-btn-cal-map"
@@ -7064,7 +7111,7 @@ export default function CceGalardonClient() {
             <div className="cce-crm-top-actions">
               <button
                 type="button"
-                onClick={fetchCrmData}
+                onClick={() => fetchCrmData(false)}
                 disabled={crmLoading}
                 className="cce-crm-action-btn"
               >
@@ -7270,6 +7317,39 @@ export default function CceGalardonClient() {
             </div>
           </div>
 
+          {crmError && (
+            <div
+              style={{
+                maxWidth: '1280px',
+                margin: '0 auto 20px auto',
+                padding: '16px 20px',
+                borderRadius: '14px',
+                background: 'rgba(239, 68, 68, 0.14)',
+                border: '1px solid rgba(239, 68, 68, 0.5)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                flexWrap: 'wrap',
+                gap: '12px',
+              }}
+              role="alert"
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#FCA5A5', fontSize: '13.5px', fontWeight: 700 }}>
+                <AlertCircle size={18} color="#F87171" />
+                <span>Error al sincronizar registros: {crmError}</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => fetchCrmData(false)}
+                className="cce-crm-action-btn"
+                style={{ background: 'rgba(212, 175, 55, 0.25)', borderColor: 'var(--cce-gold)' }}
+              >
+                <RefreshCw size={14} />
+                <span>Reintentar Ahora</span>
+              </button>
+            </div>
+          )}
+
           {/* Alerta Automática de Intentos Incompletos / Fallidos (visible solo si existen) */}
           {crmFailedAttempts.length > 0 && (
             <div
@@ -7334,7 +7414,7 @@ export default function CceGalardonClient() {
                     {att.whatsapp && (
                       <a
                         href={`https://wa.me/52${att.whatsapp}?text=${encodeURIComponent(
-                          `Buen día ${att.nombre || ''}. Notamos que iniciaste tu registro para la Entrega de Galardones 2026 del CCE Ciudad Juárez (${att.boletos} boletos) pero no se completó el envío de tu comprobante. Puedes concluirlo aquí: https://hermes-lite.vercel.app/cce-galardon-EG/confirmacion`
+                          `Buen día ${att.nombre || ''}. Notamos que iniciaste tu registro para la Entrega de Galardones 2026 del CCE Ciudad Juárez (${att.boletos} boletos) pero no se completó el envío de tu comprobante. Puedes concluirlo aquí: https://hermes-lite.vercel.app/cce-galardon-EG#registro`
                         )}`}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -7581,7 +7661,16 @@ export default function CceGalardonClient() {
                     {crmRegistrations.length === 0 && (
                       <tr>
                         <td colSpan={9} style={{ textAlign: 'center', padding: '36px', color: '#94A3B8' }}>
-                          No hay registros de acreditación capturados hasta el momento.
+                          {crmLoading ? (
+                            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', color: '#F3E5AB', fontWeight: 700 }}>
+                              <RefreshCw size={16} className="cce-spinner" />
+                              Sincronizando registros de acreditación en tiempo real...
+                            </span>
+                          ) : crmError ? (
+                            'No se pudieron cargar los registros por conexión inestable. Toca Reintentar Ahora arriba.'
+                          ) : (
+                            'No hay registros de acreditación capturados hasta el momento.'
+                          )}
                         </td>
                       </tr>
                     )}
@@ -7782,7 +7871,16 @@ export default function CceGalardonClient() {
               ))}
             {crmRegistrations.length === 0 && (
               <div className="cce-crm-empty">
-                No hay registros de acreditación capturados hasta el momento.
+                {crmLoading ? (
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', color: '#F3E5AB', fontWeight: 700 }}>
+                    <RefreshCw size={16} className="cce-spinner" />
+                    Sincronizando registros de acreditación en tiempo real...
+                  </span>
+                ) : crmError ? (
+                  'Conexión inestable al descargar registros. Pulsa Reintentar Ahora en la parte superior.'
+                ) : (
+                  'No hay registros de acreditación capturados hasta el momento.'
+                )}
               </div>
             )}
           </div>
@@ -8070,6 +8168,13 @@ export default function CceGalardonClient() {
                     <Download size={14} />
                     <span>Descargar Comprobante PDF</span>
                   </a>
+                </div>
+              </div>
+            ) : loadingComprobanteId === selectedComprobante.id ? (
+              <div className="cce-modal-preview-fallback">
+                <RefreshCw size={36} color="#D4AF37" className="cce-spinner" style={{ margin: '0 auto 12px auto' }} />
+                <div style={{ color: '#F3E5AB', fontWeight: 800, fontSize: '14px' }}>
+                  Descargando imagen original del comprobante...
                 </div>
               </div>
             ) : (

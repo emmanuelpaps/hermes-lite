@@ -7,8 +7,7 @@ import {
   updateGalardonAiAudit,
   logGalardonVisit,
   saveGalardonAttempt,
-  getGalardonFailedAttempts,
-  getGalardonTelemetry,
+  getGalardonTelemetryAndAttempts,
   GalardonRegistration,
 } from '@/lib/cce-galardon-db';
 import {
@@ -18,6 +17,7 @@ import {
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
+export const maxDuration = 60;
 
 const NO_STORE_HEADERS = {
   'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
@@ -217,7 +217,13 @@ export async function POST(req: NextRequest) {
       return rejectWithAudit('Por favor ingresa tu cargo o puesto directivo.', 400);
     }
 
-    const cleanPhone = String(whatsapp || '').replace(/\D/g, '');
+    const rawPhoneDigits = String(whatsapp || '').replace(/\D/g, '');
+    const cleanPhone =
+      rawPhoneDigits.length > 10 && rawPhoneDigits.startsWith('52')
+        ? rawPhoneDigits.slice(-10)
+        : rawPhoneDigits.length === 11 && rawPhoneDigits.startsWith('1')
+        ? rawPhoneDigits.slice(1)
+        : rawPhoneDigits;
     if (cleanPhone.length < 10) {
       return rejectWithAudit('Por favor ingresa un número de teléfono celular con WhatsApp a 10 dígitos.', 400);
     }
@@ -457,25 +463,17 @@ export async function GET(req: NextRequest) {
     }
 
     const registrations = await getGalardonRegistrations();
-    const [telemetry, failedAttempts] = await Promise.all([
-      getGalardonTelemetry(registrations),
-      getGalardonFailedAttempts(registrations),
-    ]);
+    const { telemetry, failedAttempts } = await getGalardonTelemetryAndAttempts(registrations);
 
-    // Blindaje contra el límite de 4.5 MB de respuesta en Vercel Serverless:
-    // Si el listado acumulado supera 3.2 MB, los registros excedentes omiten el binario inline
-    // y el Dashboard lo descarga bajo demanda al abrir el modal "Ver Archivo".
-    const MAX_INLINE_LIST_BYTES = 3_200_000;
-    let cumulativeBytes = 0;
+    // Listado ligero instantáneo (~14 KB en lugar de >2 MB):
+    // Se omite el binario base64 inline en la consulta general para que el CRM en móvil/WhatsApp
+    // cargue en <0.4s sin timeouts, y el comprobante individual se descarga bajo demanda al abrir "Ver Archivo".
     const safeRegistrations = registrations.map((reg) => {
-      const regSize = Buffer.byteLength(JSON.stringify(reg), 'utf8');
-      if (cumulativeBytes + regSize <= MAX_INLINE_LIST_BYTES) {
-        cumulativeBytes += regSize;
-        return reg;
-      }
-      const { comprobanteUrl: _omitted, ...lightReg } = reg;
-      cumulativeBytes += Buffer.byteLength(JSON.stringify(lightReg), 'utf8');
-      return lightReg as GalardonRegistration;
+      const { comprobanteUrl, ...lightReg } = reg;
+      return {
+        ...lightReg,
+        hasComprobante: Boolean(comprobanteUrl),
+      } as GalardonRegistration;
     });
 
     return NextResponse.json(

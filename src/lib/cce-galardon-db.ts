@@ -47,6 +47,7 @@ export interface GalardonRegistration {
   asignarNombresDespues: boolean;
   comprobanteFileName: string;
   comprobanteUrl?: string; // base64 preview or storage link
+  hasComprobante?: boolean; // lightweight indicator when comprobanteUrl is omitted in list view
   requiereFactura: boolean;
   facturaData?: {
     rfc: string;
@@ -482,5 +483,131 @@ export async function getGalardonTelemetry(
     comprobantesPendientes,
     comprobantesValidados,
     comprobantesRechazados,
+  };
+}
+
+/**
+ * Single-pass reader for CRM Console: reads `cce_galardon_telemetry` ONCE (instead of 2x 2000 docs)
+ * and computes both Telemetry KPIs and Rescue Failed Attempts simultaneously.
+ */
+export async function getGalardonTelemetryAndAttempts(
+  registrations: GalardonRegistration[] = []
+): Promise<{
+  telemetry: GalardonTelemetryData;
+  failedAttempts: GalardonRegistrationAttempt[];
+}> {
+  const cache = getLocalCache();
+  let visits: GalardonVisitLog[] = [];
+  const rawAttempts: GalardonRegistrationAttempt[] = [];
+
+  try {
+    const telemRef = collection(db, TELEMETRY_COL);
+    const q = query(telemRef, orderBy('timestamp', 'desc'), limit(2000));
+    const snap = await withFirestoreRetry(() => getDocs(q), 2);
+    snap.forEach((d) => {
+      const data = d.data() as any;
+      if (d.id.startsWith('attempt-') || data?.eventType === 'registration_attempt') {
+        rawAttempts.push(data as GalardonRegistrationAttempt);
+      } else {
+        visits.push(data as GalardonVisitLog);
+      }
+    });
+    cache.visits = visits;
+  } catch (err) {
+    console.warn('[cce-galardon-db] Single-pass telemetry fallback to cache:', err);
+    visits = cache.visits;
+  }
+
+  // 1. Compute Failed / Incomplete Attempts
+  const registeredPhones = new Set(
+    registrations.map((r) => String(r.whatsapp || '').replace(/\D/g, '')).filter(Boolean)
+  );
+  const registeredEmails = new Set(
+    registrations.map((r) => String(r.email || '').trim().toLowerCase()).filter(Boolean)
+  );
+  const byPerson = new Map<string, GalardonRegistrationAttempt>();
+  const now = Date.now();
+
+  for (const att of rawAttempts) {
+    if (att.status === 'completado') continue;
+    if (att.status === 'iniciado' && now - (att.timestamp || 0) < 45_000) continue;
+    const phone = String(att.whatsapp || '').replace(/\D/g, '');
+    const email = String(att.email || '').trim().toLowerCase();
+    if ((phone && registeredPhones.has(phone)) || (email && registeredEmails.has(email))) {
+      continue;
+    }
+    const dedupeKey = phone || email || att.ip || att.attemptId;
+    const existing = byPerson.get(dedupeKey);
+    if (!existing || (att.timestamp || 0) > (existing.timestamp || 0)) {
+      byPerson.set(dedupeKey, att);
+    }
+  }
+  const failedAttempts = Array.from(byPerson.values()).sort(
+    (a, b) => (b.timestamp || 0) - (a.timestamp || 0)
+  );
+
+  // 2. Compute Telemetry KPIs
+  const totalVisits =
+    visits.length > 0
+      ? visits.length
+      : cache.visits.length > 0
+      ? cache.visits.length
+      : registrations.length;
+  const uniqueIps = new Set(visits.map((v) => v.ip).filter(Boolean));
+  const uniqueVisits =
+    uniqueIps.size > 0 ? uniqueIps.size : registrations.length > 0 ? registrations.length : 0;
+
+  const devices = { ios: 0, android: 0, desktop: 0 };
+  for (const v of visits) {
+    if (v.deviceCategory === 'ios') devices.ios++;
+    else if (v.deviceCategory === 'android') devices.android++;
+    else devices.desktop++;
+  }
+
+  const activeRegistrations = registrations.filter((r) => r.status !== 'rechazado');
+  const totalRegistros = activeRegistrations.length;
+  const conversionRate =
+    totalVisits > 0 ? ((totalRegistros / totalVisits) * 100).toFixed(1) + '%' : '0%';
+
+  let totalBoletos = 0;
+  let totalRecaudado = 0;
+  let totalRecaudadoConciliado = 0;
+  let totalMesas = 0;
+  let comprobantesPendientes = 0;
+  let comprobantesValidados = 0;
+  let comprobantesRechazados = 0;
+
+  for (const r of registrations) {
+    if (r.status !== 'rechazado') {
+      const b = Number(r.boletos) || 0;
+      totalBoletos += b;
+      const monto = Number(r.totalMonto) || (b === 8 ? 20000 : b * 2500);
+      totalRecaudado += monto;
+      if (r.status === 'validado') {
+        totalRecaudadoConciliado += monto;
+      }
+      if (b === 8 || b === 10) totalMesas++;
+    }
+    if (r.status === 'validado') comprobantesValidados++;
+    else if (r.status === 'rechazado') comprobantesRechazados++;
+    else comprobantesPendientes++;
+  }
+
+  return {
+    telemetry: {
+      totalVisits,
+      uniqueVisits,
+      conversionRate,
+      devices,
+      totalRegistros,
+      totalBoletos,
+      totalRecaudado,
+      totalRecaudadoConciliado,
+      totalMesas,
+      comprobantesPendientes,
+      comprobantesValidados,
+      comprobantesRechazados,
+    },
+    failedAttempts,
   };
 }
