@@ -9,9 +9,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'Galardones 2026 · CCE Ciudad Juárez | Boletos Oficiales',
+  title: 'Galardones 2026 · CCE Ciudad Juárez',
   description:
-    'Adquiere tus boletos oficiales para la magna entrega de galardones del Consejo Coordinador Empresarial de Ciudad Juárez y la Conferencia Magistral de Carlos Loret de Mola en Centro de Eventos Cibeles.',
+    'Entrega de Galardones Empresariales 2026 del Consejo Coordinador Empresarial de Ciudad Juárez y Conferencia Magistral de Carlos Loret de Mola en Centro de Eventos Cibeles.',
   keywords: [
     'CCE Ciudad Juárez',
     'Galardones 2026',
@@ -19,7 +19,6 @@ export const metadata: Metadata = {
     'Carlos Loret de Mola',
     'Centro de Eventos Cibeles',
     'Consejo Coordinador Empresarial',
-    'Boletos CCE',
     'Ciudad Juárez',
   ],
   metadataBase: new URL('https://hermes-lite.vercel.app'),
@@ -29,7 +28,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Galardones 2026 · CCE Ciudad Juárez',
     description:
-      'Conferencia Magistral Carlos Loret de Mola y Entrega de Galardones. Jueves 19 de Noviembre, 9:00 a.m. en Centro de Eventos Cibeles. Boletos a la venta.',
+      'Conferencia Magistral de Carlos Loret de Mola y Entrega de Galardones Empresariales 2026. Jueves 19 de noviembre, Centro de Eventos Cibeles.',
     url: 'https://hermes-lite.vercel.app/cce-galardon-EG',
     siteName: 'Consejo Coordinador Empresarial de Ciudad Juárez',
     images: [
@@ -47,7 +46,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Galardones 2026 · CCE Ciudad Juárez',
     description:
-      'Conferencia Magistral Carlos Loret de Mola en Centro de Eventos Cibeles. Boletos a la venta.',
+      'Conferencia Magistral de Carlos Loret de Mola y Entrega de Galardones Empresariales 2026 en Centro de Eventos Cibeles.',
     images: ['https://hermes-lite.vercel.app/assets/cce-juarez/og_galardon_cce_oficial.jpg'],
   },
   robots: {

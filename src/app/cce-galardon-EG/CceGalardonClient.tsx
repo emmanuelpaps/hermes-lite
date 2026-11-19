@@ -146,14 +146,13 @@ export default function CceGalardonClient() {
     });
   }, [ticketQuantity]);
 
-  // Strict Event Registration Window: from now until 2 hours after event start (19 Nov 2026 11:00 AM Juárez UTC-6)
+  // Cierre oficial de registro y adquisición de boletos en línea
   const EVENT_DEADLINE_MS = 1795107600000;
-  const [isRegistrationClosed, setIsRegistrationClosed] = useState(false);
+  const [isRegistrationClosed] = useState(true);
 
-  // Check Admin & Log Visit & Validate Deadline
+  // Check Admin & Log Visit
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setIsRegistrationClosed(Date.now() > EVENT_DEADLINE_MS);
       const params = new URLSearchParams(window.location.search);
       const adminToken = params.get('admin');
       if (adminToken && adminToken.toLowerCase().trim() === 'cce2026') {
@@ -5923,11 +5922,15 @@ export default function CceGalardonClient() {
                 </div>
 
                 <a
-                  href="#boletos"
-                  onClick={(e) => scrollToSection(e, 'boletos')}
+                  href={isRegistrationClosed ? '#registro' : '#boletos'}
+                  onClick={(e) => scrollToSection(e, isRegistrationClosed ? 'registro' : 'boletos')}
                   className="cce-loret-cta"
                 >
-                  <span>Asegurar Asiento en la Conferencia</span>
+                  <span>
+                    {isRegistrationClosed
+                      ? 'Ver Detalles de Sede y Horario'
+                      : 'Asegurar Asiento en la Conferencia'}
+                  </span>
                   <ChevronRight size={15} />
                 </a>
               </div>
@@ -5935,6 +5938,8 @@ export default function CceGalardonClient() {
           </div>
         </section>
 
+        {!isRegistrationClosed && (
+        <>
         {/* =========================================================
            SECCIÓN 03: PASE 3D BOLETOS & CARÁTULA BANCARIA SPEI
            ========================================================= */}
@@ -6436,8 +6441,10 @@ export default function CceGalardonClient() {
             </div>
           </div>
         </section>
+        </>
+        )}
 
-        {/* Section 04: Formulario de Registro Oficial & Confirmación */}
+        {/* Section 04: Aviso de Cierre Oficial / Formulario de Registro */}
         <section
           id="registro"
           className="cce-reg-section"
@@ -6454,7 +6461,73 @@ export default function CceGalardonClient() {
             </div>
           </div>
 
-          {!isSubmitted ? (
+          {isRegistrationClosed ? (
+            <div className="cce-confirm-card" style={{ maxWidth: '880px', margin: '0 auto', position: 'relative', zIndex: 5 }}>
+              <div className="cce-reg-pill" style={{ margin: '0 auto 18px auto', display: 'inline-flex' }}>
+                <ShieldCheck size={14} color="#D4AF37" />
+                <span>Aviso Institucional · CCE Ciudad Juárez</span>
+              </div>
+
+              <h2 id="reg-section-title" className="cce-confirm-title" style={{ marginBottom: '14px' }}>
+                Registro en Línea Concluido
+              </h2>
+
+              <p className="cce-confirm-msg" style={{ maxWidth: '700px', margin: '0 auto 28px auto' }}>
+                El periodo de registro y adquisición de boletos en línea para la{' '}
+                <strong>Entrega de Galardones Empresariales 2026</strong> y la Conferencia Magistral
+                de <strong>Carlos Loret de Mola</strong> ha concluido formalmente. Agradecemos el
+                respaldo y la participación de la comunidad empresarial de Ciudad Juárez.
+              </p>
+
+              <div className="cce-confirm-summary-grid" style={{ marginBottom: '26px' }}>
+                <div className="cce-confirm-field">
+                  <span className="cce-confirm-field-label">Fecha Oficial</span>
+                  <span className="cce-confirm-field-val">Jueves 19 de noviembre de 2026</span>
+                </div>
+
+                <div className="cce-confirm-field">
+                  <span className="cce-confirm-field-label">Horario del Evento</span>
+                  <span className="cce-confirm-field-val">8:30 a.m. Registro · 9:00 a.m. Inicio del Desayuno</span>
+                </div>
+
+                <div className="cce-confirm-field">
+                  <span className="cce-confirm-field-label">Sede Oficial</span>
+                  <span className="cce-confirm-field-val">Centro de Eventos Cibeles · Blvd. Tomás Fernández 8450</span>
+                </div>
+
+                <div className="cce-confirm-field">
+                  <span className="cce-confirm-field-label">Código de Vestimenta</span>
+                  <span className="cce-confirm-field-val">Vestimenta Formal</span>
+                </div>
+              </div>
+
+              <div className="cce-confirm-actions" style={{ justifyContent: 'center', marginBottom: '18px' }}>
+                <a
+                  href="https://maps.google.com/?q=Centro+de+Eventos+Cibeles+Blvd+Tomas+Fernandez+8450+Ciudad+Juarez"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cce-btn-cal cce-btn-cal-map"
+                >
+                  <MapPin size={16} />
+                  <span>Cómo llegar en Google Maps (Cibeles)</span>
+                </a>
+
+                <a
+                  href="https://wa.me/526561803055?text=Hola,%20cuento%20con%20registro%20previo%20para%20los%20Galardones%202026%20del%20CCE%20y%20tengo%20una%20consulta"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cce-btn-cal cce-btn-cal-google"
+                >
+                  <MessageSquare size={16} />
+                  <span>Atención a Asistentes Registrados (WhatsApp)</span>
+                </a>
+              </div>
+
+              <p className="cce-confirm-note" style={{ marginBottom: 0 }}>
+                Si ya cuentas con tu folio de registro previo, te esperamos puntualmente a partir de las 8:30 a.m. en la recepción de Centro de Eventos Cibeles.
+              </p>
+            </div>
+          ) : !isSubmitted ? (
             <div>
               <div className="cce-reg-header">
                 <div className="cce-reg-pill">
@@ -8525,21 +8598,31 @@ export default function CceGalardonClient() {
                     → Conferencia Carlos Loret de Mola
                   </a>
                 </li>
-                <li>
-                  <a href="#boletos" onClick={(e) => scrollToSection(e, 'boletos')} className="cce-footer-nav-link">
-                    → Boletos y Mesas Corporativas
-                  </a>
-                </li>
-                <li>
-                  <a href="#puntos-venta" onClick={(e) => scrollToSection(e, 'puntos-venta')} className="cce-footer-nav-link">
-                    → Puntos de Adquisición Presencial
-                  </a>
-                </li>
-                <li>
-                  <a href="#registro" onClick={(e) => scrollToSection(e, 'registro')} className="cce-footer-nav-link">
-                    → Registro y Facturación CFDI 4.0
-                  </a>
-                </li>
+                {isRegistrationClosed ? (
+                  <li>
+                    <a href="#registro" onClick={(e) => scrollToSection(e, 'registro')} className="cce-footer-nav-link">
+                      → Aviso de Cierre y Ubicación
+                    </a>
+                  </li>
+                ) : (
+                  <>
+                    <li>
+                      <a href="#boletos" onClick={(e) => scrollToSection(e, 'boletos')} className="cce-footer-nav-link">
+                        → Boletos y Mesas Corporativas
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#puntos-venta" onClick={(e) => scrollToSection(e, 'puntos-venta')} className="cce-footer-nav-link">
+                        → Puntos de Adquisición Presencial
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#registro" onClick={(e) => scrollToSection(e, 'registro')} className="cce-footer-nav-link">
+                        → Registro y Facturación CFDI 4.0
+                      </a>
+                    </li>
+                  </>
+                )}
                 <li style={{ marginTop: '8px', paddingTop: '10px', borderTop: '1px solid rgba(212, 175, 55, 0.15)' }}>
                   <button
                     type="button"

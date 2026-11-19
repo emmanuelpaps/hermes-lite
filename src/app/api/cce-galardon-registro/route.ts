@@ -25,6 +25,9 @@ const NO_STORE_HEADERS = {
   Expires: '0',
 };
 
+// Cierre manual oficial del registro y venta de boletos en línea (/cce-galardon-EG)
+const REGISTRATION_MANUALLY_CLOSED = true;
+
 const DEFAULT_BOT_TOKEN = '8539545294:AAHw5rsj7Z0Dg9dA6YiXaXU23uf_LnIYZUY';
 const DEFAULT_CHAT_ID = '1813977310';
 
@@ -135,6 +138,18 @@ export async function POST(req: NextRequest) {
         timestamp: Date.now(),
       });
       return NextResponse.json({ success: true });
+    }
+
+    if (REGISTRATION_MANUALLY_CLOSED) {
+      return NextResponse.json(
+        {
+          success: false,
+          deadlineExpired: true,
+          error:
+            'El periodo de registro y adquisición de boletos en línea para la Entrega de Galardones Empresariales 2026 ha concluido formalmente.',
+        },
+        { status: 403, headers: NO_STORE_HEADERS }
+      );
     }
 
     const nowAttempt = new Date();
